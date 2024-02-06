@@ -1,0 +1,12 @@
+{
+  "name": "24a-cti-riscv",
+  "version": "1.0.0",
+  "scripts": {
+    "docs:dev": "vitepress dev docs -o",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress previe docsw"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.42"
+  }
+}
