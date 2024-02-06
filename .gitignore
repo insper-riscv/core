@@ -361,3 +361,4 @@ dist
 .pnp.*
 
 docs/.vitepress/cache/
+docs/.vitepress/dist/

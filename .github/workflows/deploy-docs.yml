@@ -1,0 +1,44 @@
+name: Deploy Docs
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - docs/**
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and Deploy on GitHub pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn docs:build
+
+      - uses: actions/configure-pages@v2
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs/.vitepress/dist
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v1
