@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "CTI RISCV",
   description: "Documentação do Projeto",
+  base: '/24a-CTI-RISCV/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
