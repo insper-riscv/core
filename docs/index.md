@@ -7,12 +7,15 @@ hero:
   text: "Documentação do Projeto"
   tagline: My great project tagline
   actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+    #- theme: brand
+    #  text: Markdown Examples
+    #  link: /markdown-examples
+    #- theme: alt
+    #  text: API Examples
+    #  link: /api-examples
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: ISA
+      link: /isa
 
 features:
   - title: Feature A
