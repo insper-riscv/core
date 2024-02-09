@@ -12,6 +12,6 @@ architecture behavioral of and_gate is
 begin
     process(a, b)
     begin
-        result <= a or b;
+        result <= a and b;
     end process;
 end architecture;
