@@ -12,7 +12,7 @@ def source(name):
 def test_and():
     run(vhdl_sources=[source("and_gate.vhd")],
         toplevel="and_gate",
-        module="tests_cocotb",
+        module="tests_and",
         testcase='tb_and',
         toplevel_lang="vhdl")
 
