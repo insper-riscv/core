@@ -1,6 +1,7 @@
 import cocotb
 from cocotb.triggers import Timer
 
+
 @cocotb.test()
 async def tb_and(dut):
     inA = [0, 0, 1, 1]
@@ -14,6 +15,7 @@ async def tb_and(dut):
         await Timer(1, units='ns')
         condition = (dut.result.value == out[i])
         if not condition:
-            dut._log.error(f"Expected value: {out[i]} Obtained value: {dut.result.value}" )
+            dut._log.error(
+                f"Expected value: {out[i]} Obtained value: {dut.result.value}")
             assert condition, f"Error in test {i}"
         await Timer(1, units='ns')
