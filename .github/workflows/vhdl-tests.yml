@@ -13,21 +13,20 @@ jobs:
         ghdl: [latest]
         gtkwave: [latest]
         python: [latest]
+    name: VHDLtest
+    runs-on: ${{ matrix.os }}
 
-  name: VHDL-TEST
-  runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up python
-      uses: action/setup-python@v4
-      with:
-        python-version: ${{ matrix.python }}
+      - name: Set up python
+        uses: action/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
       
-    - name: install dependencies
-      run: pip install -r requirements.txt
+      - name: install dependencies
+        run: pip install -r requirements.txt
     
-    - name: Run tests
-      run: SIM=ghdl pytest -s
+      - name: Run tests
+        run: SIM=ghdl pytest -s
