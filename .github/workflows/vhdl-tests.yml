@@ -3,15 +3,13 @@ name: VHDL-TESTS
 on:
   push:
   pull_request:
-    
+  
 jobs:
   run-tests:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        ghdl: [latest]
-        gtkwave: [latest]
         python-version: [3.12]
 
     name: VHDLtest
@@ -21,10 +19,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install GHDL
+        uses: ghdl/setup-ghdl-ci@nightly
+        with:
+          backend: llvm
+      - run: |
+          ghdl --version
+      
+          $GHDL --version
+
       - name: Set up python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python }}
+          python-version: ${{ matrix.python-version }}
       
       - name: install dependencies
         run: pip install -r requirements.txt
