@@ -48,3 +48,25 @@ Para montar esse processador, escolheu-se como base o Conjunto de Instruções c
 | Stores        |                      Store Byte |  S  | SB      rs1, rs2, imm    |
 |               |                  Store Halfword |  S  | SH      rs1, rs2, imm    |
 |               |                      Store Word |  S  | SW      rs1, rs2, imm    |
+
+Além das Instruções Base, temos as instruções de extensão para multiplicação
+
+| Category      |                 Name            | Fmt |       Instructions       |
+|---------------|---------------------------------|-----|--------------------------|
+| Multiply      |                        Multiply |  R  | MUL     rd, rs1, rs2     |
+|               |                   Multiply High |  R  | MULH    rd, rs1, rs2     |
+|               |          Multiply High Sign/Uns |  R  | MULHSU  rd, rs1, rs2     |
+|               |               Multiply High Uns |  R  | MULHU   rd, rs1, rs2     |
+| Divide        |                          Divide |  R  | DIV     rd, rs1, rs2     |
+|               |                 Divide Unsigned |  R  | DIVU    rd, rs1, rs2     |
+| Remainder     |                       Remainder |  R  | REM     rd, rs1, rs2     |
+|               |              Remainder Unsigned |  R  | REMU    rd, rs1, rs2     |
+
+![Intructions Format](images/image_instruction.png)
+
+# References:
+
+ - Patterson, David A.; Waterman, Andrew. **The RISC-V reader: An open architecture atlas**. Strawberry Canyon LLC, 2017.
+
+ - The RISC-V Instruction Set Manual, Volume I: User-Level ISA, Document Version
+20191213”, Editors Andrew Waterman and Krste Asanovi´c, RISC-V Foundation, December 2019.
