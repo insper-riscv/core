@@ -7,6 +7,8 @@ entity TOP_LEVEL is
 
   port (
     CLOCK : in  std_logic;
+    SW    : in std_logic_vector(3 downto 0);
+    LED   : out std_logic_vector(7 downto 0)
   );
 
 end entity;
@@ -15,19 +17,11 @@ architecture RTL of TOP_LEVEL is
 
   signal signal1 : std_logic;
   signal signal2 : std_logic;
-  signal signal3 : std_logic_vector(31 downto 0);
-  signal signal4 : std_logic_vector(31 downto 0);
+  signal signal3 : std_logic_vector(DATA_WIDTH downto 0);
+  signal signal4 : std_logic_vector(DATA_WIDTH downto 0);
 
- begin
+begin
 
-  NAME : entity WORK.ENTITY_NAME
-    generic map (
-	   property1 => signal1,
-	   property2 => signal2
-	 )
-    port map (
-	   property3 => signal3,
-	   property4 => signal4
-    );
+  LED(0) <= SW(1);
 
 end architecture;
