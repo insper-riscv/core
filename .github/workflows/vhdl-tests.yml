@@ -12,7 +12,8 @@ jobs:
         os: [ubuntu-latest]
         ghdl: [latest]
         gtkwave: [latest]
-        python: [latest]
+        python-version: [3.12]
+
     name: VHDLtest
     runs-on: ${{ matrix.os }}
 
