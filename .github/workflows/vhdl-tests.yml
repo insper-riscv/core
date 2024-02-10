@@ -3,9 +3,11 @@ name: VHDL-TESTS
 on:
   push:
     paths:
+      - src/**
       - test/**
   pull_request:
     paths:
+      - src/**
       - test/**
   
 jobs:
