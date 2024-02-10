@@ -1,6 +1,5 @@
-from cocotb_test.simulator import run
-
 import os
+from cocotb_test.simulator import run
 
 
 def source(name):
