@@ -17,11 +17,16 @@ hero:
       text: ISA
       link: /isa
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+#features:
+#  - title: Feature A
+#    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+#  - title: Feature B
+#    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+#  - title: Feature C
+#    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
+
+![Processador](images/risc-v.png)
+
+Referências:
+ - Hennessy, J. L., & Patterson, D. A. Computer Organization and Design: The Hardware/Software Interface (RISC-V Edition), 2020.
