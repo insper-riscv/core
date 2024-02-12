@@ -1,3 +1,10 @@
 {
-    "image": "raetro/quartus:21.1"
+    "image": "raetro/quartus:21.1",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "actboy168.tasks"
+            ]
+        }
+    }
 }

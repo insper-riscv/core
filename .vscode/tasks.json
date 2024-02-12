@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "type": "shell",
+    "tasks": [
+        {
+            "label": "Analisys & Syntesis",
+            "detail": "Start Analisys & Syntesis",
+            "icon": {
+                "id": "run"
+            },
+            "command": "quartus_map",
+            "args": [
+                "top_level"
+            ],
+            "options": {
+                "cwd": "${cwd}/quartus",
+                "statusbar": {
+                    "color": "#00ff00"
+                }
+            }
+        },
+        {
+            "label": "Analisys & Elaboration",
+            "detail": "Start Analisys & Elaboration",
+            "icon": {
+                "id": "run-all"
+            },
+            "command": "quartus_map",
+            "args": [
+                "top_level",
+                "--analysis_and_elaboration",
+                "--enable_register_retiming=on",
+                "--enable_wysiwyg_resynthesis=on"
+            ],
+            "options": {
+                "cwd": "${cwd}/quartus",
+                "statusbar": {
+                    "color": "#00ff00"
+                }
+            }
+        }
+    ]
+}
