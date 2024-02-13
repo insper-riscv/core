@@ -4,30 +4,30 @@ use ieee.numeric_std.all;
 
 entity ALU is
     generic (
-        dataLenght : natural := 4;
+        dataLength : natural := 4;
 		selectorLenght : natural := 2 
     );
     port (
-        a:  in std_logic_vector((dataLenght-1) downto 0);
-        b:  in std_logic_vector((dataLenght-1) downto 0);
+        a:  in std_logic_vector((dataLength-1) downto 0);
+        b:  in std_logic_vector((dataLength-1) downto 0);
         s:  in std_logic_vector((selectorLenght-1) downto 0);
-        q:  out std_logic_vector((dataLenght-1) downto 0)
+        q:  out std_logic_vector((dataLength-1) downto 0)
     );
 end ALU;
 
 architecture RTL of ALU is
 
-    signal sum : std_logic_vector((dataLenght-1) downto 0);
-    signal sub : std_logic_vector((dataLenght-1) downto 0);
-	signal pass : std_logic_vector((dataLenght-1) downto 0);
+    signal sub : std_logic_vector((dataLength-1) downto 0);
+    signal sum : std_logic_vector((dataLength-1) downto 0);
+	signal pass : std_logic_vector((dataLength-1) downto 0);
 
 begin
 
-        sum <= std_logic_vector(unsigned(a) + unsigned(b));
         sub <= std_logic_vector(unsigned(a) - unsigned(b));
+        sum <= std_logic_vector(unsigned(a) + unsigned(b));
 		pass <= std_logic_vector(unsigned(b));
-        q <= sum when (s = "01") else 
-		    sub when (s = "00") else
-			pass;
+        q <= sub when (s = "00") else
+             sum when (s = "01") else 
+			 pass;
 
 end architecture;

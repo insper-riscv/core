@@ -3,13 +3,13 @@ use ieee.std_logic_1164.all;
 
 entity GENERIC_MUX_2x1 is
     generic (
-        dataLenght : natural := 32
+        dataLength : natural := 32
     );
     port (
-        a:  in std_logic_vector((dataLenght-1) downto 0);
-        b:  in std_logic_vector((dataLenght-1) downto 0);
+        a:  in std_logic_vector((dataLength-1) downto 0);
+        b:  in std_logic_vector((dataLength-1) downto 0);
         s:  in std_logic;
-        q:  out std_logic_vector((dataLenght-1) downto 0)
+        q:  out std_logic_vector((dataLength-1) downto 0)
     );
 end GENERIC_MUX_2x1;
 
