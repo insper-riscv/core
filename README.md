@@ -12,3 +12,9 @@ real, garantindo eficiência e confiabilidade em ambientes aeroespaciais. Além
 disso, o projeto incluirá a realização de testes de unidade e integração
 detalhados para assegurar a qualidade e a funcionalidade do processador em todas
 as etapas de desenvolvimento.
+
+Para rodar os testes:
+
+```bash
+pytest -s
+```
