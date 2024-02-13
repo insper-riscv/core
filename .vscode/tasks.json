@@ -3,6 +3,32 @@
     "type": "shell",
     "tasks": [
         {
+            "label": "Open Quartus",
+            "detail": "Launch Quartus Prime Lite IDE",
+            "icon": {
+                "id": "window"
+            },
+            "command": "quartus",
+            "args": [
+                "quartus/top_level"
+            ],
+            "options": {
+                "statusbar": {
+                    "color": "#9999ff"
+                },
+            },
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
+            }
+        },
+        {
             "label": "Analisys & Syntesis",
             "detail": "Start Analisys & Syntesis",
             "icon": {
@@ -15,7 +41,7 @@
             "options": {
                 "cwd": "${cwd}/quartus",
                 "statusbar": {
-                    "color": "#00ff00"
+                    "color": "#99ff99"
                 }
             }
         },
@@ -35,7 +61,7 @@
             "options": {
                 "cwd": "${cwd}/quartus",
                 "statusbar": {
-                    "color": "#00ff00"
+                    "color": "#99ff99"
                 }
             }
         }

@@ -1,9 +1,13 @@
 {
-    "image": "raetro/quartus:21.1",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "customizations": {
         "vscode": {
             "extensions": [
-                "actboy168.tasks"
+                "actboy168.tasks",
+                "puorc.awesome-vhdl",
+                "ms-python.python"
             ]
         }
     }
