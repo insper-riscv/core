@@ -1,4 +1,5 @@
 import cocotb
+from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 from cocotb_test.simulator import run
 from utils import source
@@ -9,7 +10,7 @@ async def tb_alu(dut):
     inA = [0, 0, 1, 1]
     inB = [1, 1, 1, 1]
     inS = [0, 1, 0, 1]
-    out = [-1, 1, 0, 2]
+    out = [15, 1, 0, 2]
 
     for i, (ia, ib, iS, o) in enumerate(zip(inA, inB, inS, out)):
         dut.a.value = ia
