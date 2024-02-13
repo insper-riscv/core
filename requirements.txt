@@ -6,5 +6,5 @@ iniconfig
 packaging
 pluggy
 pytest
-pytest-env
 tomli
+pytest-env

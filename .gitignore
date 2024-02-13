@@ -362,3 +362,10 @@ dist
 
 docs/.vitepress/cache/
 docs/.vitepress/dist/
+
+
+#sim_build
+**/sim_build/
+
+#visual studio code
+.vscode/
