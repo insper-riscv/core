@@ -8,22 +8,22 @@ from utils import source
 @cocotb.test()
 async def tb_and(dut):
     inA = [
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('0'),
+        BinaryValue('0'),
+        BinaryValue('1'),
+        BinaryValue('1')
     ]
     inB = [
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('0'),
+        BinaryValue('1'),
+        BinaryValue('0'),
+        BinaryValue('1')
     ]
     out = [
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('0'),
+        BinaryValue('0'),
+        BinaryValue('0'),
+        BinaryValue('1')
     ]
 
     for i, (ia, ib, o) in enumerate(zip(inA, inB, out)):
@@ -38,7 +38,7 @@ async def tb_and(dut):
             dut._log.error(
                 f"Expected value: {o.binstr} Obtained value: {dut.q.value.binstr}")
 
-        assert condition, f"Error in test {i}: inA={ia.binstr} inB={ib.binstr} inS={iS.binstr}"
+        assert condition, f"Error in test {i}: inA={ia.binstr} inB={ib.binstr}"
         await Timer(1, units='ns')
 
 

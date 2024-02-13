@@ -8,40 +8,40 @@ from utils import source
 @cocotb.test()
 async def tb_mux_4x1(dut):
     inA = [
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('00001111000011110000111100001111')
     ]
     inB = [
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('11110000111100001111000011110000')
     ]
     inC = [
-        BinaryValue('00000000111111111111111100000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000111111111111111100000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000111111111111111100000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000111111111111111100000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00000000111111111111111100000000'),
+        BinaryValue('00000000111111111111111100000000'),
+        BinaryValue('00000000111111111111111100000000'),
+        BinaryValue('00000000111111111111111100000000')
     ]
     inD = [
-        BinaryValue('11111111000000000000000011111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111000000000000000011111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111000000000000000011111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111000000000000000011111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('11111111000000000000000011111111'),
+        BinaryValue('11111111000000000000000011111111'),
+        BinaryValue('11111111000000000000000011111111'),
+        BinaryValue('11111111000000000000000011111111')
     ]
     inS = [
-        BinaryValue('00', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('01', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('10', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00'),
+        BinaryValue('01'),
+        BinaryValue('10'),
+        BinaryValue('11')
     ]
     out = [
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000111111111111111100000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111000000000000000011111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('00000000111111111111111100000000'),
+        BinaryValue('11111111000000000000000011111111')
     ]
 
     for i, (ia, ib, ic, iD, iS, o) in enumerate(zip(inA, inB, inC, inD, inS, out)):

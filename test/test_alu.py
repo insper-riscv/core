@@ -8,28 +8,28 @@ from utils import source
 @cocotb.test()
 async def tb_alu(dut):
     inA = [
-        BinaryValue('0000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('0000'),
+        BinaryValue('0000'),
+        BinaryValue('0001'),
+        BinaryValue('0001')
     ]
     inB = [
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('0001'),
+        BinaryValue('0001'),
+        BinaryValue('0001'),
+        BinaryValue('0001')
     ]
     inS = [
-        BinaryValue('00', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('01', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('01', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00'),
+        BinaryValue('01'),
+        BinaryValue('00'),
+        BinaryValue('01')
     ]
     out = [
-        BinaryValue('1111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0001', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0010', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('1111'),
+        BinaryValue('0001'),
+        BinaryValue('0000'),
+        BinaryValue('0010')
     ]
 
     for i, (ia, ib, iS, o) in enumerate(zip(inA, inB, inS, out)):

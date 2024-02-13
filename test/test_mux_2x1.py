@@ -8,28 +8,28 @@ from utils import source
 @cocotb.test()
 async def tb_mux_2x1(dut):
     inA = [
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000000000000000000000000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000000000000000000000000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('00000000000000000000000000000000'),
+        BinaryValue('00000000000000000000000000000000')
     ]
     inB = [
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111111111111111111111111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111111111111111111111111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('11111111111111111111111111111111'),
+        BinaryValue('11111111111111111111111111111111')
     ]
     inS = [
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('0', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('1', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('0'),
+        BinaryValue('1'),
+        BinaryValue('0'),
+        BinaryValue('1')
     ]
     out = [
-        BinaryValue('00001111000011110000111100001111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11110000111100001111000011110000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('00000000000000000000000000000000', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT),
-        BinaryValue('11111111111111111111111111111111', binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+        BinaryValue('00001111000011110000111100001111'),
+        BinaryValue('11110000111100001111000011110000'),
+        BinaryValue('00000000000000000000000000000000'),
+        BinaryValue('11111111111111111111111111111111')
     ]
 
     for i, (ia, ib, iS, o) in enumerate(zip(inA, inB, inS, out)):
