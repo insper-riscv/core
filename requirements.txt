@@ -1,1 +1,10 @@
 cocotb
+cocotb-test
+exceptiongroup
+find-libpython
+iniconfig
+packaging
+pluggy
+pytest
+pytest-env
+tomli
