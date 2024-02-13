@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity GENERIC_MUX_4x1 is
+entity GENERIC_MUX_4X1 is
     generic (
         dataLength : natural := 32
     );
@@ -13,9 +13,9 @@ entity GENERIC_MUX_4x1 is
         s:  in std_logic_vector(1 downto 0);
         q:  out std_logic_vector((dataLength-1) downto 0)
     );
-end GENERIC_MUX_4x1;
+end GENERIC_MUX_4X1;
 
-architecture RTL of GENERIC_MUX_4x1 is
+architecture RTL of GENERIC_MUX_4X1 is
 
 begin
 

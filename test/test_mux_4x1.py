@@ -64,7 +64,7 @@ async def tb_mux_4x1(dut):
 
 
 def test_mux_4x1():
-    run(vhdl_sources=[source("GENERIC_MUX_4x1.vhd")],
+    run(vhdl_sources=[source("GENERIC_MUX_4X1.vhd")],
         toplevel="generic_mux_4x1",
         module="test_mux_4x1",
         testcase='tb_mux_4x1',
