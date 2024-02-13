@@ -50,7 +50,7 @@ async def tb_mux_2x1(dut):
 
 
 def test_mux_2x1():
-    run(vhdl_sources=[source("GENERIC_MUX_2x1.vhd")],
+    run(vhdl_sources=[source("GENERIC_MUX_2X1.vhd")],
         toplevel="generic_mux_2x1",
         module="test_mux_2x1",
         testcase='tb_mux_2x1',
