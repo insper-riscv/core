@@ -1,5 +1,5 @@
 import cocotb
-from cocotb.binary import BinaryRepresentation, BinaryValue
+from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 from cocotb_test.simulator import run
 from utils import source
