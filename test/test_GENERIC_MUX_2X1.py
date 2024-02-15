@@ -6,7 +6,7 @@ from utils import source
 
 
 @cocotb.test()
-async def tb_mux_2x1(dut):
+async def tb_GENERIC_MUX_2X1(dut):
     inA = [
         BinaryValue('00001111000011110000111100001111'),
         BinaryValue('00001111000011110000111100001111'),
@@ -49,13 +49,13 @@ async def tb_mux_2x1(dut):
         await Timer(1, units='ns')
 
 
-def test_mux_2x1():
+def test_GENERIC_MUX_2X1():
     run(vhdl_sources=[source("GENERIC_MUX_2X1.vhd")],
         toplevel="generic_mux_2x1",
-        module="test_mux_2x1",
-        testcase='tb_mux_2x1',
+        module="test_GENERIC_MUX_2X1",
+        testcase='tb_GENERIC_MUX_2X1',
         toplevel_lang="vhdl")
 
 
 if __name__ == "__main__":
-    test_mux_2x1()
+    test_GENERIC_MUX_2X1()
