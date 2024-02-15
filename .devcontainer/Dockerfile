@@ -12,10 +12,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN { \
 		echo '#!/bin/sh -e';                                             \
 		echo '';                                                         \
-		echo 'if [ -n "$GITHUB_TOKEN" ] ; then';                         \
-		echo '    gh auth setup-git';                                    \
-		echo 'fi';                                                       \
-		echo '';                                                         \
 		echo 'if [ -n "$JTAG_SERVER" -a -n "$JTAG_PASSWD" ] ; then';     \
 		echo '    jtagconfig --addserver "$JTAG_SERVER" "$JTAG_PASSWD"'; \
 		echo 'fi';                                                       \
@@ -86,75 +82,23 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
-# Change the working directory
-# WORKDIR /tmp
-
-# Copy libpng, Github CLI and Changelog generator
-# ARG GH_VERSION="2.14.2"
-# ARG CHGLOG_VERSION="0.15.1"
-# ADD libs/libpng12-0_1.2.54-1ubuntu1.1_amd64.deb .
-# ADD libs/libpng12-0_1.2.54-1ubuntu1.1_i386.deb .
-# ADD https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.deb .
-# ADD https://github.com/git-chglog/git-chglog/releases/download/v${CHGLOG_VERSION}/git-chglog_${CHGLOG_VERSION}_linux_amd64.tar.gz .
-
-# Install libpng, Github CLI and Changelog generator
-# RUN dpkg -i libpng12-0_1.2.54-1ubuntu1.1_amd64.deb \
-#             libpng12-0_1.2.54-1ubuntu1.1_i386.deb  \
-#             gh_${GH_VERSION}_linux_amd64.deb
-
-# RUN tar -zxf git-chglog_${CHGLOG_VERSION}_linux_amd64.tar.gz && \
-#     chmod a+x git-chglog                                     && \
-#     mv git-chglog /usr/bin/git-chglog                        && \
-#     rm -rf  /tmp/*
-
 # Set main Quartus variables
 ENV QUARTUS_PATH=/opt/intelFPGA
 
 # Set Quartus environment variables
 ENV QUARTUS_ROOTDIR=${QUARTUS_PATH}/quartus
 ENV SOPC_KIT_NIOS2=${QUARTUS_PATH}/nios2eds
-ENV MODELSIM_ROOTDIR=${QUARTUS_PATH}/modelsim_ase
 ENV PATH=${QUARTUS_ROOTDIR}/bin/:${QUARTUS_ROOTDIR}/linux64/gnu/:${QUARTUS_ROOTDIR}/sopc_builder/bin/:$PATH
 ENV PATH=${SOPC_KIT_NIOS2}/:${SOPC_KIT_NIOS2}/bin/:${SOPC_KIT_NIOS2}/bin/gnu/H-x86_64-pc-linux-gnu/bin/:${SOPC_KIT_NIOS2}/sdk2/bin/:$PATH
-ENV PATH=${MODELSIM_ROOTDIR}/bin/:$PATH
 
 # Where we will store our data
 VOLUME /build
-
-# Quartus uses the current working directory
-WORKDIR /build
 
 # Expose default JTAG server port
 EXPOSE 1309/tcp
 EXPOSE 1309/udp
 
-# Metadata Params
-ARG BUILD_DATE
-ARG BUILD_VERSION
-
-# Metadata
-LABEL \
-    org.opencontainers.image.vendor="Raetro.org"                                      \
-    org.opencontainers.image.title="raetro/quartus"                                   \
-    org.opencontainers.image.description="Base OS for Quartus Prime Synthesis Engine" \
-    org.opencontainers.image.authors="sigs+fpga@raetro.org"                           \
-    org.opencontainers.image.url="https://github.com/raetro/sdk-docker-fpga"          \
-    org.opencontainers.image.source="https://github.com/raetro/sdk-docker-fpga.git"   \
-    org.opencontainers.image.created=$BUILD_DATE                                      \
-    org.opencontainers.image.version=$BUILD_VERSION
-
 ENTRYPOINT ["quartus-entrypoint"]
-
-CMD ["/bin/bash"]
-
-################################################################################
-# SPDX-License-Identifier: MIT
-# SPDX-FileType: SOURCE
-# SPDX-FileCopyrightText: (c) 2022, Marcus Andrade
-################################################################################
-
-# Install Quartus on a separated layer of the Docker image to shrink the image size.
-# FROM raetro/quartus:base as install
 
 # Change the working directory
 WORKDIR /tmp
@@ -168,14 +112,12 @@ ARG INTEL_CDN="https://downloads.intel.com/akdlm/software/acdsinst"
 ADD ${INTEL_CDN}/23.1std/991/ib_installers/cyclonev-23.1std.0.991.qdz               .
 # ADD ${INTEL_CDN}/23.1std/991/ib_installers/max10-23.1std.0.991.qdz           
 ADD ${INTEL_CDN}/23.1std/991/ib_installers/QuartusLiteSetup-23.1std.0.991-linux.run .
-ADD ${INTEL_CDN}/20.1std.1/720/ib_installers/ModelSimSetup-20.1.1.720-linux.run     .
 
 # Fix file permissions
 RUN chmod a+x QuartusLiteSetup-23.1std.0.991-linux.run                                                        && \
     ./QuartusLiteSetup-23.1std.0.991-linux.run --mode unattended --accept_eula 1 --installdir /opt/intelFPGA  && \
-    chmod a+x ModelSimSetup-20.1.1.720-linux.run                                                              && \
-    ./ModelSimSetup-20.1.1.720-linux.run --mode unattended --accept_eula 1 --installdir /opt/intelFPGA        && \
-    rm -rf /opt/intelFPGA/uninstall/
+    rm -rf /opt/intelFPGA/uninstall/                                                                          && \
+    rm -rf /tmp/*
 
 ################################################################################
 
