@@ -6,7 +6,7 @@ from utils import source
 
 
 @cocotb.test()
-async def tb_nor(dut):
+async def tb_GENERIC_OR(dut):
     inA = [
         BinaryValue('0'),
         BinaryValue('0'),
@@ -20,10 +20,10 @@ async def tb_nor(dut):
         BinaryValue('1')
     ]
     out = [
+        BinaryValue('0'),
         BinaryValue('1'),
-        BinaryValue('0'),
-        BinaryValue('0'),
-        BinaryValue('0')
+        BinaryValue('1'),
+        BinaryValue('1')
     ]
 
     for i, (ia, ib, o) in enumerate(zip(inA, inB, out)):
@@ -42,13 +42,13 @@ async def tb_nor(dut):
         await Timer(1, units='ns')
 
 
-def test_nor():
-    run(vhdl_sources=[source("GENERIC_NOR.vhd")],
-        toplevel="generic_nor",
-        module="test_nor",
-        testcase='tb_nor',
+def test_GENERIC_OR():
+    run(vhdl_sources=[source("GENERIC_OR.vhd")],
+        toplevel="generic_or",
+        module="test_GENERIC_OR",
+        testcase='tb_GENERIC_OR',
         toplevel_lang="vhdl")
 
 
 if __name__ == "__main__":
-    test_nor()
+    test_GENERIC_OR()
