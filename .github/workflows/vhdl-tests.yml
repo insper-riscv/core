@@ -5,7 +5,7 @@ on:
     paths:
       - src/**
       - test/**
-      
+
 jobs:
   run-tests:
     strategy:
@@ -27,16 +27,16 @@ jobs:
           backend: llvm
       - run: |
           ghdl --version
-      
+
           $GHDL --version
 
       - name: Set up python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      
+
       - name: install dependencies
         run: pip install -r requirements.txt
-    
+
       - name: Run tests
         run: pytest -s

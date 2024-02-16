@@ -1,53 +1,54 @@
+from decimal import Decimal
+
 import cocotb
+import cocotb.runner
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
-from cocotb_test.simulator import run
-from utils import source
+
+import utils
+
+
+class GENERIC_OR(utils.DUT):
+    a: utils.DUT.Input_pin
+    b: utils.DUT.Input_pin
+    q: utils.DUT.Output_pin
 
 
 @cocotb.test()
-async def tb_GENERIC_OR(dut):
-    inA = [
-        BinaryValue('0'),
-        BinaryValue('0'),
-        BinaryValue('1'),
-        BinaryValue('1')
-    ]
-    inB = [
-        BinaryValue('0'),
-        BinaryValue('1'),
-        BinaryValue('0'),
-        BinaryValue('1')
-    ]
-    out = [
-        BinaryValue('0'),
-        BinaryValue('1'),
-        BinaryValue('1'),
-        BinaryValue('1')
-    ]
+async def tb_GENERIC_OR(dut: GENERIC_OR):
+    inA = ["0", "0", "1", "1"]
+    inB = ["0", "1", "0", "1"]
+    out = ["0", "1", "1", "1"]
 
     for i, (ia, ib, o) in enumerate(zip(inA, inB, out)):
-        dut.a.value = ia
-        dut.b.value = ib
+        dut.a.value = BinaryValue(ia)
+        dut.b.value = BinaryValue(ib)
 
-        await Timer(1, units='ns')
+        await Timer(Decimal(1), units="ns")
 
-        condition = (dut.q.value.binstr == o.binstr)
+        condition = dut.q.value.binstr == o
 
         if not condition:
-            dut._log.error(
-                f"Expected value: {o.binstr} Obtained value: {dut.q.value.binstr}")
+            dut._log.error(f"Expected value: {o} Obtained value: {dut.q.value.binstr}")
 
-        assert condition, f"Error in test {i}: inA={ia.binstr} inB={ib.binstr}"
-        await Timer(1, units='ns')
+        assert condition, f"Error in test {i}: inA={ia} inB={ib}"
+        await Timer(Decimal(1), units="ns")
 
 
 def test_GENERIC_OR():
-    run(vhdl_sources=[source("GENERIC_OR.vhd")],
-        toplevel="generic_or",
-        module="test_GENERIC_OR",
-        testcase='tb_GENERIC_OR',
-        toplevel_lang="vhdl")
+    runner = cocotb.runner.get_runner("ghdl")
+
+    runner.build(
+        vhdl_sources=["src/GENERIC_OR.vhd"],
+        always=True,
+    )
+
+    runner.test(
+        hdl_toplevel="generic_or",
+        test_module="test_GENERIC_OR",
+        testcase="tb_GENERIC_OR",
+        hdl_toplevel_lang="vhdl",
+    )
 
 
 if __name__ == "__main__":
