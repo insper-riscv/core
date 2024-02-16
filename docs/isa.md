@@ -51,7 +51,7 @@ Para montar esse processador, escolheu-se como base o Conjunto de Instruções c
 
 # RVM
 
-Além das Instruções Base, temos as instruções de extensão para multiplicação
+Além das Instruções Base, temos as Instruções de Extensão para Multiplicação
 
 | Category      |                 Name            | Fmt |       Instructions       |
 |---------------|---------------------------------|-----|--------------------------|
