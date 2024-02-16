@@ -13,6 +13,9 @@ hero:
     #- theme: alt
     #  text: API Examples
     #  link: /api-examples
+    - theme: brand
+      text: Pipeline
+      link: /pipeline
     - theme: alt
       text: ISA
       link: /isa
