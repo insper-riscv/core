@@ -40,6 +40,7 @@ def test_GENERIC_OR():
 
     runner.build(
         vhdl_sources=["src/GENERIC_OR.vhd"],
+        hdl_toplevel="generic_or",
         always=True,
     )
 

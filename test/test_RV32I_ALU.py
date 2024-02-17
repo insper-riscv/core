@@ -49,6 +49,7 @@ def test_RV32I_ALU():
 
     runner.build(
         vhdl_sources=["src/RV32I_ALU.vhd"],
+        hdl_toplevel="rv32i_alu",
         always=True,
     )
 

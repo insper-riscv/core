@@ -20,9 +20,6 @@ async def tb_GENERIC_AND(dut: GENERIC_AND):
     values_b = ["0", "1", "0", "1"]
     values_q = ["0", "0", "0", "1"]
 
-    print(dut._log)
-    print(type(dut._log))
-
     for index, (a, b, q) in enumerate(zip(values_a, values_b, values_q)):
         dut.a.value = BinaryValue(a)
         dut.b.value = BinaryValue(b)
@@ -43,6 +40,7 @@ def test_GENERIC_AND():
 
     runner.build(
         vhdl_sources=["src/GENERIC_AND.vhd"],
+        hdl_toplevel="generic_and",
         always=True,
     )
 

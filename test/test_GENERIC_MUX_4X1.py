@@ -74,6 +74,7 @@ def test_GENERIC_MUX_4X1():
 
     runner.build(
         vhdl_sources=["src/GENERIC_MUX_4X1.vhd"],
+        hdl_toplevel="generic_mux_4x1",
         always=True,
     )
 

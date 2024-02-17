@@ -40,6 +40,7 @@ def test_GENERIC_XOR():
 
     runner.build(
         vhdl_sources=["src/GENERIC_XOR.vhd"],
+        hdl_toplevel="generic_xor",
         always=True,
     )
 
