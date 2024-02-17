@@ -1,22 +1,28 @@
-library ieee;
-use ieee.std_logic_1164.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
 entity GENERIC_MUX_2X1 is
+
     generic (
-        dataLength : natural := 32
+        DATA_WIDTH : natural := 8
     );
+
     port (
-        a:  in std_logic_vector((dataLength-1) downto 0);
-        b:  in std_logic_vector((dataLength-1) downto 0);
-        s:  in std_logic;
-        q:  out std_logic_vector((dataLength-1) downto 0)
+        source_0 : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_1 : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        selector : in  std_logic;
+        destiny  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
-end GENERIC_MUX_2X1;
+
+end entity;
 
 architecture RTL of GENERIC_MUX_2X1 is
 
+    -- No signals
+
 begin
 
-    q <= a when (s = '0') else b;
+    destiny <= source_1 when (selector = '1') else
+               source_0;
 
 end architecture;
