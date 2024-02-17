@@ -2,6 +2,8 @@
 
 # CTI RISCV
 
+[![Pytest](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/pytest.yml)
+
 O objetivo central deste projeto é o desenvolvimento de uma Propriedade
 Intelectual (IP) de um processador baseado na arquitetura RISC-V,
 especificamente para aplicações aeroespaciais. O design do hardware deve ser
@@ -13,8 +15,8 @@ disso, o projeto incluirá a realização de testes de unidade e integração
 detalhados para assegurar a qualidade e a funcionalidade do processador em todas
 as etapas de desenvolvimento.
 
-Para rodar os testes:
+## Rotina de testes
 
 ```bash
-pytest -s
+$ pytest -s
 ```

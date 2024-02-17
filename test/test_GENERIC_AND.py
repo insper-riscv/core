@@ -1,53 +1,55 @@
+from decimal import Decimal
+
 import cocotb
+import cocotb.runner
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
-from cocotb_test.simulator import run
-from utils import source
+
+import utils
+
+
+class GENERIC_AND(utils.DUT):
+    a: utils.DUT.Input_pin
+    b: utils.DUT.Input_pin
+    q: utils.DUT.Output_pin
 
 
 @cocotb.test()
-async def tb_GENERIC_AND(dut):
-    inA = [
-        BinaryValue('0'),
-        BinaryValue('0'),
-        BinaryValue('1'),
-        BinaryValue('1')
-    ]
-    inB = [
-        BinaryValue('0'),
-        BinaryValue('1'),
-        BinaryValue('0'),
-        BinaryValue('1')
-    ]
-    out = [
-        BinaryValue('0'),
-        BinaryValue('0'),
-        BinaryValue('0'),
-        BinaryValue('1')
-    ]
+async def tb_GENERIC_AND(dut: GENERIC_AND):
+    values_a = ["0", "0", "1", "1"]
+    values_b = ["0", "1", "0", "1"]
+    values_q = ["0", "0", "0", "1"]
 
-    for i, (ia, ib, o) in enumerate(zip(inA, inB, out)):
-        dut.a.value = ia
-        dut.b.value = ib
+    for index, (a, b, q) in enumerate(zip(values_a, values_b, values_q)):
+        dut.a.value = BinaryValue(a)
+        dut.b.value = BinaryValue(b)
 
-        await Timer(1, units='ns')
+        await Timer(Decimal(1), units="ns")
 
-        condition = (dut.q.value.binstr == o.binstr)
+        condition = dut.q.value.binstr == q
 
         if not condition:
-            dut._log.error(
-                f"Expected value: {o.binstr} Obtained value: {dut.q.value.binstr}")
+            dut._log.error(f"Expected value: {q} Obtained value: {dut.q.value.binstr}")
 
-        assert condition, f"Error in test {i}: inA={ia.binstr} inB={ib.binstr}"
-        await Timer(1, units='ns')
+        assert condition, f"Error in test {index}: inA={a} inB={b}"
+        await Timer(Decimal(1), units="ns")
 
 
 def test_GENERIC_AND():
-    run(vhdl_sources=[source("GENERIC_AND.vhd")],
-        toplevel="generic_and",
-        module="test_GENERIC_AND",
-        testcase='tb_GENERIC_AND',
-        toplevel_lang="vhdl")
+    runner = cocotb.runner.get_runner("ghdl")
+
+    runner.build(
+        vhdl_sources=["src/GENERIC_AND.vhd"],
+        hdl_toplevel="generic_and",
+        always=True,
+    )
+
+    runner.test(
+        hdl_toplevel="generic_and",
+        test_module="test_GENERIC_AND",
+        testcase="tb_GENERIC_AND",
+        hdl_toplevel_lang="vhdl",
+    )
 
 
 if __name__ == "__main__":
