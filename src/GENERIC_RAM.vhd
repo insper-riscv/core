@@ -1,12 +1,14 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-use IEEE.TOP_LEVEL_CONSTANTS.ALL;
+
+library WORK;
+use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_RAM is
 
     generic (
-        DATA_WIDTH        : natural := 32;
+        DATA_WIDTH_0       : natural := DATA_WIDTH;
         ADDRESS_WIDTH     : natural := 32;
         ADDRESSABLE_WIDTH : natural := 8
     );
@@ -17,15 +19,15 @@ entity GENERIC_RAM is
         enable_read  : in  std_logic;
         enable_write : in  std_logic;
         address      : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        data_in      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_out     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        source       : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        destination  : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL OF GENERIC_RAM IS
 
-    subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
+    subtype word_t is std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
     type memory_t is array(0 to (2**ADDRESSABLE_WIDTH - 1)) of word_t;
 
     signal ram: memory_t;
@@ -42,14 +44,14 @@ begin
     begin
         if(rising_edge(clock)) then
             STORE : if(enable_write = '1' AND enable = '1') then
-                ram(to_integer(unsigned(local_address))) <= data_in;
+                ram(to_integer(unsigned(local_address))) <= source ;
             end if;
         end if;
     end process;
 
-    data_out <= ram(to_integer(unsigned(local_address))) when (
-                    enable_read = '1' and enable = '1'
-                ) else
-                (others => 'Z');
+    destination <= ram(to_integer(unsigned(local_address))) when (
+                       enable_read = '1' and enable = '1'
+                   ) else
+                   (others => 'Z');
 
 end architecture;

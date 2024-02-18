@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity EDGE_DETECTOR is
+entity GENERIC_EDGE_DETECTOR is
 
     Port (
         clock  : in  std_logic;
@@ -11,7 +11,7 @@ entity EDGE_DETECTOR is
 
 end entity;
 
-architecture RISING_DETECTOR of EDGE_DETECTOR is
+architecture RISING_DETECTOR of GENERIC_EDGE_DETECTOR is
 
     signal state_1 : std_logic;
     signal state_2 : std_logic;
@@ -30,7 +30,7 @@ begin
 
 end architecture;
 
-architecture FALLING_DETECTOR of EDGE_DETECTOR is
+architecture FALLING_DETECTOR of GENERIC_EDGE_DETECTOR is
 
     signal state_1 : std_logic;
     signal state_2 : std_logic;

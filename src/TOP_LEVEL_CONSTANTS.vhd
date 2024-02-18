@@ -2,6 +2,8 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+library WORK;
+
 package TOP_LEVEL_CONSTANTS is
 
     constant CLOCK_FREQUENCY : integer := 50_000_000; -- 50 MHz clock frequency
