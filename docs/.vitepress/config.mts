@@ -8,16 +8,17 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Project', link: '/project' }
+      { text: 'Docs', link: '/' },
+      { text: 'CTI', link: 'https://www.gov.br/cti/pt-br' },
+      { text: 'PFE Insper', link: 'https://www.insper.edu.br/pfe/' }
     ],
 
     sidebar: [
       {
-        text: 'Project',
+        text: 'Projeto',
         items: [
-          { text: 'Introduction', link: '/project' },
-          { text: 'RISC-V Processor', link: '/diagram' }
+          { text: 'Introdução', link: '/project' },
+          { text: 'RISC-V', link: '/diagram' }
         ]
       }
     ],
