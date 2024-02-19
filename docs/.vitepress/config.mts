@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "CTI Renato Archer - RISC-V",
+  title: "RISC-V para uso Aeroespacial",
   description: "Documentação do Projeto",
   base: '/24a-CTI-RISCV/',
   themeConfig: {
