@@ -1,12 +1,7 @@
 # RISC-V Development for Aerospatial Applications
 
-- Students:
-    - Giancarlo Vanoni Ruggiero (giancarlovr@al.insper.edu.br)
-    - Luciano Felix Dias (lucianofd@al.insper.edu.br)
-    - Tiago Vitorino Seixas (tiagovs1@al.insper.edu.br)
 - Institution: Insper Instituto de Ensino e Pesquisa
 - Course: Computer Engineering, 8th Semester
-- Professor: Rafael Corsi Ferrão (rafael.corsi@insper.edu.br)
 - Mentor: Saulo Finco
 - Organization: Centro de Tecnologia da Informação Renato Archer
 - Year: 2024

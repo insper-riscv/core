@@ -16,7 +16,7 @@ export default defineConfig({
       {
         text: 'Project',
         items: [
-          { text: 'Introduction', link: '/project' }
+          { text: 'Introduction', link: '/project' },
           { text: 'RISC-V Processor', link: '/diagram' }
         ]
       }
