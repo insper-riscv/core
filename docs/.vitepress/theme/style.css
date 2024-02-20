@@ -1,0 +1,96 @@
+/**
+ * Customize default theme styling by overriding CSS variables:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+
+ :root {
+    --vp-c-brand: #FDB616;
+    --vp-c-brand-light: #003262;
+    --vp-c-brand-lighter: #003262;
+    --vp-c-brand-lightest: #003262;
+    --vp-c-brand-dark: #FDB616;
+    --vp-c-brand-darker: #FDB616;
+    --vp-c-brand-dimm: rgba(0 50 98 / 0.749);
+    --vp-c-brand-accent: #003262;
+}
+
+.dark {
+    --vp-c-brand: #003262;
+    --vp-c-brand-light: #FDB616;
+    --vp-c-brand-lighter: #FDB616;
+    --vp-c-brand-lightest: #FDB616;
+    --vp-c-brand-dark: #011E41;
+    --vp-c-brand-darker: #011E41;
+    --vp-c-brand-dimm: rgba(0 50 98 / 0.75);
+    --vp-c-brand-accent: #FDB616;
+}
+
+::selection {
+    background-color: rgba(0 50 98 / 0.75);
+    background-color: rgba(0 50 98 / 0.75);
+    color: #000000
+}
+  
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+  
+:root {
+    --vp-button-brand-border: var(--vp-c-brand-light);
+    --vp-button-brand-text: var(--vp-c-white);
+    --vp-button-brand-bg: var(--vp-c-brand);
+    --vp-button-brand-hover-border: var(--vp-c-brand-light);
+    --vp-button-brand-hover-text: var(--vp-c-white);
+    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+    --vp-button-brand-active-border: var(--vp-c-brand-light);
+    --vp-button-brand-active-text: var(--vp-c-white);
+    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+}
+  
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+  
+:root {
+    --vp-home-hero-name-color: #003262;
+}
+
+.dark {
+    --vp-home-hero-name-color: #FDB616;
+}
+  
+/**
+ * Component: Custom Block
+ * -------------------------------------------------------------------------- */
+  
+:root {
+    --vp-custom-block-tip-border: var(--vp-c-brand-light);
+    --vp-custom-block-tip-text: var(--vp-c-brand-darker);
+    --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+  
+.dark {
+    --vp-custom-block-tip-border: var(--vp-c-brand);
+    --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
+    --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+  
+/**
+ * Component: Algolia
+ * -------------------------------------------------------------------------- */
+  
+.DocSearch {
+    --docsearch-primary-color: var(--vp-c-brand) !important;
+}
+  
+/**
+  * Others
+  * -------------------------------------------------------------------------- */
+  
+.aside-curtain {
+    display: none;
+}
