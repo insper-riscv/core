@@ -13,8 +13,8 @@ end entity;
 
 architecture RISING_DETECTOR of GENERIC_EDGE_DETECTOR is
 
-    signal state_1 : std_logic;
-    signal state_2 : std_logic;
+    signal state_1 : std_logic := '0';
+    signal state_2 : std_logic := '0';
 
 begin
 
@@ -32,8 +32,8 @@ end architecture;
 
 architecture FALLING_DETECTOR of GENERIC_EDGE_DETECTOR is
 
-    signal state_1 : std_logic;
-    signal state_2 : std_logic;
+    signal state_1 : std_logic := '0';
+    signal state_2 : std_logic := '0';
 
 begin
 
