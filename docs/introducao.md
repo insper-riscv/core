@@ -26,7 +26,7 @@ Este projeto foi desenvolvido em duas vertentes: o desenvolvimento dos
 componentes individuais, com testes automatizados, e o desenvolvimento da CPU,
 com implementação em uma placa FPGA.
 
-![Fluxo do Projeto](images/fluxo.drawio.png)
+![Fluxo do Projeto](/images/fluxo.drawio.png)
 
 ## Referências
 

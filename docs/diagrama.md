@@ -64,7 +64,7 @@ instruções foram implementadas:
 A coluna `tipo` indica o formato da instrução em bites para sintaxe assembly.
 Segue a especificação oficial:
 
-![Formato das Instruções](images/image_instruction.drawio.png)
+![Formato das Instruções](/images/image_instruction.drawio.png)
 
 ## Especificação da expansão RV32IM ISA
 
@@ -90,12 +90,12 @@ A partir do núcleo de processamento, é possível implementar periféricos que
 adicionam funcionalidade. Segue o diagrama de barramentos de comunicação entre o
 núcleo `CORE` e alguns dos periféricos planejados para este projeto.
 
-![Periféricos](images/infra.drawio.png)
+![Periféricos](/images/infra.drawio.png)
 
 O núcleo de processamento é organizado em pipeline com 5 etapas, sem uso de
 barramento, cache ou controlador de memória.
 
-![Núcleo de processamento com pipeline](images/risc-v.drawio.png)
+![Núcleo de processamento com pipeline](/images/risc-v.drawio.png)
 
 Referências:
 
