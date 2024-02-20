@@ -1,13 +1,11 @@
 # RISC-V
 
-## What it is, and why it was chosen
-
-<p>RISC, short for Reduced Instruction Set Computer, is a broad term that encompasses computers with their Core Processing Units (CPUs) designed to have smaller and more optimized instruction sets, meaning they handle simpler and more uniform instructions. RISC-V is an open source family of Instruction Set Architectures (ISA), which is to say, it needs no royalties to be paid for it's usage, reason why it was chosen for this project. According to ARM, an ISA is what defines the capabilities of a processor, as well as how it performs it's operations </p>
+<p>RISC (Reduced Instruction Set Computer), é um termo geral para se referir a computadores cujas CPUs (Core Processing Units) foram projetadas para interpretar instruções uniformes mais otimizadas, ou seja, instruções mais simples e menores. RISC-V, o objeto de desenvolvimento deste projeto, é uma variação aberta ao público da arquitetura RISC, ou seja, uma arquitetura disponível para o desenvolvimento sem a necessidade de pagar royalties.</p>
 
 ## RV32I ISA
 
-<p>Although RISC-V is more often than not referred to as an ISA, it is actually a group of ISAs, with four base ones. For this project, it was chosen to work with the primary base integer variant for instructions with 32 bits of length, which is the RV32I (RV standing for RISC-V, 32 being the length of bits, and I is the indicator of Integer).</p>
-<p>The following instructions were implemented:</p>
+<p>Embora o comum seja se referir ao RISC-V como sendo uma arquitetura RISC, na verdade ele é uma família de arquiteturas de conjuntos de instruções (ISA), com quatro arquiteturas base. No caso deste projeto, foi acordado trabalhar desenvolvendo a arquitetura base de instruções de inteiros de 32 bits, a RV32I (RV sendo a nominação padrão de arquiteturas RISC-V, 32 indicando o tamanho das instruções, e I indicando que a arquitetura base é a dos Inteiros) </p>
+<p>As seguintes instruções foram implementadas:</p>
 
 | Category      |                 Name            | Fmt |       Instructions       |
 |---------------|---------------------------------|-----|--------------------------|
@@ -56,13 +54,13 @@
 |               |                  Store Halfword |  S  | SH      rs1, rs2, imm    |
 |               |                      Store Word |  S  | SW      rs1, rs2, imm    |
 
-The fmt column indicates which of the follownig formats applies to the instruction 
+A coluna Fmt indica qual dos seguintes formatos se aplica à instrução
 
 ![Intructions Format](images/image_instruction.drawio.png)
 
 # RV32IM ISA
 
-Besides the Base Instruction Set, it was decided to add the Extension Set for Multiplication
+Além do conjunto de instruções base, pode-se adaptar o processador RISC-V para funcionar com extensões, ou seja, com instruções além das instruções base implementadas anteriormente. Foi acordado desenvolver a extensão para multiplicação e divisão, a extensão M, tornando o processador um RV32IM (processador RISC-V de 32 bits para inteiros com extensão para multiplicação e divisão)
 
 | Category      |                 Name            | Fmt |       Instructions       |
 |---------------|---------------------------------|-----|--------------------------|
@@ -75,17 +73,17 @@ Besides the Base Instruction Set, it was decided to add the Extension Set for Mu
 | Remainder     |                       Remainder |  R  | REM     rd, rs1, rs2     |
 |               |              Remainder Unsigned |  R  | REMU    rd, rs1, rs2     |
 
-# Processor Architecture
+# Arquitetura do processador
 
-The intention of the group members was to develop a functional single-core RV32IM processor and also implement some periferics
+A intenção do grupo era desenvolver um processador RV32IM de um núcleo e adicionar alguns periféricos.
 
 ![Infrastructure](images/infra.drawio.png)
 
-The processor itself would have a five-step pipeline, with no bus, no cache and no memory controller. 
+Sendo que o processador em si teria uma pipeline de 5 etapas, sem uso de barramento, cache ou controlador de memória.
 
 ![Processador](images/risc-v.drawio.png)
 
-References:
+Referências:
 - Hennessy, J. L.; Patterson, D. A. (2020) **Computer Organization and Design: The Hardware/Software Interface (RISC-V Edition)**. p. 314.
 
 - Patterson, David A.; Waterman, Andrew. **The RISC-V reader: An open architecture atlas**. Strawberry Canyon LLC, 2017.

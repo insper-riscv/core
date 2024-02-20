@@ -1,24 +1,26 @@
-# RISC-V Development for Aerospatial Applications
+# Desenvolvimento de RISC-V para Aplicações Aeroespaciais
 
-- Institution: Insper Instituto de Ensino e Pesquisa
-- Course: Computer Engineering, 8th Semester
+- Instituição: Insper Instituto de Ensino e Pesquisa
+- Curso: Computer Engineering, 8th Semester
 - Mentor: Saulo Finco
-- Organization: Centro de Tecnologia da Informação Renato Archer
-- Year: 2024
+- Organização: Centro de Tecnologia da Informação Renato Archer
+- Ano: 2024
 
-## About
+## Resumo
 
-<p>This project's objective is to develop a RISC-V processor for aerospatial applications, while guaranteeing it’s trustworthiness through a CI/CD pipeline, which is an automation practice where the development process is divided in steps.</p>
+<p>O objetivo deste projeto é desenvolver um processador RISC-V para aplicações aeroespaciais, garantindo sua qualidade por meio de uma pipeline CI/CD, que é uma prática de automação onde o processo de desenvolvimento está separado em etapas. </p>
 
-<p>The institution "Insper Instituto de Ensino e Pesquisa", also known as Insper, is a non-profitable organization dedicated to research and teaching, and this project was developed by three of it's students as a final project for the computer engineering course, working together with the brazilian government organization "Centro de Tecnologia da Informação Renato Archer", also known as CTI Renato Archer.</p>
+## Introdução
 
-## Project Overview
+<p>A instituição "Insper Instituto de Ensino e Pesquisa" (Insper) é uma organização sem fins lucrativos, e este projeto foi desenvolvido por três alunos da graduação do curso de engenharia da computação, em conjunto com a organização governamental "Centro de Tecnologia da Informação Renato Archer" (CTI).</p>
 
-The project was divided into two branches ofdevelopment: the development of individual components, which are tested by cocotb, and the development of the CPU, which is tested in the FPGA board
+## Visão Abrangente do projeto
+
+Este projeto foi desenvolvido em duas vertentes: o desenvolvimento dos componentes individuais, testados por cocotb, e o desenvolvimento da CPU, testada na placa FPGA
 
 ![Project Pipeline](images/fluxo.drawio.png)
 
-# References
+# Referências
 - Edington, A. A.; Domingues, B. S.; Vale, L. L.; Santos, R. D. **Conformance Tester for Tags EPC-GEN2 UHF RFID**. Insper, 2021. Available at: https://pfeinsper.github.io/21b-indago-rfid-conformance-tester/
 
 
