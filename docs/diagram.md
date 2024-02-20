@@ -56,9 +56,9 @@
 
 A coluna Fmt indica qual dos seguintes formatos se aplica à instrução
 
-![Intructions Format](images/image_instruction.drawio.png)
+![Formato das Instruções](images/image_instruction.drawio.png)
 
-# RV32IM ISA
+## RV32IM ISA
 
 Além do conjunto de instruções base, pode-se adaptar o processador RISC-V para funcionar com extensões, ou seja, com instruções além das instruções base implementadas anteriormente. Foi acordado desenvolver a extensão para multiplicação e divisão, a extensão M, tornando o processador um RV32IM (processador RISC-V de 32 bits para inteiros com extensão para multiplicação e divisão)
 
@@ -73,11 +73,11 @@ Além do conjunto de instruções base, pode-se adaptar o processador RISC-V par
 | Remainder     |                       Remainder |  R  | REM     rd, rs1, rs2     |
 |               |              Remainder Unsigned |  R  | REMU    rd, rs1, rs2     |
 
-# Arquitetura do processador
+## Arquitetura do processador
 
 A intenção do grupo era desenvolver um processador RV32IM de um núcleo e adicionar alguns periféricos.
 
-![Infrastructure](images/infra.drawio.png)
+![Infraestrutura](images/infra.drawio.png)
 
 Sendo que o processador em si teria uma pipeline de 5 etapas, sem uso de barramento, cache ou controlador de memória.
 

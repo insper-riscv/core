@@ -18,7 +18,7 @@
 
 Este projeto foi desenvolvido em duas vertentes: o desenvolvimento dos componentes individuais, testados por cocotb, e o desenvolvimento da CPU, testada na placa FPGA
 
-![Project Pipeline](images/fluxo.drawio.png)
+![Fluxo do Projeto](images/fluxo.drawio.png)
 
 # Referências
 - Edington, A. A.; Domingues, B. S.; Vale, L. L.; Santos, R. D. **Conformance Tester for Tags EPC-GEN2 UHF RFID**. Insper, 2021. Available at: https://pfeinsper.github.io/21b-indago-rfid-conformance-tester/
