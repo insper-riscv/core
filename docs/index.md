@@ -1,16 +1,15 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
-
 hero:
-  name: "CTI Renato Archer - RISC-V"
-  text: "Documentação do Projeto"
-  tagline: My great project tagline
+  name: RISC-V para uso Aeroespacial
+  text: Documentação do Projeto
+  tagline: CTI Renato Archer e PFE Insper
   actions:
     - theme: brand
-      text: Project
+      text: Projeto
       link: /project
 ---
+
 <script setup>
 import { VPTeamMembers } from 'vitepress/theme'
 

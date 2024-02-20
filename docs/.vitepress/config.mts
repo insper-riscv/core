@@ -2,22 +2,23 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "CTI Renato Archer - RISC-V",
+  title: "RISC-V para uso Aeroespacial",
   description: "Documentação do Projeto",
   base: '/24a-CTI-RISCV/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Project', link: '/project' }
+      { text: 'Docs', link: '/' },
+      { text: 'CTI', link: 'https://www.gov.br/cti/pt-br' },
+      { text: 'PFE Insper', link: 'https://www.insper.edu.br/pfe/' }
     ],
 
     sidebar: [
       {
-        text: 'Project',
+        text: 'Projeto',
         items: [
-          { text: 'Introduction', link: '/project' },
-          { text: 'RISC-V Processor', link: '/diagram' }
+          { text: 'Introdução', link: '/project' },
+          { text: 'RISC-V', link: '/diagram' }
         ]
       }
     ],
