@@ -34,8 +34,6 @@ begin
     slt(0)   <= overflow(DATA_WIDTH - 1);
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
-        constant i1 : integer := i + 1;
-    begin
         FOR_BIT : entity WORK.RV32I_ALU_BIT
             port map (
                 invert_source_1 => invert_source_1,
@@ -46,7 +44,7 @@ begin
                 source_1        => source_1(i),
                 source_2        => source_2(i),
                 destination     => result(i),
-                carry_out       => carry(i1),
+                carry_out       => carry(i + 1),
                 overflow        => overflow(i)
             );
     end generate;
