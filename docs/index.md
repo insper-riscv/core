@@ -65,6 +65,18 @@ members:
     link: https://www.linkedin.com/in/rafael-corsi-ferrão-624238116/
   - icon: github
     link: https://github.com/rafaelcorsi
+- avatar: https://media.licdn.com/dms/image/C4D0BAQF6iPH2r0sRCA/company-logo_200_200/0/1630470864507/cti_renato_archer_logo?e=1716422400&v=beta&t=IXE8hu6bInWiNoIVn--Z6Cm4Hd-5ywIkS6h6Txvzb0w
+  name: CTI Renato Archer
+  title: Realização
+  links:
+  - icon: linkedin
+    link: https://www.linkedin.com/company/cti-renato-archer/
+- avatar: https://media.licdn.com/dms/image/D4E03AQG3diHhspG70w/profile-displayphoto-shrink_800_800/0/1665021953301?e=1714003200&v=beta&t=4G8s6U3TEc9sP6ziTJSFfIQnScdIDrYayt5sHjwIij8
+  name: Saulo Finco
+  title: Mentor
+  links:
+  - icon: linkedin
+    link: https://www.linkedin.com/in/saulofinco
 
 ---
 
@@ -74,4 +86,4 @@ import { VPTeamMembers } from 'vitepress/theme'
 
 <div style="margin-top: 2rem;"></div>
 
-<VPTeamMembers size="small" :members="$frontmatter.members" />
+<VPTeamMembers :members="$frontmatter.members" />
