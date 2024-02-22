@@ -17,21 +17,9 @@ async def tb_GENERIC_SIGNAL_EXTENDER(dut: GENERIC_SIGNAL_EXTENDER):
     pass
 
 
-@pytest.fixture(scope="module", autouse=True)
-def build_GENERIC_SIGNAL_EXTENDER():
-    utils.runner.build(
-        vhdl_sources=["src/GENERIC_SIGNAL_EXTENDER.vhd"],
-        hdl_toplevel="generic_signal_extender",
-        always=True,
-    )
-
 def test_GENERIC_SIGNAL_EXTENDER():
-    utils.runner.test(
-        hdl_toplevel="generic_signal_extender",
-        test_module="test_GENERIC_SIGNAL_EXTENDER",
-        testcase="tb_GENERIC_SIGNAL_EXTENDER",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_SIGNAL_EXTENDER.build_vhd()
+    GENERIC_SIGNAL_EXTENDER.test_with(tb_GENERIC_SIGNAL_EXTENDER)
 
 
 if __name__ == "__main__":

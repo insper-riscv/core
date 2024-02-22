@@ -15,7 +15,7 @@ class GENERIC_ADDER(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_ADDER(dut: GENERIC_ADDER):
+async def tb_GENERIC_ADDER(dut: "GENERIC_ADDER"):
     values_source_1 = [
         "00000000000000000000000000000000",
         "10101010101010101010101010101010",
@@ -49,22 +49,9 @@ async def tb_GENERIC_ADDER(dut: GENERIC_ADDER):
         assert condition, f"Error in test {index}: inA={source_1} inB={source_2}"
         await Timer(Decimal(1), units="ns")
 
-
-@pytest.fixture(scope="module", autouse=True)
-def build_GENERIC_ADDER():
-    utils.runner.build(
-        vhdl_sources=["src/GENERIC_ADDER.vhd"],
-        hdl_toplevel="generic_adder",
-        always=True,
-    )
-
 def test_GENERIC_ADDER():
-    utils.runner.test(
-        hdl_toplevel="generic_adder",
-        test_module="test_GENERIC_ADDER",
-        testcase="tb_GENERIC_ADDER",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_ADDER.build_vhd()
+    GENERIC_ADDER.test_with(tb_GENERIC_ADDER)
 
 
 if __name__ == "__main__":

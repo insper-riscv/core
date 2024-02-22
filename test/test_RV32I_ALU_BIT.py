@@ -17,21 +17,9 @@ async def tb_RV32I_ALU_BIT(dut: RV32I_ALU_BIT):
     pass
 
 
-@pytest.fixture(scope="module", autouse=True)
-def build_RV32I_ALU_BIT():
-    utils.runner.build(
-        vhdl_sources=["src/RV32I_ALU_BIT.vhd"],
-        hdl_toplevel="rv32i_alu_bit",
-        always=True,
-    )
-
 def test_RV32I_ALU_BIT():
-    utils.runner.test(
-        hdl_toplevel="rv32i_alu_bit",
-        test_module="test_RV32I_ALU_BIT",
-        testcase="tb_RV32I_ALU_BIT",
-        hdl_toplevel_lang="vhdl",
-    )
+    RV32I_ALU_BIT.build_vhd()
+    RV32I_ALU_BIT.test_with(tb_RV32I_ALU_BIT)
 
 
 if __name__ == "__main__":

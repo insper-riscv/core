@@ -42,22 +42,9 @@ async def tb_GENERIC_COUNTER(dut: GENERIC_COUNTER):
         assert condition, f"Error in test {index}: clear={clear} update={update} source={source} clock={clock}"
         await Timer(Decimal(20000), units="ns")
 
-
-@pytest.fixture(scope='session', autouse=True)
-def build_GENERIC_COUNTER():
-    utils.runner.build(
-        vhdl_sources=["src/GENERIC_COUNTER.vhd"],
-        hdl_toplevel="generic_counter",
-        always=True,
-    )
-
 def test_GENERIC_COUNTER():
-    utils.runner.test(
-        hdl_toplevel="generic_counter",
-        test_module="test_GENERIC_COUNTER",
-        testcase="tb_GENERIC_COUNTER",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_COUNTER.build_vhd()
+    GENERIC_COUNTER.test_with(tb_GENERIC_COUNTER)
 
 
 if __name__ == "__main__":

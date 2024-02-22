@@ -56,21 +56,9 @@ async def tb_GENERIC_EDGE_DETECTOR(dut: GENERIC_EDGE_DETECTOR):
         await Timer(Decimal(20000), units="ns")
 
 
-@pytest.fixture(scope="module", autouse=True)
-def build_GENERIC_EDGE_DETECTOR():
-    utils.runner.build(
-        vhdl_sources=["src/GENERIC_EDGE_DETECTOR.vhd"],
-        hdl_toplevel="generic_edge_detector",
-        always=True,
-    )
-
 def test_GENERIC_EDGE_DETECTOR():
-    utils.runner.test(
-        hdl_toplevel="generic_edge_detector",
-        test_module="test_GENERIC_EDGE_DETECTOR",
-        testcase="tb_GENERIC_EDGE_DETECTOR",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_EDGE_DETECTOR.build_vhd()
+    GENERIC_EDGE_DETECTOR.test_with(tb_GENERIC_EDGE_DETECTOR)
 
 
 if __name__ == "__main__":

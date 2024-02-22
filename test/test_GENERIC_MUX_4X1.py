@@ -6,9 +6,12 @@ from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 
 import utils
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class GENERIC_MUX_4X1(utils.DUT):
+    CHILDREN = [GENERIC_MUX_2X1]
+
     source_1: utils.DUT.Input_pin
     source_2: utils.DUT.Input_pin
     source_3: utils.DUT.Input_pin
@@ -69,21 +72,9 @@ async def tb_GENERIC_MUX_4X1(dut: GENERIC_MUX_4X1):
         await Timer(Decimal(1), units="ns")
 
 
-@pytest.fixture(scope="module", autouse=True)
-def build_GENERIC_MUX_4X1():
-    utils.runner.build(
-        vhdl_sources=["src/GENERIC_MUX_4X1.vhd"],
-        hdl_toplevel="generic_mux_4x1",
-        always=True,
-    )
-
 def test_GENERIC_MUX_4X1():
-    utils.runner.test(
-        hdl_toplevel="generic_mux_4x1",
-        test_module="test_GENERIC_MUX_4X1",
-        testcase="tb_GENERIC_MUX_4X1",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_MUX_4X1.build_vhd()
+    GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1)
 
 
 if __name__ == "__main__":

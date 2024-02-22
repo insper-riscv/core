@@ -44,21 +44,9 @@ async def tb_GENERIC_REGISTER(dut: GENERIC_REGISTER):
         await Timer(Decimal(20000), units="ns")
 
 
-@pytest.fixture(scope="module", autouse=True)
-def build_GENERIC_REGISTER():
-    utils.runner.build(
-        vhdl_sources=["src/GENERIC_REGISTER.vhd"],
-        hdl_toplevel="generic_register",
-        always=True,
-    )
-
 def test_GENERIC_REGISTER():
-    utils.runner.test(
-        hdl_toplevel="generic_register",
-        test_module="test_GENERIC_REGISTER",
-        testcase="tb_GENERIC_REGISTER",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_REGISTER.build_vhd()
+    GENERIC_REGISTER.test_with(tb_GENERIC_REGISTER)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-from pickle import BUILD
 import typing as T
 
 import cocotb.binary
