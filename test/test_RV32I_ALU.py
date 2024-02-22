@@ -19,7 +19,6 @@ async def tb_RV32I_ALU(dut: RV32I_ALU):
 
 
 def test_RV32I_ALU():
-    RV32I_ALU.build_vhd()
     RV32I_ALU.test_with(tb_RV32I_ALU)
 
 

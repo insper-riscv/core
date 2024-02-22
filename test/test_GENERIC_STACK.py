@@ -18,7 +18,6 @@ async def tb_GENERIC_STACK(dut: GENERIC_STACK):
 
 
 def test_GENERIC_STACK():
-    GENERIC_STACK.build_vhd()
     GENERIC_STACK.test_with(tb_GENERIC_STACK)
 
 

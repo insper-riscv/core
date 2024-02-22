@@ -20,14 +20,36 @@ class GENERIC_COUNTER(utils.DUT):
 
 @cocotb.test()
 async def tb_GENERIC_COUNTER(dut: GENERIC_COUNTER):
-    values_clear = ["0", "0", "0", "1",]
-    values_update = ["0", "0", "1", "0",]
-    values_source = ["00000", "00000", "00000", "00000",]
-    values_state = ["0", "0", "0", "0",]
+    values_clear = [
+        "0",
+        "0",
+        "0",
+        "1",
+    ]
+    values_update = [
+        "0",
+        "0",
+        "1",
+        "0",
+    ]
+    values_source = [
+        "00000",
+        "00000",
+        "00000",
+        "00000",
+    ]
+    values_state = [
+        "0",
+        "0",
+        "0",
+        "0",
+    ]
     clock = Clock(dut.clock, 20000, units="ns")
     cocotb.start_soon(clock.start(start_high=False))
 
-    for index, (clear, update, source, state) in enumerate(zip(values_clear, values_update, values_source, values_state)):
+    for index, (clear, update, source, state) in enumerate(
+        zip(values_clear, values_update, values_source, values_state)
+    ):
         dut.clear.value = BinaryValue(clear)
         dut.update.value = BinaryValue(update)
         dut.source.value = BinaryValue(source)
@@ -37,13 +59,17 @@ async def tb_GENERIC_COUNTER(dut: GENERIC_COUNTER):
         condition = dut.state.value.binstr == state
 
         if not condition:
-            dut._log.error(f"Expected value: {state} Obtained value: {dut.state.value.binstr}")
+            dut._log.error(
+                f"Expected value: {state} Obtained value: {dut.state.value.binstr}"
+            )
 
-        assert condition, f"Error in test {index}: clear={clear} update={update} source={source} clock={clock}"
+        assert (
+            condition
+        ), f"Error in test {index}: clear={clear} update={update} source={source} clock={clock}"
         await Timer(Decimal(20000), units="ns")
 
+
 def test_GENERIC_COUNTER():
-    GENERIC_COUNTER.build_vhd()
     GENERIC_COUNTER.test_with(tb_GENERIC_COUNTER)
 
 

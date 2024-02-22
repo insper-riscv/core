@@ -54,7 +54,23 @@ async def tb_GENERIC_MUX_4X1(dut: GENERIC_MUX_4X1):
         "11111111000000000000000011111111",
     ]
 
-    for index, (source_1, source_2, source_3, source_4, selector, destination) in enumerate(zip(values_source_1, values_source_2, values_source_3, values_source_4, values_selector, values_destination)):
+    for index, (
+        source_1,
+        source_2,
+        source_3,
+        source_4,
+        selector,
+        destination,
+    ) in enumerate(
+        zip(
+            values_source_1,
+            values_source_2,
+            values_source_3,
+            values_source_4,
+            values_selector,
+            values_destination,
+        )
+    ):
         dut.source_1.value = BinaryValue(source_1)
         dut.source_2.value = BinaryValue(source_2)
         dut.source_3.value = BinaryValue(source_3)
@@ -66,14 +82,17 @@ async def tb_GENERIC_MUX_4X1(dut: GENERIC_MUX_4X1):
         condition = dut.destination.value.binstr == destination
 
         if not condition:
-            dut._log.error(f"Expected value: {destination} Obtained value: {dut.destination.value.binstr}")
+            dut._log.error(
+                f"Expected value: {destination} Obtained value: {dut.destination.value.binstr}"
+            )
 
-        assert condition, f"Error in test {index}: source_1={source_1} source_2={source_2} source_3={source_3} source_4={source_4} selector={selector}"
+        assert (
+            condition
+        ), f"Error in test {index}: source_1={source_1} source_2={source_2} source_3={source_3} source_4={source_4} selector={selector}"
         await Timer(Decimal(1), units="ns")
 
 
 def test_GENERIC_MUX_4X1():
-    GENERIC_MUX_4X1.build_vhd()
     GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1)
 
 

@@ -18,7 +18,6 @@ async def tb_GENERIC_RAM(dut: GENERIC_RAM):
 
 
 def test_GENERIC_RAM():
-    GENERIC_RAM.build_vhd()
     GENERIC_RAM.test_with(tb_GENERIC_RAM)
 
 

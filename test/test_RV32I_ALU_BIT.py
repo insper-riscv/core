@@ -18,7 +18,6 @@ async def tb_RV32I_ALU_BIT(dut: RV32I_ALU_BIT):
 
 
 def test_RV32I_ALU_BIT():
-    RV32I_ALU_BIT.build_vhd()
     RV32I_ALU_BIT.test_with(tb_RV32I_ALU_BIT)
 
 

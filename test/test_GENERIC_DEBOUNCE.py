@@ -19,7 +19,6 @@ async def tb_GENERIC_DEBOUNCE(dut: GENERIC_DEBOUNCE):
 
 
 def test_GENERIC_DEBOUNCE():
-    GENERIC_DEBOUNCE.build_vhd()
     GENERIC_DEBOUNCE.test_with(tb_GENERIC_DEBOUNCE)
 
 
