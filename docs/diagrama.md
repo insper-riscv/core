@@ -64,7 +64,7 @@ instruções foram implementadas:
 A coluna `tipo` indica o formato da instrução em bites para sintaxe assembly.
 Segue a especificação oficial:
 
-![Formato das Instruções](/images/image_instruction.drawio.png)
+![Formato das Instruções](/public/images/image_instruction.drawio.png)
 
 ## Especificação da expansão RV32IM ISA
 
@@ -90,20 +90,20 @@ A partir do núcleo de processamento, é possível implementar periféricos que
 adicionam funcionalidade. Segue o diagrama de barramentos de comunicação entre o
 núcleo `CORE` e alguns dos periféricos planejados para este projeto.
 
-![Periféricos](/images/infra.drawio.png)
+![Periféricos](public/images/infra.drawio.png)
 
 O núcleo de processamento é organizado em pipeline com 5 etapas, sem uso de
 barramento, cache ou controlador de memória.
 
-![Núcleo de processamento com pipeline](/images/risc-v.drawio.png)
+![Núcleo de processamento com pipeline](/public/images/diagrama.png)
 
-Referências:
+## Referências:
 
-- Hennessy, J. L.; Patterson, D. A. (2020) **Computer Organization and Design:
-  The Hardware/Software Interface (RISC-V Edition)**. p. 314.
+- Hennessy, J. L.; Patterson, D. A. (2020) 
+**Computer Organization and Design: The Hardware/Software Interface (RISC-V Edition)**. p. 314.
 
-- Patterson, David A.; Waterman, Andrew. **The RISC-V reader: An open
-  architecture atlas**. Strawberry Canyon LLC, 2017.
+- Patterson, David A.; Waterman, Andrew. **The RISC-V reader: An open architecture atlas**.
+ Strawberry Canyon LLC, 2017.
 
 - “The RISC-V Instruction Set Manual, Volume I: User-Level ISA, Document Version
   20191213”, Editors Andrew Waterman and Krste Asanovic, RISC-V Foundation,
@@ -113,6 +113,5 @@ Referências:
   MakeUseOf, 15 oct. 2022. Available at:
   https://www.makeuseof.com/what-is-risc-what-is-risc-v-how-do-they-differ/
 
-- **GLOSSARY - Instruction Set Architecture: What Is an Instruction Set
-  Architecture?**. ARM, 14 nov. 2023. Available at:
-  https://www.arm.com/glossary/isa
+- **GLOSSARY - Instruction Set Architecture: What Is an Instruction Set Architecture?**.
+ ARM, 14 nov. 2023. Available at:  https://www.arm.com/glossary/isa
