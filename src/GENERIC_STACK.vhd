@@ -38,12 +38,12 @@ begin
     STACK : process(clock, enable_read, enable_write, pointer) is
     begin
         if (rising_edge(clock)) then
-            PUSH : if (enable_write = '1' and pointer < SIZE) then
+            PUSH : if (enable_write = '1' and pointer < SIZE and enable_read = '0') then
                 registers(pointer) := source;
                 pointer <= pointer + 1;
             end if;
 
-            POP : if (enable_read = '1' and pointer > 0) then
+            POP : if (enable_read = '1' and pointer > 0 and enable_write = '0') then
                 pointer <= pointer - 1;
             end if;
         end if;
@@ -51,7 +51,7 @@ begin
 
     process(pointer)
     begin
-        if (pointer < SIZE) then
+        if (pointer >= SIZE) then
             overflow <= '1';
         else
             overflow <= '0';
