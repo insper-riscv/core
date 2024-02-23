@@ -4,7 +4,7 @@ import pytest
 import cocotb
 import cocotb.runner
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
+from cocotb.triggers import Timer, RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -20,53 +20,44 @@ class GENERIC_COUNTER(utils.DUT):
 
 @cocotb.test()
 async def tb_GENERIC_COUNTER(dut: GENERIC_COUNTER):
-    values_clear = [
-        "0",
-        "0",
-        "0",
-        "1",
-    ]
-    values_update = [
-        "0",
-        "0",
-        "1",
-        "0",
-    ]
-    values_source = [
-        "00000",
-        "00000",
-        "00000",
-        "00000",
-    ]
-    values_state = [
-        "0",
-        "0",
-        "0",
-        "0",
-    ]
     clock = Clock(dut.clock, 20000, units="ns")
     cocotb.start_soon(clock.start(start_high=False))
 
-    for index, (clear, update, source, state) in enumerate(
-        zip(values_clear, values_update, values_source, values_state)
-    ):
-        dut.clear.value = BinaryValue(clear)
-        dut.update.value = BinaryValue(update)
-        dut.source.value = BinaryValue(source)
+    dut.clear.value = BinaryValue('1')
+    await RisingEdge(dut.clock)
+    await FallingEdge(dut.clock)
 
-        await Timer(Decimal(20000), units="ns")
+    condition = dut.state.value.binstr == '0'
 
-        condition = dut.state.value.binstr == state
+    if not condition:
+        dut._log.error(f"Expected value: {'0'} Obtained value: {dut.state.value.binstr}")
 
-        if not condition:
-            dut._log.error(
-                f"Expected value: {state} Obtained value: {dut.state.value.binstr}"
-            )
+    assert (condition), f"Error in clear test 1"
 
-        assert (
-            condition
-        ), f"Error in test {index}: clear={clear} update={update} source={source} clock={clock}"
-        await Timer(Decimal(20000), units="ns")
+    dut.source.value = BinaryValue("00010")
+    dut.update.value = BinaryValue('1')
+    dut.clear.value = BinaryValue('0')
+    await FallingEdge(dut.clock)
+    await FallingEdge(dut.clock)
+    await FallingEdge(dut.clock)
+
+    condition = dut.state.value.binstr == '1'
+
+    if not condition:
+        dut._log.error(f"Expected value: {'1'} Obtained value: {dut.state.value.binstr}")
+
+    assert (condition), f"Error in count test"
+
+    dut.clear.value = BinaryValue('1')
+    await RisingEdge(dut.clock)
+    await FallingEdge(dut.clock)
+
+    condition = dut.state.value.binstr == '0'
+
+    if not condition:
+        dut._log.error(f"Expected value: {'0'} Obtained value: {dut.state.value.binstr}")
+
+    assert (condition), f"Error in clear test 2"
 
 
 def test_GENERIC_COUNTER():
