@@ -90,7 +90,7 @@ A partir do núcleo de processamento, é possível implementar periféricos que
 adicionam funcionalidade. Segue o diagrama de barramentos de comunicação entre o
 núcleo `CORE` e alguns dos periféricos planejados para este projeto.
 
-![Periféricos](/images/infra.drawio.png)
+![Periféricos](/images/diagrama.png)
 
 O núcleo de processamento é organizado em pipeline com 5 etapas, sem uso de
 barramento, cache ou controlador de memória.
