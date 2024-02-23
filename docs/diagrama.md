@@ -64,7 +64,7 @@ instruções foram implementadas:
 A coluna `tipo` indica o formato da instrução em bites para sintaxe assembly.
 Segue a especificação oficial:
 
-![Formato das Instruções](/images/image_instruction.drawio.png)
+![Formato das Instruções](/public/images/image_instruction.drawio.png)
 
 ## Especificação da expansão RV32IM ISA
 
@@ -95,7 +95,7 @@ núcleo `CORE` e alguns dos periféricos planejados para este projeto.
 O núcleo de processamento é organizado em pipeline com 5 etapas, sem uso de
 barramento, cache ou controlador de memória.
 
-![Núcleo de processamento com pipeline](/images/diagrama.png)
+![Núcleo de processamento com pipeline](/public/images/diagrama.png)
 
 ## Referências:
 
