@@ -13,6 +13,8 @@ package TOP_LEVEL_CONSTANTS is
 
     subtype OPCODE_RANGE is natural range 6 downto 0;
 
+    subtype FUNCTION_RANGE is natural range 2 downto 0;
+
     -- RV32I Base Instruction Set opcodes
     constant OPCODE_LUI     : std_logic_vector(OPCODE_RANGE) := "0110111";
     constant OPCODE_AUIPC   : std_logic_vector(OPCODE_RANGE) := "0010111";
