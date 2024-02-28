@@ -1,7 +1,7 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
-import cocotb.runner
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 
@@ -9,65 +9,58 @@ import utils
 
 
 class GENERIC_MUX_2X1(utils.DUT):
-    a: utils.DUT.Input_pin
-    b: utils.DUT.Input_pin
-    s: utils.DUT.Input_pin
-    q: utils.DUT.Output_pin
+    source_1: utils.DUT.Input_pin
+    source_2: utils.DUT.Input_pin
+    selector: utils.DUT.Input_pin
+    destination: utils.DUT.Output_pin
 
 
 @cocotb.test()
 async def tb_GENERIC_MUX_2X1(dut: GENERIC_MUX_2X1):
-    inA = [
+    values_source_1 = [
         "00001111000011110000111100001111",
         "00001111000011110000111100001111",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
     ]
-    inB = [
+    values_source_2 = [
         "11110000111100001111000011110000",
         "11110000111100001111000011110000",
         "11111111111111111111111111111111",
         "11111111111111111111111111111111",
     ]
-    inS = ["0", "1", "0", "1"]
-    out = [
+    values_selector = ["0", "1", "0", "1"]
+    values_destination = [
         "00001111000011110000111100001111",
         "11110000111100001111000011110000",
         "00000000000000000000000000000000",
         "11111111111111111111111111111111",
     ]
 
-    for i, (ia, ib, iS, o) in enumerate(zip(inA, inB, inS, out)):
-        dut.a.value = BinaryValue(ia)
-        dut.b.value = BinaryValue(ib)
-        dut.s.value = BinaryValue(iS)
+    for index, (source_1, source_2, selector, destination) in enumerate(
+        zip(values_source_1, values_source_2, values_selector, values_destination)
+    ):
+        dut.source_1.value = BinaryValue(source_1)
+        dut.source_2.value = BinaryValue(source_2)
+        dut.selector.value = BinaryValue(selector)
 
         await Timer(Decimal(1), units="ns")
 
-        condition = dut.q.value.binstr == o
+        condition = dut.destination.value.binstr == destination
 
         if not condition:
-            dut._log.error(f"Expected value: {o} Obtained value: {dut.q.value.binstr}")
+            dut._log.error(
+                f"Expected value: {destination} Obtained value: {dut.destination.value.binstr}"
+            )
 
-        assert condition, f"Error in test {i}: inA={ia} inB={ib} inS={iS}"
+        assert (
+            condition
+        ), f"Error in test {index}: source_1={source_1} source_2={source_2} selector={selector}"
         await Timer(Decimal(1), units="ns")
 
 
 def test_GENERIC_MUX_2X1():
-    runner = cocotb.runner.get_runner("ghdl")
-
-    runner.build(
-        vhdl_sources=["src/GENERIC_MUX_2X1.vhd"],
-        hdl_toplevel="generic_mux_2x1",
-        always=True,
-    )
-
-    runner.test(
-        hdl_toplevel="generic_mux_2x1",
-        test_module="test_GENERIC_MUX_2X1",
-        testcase="tb_GENERIC_MUX_2X1",
-        hdl_toplevel_lang="vhdl",
-    )
+    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1)
 
 
 if __name__ == "__main__":

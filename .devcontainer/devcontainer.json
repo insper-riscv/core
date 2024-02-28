@@ -6,9 +6,9 @@
         "vscode": {
             "extensions": [
                 "actboy168.tasks",
-                "puorc.awesome-vhdl",
                 "ms-python.python",
-                "ms-python.black-formatter"
+                "ms-python.black-formatter",
+                "mshr-h.VerilogHDL"
             ]
         }
     }
