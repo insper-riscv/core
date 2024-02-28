@@ -9,7 +9,7 @@ entity GENERIC_REGISTERS_BANK is
 
     generic (
         DATA_WIDTH_0  : natural := DATA_WIDTH;
-        ADDRESS_WIDTH : natural
+        ADDRESS_WIDTH : natural := 5
     );
 
     port (
@@ -33,8 +33,8 @@ architecture RTL of GENERIC_REGISTERS_BANK is
     function init_memory return memory_t is
         variable tmp : memory_t := (others => (others => '0'));
     begin
-        for i in start_index to end_index loop
-            tmp(i) <= (others => '0');
+        for i in 0 to (DATA_WIDTH_0 - 1) loop
+            tmp(i) := (others => '0');
         end loop;
         return tmp;
     end function;

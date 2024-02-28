@@ -1,5 +1,5 @@
-library ieee;
-use ieee.std_logic_1164.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
@@ -7,8 +7,8 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_SIGNAL_EXTENDER is
 
     generic (
-        SOURCE_WIDTH      : DATA_WIDTH;
-        DESTINATION_WIDTH : DATA_WIDTH
+        SOURCE_WIDTH      : natural :=  DATA_WIDTH;
+        DESTINATION_WIDTH : natural := DATA_WIDTH
     );
 
     port (

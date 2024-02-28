@@ -1,6 +1,6 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
@@ -28,7 +28,7 @@ architecture CPU of RV32I_ALU is
     constant ZERO : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
 
     signal result   : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-    signal carry    : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+    signal carry    : std_logic_vector((DATA_RANGE'left + 1) downto 0);
     signal slt      : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
     signal overflow : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
 
