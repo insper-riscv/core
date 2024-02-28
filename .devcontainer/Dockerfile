@@ -19,18 +19,7 @@ RUN apt-get update -qq              \
     && apt-get autoclean            \
     && apt-get clean                \
     && apt-get autoremove -y        \
-    && rm -r /var/lib/apt/lists/*   \
-    && pip install                  \
-        cocotb                      \
-        cocotb-test                 \
-        exceptiongroup              \
-        find-libpython              \
-        iniconfig                   \
-        packaging                   \
-        pluggy                      \
-        pytest                      \
-        pytest-env                  \
-        tomli
+    && rm -r /var/lib/apt/lists/*
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8
