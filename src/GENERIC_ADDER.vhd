@@ -13,8 +13,8 @@ entity GENERIC_ADDER is
     );
 
     port (
-        source_1  : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_2  : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := std_logic_vector(to_signed(DEFAULT_SOURCE_1, DATA_WIDTH_0));
+        source_1    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_2    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := std_logic_vector(to_signed(DEFAULT_SOURCE_1, DATA_WIDTH_0));
         destination : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
     );
 

@@ -8,7 +8,7 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_RAM is
 
     generic (
-        DATA_WIDTH_0       : natural := DATA_WIDTH;
+        DATA_WIDTH_0      : natural := DATA_WIDTH;
         ADDRESS_WIDTH     : natural := 32;
         ADDRESSABLE_WIDTH : natural := 8
     );
