@@ -28,7 +28,7 @@ architecture CPU of RV32I_ALU is
     constant ZERO : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
 
     signal result   : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-    signal carry    : std_logic_vector((DATA_WIDTH_0 downto 0) downto 0);
+    signal carry    : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
     signal slt      : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
     signal overflow : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
 

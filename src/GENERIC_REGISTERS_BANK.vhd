@@ -1,4 +1,4 @@
-ibrary IEEE;
+library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
@@ -55,10 +55,10 @@ begin
         end if;
     end process;
 
-    data_source_1 <= ZERO when address_source = ADDRESS_ZERO else
-                     registers(to_integer(unsigned(address_source)));
+    data_source_1 <= ZERO when address_source_1 = ADDRESS_ZERO else
+                     registers(to_integer(unsigned(address_source_1)));
 
-    data_source_2 <= ZERO when address_target = ADDRESS_ZERO else
-                     registers(to_integer(unsigned(address_target)));
+    data_source_2 <= ZERO when address_source_2 = ADDRESS_ZERO else
+                     registers(to_integer(unsigned(address_source_2)));
 
 end architecture;
