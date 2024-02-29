@@ -53,7 +53,7 @@ begin
         port (
             invert_source_1 => MUX_REGISTER_ALU_1_OUT,
             invert_source_2 => MUX_REGISTER_ALU_2_OUT,
-            select_function => ALU_OP,
+            select_function => alu_op,
             source_1        => MUX_REGISTER_ALU_1_OUT,
             source_2        => MUX_REGISTER_ALU_2_OUT,
             destination     => alu_out,
