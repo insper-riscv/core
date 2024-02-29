@@ -151,7 +151,7 @@ package body TOP_LEVEL_CONSTANTS is
         out_vec.immediate_j := immediate_j;
         out_vec.opcode      := in_vec(OPCODE_RANGE);
 
-        if out_vec.opcode = OPCODE_AND then
+        if out_vec.opcode = OPCODE_OP then
             out_vec.encoding := RV32I_INSTRUCTION_R_TYPE;
         end if;
 

@@ -26,7 +26,6 @@ architecture RTL of MODULE_ALU is
 
         signal MUX_REGISTER_ALU_1_OUT : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         signal MUX_REGISTER_ALU_2_OUT : std_logic_vector((DATA_WIDTH_0 - 1) downto 0); 
-        signal ALU_CTRL : std_logic_vector(1 downto 0); 
 begin
 
     MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_4X1
