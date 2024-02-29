@@ -1,19 +1,23 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity RV32I_ALU is
+
+    generic (
+        DATA_WIDTH_0 : natural := DATA_WIDTH
+    );
   
     port (
         invert_source_1 : in  std_logic;
         invert_source_2 : in  std_logic;
         select_function : in  std_logic_vector(1 downto 0);
-        source_1        : in  std_logic_vector(DATA_RANGE);
-        source_2        : in  std_logic_vector(DATA_RANGE);
-        destination     : out std_logic_vector(DATA_RANGE);
+        source_1        : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_2        : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        destination     : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         flag_z          : out std_logic
     );
 
@@ -21,12 +25,12 @@ end entity;
 
 architecture CPU of RV32I_ALU is
 
-    constant ZERO : std_logic_vector(DATA_RANGE) := (others => '0');
+    constant ZERO : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
 
-    signal result   : std_logic_vector(DATA_RANGE);
+    signal result   : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
     signal carry    : std_logic_vector((DATA_RANGE'left + 1) downto 0);
-    signal slt      : std_logic_vector(DATA_RANGE) := (others => '0');
-    signal overflow : std_logic_vector(DATA_RANGE);
+    signal slt      : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
+    signal overflow : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
 
 begin
 
