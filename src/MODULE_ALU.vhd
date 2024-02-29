@@ -12,20 +12,20 @@ entity MODULE_ALU is
   
     port (
         alu_op : in std_logic_vector(1 downto 0);
-        data_source_1 : in std_logic_vector(DATA_WIDTH_0 downto 0);
-        data_source_2 : in std_logic_vector(DATA_WIDTH_0 downto 0);
-        data_mem : in std_logic_vector(DATA_WIDTH_0 downto 0);
-        data_wb : in std_logic_vector(DATA_WIDTH_0 downto 0);
+        data_source_1 : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        data_source_2 : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        data_mem : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        data_wb : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         flagzero : out std_logic;
-        alu_out: out std_logic_vector(DATA_WIDTH_0 downto 0)
+        alu_out: out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of MODULE_ALU is
 
-        signal MUX_REGISTER_ALU_1_OUT : std_logic_vector(DATA_WIDTH_0 downto 0);
-        signal MUX_REGISTER_ALU_2_OUT : std_logic_vector(DATA_WIDTH_0 downto 0); 
+        signal MUX_REGISTER_ALU_1_OUT : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        signal MUX_REGISTER_ALU_2_OUT : std_logic_vector((DATA_WIDTH_0 - 1) downto 0); 
         signal ALU_CTRL : std_logic_vector(1 downto 0); 
 begin
 
