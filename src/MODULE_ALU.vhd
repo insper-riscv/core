@@ -11,7 +11,7 @@ entity MODULE_ALU is
     );
   
     port (
-        alu_op : in std_logic_vector(1 downto 0);
+        alu_ctrl : in std_logic_vector(3 downto 0);
         data_source_1 : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         data_source_2 : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         data_mem : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
@@ -50,9 +50,9 @@ begin
 
     ALU : entity WORK.RV32I_ALU
         port (
-            invert_source_1 => MUX_REGISTER_ALU_1_OUT,
-            invert_source_2 => MUX_REGISTER_ALU_2_OUT,
-            select_function => alu_op,
+            invert_source_1 => alu_ctrl[3],
+            invert_source_2 => alu_ctrl[2],
+            select_function => alu_ctrl[1 downto 0],
             source_1        => MUX_REGISTER_ALU_1_OUT,
             source_2        => MUX_REGISTER_ALU_2_OUT,
             destination     => alu_out,
