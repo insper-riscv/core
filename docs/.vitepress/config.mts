@@ -62,7 +62,8 @@ export default defineConfig({
         items: [
           { text: 'Introdução', link: '/introducao' },
           { text: 'Desenvolvimento', link: '/desenvolvimento' },
-          { text: 'RISC-V', link: '/diagrama' }
+          { text: 'RISC-V', link: '/diagrama' },
+          { text: 'Módulos e Componentes', link: '/modules_components' }
         ]
       }
     ],
