@@ -195,17 +195,59 @@ export default {
                 ],
             }, {
                 text: 'Componentes',
+                link: '/referencia/componentes/',
                 collapsed: false,
                 items: [
                     {
                         text: 'Genéricos',
                         collapsed: true,
                         items: [
+                            {
+                                text: 'Somador',
+                                link: '/referencia/componentes/generic_adder',
+                            }, {
+                                text: 'Debounce',
+                                link: '/referencia/componentes/generic_debounce',
+                            }, {
+                                text: 'Detector de borda',
+                                link: '/referencia/componentes/generic_edge_detector',
+                            }, {
+                                text: 'Flip Flop',
+                                link: '/referencia/componentes/generic_flip_flip',
+                            }, {
+                                text: 'MUX 2x1',
+                                link: '/referencia/componentes/generic_mux_2x1',
+                            }, {
+                                text: 'MUX 4x1',
+                                link: '/referencia/componentes/generic_mux_4x1',
+                            }, {
+                                text: 'RAM',
+                                link: '/referencia/componentes/generic_ram',
+                            }, {
+                                text: 'Registrador',
+                                link: '/referencia/componentes/generic_register',
+                            }, {
+                                text: 'Banco de Registradores',
+                                link: '/referencia/componentes/generic_registers_bank',
+                            }, {
+                                text: 'Extensor de sinal',
+                                link: '/referencia/componentes/generic_signal_extender',
+                            }, {
+                                text: 'Pilha',
+                                link: '/referencia/componentes/generic_stack',
+                            }
                         ],
                     }, {
                         text: 'RV32I',
                         collapsed: true,
                         items: [
+                            {
+                                text: 'Bit da ULA',
+                                link: '/referencia/componentes/rv32i_alu_bit',
+                            }, {
+                                text: 'ULA',
+                                link: '/referencia/componentes/rv32i_alu',
+                            }
                         ],
                     }, {
                         text: 'Módulos',
