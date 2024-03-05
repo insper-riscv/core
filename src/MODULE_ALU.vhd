@@ -64,10 +64,10 @@ begin
         );
 
     ALU : entity WORK.RV32I_ALU
-        port (
-            source_invert_1 => select_function[3],
-            source_invert_2 => select_function[2],
-            select_function => select_function[1 downto 0],
+        port map (
+            invert_source_1 => select_function(3),
+            invert_source_2 => select_function(2),
+            select_function => select_function(1 downto 0),
             source_1        => MUX_REGISTER_ALU_1_OUT,
             source_2        => MUX_REGISTER_ALU_2_OUT,
             destination     => destination,

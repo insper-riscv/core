@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
@@ -11,8 +12,11 @@ entity MODULE_IF is
     );
 
     port (
+        clock       : in  std_logic;
         id_source   : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        selector    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        selector    : in  std_logic;
+        clear       : in  std_logic;
+        enable      : in  std_logic;
         destination : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
     );
 
@@ -34,16 +38,17 @@ begin
     
     PC : entity WORK.GENERIC_REGISTER
         port map (
+            clock => clock,
             clear => clear,
             enable => enable,
-            source => source,
+            source => mux_out,
             destination => pc_out
         );
 
     ADDER : entity WORK.GENERIC_ADDER
         port map (
             source_1 => pc_out,
-            source_2 => (others => '0') & "100",
+            source_2 => std_logic_vector(to_unsigned(4, 32)),
             destination => adder_out
         );
 

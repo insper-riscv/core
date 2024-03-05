@@ -7,10 +7,12 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity MODULE_MEMORY is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH
+        DATA_WIDTH_0  : natural := DATA_WIDTH;
+        ADDRESS_WIDTH : natural := 32
     );
   
     port (
+        clock             : in  std_logic;
         enable            : in  std_logic;
         enable_read       : in  std_logic;
         enable_write      : in  std_logic;
@@ -26,6 +28,7 @@ architecture RTL of MODULE_MEMORY is
 begin
     RAM : entity WORK.GENERIC_RAM
         port map (
+            clock        => clock,
             enable       => enable,      
             enable_read  => enable_read,
             enable_write => enable_write,
