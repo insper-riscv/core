@@ -2,11 +2,7 @@
 
 `GENERIC_REGISTER.vhd`
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do registrador](../../public/images/referencia/componentes/generic_register.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd).
 

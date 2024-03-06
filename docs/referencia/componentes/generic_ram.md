@@ -2,11 +2,7 @@
 
 `GENERIC_RAM.vhd`
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas da memória RAM](../../public/images/referencia/componentes/generic_ram.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd).
 
