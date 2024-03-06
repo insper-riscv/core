@@ -18,7 +18,7 @@ instrução reserva sua sintaxe seguindo os seguintes segmentos.
             <th style="text-align: center;">31</th>
             <th style="text-align: center;">30 - 25</th>
             <th style="text-align: center;">24 - 21</th>
-            <th style="text-align: center;">21 - 20</th>
+            <th style="text-align: center;">20</th>
             <th style="text-align: center;">19 - 15</th>
             <th style="text-align: center;">14 - 12</th>
             <th style="text-align: center;">11 - 8</th>

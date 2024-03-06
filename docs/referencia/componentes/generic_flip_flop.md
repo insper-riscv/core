@@ -1,14 +1,10 @@
 # Flip Flop
 
-`ARQUIVO.vhd`
+`GENERIC_FLIP_FLOP.vhd`
 
-::: danger TO DO
+![Diagrama de portas do flip flop](../../public/images/referencia/componentes/generic_flip_flop.drawio.svg)
 
-Diagrama de portas
-
-:::
-
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/ARQUIVO.vhd).
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd).
 
 ## Interface genérica
 
@@ -20,6 +16,49 @@ Work in progress.
 :::
 
 ## Interface de portas
+
+### `clock`
+
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+
+- tipo: `std_logic`
+
+### `clear`
+
+Entrada que reseta o flip flop.
+
+- tipo: `std_logic`
+
+### `enable`
+
+::: danger TO DO
+
+Escrever descrição enable
+
+:::
+
+- tipo: `std_logic`
+
+### `source`
+
+::: danger TO DO
+
+Escrever descrição source
+
+:::
+
+- tipo: `std_logic`
+
+### `state`
+
+::: danger TO DO
+
+Escrever descrição state
+
+:::
+
+- tipo: `std_logic`
+- padrão: `0`
 
 ::: danger TO DO
 
@@ -37,8 +76,8 @@ Diagrama a nível de registradores
 
 ## Casos de teste
 
-`test_ARQUIVO.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_ARQUIVO.py).
+`test_GENERIC_FLIP_FLOP.py`.
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py).
 
 ::: danger TO DO
 

@@ -206,6 +206,9 @@ export default {
                                 text: 'Somador',
                                 link: '/referencia/componentes/generic_adder',
                             }, {
+                                text: 'Contador',
+                                link: '/referencia/componentes/generic_counter',
+                            }, {
                                 text: 'Debounce',
                                 link: '/referencia/componentes/generic_debounce',
                             }, {
@@ -213,7 +216,7 @@ export default {
                                 link: '/referencia/componentes/generic_edge_detector',
                             }, {
                                 text: 'Flip Flop',
-                                link: '/referencia/componentes/generic_flip_flip',
+                                link: '/referencia/componentes/generic_flip_flop',
                             }, {
                                 text: 'MUX 2x1',
                                 link: '/referencia/componentes/generic_mux_2x1',

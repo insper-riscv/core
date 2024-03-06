@@ -1,6 +1,6 @@
 # Extensor de Sinal
 
-`ARQUIVO.vhd`
+`GENERIC_SIGNAL_EXTENDER.vhd`
 
 ::: danger TO DO
 
@@ -8,7 +8,7 @@ Diagrama de portas
 
 :::
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/ARQUIVO.vhd).
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_SIGNAL_EXTENDER.vhd).
 
 ## Interface genérica
 
@@ -37,8 +37,8 @@ Diagrama a nível de registradores
 
 ## Casos de teste
 
-`test_ARQUIVO.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_ARQUIVO.py).
+`test_GENERIC_SIGNAL_EXTENDER.py`.
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_SIGNAL_EXTENDER.py).
 
 ::: danger TO DO
 

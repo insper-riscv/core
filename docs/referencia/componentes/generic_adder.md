@@ -2,11 +2,7 @@
 
 `GENERIC_ADDER.vhd`
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do somador](../../public/images/referencia/componentes/generic_adder.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd).
 

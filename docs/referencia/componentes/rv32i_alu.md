@@ -1,6 +1,6 @@
 # ULA
 
-`ARQUIVO.vhd`
+`RV32I_ALU.vhd`
 
 ::: danger TO DO
 
@@ -8,7 +8,7 @@ Diagrama de portas
 
 :::
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/ARQUIVO.vhd).
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU.vhd).
 
 ## Interface genérica
 
@@ -37,8 +37,8 @@ Diagrama a nível de registradores
 
 ## Casos de teste
 
-`test_ARQUIVO.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_ARQUIVO.py).
+`test_RV32I_ALU.py`.
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_ALU.py).
 
 ::: danger TO DO
 
