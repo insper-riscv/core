@@ -11,7 +11,7 @@ hero:
     alt: VitePress
   actions:
     - text: Introdução
-      link: /guia/introducao
+      link: /guia/
       theme: brand
     - text: Referência
       link: /referencia/isa/
