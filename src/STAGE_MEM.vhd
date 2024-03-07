@@ -11,9 +11,9 @@ entity STAGE_MEM is
         enable            : in  std_logic;
         enable_read       : in  std_logic;
         enable_write      : in  std_logic;
-        source_ex         : in  std_logic_vector((XLEN_RANGE);
-        register_source_2 : in  std_logic_vector((XLEN_RANGE);
-        destination       : out std_logic_vector((XLEN_RANGE)
+        source_ex         : in  std_logic_vector(XLEN_RANGE);
+        register_source_2 : in  std_logic_vector(XLEN_RANGE);
+        destination       : out std_logic_vector(XLEN_RANGE)
     );
 
 end entity;

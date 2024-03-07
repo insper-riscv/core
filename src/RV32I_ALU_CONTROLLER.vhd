@@ -6,10 +6,6 @@ library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity RV32I_ALU_CONTROLLER is
-
-    generic (
-        DATA_WIDTH : natural := DATA_WIDTH
-    );
   
     port (
         opcode     : in std_logic_vector(OPCODE_RANGE);

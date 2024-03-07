@@ -8,7 +8,7 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity MODULE_PC is
 
     generic (
-        DATA_WIDTH : natural := DATA_WIDTH
+        DATA_WIDTH : natural := XLEN
     );
 
     port (

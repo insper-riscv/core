@@ -10,7 +10,7 @@ entity GENERIC_ROM IS
     generic (
         DATA_WIDTH        : natural := XLEN;
         ADDRESS_WIDTH     : natural := XLEN;
-        ADDRESSABLE_WIDTH : natural := XLEN
+        ADDRESSABLE_WIDTH : natural := 10
     );
 
     port (

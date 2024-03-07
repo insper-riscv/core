@@ -8,7 +8,7 @@ package TOP_LEVEL_CONSTANTS is
 
     constant CLOCK_FREQUENCY : integer := 50_000_000; -- 50 MHz clock frequency
 
-    constant XLEN            : integer := 32;
+    constant XLEN : natural := 32;
     subtype XLEN_RANGE is natural range (XLEN - 1) downto 0;
 
     subtype INSTRUCTION_RANGE is natural range 31 downto 0;
@@ -64,7 +64,7 @@ package TOP_LEVEL_CONSTANTS is
     type t_EX_SIGNALS is record
         select_source_1  : std_logic_vector(1 downto 0);
         select_source_2  : std_logic_vector(1 downto 0);
-        select_operation : std_logic_vector(0 ownto 0);
+        select_operation : std_logic_vector(1 downto 0);
     end record;
 
     type t_MEM_SIGNALS is record
@@ -197,7 +197,8 @@ package body TOP_LEVEL_CONSTANTS is
         immediate_b(31 downto 12) := (others => in_vec(31));
         immediate_b(11 downto  0) := in_vec(7) & in_vec(30 downto 25) & in_vec(11 downto 8) & '0';
 
-        immediate_u(31 downto  0) := in_vec(31 downto 12) & (others => '0');
+        immediate_u(31 downto  12) := in_vec(31 downto 12);
+        immediate_u(11 downto  0)  := (others => '0');
 
         immediate_j(31 downto 20) := (others => in_vec(31));
         immediate_j(19 downto  0) := in_vec(31) & in_vec(19 downto 12) & in_vec(20) & in_vec(30 downto 21) & '0';
