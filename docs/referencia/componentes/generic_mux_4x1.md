@@ -70,8 +70,47 @@ Diagrama a nível de registradores
 `test_GENERIC_MUX_4X1.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_4X1.py).
 
-::: danger TO DO
+### Caso 1
 
-Work in progress.
+Lógica combinacional:
 
-:::
+- `source_1` &larr; `00001111000011110000111100001111`
+- `source_2` &larr; `11110000111100001111000011110000`
+- `source_3` &larr; `00000000111111111111111100000000`
+- `source_4` &larr; `11111111000000000000000011111111`
+- `selector` &larr; `00`
+- `destination` &rarr; `00001111000011110000111100001111`
+
+### Caso 2
+
+Lógica combinacional:
+
+- `source_1` &larr; `00001111000011110000111100001111`
+- `source_2` &larr; `11110000111100001111000011110000`
+- `source_3` &larr; `00000000111111111111111100000000`
+- `source_4` &larr; `11111111000000000000000011111111`
+- `selector` &larr; `01`
+- `destination` &rarr; `11110000111100001111000011110000`
+
+### Caso 3
+
+Lógica combinacional:
+
+- `source_1` &larr; `00001111000011110000111100001111`
+- `source_2` &larr; `11110000111100001111000011110000`
+- `source_3` &larr; `00000000111111111111111100000000`
+- `source_4` &larr; `11111111000000000000000011111111`
+- `selector` &larr; `10`
+- `destination` &rarr; `00000000111111111111111100000000`
+
+### Caso 4
+
+Lógica combinacional:
+
+- `source_1` &larr; `00001111000011110000111100001111`
+- `source_2` &larr; `11110000111100001111000011110000`
+- `source_3` &larr; `00000000111111111111111100000000`
+- `source_4` &larr; `11111111000000000000000011111111`
+- `selector` &larr; `11`
+- `destination` &rarr; `11111111000000000000000011111111`
+

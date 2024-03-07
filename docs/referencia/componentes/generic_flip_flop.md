@@ -79,8 +79,35 @@ Diagrama a nível de registradores
 `test_GENERIC_FLIP_FLOP.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py).
 
-::: danger TO DO
+### Caso 1
 
-Work in progress.
+Lógica combinacional:
+
+- `clear` &larr; `0`
+- `enable` &larr; `1`
+- `source` &larr; `1`
+- `state` &rarr; `1`
+
+### Caso 2
+
+Lógica combinacional:
+
+- `clear` &larr; `0`
+- `enable` &larr; `1`
+- `source` &larr; `0`
+- `state` &rarr; `0`
+
+### Caso 3
+
+Lógica combinacional:
+
+- `clear` &larr; `1`
+- `enable` &larr; `0`
+- `source` &larr; `1`
+- `state` &rarr; `0`
+
+::: warning TO DO
+
+Review.
 
 :::

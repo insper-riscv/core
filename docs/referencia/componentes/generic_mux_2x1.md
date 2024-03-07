@@ -54,8 +54,38 @@ Diagrama a nível de registradores
 `test_GENERIC_MUX_2X1.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_2X1.py).
 
-::: danger TO DO
+### Caso 1
 
-Work in progress.
+Lógica combinacional:
 
-:::
+- `source_1` &larr; `00001111000011110000111100001111`
+- `source_2` &larr; `11110000111100001111000011110000`
+- `selector` &larr; `0`
+- `destination` &rarr; `00001111000011110000111100001111`
+
+### Caso 2
+
+Lógica combinacional:
+
+- `source_1` &larr; `00001111000011110000111100001111`
+- `source_2` &larr; `11110000111100001111000011110000`
+- `selector` &larr; `1`
+- `destination` &rarr; `11110000111100001111000011110000`
+
+### Caso 3
+
+Lógica combinacional:
+
+- `source_1` &larr; `00000000000000000000000000000000`
+- `source_2` &larr; `11111111111111111111111111111111`
+- `selector` &larr; `0`
+- `destination` &rarr; `00000000000000000000000000000000`
+
+### Caso 4
+
+Lógica combinacional:
+
+- `source_1` &larr; `00000000000000000000000000000000`
+- `source_2` &larr; `11111111111111111111111111111111`
+- `selector` &larr; `1`
+- `destination` &rarr; `11111111111111111111111111111111`
