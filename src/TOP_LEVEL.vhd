@@ -17,10 +17,7 @@ end entity;
 
 architecture RTL of TOP_LEVEL is
 
-    signal signal1 : std_logic;
-    signal signal2 : std_logic;
-    signal signal3 : std_logic_vector(DATA_WIDTH downto 0);
-    signal signal4 : std_logic_vector(DATA_WIDTH downto 0);
+    -- No signals
 
 begin
 

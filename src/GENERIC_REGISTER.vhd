@@ -7,15 +7,15 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_REGISTER is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH
+        DATA_WIDTH : natural := XLEN
     );
 
     port (
         clock       : in  std_logic;
         clear       : in  std_logic;
         enable      : in  std_logic;
-        source      : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0')
+        source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0')
     );
 
 end entity;

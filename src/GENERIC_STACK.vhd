@@ -8,16 +8,16 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_STACK is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH;
-        SIZE        : natural := 8
+        DATA_WIDTH : natural := XLEN;
+        SIZE       : natural := 8
     );
 
     port (
         clock        : in  std_logic;
         enable_read  : in  std_logic;
         enable_write : in  std_logic;
-        source       : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination  : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         overflow     : out std_logic
     );
 
@@ -25,7 +25,7 @@ end entity;
 
 architecture LIFO of GENERIC_STACK is
 
-    subtype word_t is std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+    subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
     type memory_t is array((SIZE - 1) downto 0) of word_t;
 
     shared variable registers : memory_t;

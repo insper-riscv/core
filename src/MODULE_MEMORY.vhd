@@ -7,7 +7,7 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity MODULE_MEMORY is
 
     generic (
-        DATA_WIDTH_0  : natural := DATA_WIDTH;
+        DATA_WIDTH    : natural := XLEN;
         ADDRESS_WIDTH : natural := 32
     );
   
@@ -17,15 +17,18 @@ entity MODULE_MEMORY is
         enable_read       : in  std_logic;
         enable_write      : in  std_logic;
         source_ex         : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        register_source_2 : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination       : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        register_source_2 : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination       : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of MODULE_MEMORY is
-        
+
+    -- No signals
+
 begin
+
     RAM : entity WORK.GENERIC_RAM
         port map (
             clock        => clock,
@@ -36,6 +39,5 @@ begin
             source       => register_source_2,      
             destination  => destination 
         );
-    
 
 end architecture;

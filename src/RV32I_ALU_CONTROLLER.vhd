@@ -8,7 +8,7 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity RV32I_ALU_CONTROLLER is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH
+        DATA_WIDTH : natural := DATA_WIDTH
     );
   
     port (
@@ -22,7 +22,10 @@ end entity;
 
 architecture RTL of RV32I_ALU_CONTROLLER is
 
+    -- No signals
+
 begin
+
     destination <= "0000" when (function_3 = FUNCTION_AND)  and (opcode = OPCODE_OP) and (function_7 = "0000000") else
                    "0001" when (function_3 = FUNCTION_OR)   and (opcode = OPCODE_OP) and (function_7 = "0000000") else
                    "0010" when (function_3 = FUNCTION_ADD)  and (opcode = OPCODE_OP) and (function_7 = "0000000") else
@@ -34,4 +37,5 @@ begin
                    "0001" when (function_3 = FUNCTION_ORI)  and (opcode = OPCODE_OP_IMM) else
                    "0010" when (function_3 = FUNCTION_ADDI) and (opcode = OPCODE_OP_IMM) else
                    "0000";
+
 end architecture;

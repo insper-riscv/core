@@ -10,21 +10,23 @@ entity MODULE_ALU is
         opcode                : in std_logic_vector(OPCODE_RANGE);
         function_3            : in std_logic_vector(FUNCTION_RANGE);
         function_7            : in std_logic_vector(6 downto 0);
-        source_register_1     : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_register_2     : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_memory         : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_write_back     : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_immediate      : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_register_1     : in std_logic_vector(XLEN_RANGE);
+        source_register_2     : in std_logic_vector(XLEN_RANGE);
+        source_memory         : in std_logic_vector(XLEN_RANGE);
+        source_write_back     : in std_logic_vector(XLEN_RANGE);
+        source_immediate      : in std_logic_vector(XLEN_RANGE);
         select_foward_1       : in std_logic_vector(1 downto 0);
         select_foward_2       : in std_logic_vector(1 downto 0);
         flag_z                : out std_logic;
-        source_register_2_out : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination           : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        source_register_2_out : out std_logic_vector(XLEN_RANGE);
+        destination           : out std_logic_vector(XLEN_RANGE)
     );
 
 end entity;
 
 architecture RTL of MODULE_ALU is
+
+    -- No signals
 
 begin
 

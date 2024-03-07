@@ -9,19 +9,21 @@ entity STAGE_IF is
 
     port (
         clock       : in  std_logic;
-        source_id   : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_id   : in  std_logic_vector(XLEN_RANGE);
         selector    : in  std_logic;
         clear       : in  std_logic;
         enable      : in  std_logic;
-        destination : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        destination : out std_logic_vector(XLEN_RANGE)
     );
 
 end entity;
 
 architecture RTL of STAGE_IF is
 
-begin   
-    
+    -- No signals
+
+begin
+
     MODULE_PC : entity WORK.MODULE_PC
         port map (
             clock       => clock,      
@@ -31,6 +33,5 @@ begin
             enable      => enable,     
             destination => destination
         );
-
 
 end architecture;

@@ -11,16 +11,19 @@ entity STAGE_MEM is
         enable            : in  std_logic;
         enable_read       : in  std_logic;
         enable_write      : in  std_logic;
-        source_ex         : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        register_source_2 : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination       : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        source_ex         : in  std_logic_vector((XLEN_RANGE);
+        register_source_2 : in  std_logic_vector((XLEN_RANGE);
+        destination       : out std_logic_vector((XLEN_RANGE)
     );
 
 end entity;
 
 architecture RTL of STAGE_MEM is
-        
+
+    -- No signals
+
 begin
+
     MODULE_MEMORY : entity WORK.MODULE_MEMORY
         port map (
             clock             => clock,
@@ -31,6 +34,5 @@ begin
             register_source_2 => register_source_2,      
             destination       => destination 
         );
-    
 
 end architecture;

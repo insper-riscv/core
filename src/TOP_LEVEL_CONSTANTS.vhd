@@ -64,7 +64,7 @@ package TOP_LEVEL_CONSTANTS is
     type t_EX_SIGNALS is record
         select_source_1  : std_logic_vector(1 downto 0);
         select_source_2  : std_logic_vector(1 downto 0);
-        select_operation : std_logic_vector();
+        select_operation : std_logic_vector(0 ownto 0);
     end record;
 
     type t_MEM_SIGNALS is record
@@ -99,7 +99,7 @@ package TOP_LEVEL_CONSTANTS is
     end record;
 
     type t_EX_MEM_SIGNALS is record
-       ex_signals : t_EX_SIGNALS
+       ex_signals : t_EX_SIGNALS;
        wb_signals : t_WB_SIGNALS;
     end record;
 

@@ -8,40 +8,42 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity MODULE_PC is
 
     generic (
-        DATA_WIDTH_0  : natural := DATA_WIDTH
+        DATA_WIDTH : natural := DATA_WIDTH
     );
 
     port (
         clock       : in  std_logic;
-        source_id   : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_id   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         selector    : in  std_logic;
         clear       : in  std_logic;
         enable      : in  std_logic;
-        destination : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of MODULE_PC is
-        signal adder_out : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        signal mux_out   : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        signal pc_out    : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+
+        signal adder_out : std_logic_vector((DATA_WIDTH - 1) downto 0);
+        signal mux_out   : std_logic_vector((DATA_WIDTH - 1) downto 0);
+        signal pc_out    : std_logic_vector((DATA_WIDTH - 1) downto 0);
+
 begin   
-    
+
     MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_2X1
         port map (
-            source_1 => source_id,
-            source_2 => adder_out,
-            selector => selector,
+            source_1    => source_id,
+            source_2    => adder_out,
+            selector    => selector,
             destination => mux_out
         );
-    
+
     PC : entity WORK.GENERIC_REGISTER
         port map (
-            clock => clock,
-            clear => clear,
-            enable => enable,
-            source => mux_out,
+            clock       => clock,
+            clear       => clear,
+            enable      => enable,
+            source      => mux_out,
             destination => pc_out
         );
 
@@ -53,10 +55,9 @@ begin
 
     ADDER : entity WORK.GENERIC_ADDER
         port map (
-            source_1 => pc_out,
-            source_2 => std_logic_vector(to_unsigned(4, 32)),
+            source_1    => pc_out,
+            source_2    => std_logic_vector(to_unsigned(4, 32)),
             destination => adder_out
         );
-
 
 end architecture;

@@ -8,9 +8,9 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_RAM is
 
     generic (
-        DATA_WIDTH_0      : natural := DATA_WIDTH;
-        ADDRESS_WIDTH     : natural := 32;
-        ADDRESSABLE_WIDTH : natural := 8
+        DATA_WIDTH        : natural := XLEN;
+        ADDRESS_WIDTH     : natural := XLEN;
+        ADDRESSABLE_WIDTH : natural := XLEN
     );
 
     port (
@@ -19,15 +19,15 @@ entity GENERIC_RAM is
         enable_read  : in  std_logic;
         enable_write : in  std_logic;
         address      : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        source       : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination  : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        source       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL OF GENERIC_RAM IS
 
-    subtype word_t is std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+    subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
     type memory_t is array(0 to (2**ADDRESSABLE_WIDTH - 1)) of word_t;
 
     signal ram: memory_t;

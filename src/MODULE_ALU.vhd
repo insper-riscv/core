@@ -7,31 +7,31 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity MODULE_ALU is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH
+        DATA_WIDTH : natural := DATA_WIDTH
     );
   
     port (
         opcode                : in std_logic_vector(OPCODE_RANGE);
         function_3            : in std_logic_vector(FUNCTION_RANGE);
         function_7            : in std_logic_vector(6 downto 0);
-        source_register_1     : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_register_2     : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_memory         : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_write_back     : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_immediate      : in std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_register_1     : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_register_2     : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_memory         : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_write_back     : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_immediate      : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         select_foward_1       : in std_logic_vector(1 downto 0);
         select_foward_2       : in std_logic_vector(1 downto 0);
         flag_z                : out std_logic;
-        source_register_2_out : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination           : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        source_register_2_out : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination           : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of MODULE_ALU is
 
-        signal MUX_REGISTER_ALU_1_OUT : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        signal MUX_REGISTER_ALU_2_OUT : std_logic_vector((DATA_WIDTH_0 - 1) downto 0); 
+        signal MUX_REGISTER_ALU_1_OUT : std_logic_vector((DATA_WIDTH - 1) downto 0);
+        signal MUX_REGISTER_ALU_2_OUT : std_logic_vector((DATA_WIDTH - 1) downto 0); 
         signal select_function : std_logic_vector(3 downto 0);
 begin
 

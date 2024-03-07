@@ -7,8 +7,8 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_SIGNAL_EXTENDER is
 
     generic (
-        SOURCE_WIDTH      : natural :=  DATA_WIDTH;
-        DESTINATION_WIDTH : natural := DATA_WIDTH
+        SOURCE_WIDTH      : natural := XLEN;
+        DESTINATION_WIDTH : natural := XLEN
     );
 
     port (

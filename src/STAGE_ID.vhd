@@ -10,24 +10,26 @@ entity STAGE_ID is
     port (
         clock               : in  std_logic;
         enable              : in  std_logic := '0';
-        address_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        address_source_1    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        address_source_2    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        data_destination    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        instruction         : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        pc_out              : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_id           : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        immediate_source    : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        data_source_1       : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        data_source_2       : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        address_destination : in  std_logic_vector(XLEN_RANGE);
+        address_source_1    : in  std_logic_vector(XLEN_RANGE);
+        address_source_2    : in  std_logic_vector(XLEN_RANGE);
+        data_destination    : in  std_logic_vector(XLEN_RANGE);
+        instruction         : in  std_logic_vector(XLEN_RANGE);
+        pc_out              : in  std_logic_vector(XLEN_RANGE);
+        source_id           : out std_logic_vector(XLEN_RANGE);
+        immediate_source    : out std_logic_vector(XLEN_RANGE);
+        data_source_1       : out std_logic_vector(XLEN_RANGE);
+        data_source_2       : out std_logic_vector(XLEN_RANGE)
     );
 
 end entity;
 
 architecture RTL of STAGE_ID is
 
-begin   
-    
+    -- No signals
+
+begin
+
     MODULE_BANK_IMM : entity WORK.MODULE_BANK_IMM
         port map (
         clock               => clock,              
@@ -43,6 +45,5 @@ begin
         data_source_1       => data_source_1,      
         data_source_2       => data_source_2      
     );
-
 
 end architecture;

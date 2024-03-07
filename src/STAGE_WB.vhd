@@ -7,17 +7,20 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_WB is
   
     port (
-        source_ex     : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_memory : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_ex     : in  std_logic_vector(XLEN_RANGE);
+        source_memory : in  std_logic_vector(XLEN_RANGE);
         selector      : in  std_logic;
-        destination   : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        destination   : out std_logic_vector(XLEN_RANGE)
     );
 
 end entity;
 
 architecture RTL of STAGE_WB is
-        
+
+    -- No signals
+
 begin
+
     MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK
         port map (
             source_ex     => source_ex,
@@ -25,6 +28,5 @@ begin
             selector      => selector,
             destination   => destination
         );
-    
 
 end architecture;
