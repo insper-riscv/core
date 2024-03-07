@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity MODULE_IF is
+entity MODULE_PC is
 
     generic (
         DATA_WIDTH_0  : natural := DATA_WIDTH
@@ -13,7 +13,7 @@ entity MODULE_IF is
 
     port (
         clock       : in  std_logic;
-        id_source   : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_id   : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         selector    : in  std_logic;
         clear       : in  std_logic;
         enable      : in  std_logic;
@@ -22,7 +22,7 @@ entity MODULE_IF is
 
 end entity;
 
-architecture RTL of MODULE_IF is
+architecture RTL of MODULE_PC is
         signal adder_out : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         signal mux_out   : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         signal pc_out    : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
@@ -30,7 +30,7 @@ begin
     
     MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_2X1
         port map (
-            source_1 => id_source,
+            source_1 => source_id,
             source_2 => adder_out,
             selector => selector,
             destination => mux_out
@@ -43,6 +43,12 @@ begin
             enable => enable,
             source => mux_out,
             destination => pc_out
+        );
+
+    ROM : entity WORK.GENERIC_ROM
+        port map (
+            address     => pc_out,
+            destination => destination
         );
 
     ADDER : entity WORK.GENERIC_ADDER

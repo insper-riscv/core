@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity MODULE_ID is
+entity MODULE_BANK_IMM is
 
     generic (
         DATA_WIDTH_0  : natural := DATA_WIDTH;
@@ -20,7 +20,7 @@ entity MODULE_ID is
         data_destination    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         instruction         : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         pc_out              : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        id_source           : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_id           : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         immediate_source    : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         data_source_1       : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         data_source_2       : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
@@ -28,7 +28,7 @@ entity MODULE_ID is
 
 end entity;
 
-architecture RTL of MODULE_ID is
+architecture RTL of MODULE_BANK_IMM is
         signal immediate_shift      : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
         signal immediate_source_tmp : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
 begin   
@@ -46,7 +46,7 @@ begin
         port map (
             source_1 => immediate_shift,
             source_2 => pc_out,
-            destination => id_source
+            destination => source_id
         );
 
     REGISTER_BANK : entity WORK.GENERIC_REGISTERS_BANK

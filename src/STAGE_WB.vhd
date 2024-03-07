@@ -4,11 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity MODULE_WRITE_BACK is
-
-    generic (
-        DATA_WIDTH_0  : natural := DATA_WIDTH
-    );
+entity STAGE_WB is
   
     port (
         source_ex     : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
@@ -19,15 +15,15 @@ entity MODULE_WRITE_BACK is
 
 end entity;
 
-architecture RTL of MODULE_WRITE_BACK is
+architecture RTL of STAGE_WB is
         
 begin
-    MUX : entity WORK.GENERIC_MUX_2X1
+    MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK
         port map (
-            source_1 => source_ex,
-            source_2 => source_memory,
-            selector => selector,
-            destination => destination
+            source_ex     => source_ex,
+            source_memory => source_memory,
+            selector      => selector,
+            destination   => destination
         );
     
 
