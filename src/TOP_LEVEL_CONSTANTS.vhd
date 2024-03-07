@@ -7,9 +7,9 @@ library WORK;
 package TOP_LEVEL_CONSTANTS is
 
     constant CLOCK_FREQUENCY : integer := 50_000_000; -- 50 MHz clock frequency
-    constant DATA_WIDTH      : integer := 32;
 
-    subtype DATA_RANGE is natural range (DATA_WIDTH - 1) downto 0;
+    constant XLEN            : integer := 32;
+    subtype XLEN_RANGE is natural range (XLEN - 1) downto 0;
 
     subtype INSTRUCTION_RANGE is natural range 31 downto 0;
     type RV32I_INSTRUCTION_TYPE is (
@@ -26,6 +26,9 @@ package TOP_LEVEL_CONSTANTS is
 
     subtype OPCODE_RANGE is natural range 6 downto 0;
     subtype t_OPCODE is std_logic_vector(OPCODE_RANGE);
+
+    subtype OPCODE_COMPACT_RANGE is natural range OPCODE_RANGE'left downto (OPCODE_RANGE'right + 2);
+    subtype t_OPCODE_COMPACT is std_logic_vector((OPCODE_RANGE'left - 2) to 0);
 
     type t_RV32I_INSTRUCTION is record
         funct_3     : t_FUNCTION;
@@ -44,6 +47,65 @@ package TOP_LEVEL_CONSTANTS is
     end record;
 
     function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE)) return t_RV32I_INSTRUCTION;
+
+    type t_IF_SIGNALS is record
+        enable_flush     : std_logic;
+        enable_jump      : std_logic;
+        select_source_pc : std_logic;
+    end record;
+
+    type t_ID_SIGNALS is record
+        select_jump     : std_logic;
+        enable_jump     : std_logic;
+        enable_flush_id : std_logic;
+        enable_flux_ex  : std_logic;
+    end record;
+
+    type t_EX_SIGNALS is record
+        select_source_1  : std_logic_vector(1 downto 0);
+        select_source_2  : std_logic_vector(1 downto 0);
+        select_operation : std_logic_vector();
+    end record;
+
+    type t_MEM_SIGNALS is record
+        enable_read  : std_logic;
+        enable_write : std_logic;
+    end record;
+
+    type t_WB_SIGNALS is record
+        enable_registers   : std_logic;
+        select_destination : std_logic;
+    end record;
+
+    type t_IF_ID_SIGNALS is record
+        pc          : std_logic_vector(XLEN_RANGE);
+        instruction : std_logic_vector(INSTRUCTION_RANGE);
+    end record;
+
+    type t_ID_EX_SIGNALS is record
+        ex_signals         : t_EX_SIGNALS;
+        MEM_signals        : t_MEM_SIGNALS;
+        WB_signals         : t_WB_SIGNALS;
+        pc                 : std_logic_vector(XLEN_RANGE);
+        source_1           : std_logic_vector(XLEN_RANGE);
+        source_2           : std_logic_vector(XLEN_RANGE);
+        immediate          : std_logic_vector(XLEN_RANGE);
+        funct_7            : std_logic_vector(6 downto 0);
+        funct_3            : t_FUNCTION;
+        opcode             : t_OPCODE_COMPACT;
+        select_source_1    : std_logic_vector(4 downto 0);
+        select_source_2    : std_logic_vector(4 downto 0);
+        select_destination : std_logic_vector(4 downto 0);
+    end record;
+
+    type t_EX_MEM_SIGNALS is record
+       ex_signals : t_EX_SIGNALS
+       wb_signals : t_WB_SIGNALS;
+    end record;
+
+    type t_MEM_WB_SIGNALS is record
+       WB_signals : t_WB_SIGNALS;
+    end record;
 
     -- RV32I Base Instruction Set functions
     constant FUNCTION_JALR    : t_FUNCTION := "000";
@@ -120,11 +182,11 @@ package body TOP_LEVEL_CONSTANTS is
 
     function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION is
         variable out_vec: t_RV32I_INSTRUCTION;
-        variable immediate_i: std_logic_vector(DATA_RANGE);
-        variable immediate_s: std_logic_vector(DATA_RANGE);
-        variable immediate_b: std_logic_vector(DATA_RANGE);
-        variable immediate_u: std_logic_vector(DATA_RANGE);
-        variable immediate_j: std_logic_vector(DATA_RANGE);
+        variable immediate_i: std_logic_vector(XLEN_RANGE);
+        variable immediate_s: std_logic_vector(XLEN_RANGE);
+        variable immediate_b: std_logic_vector(XLEN_RANGE);
+        variable immediate_u: std_logic_vector(XLEN_RANGE);
+        variable immediate_j: std_logic_vector(XLEN_RANGE);
     begin
         immediate_i(31 downto 11) := (others => in_vec(31));
         immediate_i(10 downto  0) := in_vec(30 downto 20);
