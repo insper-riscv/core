@@ -11,7 +11,8 @@ entity RV32I_INSTRUCTION_DECODER is
         instruction      : in  std_logic_vector(INSTRUCTION_RANGE);
         enable_registers : out std_logic;
         enable_immediate : out std_logic;
-        enable_jump : out std_logic
+        enable_branch    : out std_logic;
+        enable_jump      : out std_logic
     );
 
 end entity;
@@ -27,6 +28,9 @@ begin
 
     enable_immediate <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) else
                         '0';
+
+    enable_branch <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_B_TYPE) else
+                     '0';
 
     enable_jump <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                    '0';
