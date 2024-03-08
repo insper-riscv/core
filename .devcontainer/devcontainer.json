@@ -1,7 +1,8 @@
 {
     "build": {
-        "dockerfile": "Dockerfile"
+        "dockerfile": "Dockerfile",        
     },
+    "postCreateCommand": "pip3 install --user -r requirements-docker.txt",
     "customizations": {
         "vscode": {
             "extensions": [
