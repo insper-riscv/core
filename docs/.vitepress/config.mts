@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import mdItDeflist from 'markdown-it-deflist'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -23,10 +24,24 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Sobre', items: [
-        { text: 'CTI Renato Archer', link: 'https://www.gov.br/cti/pt-br' },
-        { text: 'PFE Insper', link: 'https://www.insper.edu.br/pfe/' }
-      ] }
+      {
+        text: 'Guia',
+        link: '/guia/',
+      }, {
+        text: 'Referência',
+        link: '/referencia/isa/',
+      }, {
+        text: 'Sobre',
+        items: [
+          {
+            text: 'CTI Renato Archer',
+            link: 'https://www.gov.br/cti/pt-br'
+          }, {
+            text: 'PFE Insper',
+            link: 'https://www.insper.edu.br/pfe/'
+          }
+        ],
+      },
     ],
 
     search: {
@@ -56,17 +71,10 @@ export default defineConfig({
       }
     },
 
-    sidebar: [
-      {
-        text: 'Documentação',
-        items: [
-          { text: 'Introdução', link: '/introducao' },
-          { text: 'Desenvolvimento', link: '/desenvolvimento' },
-          { text: 'RISC-V', link: '/diagrama' },
-          { text: 'Módulos e Componentes', link: '/modules_components' }
-        ]
-      }
-    ],
+    sidebar: {
+      ...require('../guia/config.ts').default.sidebar,
+      ...require('../referencia/config.ts').default.sidebar,
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/pfeinsper/24a-CTI-RISCV' }
@@ -90,5 +98,11 @@ export default defineConfig({
       message: 'Publicado sob a Licença MIT.<br/>Icones por <a href="https://github.com/microsoft/fluentui-emoji">microsoft/fluentui-emoji</a>.',
       copyright: 'Copyright © 2024'
     },
-  }
+  },
+
+  markdown: {
+    config(md) {
+      md.use(mdItDeflist)
+    },
+  },
 })
