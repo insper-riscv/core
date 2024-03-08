@@ -29,11 +29,17 @@ export default defineConfig({
         link: '/guia/',
       }, {
         text: 'Referência',
-        link: '/referencia/isa/',
+        link: '/referencia/componentes/top_level',
       }, {
-        text: 'Sobre',
+        text: 'Mais',
         items: [
           {
+            text: 'Sobre',
+            link: '/sobre',
+          }, {
+            text: 'Bibliografia',
+            link: '/bibliografia'
+          }, {
             text: 'CTI Renato Archer',
             link: 'https://www.gov.br/cti/pt-br'
           }, {
@@ -83,7 +89,18 @@ export default defineConfig({
     outline: 'deep',
     outlineTitle: 'Tópicos',
 
-    lastUpdatedText: 'Updated Date',
+    editLink: {
+      pattern: 'https://github.com/pfeinsper/24a-CTI-RISCV/edit/docs/docs/:path',
+      text: 'Editar esta página'
+    },
+
+    lastUpdated: {
+      text: 'Última modificação em',
+      formatOptions: {
+        dateStyle: 'long',
+        timeStyle: 'short'
+      }
+    },
 
     docFooter: {
       prev: 'Página anterior',
@@ -95,7 +112,7 @@ export default defineConfig({
     langMenuLabel: 'Mudar idioma',
   
     footer: {
-      message: 'Publicado sob a Licença MIT.<br/>Icones por <a href="https://github.com/microsoft/fluentui-emoji">microsoft/fluentui-emoji</a>.',
+      message: 'Publicado sob a Licença MIT.',
       copyright: 'Copyright © 2024'
     },
   },
