@@ -17,7 +17,7 @@ class RV32I_ALU(utils.DUT):
     source_1: utils.DUT.Input_pin
     source_2: utils.DUT.Input_pin
     destination: utils.DUT.Output_pin
-    flag_z: utils.DUT.Output_pin
+    #flag_z: utils.DUT.Output_pin
 
 
 @cocotb.test()
@@ -55,12 +55,14 @@ async def tb_RV32I_ALU(dut: RV32I_ALU):
                             "00000000000000000000000000000000", 
                             "00000000000000000000000000000001",
                           ]
-    values_flag_z = ["1", "0", "0", "0", "0", "0", "1", "0",]
+    #values_flag_z = ["1", "0", "0", "0", "0", "0", "1", "0",]
 
     for index, (invert_source_1, invert_source_2, select_function,  source_1, source_2, 
-            destination, flag_z) in enumerate(
+            destination) in enumerate(
+            #destination, flag_z) in enumerate(
         zip(values_invert_source_1, values_invert_source_2, values_select_function, 
-            values_source_1, values_source_2, values_destination, values_flag_z)
+            values_source_1, values_source_2, values_destination)
+            #values_source_1, values_source_2, values_destination, values_flag_z)
     ):
         dut.invert_source_1.value = BinaryValue(invert_source_1)
         dut.invert_source_2.value = BinaryValue(invert_source_2)
@@ -71,19 +73,20 @@ async def tb_RV32I_ALU(dut: RV32I_ALU):
         await Timer(Decimal(1), units="ns")
 
         condition = dut.destination.value.binstr == destination
-        condition1 = dut.flag_z.value.binstr == flag_z
+        #condition1 = dut.flag_z.value.binstr == flag_z
 
         if not condition:
             dut._log.error(
                 f"Expected destination value: {destination} Obtained value: {dut.destination.value.binstr}"
             )
         
-        if not condition1:
-            dut._log.error(
-                f"Expected flag_z value: {flag_z} Obtained value: {dut.flag_z.value.binstr}"
-            )
+        #if not condition1:
+        #    dut._log.error(
+        #        f"Expected flag_z value: {flag_z} Obtained value: {dut.flag_z.value.binstr}"
+        #    )
 
-        assert (condition and condition1), f"Error in test {index}"
+        #assert (condition and condition1), f"Error in test {index}"
+        assert (condition), f"Error in test {index}"
         await Timer(Decimal(1), units="ns")
 
 

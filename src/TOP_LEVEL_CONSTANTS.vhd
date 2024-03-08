@@ -207,8 +207,8 @@ package body TOP_LEVEL_CONSTANTS is
         immediate_u(31 downto  12) := in_vec(31 downto 12);
         immediate_u(11 downto  0)  := (others => '0');
 
-        immediate_j(31 downto 20) := (others => in_vec(31));
-        immediate_j(19 downto  0) := in_vec(31) & in_vec(19 downto 12) & in_vec(20) & in_vec(30 downto 21) & '0';
+        immediate_j(31 downto 21) := (others => in_vec(31));
+        immediate_j(20 downto  0) := in_vec(31) & in_vec(19 downto 12) & in_vec(20) & in_vec(30 downto 21) & '0';
 
         out_vec.funct_3     := in_vec(FUNCTION_RANGE);
         out_vec.funct_7     := in_vec(31 downto 25);
