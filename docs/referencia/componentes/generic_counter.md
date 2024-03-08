@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Contador
 
 `GENERIC_COUNTER.vhd`

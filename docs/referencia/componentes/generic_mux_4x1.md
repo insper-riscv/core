@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # MUX 4x1
 
 `GENERIC_MUX_4X1.vhd`

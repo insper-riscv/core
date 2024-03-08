@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Registrador
 
 `GENERIC_REGISTER.vhd`

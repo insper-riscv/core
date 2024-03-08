@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Somador
 
 `GENERIC_ADDER.vhd`

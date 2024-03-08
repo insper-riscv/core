@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # RAM
 
 `GENERIC_RAM.vhd`

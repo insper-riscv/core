@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Banco de Registradores
 
 `GENERIC_REGISTERS_BANK.vhd`

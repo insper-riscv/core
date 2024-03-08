@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Detector de Borda
 
 `GENERIC_EDGE_DETECTOR.vhd`

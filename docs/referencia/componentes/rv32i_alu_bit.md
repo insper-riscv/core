@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Bit da ULA
 
 `RV32I_ALU_BIT.vhd`

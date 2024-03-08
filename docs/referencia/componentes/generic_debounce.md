@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Debounce
 
 `GENERIC_DEBOUNCE.vhd`

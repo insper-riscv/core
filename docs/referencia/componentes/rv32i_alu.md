@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # ULA
 
 `RV32I_ALU.vhd`

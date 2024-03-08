@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Flip Flop
 
 `GENERIC_FLIP_FLOP.vhd`

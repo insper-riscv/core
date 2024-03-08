@@ -1,3 +1,7 @@
+---
+outline: 2
+---
+
 # Extensor de Sinal
 
 `GENERIC_SIGNAL_EXTENDER.vhd`
