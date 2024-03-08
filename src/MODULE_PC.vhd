@@ -15,8 +15,8 @@ entity MODULE_PC is
         clock       : in  std_logic;
         source_id   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         selector    : in  std_logic;
-        clear       : in  std_logic;
         enable      : in  std_logic;
+        pc          : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -38,10 +38,10 @@ begin
             destination => mux_out
         );
 
-    PC : entity WORK.GENERIC_REGISTER
+    PC_REGISTER : entity WORK.GENERIC_REGISTER
         port map (
             clock       => clock,
-            clear       => clear,
+            clear       => '0',
             enable      => enable,
             source      => mux_out,
             destination => pc_out

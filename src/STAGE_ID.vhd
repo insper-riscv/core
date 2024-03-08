@@ -8,42 +8,48 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_ID is
 
     port (
-        clock               : in  std_logic;
-        enable              : in  std_logic := '0';
-        address_destination : in  std_logic_vector(XLEN_RANGE);
-        address_source_1    : in  std_logic_vector(XLEN_RANGE);
-        address_source_2    : in  std_logic_vector(XLEN_RANGE);
-        data_destination    : in  std_logic_vector(XLEN_RANGE);
-        instruction         : in  std_logic_vector(XLEN_RANGE);
-        pc_out              : in  std_logic_vector(XLEN_RANGE);
-        source_id           : out std_logic_vector(XLEN_RANGE);
-        immediate_source    : out std_logic_vector(XLEN_RANGE);
-        data_source_1       : out std_logic_vector(XLEN_RANGE);
-        data_source_2       : out std_logic_vector(XLEN_RANGE)
+        clock                : in  std_logic;
+        source               : in t_IF_ID_SIGNALS;
+        enable               : in std_logic;
+        address_destination  : in std_logic_vector(4 downto 0);
+        data_destination     : in std_logic_vector(XLEN_RANGE);
+        control_if           : out t_IF_SIGNALS;
+        address_pc           : out std_logic_vector(XLEN_RANGE);
+        destination          : out t_ID_EX_SIGNALS
     );
 
 end entity;
 
 architecture RTL of STAGE_ID is
 
-    -- No signals
+    signal data_source_1 : std_logic_vector(XLEN_RANGE);
 
 begin
 
-    MODULE_BANK_IMM : entity WORK.MODULE_BANK_IMM
+    MODULE_REGISTERS_BANK : entity WORK.MODULE_REGISTERS_BANK
         port map (
         clock               => clock,              
         enable              => enable,             
         address_destination => address_destination,
-        address_source_1    => address_source_1,   
-        address_source_2    => address_source_2,   
         data_destination    => data_destination,   
-        instruction         => instruction,        
-        pc_out              => pc_out,             
-        source_id           => source_id,          
-        immediate_source    => immediate_source,   
+        instruction         => source.instruction,          
         data_source_1       => data_source_1,      
-        data_source_2       => data_source_2      
+        data_source_2       => destination.source_2   
     );
+
+    MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT
+        port map (
+            instruction      => source.instruction,
+            pc_out           => source.pc,
+            data_source_1    => data_source_1,
+            source_id        => address_pc,
+            immediate_source => destination.immediate,
+            control_if       => control_if,
+            control_ex       => destination.ex_signals,
+            control_mem      => destination.mem_signals,
+            control_wb       => destination.wb_signals
+    );
+
+    destination.source_1 <= data_source_1;
 
 end architecture;

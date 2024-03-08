@@ -17,15 +17,15 @@ entity RV32I_ALU is
         select_function : in  std_logic_vector(1 downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        flag_z          : out std_logic
+        destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        --flag_z          : out std_logic
     );
 
 end entity;
 
 architecture CPU of RV32I_ALU is
 
-    constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+    --constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
 
     signal result   : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal carry    : std_logic_vector(DATA_WIDTH downto 0);
@@ -55,7 +55,7 @@ begin
 
     destination <= result;
 
-    flag_z  <= '1' when (result = ZERO) else
-               '0';
+    --flag_z  <= '1' when (result = ZERO) else
+    --           '0';
 
 end architecture;

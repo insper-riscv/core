@@ -11,8 +11,8 @@ entity MODULE_WRITE_BACK is
     );
   
     port (
-        source_ex     : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_memory : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_ex     : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         selector      : in  std_logic;
         destination   : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
@@ -27,8 +27,8 @@ begin
 
     MUX : entity WORK.GENERIC_MUX_2X1
         port map (
-            source_1 => source_ex,
-            source_2 => source_memory,
+            source_1 => source_memory,
+            source_2 => source_ex,
             selector => selector,
             destination => destination
         );

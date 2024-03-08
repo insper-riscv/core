@@ -8,8 +8,8 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity RV32I_ALU_CONTROLLER is
   
     port (
-        opcode     : in std_logic_vector(OPCODE_RANGE);
-        function_3 : in std_logic_vector(FUNCTION_RANGE);
+        opcode     : t_OPCODE_COMPACT;
+        function_3 : t_FUNCTION;
         function_7 : in std_logic_vector(6 downto 0);
         destination   : out std_logic_vector(3 downto 0)
     );
