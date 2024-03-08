@@ -10,9 +10,12 @@ hero:
     dark: /images/RISC-V_Stacked_White_Yellow.svg
     alt: VitePress
   actions:
-    - theme: brand
-      text: Introdução
-      link: /introducao
+    - text: Introdução
+      link: /guia/
+      theme: brand
+    - text: Referência
+      link: /referencia/isa/
+      theme: alt
 
 features:
   - title: RISC-V
