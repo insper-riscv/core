@@ -4,32 +4,24 @@ outline: [2, 3]
 
 # Conjunto de Instruções
 
+## Sintaxe
+
 As instruções são vetores binários de 32 bits. Cada tipo de instrução reserva
 sua sintaxe seguindo os segmentos:
-
-- `opcode`: Codifica o tipo de instrução ou uma instrução específica;
-- `funct3`: Codifica a operacionalização da instrução;
-- `funct7`: Codifica uma variação da operacionalização;
-- `rs1`: Endereça registrador de recurso primário;
-- `rs2`: Endereça registrador de recurso secundário;
-- `rd`: Endereça registrador de destinação;
-- `imm`: Vetor do imediato.
-
-## Sintaxe
 
 <table>
     <thead>
         <tr>
-            <th style="text-align: center;">Tipo</th>
-            <th style="text-align: center;">31</th>
-            <th style="text-align: center;">30 - 25</th>
-            <th style="text-align: center;">24 - 21</th>
-            <th style="text-align: center;">20</th>
-            <th style="text-align: center;">19 - 15</th>
-            <th style="text-align: center;">14 - 12</th>
-            <th style="text-align: center;">11 - 8</th>
-            <th style="text-align: center;">8 - 7</th>
-            <th style="text-align: center;">6 - 0</th>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31</th>
+            <th style="text-align: center; white-space: nowrap;">30 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 21</th>
+            <th style="text-align: center; white-space: nowrap;">20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 8</th>
+            <th style="text-align: center; white-space: nowrap;">8 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
         </tr>
     </thead>
     <tbody>
@@ -60,8 +52,11 @@ sua sintaxe seguindo os segmentos:
             <td style="text-align: center;">
                 I
             </td>
-            <td style="text-align: center;" colspan="4">
-                imm
+            <td style="text-align: center;">
+                imm[31:11]
+            </td>
+            <td style="text-align: center;" colspan="3">
+                imm[10:0]
             </td>
             <td style="text-align: center;">
                 rs1
@@ -80,8 +75,11 @@ sua sintaxe seguindo os segmentos:
             <td style="text-align: center;">
                 S
             </td>
-            <td style="text-align: center;" colspan="2">
-                imm[11:5]
+            <td style="text-align: center;">
+                imm[31:11]
+            </td>
+            <td style="text-align: center;">
+                imm[10:5]
             </td>
             <td style="text-align: center;" colspan="2">
                 rs2
@@ -104,7 +102,7 @@ sua sintaxe seguindo os segmentos:
                 B
             </td>
             <td style="text-align: center;">
-                imm[12]
+                imm[31:12]
             </td>
             <td style="text-align: center;">
                 imm[10:5]
@@ -147,7 +145,7 @@ sua sintaxe seguindo os segmentos:
                 J
             </td>
             <td style="text-align: center;">
-                imm[20]
+                imm[31:20]
             </td>
             <td style="text-align: center;" colspan="2">
                 imm[10:1]
@@ -168,24 +166,48 @@ sua sintaxe seguindo os segmentos:
     </tbody>
 </table>
 
-## Imediatos
+Sendo, para cada segmento:
+
+- `opcode`: Codifica o tipo de instrução ou uma instrução específica;
+- `funct3`: Codifica a operacionalização da instrução;
+- `funct7`: Codifica uma variação da operacionalização;
+- `rs1`: Endereça registrador de recurso primário;
+- `rs2`: Endereça registrador de recurso secundário;
+- `rd`: Endereça registrador de destinação;
+- `imm`: Vetor do imediato.
+
+### Opcode
+
+Opcodes são segmentos de 7 bits do vetor de instrução. Cada tipo de instrução
+possui um opcode ou uma instrução possui um opcode exclusivo. Para alguns tipos
+de instrução, são codificados com mais de um opcode, seguindo a seguinte
+generalização:
+
+|    None    |   valor   |
+| :--------: | :-------: |
+|     OP     | `0110011` |
+|   OP-IMM   | `0010011` |
+|   STORE    | `0100011` |
+|    LOAD    | `0000011` |
+|   BRANCH   | `1100011` |
+| **Outros** | `XXXXX11` |
+
+### Imediato
 
 Os imediatos são vetores binários de 32 bits. Cada tipo de instrução com
-imediato possui uma sintaxe própria. Sendo:
-
-- `inst`: Vetor da instrução.
+imediato possui uma sintaxe seguindo os segmentos:
 
 <table>
     <thead>
         <tr>
-            <th style="text-align: center;">Tipo</th>
-            <th style="text-align: center;">31</th>
-            <th style="text-align: center;">30 - 20</th>
-            <th style="text-align: center;">19 - 12</th>
-            <th style="text-align: center;">11</th>
-            <th style="text-align: center;">10 - 5</th>
-            <th style="text-align: center;">4 - 1</th>
-            <th style="text-align: center;">0</th>
+            <th style="text-align: center;\f">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31</th>
+            <th style="text-align: center; white-space: nowrap;">30 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11</th>
+            <th style="text-align: center; white-space: nowrap;">10 - 5</th>
+            <th style="text-align: center; white-space: nowrap;">4 - 1</th>
+            <th style="text-align: center; white-space: nowrap;">0</th>
         </tr>
     </thead>
     <tbody>
@@ -206,12 +228,12 @@ imediato possui uma sintaxe própria. Sendo:
             <td style="text-align: center;">inst[7]</td>
             <td style="text-align: center;">inst[30:25]</td>
             <td style="text-align: center;">inst[11:8]</td>
-            <td style="text-align: center;">0</td>
+            <td style="text-align: center;"><code>0</code></td>
         </tr>
         <tr>
             <td style="text-align: center;">U</td>
             <td style="text-align: center;" colspan="3">inst[31:12]</td>
-            <td style="text-align: center;" colspan="4">0</td>
+            <td style="text-align: center;" colspan="4"><code>0...0</code></td>
         </tr>
         <tr>
             <td style="text-align: center;">J</td>
@@ -219,33 +241,18 @@ imediato possui uma sintaxe própria. Sendo:
             <td style="text-align: center;">inst[19:12]</td>
             <td style="text-align: center;">inst[20]</td>
             <td style="text-align: center;" colspan="2">inst[30:21]</td>
-            <td style="text-align: center;">0</td>
+            <td style="text-align: center;"><code>0</code></td>
         </tr>
     </tbody>
 </table>
 
-## Opcodes
-
-Opcodes são vetores binários de 7 bits. Cada tipo de instrução possui um opcode
-ou uma instrução possui um opcode exclusivo.
-
-|    None     |   valor   |
-| :---------: | :-------: |
-|     OP      | `0110011` |
-|   OP-IMM    | `0010011` |
-|    STORE    | `0100011` |
-|    LOAD     | `0000011` |
-|   BRANCH    | `1100011` |
-|     LUI     | `0110111` |
-|    AUIPC    | `0010111` |
-|     JAL     | `1101111` |
-|    JALR     | `1100111` |
+Sendo, para cada segmento, `inst` o vetor da instrução.
 
 ## Build
 
 ---
 
-### `LUI`
+### `LUI` <Badge type="info" text="RV32I Base" />
 
 Load Upper Immediate (Carregar Superior Imediato).
 
@@ -254,9 +261,9 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 #### Sintaxe
 
-| Tipo |   31-12    | 11-7 |      6-0      |
-| :--: | :--------: | :--: | :-----------: |
-|  U   | imm[31:12] |  rd  | LUI (0110111) |
+| Tipo |   31-12    |    11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: |
+|  U   | imm[31:12] | rd[x1-x31] | `0110111` |
 
 #### Formato
 
@@ -268,7 +275,7 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 ---
 
-### `AUIPC`
+### `AUIPC` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -280,7 +287,7 @@ Work in progress.
 
 ---
 
-### `SLL`
+### `SLL` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -290,7 +297,7 @@ Work in progress.
 
 ---
 
-### `SLLI`
+### `SLLI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -300,7 +307,7 @@ Work in progress.
 
 ---
 
-### `SRL`
+### `SRL` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -310,7 +317,7 @@ Work in progress.
 
 ---
 
-### `SRLI`
+### `SRLI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -320,7 +327,7 @@ Work in progress.
 
 ---
 
-### `SRA`
+### `SRA` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -330,7 +337,7 @@ Work in progress.
 
 ---
 
-### `SRAI`
+### `SRAI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -342,7 +349,7 @@ Work in progress.
 
 ## Arithmetic
 
-### `ADD`
+### `ADD` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -352,7 +359,7 @@ Work in progress.
 
 ---
 
-### `ADDI`
+### `ADDI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -362,7 +369,7 @@ Work in progress.
 
 ---
 
-### `SUB`
+### `SUB` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -372,7 +379,7 @@ Work in progress.
 
 ---
 
-### `MUL`
+### `MUL` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -382,7 +389,7 @@ Work in progress.
 
 ---
 
-### `MULH`
+### `MULH` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -392,7 +399,7 @@ Work in progress.
 
 ---
 
-### `MULHSU`
+### `MULHSU` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -402,7 +409,7 @@ Work in progress.
 
 ---
 
-### `MULHU`
+### `MULHU` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -412,7 +419,7 @@ Work in progress.
 
 ---
 
-### `DIV`
+### `DIV` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -422,7 +429,7 @@ Work in progress.
 
 ---
 
-### `DIVU`
+### `DIVU` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -432,7 +439,7 @@ Work in progress.
 
 ---
 
-### `REM`
+### `REM` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -442,7 +449,7 @@ Work in progress.
 
 ---
 
-### `REMU`
+### `REMU` <Badge type="tip" text="“M” Standard Extension" />
 
 ::: danger TO DO
 
@@ -454,7 +461,7 @@ Work in progress.
 
 ## Logical
 
-### `XOR`
+### `XOR` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -464,7 +471,7 @@ Work in progress.
 
 ---
 
-### `XORI`
+### `XORI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -474,7 +481,7 @@ Work in progress.
 
 ---
 
-### `OR`
+### `OR` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -484,7 +491,7 @@ Work in progress.
 
 ---
 
-### `ORI`
+### `ORI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -494,7 +501,7 @@ Work in progress.
 
 ---
 
-### `AND`
+### `AND` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -504,7 +511,7 @@ Work in progress.
 
 ---
 
-### `ANDI`
+### `ANDI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -516,7 +523,7 @@ Work in progress.
 
 ## Compare
 
-### `SLT`
+### `SLT` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -526,7 +533,7 @@ Work in progress.
 
 ---
 
-### `SLTI`
+### `SLTI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -536,7 +543,7 @@ Work in progress.
 
 ---
 
-### `SLTU`
+### `SLTU` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -546,7 +553,7 @@ Work in progress.
 
 ---
 
-### `SLTI`
+### `SLTI` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -558,7 +565,7 @@ Work in progress.
 
 ## Branch
 
-### `BEQ`
+### `BEQ` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -568,7 +575,7 @@ Work in progress.
 
 ---
 
-### `BNE`
+### `BNE` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -578,7 +585,7 @@ Work in progress.
 
 ---
 
-### `BLT`
+### `BLT` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -588,7 +595,7 @@ Work in progress.
 
 ---
 
-### `BGE`
+### `BGE` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -598,7 +605,7 @@ Work in progress.
 
 ---
 
-### `BLTU`
+### `BLTU` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -608,7 +615,7 @@ Work in progress.
 
 ---
 
-### `BGEU`
+### `BGEU` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -620,7 +627,7 @@ Work in progress.
 
 ## Link
 
-### `JAL`
+### `JAL` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -630,7 +637,7 @@ Work in progress.
 
 ---
 
-### `JALR`
+### `JALR` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -642,7 +649,7 @@ Work in progress.
 
 ## Loads
 
-### `LB`
+### `LB` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -652,7 +659,7 @@ Work in progress.
 
 ---
 
-### `LH`
+### `LH` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -662,7 +669,7 @@ Work in progress.
 
 ---
 
-### `LBU`
+### `LBU` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -672,7 +679,7 @@ Work in progress.
 
 ---
 
-### `LHU`
+### `LHU` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -682,7 +689,7 @@ Work in progress.
 
 ---
 
-### `LW`
+### `LW` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -694,7 +701,7 @@ Work in progress.
 
 ## Stores
 
-### `SB`
+### `SB` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -704,7 +711,7 @@ Work in progress.
 
 ---
 
-### `SH`
+### `SH` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
@@ -714,7 +721,7 @@ Work in progress.
 
 ---
 
-### `SW`
+### `SW` <Badge type="info" text="RV32I Base" />
 
 ::: danger TO DO
 
