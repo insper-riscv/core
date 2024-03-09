@@ -27,8 +27,10 @@ package TOP_LEVEL_CONSTANTS is
     subtype OPCODE_RANGE is natural range 6 downto 0;
     subtype t_OPCODE is std_logic_vector(OPCODE_RANGE);
 
-    subtype OPCODE_COMPACT_RANGE is natural range OPCODE_RANGE'left downto (OPCODE_RANGE'right + 2);
-    subtype t_OPCODE_COMPACT is std_logic_vector((OPCODE_RANGE'left - 2) to 0);
+    --subtype OPCODE_COMPACT_RANGE is natural range OPCODE_RANGE'left downto (OPCODE_RANGE'right + 2);
+    --subtype t_OPCODE_COMPACT is std_logic_vector((OPCODE_RANGE'left - 2) to 0);
+    subtype OPCODE_COMPACT_RANGE is natural range 6 downto 2;
+    subtype t_OPCODE_COMPACT is std_logic_vector(OPCODE_COMPACT_RANGE);
 
     type t_RV32I_INSTRUCTION is record
         funct_3     : t_FUNCTION;
