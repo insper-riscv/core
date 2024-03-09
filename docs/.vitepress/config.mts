@@ -3,10 +3,10 @@ import mdItDeflist from 'markdown-it-deflist'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'RISC-V para uso Aeroespacial',
+  title: 'CTI RISC-V',
   description: 'Documentação do Projeto',
   base: '/24a-CTI-RISCV/',
-  
+
   locales: {
     root: {
       label: 'Português',
