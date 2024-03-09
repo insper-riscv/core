@@ -99,40 +99,10 @@ export default {
                 ],
             }, {
                 text: 'Instruções',
-                collapsed: false,
-                items: [
-                    {
-                        text: 'Build',
-                        link: '/referencia/isa/#build',
-                    }, {
-                        text: 'Shift',
-                        link: '/referencia/isa/#shift',
-                    }, {
-                        text: 'Arithmetic',
-                        link: '/referencia/isa/#arithmetic',
-                    }, {
-                        text: 'Logical',
-                        link: '/referencia/isa/#logical',
-                    }, {
-                        text: 'Compare',
-                        link: '/referencia/isa/#compare',
-                    }, {
-                        text: 'Branch',
-                        link: '/referencia/isa/#branch',
-                    }, {
-                        text: 'Link',
-                        link: '/referencia/isa/#link',
-                    }, {
-                        text: 'Loads',
-                        link: '/referencia/isa/#loads',
-                    }, {
-                        text: 'Stores',
-                        link: '/referencia/isa/#stores',
-                    }, {
-                        text: 'Pseudo-instruções',
-                        link: '/referencia/isa/pseudo',
-                    },
-                ],
+                link: '/referencia/isa/',
+            }, {
+                text: 'Pseudo-instruções',
+                link: '/referencia/isa/pseudo',
             },
         ],
     },
