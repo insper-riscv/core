@@ -53,6 +53,7 @@ package TOP_LEVEL_CONSTANTS is
         enable_flush     : std_logic;
         enable_jump      : std_logic;
         select_source_pc : std_logic;
+        source           : std_logic_vector(XLEN_RANGE);
     end record;
 
     type t_ID_SIGNALS is record

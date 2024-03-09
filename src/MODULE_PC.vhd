@@ -12,12 +12,12 @@ entity MODULE_PC is
     );
 
     port (
-        clock       : in  std_logic;
-        source_id   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        selector    : in  std_logic;
-        enable      : in  std_logic;
-        pc          : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        clock        : in  std_logic;
+        jump_address : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        selector     : in  std_logic;
+        enable       : in  std_logic;
+        pc           : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
@@ -32,7 +32,7 @@ begin
 
     MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_2X1
         port map (
-            source_1    => source_id,
+            source_1    => jump_address,
             source_2    => adder_out,
             selector    => selector,
             destination => mux_out

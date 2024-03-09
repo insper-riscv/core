@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity GENERIC_REGISTERS_BANK is
+entity GENERIC_REGISTER_FILE is
 
     generic (
         DATA_WIDTH    : natural := XLEN;
@@ -25,7 +25,7 @@ entity GENERIC_REGISTERS_BANK is
 
 end entity;
 
-architecture RTL of GENERIC_REGISTERS_BANK is
+architecture RTL of GENERIC_REGISTER_FILE is
 
     subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
     type memory_t is array((2**ADDRESS_WIDTH - 1) downto 0) of word_t;

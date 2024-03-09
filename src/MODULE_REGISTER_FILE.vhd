@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity MODULE_REGISTERS_BANK is
+entity MODULE_REGISTER_FILE is
 
     generic (
         DATA_WIDTH    : natural := XLEN;
@@ -23,11 +23,11 @@ entity MODULE_REGISTERS_BANK is
 
 end entity;
 
-architecture RTL of MODULE_REGISTERS_BANK is
+architecture RTL of MODULE_REGISTER_FILE is
 
 begin   
 
-    REGISTER_BANK : entity WORK.GENERIC_REGISTERS_BANK
+    REGISTER_BANK : entity WORK.GENERIC_REGISTER_FILE
         port map (
             clock               => clock,
             enable              => enable,

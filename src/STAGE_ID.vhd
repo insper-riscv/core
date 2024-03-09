@@ -14,7 +14,6 @@ entity STAGE_ID is
         address_destination  : in std_logic_vector(4 downto 0);
         data_destination     : in std_logic_vector(XLEN_RANGE);
         control_if           : out t_IF_SIGNALS;
-        address_pc           : out std_logic_vector(XLEN_RANGE);
         destination          : out t_ID_EX_SIGNALS
     );
 
@@ -26,7 +25,7 @@ architecture RTL of STAGE_ID is
 
 begin
 
-    MODULE_REGISTERS_BANK : entity WORK.MODULE_REGISTERS_BANK
+    MODULE_REGISTER_FILE : entity WORK.MODULE_REGISTER_FILE
         port map (
         clock               => clock,              
         enable              => enable,             
@@ -42,7 +41,6 @@ begin
             instruction      => source.instruction,
             pc_out           => source.pc,
             data_source_1    => data_source_1,
-            source_id        => address_pc,
             immediate_source => destination.immediate,
             control_if       => control_if,
             control_ex       => destination.ex_signals,

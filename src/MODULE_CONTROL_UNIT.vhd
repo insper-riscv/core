@@ -15,7 +15,7 @@ entity MODULE_CONTROL_UNIT is
         instruction      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         pc_out           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         data_source_1    : in std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_id        : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        --source_id        : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         immediate_source : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         control_if       : out t_IF_SIGNALS;
         control_ex       : out t_EX_SIGNALS;
@@ -64,7 +64,7 @@ begin
             source_1 => adder_out_1,
             source_2 => adder_out_2,
             selector => control_id.select_jump,
-            destination => source_id
+            destination => control_if.source
         );   
 
     immediate_source <= immediate_tmp;

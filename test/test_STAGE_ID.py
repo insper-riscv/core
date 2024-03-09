@@ -5,11 +5,11 @@ from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 
 import utils
-from test_MODULE_REGISTERS_BANK import MODULE_REGISTERS_BANK
+from test_MODULE_REGISTER_FILE import MODULE_REGISTER_FILE
 from test_MODULE_CONTROL_UNIT import MODULE_CONTROL_UNIT
 
 class STAGE_ID(utils.DUT):
-    CHILDREN = [MODULE_REGISTERS_BANK, MODULE_CONTROL_UNIT]
+    CHILDREN = [MODULE_REGISTER_FILE, MODULE_CONTROL_UNIT]
 
 
 @cocotb.test()

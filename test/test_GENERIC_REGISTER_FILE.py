@@ -9,7 +9,7 @@ from cocotb.clock import Clock
 import utils
 
 
-class GENERIC_REGISTERS_BANK(utils.DUT):
+class GENERIC_REGISTER_FILE(utils.DUT):
     clock: utils.DUT.Input_pin
     enable: utils.DUT.Input_pin
     address_destination: utils.DUT.Input_pin
@@ -21,7 +21,7 @@ class GENERIC_REGISTERS_BANK(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_REGISTERS_BANK(dut: GENERIC_REGISTERS_BANK):
+async def tb_GENERIC_REGISTER_FILE(dut: GENERIC_REGISTER_FILE):
     clock = Clock(dut.clock, 20000, units="ns")
     values_enable = ["1", "1", "1", "1", "1"]
     values_address_destination = [
@@ -93,9 +93,9 @@ async def tb_GENERIC_REGISTERS_BANK(dut: GENERIC_REGISTERS_BANK):
         ), f"Error in test {index}: enable={enable} clock={clock}"
 
 
-def test_GENERIC_REGISTERS_BANK():
-    GENERIC_REGISTERS_BANK.test_with(tb_GENERIC_REGISTERS_BANK)
+def test_GENERIC_REGISTER_FILE():
+    GENERIC_REGISTER_FILE.test_with(tb_GENERIC_REGISTER_FILE)
 
 
 if __name__ == "__main__":
-    test_GENERIC_REGISTERS_BANK()
+    test_GENERIC_REGISTER_FILE()
