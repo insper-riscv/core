@@ -3,7 +3,7 @@
     "type": "shell",
     "tasks": [
         {
-            "label": "Open Quartus",
+            "label": "Quartus",
             "detail": "Launch Quartus Prime Lite IDE",
             "icon": {
                 "id": "window"
@@ -12,11 +12,6 @@
             "args": [
                 "quartus/top_level"
             ],
-            "options": {
-                "statusbar": {
-                    "color": "#9999ff"
-                },
-            },
             "isBackground": true,
             "presentation": {
                 "echo": true,
@@ -27,9 +22,8 @@
                 "clear": true,
                 "close": true
             }
-        },
-        {
-            "label": "Analisys & Syntesis",
+        }, {
+            "label": "Syntesis",
             "detail": "Start Analisys & Syntesis",
             "icon": {
                 "id": "run"
@@ -39,14 +33,10 @@
                 "top_level"
             ],
             "options": {
-                "cwd": "${cwd}/quartus",
-                "statusbar": {
-                    "color": "#99ff99"
-                }
+                "cwd": "${cwd}/quartus"
             }
-        },
-        {
-            "label": "Analisys & Elaboration",
+        }, {
+            "label": "Elaboration",
             "detail": "Start Analisys & Elaboration",
             "icon": {
                 "id": "run-all"
@@ -59,10 +49,7 @@
                 "--enable_wysiwyg_resynthesis=on"
             ],
             "options": {
-                "cwd": "${cwd}/quartus",
-                "statusbar": {
-                    "color": "#99ff99"
-                }
+                "cwd": "${cwd}/quartus"
             }
         }
     ]
