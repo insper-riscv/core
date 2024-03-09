@@ -49,5 +49,9 @@ begin
     );
 
     destination.source_1 <= data_source_1;
+    destination.funct_7 <= source.instruction(31 downto 25)
+    destination.funct_3 <= source.instruction(14 downto 12)
+    destination.opcode <= source.instruction(6 downto 0)
+    destination.select_destination <= source.instruction(11 downto 7)
 
 end architecture;
