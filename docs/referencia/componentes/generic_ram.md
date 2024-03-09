@@ -12,13 +12,12 @@ outline: 2
 
 ## Interface genérica
 
-
-### `DATA_WIDTH_0`
+### `DATA_WIDTH`
 
 Largura dos vetores de entrada e saída de dados.
 
 - tipo: `natural`
-- padrão: `DATA_WIDTH`
+- padrão: `XLEN`
 
 ### `ADDRESS_WIDTH`
 
@@ -42,7 +41,8 @@ Escrever descrição de ADDRESSABLE_WIDTH
 
 ### `clock`
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do
+processador).
 
 - tipo: `std_logic`
 
@@ -74,13 +74,13 @@ Entrada de endereço da memória.
 
 Entrada de dados.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ### `destination`
 
 Saída de dados com o valor da memória no endereço definido por `address`.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ## Diagrama RTL
 

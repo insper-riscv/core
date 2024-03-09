@@ -12,12 +12,12 @@ outline: 2
 
 ## Interface genérica
 
-### `DATA_WIDTH_0`
+### `DATA_WIDTH`
 
 Largura dos vetores de entrada e saída de dados.
 
 - tipo: `natural`
-- padrão: `DATA_WIDTH`
+- padrão: `XLEN`
 
 ## Interface de portas
 
@@ -25,29 +25,29 @@ Largura dos vetores de entrada e saída de dados.
 
 Entrada de dados primária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
-- padrão: `00000000000000000000000000000000`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- padrão: `0...0`
 
 ### `source_2`
 
 Entrada de dados secundária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
-- padrão: `00000000000000000000000000000000`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- padrão: `0...0`
 
 ### `source_3`
 
 Entrada de dados terciária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
-- padrão: `00000000000000000000000000000000`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- padrão: `0...0`
 
 ### `source_4`
 
 Entrada de dados quaternária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
-- padrão: `00000000000000000000000000000000`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- padrão: `0...0`
 
 ### `selector`
 
@@ -57,9 +57,10 @@ Seletor que determina qual das entradas será usada.
 
 ### `destination`
 
-Saída de dados com o valor de uma das entradas de dados (`source_1`, `source_2`, `source_3` ou `source_4`).
+Saída de dados com o valor de uma das entradas de dados (`source_1`, `source_2`,
+`source_3` ou `source_4`).
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ## Diagrama RTL
 
@@ -117,4 +118,3 @@ Lógica combinacional:
 - `source_4` &larr; `11111111000000000000000011111111`
 - `selector` &larr; `11`
 - `destination` &rarr; `11111111000000000000000011111111`
-

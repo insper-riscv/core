@@ -12,7 +12,6 @@ outline: 2
 
 ## Interface genérica
 
-
 ::: danger TO DO
 
 Work in progress.
@@ -23,7 +22,8 @@ Work in progress.
 
 ### `clock`
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do
+processador).
 
 - tipo: `std_logic`
 
@@ -83,35 +83,38 @@ Diagrama a nível de registradores
 `test_GENERIC_FLIP_FLOP.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py).
 
-### Caso 1
+### Caso 1 <Badge type="info" text="Lógica sequencial" />
 
-Lógica combinacional:
+1.
+   - `clear` &larr; `0`
+   - `enable` &larr; `1`
+   - `source` &larr; `1`
+   - `state` &rarr; `0`
+2.
+   - `Clock` &larr; borda de subida
+3.
+   - `state` &rarr; `1`
 
-- `clear` &larr; `0`
-- `enable` &larr; `1`
-- `source` &larr; `1`
-- `state` &rarr; `1`
+### Caso 2 <Badge type="info" text="Lógica sequencial" />
 
-### Caso 2
+1.
+   - `clear` &larr; `0`
+   - `enable` &larr; `1`
+   - `source` &larr; `0`
+   - `state` &rarr; `0`
+2.
+   - `Clock` &larr; borda de subida
+3.
+   - `state` &rarr; `0`
 
-Lógica combinacional:
+### Caso 3 <Badge type="info" text="Lógica sequencial" />
 
-- `clear` &larr; `0`
-- `enable` &larr; `1`
-- `source` &larr; `0`
-- `state` &rarr; `0`
-
-### Caso 3
-
-Lógica combinacional:
-
-- `clear` &larr; `1`
-- `enable` &larr; `0`
-- `source` &larr; `1`
-- `state` &rarr; `0`
-
-::: warning TO DO
-
-Review.
-
-:::
+1.
+   - `clear` &larr; `0`
+   - `enable` &larr; `0`
+   - `source` &larr; `1`
+   - `state` &rarr; `0`
+2.
+   - `Clock` &larr; borda de subida
+3.
+   - `state` &rarr; `0`

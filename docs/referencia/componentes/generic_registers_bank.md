@@ -12,12 +12,12 @@ outline: 2
 
 ## Interface genérica
 
-### `DATA_WIDTH_0`
+### `DATA_WIDTH`
 
 Largura dos vetores de entrada e saída de dados.
 
 - tipo: `natural`
-- padrão: `DATA_WIDTH`
+- padrão: `XLEN`
 
 ### `ADDRESS_WIDTH`
 
@@ -30,7 +30,8 @@ Largura dos vetores de entrada e saída de endereços.
 
 ### `clock`
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do
+processador).
 
 - tipo: `std_logic`
 
@@ -62,19 +63,19 @@ Entrada de endereço de registrador secundária.
 
 Entrada de valor para armazenar em registrador.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ### `data_source_1`
 
 Saída de valor de registrador primária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ### `data_source_2`
 
 Saída de valor de registrador secundária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ## Diagrama RTL
 

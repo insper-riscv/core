@@ -16,7 +16,6 @@ Diagrama de portas
 
 ## Interface genérica
 
-
 ::: danger TO DO
 
 Work in progress.

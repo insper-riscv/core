@@ -12,12 +12,12 @@ outline: 2
 
 ## Interface genérica
 
-### `DATA_WIDTH_0`
+### `DATA_WIDTH`
 
 Largura dos vetores de entrada e saída de dados.
 
 - tipo: `natural`
-- padrão: `DATA_WIDTH`
+- padrão: `XLEN`
 
 ## Interface de portas
 
@@ -25,13 +25,13 @@ Largura dos vetores de entrada e saída de dados.
 
 Entrada de dados primária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ### `source_2`
 
 Entrada de dados secundária.
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ### `selector`
 
@@ -41,9 +41,10 @@ Seletor que determina qual das entradas será usada.
 
 ### `destination`
 
-Saída de dados com o valor de uma das entradas de dados (`source_1` ou `source_2`).
+Saída de dados com o valor de uma das entradas de dados (`source_1` ou
+`source_2`).
 
-- tipo: `std_logic_vector((DATA_WIDTH_0 - 1) downto 0)`
+- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 
 ## Diagrama RTL
 

@@ -7,5 +7,3 @@
 - Diagrama de periféricos
 
 :::
-
-

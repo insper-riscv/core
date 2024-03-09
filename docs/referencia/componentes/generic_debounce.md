@@ -16,7 +16,6 @@ Diagrama de portas
 
 ## Interface genérica
 
-
 ::: danger TO DO
 
 Work in progress.
@@ -27,7 +26,8 @@ Work in progress.
 
 ### `clock`
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do
+processador).
 
 - tipo: `std_logic`
 
