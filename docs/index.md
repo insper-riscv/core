@@ -8,22 +8,22 @@ hero:
   image:
     light: /images/RISC-V_Stacked_Color.svg
     dark: /images/RISC-V_Stacked_White_Yellow.svg
-    alt: VitePress
+    alt: RISC-V
   actions:
-    - text: Introdução
+    - text: Relatório
       link: /guia/
       theme: brand
-    - text: Referência
-      link: /referencia/componentes/top_level
+    - text: Arquitetura
+      link: /referencia/componentes/
       theme: alt
     - text: Projeto
       link: /sobre
       theme: alt
 
 features:
-  - title: RISC-V
+  - title: RISC-V Bare Metal
     details: Especificação de arquitetura do núcleo de processamento
-    link: https://riscv.org
+    link: https://wiki.riscv.org
     linkText: Saiba mais
   - title: Visual Studio Code e Docker
     details: Ambiente de desenvolvimento conteinerizado
@@ -33,10 +33,8 @@ features:
     details: Framework de descrição de hardware em placas FPGA Intel
     link: https://www.intel.com.br/content/www/br/pt/products/details/fpga/development-tools/quartus-prime.html
     linkText: Saiba mais
-  - title: Cocotb
+  - title: Pytest e Cocotb
     details: Framework de testes de integração em VHDL
     link: https://cocotb.org/
     linkText: Saiba mais
 ---
-
-<div style="margin-top: 2rem;"></div>
