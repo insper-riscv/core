@@ -47,17 +47,13 @@ begin
             destination => pc_out
         );
 
-    ROM : entity WORK.GENERIC_ROM
-        port map (
-            address     => pc_out,
-            destination => destination
-        );
-
     ADDER : entity WORK.GENERIC_ADDER
         port map (
             source_1    => pc_out,
             source_2    => std_logic_vector(to_unsigned(4, 32)),
             destination => adder_out
         );
+
+    destination <= pc_out;
 
 end architecture;

@@ -15,7 +15,7 @@ end entity;
 
 architecture RTL of STAGE_EX is
 
-    -- No signals
+        signal select_function : std_logic_vector(3 downto 0);
 
 begin
 
@@ -27,11 +27,17 @@ begin
             source_register_1      => source.source_1,
             source_register_2      => source.source_2,
             source_immediate       => source.immediate,
+            select_function        => select_function,
+            source_register_2_out  => destination.source_2,
+            destination            => destination.pointer
+        );
+
+    MODULE_ALU_CONTROLLER : entity WORK.MODULE_ALU_CONTROLLER
+        port map (
             opcode                 => source.opcode,
             function_3             => source.funct_3,
             function_7             => source.funct_7,
-            source_register_2_out  => destination.source_2,
-            destination            => destination.pointer
+            destination            => select_function
         );
 
     destination.mem_signals <= source.mem_signals;

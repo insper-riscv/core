@@ -12,15 +12,13 @@ entity MODULE_ALU is
     );
   
     port (
-        select_source_1        : std_logic_vector(1 downto 0);
-        select_source_2        : std_logic_vector(1 downto 0);
+        select_source_1        : in std_logic_vector(1 downto 0);
+        select_source_2        : in std_logic_vector(1 downto 0);
         source_pc              : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_register_1      : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_register_2      : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_immediate       : in std_logic_vector((DATA_WIDTH - 1) downto 0);
-        opcode                 : t_OPCODE_COMPACT;
-        function_3             : t_FUNCTION;
-        function_7             : in std_logic_vector(6 downto 0);
+        select_function        : in std_logic_vector(3 downto 0);
         --source_memory          : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         --source_write_back      : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         --select_foward_1        : in std_logic_vector(1 downto 0);
@@ -36,7 +34,6 @@ architecture RTL of MODULE_ALU is
 
         signal mux_register_alu_1_out : std_logic_vector((DATA_WIDTH - 1) downto 0);
         signal mux_register_alu_2_out : std_logic_vector((DATA_WIDTH - 1) downto 0); 
-        signal select_function : std_logic_vector(3 downto 0);
 begin
 
     MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_4X1
@@ -57,14 +54,6 @@ begin
             source_4    => (others => '0'),
             selector    => select_source_2,
             destination => mux_register_alu_2_out
-        );
-
-    ALU_CONTROLLER : entity WORK.RV32I_ALU_CONTROLLER
-        port map (
-            opcode      => opcode,
-            function_3  => function_3,
-            function_7  => function_7,
-            destination => select_function
         );
 
     ALU : entity WORK.RV32I_ALU
