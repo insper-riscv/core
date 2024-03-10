@@ -95,7 +95,7 @@ núcleo `CORE` e alguns dos periféricos planejados para este projeto.
 O núcleo de processamento é organizado em pipeline com 5 etapas, sem uso de
 barramento, cache ou controlador de memória.
 
-![Núcleo de processamento com pipeline](/public/images/diagrama.png)
+![Núcleo de processamento com pipeline](../public/images/pipeline_br.drawio.svg)
 
 ## Referências:
 
