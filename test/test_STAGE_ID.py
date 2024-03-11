@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -12,14 +13,10 @@ class STAGE_ID(utils.DUT):
     CHILDREN = [MODULE_REGISTER_FILE, MODULE_CONTROL_UNIT]
 
 
-@cocotb.test()
-async def tb_STAGE_ID(dut: STAGE_ID):
-    pass
-
-
-def test_STAGE_ID():
-    STAGE_ID.test_with(tb_STAGE_ID)
+def test_STAGE_ID_syntesis():
+    STAGE_ID.build_vhd()
+    STAGE_ID.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_STAGE_ID()
+    pytest.main(["-k", f"test_STAGE_ID"])
