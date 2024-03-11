@@ -10,9 +10,6 @@ export default {
                 collapsed: false,
                 items: [
                     {
-                        text: 'Top Level',
-                        link: '/referencia/componentes/top_level'
-                    }, {
                         text: 'Genéricos',
                         collapsed: true,
                         items: [
@@ -44,9 +41,6 @@ export default {
                                 text: 'Registrador',
                                 link: '/referencia/componentes/generic_register',
                             }, {
-                                text: 'Banco de Registradores',
-                                link: '/referencia/componentes/generic_registers_bank',
-                            }, {
                                 text: 'Extensor de sinal',
                                 link: '/referencia/componentes/generic_signal_extender',
                             },
@@ -58,6 +52,9 @@ export default {
                             {
                                 text: 'Decodificador de instruções',
                                 link: '/referencia/componentes/rv32i_instruction_decoder',
+                            }, {
+                                text: 'Arquivo de Registradores',
+                                link: '/referencia/componentes/rv32i_register_file',
                             }, {
                                 text: 'Bit da ULA',
                                 link: '/referencia/componentes/rv32i_alu_bit',
@@ -73,6 +70,22 @@ export default {
                         text: 'Módulos',
                         collapsed: true,
                         items: [
+                            {
+                                text: 'Contador de Programa',
+                                link: '/referencia/componentes/module_program_counter',
+                            }, {
+                                text: 'Unidade de Controle',
+                                link: '/referencia/componentes/module_control_unit',
+                            }, {
+                                text: 'ULA',
+                                link: '/referencia/componentes/module_alu',
+                            }, {
+                                text: 'Unidade de Controle da ULA',
+                                link: '/referencia/componentes/module_alu_controller',
+                            }, {
+                                text: 'Memória',
+                                link: '/referencia/componentes/module_memory',
+                            },
                         ],
                     }, {
                         text: 'Estágios',
