@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity GENERIC_REGISTER_FILE is
+entity RV32I_REGISTER_FILE is
 
     generic (
         DATA_WIDTH    : natural := XLEN;
@@ -25,7 +25,7 @@ entity GENERIC_REGISTER_FILE is
 
 end entity;
 
-architecture RTL of GENERIC_REGISTER_FILE is
+architecture RTL of RV32I_REGISTER_FILE is
 
     subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
     type memory_t is array((2**ADDRESS_WIDTH - 1) downto 0) of word_t;
@@ -41,7 +41,7 @@ architecture RTL of GENERIC_REGISTER_FILE is
 
     shared variable registers : memory_t := init_memory;
 
-    constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+    constant ZERO         : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
     constant ADDRESS_ZERO : std_logic_vector((ADDRESS_WIDTH - 1) downto 0) := (others => '0');
 
 begin
