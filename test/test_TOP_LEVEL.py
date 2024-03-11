@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -16,14 +17,10 @@ class TOP_LEVEL(utils.DUT):
     CHILDREN = [STAGE_IF, STAGE_ID, STAGE_EX, STAGE_MEM, STAGE_WB]
 
 
-@cocotb.test()
-async def tb_TOP_LEVEL(dut: TOP_LEVEL):
-    pass
-
-
-def test_TOP_LEVEL():
-    TOP_LEVEL.test_with(tb_TOP_LEVEL)
+def test_TOP_LEVEL_syntesis():
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_TOP_LEVEL()
+    pytest.main(["-k", f"test_TOP_LEVEL"])
