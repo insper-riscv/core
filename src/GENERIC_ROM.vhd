@@ -23,14 +23,14 @@ architecture RTL of GENERIC_ROM is
 
     type memory_block is array(0 TO 2**ADDRESSABLE_WIDTH - 1) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
 
-    function memory_init
-        return memory_block is variable tmp : memory_block := (others => (others => '0'));
+    function memory_init return memory_block is
+        variable tmp : memory_block := (others => (others => '0'));
     begin
   
         tmp(0) := "00000000000000000001010000110111";	
 
         return tmp;
-    end memory_init;
+    end function;
 
     signal memory_ROM : memory_block := memory_init;
 
