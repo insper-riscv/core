@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -8,17 +9,19 @@ import utils
 
 
 class RV32I_INSTRUCTION_DECODER(utils.DUT):
-    pass
+    instruction: utils.DUT.Input_pin
+    control_if: utils.DUT.Output_pin
+    control_id: utils.DUT.Output_pin
+    control_ex: utils.DUT.Output_pin
+    control_mem: utils.DUT.Output_pin
+    control_wb: utils.DUT.Output_pin
+    immediate: utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_RV32I_INSTRUCTION_DECODER(dut: RV32I_INSTRUCTION_DECODER):
-    pass
-
-
-def test_RV32I_INSTRUCTION_DECODER():
-    RV32I_INSTRUCTION_DECODER.test_with(tb_RV32I_INSTRUCTION_DECODER)
+def test_RV32I_INSTRUCTION_DECODER_syntesis():
+    RV32I_INSTRUCTION_DECODER.build_vhd()
+    RV32I_INSTRUCTION_DECODER.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_RV32I_INSTRUCTION_DECODER()
+    pytest.main(["-k", f"test_RV32I_INSTRUCTION_DECODER"])
