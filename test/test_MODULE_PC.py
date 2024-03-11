@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -14,14 +15,10 @@ class MODULE_PC(utils.DUT):
     CHILDREN = [GENERIC_MUX_2X1, GENERIC_REGISTER, GENERIC_ADDER]
 
 
-@cocotb.test()
-async def tb_MODULE_PC(dut: MODULE_PC):
-    pass
-
-
-def test_MODULE_PC():
-    MODULE_PC.test_with(tb_MODULE_PC)
+def test_MODULE_PC_syntesis():
+    MODULE_PC.build_vhd()
+    MODULE_PC.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_MODULE_PC()
+    pytest.main(["-k", f"test_MODULE_PC"])
