@@ -17,82 +17,148 @@ class RV32I_ALU(utils.DUT):
     source_1: utils.DUT.Input_pin
     source_2: utils.DUT.Input_pin
     destination: utils.DUT.Output_pin
-    #flag_z: utils.DUT.Output_pin
 
 
 @cocotb.test()
-async def tb_RV32I_ALU(dut: RV32I_ALU):
-    values_invert_source_1 = ["0", "0", "0", "0", "1", "0", "1", "1",]
-    values_invert_source_2 = ["0", "0", "0", "0", "0", "1", "0", "1",]
-    values_select_function = ["00", "01", "10", "11", "00", "01", "10", "11",]
-    values_source_1 = [
-                        "00000000000000000000000000000000",
-                        "11111111111111111111111111111111", 
-                        "11111111111111110000000000000000", 
-                        "11111111111111111111111111111111", 
-                        "00000000000000000000000000000000", 
-                        "11111111111111111111111111111111", 
-                        "11111111111111110000000000000000", 
-                        "11111111111111111111111111111111",
-                       ]
-    values_source_2 = [
-                        "11111111111111111111111111111111", 
-                        "00000000000000000000000000000000", 
-                        "00000000000000001111111111111111", 
-                        "00000000000000000000000000000000", 
-                        "11111111111111111111111111111111", 
-                        "00000000000000000000000000000000", 
-                        "11111111111111110000000000000000",
-                        "00000000000000000000000000000000",
-                        ]
-    values_destination = [
-                            "00000000000000000000000000000000",
-                            "11111111111111111111111111111111", 
-                            "11111111111111111111111111111111", 
-                            "00000000000000000000000000000001", 
-                            "11111111111111111111111111111111", 
-                            "11111111111111111111111111111111", 
-                            "00000000000000000000000000000000", 
-                            "00000000000000000000000000000001",
-                          ]
-    #values_flag_z = ["1", "0", "0", "0", "0", "0", "1", "0",]
+async def tb_RV32I_ALU_case_1(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("0")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("00")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    dut.source_2.value = BinaryValue("11111111111111111111111111111111")
 
-    for index, (invert_source_1, invert_source_2, select_function,  source_1, source_2, 
-            destination) in enumerate(
-            #destination, flag_z) in enumerate(
-        zip(values_invert_source_1, values_invert_source_2, values_select_function, 
-            values_source_1, values_source_2, values_destination)
-            #values_source_1, values_source_2, values_destination, values_flag_z)
-    ):
-        dut.invert_source_1.value = BinaryValue(invert_source_1)
-        dut.invert_source_2.value = BinaryValue(invert_source_2)
-        dut.select_function.value = BinaryValue(select_function)
-        dut.source_1.value = BinaryValue(source_1)
-        dut.source_2.value = BinaryValue(source_2)
-
-        await Timer(Decimal(1), units="ns")
-
-        condition = dut.destination.value.binstr == destination
-        #condition1 = dut.flag_z.value.binstr == flag_z
-
-        if not condition:
-            dut._log.error(
-                f"Expected destination value: {destination} Obtained value: {dut.destination.value.binstr}"
-            )
-        
-        #if not condition1:
-        #    dut._log.error(
-        #        f"Expected flag_z value: {flag_z} Obtained value: {dut.flag_z.value.binstr}"
-        #    )
-
-        #assert (condition and condition1), f"Error in test {index}"
-        assert (condition), f"Error in test {index}"
-        await Timer(Decimal(1), units="ns")
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "00000000000000000000000000000000")
+    await Timer(Decimal(1), units="ns")
 
 
-def test_RV32I_ALU():
-    RV32I_ALU.test_with(tb_RV32I_ALU)
+@cocotb.test()
+async def tb_RV32I_ALU_case_2(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("0")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("01")
+    dut.source_1.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "11111111111111111111111111111111")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_RV32I_ALU_case_3(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("0")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("10")
+    dut.source_1.value = BinaryValue("11111111111111110000000000000000")
+    dut.source_2.value = BinaryValue("00000000000000001111111111111111")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "11111111111111111111111111111111")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_RV32I_ALU_case_4(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("0")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("11")
+    dut.source_1.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "00000000000000000000000000000001")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_RV32I_ALU_case_5(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("1")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("00")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    dut.source_2.value = BinaryValue("11111111111111111111111111111111")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "11111111111111111111111111111111")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_RV32I_ALU_case_6(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("0")
+    dut.invert_source_2.value = BinaryValue("1")
+    dut.select_function.value = BinaryValue("01")
+    dut.source_1.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "11111111111111111111111111111111")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_RV32I_ALU_case_7(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("1")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("10")
+    dut.source_1.value = BinaryValue("11111111111111110000000000000000")
+    dut.source_2.value = BinaryValue("11111111111111110000000000000000")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "00000000000000000000000000000000")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_RV32I_ALU_case_8(dut: RV32I_ALU):
+    dut.invert_source_1.value = BinaryValue("1")
+    dut.invert_source_2.value = BinaryValue("1")
+    dut.select_function.value = BinaryValue("11")
+    dut.source_1.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "00000000000000000000000000000001")
+    await Timer(Decimal(1), units="ns")
+
+
+def test_RV32I_ALU_syntesis():
+    RV32I_ALU.build_vhd()
+    RV32I_ALU.build_netlistsvg()
+
+
+def test_RV32I_ALU_case_1():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_1)
+
+
+def test_RV32I_ALU_case_2():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_2)
+
+
+def test_RV32I_ALU_case_3():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_3)
+
+
+def test_RV32I_ALU_case_4():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_4)
+
+
+def test_RV32I_ALU_case_5():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_5)
+
+
+def test_RV32I_ALU_case_6():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_6)
+
+
+def test_RV32I_ALU_case_7():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_7)
+
+
+def test_RV32I_ALU_case_8():
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_8)
 
 
 if __name__ == "__main__":
-    test_RV32I_ALU()
+    pytest.main(["-k", f"test_RV32I_ALU"])
