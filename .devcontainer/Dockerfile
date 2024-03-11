@@ -1,4 +1,4 @@
-FROM ghdl/ghdl:ubuntu22-llvm-11
+FROM hdlc/ghdl:yosys
 
 RUN apt-get update -qq              \
     && apt-get upgrade -y           \
@@ -10,7 +10,8 @@ RUN apt-get update -qq              \
         libtcmalloc-minimal4        \
         locales                     \
         make                        \
-        openjdk-8-jdk               \
+        npm                         \
+        python3                     \
         python3-pip                 \
         sudo                        \
         tar                         \
@@ -20,17 +21,7 @@ RUN apt-get update -qq              \
     && apt-get clean                \
     && apt-get autoremove -y        \
     && rm -r /var/lib/apt/lists/*   \
-    && pip install                  \
-        cocotb                      \
-        cocotb-test                 \
-        exceptiongroup              \
-        find-libpython              \
-        iniconfig                   \
-        packaging                   \
-        pluggy                      \
-        pytest                      \
-        pytest-env                  \
-        tomli
+    && npm install -g netlistsvg
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8
@@ -62,3 +53,5 @@ RUN chmod a+x QuartusLiteSetup-23.1std.0.991-linux.run                          
     ./QuartusLiteSetup-23.1std.0.991-linux.run --mode unattended --accept_eula 1 --installdir /opt/intelFPGA  && \
     rm -rf /opt/intelFPGA/uninstall/                                                                          && \
     rm -rf /tmp/*
+
+RUN echo 'export PS1="\n\e[92m\e[1m\u@\h\e[0m \e[94m\w\n \e[92m\e[1m$\e[0m\e[0m\e[39m\e[49m "' >> ~/.bashrc
