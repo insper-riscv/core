@@ -21,80 +21,77 @@ class GENERIC_MUX_4X1(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_MUX_4X1(dut: GENERIC_MUX_4X1):
-    values_source_1 = [
-        "00001111000011110000111100001111",
-        "00001111000011110000111100001111",
-        "00001111000011110000111100001111",
-        "00001111000011110000111100001111",
-    ]
-    values_source_2 = [
-        "11110000111100001111000011110000",
-        "11110000111100001111000011110000",
-        "11110000111100001111000011110000",
-        "11110000111100001111000011110000",
-    ]
-    values_source_3 = [
-        "00000000111111111111111100000000",
-        "00000000111111111111111100000000",
-        "00000000111111111111111100000000",
-        "00000000111111111111111100000000",
-    ]
-    values_source_4 = [
-        "11111111000000000000000011111111",
-        "11111111000000000000000011111111",
-        "11111111000000000000000011111111",
-        "11111111000000000000000011111111",
-    ]
-    values_selector = ["00", "01", "10", "11"]
-    values_destination = [
-        "00001111000011110000111100001111",
-        "11110000111100001111000011110000",
-        "00000000111111111111111100000000",
-        "11111111000000000000000011111111",
-    ]
+async def tb_GENERIC_MUX_4X1_case_1(dut: GENERIC_MUX_4X1):
+    dut.source_1.value = BinaryValue("00001111000011110000111100001111")
+    dut.source_2.value = BinaryValue("11110000111100001111000011110000")
+    dut.source_3.value = BinaryValue("00000000111111111111111100000000")
+    dut.source_4.value = BinaryValue("11111111000000000000000011111111")
+    dut.selector.value = BinaryValue("00")
 
-    for index, (
-        source_1,
-        source_2,
-        source_3,
-        source_4,
-        selector,
-        destination,
-    ) in enumerate(
-        zip(
-            values_source_1,
-            values_source_2,
-            values_source_3,
-            values_source_4,
-            values_selector,
-            values_destination,
-        )
-    ):
-        dut.source_1.value = BinaryValue(source_1)
-        dut.source_2.value = BinaryValue(source_2)
-        dut.source_3.value = BinaryValue(source_3)
-        dut.source_4.value = BinaryValue(source_4)
-        dut.selector.value = BinaryValue(selector)
-
-        await Timer(Decimal(1), units="ns")
-
-        condition = dut.destination.value.binstr == destination
-
-        if not condition:
-            dut._log.error(
-                f"Expected value: {destination} Obtained value: {dut.destination.value.binstr}"
-            )
-
-        assert (
-            condition
-        ), f"Error in test {index}: source_1={source_1} source_2={source_2} source_3={source_3} source_4={source_4} selector={selector}"
-        await Timer(Decimal(1), units="ns")
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "00001111000011110000111100001111")
+    await Timer(Decimal(1), units="ns")
 
 
-def test_GENERIC_MUX_4X1():
-    GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1)
+@cocotb.test()
+async def tb_GENERIC_MUX_4X1_case_2(dut: GENERIC_MUX_4X1):
+    dut.source_1.value = BinaryValue("00001111000011110000111100001111")
+    dut.source_2.value = BinaryValue("11110000111100001111000011110000")
+    dut.source_3.value = BinaryValue("00000000111111111111111100000000")
+    dut.source_4.value = BinaryValue("11111111000000000000000011111111")
+    dut.selector.value = BinaryValue("01")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "11110000111100001111000011110000")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_GENERIC_MUX_4X1_case_3(dut: GENERIC_MUX_4X1):
+    dut.source_1.value = BinaryValue("00001111000011110000111100001111")
+    dut.source_2.value = BinaryValue("11110000111100001111000011110000")
+    dut.source_3.value = BinaryValue("00000000111111111111111100000000")
+    dut.source_4.value = BinaryValue("11111111000000000000000011111111")
+    dut.selector.value = BinaryValue("10")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "00000000111111111111111100000000")
+    await Timer(Decimal(1), units="ns")
+
+
+@cocotb.test()
+async def tb_GENERIC_MUX_4X1_case_4(dut: GENERIC_MUX_4X1):
+    dut.source_1.value = BinaryValue("00001111000011110000111100001111")
+    dut.source_2.value = BinaryValue("11110000111100001111000011110000")
+    dut.source_3.value = BinaryValue("00000000111111111111111100000000")
+    dut.source_4.value = BinaryValue("11111111000000000000000011111111")
+    dut.selector.value = BinaryValue("11")
+
+    await Timer(Decimal(1), units="ns")
+    utils.assert_output(dut.destination, "11111111000000000000000011111111")
+    await Timer(Decimal(1), units="ns")
+
+
+def test_GENERIC_MUX_4X1_syntesis():
+    GENERIC_MUX_4X1.build_vhd()
+    GENERIC_MUX_4X1.build_netlistsvg()
+
+
+def test_GENERIC_MUX_4X1_case_1():
+    GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1_case_1)
+
+
+def test_GENERIC_MUX_4X1_case_2():
+    GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1_case_2)
+
+
+def test_GENERIC_MUX_4X1_case_3():
+    GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1_case_3)
+
+
+def test_GENERIC_MUX_4X1_case_4():
+    GENERIC_MUX_4X1.test_with(tb_GENERIC_MUX_4X1_case_4)
 
 
 if __name__ == "__main__":
-    test_GENERIC_MUX_4X1()
+    pytest.main(["-k", f"test_GENERIC_MUX_4X1"])
