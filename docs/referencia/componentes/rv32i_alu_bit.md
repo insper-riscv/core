@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Bit da ULA
-
-`RV32I_ALU_BIT.vhd`
+# Bit da ULA <Badge type="info" text="RV32I_ALU_BIT.vhd"/>
 
 ::: danger TO DO
 
@@ -32,11 +30,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/rv32i_alu_bit_netlist.svg" alt="Diagrama de RTL do bit da ULA" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

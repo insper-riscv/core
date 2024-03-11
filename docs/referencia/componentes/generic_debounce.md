@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Debounce
-
-`GENERIC_DEBOUNCE.vhd`
+# Debounce <Badge type="info" text="GENERIC_DEBOUNCE.vhd"/>
 
 ::: danger TO DO
 
@@ -66,11 +64,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_debounce_netlist.svg" alt="Diagrama de RTL do debounce" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

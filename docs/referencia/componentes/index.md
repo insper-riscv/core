@@ -1,9 +1,11 @@
-# Componentes
+# Top Level
 
-::: danger TO DO
+![](/images/referencia/componentes/top_level_pipeline.drawio.svg)
 
-- Diagrama de blocos do pipeline
-- Diagrama detalhado
-- Diagrama de periféricos
+`TOP_LEVEL.vhd`
 
-:::
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/TOP_LEVEL.vhd).
+
+## Diagrama RTL
+
+![](/images/referencia/componentes/top_level_core.drawio.svg)

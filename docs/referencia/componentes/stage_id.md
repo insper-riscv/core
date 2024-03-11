@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Decodifica Instrução
-
-`STAGE_ID.vhd`
+# Decodifica Instrução <Badge type="info" text="STAGE_ID.vhd"/>
 
 ::: danger TO DO
 

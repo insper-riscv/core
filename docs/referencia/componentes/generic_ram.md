@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# RAM
-
-`GENERIC_RAM.vhd`
+# RAM <Badge type="info" text="GENERIC_RAM.vhd"/>
 
 ![Diagrama de portas da memória RAM](../../public/images/referencia/componentes/generic_ram.drawio.svg)
 
@@ -84,11 +82,7 @@ Saída de dados com o valor da memória no endereço definido por `address`.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_ram_netlist.svg" alt="Diagrama de RTL da RAM" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

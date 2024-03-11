@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# ULA
-
-`RV32I_ALU.vhd`
+# Unidade Lógia Aritmética <Badge type="info" text="RV32I_ALU.vhd"/>
 
 ::: danger TO DO
 

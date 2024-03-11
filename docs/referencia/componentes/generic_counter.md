@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Contador
-
-`GENERIC_COUNTER.vhd`
+# Contador <Badge type="info" text="GENERIC_COUNTER.vhd"/>
 
 ![Diagrama de portas do contador](../../public/images/referencia/componentes/generic_counter.drawio.svg)
 
@@ -69,11 +67,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_counter_netlist.svg" alt="Diagrama de RTL do contador" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

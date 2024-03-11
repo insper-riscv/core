@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# MUX 4x1
-
-`GENERIC_MUX_4X1.vhd`
+# MUX 4x1 <Badge type="info" text="GENERIC_MUX_4X1.vhd"/>
 
 ![Diagrama de portas do multiplexador 4 em 1](../../public/images/referencia/componentes/generic_mux_4x1.drawio.svg)
 
@@ -64,11 +62,7 @@ Saída de dados com o valor de uma das entradas de dados (`source_1`, `source_2`
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_mux_4x1_netlist.svg" alt="Diagrama de RTL do mux 4x1" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

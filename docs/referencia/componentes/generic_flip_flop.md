@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Flip Flop
-
-`GENERIC_FLIP_FLOP.vhd`
+# Flip Flop <Badge type="info" text="GENERIC_FLIP_FLOP.vhd"/>
 
 ![Diagrama de portas do flip flop](../../public/images/referencia/componentes/generic_flip_flop.drawio.svg)
 
@@ -72,11 +70,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_flip_flop_netlist.svg" alt="Diagrama de RTL do flip flop" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

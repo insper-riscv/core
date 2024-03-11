@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# MUX 2x1
-
-`GENERIC_MUX_2X1.vhd`
+# MUX 2x1 <Badge type="info" text="GENERIC_MUX_2X1.vhd"/>
 
 ![Diagrama de portas do multiplexador 2 em 1](../../public/images/referencia/componentes/generic_mux_2x1.drawio.svg)
 
@@ -48,11 +46,7 @@ Saída de dados com o valor de uma das entradas de dados (`source_1` ou
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_mux_2x1_netlist.svg" alt="Diagrama de RTL do mux 2x1" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Acesso a Memória
-
-`STAGE_MEM.vhd`
+# Acesso a Memória <Badge type="info" text="STAGE_MEM.vhd"/>
 
 ::: danger TO DO
 
