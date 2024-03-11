@@ -5,13 +5,18 @@ export default {
     sidebar: {
         '/guia/': [
             {
-                text: 'Documentação',
-                items: [
-                    { text: 'Introdução', link: '/guia/introducao' },
-                    { text: 'Desenvolvimento', link: '/guia/desenvolvimento' },
-                    { text: 'RISC-V', link: '/guia/diagrama' }
-                ],
-            }
+                text: 'Sobre',
+                link: '/guia/',
+            }, {
+                text: 'Introdução',
+                link: '/guia/introducao'
+            }, {
+                text: 'Desenvolvimento',
+                link: '/guia/desenvolvimento'
+            }, {
+                text: 'Bibliografia',
+                link: '/guia/bibliografia'
+            },
         ],
     },
 } satisfies DefaultTheme.Config

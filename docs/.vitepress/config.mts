@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitepress'
-import mdItDeflist from 'markdown-it-deflist'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -23,22 +22,27 @@ export default defineConfig({
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: {
+      light: '/images/RISC-V_Stacked_Color.svg',
+      dark: '/images/RISC-V_Stacked_White_Yellow.svg',
+      alt: 'RISC-V',
+    },
     nav: [
       {
         text: 'Guia',
         link: '/guia/',
       }, {
         text: 'Referência',
-        link: '/referencia/componentes/top_level',
+        link: '/referencia/componentes/',
       }, {
         text: 'Mais',
         items: [
           {
             text: 'Sobre',
-            link: '/sobre',
+            link: '/guia/',
           }, {
             text: 'Bibliografia',
-            link: '/bibliografia'
+            link: '/guia/bibliografia'
           }, {
             text: 'CTI Renato Archer',
             link: 'https://www.gov.br/cti/pt-br'
@@ -114,12 +118,6 @@ export default defineConfig({
     footer: {
       message: 'Publicado sob a Licença MIT.',
       copyright: 'Copyright © 2024'
-    },
-  },
-
-  markdown: {
-    config(md) {
-      md.use(mdItDeflist)
     },
   },
 })
