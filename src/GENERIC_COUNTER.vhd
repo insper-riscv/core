@@ -28,7 +28,7 @@ architecture RTL of GENERIC_COUNTER is
 begin
 
     COUNTER : process(clock, update)
-        variable pow      : integer;
+        variable selector : integer;
         variable overflow : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(DEFAULT_OVERFLOW, 32));
         variable count    : std_logic_vector(31 downto 0) := (others => '0');
     begin
@@ -36,8 +36,14 @@ begin
             count := std_logic_vector(unsigned(count) + 1);
 
             UPDATE_OVERFLOW : if (update = '1') then
-                pow := to_integer(unsigned(source(4 downto 0)));
-                overflow := std_logic_vector(to_unsigned(2 ** pow, 32));
+                selector := to_integer(unsigned(source(4 downto 0)));
+                overflow := (others =>'0');
+
+                for i in 0 to 31 loop
+                    if (i = selector) then
+                        overflow(i) := '1';
+                    end if;
+                end loop;
             end if;
 
             UPDATE_STATE : if (count = overflow) then
