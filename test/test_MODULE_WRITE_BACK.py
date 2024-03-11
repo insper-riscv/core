@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -12,14 +13,10 @@ class MODULE_WRITE_BACK(utils.DUT):
     CHILDREN = [GENERIC_MUX_2X1]
 
 
-@cocotb.test()
-async def tb_MODULE_WRITE_BACK(dut: MODULE_WRITE_BACK):
-    pass
-
-
-def test_MODULE_WRITE_BACK():
-    MODULE_WRITE_BACK.test_with(tb_MODULE_WRITE_BACK)
+def test_MODULE_WRITE_BACK_syntesis():
+    MODULE_WRITE_BACK.build_vhd()
+    MODULE_WRITE_BACK.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_MODULE_WRITE_BACK()
+    pytest.main(["-k", f"test_MODULE_WRITE_BACK"])
