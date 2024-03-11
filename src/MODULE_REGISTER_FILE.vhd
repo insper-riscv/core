@@ -27,7 +27,7 @@ architecture RTL of MODULE_REGISTER_FILE is
 
 begin   
 
-    REGISTER_BANK : entity WORK.GENERIC_REGISTER_FILE
+    REGISTER_BANK : entity WORK.RV32I_REGISTER_FILE
         port map (
             clock               => clock,
             enable              => enable,
