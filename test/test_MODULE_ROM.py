@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -12,14 +13,10 @@ class MODULE_ROM(utils.DUT):
     CHILDREN = [GENERIC_ROM]
 
 
-@cocotb.test()
-async def tb_MODULE_ROM(dut: MODULE_ROM):
-    pass
-
-
-def test_MODULE_ROM():
-    MODULE_ROM.test_with(tb_MODULE_ROM)
+def test_MODULE_ROM_syntesis():
+    MODULE_ROM.build_vhd()
+    MODULE_ROM.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_MODULE_ROM()
+    pytest.main(["-k", f"test_MODULE_ROM"])
