@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -10,17 +11,14 @@ from test_GENERIC_FLIP_FLOP import GENERIC_FLIP_FLOP
 
 
 class GENERIC_ROM(utils.DUT):
-    pass
+    address: utils.DUT.Input_pin
+    destination: utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_ROM(dut: GENERIC_ROM):
-    pass
-
-
-def test_GENERIC_ROM():
-    GENERIC_ROM.test_with(tb_GENERIC_ROM)
+def test_GENERIC_ROM_syntesis():
+    GENERIC_ROM.build_vhd()
+    GENERIC_ROM.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_GENERIC_ROM()
+    pytest.main(["-k", f"test_GENERIC_ROM"])
