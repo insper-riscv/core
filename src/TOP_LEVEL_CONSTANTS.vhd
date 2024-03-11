@@ -190,7 +190,7 @@ end package;
 
 package body TOP_LEVEL_CONSTANTS is
 
-    function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION is
+    function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE)) return t_RV32I_INSTRUCTION is
         variable out_vec: t_RV32I_INSTRUCTION;
         variable immediate_i: std_logic_vector(XLEN_RANGE);
         variable immediate_s: std_logic_vector(XLEN_RANGE);
