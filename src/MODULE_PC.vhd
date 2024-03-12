@@ -16,7 +16,6 @@ entity MODULE_PC is
         jump_address : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         selector     : in  std_logic;
         enable       : in  std_logic;
-        --pc           : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -24,9 +23,9 @@ end entity;
 
 architecture RTL of MODULE_PC is
 
-        signal adder_out : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal mux_out   : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal pc_out    : std_logic_vector((DATA_WIDTH - 1) downto 0);
+        signal adder_out      : std_logic_vector((DATA_WIDTH - 1) downto 0);
+        signal mux_out        : std_logic_vector((DATA_WIDTH - 1) downto 0);
+        signal pc_destination : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin   
 
@@ -44,16 +43,16 @@ begin
             clear       => '0',
             enable      => enable,
             source      => mux_out,
-            destination => pc_out
+            destination => pc_destination
         );
 
     ADDER : entity WORK.GENERIC_ADDER
         port map (
-            source_1    => pc_out,
+            source_1    => pc_destination,
             source_2    => std_logic_vector(to_unsigned(4, 32)),
             destination => adder_out
         );
 
-    destination <= pc_out;
+    destination <= pc_destination;
 
 end architecture;

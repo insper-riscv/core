@@ -21,7 +21,8 @@ end entity;
 
 architecture RTL of STAGE_IF is
 
-        signal pc : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal enable_pc : std_logic := NOT(source.enable_stall);
+    signal pc        : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
@@ -30,8 +31,7 @@ begin
             clock        => clock,
             jump_address => source.source,
             selector     => source.select_source_pc,
-            enable       => source.enable_stall,
-            --pc           => destination.pc,
+            enable       => enable_pc,
             destination  => pc
         );
 

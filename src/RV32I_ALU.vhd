@@ -18,7 +18,6 @@ entity RV32I_ALU is
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
-        --flag_z          : out std_logic
     );
 
 end entity;
@@ -28,7 +27,7 @@ architecture CPU of RV32I_ALU is
     --constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
 
     signal result   : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal carry    : std_logic_vector(DATA_WIDTH downto 0);
+    signal carry    : std_logic_vector( DATA_WIDTH      downto 0);
     signal slt      : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
     signal overflow : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
@@ -36,6 +35,7 @@ begin
 
     carry(0) <= invert_source_1 XOR invert_source_2;
     slt(0)   <= overflow(DATA_WIDTH - 1);
+    slt((DATA_WIDTH - 1) downto 1) <= (others => '0');
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
         FOR_BIT : entity WORK.RV32I_ALU_BIT

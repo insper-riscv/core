@@ -6,7 +6,7 @@ library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity RV32I_INSTRUCTION_DECODER is
-  
+
     port (
         instruction : in  std_logic_vector(INSTRUCTION_RANGE);
         control_if  : out t_IF_SIGNALS;
@@ -14,64 +14,67 @@ entity RV32I_INSTRUCTION_DECODER is
         control_ex  : out t_EX_SIGNALS;
         control_mem : out t_MEM_SIGNALS;
         control_wb  : out t_WB_SIGNALS;
-        immediate   : out std_logic_vector(INSTRUCTION_RANGE) := (others => '0')
+        immediate   : out std_logic_vector(INSTRUCTION_RANGE)
     );
 
 end entity;
 
 architecture RTL of RV32I_INSTRUCTION_DECODER is
 
-    shared variable rv32i_instruction : t_RV32I_INSTRUCTION := to_RV32I_INSTRUCTION(instruction);
-    signal instruction_type : RV32I_INSTRUCTION_TYPE;
+    signal rv32i_instruction : t_RV32I_INSTRUCTION;
 
 begin
 
-    instruction_type <= RV32I_INSTRUCTION_R_TYPE when instruction(OPCODE_COMPACT_RANGE) = OPCODE_OP(OPCODE_COMPACT_RANGE) else
-                        RV32I_INSTRUCTION_I_TYPE when instruction(OPCODE_COMPACT_RANGE) = OPCODE_JALR(OPCODE_COMPACT_RANGE) or
-                                                      instruction(OPCODE_COMPACT_RANGE) = OPCODE_LOAD(OPCODE_COMPACT_RANGE) or
-                                                      instruction(OPCODE_COMPACT_RANGE) = OPCODE_OP_IMM(OPCODE_COMPACT_RANGE) or
-                                                      instruction(OPCODE_COMPACT_RANGE) = OPCODE_SYNCH(OPCODE_COMPACT_RANGE) or
-                                                      instruction(OPCODE_COMPACT_RANGE) = OPCODE_SYSTEM(OPCODE_COMPACT_RANGE) else
-                        RV32I_INSTRUCTION_S_TYPE when instruction(OPCODE_COMPACT_RANGE) = OPCODE_STORE(OPCODE_COMPACT_RANGE) else
-                        RV32I_INSTRUCTION_B_TYPE when instruction(OPCODE_COMPACT_RANGE) = OPCODE_BRANCH(OPCODE_COMPACT_RANGE) else
-                        RV32I_INSTRUCTION_U_TYPE when instruction(OPCODE_COMPACT_RANGE) = OPCODE_LUI(OPCODE_COMPACT_RANGE) or 
-                                                      instruction(OPCODE_COMPACT_RANGE) = OPCODE_AUIPC(OPCODE_COMPACT_RANGE) else
-                        RV32I_INSTRUCTION_J_TYPE when instruction(OPCODE_COMPACT_RANGE) = OPCODE_JAL(OPCODE_COMPACT_RANGE);
+    process(instruction, rv32i_instruction) is
+    begin
+        rv32i_instruction <= to_RV32I_INSTRUCTION(instruction);
+    end process;
 
-    --control_if.enable_flush     <= ;
-    control_if.enable_jump      <= '1' when (instruction_type = RV32I_INSTRUCTION_J_TYPE) else
+    control_if.enable_stall     <= '0';
+    control_if.enable_flush     <= '0';
+    control_if.enable_jump      <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                                    '0';
-    --control_if.select_source_pc <= ;
+    control_if.select_source_pc <= '0';
+    control_if.source           <= (others => '0');
 
-    control_id.enable_jump     <= '1' when (instruction_type = RV32I_INSTRUCTION_J_TYPE) else
+    control_id.select_jump     <= '0';
+    control_id.enable_jump     <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                                   '0';
-    --control_id.select_jump     <= ;
-    --control_id.enable_flush_id <= ;
-    --control_id.enable_flux_ex  <= ;
+    control_id.enable_flush_id <= '0';
+    control_id.enable_flux_ex  <= '0';
 
-    control_ex.select_source_1  <= "01" when (instruction(OPCODE_COMPACT_RANGE) = OPCODE_AUIPC) else
-                                   "10" when (instruction(OPCODE_COMPACT_RANGE) = OPCODE_LUI(OPCODE_COMPACT_RANGE)) else
+    control_ex.select_source_1  <= "01" when (rv32i_instruction.opcode = OPCODE_AUIPC(OPCODE_RANGE)) else
+                                   "10" when (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE)) else
                                    "00";
-    control_ex.select_source_2  <= "01" when (instruction_type = RV32I_INSTRUCTION_I_TYPE or 
-                                              instruction(OPCODE_COMPACT_RANGE) = OPCODE_LUI(OPCODE_COMPACT_RANGE)) else
+    control_ex.select_source_2  <= "01" when (
+                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) or 
+                                       (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                   ) else
                                    "00";
-    --control_ex.select_operation <= ;
+    control_ex.select_operation <= (others => '0');
 
 
-    control_mem.enable_read  <= '1' when (instruction(OPCODE_COMPACT_RANGE) = OPCODE_LOAD) else
+    control_mem.enable_read  <= '1' when (rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE)) else
                                 '0';
-    control_mem.enable_write <= '1' when (instruction_type = RV32I_INSTRUCTION_R_TYPE) else
+    control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) else
                                 '0';
 
-    control_wb.enable_registers   <= '1' when (instruction_type = RV32I_INSTRUCTION_R_TYPE) or 
-                                               instruction(OPCODE_COMPACT_RANGE) = OPCODE_LUI(OPCODE_COMPACT_RANGE) else
+    control_wb.enable_registers   <= '1' when (
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
+                                         (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                     ) else
                                      '0';
-    control_wb.select_destination <= '1' when (instruction(OPCODE_COMPACT_RANGE) = OPCODE_LOAD or 
-                                               instruction(OPCODE_COMPACT_RANGE) = OPCODE_LUI(OPCODE_COMPACT_RANGE)) else
+    control_wb.select_destination <= '1' when (
+                                         (rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE)) or 
+                                         (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                     ) else
                                      '0';
 
-    immediate(31 downto 12) <= instruction(31 downto 12) when instruction_type = RV32I_INSTRUCTION_U_TYPE;
-    immediate(11 downto 0) <= (others => '0') when instruction_type = RV32I_INSTRUCTION_U_TYPE;
-
+    immediate <= rv32i_instruction.immediate_i when (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) else
+                 rv32i_instruction.immediate_s when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else
+                 rv32i_instruction.immediate_b when (rv32i_instruction.encoding = RV32I_INSTRUCTION_B_TYPE) else
+                 rv32i_instruction.immediate_u when (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE) else
+                 rv32i_instruction.immediate_j when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
+                 (others => '0');
 
 end architecture;

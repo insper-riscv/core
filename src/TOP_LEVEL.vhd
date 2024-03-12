@@ -27,7 +27,6 @@ architecture RTL of TOP_LEVEL is
         signal address_destination   : std_logic_vector(4 downto 0);
         signal data_destination      : std_logic_vector(XLEN_RANGE);
 
-
 begin
 
     LED(0) <= SW(1);
@@ -69,7 +68,6 @@ begin
             enable           => enable_reg_file_write,
             address_register => address_destination,
             destination      => data_destination
-
         );
 
     destination <= data_destination;
