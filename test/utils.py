@@ -58,18 +58,21 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
 
         print(True, os.getcwd())
 
-        subprocess.call(
+        exit_code = subprocess.call(
             [
                 "yosys",
                 "-m",
                 "ghdl",
                 "-p",
-                f"ghdl --work=top {entity}; prep -top {cls.__name__}; write_json -compat-int {entity}.json",
+                f"ghdl --work=top {entity}; prep -top {cls.__name__}; aigmap; write_json -compat-int {entity}.json",
             ],
             cwd="sim_build",
         )
 
-        subprocess.call(
+        if exit_code != 0:
+            raise SystemError("Failed to build synthesis!")
+
+        exit_code = subprocess.call(
             [
                 "netlistsvg",
                 f"{entity}.json",
@@ -78,6 +81,9 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
             ],
             cwd="sim_build",
         )
+
+        if exit_code != 0:
+            raise SystemError("Failed to build NetList SVG!")
 
     @classmethod
     def test_with(
