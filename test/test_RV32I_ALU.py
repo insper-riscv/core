@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -123,42 +124,23 @@ async def tb_RV32I_ALU_case_8(dut: RV32I_ALU):
     await Timer(Decimal(1), units="ns")
 
 
-def test_RV32I_ALU_syntesis():
+def test_RV32I_ALU_synthesis():
     RV32I_ALU.build_vhd()
-    #RV32I_ALU.build_netlistsvg()
+    RV32I_ALU.build_netlistsvg()
 
 
-def test_RV32I_ALU_case_1():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_1)
-
-
-def test_RV32I_ALU_case_2():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_2)
-
-
-def test_RV32I_ALU_case_3():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_3)
-
-
-def test_RV32I_ALU_case_4():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_4)
-
-
-def test_RV32I_ALU_case_5():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_5)
-
-
-def test_RV32I_ALU_case_6():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_6)
-
-
-def test_RV32I_ALU_case_7():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_7)
-
-
-def test_RV32I_ALU_case_8():
-    RV32I_ALU.test_with(tb_RV32I_ALU_case_8)
+def test_RV32I_ALU_testcases():
+    RV32I_ALU.test_with([
+        tb_RV32I_ALU_case_1,
+        tb_RV32I_ALU_case_2,
+        tb_RV32I_ALU_case_3,
+        tb_RV32I_ALU_case_4,
+        tb_RV32I_ALU_case_5,
+        tb_RV32I_ALU_case_6,
+        tb_RV32I_ALU_case_7,
+        tb_RV32I_ALU_case_8,
+    ])
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_RV32I_ALU"])
+    pytest.main(["-k", os.path.basename(__file__)])

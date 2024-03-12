@@ -13,7 +13,7 @@ class STAGE_ID(utils.DUT):
     CHILDREN = [MODULE_REGISTER_FILE, MODULE_CONTROL_UNIT]
 
 
-def test_STAGE_ID_syntesis():
+def test_STAGE_ID_synthesis():
     STAGE_ID.build_vhd()
     #STAGE_ID.build_netlistsvg()
 

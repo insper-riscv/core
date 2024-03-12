@@ -72,7 +72,7 @@ async def tb_GENERIC_MUX_4X1_case_4(dut: GENERIC_MUX_4X1):
     await Timer(Decimal(1), units="ns")
 
 
-def test_GENERIC_MUX_4X1_syntesis():
+def test_GENERIC_MUX_4X1_synthesis():
     GENERIC_MUX_4X1.build_vhd()
     #GENERIC_MUX_4X1.build_netlistsvg()
 

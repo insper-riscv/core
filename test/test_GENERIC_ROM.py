@@ -24,7 +24,7 @@ async def tb_GENERIC_ROM_case_1(dut: "GENERIC_ROM"):
 
     await Timer(Decimal(1), units="ns")
 
-def test_GENERIC_ROM_syntesis():
+def test_GENERIC_ROM_synthesis():
     GENERIC_ROM.build_vhd()
     #GENERIC_ROM.build_netlistsvg()
 

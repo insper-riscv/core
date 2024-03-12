@@ -47,7 +47,7 @@ async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR):
         await RisingEdge(dut.clock)
 
 
-def test_GENERIC_EDGE_DETECTOR_syntesis():
+def test_GENERIC_EDGE_DETECTOR_synthesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
     #GENERIC_EDGE_DETECTOR.build_netlistsvg()
 

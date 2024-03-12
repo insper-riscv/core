@@ -52,7 +52,7 @@ async def tb_MODULE_ALU_CONTROLLER_case_3(dut: "MODULE_ALU_CONTROLLER"):
 
     await Timer(Decimal(1), units="ns")
 
-def test_MODULE_ALU_CONTROLLER_syntesis():
+def test_MODULE_ALU_CONTROLLER_synthesis():
     MODULE_ALU_CONTROLLER.build_vhd()
     #MODULE_ALU_CONTROLLER.build_netlistsvg()
 

@@ -14,7 +14,7 @@ class STAGE_EX(utils.DUT):
     CHILDREN = [MODULE_ALU, MODULE_ALU_CONTROLLER]
 
 
-def test_STAGE_EX_syntesis():
+def test_STAGE_EX_synthesis():
     STAGE_EX.build_vhd()
     #STAGE_EX.build_netlistsvg()
 

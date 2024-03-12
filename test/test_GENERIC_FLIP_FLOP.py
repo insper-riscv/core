@@ -40,7 +40,7 @@ async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP):
         await Timer(Decimal(20000), units="ns")
 
 
-def test_GENERIC_FLIP_FLOP_syntesis():
+def test_GENERIC_FLIP_FLOP_synthesis():
     GENERIC_FLIP_FLOP.build_vhd()
     #GENERIC_FLIP_FLOP.build_netlistsvg()
 

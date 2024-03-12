@@ -13,7 +13,7 @@ class STAGE_MEM(utils.DUT):
     CHILDREN = [MODULE_MEMORY]
 
 
-def test_STAGE_MEM_syntesis():
+def test_STAGE_MEM_synthesis():
     STAGE_MEM.build_vhd()
     #STAGE_MEM.build_netlistsvg()
 

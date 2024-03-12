@@ -14,7 +14,7 @@ class STAGE_IF(utils.DUT):
     CHILDREN = [MODULE_PC, MODULE_ROM]
 
 
-def test_STAGE_IF_syntesis():
+def test_STAGE_IF_synthesis():
     STAGE_IF.build_vhd()
     #STAGE_IF.build_netlistsvg()
 

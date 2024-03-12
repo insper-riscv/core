@@ -13,7 +13,7 @@ class MODULE_WRITE_BACK(utils.DUT):
     CHILDREN = [GENERIC_MUX_2X1]
 
 
-def test_MODULE_WRITE_BACK_syntesis():
+def test_MODULE_WRITE_BACK_synthesis():
     MODULE_WRITE_BACK.build_vhd()
     #MODULE_WRITE_BACK.build_netlistsvg()
 

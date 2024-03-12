@@ -18,9 +18,9 @@ class RV32I_INSTRUCTION_DECODER(utils.DUT):
     immediate: utils.DUT.Output_pin
 
 
-def test_RV32I_INSTRUCTION_DECODER_syntesis():
+def test_RV32I_INSTRUCTION_DECODER_synthesis():
     RV32I_INSTRUCTION_DECODER.build_vhd()
-    #RV32I_INSTRUCTION_DECODER.build_netlistsvg()
+    RV32I_INSTRUCTION_DECODER.build_netlistsvg()
 
 
 if __name__ == "__main__":

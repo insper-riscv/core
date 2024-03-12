@@ -79,7 +79,7 @@ async def tb_MODULE_MEMORY_case_1(dut: MODULE_MEMORY):
         await Timer(Decimal(20000), units="ns")
 
 
-def test_MODULE_MEMORY_syntesis():
+def test_MODULE_MEMORY_synthesis():
     MODULE_MEMORY.build_vhd()
     #MODULE_MEMORY.build_netlistsvg()
 

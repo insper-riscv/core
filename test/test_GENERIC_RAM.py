@@ -78,7 +78,7 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM):
         await Timer(Decimal(20000), units="ns")
 
 
-def test_GENERIC_RAM_syntesis():
+def test_GENERIC_RAM_synthesis():
     GENERIC_RAM.build_vhd()
     #GENERIC_RAM.build_netlistsvg()
 

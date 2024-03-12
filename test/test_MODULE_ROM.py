@@ -13,7 +13,7 @@ class MODULE_ROM(utils.DUT):
     CHILDREN = [GENERIC_ROM]
 
 
-def test_MODULE_ROM_syntesis():
+def test_MODULE_ROM_synthesis():
     MODULE_ROM.build_vhd()
     #MODULE_ROM.build_netlistsvg()
 

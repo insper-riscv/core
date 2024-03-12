@@ -13,7 +13,7 @@ class STAGE_WB(utils.DUT):
     CHILDREN = [MODULE_WRITE_BACK]
 
 
-def test_STAGE_WB_syntesis():
+def test_STAGE_WB_synthesis():
     STAGE_WB.build_vhd()
     #STAGE_WB.build_netlistsvg()
 

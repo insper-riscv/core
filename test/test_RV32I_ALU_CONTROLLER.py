@@ -64,7 +64,7 @@ async def tb_RV32I_ALU_CONTROLLER_case_4(dut: "RV32I_ALU_CONTROLLER"):
     await Timer(Decimal(1), units="ns")
 
 
-def test_RV32I_ALU_CONTROLLER_syntesis():
+def test_RV32I_ALU_CONTROLLER_synthesis():
     RV32I_ALU_CONTROLLER.build_vhd()
     #RV32I_ALU_CONTROLLER.build_netlistsvg()
 

@@ -52,7 +52,7 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER):
         await Timer(Decimal(20000), units="ns")
 
 
-def test_GENERIC_REGISTER_syntesis():
+def test_GENERIC_REGISTER_synthesis():
     GENERIC_REGISTER.build_vhd()
     #GENERIC_REGISTER.build_netlistsvg()
 

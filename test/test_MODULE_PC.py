@@ -58,7 +58,7 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC):
         await Timer(Decimal(20000), units="ns")
         utils.assert_output(dut.destination, destination, f"At clock {index}.")
 
-def test_MODULE_PC_syntesis():
+def test_MODULE_PC_synthesis():
     MODULE_PC.build_vhd()
     #MODULE_PC.build_netlistsvg()
 

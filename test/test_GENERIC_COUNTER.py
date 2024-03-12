@@ -49,7 +49,7 @@ async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER):
     utils.assert_output(dut.state, "0")
 
 
-def test_GENERIC_COUNTER_syntesis():
+def test_GENERIC_COUNTER_synthesis():
     GENERIC_COUNTER.build_vhd()
     #GENERIC_COUNTER.build_netlistsvg()
 

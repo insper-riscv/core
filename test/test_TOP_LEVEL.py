@@ -50,7 +50,7 @@ async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL):
         await FallingEdge(dut.CLOCK)
 
 
-def test_TOP_LEVEL_syntesis():
+def test_TOP_LEVEL_synthesis():
     TOP_LEVEL.build_vhd()
     #TOP_LEVEL.build_netlistsvg()
 

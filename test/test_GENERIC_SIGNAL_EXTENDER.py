@@ -14,7 +14,7 @@ class GENERIC_SIGNAL_EXTENDER(utils.DUT):
     destination: utils.DUT.Output_pin
 
 
-def test_GENERIC_SIGNAL_EXTENDER_syntesis():
+def test_GENERIC_SIGNAL_EXTENDER_synthesis():
     GENERIC_SIGNAL_EXTENDER.build_vhd()
     #GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
 

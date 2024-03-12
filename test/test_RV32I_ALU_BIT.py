@@ -157,7 +157,7 @@ async def tb_RV32I_ALU_BIT_case_8(dut: RV32I_ALU_BIT):
     await Timer(Decimal(1), units="ns")
 
 
-def test_RV32I_ALU_BIT_syntesis():
+def test_RV32I_ALU_BIT_synthesis():
     RV32I_ALU_BIT.build_vhd()
     #RV32I_ALU_BIT.build_netlistsvg()
 

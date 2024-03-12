@@ -62,7 +62,7 @@ async def tb_GENERIC_ADDER_case_4(dut: "GENERIC_ADDER"):
     await Timer(Decimal(1), units="ns")
 
 
-def test_GENERIC_ADDER_syntesis():
+def test_GENERIC_ADDER_synthesis():
     GENERIC_ADDER.build_vhd()
     #GENERIC_ADDER.build_netlistsvg()
 
