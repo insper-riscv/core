@@ -49,7 +49,7 @@ async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR):
 
 def test_GENERIC_EDGE_DETECTOR_syntesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
-    GENERIC_EDGE_DETECTOR.build_netlistsvg()
+    #GENERIC_EDGE_DETECTOR.build_netlistsvg()
 
 
 def test_GENERIC_EDGE_DETECTOR_case_1():

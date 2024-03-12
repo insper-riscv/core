@@ -31,7 +31,7 @@ begin
             jump_address => source.source,
             selector     => source.select_source_pc,
             enable       => source.enable_stall,
-            pc           => destination.pc,
+            --pc           => destination.pc,
             destination  => pc
         );
 
@@ -40,5 +40,7 @@ begin
             pc           => pc,
             destination  => destination.instruction
         );
+
+    destination.pc <= pc;
 
 end architecture;

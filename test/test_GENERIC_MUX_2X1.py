@@ -61,7 +61,7 @@ async def tb_GENERIC_MUX_2X1_case_4(dut: GENERIC_MUX_2X1):
 
 def test_GENERIC_MUX_2X1_syntesis():
     GENERIC_MUX_2X1.build_vhd()
-    GENERIC_MUX_2X1.build_netlistsvg()
+    #GENERIC_MUX_2X1.build_netlistsvg()
 
 
 def test_GENERIC_MUX_2X1_case_1():

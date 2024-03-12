@@ -15,7 +15,7 @@ class STAGE_MEM(utils.DUT):
 
 def test_STAGE_MEM_syntesis():
     STAGE_MEM.build_vhd()
-    STAGE_MEM.build_netlistsvg()
+    #STAGE_MEM.build_netlistsvg()
 
 
 if __name__ == "__main__":

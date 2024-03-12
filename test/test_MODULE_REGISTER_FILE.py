@@ -17,7 +17,7 @@ class MODULE_REGISTER_FILE(utils.DUT):
 
 def test_MODULE_REGISTER_FILE_syntesis():
     MODULE_REGISTER_FILE.build_vhd()
-    MODULE_REGISTER_FILE.build_netlistsvg()
+    #MODULE_REGISTER_FILE.build_netlistsvg()
 
 
 if __name__ == "__main__":

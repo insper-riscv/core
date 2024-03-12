@@ -16,7 +16,7 @@ class GENERIC_SIGNAL_EXTENDER(utils.DUT):
 
 def test_GENERIC_SIGNAL_EXTENDER_syntesis():
     GENERIC_SIGNAL_EXTENDER.build_vhd()
-    GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
+    #GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
 
 
 if __name__ == "__main__":

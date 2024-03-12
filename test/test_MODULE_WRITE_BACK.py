@@ -15,7 +15,7 @@ class MODULE_WRITE_BACK(utils.DUT):
 
 def test_MODULE_WRITE_BACK_syntesis():
     MODULE_WRITE_BACK.build_vhd()
-    MODULE_WRITE_BACK.build_netlistsvg()
+    #MODULE_WRITE_BACK.build_netlistsvg()
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ entity MODULE_PC is
         jump_address : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         selector     : in  std_logic;
         enable       : in  std_logic;
-        pc           : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        --pc           : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 

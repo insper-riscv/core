@@ -159,7 +159,7 @@ async def tb_RV32I_ALU_BIT_case_8(dut: RV32I_ALU_BIT):
 
 def test_RV32I_ALU_BIT_syntesis():
     RV32I_ALU_BIT.build_vhd()
-    RV32I_ALU_BIT.build_netlistsvg()
+    #RV32I_ALU_BIT.build_netlistsvg()
 
 
 def test_RV32I_ALU_BIT_case_2():

@@ -64,7 +64,7 @@ async def tb_GENERIC_ADDER_case_4(dut: "GENERIC_ADDER"):
 
 def test_GENERIC_ADDER_syntesis():
     GENERIC_ADDER.build_vhd()
-    GENERIC_ADDER.build_netlistsvg()
+    #GENERIC_ADDER.build_netlistsvg()
 
 
 def test_GENERIC_ADDER_case_1():

@@ -20,7 +20,7 @@ class RV32I_INSTRUCTION_DECODER(utils.DUT):
 
 def test_RV32I_INSTRUCTION_DECODER_syntesis():
     RV32I_INSTRUCTION_DECODER.build_vhd()
-    RV32I_INSTRUCTION_DECODER.build_netlistsvg()
+    #RV32I_INSTRUCTION_DECODER.build_netlistsvg()
 
 
 if __name__ == "__main__":

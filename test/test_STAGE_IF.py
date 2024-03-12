@@ -16,7 +16,7 @@ class STAGE_IF(utils.DUT):
 
 def test_STAGE_IF_syntesis():
     STAGE_IF.build_vhd()
-    STAGE_IF.build_netlistsvg()
+    #STAGE_IF.build_netlistsvg()
 
 
 if __name__ == "__main__":

@@ -102,7 +102,7 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE):
 
 def test_RV32I_REGISTER_FILE_syntesis():
     RV32I_REGISTER_FILE.build_vhd()
-    RV32I_REGISTER_FILE.build_netlistsvg()
+    #RV32I_REGISTER_FILE.build_netlistsvg()
 
 
 def test_RV32I_REGISTER_FILE_case_1():

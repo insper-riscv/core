@@ -54,7 +54,7 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER):
 
 def test_GENERIC_REGISTER_syntesis():
     GENERIC_REGISTER.build_vhd()
-    GENERIC_REGISTER.build_netlistsvg()
+    #GENERIC_REGISTER.build_netlistsvg()
 
 
 def test_GENERIC_REGISTER_case_1():

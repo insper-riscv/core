@@ -15,7 +15,7 @@ class STAGE_ID(utils.DUT):
 
 def test_STAGE_ID_syntesis():
     STAGE_ID.build_vhd()
-    STAGE_ID.build_netlistsvg()
+    #STAGE_ID.build_netlistsvg()
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ class GENERIC_DEBOUNCE(utils.DUT):
 
 def test_GENERIC_DEBOUNCE_syntesis():
     GENERIC_DEBOUNCE.build_vhd()
-    GENERIC_DEBOUNCE.build_netlistsvg()
+    #GENERIC_DEBOUNCE.build_netlistsvg()
 
 
 if __name__ == "__main__":

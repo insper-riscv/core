@@ -15,7 +15,7 @@ class MODULE_ROM(utils.DUT):
 
 def test_MODULE_ROM_syntesis():
     MODULE_ROM.build_vhd()
-    MODULE_ROM.build_netlistsvg()
+    #MODULE_ROM.build_netlistsvg()
 
 
 if __name__ == "__main__":

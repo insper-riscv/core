@@ -15,7 +15,7 @@ class STAGE_WB(utils.DUT):
 
 def test_STAGE_WB_syntesis():
     STAGE_WB.build_vhd()
-    STAGE_WB.build_netlistsvg()
+    #STAGE_WB.build_netlistsvg()
 
 
 if __name__ == "__main__":

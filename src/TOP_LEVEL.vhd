@@ -8,9 +8,10 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity TOP_LEVEL is
 
     port (
-        CLOCK : in  std_logic;
-        SW    : in std_logic_vector(3 downto 0);
-        LED   : out std_logic_vector(7 downto 0)
+        CLOCK       : in  std_logic;
+        SW          : in std_logic_vector(3 downto 0) := (others => '0');
+        LED         : out std_logic_vector(7 downto 0) := (others => '0');
+        destination : out std_logic_vector(XLEN_RANGE)
     );
 
 end entity;
@@ -70,5 +71,7 @@ begin
             destination      => data_destination
 
         );
+
+    destination <= data_destination;
 
 end architecture;

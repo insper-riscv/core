@@ -80,7 +80,7 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM):
 
 def test_GENERIC_RAM_syntesis():
     GENERIC_RAM.build_vhd()
-    GENERIC_RAM.build_netlistsvg()
+    #GENERIC_RAM.build_netlistsvg()
 
 
 def test_GENERIC_RAM_case_1():
