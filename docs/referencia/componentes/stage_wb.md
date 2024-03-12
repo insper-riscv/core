@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Escrita de Resposta
-
-`STAGE_WB.vhd`
+# Escrita de Resposta <Badge type="info" text="STAGE_WB.vhd"/>
 
 ::: danger TO DO
 

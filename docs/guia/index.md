@@ -1,30 +1,107 @@
-# Desenvolvimento de RISC-V para Aplicações Aeroespaciais
+<script setup>
+import { VPTeamMembers } from 'vitepress/theme'
+</script>
 
-![](/public/images/capa_ilustrativa.jpg)  
+# Sobre
 
-## Introdução
+O objetivo central deste projeto é o desenvolvimento de uma Propriedade
+Intelectual (IP) de um processador baseado na arquitetura RISC-V,
+especificamente para aplicações aeroespaciais. O design do hardware deve ser
+modular, permitindo sua adaptação a uma variedade de cenários operacionais. O
+processador será inicialmente testado em uma FPGA Intel. É crucial que o
+processador seja capaz de suportar a execução de um sistema operacional de tempo
+real, garantindo eficiência e confiabilidade em ambientes aeroespaciais. Além
+disso, o projeto incluirá a realização de testes de unidade e integração
+detalhados para assegurar a qualidade e a funcionalidade do processador em todas
+as etapas de desenvolvimento.
 
-O Projeto Final de Engenharia (PFE) é uma disciplina obrigatória aos alunos do
-oitavo semestre dos cursos de graduação em Engenharia do Insper Instituto de
-Ensino e Pesquisa. Em parceria com o Centro de Tecnologia da Informação Renato
-Archer, unidade de pesquisa do Ministério da Ciência, Tecnologia e Inovação do
-Poder Executivo Federal do Brasil, o PFE propôs o projeto da implementação de um
-microcontrolador com núcleo de processamento baseado na arquitetura RISC-V para
-o uso em projetos aeroespaciais nacionais.
+<script>
+const a = {
+  members24_1: [
+    {
+      avatar: "https://media.licdn.com/dms/image/C5103AQEOCjELDx5ajA/profile-displayphoto-shrink_800_800/0/1517465490173?e=1714003200&v=beta&t=8ZRnaxdyEzryRQViqNk6_-B4G72lMULu5xFGh4tfId8",
+      name: "Rafael Corsi",
+      title: "Orientador",
+      links: [
+        {
+          icon: "linkedin",
+          link: "https://www.linkedin.com/in/rafael-corsi-ferrão-624238116/"
+        }, {
+          icon: "github",
+          link: "https://github.com/rafaelcorsi"
+        }
+      ]
+    }, {
+      avatar: "https://media.licdn.com/dms/image/C4E03AQEpCgpnDSn1Rg/profile-displayphoto-shrink_400_400/0/1617900258233?e=1714003200&v=beta&t=3E9dMYeFAvXG_k_Ktv9598Qnim9UO1141zZQCum2mGI",
+      name: "Giancarlo Ruggiero",
+      title: "Desenvolvedor",
+      links: [
+        {
+          icon: "linkedin",
+          link: "https://www.linkedin.com/in/giancarlo-vr/"
+        }, {
+          icon: "github",
+          link: "https://github.com/gianvr"
+        }
+      ]
+    }, {
+      avatar: "https://media.licdn.com/dms/image/D4D03AQGHydd8FnBOdA/profile-displayphoto-shrink_400_400/0/1707877218390?e=1714003200&v=beta&t=OqbtDvw0qaaZ7Lx7iykHOWjNEAe5KISyyJstXY6Omjk",
+      name: "Luciano Felix",
+      title: "Desenvolvedor",
+      links: [
+        {
+          icon: "linkedin",
+          link: "https://www.linkedin.com/in/luciano-felix/"
+        }, {
+          icon: "github",
+          link: "https://github.com/FelixLuciano"
+        }
+      ]
+    }, {
+      avatar: "https://media.licdn.com/dms/image/D4E03AQFt5YSf5FbxKg/profile-displayphoto-shrink_200_200/0/1666467108985?e=2147483647&v=beta&t=b0XQGht56s_SqQ4i46sv17sWOQ9g3Bbtv8yh1XFbKtg",
+      name: "Tiago Seixas",
+      title: "Desenvolvedor",
+      links: [
+        {
+          icon: "linkedin",
+          link: "https://www.linkedin.com/in/tiago-seixas-bb9614254/"
+        }, {
+          icon: "github",
+          link: "https://github.com/TiagoSeixas2103"
+        }
+      ]
+    },
+  ],
+  org: [
+    {
+      avatar: "https://media.licdn.com/dms/image/C4D0BAQF6iPH2r0sRCA/company-logo_200_200/0/1630470864507/cti_renato_archer_logo?e=1716422400&v=beta&t=IXE8hu6bInWiNoIVn--Z6Cm4Hd-5ywIkS6h6Txvzb0w",
+      name: "CTI Renato Archer",
+      title: "Realização",
+      links: [
+        {
+          icon: "linkedin",
+          link: "https://www.linkedin.com/company/cti-renato-archer/"
+        }
+      ]
+    }, {
+      avatar: "https://media.licdn.com/dms/image/D4E03AQG3diHhspG70w/profile-displayphoto-shrink_800_800/0/1665021953301?e=1714003200&v=beta&t=4G8s6U3TEc9sP6ziTJSFfIQnScdIDrYayt5sHjwIij8",
+      name: "Saulo Finco",
+      title: "Mentor",
+      links: [
+        {
+          icon: "linkedin",
+          link: "https://www.linkedin.com/in/saulofinco"
+        }
+      ]
+    }
+  ],
+}
+</script>
 
-Saulo Finco é o coordenador responsável pelo projeto com o CTI, e Rafael Corsi é
-o professor orientador no Insper. As atividades foram conduzidas ao longo do
-período letivo do primeiro semestre de 2024.
+## Organização
 
-## Resumo
+<VPTeamMembers :members="a.org" />
 
-O objetivo deste projeto é desenvolver um processador RISC-V para aplicações
-aeroespaciais, garantindo sua qualidade por meio de uma pipeline CI/CD, que é
-uma prática de automação onde o processo de desenvolvimento está separado em
-etapas.
+## Equipe PFE 2024.1
 
-## Referências
-
-- Edington, A. A.; Domingues, B. S.; Vale, L. L.; Santos, R. D. **Conformance
-  Tester for Tags EPC-GEN2 UHF RFID**. Insper, 2021. Available at:
-  https://pfeinsper.github.io/21b-indago-rfid-conformance-tester/
+<VPTeamMembers :members="a.members24_1" />

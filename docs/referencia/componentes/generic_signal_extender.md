@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Extensor de Sinal
-
-`GENERIC_SIGNAL_EXTENDER.vhd`
+# Extensor de Sinal <Badge type="info" text="GENERIC_SIGNAL_EXTENDER.vhd"/>
 
 ::: danger TO DO
 
@@ -32,11 +30,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_signal_extender_netlist.svg" alt="Diagrama de RTL do extensor de sinal" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Registrador
-
-`GENERIC_REGISTER.vhd`
+# Registrador <Badge type="info" text="GENERIC_REGISTER.vhd"/>
 
 ![Diagrama de portas do registrador](../../public/images/referencia/componentes/generic_register.drawio.svg)
 
@@ -65,11 +63,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_register_netlist.svg" alt="Diagrama de RTL do registrador" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

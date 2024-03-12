@@ -2,7 +2,7 @@
 outline: 2
 ---
 
-# Unidade Lógia Aritmética <Badge type="info" text="RV32I_ALU.vhd"/>
+# Memória <Badge type="info" text="MODULE_MEMORY.vhd"/>
 
 ::: danger TO DO
 
@@ -10,7 +10,7 @@ Diagrama de portas
 
 :::
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU.vhd).
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_MEMORY.vhd).
 
 ## Interface genérica
 
@@ -24,7 +24,7 @@ Work in progress.
 
 ::: danger TO DO
 
-Work in progress.
+Diagrama a nível de registradores
 
 :::
 
@@ -38,8 +38,8 @@ Diagrama a nível de registradores
 
 ## Casos de teste
 
-`test_RV32I_ALU.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_ALU.py).
+`test_MODULE_MEMORY.py`.
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_MODULE_MEMORY.py).
 
 ::: danger TO DO
 

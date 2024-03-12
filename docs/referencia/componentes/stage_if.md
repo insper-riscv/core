@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Busca Instrução
-
-`STAGE_IF.vhd`
+# Busca Instrução <Badge type="info" text="STAGE_IF.vhd"/>
 
 ::: danger TO DO
 

@@ -1,7 +1,3 @@
----
-aside: false
----
-
 # Bibliografia
 
 - Laoyan, S. **What is Agile methodology? (A beginner’s guide)**. Asana, 15
@@ -24,3 +20,13 @@ aside: false
 - **GLOSSARY - Instruction Set Architecture: What Is an Instruction Set
   Architecture?**. ARM, 14 nov. 2023. Available at:
   https://www.arm.com/glossary/isa
+
+- RIEGERT, Margret. **VHDL block diagrams using netlistsvg**. Massachusetts, 30
+  nov. 2020. Available at: https://blog.eowyn.net/netlistsvg
+
+- DITTRICH, Andi. **BusyBox: fancy cli color prompt via PS1**. Germany, 20
+  oct. 2019. Available at:
+  https://andidittrich.com/2019/10/busybox-fancy-cli-color-prompt-ps1.html
+
+- ANDRADE, Marcus; MALENFANT, Didier. **Intel Quartus Prime Synthesis Engine for
+  Docker**. 4 sep. 2023. Available at: https://github.com/raetro/sdk-docker-fpga

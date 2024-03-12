@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Executa
-
-`STAGE_EX.vhd`
+# Executa <Badge type="info" text="STAGE_EX.vhd"/>
 
 ::: danger TO DO
 

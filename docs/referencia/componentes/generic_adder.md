@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Somador
-
-`GENERIC_ADDER.vhd`
+# Somador <Badge type="info" text="GENERIC_ADDER.vhd"/>
 
 ![Diagrama de portas do somador](../../public/images/referencia/componentes/generic_adder.drawio.svg)
 
@@ -49,11 +47,7 @@ Saída de dados com o resultado de `source_1 + source_2`.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_adder_netlist.svg" alt="Diagrama de RTL do somador" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

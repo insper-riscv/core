@@ -2,13 +2,11 @@
 outline: 2
 ---
 
-# Banco de Registradores
+# Arquivo de registradores <Badge type="info" text="RV32I_REGISTER_FILE.vhd"/>
 
-`GENERIC_REGISTERS_BANK.vhd`
+![Diagrama de portas do banco de registradores](../../public/images/referencia/componentes/rv32i_register_file.drawio.svg)
 
-![Diagrama de portas do banco de registradores](../../public/images/referencia/componentes/generic_registers_bank.drawio.svg)
-
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTERS_BANK.vhd).
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd).
 
 ## Interface genérica
 
@@ -79,16 +77,12 @@ Saída de valor de registrador secundária.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 
-`test_GENERIC_REGISTERS_BANK.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTERS_BANK.py).
+`test_RV32I_REGISTER_FILE.py`.
+[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_REGISTER_FILE.py).
 
 ::: danger TO DO
 

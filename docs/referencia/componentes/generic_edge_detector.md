@@ -2,9 +2,7 @@
 outline: 2
 ---
 
-# Detector de Borda
-
-`GENERIC_EDGE_DETECTOR.vhd`
+# Detector de Borda <Badge type="info" text="GENERIC_EDGE_DETECTOR.vhd"/>
 
 ![Diagrama de portas do detector de borda](../../public/images/referencia/componentes/generic_edge_detector.drawio.svg)
 
@@ -55,11 +53,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/generic_edge_detector_netlist.svg" alt="Diagrama de RTL do detector de borda" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 
