@@ -263,7 +263,7 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 | Tipo |   31-12    |    11-7    |    6-0    |
 | :--: | :--------: | :--------: | :-------: |
-|  U   | imm[31:12] | rd[x1-x31] | `0110111` |
+|  U   | imm[31:12] |     rd     | `0110111` |
 
 #### Formato
 
@@ -277,73 +277,177 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 ### `AUIPC` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Add Upper Immediate (Adiciona Superior Imediato).
 
-Work in progress.
+Desloca o valor do imediato 12 bits para a esquerda, preenchendo os 12 bits 
+mais baixos com zero e o adiciona ao PC. Escreve o resultado no registrador `rd`
 
-:::
+#### Sintaxe
 
-## Shift
+| Tipo |   31-12    |    11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: |
+|  U   | imm[31:12] |    rd      | `0010111` |
+
+#### Formato
+
+`auipc rd, imm`
+
+#### Implementação
+
+`x[rd] = pc + sext(immediate[31:12] << 12)`
 
 ---
 
+## Shift
+
+
+
 ### `SLL` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Shift Left Logical (Deslocamento à Esquerda Lógico).
 
-Work in progress.
+Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado pelos
+5 bits menos significativos do valor do registrador `rs2`. Os bits remanescentes
+de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos com zeros. O resultado
+é escrito no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |     rs2    |  rs1      |   001    |    rd     | `0110011` |    
+
+#### Formato
+
+`sll rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] << x[rs2]`
+
 
 ---
 
 ### `SLLI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
 
-Work in progress.
+Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado pelo `shamt`.
+Os bits vazios de `rs1` são preenchidos com zeros. O resultado é escrito no registrador `rd`.
+Só é permitido quando `shamt[5] = 0`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   000000   |   shamt    |    rs1    |   001    |    rd     | `0010011` |    
+
+#### Formato
+
+`slli rd, rs1, shamt`
+
+#### Implementação
+
+`x[rd] = x[rs1] << shamt`
+
 
 ---
 
 ### `SRL` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Shift Right Logical (Deslocamento à Direita Lógico).
 
-Work in progress.
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelos
+5 bits menos significativos do valor do registrador `rs2`. Os bits remanescentes
+de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos com zeros. O resultado
+é escrito no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
+
+#### Formato
+
+`srl rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] >> x[rs2]`
 
 ---
 
 ### `SRLI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
 
-Work in progress.
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelo `shamt`.
+Os bits vazios de `rs1` são preenchidos com zeros. O resultado é escrito no registrador `rd`.
+Só é permitido quando `shamt[5] = 0`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   000000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
+
+#### Formato
+
+`srli rd, rs1, shamt`
+
+#### Implementação
+
+`x[rd] = x[rs1] >>shamt`
 
 ---
 
 ### `SRA` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Shift Right Arithmetic (Deslocamento à Direita Aritmético).
 
-Work in progress.
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelos
+5 bits menos significativos do valor do registrador `rs2`. Os bits remanescentes
+de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos com cópias do bit mais significativo
+de `rs1`. O resultado é escrito no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0100000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
+
+#### Formato
+
+`sra rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] >> x[rs2]`
 
 ---
 
 ### `SRAI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
 
-Work in progress.
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelo `shamt`. 
+Os bits vazios de `rs1` são preenchidos com cópias do bit mais significativo de `rs1`. 
+O resultado é escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   010000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
+
+#### Formato
+
+`srai rd, rs1, shamt`
+
+#### Implementação
+
+`x[rd] = x[rs1] >> shamt`
 
 ---
 
@@ -351,111 +455,254 @@ Work in progress.
 
 ### `ADD` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Add (Adição).
 
-Work in progress.
+Soma os registradores `rs1` e `rs2` e armazena o resultado no registrador `rd`. Em caso de
+overflow, ele é ignorado.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   000    |    rd     | `0110011` |    
+
+#### Formato
+
+`add rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] + x[rs2]`
 
 ---
 
 ### `ADDI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Add Immediate (Adição Imediata).
 
-Work in progress.
+Soma o registrador `rs1` com o sinal estendido do imediato e armazena o resultado no registrador `rd`.
+Em caso de overflow, ele é ignorado.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   immediate[11:0]   |    rs1    |   000    |    rd     | `0010011` |  
+
+#### Formato
+
+`addi rd, rs1, immediate`
+
+#### Implementação
+
+`x[rd] = x[rs1] + sext(immediate)`
 
 ---
 
 ### `SUB` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Subtract (Subtração).
 
-Work in progress.
+Subtrai o registrador `rs1` pelo `rs2` e armazena o resultado no registrador `rd`. Em caso de
+overflow, ele é ignorado.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0100000  |    rs2     |    rs1    |   000    |    rd     | `0110011` |    
+
+#### Formato
+
+`sub rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] - x[rs2]`
 
 ---
 
 ### `MUL` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Multiply (Multiplicação).
 
-Work in progress.
+Multiplica os registradores `rs1` e `rs2` e armazena o resultado no registrador `rd`. Em caso de
+overflow, ele é ignorado.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   000    |    rd     | `0110011` |    
+
+#### Formato
+
+`mul rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] × x[rs2]`
 
 ---
 
 ### `MULH` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Multiply High (Multiplicação Superior).
 
-Work in progress.
+Multiplica os registradores `rs1` e `rs2`, considerando que são números de complemento de dois
+e armazena a metade superior do produto no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   001    |    rd     | `0110011` |    
+
+#### Formato
+
+`mulh rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = (x[rs1] × x[rs2]) >> XLEN`
 
 ---
 
 ### `MULHSU` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Multiply High Signed and Unsigned (Multiplicação Superior com Sinal e Sem Sinal).
 
-Work in progress.
+Multiplica os registradores `rs1` e `rs2`, considerando que `rs1` é um número de complemento de dois
+e `rs2` é um número sem sinal, e armazena a metade superior do produto no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   010    |    rd     | `0110011` |   
+
+#### Formato
+
+`mulhsu rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = (x[rs1] * x[rs2]) >> XLEN`
 
 ---
 
 ### `MULHU` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Multiply High Unsigned (Multiplicação Superior Sem Sinal).
 
-Work in progress.
+Multiplica os registradores `rs1` e `rs2`, considerando que ambos são números sem sinal, e armazena
+a metade superior do produto no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   011    |    rd     | `0110011` |   
+
+#### Formato
+
+`mulhu rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = (x[rs1] × x[rs2]) >> XLEN`
 
 ---
 
 ### `DIV` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Divide (Divisão).
 
-Work in progress.
+Divide o registrador `rs1` por `rs2`, considerando que são números de complemento de dois, arredondando
+para zero, e armazena o quociente no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   100    |    rd     | `0110011` |    
+
+#### Formato
+
+`div rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] ÷ x[rs2]`
 
 ---
 
 ### `DIVU` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Divide Unsigned (Divisão Sem Sinal).
 
-Work in progress.
+Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal, arredondando
+para zero, e armazena o quociente no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
+
+#### Formato
+
+`div rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] ÷ x[rs2]`
 
 ---
 
 ### `REM` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Remainder (Resto).
 
-Work in progress.
+Divide o registrador `rs1` por `rs2`, considerando que são números de complemento de dois, arredondando
+para zero, e armazena o resto no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   110    |    rd     | `0110011` |    
+
+#### Formato
+
+`rem rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] % x[rs2]`
 
 ---
 
 ### `REMU` <Badge type="tip" text="“M” Standard Extension" />
 
-::: danger TO DO
+Remainder Unsigned (Resto Sem Sinal).
 
-Work in progress.
+Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal, arredondando
+para zero, e armazena o resto no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000001  |    rs2     |    rs1    |   111    |    rd     | `0110011` |    
+
+#### Formato
+
+`rem rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] % x[rs2]`
 
 ---
 
@@ -463,61 +710,140 @@ Work in progress.
 
 ### `XOR` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Exclusive OR (OU Exclusivo).
 
-Work in progress.
+Realiza a operação lógica XOR, bit a bit, entre os registradores `rs1` e `rs2` e armazena o resultado
+no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   100    |    rd     | `0110011` |    
+
+#### Formato
+
+`xor rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] ˆ x[rs2]`
 
 ---
 
 ### `XORI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Exclusive OR Immediate (OU Exclusivo Imediato).
 
-Work in progress.
+Realiza a operação lógica XOR, bit a bit, entre o registrador `rs1` e o imediato 
+com sinal estendido e armazena o resultado no registrador `rd`.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   immediate[11:0]   |    rs1    |   100    |    rd     | `0010011` |  
+
+#### Formato
+
+`xori rd, rs1, immediate`
+
+#### Implementação
+
+`x[rd] = x[rs1] ˆ sext(immediate)`
 
 ---
 
 ### `OR` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+OR (OU).
 
-Work in progress.
+Realiza a operação lógica OR, bit a bit, entre os registradores `rs1` e `rs2` e armazena o resultado
+no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   110    |    rd     | `0110011` |    
+
+#### Formato
+
+`or rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] | x[rs2]`
 
 ---
 
 ### `ORI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+OR Immediate (OU Imediato).
 
-Work in progress.
+Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato 
+com sinal estendido e armazena o resultado no registrador `rd`.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   immediate[11:0]   |    rs1    |   110    |    rd     | `0010011` |  
+
+#### Formato
+
+`ori rd, rs1, immediate`
+
+#### Implementação
+
+`x[rd] = x[rs1] | sext(immediate)`
 
 ---
 
 ### `AND` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+AND (E).
 
-Work in progress.
+Realiza a operação lógica AND, bit a bit, entre os registradores `rs1` e `rs2` e armazena o resultado
+no registrador `rd`.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   111    |    rd     | `0110011` |    
+
+#### Formato
+
+`and rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] & x[rs2]`
 
 ---
 
 ### `ANDI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+AND Immediate (E Imediato).
 
-Work in progress.
+Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato 
+com sinal estendido e armazena o resultado no registrador `rd`.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   immediate[11:0]   |    rs1    |   111    |    rd     | `0010011` |  
+
+#### Formato
+
+`andi rd, rs1, immediate`
+
+#### Implementação
+
+`x[rd] = x[rs1] & sext(immediate)`
+
 
 ---
 
@@ -525,103 +851,214 @@ Work in progress.
 
 ### `SLT` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Set if Less Than (Definir se Menor que).
 
-Work in progress.
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são 
+complemento de dois, em caso positivo, armazena 1 no registrador `rd`, caso contrário, armazena 0.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   010    |    rd     | `0110011` |    
+
+#### Formato
+
+`slt rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] < x[rs2]`
 
 ---
 
 ### `SLTI` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Set if Less Than Immediate (Definir se Menor que Imediato).
 
-Work in progress.
+Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal, 
+considerando que são complemento de dois, em caso positivo, armazena 1 no registrador `rd`,
+caso contrário, armazena 0.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   immediate[11:0]   |    rs1    |   010    |    rd     | `0010011` |  
+
+#### Formato
+
+`slti rd, rs1, immediate`
+
+#### Implementação
+
+`x[rd] = x[rs1] < sext(immediate)`
 
 ---
 
 ### `SLTU` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Set if Less Than Unsigned(Definir se Menor que Sem Sinal).
 
-Work in progress.
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são 
+sem sinal, em caso positivo, armazena 1 no registrador `rd`, caso contrário, armazena 0.
 
-:::
+#### Sintaxe
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   011    |    rd     | `0110011` |    
+
+#### Formato
+
+`sltu rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] < x[rs2]`
+
 
 ---
 
-### `SLTI` <Badge type="info" text="RV32I Base" />
-
-::: danger TO DO
-
-Work in progress.
-
-:::
-
----
 
 ## Branch
 
 ### `BEQ` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
 
-Work in progress.
+Branch if Equal (Desvio se Igual)
 
-:::
+Verifica se o registrador `rs1` é igual ao registrador `rs2`, em caso positivo, modifica o PC
+para o valor atual somado ao offset com extensão de sinal.
+
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   000    |    offset[4:1|11]     | `1100011` |    
+
+#### Formato
+
+`beq rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 == rs2) pc += sext(offset)`
 
 ---
 
 ### `BNE` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Branch if Not Equal (Desvio se Não Igual)
 
-Work in progress.
+Verifica se o registrador `rs1` não é igual ao registrador `rs2`, em caso positivo, modifica o PC
+para o valor atual somado ao offset com extensão de sinal.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   001    |    offset[4:1|11]     | `1100011` |    
+
+#### Formato
+
+`bnq rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 != rs2) pc += sext(offset)`
 
 ---
 
 ### `BLT` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Branch if Less Than (Desvio se Menor que)
 
-Work in progress.
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são números em complemento de dois, 
+em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   000    |    offset[4:1|11]     | `1100011` |    
+
+#### Formato
+
+`blt rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 < rs2) pc += sext(offset)`
 
 ---
 
 ### `BGE` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Branch if Less Than (Desvio se Menor que)
 
-Work in progress.
+Verifica se o registrador `rs1` é menor ou igual ao registrador `rs2`, considerando que são números em complemento de dois, 
+em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   101    |    offset[4:1|11]     | `1100011` |    
+
+#### Formato
+
+`bge rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 >= rs2) pc += sext(offset)`
 
 ---
 
 ### `BLTU` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Branch if Less Than Unsigned(Desvio se Menor que Sem Sinal)
 
-Work in progress.
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são números sem sinal,
+em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   110    |    offset[4:1|11]     | `1100011` |    
+
+#### Formato
+
+`bltu rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 < rs2) pc += sext(offset)`
 
 ---
 
 ### `BGEU` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Branch if Greater Than Unsigned(Desvio se Maior que Sem Sinal)
 
-Work in progress.
+Verifica se o registrador `rs1` é maior que o registrador `rs2`, considerando que são números sem sinal,
+em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   110    |    offset[4:1|11]     | `1100011` |    
+
+#### Formato
+
+`bgeu rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 >= rs2) pc += sext(offset)`
 
 ---
 
@@ -629,21 +1066,47 @@ Work in progress.
 
 ### `JAL` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Jump and Link (Salto e Link).
 
-Work in progress.
+Escreve o endereço da próxima instrução (PC+4) no registrador `rd` e modifica o PC para o valor atual
+somado ao offset com extensão de sinal. Se `rd` for omitido, o valor de retorno é armazenado em `x1`.
 
-:::
+#### Sintaxe
+
+| Tipo |             31-12           |    11-7   |    6-0    |
+| :--: | :-------------------------: | :-------: | :-------: |
+|  J   |  offset[20|10:1|11|19:12]   |    rd     | `1100011` |
+
+#### Formato
+
+`jal rd, offset`
+
+#### Implementação
+
+`x[rd] = pc+4; pc += sext(offset)`
 
 ---
 
 ### `JALR` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Jump and Link Register (Salto e Link por Registrador).
 
-Work in progress.
+Realiza um cópia do PC para `rs1 + sext(offset)`, mascara bit menos significativo do endereço resultante e 
+armazena o endereço anterior de PC+4 no registrador `rd`. Se `rd` for omitido, o valor é armazenado em `x1`. 
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   000    |    rd     | `1100111` |  
+
+#### Formato
+
+`jalr rd, offset(rs1) `
+
+#### Implementação
+
+`t =pc+4; pc=(x[rs1]+sext(offset))&∼1; x[rd]=t`
 
 ---
 
@@ -651,51 +1114,116 @@ Work in progress.
 
 ### `LB` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Load Byte (Carrega Byte).
 
-Work in progress.
+Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
+com extensão de sinal.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   000    |    rd     | `0000011` |  
+
+#### Formato
+
+`lb rd, offset(rs1)`
+
+#### Implementação
+
+`x[rd] = sext(M[x[rs1] + sext(offset)][7:0])`
 
 ---
 
 ### `LH` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Load Halfword (Carrega Halfword).
 
-Work in progress.
+Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
+com extensão de sinal.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   001    |    rd     | `0000011` |  
+
+#### Formato
+
+`lh rd, offset(rs1)`
+
+#### Implementação
+
+`x[rd] = sext(M[x[rs1] + sext(offset)][15:0])`
+
 
 ---
 
 ### `LBU` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Load Byte Unsigned(Carrega Byte Sem Sinal).
 
-Work in progress.
+Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
+com extensão de zero.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   100    |    rd     | `0000011` |  
+
+#### Formato
+
+`lbu rd, offset(rs1)`
+
+#### Implementação
+
+`x[rd] = M[x[rs1] + sext(offset)][7:0]`
 
 ---
 
 ### `LHU` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Load Halfword Unsigned(Carrega Halfword Sem Sinal).
 
-Work in progress.
+Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
+com extensão de zero.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   101    |    rd     | `0000011` |  
+
+#### Formato
+
+`lhu rd, offset(rs1)`
+
+#### Implementação
+
+`x[rd] = M[x[rs1] + sext(offset)][15:0]`
 
 ---
 
 ### `LW` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Load Word (Carrega Word).
 
-Work in progress.
+Carrega quatro bytes da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`.
 
-:::
+#### Sintaxe
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   010    |    rd     | `0000011` |  
+
+#### Formato
+
+`lw rd, offset(rs1)`
+
+#### Implementação
+
+`x[rd] = sext(M[x[rs1] + sext(offset)][31:0])`
 
 ---
 
@@ -703,28 +1231,64 @@ Work in progress.
 
 ### `SB` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Store Byte (Armazena Byte).
 
-Work in progress.
+Armazena o byte menos significativo do registrador `rs2` na memória no endereço `rs1 + sext(offset)`.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  S   |    offset[11:5]    |    rs2     |    rs1    |   000    |       offset[4:0]     | `0100011` |    
+
+#### Formato
+
+`sb rs2, offset(rs1)`
+
+#### Implementação
+
+`M[x[rs1] + sext(offset)] = x[rs2][7:0]`
 
 ---
 
 ### `SH` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Store Halfword (Armazena Halfword).
 
-Work in progress.
+Armazena os dois bytes menos significativo do registrador `rs2` na memória no endereço `rs1 + sext(offset)`.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  S   |    offset[11:5]    |    rs2     |    rs1    |   001    |       offset[4:0]     | `0100011` |    
+
+#### Formato
+
+`sh rs2, offset(rs1)`
+
+#### Implementação
+
+`M[x[rs1] + sext(offset)] = x[rs2][15:0]`
 
 ---
 
 ### `SW` <Badge type="info" text="RV32I Base" />
 
-::: danger TO DO
+Store Word (Armazena Word).
 
-Work in progress.
+Armazena os quatro bytes menos significativo do registrador `rs2` na memória no endereço `rs1 + sext(offset)`.
 
-:::
+#### Sintaxe
+
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  S   |    offset[11:5]    |    rs2     |    rs1    |   010    |       offset[4:0]     | `0100011` |    
+
+#### Formato
+
+`sw rs2, offset(rs1)`
+
+#### Implementação
+
+`M[x[rs1] + sext(offset)] = x[rs2][31:0]`
