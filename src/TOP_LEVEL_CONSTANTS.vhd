@@ -24,31 +24,29 @@ package TOP_LEVEL_CONSTANTS is
     subtype FUNCTION_RANGE is natural range 2 downto 0;
     subtype t_FUNCTION is std_logic_vector(FUNCTION_RANGE);
 
-    subtype OPCODE_RANGE is natural range 6 downto 0;
+    subtype OPCODE_FULL_RANGE is natural range 6 downto 0;
+    subtype t_OPCODE_FULL is std_logic_vector(OPCODE_FULL_RANGE);
+
+    subtype OPCODE_RANGE is natural range 6 downto 2;
     subtype t_OPCODE is std_logic_vector(OPCODE_RANGE);
 
-    --subtype OPCODE_COMPACT_RANGE is natural range OPCODE_RANGE'left downto (OPCODE_RANGE'right + 2);
-    --subtype t_OPCODE_COMPACT is std_logic_vector((OPCODE_RANGE'left - 2) to 0);
-    subtype OPCODE_COMPACT_RANGE is natural range 6 downto 2;
-    subtype t_OPCODE_COMPACT is std_logic_vector(OPCODE_COMPACT_RANGE);
-
     type t_RV32I_INSTRUCTION is record
-        funct_3     : t_FUNCTION;
-        funct_7     : std_logic_vector( 6 downto 0);
+        funct_3            : t_FUNCTION;
+        funct_7            : std_logic_vector( 6 downto 0);
         select_source_2    : std_logic_vector( 4 downto 0);
         select_source_1    : std_logic_vector( 4 downto 0);
         select_destination : std_logic_vector( 4 downto 0);
-        immediate_i : std_logic_vector(31 downto 0);
-        immediate_s : std_logic_vector(31 downto 0);
-        immediate_b : std_logic_vector(31 downto 0);
-        immediate_u : std_logic_vector(31 downto 0);
-        immediate_j : std_logic_vector(31 downto 0);
-        shamt       : std_logic_vector(31 downto 0);
-        opcode      : t_OPCODE;
-        encoding    : RV32I_INSTRUCTION_TYPE;
+        immediate_i        : std_logic_vector(31 downto 0);
+        immediate_s        : std_logic_vector(31 downto 0);
+        immediate_b        : std_logic_vector(31 downto 0);
+        immediate_u        : std_logic_vector(31 downto 0);
+        immediate_j        : std_logic_vector(31 downto 0);
+        shamt              : std_logic_vector(31 downto 0);
+        opcode             : t_OPCODE;
+        encoding           : RV32I_INSTRUCTION_TYPE;
     end record;
 
-    function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE)) return t_RV32I_INSTRUCTION;
+    function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION;
 
     type t_IF_SIGNALS is record
         enable_stall     : std_logic;
@@ -96,7 +94,7 @@ package TOP_LEVEL_CONSTANTS is
         immediate          : std_logic_vector(XLEN_RANGE);
         funct_7            : std_logic_vector(6 downto 0);
         funct_3            : t_FUNCTION;
-        opcode             : t_OPCODE_COMPACT;
+        opcode             : t_OPCODE;
         --select_source_1    : std_logic_vector(4 downto 0);
         --select_source_2    : std_logic_vector(4 downto 0);
         select_destination : std_logic_vector(4 downto 0);
@@ -174,23 +172,23 @@ package TOP_LEVEL_CONSTANTS is
     constant FUNCTION_REMU   : t_FUNCTION := "111";
 
     -- RV32I Base Instruction Set opcodes
-    constant OPCODE_OP     : t_OPCODE := "0110011";
-    constant OPCODE_OP_IMM : t_OPCODE := "0010011";
-    constant OPCODE_JALR   : t_OPCODE := "1100111";
-    constant OPCODE_SYNCH  : t_OPCODE := "0001111";
-    constant OPCODE_SYSTEM : t_OPCODE := "1110011";
-    constant OPCODE_STORE  : t_OPCODE := "0100011";
-    constant OPCODE_LOAD   : t_OPCODE := "0000011";
-    constant OPCODE_BRANCH : t_OPCODE := "1100011";
-    constant OPCODE_LUI    : t_OPCODE := "0110111";
-    constant OPCODE_AUIPC  : t_OPCODE := "0010111";
-    constant OPCODE_JAL    : t_OPCODE := "1101111";
+    constant OPCODE_OP     : t_OPCODE_FULL := "0110011";
+    constant OPCODE_OP_IMM : t_OPCODE_FULL := "0010011";
+    constant OPCODE_JALR   : t_OPCODE_FULL := "1100111";
+    constant OPCODE_SYNCH  : t_OPCODE_FULL := "0001111";
+    constant OPCODE_SYSTEM : t_OPCODE_FULL := "1110011";
+    constant OPCODE_STORE  : t_OPCODE_FULL := "0100011";
+    constant OPCODE_LOAD   : t_OPCODE_FULL := "0000011";
+    constant OPCODE_BRANCH : t_OPCODE_FULL := "1100011";
+    constant OPCODE_LUI    : t_OPCODE_FULL := "0110111";
+    constant OPCODE_AUIPC  : t_OPCODE_FULL := "0010111";
+    constant OPCODE_JAL    : t_OPCODE_FULL := "1101111";
 
 end package;
 
 package body TOP_LEVEL_CONSTANTS is
 
-    function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE)) return t_RV32I_INSTRUCTION is
+    function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION is
         variable out_vec: t_RV32I_INSTRUCTION;
         variable immediate_i: std_logic_vector(XLEN_RANGE);
         variable immediate_s: std_logic_vector(XLEN_RANGE);
@@ -225,36 +223,36 @@ package body TOP_LEVEL_CONSTANTS is
         out_vec.immediate_j := immediate_j;
         out_vec.opcode      := in_vec(OPCODE_RANGE);
 
-        if out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_OP(OPCODE_RANGE'left downto 2) then
+        if out_vec.opcode(OPCODE_RANGE) = OPCODE_OP(OPCODE_RANGE) then
             out_vec.encoding := RV32I_INSTRUCTION_R_TYPE;
         end if;
 
         if (
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_JALR(OPCODE_RANGE'left downto 2) or
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_LOAD(OPCODE_RANGE'left downto 2) or
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_OP_IMM(OPCODE_RANGE'left downto 2) or
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_SYNCH(OPCODE_RANGE'left downto 2) or
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_SYSTEM(OPCODE_RANGE'left downto 2)
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_JALR(OPCODE_RANGE) or
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_LOAD(OPCODE_RANGE) or
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_OP_IMM(OPCODE_RANGE) or
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_SYNCH(OPCODE_RANGE) or
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_SYSTEM(OPCODE_RANGE)
         ) then
             out_vec.encoding := RV32I_INSTRUCTION_I_TYPE;
         end if;
 
-        if out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_STORE(OPCODE_RANGE'left downto 2) then
+        if out_vec.opcode(OPCODE_RANGE) = OPCODE_STORE(OPCODE_RANGE) then
             out_vec.encoding := RV32I_INSTRUCTION_S_TYPE;
         end if;
 
-        if out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_BRANCH(OPCODE_RANGE'left downto 2) then
+        if out_vec.opcode(OPCODE_RANGE) = OPCODE_BRANCH(OPCODE_RANGE) then
             out_vec.encoding := RV32I_INSTRUCTION_B_TYPE;
         end if;
 
         if (
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_LUI(OPCODE_RANGE'left downto 2) or
-            out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_AUIPC(OPCODE_RANGE'left downto 2)
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_LUI(OPCODE_RANGE) or
+            out_vec.opcode(OPCODE_RANGE) = OPCODE_AUIPC(OPCODE_RANGE)
         ) then
             out_vec.encoding := RV32I_INSTRUCTION_U_TYPE;
         end if;
 
-        if out_vec.opcode(OPCODE_RANGE'left downto 2) = OPCODE_JAL(OPCODE_RANGE'left downto 2) then
+        if out_vec.opcode(OPCODE_RANGE) = OPCODE_JAL(OPCODE_RANGE) then
             out_vec.encoding := RV32I_INSTRUCTION_J_TYPE;
         end if;
 
