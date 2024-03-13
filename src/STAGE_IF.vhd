@@ -21,10 +21,15 @@ end entity;
 
 architecture RTL of STAGE_IF is
 
-    signal enable_pc : std_logic := NOT(source.enable_stall);
+    signal enable_pc : std_logic;
     signal pc        : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
+
+    process(source.enable_stall) is
+    begin
+        enable_pc <= NOT source.enable_stall;
+    end process;
 
     MODULE_PC : entity WORK.MODULE_PC
         port map (
