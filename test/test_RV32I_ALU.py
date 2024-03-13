@@ -126,7 +126,7 @@ async def tb_RV32I_ALU_case_8(dut: RV32I_ALU):
 
 def test_RV32I_ALU_synthesis():
     RV32I_ALU.build_vhd()
-    RV32I_ALU.build_netlistsvg()
+    # RV32I_ALU.build_netlistsvg()
 
 
 def test_RV32I_ALU_testcases():
