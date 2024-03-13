@@ -1,7 +1,7 @@
 {
     "name": "cti-risc-v",
     "build": {
-        "dockerfile": "Dockerfile"
+        "dockerfile": "Dockerfile",        
     },
     "postCreateCommand": "pip install -r requirements.txt",
     "workspaceMount": "source=${localWorkspaceFolder},target=/root/workspace,type=bind,consistency=cached",
