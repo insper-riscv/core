@@ -8,34 +8,34 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity RV32I_ALU is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH
+        DATA_WIDTH : natural := XLEN
     );
   
     port (
         invert_source_1 : in  std_logic;
         invert_source_2 : in  std_logic;
         select_function : in  std_logic_vector(1 downto 0);
-        source_1        : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_2        : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        destination     : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        flag_z          : out std_logic
+        source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture CPU of RV32I_ALU is
 
-    constant ZERO : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
+    --constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
 
-    signal result   : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-    signal carry    : std_logic_vector((DATA_RANGE'left + 1) downto 0);
-    signal slt      : std_logic_vector((DATA_WIDTH_0 - 1) downto 0) := (others => '0');
-    signal overflow : std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+    signal result   : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal carry    : std_logic_vector( DATA_WIDTH      downto 0);
+    signal slt      : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+    signal overflow : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
     carry(0) <= invert_source_1 XOR invert_source_2;
     slt(0)   <= overflow(DATA_WIDTH - 1);
+    slt((DATA_WIDTH - 1) downto 1) <= (others => '0');
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
         FOR_BIT : entity WORK.RV32I_ALU_BIT
@@ -55,7 +55,7 @@ begin
 
     destination <= result;
 
-    flag_z  <= '1' when (result = ZERO) else
-               '0';
+    --flag_z  <= '1' when (result = ZERO) else
+    --           '0';
 
 end architecture;

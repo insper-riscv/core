@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -16,57 +17,50 @@ class GENERIC_EDGE_DETECTOR(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_EDGE_DETECTOR(dut: GENERIC_EDGE_DETECTOR):
-    values_source_rise = ["0", "1", "0", "0",]
-    values_pulse_rise = ["0", "0", "0", "1"]
-    values_source_fall = ["0", "1", "0", "0",]
-    values_pulse_fall = ["0", "0", "0", "1"]
+async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR):
+    values_source = ["0", "1", "0", "0"]
+    values_pulse = ["0", "0", "0", "1"]
     clock = Clock(dut.clock, 20000, units="ns")
 
     cocotb.start_soon(clock.start(start_high=False))
-    for index, (source_rise, pulse) in enumerate(
-        zip(values_source_rise, values_pulse_rise)
-    ):
+
+    for index, (source_rise, pulse) in enumerate(zip(values_source, values_pulse)):
         dut.source.value = BinaryValue(source_rise)
 
         await RisingEdge(dut.clock)
-
-        condition = dut.pulse.value.binstr == pulse
-
-        if not condition:
-            dut._log.error(
-                f"Expected value: {pulse} Obtained value: {dut.pulse.value.binstr}"
-            )
-
-        assert (
-            condition
-        ), f"Error in test rise {index}: clock={clock} source_rise={source_rise}"
+        utils.assert_output(dut.pulse, pulse, f"At clock {index}.")
         await FallingEdge(dut.clock)
 
+
+@cocotb.test()
+async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR):
+    values_source = ["0", "1", "0", "0"]
+    values_pulse = ["0", "0", "0", "1"]
+    clock = Clock(dut.clock, 20000, units="ns")
+
     cocotb.start_soon(clock.start(start_high=True))
-    for index, (source_fall, pulse) in enumerate(
-        zip(values_source_fall, values_pulse_fall)
-    ):
+
+    for index, (source_fall, pulse) in enumerate(zip(values_source, values_pulse)):
         dut.source.value = BinaryValue(source_fall)
 
         await FallingEdge(dut.clock)
-
-        condition = dut.pulse.value.binstr == pulse
-
-        if not condition:
-            dut._log.error(
-                f"Expected value: {pulse} Obtained value: {dut.pulse.value.binstr}"
-            )
-
-        assert (
-            condition
-        ), f"Error in test fall {index}: clock={clock} source_fall={source_fall}"
+        utils.assert_output(dut.pulse, pulse, f"At clock {index}.")
         await RisingEdge(dut.clock)
 
 
-def test_GENERIC_EDGE_DETECTOR():
-    GENERIC_EDGE_DETECTOR.test_with(tb_GENERIC_EDGE_DETECTOR)
+def test_GENERIC_EDGE_DETECTOR_synthesis():
+    GENERIC_EDGE_DETECTOR.build_vhd()
+    # GENERIC_EDGE_DETECTOR.build_netlistsvg()
+
+
+def test_GENERIC_EDGE_DETECTOR_testcases():
+    GENERIC_EDGE_DETECTOR.test_with(
+        [
+            tb_GENERIC_EDGE_DETECTOR_case_1,
+            tb_GENERIC_EDGE_DETECTOR_case_2,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    test_GENERIC_EDGE_DETECTOR()
+    pytest.main(["-k", os.path.basename(__file__)])

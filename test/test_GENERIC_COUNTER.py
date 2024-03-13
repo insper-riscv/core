@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -19,50 +20,48 @@ class GENERIC_COUNTER(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_COUNTER(dut: GENERIC_COUNTER):
+async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER):
     clock = Clock(dut.clock, 20000, units="ns")
+
     cocotb.start_soon(clock.start(start_high=False))
 
-    dut.clear.value = BinaryValue('1')
+    dut.clear.value = BinaryValue("1")
+
     await RisingEdge(dut.clock)
     await FallingEdge(dut.clock)
 
-    condition = dut.state.value.binstr == '0'
+    utils.assert_output(dut.state, "0")
 
-    if not condition:
-        dut._log.error(f"Expected value: {'0'} Obtained value: {dut.state.value.binstr}")
+    dut.source.value = BinaryValue("00001")
+    dut.update.value = BinaryValue("1")
+    dut.clear.value = BinaryValue("0")
 
-    assert (condition), f"Error in clear test 1"
-
-    dut.source.value = BinaryValue("00010")
-    dut.update.value = BinaryValue('1')
-    dut.clear.value = BinaryValue('0')
     await FallingEdge(dut.clock)
     await FallingEdge(dut.clock)
     await FallingEdge(dut.clock)
 
-    condition = dut.state.value.binstr == '1'
+    utils.assert_output(dut.state, "1")
 
-    if not condition:
-        dut._log.error(f"Expected value: {'1'} Obtained value: {dut.state.value.binstr}")
+    dut.clear.value = BinaryValue("1")
 
-    assert (condition), f"Error in count test"
-
-    dut.clear.value = BinaryValue('1')
     await RisingEdge(dut.clock)
     await FallingEdge(dut.clock)
 
-    condition = dut.state.value.binstr == '0'
-
-    if not condition:
-        dut._log.error(f"Expected value: {'0'} Obtained value: {dut.state.value.binstr}")
-
-    assert (condition), f"Error in clear test 2"
+    utils.assert_output(dut.state, "0")
 
 
-def test_GENERIC_COUNTER():
-    GENERIC_COUNTER.test_with(tb_GENERIC_COUNTER)
+def test_GENERIC_COUNTER_synthesis():
+    GENERIC_COUNTER.build_vhd()
+    # GENERIC_COUNTER.build_netlistsvg()
+
+
+def test_GENERIC_COUNTER_testcases():
+    GENERIC_COUNTER.test_with(
+        [
+            tb_GENERIC_COUNTER_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    test_GENERIC_COUNTER()
+    pytest.main(["-k", os.path.basename(__file__)])

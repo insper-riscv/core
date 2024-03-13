@@ -1,5 +1,7 @@
+import os
 from decimal import Decimal
 
+import pytest
 import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
@@ -13,14 +15,10 @@ class GENERIC_DEBOUNCE(utils.DUT):
     CHILDREN = [GENERIC_EDGE_DETECTOR, GENERIC_FLIP_FLOP]
 
 
-@cocotb.test()
-async def tb_GENERIC_DEBOUNCE(dut: GENERIC_DEBOUNCE):
-    pass
-
-
-def test_GENERIC_DEBOUNCE():
-    GENERIC_DEBOUNCE.test_with(tb_GENERIC_DEBOUNCE)
+def test_GENERIC_DEBOUNCE_synthesis():
+    GENERIC_DEBOUNCE.build_vhd()
+    # GENERIC_DEBOUNCE.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    test_GENERIC_DEBOUNCE()
+    pytest.main(["-k", os.path.basename(__file__)])

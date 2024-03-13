@@ -7,14 +7,14 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_MUX_2X1 is
 
     generic (
-        DATA_WIDTH_0 : natural := DATA_WIDTH
+        DATA_WIDTH : natural := XLEN
     );
 
     port (
-        source_1    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
-        source_2    : in  std_logic_vector((DATA_WIDTH_0 - 1) downto 0);
+        source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_2    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         selector    : in  std_logic;
-        destination : out std_logic_vector((DATA_WIDTH_0 - 1) downto 0)
+        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
