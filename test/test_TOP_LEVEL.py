@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -16,10 +17,10 @@ from test_STAGE_WB import STAGE_WB
 
 class TOP_LEVEL(utils.DUT):
     CHILDREN = [STAGE_IF, STAGE_ID, STAGE_EX, STAGE_MEM, STAGE_WB]
-    CLOCK       : utils.DUT.Input_pin
-    SW          : utils.DUT.Input_pin
-    LED         : utils.DUT.Output_pin
-    destination : utils.DUT.Output_pin
+    CLOCK: utils.DUT.Input_pin
+    SW: utils.DUT.Input_pin
+    LED: utils.DUT.Output_pin
+    destination: utils.DUT.Output_pin
 
 
 @cocotb.test()
@@ -51,12 +52,12 @@ async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL):
 
 def test_TOP_LEVEL_synthesis():
     TOP_LEVEL.build_vhd()
-    #TOP_LEVEL.build_netlistsvg()
+    # TOP_LEVEL.build_netlistsvg()
 
 
-def test_TOP_LEVEL_case_1():
+def test_TOP_LEVEL_testcases():
     TOP_LEVEL.test_with(tb_TOP_LEVEL_case_1)
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_TOP_LEVEL"])
+    pytest.main(["-k", os.path.basename(__file__)])

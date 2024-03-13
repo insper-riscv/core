@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -61,24 +62,19 @@ async def tb_GENERIC_MUX_2X1_case_4(dut: GENERIC_MUX_2X1):
 
 def test_GENERIC_MUX_2X1_synthesis():
     GENERIC_MUX_2X1.build_vhd()
-    #GENERIC_MUX_2X1.build_netlistsvg()
+    # GENERIC_MUX_2X1.build_netlistsvg()
 
 
-def test_GENERIC_MUX_2X1_case_1():
-    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_1)
-
-
-def test_GENERIC_MUX_2X1_case_2():
-    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_2)
-
-
-def test_GENERIC_MUX_2X1_case_3():
-    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_3)
-
-
-def test_GENERIC_MUX_2X1_case_4():
-    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_4)
+def test_GENERIC_MUX_2X1_testcases():
+    GENERIC_MUX_2X1.test_with(
+        [
+            tb_GENERIC_MUX_2X1_case_1,
+            tb_GENERIC_MUX_2X1_case_2,
+            tb_GENERIC_MUX_2X1_case_3,
+            tb_GENERIC_MUX_2X1_case_4,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_GENERIC_MUX_2X1"])
+    pytest.main(["-k", os.path.basename(__file__)])

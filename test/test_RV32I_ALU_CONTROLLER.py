@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -27,6 +28,7 @@ async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER"):
 
     await Timer(Decimal(1), units="ns")
 
+
 @cocotb.test()
 async def tb_RV32I_ALU_CONTROLLER_case_2(dut: "RV32I_ALU_CONTROLLER"):
     dut.opcode.value = BinaryValue("01100")
@@ -39,6 +41,7 @@ async def tb_RV32I_ALU_CONTROLLER_case_2(dut: "RV32I_ALU_CONTROLLER"):
 
     await Timer(Decimal(1), units="ns")
 
+
 @cocotb.test()
 async def tb_RV32I_ALU_CONTROLLER_case_3(dut: "RV32I_ALU_CONTROLLER"):
     dut.opcode.value = BinaryValue("01100")
@@ -50,6 +53,7 @@ async def tb_RV32I_ALU_CONTROLLER_case_3(dut: "RV32I_ALU_CONTROLLER"):
     utils.assert_output(dut.destination, "0110")
 
     await Timer(Decimal(1), units="ns")
+
 
 @cocotb.test()
 async def tb_RV32I_ALU_CONTROLLER_case_4(dut: "RV32I_ALU_CONTROLLER"):
@@ -66,21 +70,19 @@ async def tb_RV32I_ALU_CONTROLLER_case_4(dut: "RV32I_ALU_CONTROLLER"):
 
 def test_RV32I_ALU_CONTROLLER_synthesis():
     RV32I_ALU_CONTROLLER.build_vhd()
-    #RV32I_ALU_CONTROLLER.build_netlistsvg()
+    # RV32I_ALU_CONTROLLER.build_netlistsvg()
 
 
-def test_RV32I_ALU_CONTROLLER_case_1():
-    RV32I_ALU_CONTROLLER.test_with(tb_RV32I_ALU_CONTROLLER_case_1)
-
-def test_RV32I_ALU_CONTROLLER_case_2():
-    RV32I_ALU_CONTROLLER.test_with(tb_RV32I_ALU_CONTROLLER_case_2)
-
-def test_RV32I_ALU_CONTROLLER_case_3():
-    RV32I_ALU_CONTROLLER.test_with(tb_RV32I_ALU_CONTROLLER_case_3)
-
-def test_RV32I_ALU_CONTROLLER_case_4():
-    RV32I_ALU_CONTROLLER.test_with(tb_RV32I_ALU_CONTROLLER_case_4)
+def test_RV32I_ALU_CONTROLLER_testcases():
+    RV32I_ALU_CONTROLLER.test_with(
+        [
+            tb_RV32I_ALU_CONTROLLER_case_1,
+            tb_RV32I_ALU_CONTROLLER_case_2,
+            tb_RV32I_ALU_CONTROLLER_case_3,
+            tb_RV32I_ALU_CONTROLLER_case_4,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_RV32I_ALU_CONTROLLER"])
+    pytest.main(["-k", os.path.basename(__file__)])

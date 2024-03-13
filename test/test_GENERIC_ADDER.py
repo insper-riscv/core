@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -64,24 +65,19 @@ async def tb_GENERIC_ADDER_case_4(dut: "GENERIC_ADDER"):
 
 def test_GENERIC_ADDER_synthesis():
     GENERIC_ADDER.build_vhd()
-    #GENERIC_ADDER.build_netlistsvg()
+    # GENERIC_ADDER.build_netlistsvg()
 
 
-def test_GENERIC_ADDER_case_1():
-    GENERIC_ADDER.test_with(tb_GENERIC_ADDER_case_1)
-
-
-def test_GENERIC_ADDER_case_2():
-    GENERIC_ADDER.test_with(tb_GENERIC_ADDER_case_2)
-
-
-def test_GENERIC_ADDER_case_3():
-    GENERIC_ADDER.test_with(tb_GENERIC_ADDER_case_3)
-
-
-def test_GENERIC_ADDER_case_4():
-    GENERIC_ADDER.test_with(tb_GENERIC_ADDER_case_4)
+def test_GENERIC_ADDER_testcases():
+    GENERIC_ADDER.test_with(
+        [
+            tb_GENERIC_ADDER_case_1,
+            tb_GENERIC_ADDER_case_2,
+            tb_GENERIC_ADDER_case_3,
+            tb_GENERIC_ADDER_case_4,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_GENERIC_ADDER"])
+    pytest.main(["-k", os.path.basename(__file__)])

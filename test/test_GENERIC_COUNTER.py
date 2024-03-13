@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -51,12 +52,16 @@ async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER):
 
 def test_GENERIC_COUNTER_synthesis():
     GENERIC_COUNTER.build_vhd()
-    #GENERIC_COUNTER.build_netlistsvg()
+    # GENERIC_COUNTER.build_netlistsvg()
 
 
-def test_GENERIC_COUNTER_case_1():
-    GENERIC_COUNTER.test_with(tb_GENERIC_COUNTER_case_1)
+def test_GENERIC_COUNTER_testcases():
+    GENERIC_COUNTER.test_with(
+        [
+            tb_GENERIC_COUNTER_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_GENERIC_COUNTER"])
+    pytest.main(["-k", os.path.basename(__file__)])

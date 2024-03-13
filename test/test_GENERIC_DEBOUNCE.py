@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -16,8 +17,8 @@ class GENERIC_DEBOUNCE(utils.DUT):
 
 def test_GENERIC_DEBOUNCE_synthesis():
     GENERIC_DEBOUNCE.build_vhd()
-    #GENERIC_DEBOUNCE.build_netlistsvg()
+    # GENERIC_DEBOUNCE.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_GENERIC_DEBOUNCE"])
+    pytest.main(["-k", os.path.basename(__file__)])

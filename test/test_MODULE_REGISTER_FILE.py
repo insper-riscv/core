@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -17,8 +18,8 @@ class MODULE_REGISTER_FILE(utils.DUT):
 
 def test_MODULE_REGISTER_FILE_synthesis():
     MODULE_REGISTER_FILE.build_vhd()
-    #MODULE_REGISTER_FILE.build_netlistsvg()
+    # MODULE_REGISTER_FILE.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_MODULE_REGISTER_FILE"])
+    pytest.main(["-k", os.path.basename(__file__)])

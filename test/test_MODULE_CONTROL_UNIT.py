@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -13,14 +14,14 @@ from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 class MODULE_CONTROL_UNIT(utils.DUT):
     CHILDREN = [RV32I_INSTRUCTION_DECODER, GENERIC_ADDER, GENERIC_MUX_2X1]
-    instruction      : utils.DUT.Input_pin
-    pc_out           : utils.DUT.Input_pin
-    data_source_1    : utils.DUT.Input_pin
-    immediate_source : utils.DUT.Output_pin
-    control_if       : utils.DUT.Output_pin
-    control_ex       : utils.DUT.Output_pin
-    control_mem      : utils.DUT.Output_pin
-    control_wb       : utils.DUT.Output_pin
+    instruction: utils.DUT.Input_pin
+    pc_out: utils.DUT.Input_pin
+    data_source_1: utils.DUT.Input_pin
+    immediate_source: utils.DUT.Output_pin
+    control_if: utils.DUT.Output_pin
+    control_ex: utils.DUT.Output_pin
+    control_mem: utils.DUT.Output_pin
+    control_wb: utils.DUT.Output_pin
 
 
 @cocotb.test()
@@ -41,9 +42,13 @@ def test_MODULE_CONTROL_UNIT_synthesis():
     # MODULE_CONTROL_UNIT.build_netlistsvg()
 
 
-def test_MODULE_CONTROL_UNIT_case_1():
-    MODULE_CONTROL_UNIT.test_with(tb_MODULE_CONTROL_UNIT_case_1)
+def test_MODULE_CONTROL_UNIT_testcases():
+    MODULE_CONTROL_UNIT.test_with(
+        [
+            tb_MODULE_CONTROL_UNIT_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_MODULE_CONTROL_UNIT"])
+    pytest.main(["-k", os.path.basename(__file__)])

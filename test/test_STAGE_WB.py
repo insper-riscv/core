@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -15,8 +16,8 @@ class STAGE_WB(utils.DUT):
 
 def test_STAGE_WB_synthesis():
     STAGE_WB.build_vhd()
-    #STAGE_WB.build_netlistsvg()
+    # STAGE_WB.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_STAGE_WB"])
+    pytest.main(["-k", os.path.basename(__file__)])

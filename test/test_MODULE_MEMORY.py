@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -19,6 +20,7 @@ class MODULE_MEMORY(utils.DUT):
     source_ex: utils.DUT.Input_pin
     register_source_2: utils.DUT.Input_pin
     destination: utils.DUT.Output_pin
+
 
 @cocotb.test()
 async def tb_MODULE_MEMORY_case_1(dut: MODULE_MEMORY):
@@ -81,12 +83,16 @@ async def tb_MODULE_MEMORY_case_1(dut: MODULE_MEMORY):
 
 def test_MODULE_MEMORY_synthesis():
     MODULE_MEMORY.build_vhd()
-    #MODULE_MEMORY.build_netlistsvg()
+    # MODULE_MEMORY.build_netlistsvg()
 
 
-def test_MODULE_MEMORY_case_1():
-    MODULE_MEMORY.test_with(tb_MODULE_MEMORY_case_1)
+def test_MODULE_MEMORY_testcases():
+    MODULE_MEMORY.test_with(
+        [
+            tb_MODULE_MEMORY_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_MODULE_MEMORY"])
+    pytest.main(["-k", os.path.basename(__file__)])

@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -15,8 +16,8 @@ class MODULE_ROM(utils.DUT):
 
 def test_MODULE_ROM_synthesis():
     MODULE_ROM.build_vhd()
-    #MODULE_ROM.build_netlistsvg()
+    # MODULE_ROM.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_MODULE_ROM"])
+    pytest.main(["-k", os.path.basename(__file__)])

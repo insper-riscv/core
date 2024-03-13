@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -80,12 +81,16 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM):
 
 def test_GENERIC_RAM_synthesis():
     GENERIC_RAM.build_vhd()
-    #GENERIC_RAM.build_netlistsvg()
+    # GENERIC_RAM.build_netlistsvg()
 
 
-def test_GENERIC_RAM_case_1():
-    GENERIC_RAM.test_with(tb_GENERIC_RAM_case_1)
+def test_GENERIC_RAM_testcases():
+    GENERIC_RAM.test_with(
+        [
+            tb_GENERIC_RAM_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_GENERIC_RAM"])
+    pytest.main(["-k", os.path.basename(__file__)])

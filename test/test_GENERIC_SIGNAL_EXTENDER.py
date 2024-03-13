@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -16,8 +17,8 @@ class GENERIC_SIGNAL_EXTENDER(utils.DUT):
 
 def test_GENERIC_SIGNAL_EXTENDER_synthesis():
     GENERIC_SIGNAL_EXTENDER.build_vhd()
-    #GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
+    # GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_GENERIC_SIGNAL_EXTENDER"])
+    pytest.main(["-k", os.path.basename(__file__)])

@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -14,12 +15,12 @@ from test_GENERIC_ADDER import GENERIC_ADDER
 
 class MODULE_PC(utils.DUT):
     CHILDREN = [GENERIC_MUX_2X1, GENERIC_REGISTER, GENERIC_ADDER]
-    clock        : utils.DUT.Input_pin
-    jump_address : utils.DUT.Input_pin
-    selector     : utils.DUT.Input_pin
-    enable       : utils.DUT.Input_pin
-    #pc           : utils.DUT.Output_pin
-    destination  : utils.DUT.Output_pin
+    clock: utils.DUT.Input_pin
+    jump_address: utils.DUT.Input_pin
+    selector: utils.DUT.Input_pin
+    enable: utils.DUT.Input_pin
+    # pc           : utils.DUT.Output_pin
+    destination: utils.DUT.Output_pin
 
 
 @cocotb.test()
@@ -58,12 +59,19 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC):
         await Timer(Decimal(20000), units="ns")
         utils.assert_output(dut.destination, destination, f"At clock {index}.")
 
+
 def test_MODULE_PC_synthesis():
     MODULE_PC.build_vhd()
-    #MODULE_PC.build_netlistsvg()
+    # MODULE_PC.build_netlistsvg()
 
-def test_MODULE_PC_case_1():
-    MODULE_PC.test_with(tb_MODULE_PC_case_1)
+
+def test_MODULE_PC_testcases():
+    MODULE_PC.test_with(
+        [
+            tb_MODULE_PC_case_1,
+        ]
+    )
+
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_MODULE_PC"])
+    pytest.main(["-k", os.path.basename(__file__)])

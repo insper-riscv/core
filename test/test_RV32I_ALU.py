@@ -130,16 +130,18 @@ def test_RV32I_ALU_synthesis():
 
 
 def test_RV32I_ALU_testcases():
-    RV32I_ALU.test_with([
-        tb_RV32I_ALU_case_1,
-        tb_RV32I_ALU_case_2,
-        tb_RV32I_ALU_case_3,
-        tb_RV32I_ALU_case_4,
-        tb_RV32I_ALU_case_5,
-        tb_RV32I_ALU_case_6,
-        tb_RV32I_ALU_case_7,
-        tb_RV32I_ALU_case_8,
-    ])
+    RV32I_ALU.test_with(
+        [
+            tb_RV32I_ALU_case_1,
+            tb_RV32I_ALU_case_2,
+            tb_RV32I_ALU_case_3,
+            tb_RV32I_ALU_case_4,
+            tb_RV32I_ALU_case_5,
+            tb_RV32I_ALU_case_6,
+            tb_RV32I_ALU_case_7,
+            tb_RV32I_ALU_case_8,
+        ]
+    )
 
 
 if __name__ == "__main__":

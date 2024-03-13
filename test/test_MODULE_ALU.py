@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -13,15 +14,15 @@ from test_RV32I_ALU import RV32I_ALU
 
 class MODULE_ALU(utils.DUT):
     CHILDREN = [GENERIC_MUX_4X1, GENERIC_MUX_4X1, RV32I_ALU, RV32I_ALU_CONTROLLER]
-    select_source_1       : utils.DUT.Input_pin
-    select_source_2       : utils.DUT.Input_pin
-    source_pc             : utils.DUT.Input_pin
-    source_register_1     : utils.DUT.Input_pin
-    source_register_2     : utils.DUT.Input_pin
-    source_immediate      : utils.DUT.Input_pin
-    select_function       : utils.DUT.Input_pin         
-    source_register_2_out : utils.DUT.Output_pin
-    destination           : utils.DUT.Output_pin
+    select_source_1: utils.DUT.Input_pin
+    select_source_2: utils.DUT.Input_pin
+    source_pc: utils.DUT.Input_pin
+    source_register_1: utils.DUT.Input_pin
+    source_register_2: utils.DUT.Input_pin
+    source_immediate: utils.DUT.Input_pin
+    select_function: utils.DUT.Input_pin
+    source_register_2_out: utils.DUT.Output_pin
+    destination: utils.DUT.Output_pin
 
 
 @cocotb.test()
@@ -40,6 +41,7 @@ async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU"):
     utils.assert_output(dut.destination, "00000000000000000001000000000000")
 
     await Timer(Decimal(1), units="ns")
+
 
 @cocotb.test()
 async def tb_MODULE_ALU_case_2(dut: "MODULE_ALU"):
@@ -61,15 +63,17 @@ async def tb_MODULE_ALU_case_2(dut: "MODULE_ALU"):
 
 def test_MODULE_ALU_synthesis():
     MODULE_ALU.build_vhd()
-    #MODULE_ALU.build_netlistsvg()
+    # MODULE_ALU.build_netlistsvg()
 
 
 def test_MODULE_ALU_case_1():
-    MODULE_ALU.test_with(tb_MODULE_ALU_case_1)
-
-def test_MODULE_ALU_case_2():
-    MODULE_ALU.test_with(tb_MODULE_ALU_case_2)
+    MODULE_ALU.test_with(
+        [
+            tb_MODULE_ALU_case_1,
+            tb_MODULE_ALU_case_2,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_MODULE_ALU"])
+    pytest.main(["-k", os.path.basename(__file__)])

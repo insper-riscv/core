@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -102,12 +103,16 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE):
 
 def test_RV32I_REGISTER_FILE_synthesis():
     RV32I_REGISTER_FILE.build_vhd()
-    #RV32I_REGISTER_FILE.build_netlistsvg()
+    # RV32I_REGISTER_FILE.build_netlistsvg()
 
 
-def test_RV32I_REGISTER_FILE_case_1():
-    RV32I_REGISTER_FILE.test_with(tb_RV32I_REGISTER_FILE_case_1)
+def test_RV32I_REGISTER_FILE_testcases():
+    RV32I_REGISTER_FILE.test_with(
+        [
+            tb_RV32I_REGISTER_FILE_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_RV32I_REGISTER_FILE"])
+    pytest.main(["-k", os.path.basename(__file__)])

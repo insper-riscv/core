@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 import pytest
@@ -15,8 +16,8 @@ class STAGE_MEM(utils.DUT):
 
 def test_STAGE_MEM_synthesis():
     STAGE_MEM.build_vhd()
-    #STAGE_MEM.build_netlistsvg()
+    # STAGE_MEM.build_netlistsvg()
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", f"test_STAGE_MEM"])
+    pytest.main(["-k", os.path.basename(__file__)])
