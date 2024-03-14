@@ -896,6 +896,30 @@ caso contrário, armazena 0.
 
 ---
 
+### `SLTIU` <Badge type="info" text="RV32I Base" />
+
+Set if Less Than Immediate Unisgned(Definir se Menor que Imediato Sem Sinal).
+
+Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal, 
+considerando que são sem sinal, em caso positivo, armazena 1 no registrador `rd`,
+caso contrário, armazena 0.
+
+#### Sintaxe
+  
+| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   immediate[11:0]   |    rs1    |   011    |    rd     | `0010011` |  
+
+#### Formato
+
+`slti rd, rs1, immediate`
+
+#### Implementação
+
+`x[rd] = x[rs1] < sext(immediate)`
+
+---
+
 ### `SLTU` <Badge type="info" text="RV32I Base" />
 
 Set if Less Than Unsigned(Definir se Menor que Sem Sinal).
