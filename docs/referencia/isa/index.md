@@ -1019,9 +1019,9 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
 
 ### `BGE` <Badge type="info" text="RV32I Base" />
 
-Branch if Less Than (Desvio se Menor que)
+Branch if Greater Than or Equal(Desvio se Maior ou Igual que)
 
-Verifica se o registrador `rs1` é menor ou igual ao registrador `rs2`, considerando que são números em complemento de dois, 
+Verifica se o registrador `rs1` é maior ou igual ao registrador `rs2`, considerando que são números em complemento de dois, 
 em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
@@ -1065,9 +1065,9 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
 
 ### `BGEU` <Badge type="info" text="RV32I Base" />
 
-Branch if Greater Than Unsigned(Desvio se Maior que Sem Sinal)
+Branch if Greater or Equal Than Unsigned(Desvio se Maior ou Igual que Sem Sinal)
 
-Verifica se o registrador `rs1` é maior que o registrador `rs2`, considerando que são números sem sinal,
+Verifica se o registrador `rs1` é maior ou igual que o registrador `rs2`, considerando que são números sem sinal,
 em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
