@@ -47,6 +47,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
             vhdl_sources=[f"src/{cls.__name__}.vhd"],
             hdl_toplevel=cls.__name__.lower(),
             always=True,
+            build_args=["--std=08"]
         )
 
     @classmethod
