@@ -52,18 +52,19 @@ package TOP_LEVEL_CONSTANTS is
 
     function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION;
 
-    type t_CONTROL_CLK_CLR_EN is record
-        clock  : std_logic;
-        clear  : std_logic;
-        enable : std_logic;
-    end record;
-
     type t_CONTROL_IF is record
         enable_stall  : std_logic;
         enable_flush  : std_logic;
         enable_jump   : std_logic;
         select_source : std_logic;
     end record;
+
+    constant NULL_CONTROL_IF : t_CONTROL_IF := (
+        enable_stall  => '0',
+        enable_flush  => '0',
+        enable_jump   => '0',
+        select_source => '0'
+    );
 
     type t_CONTROL_ID is record
         select_jump     : std_logic;
@@ -72,26 +73,54 @@ package TOP_LEVEL_CONSTANTS is
         enable_flux_ex  : std_logic;
     end record;
 
+    constant NULL_CONTROL_ID : t_CONTROL_ID := (
+        select_jump     => '0',
+        enable_jump     => '0',
+        enable_flush_id => '0',
+        enable_flux_ex  => '0'
+    );
+
     type t_CONTROL_EX is record
         select_source_1  : std_logic_vector(1 downto 0);
         select_source_2  : std_logic_vector(1 downto 0);
         select_operation : std_logic_vector(1 downto 0);
     end record;
 
+    constant NULL_CONTROL_EX : t_CONTROL_EX := (
+        select_source_1  => (others => '0'),
+        select_source_2  => (others => '0'),
+        select_operation => (others => '0')
+    );
+
     type t_CONTROL_MEM is record
         enable_read  : std_logic;
         enable_write : std_logic;
     end record;
+
+    constant NULL_CONTROL_MEM : t_CONTROL_MEM := (
+        enable_read  => '0',
+        enable_write => '0'
+    );
 
     type t_CONTROL_WB is record
         enable_destination : std_logic;
         select_destination : std_logic;
     end record;
 
+    constant NULL_CONTROL_WB : t_CONTROL_WB := (
+        enable_destination => '0',
+        select_destination => '1'
+    );
+
     type t_SIGNALS_IF_ID is record
         address_program  : t_DATA;
         data_instruction : t_DATA;
     end record;
+
+    constant NULL_SIGNALS_IF_ID : t_SIGNALS_IF_ID := (
+        address_program  => (others => '0'),
+        data_instruction => (others => '0')
+    );
 
     type t_SIGNALS_ID_EX is record
         control_ex         : t_CONTROL_EX;
@@ -107,6 +136,20 @@ package TOP_LEVEL_CONSTANTS is
         select_destination : t_REGISTER;
     end record;
 
+    constant NULL_SIGNALS_ID_EX : t_SIGNALS_ID_EX := (
+        control_ex         => NULL_CONTROL_EX,
+        control_mem        => NULL_CONTROL_MEM,
+        control_wb         => NULL_CONTROL_WB,
+        address_program    => (others => '0'),
+        data_source_1      => (others => '0'),
+        data_source_2      => (others => '0'),
+        data_immediate     => (others => '0'),
+        funct_7            => (others => '0'),
+        funct_3            => (others => '0'),
+        opcode             => (others => '0'),
+        select_destination => (others => '0')
+    );
+
     type t_SIGNALS_EX_MEM is record
         control_mem        : t_CONTROL_MEM;
         control_wb         : t_CONTROL_WB;
@@ -115,12 +158,27 @@ package TOP_LEVEL_CONSTANTS is
         select_destination : t_REGISTER;
     end record;
 
+    constant NULL_SIGNALS_EX_MEM : t_SIGNALS_EX_MEM := (
+        control_mem        => NULL_CONTROL_MEM,
+        control_wb         => NULL_CONTROL_WB,
+        address_pointer    => (others => '0'),
+        data_source_2      => (others => '0'),
+        select_destination => (others => '0')
+    );
+
     type t_SIGNALS_MEM_WB is record
         control_wb         : t_CONTROL_WB;
         data_memory        : t_DATA;
         data_destination   : t_DATA;
         select_destination : t_REGISTER;
     end record;
+
+    constant NULL_SIGNALS_MEM_WB : t_SIGNALS_MEM_WB := (
+        control_wb         => NULL_CONTROL_WB,
+        data_memory        => (others => '0'),
+        data_destination   => (others => '0'),
+        select_destination => (others => '0')
+    );
 
     -- RV32I Base Instruction Set functions
     constant FUNCTION_JALR    : t_FUNCTION := "000";
