@@ -17,7 +17,7 @@ entity TOP_LEVEL is
         DATA_PROGRAM    : in  t_DATA                       := (others => '0');
         DATA_MEMORY_IN  : in  t_DATA                       := (others => '0');
         SW              : in  std_logic_vector(3 downto 0) := (others => '0');
-        DATA_MEMORY_OUT : out  t_DATA;
+        DATA_MEMORY_OUT : out t_DATA;
         ADDRESS_PROGRAM : out t_DATA;
         ADDRESS_MEMORY  : out t_DATA;
         MEMORY_READ     : out std_logic;
@@ -62,7 +62,7 @@ begin
             address_program => signals_if_id.address_program
         );
 
-    ADDRESS_PROGRAM           <= signals_if_id.address_program;
+    ADDRESS_PROGRAM <= signals_if_id.address_program;
 
     PROGRAM_SOURCE : if EXTERNAL_PROGRAM = TRUE generate
         signals_if_id.data_instruction <= DATA_PROGRAM;
@@ -126,7 +126,7 @@ begin
     end generate;
 
     source_wb.control_wb         <= signals_mem_wb.control_wb;
-    source_wb.data_memory        <= signals_mem_wb.data_memory;
+    source_wb.data_memory        <= data_memory_in_0;
     source_wb.data_destination   <= signals_mem_wb.data_destination;
     source_wb.select_destination <= signals_mem_wb.select_destination;
 
