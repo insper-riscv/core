@@ -49,14 +49,12 @@ architecture RTL of TOP_LEVEL is
 begin
 
     LED(0) <= SW(1);
+    LED(7 downto 1) <= (others => '0');
 
     STAGE_IF : entity WORK.STAGE_IF
         port map (
-            control         => (
-                clock       => CLOCK,
-                clear       => '0',
-                enable      => '1'
-            ),
+            clock           => CLOCK,
+            enable          => '1',
             source          => control_if,
             address_jump    => address_jump,
             address_program => signals_if_id.address_program
@@ -76,11 +74,9 @@ begin
 
     STAGE_ID : entity WORK.STAGE_ID
         port map (
-            control             => (
-                clock           => CLOCK,
-                clear           => '0',
-                enable          => enable_destination
-            ),
+            clock               => CLOCK,
+            clear               => '0',
+            enable              => enable_destination,
             source              => signals_if_id,
             select_destination  => select_destination,
             data_destination    => data_destination,
@@ -91,6 +87,9 @@ begin
 
     STAGE_EX : entity WORK.STAGE_EX
         port map (
+            clock       => CLOCK,
+            clear       => '0',
+            enable      => '1',
             source      => signals_id_ex,
             destination => signals_ex_mem
         );
@@ -98,6 +97,8 @@ begin
     STAGE_MEM : entity WORK.STAGE_MEM
         port map (
             clock          => CLOCK,
+            clear          => '0',
+            enable         => '1',
             source         => signals_ex_mem,
             control_memory => control_memory,
             address_memory => address_memory_0,
@@ -132,6 +133,9 @@ begin
 
     STAGE_WB : entity WORK.STAGE_WB
         port map (
+            clock              => CLOCK,
+            clear              => '0',
+            enable             => '1',
             enable_destination => enable_destination,
             source             => source_wb,
             select_destination => select_destination,
