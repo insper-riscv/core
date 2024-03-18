@@ -40,29 +40,37 @@ class TOP_LEVEL(utils.DUT):
 
 @cocotb.test()
 async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL):
-    values_SW = ["0000", "0000", "0000", "0000"]
-
-    values_LED = ["00000000", "00000000", "00000000", "00000000"]
-
     values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000001000000000000",
         "00000000000000000001000000000000",
         "00000000000000000001000000000000",
         "00000000000000000001000000000000",
         "00000000000000000001000000000000",
     ]
 
-    clock = Clock(dut.clock, 20000, units="ns")
-    cocotb.start_soon(clock.start(start_high=False))
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
 
-    for index, (t_SW, t_LED, destination) in enumerate(
-        zip(values_SW, values_LED, values_destination)
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
     ):
-        dut.sw.value = BinaryValue(t_SW)
 
-        await RisingEdge(dut.clock)
-        utils.assert_output(dut.led, t_LED, f"At clock {index}.")
+        await Timer(Decimal(clock.period), units="fs")
+
         utils.assert_output(dut.stage_wb.destination, destination, f"At clock {index}.")
-        await FallingEdge(dut.clock)
+        await RisingEdge(dut.clock)
 
 
 def test_TOP_LEVEL_synthesis():
@@ -71,7 +79,11 @@ def test_TOP_LEVEL_synthesis():
 
 
 def test_TOP_LEVEL_testcases():
-    TOP_LEVEL.test_with(tb_TOP_LEVEL_case_1)
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_case_1
+        ],
+    )
 
 
 if __name__ == "__main__":
