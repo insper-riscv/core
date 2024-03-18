@@ -50,8 +50,10 @@ begin
     );
 
     process(source.data_instruction) is
-        variable instruction : t_RV32I_INSTRUCTION := to_RV32I_INSTRUCTION(source.data_instruction);
+        variable instruction : t_RV32I_INSTRUCTION;
     begin
+        instruction := to_RV32I_INSTRUCTION(source.data_instruction);
+
         signals_ex.data_source_1      <= data_source_1;
         signals_ex.funct_7            <= instruction.funct_7;
         signals_ex.funct_3            <= instruction.funct_3;
