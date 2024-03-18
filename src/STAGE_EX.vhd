@@ -7,41 +7,40 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_EX is
   
     port (
-        source : in t_ID_EX_SIGNALS;
-        destination : out t_EX_MEM_SIGNALS
+        source      : in  t_SIGNALS_ID_EX;
+        destination : out t_SIGNALS_EX_MEM
     );
 
 end entity;
 
 architecture RTL of STAGE_EX is
 
-        signal select_function : std_logic_vector(3 downto 0);
+    signal select_function : std_logic_vector(3 downto 0);
 
 begin
 
-    MODULE_ALU : entity WORK.MODULE_ALU
-        port map (
-            select_source_1        => source.ex_signals.select_source_1,
-            select_source_2        => source.ex_signals.select_source_2,
-            source_pc              => source.pc,
-            source_register_1      => source.source_1,
-            source_register_2      => source.source_2,
-            source_immediate       => source.immediate,
-            select_function        => select_function,
-            source_register_2_out  => destination.source_2,
-            destination            => destination.pointer
-        );
-
     MODULE_ALU_CONTROLLER : entity WORK.MODULE_ALU_CONTROLLER
         port map (
-            opcode                 => source.opcode,
-            function_3             => source.funct_3,
-            function_7             => source.funct_7,
-            destination            => select_function
+            opcode      => source.opcode,
+            function_3  => source.funct_3,
+            function_7  => source.funct_7,
+            destination => select_function
         );
 
-    destination.mem_signals <= source.mem_signals;
-    destination.wb_signals <= source.wb_signals;
+    MODULE_ALU : entity WORK.MODULE_ALU
+        port map (
+            select_source_1 => source.control_ex.select_source_1,
+            select_source_2 => source.control_ex.select_source_2,
+            address_program => source.address_program,
+            data_source_1   => source.data_source_1,
+            data_source_2   => source.data_source_2,
+            data_immediate  => source.data_immediate,
+            select_function => select_function,
+            destination     => destination.address_pointer
+        );
+
+    destination.control_mem        <= source.control_mem;
+    destination.control_wb         <= source.control_wb;
     destination.select_destination <= source.select_destination;
 
 end architecture;

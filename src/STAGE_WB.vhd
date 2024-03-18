@@ -7,10 +7,10 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_WB is
   
     port (
-        source           : in t_MEM_WB_SIGNALS;
-        enable           : out std_logic;
-        address_register : out std_logic_vector(4 downto 0);
-        destination      : out std_logic_vector(XLEN_RANGE)
+        source             : in  t_SIGNALS_MEM_WB;
+        enable_destination : out std_logic;
+        select_destination : out t_REGISTER;
+        destination        : out t_DATA
     );
 
 end entity;
@@ -23,10 +23,12 @@ begin
 
     MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK
         port map (
-            source_memory => source.destination,
-            source_ex     => source.address,
-            selector      => source.wb_signals.select_destination,
+            source_memory => source.data_memory,
+            source_ex     => source.data_destination,
+            selector      => source.control_wb.select_destination,
             destination   => destination
         );
+
+    enable_destination <= source.control_wb.enable_destination;
 
 end architecture;

@@ -13,14 +13,15 @@ entity MODULE_CONTROL_UNIT is
 
     port (
         instruction      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        pc_out           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_1    : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        address_program  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        data_source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         --source_id        : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        jump_address     : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         immediate_source : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        control_if       : out t_IF_SIGNALS;
-        control_ex       : out t_EX_SIGNALS;
-        control_mem      : out t_MEM_SIGNALS;
-        control_wb       : out t_WB_SIGNALS
+        control_if       : out t_CONTROL_IF;
+        control_ex       : out t_CONTROL_EX;
+        control_mem      : out t_CONTROL_MEM;
+        control_wb       : out t_CONTROL_WB
     );
 
 end entity;
@@ -30,7 +31,7 @@ architecture RTL of MODULE_CONTROL_UNIT is
         signal immediate_tmp : std_logic_vector((DATA_WIDTH - 1) downto 0);
         signal adder_out_1   : std_logic_vector((DATA_WIDTH - 1) downto 0);
         signal adder_out_2   : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal control_id    : t_ID_SIGNALS;
+        signal control_id    : t_CONTROL_ID;
 
 begin
 
@@ -47,24 +48,24 @@ begin
 
     ADDER_1 : entity WORK.GENERIC_ADDER
         port map (
-            source_1 => pc_out,
-            source_2 => immediate_tmp,
+            source_1    => address_program,
+            source_2    => immediate_tmp,
             destination => adder_out_1
         );
 
     ADDER_2 : entity WORK.GENERIC_ADDER
         port map (
-            source_1 => immediate_tmp,
-            source_2 => data_source_1,
+            source_1    => immediate_tmp,
+            source_2    => data_source_1,
             destination => adder_out_2
         );
 
     MUX : entity WORK.GENERIC_MUX_2X1
         port map (
-            source_1 => adder_out_1,
-            source_2 => adder_out_2,
-            selector => control_id.select_jump,
-            destination => control_if.source
+            source_1    => adder_out_1,
+            source_2    => adder_out_2,
+            selector    => control_id.select_jump,
+            destination => jump_address
         );   
 
     immediate_source <= immediate_tmp;

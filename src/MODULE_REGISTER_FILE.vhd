@@ -12,13 +12,13 @@ entity MODULE_REGISTER_FILE is
     );
 
     port (
-        clock               : in  std_logic;
-        enable              : in  std_logic := '0';
-        address_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        data_destination    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        instruction         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_1       : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_2       : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        clock              : in  std_logic;
+        enable             : in  std_logic := '0';
+        select_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        data_destination   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        instruction        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        data_source_1      : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        data_source_2      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
@@ -27,11 +27,11 @@ architecture RTL of MODULE_REGISTER_FILE is
 
 begin   
 
-    REGISTER_BANK : entity WORK.RV32I_REGISTER_FILE
+    REGISTER_FILE : entity WORK.RV32I_REGISTER_FILE
         port map (
             clock               => clock,
             enable              => enable,
-            address_destination => address_destination,
+            address_destination => select_destination,
             address_source_1    => instruction(19 downto 15),
             address_source_2    => instruction(24 downto 20),
             data_destination    => data_destination,
