@@ -10,7 +10,7 @@ entity GENERIC_ROM IS
     generic (
         DATA_WIDTH        : natural := XLEN;
         ADDRESS_WIDTH     : natural := XLEN;
-        ADDRESSABLE_WIDTH : natural := 10
+        ADDRESSABLE_WIDTH : natural := 7
     );
 
     port (
@@ -39,6 +39,15 @@ architecture RTL of GENERIC_ROM is
 
 begin
 
-    destination <= memory_ROM(to_integer(unsigned(address)));
+    process(address)
+        variable index : natural;
+    begin
+        index := to_integer(unsigned(address));
+        if (index < memory_ROM'length) then
+            destination <= memory_ROM(index);
+        else
+            destination <= (others => '0');
+        end if;
+    end process;
 
 end architecture;
