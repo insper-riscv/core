@@ -30,11 +30,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/rv32i_alu_netlist.svg" alt="Diagrama de RTL da Unidade Lógia Aritmética" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

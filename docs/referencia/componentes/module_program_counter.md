@@ -2,7 +2,7 @@
 outline: 2
 ---
 
-# Contador de Programa <Badge type="info" text="MODULE_PROGRAM_COUNTER.vhd"/>
+# Contador de Programa <Badge type="info" text="MODULE_pc.vhd"/>
 
 ::: danger TO DO
 
@@ -30,11 +30,7 @@ Diagrama a nível de registradores
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/module_pc_netlist.svg" alt="Diagrama de RTL do Contador de Programa" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

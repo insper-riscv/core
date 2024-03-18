@@ -4,11 +4,7 @@ outline: 2
 
 # Acesso a Memória <Badge type="info" text="STAGE_MEM.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![](/images/referencia/componentes/stage_mem_rtl.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_MEM.vhd).
 
@@ -30,7 +26,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-![](/images/referencia/componentes/stage_mem_rtl.drawio.svg)
+<img src="../../public/images/referencia/componentes/stage_mem_netlist.svg" alt="Diagrama de RTL do Acesso a Memória" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

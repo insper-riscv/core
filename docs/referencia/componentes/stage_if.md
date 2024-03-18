@@ -4,11 +4,8 @@ outline: 2
 
 # Busca Instrução <Badge type="info" text="STAGE_IF.vhd"/>
 
-::: danger TO DO
+![](/images/referencia/componentes/stage_if_rtl.drawio.svg)
 
-Diagrama de portas
-
-:::
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_IF.vhd).
 
@@ -30,7 +27,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-![](/images/referencia/componentes/stage_if_rtl.drawio.svg)
+<img src="../../public/images/referencia/componentes/stage_if_netlist.svg" alt="Diagrama de RTL do Busca Instrução" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

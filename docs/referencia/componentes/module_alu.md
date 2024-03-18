@@ -30,11 +30,7 @@ Diagrama a nível de registradores
 
 ## Diagrama RTL
 
-::: danger TO DO
-
-Diagrama a nível de registradores
-
-:::
+<img src="../../public/images/referencia/componentes/module_alu_netlist.svg" alt="Diagrama de RTL da ULA" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

@@ -4,11 +4,7 @@ outline: 2
 
 # Executa <Badge type="info" text="STAGE_EX.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![](/images/referencia/componentes/stage_ex_rtl.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_EX.vhd).
 
@@ -30,7 +26,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-![](/images/referencia/componentes/stage_ex_rtl.drawio.svg)
+<img src="../../public/images/referencia/componentes/stage_ex_netlist.svg" alt="Diagrama de RTL do Executa" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

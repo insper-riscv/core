@@ -82,9 +82,6 @@ export default {
                             }, {
                                 text: 'Unidade de Controle da ULA',
                                 link: '/referencia/componentes/module_alu_controller',
-                            }, {
-                                text: 'Memória',
-                                link: '/referencia/componentes/module_memory',
                             },
                         ],
                     }, {
