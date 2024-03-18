@@ -41,22 +41,11 @@ class TOP_LEVEL(utils.DUT):
 @cocotb.test()
 async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL):
     values_destination = [
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000001000000000000",
         "00000000000000000001000000000000",
         "00000000000000000001000000000000",
         "00000000000000000001000000000000",
-        "00000000000000000001000000000000",
+        "00000000000000000000000000000000",
     ]
 
     clock = Clock(dut.clock, 2_000_000_000, units="fs")
@@ -67,10 +56,10 @@ async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL):
         zip(values_destination)
     ):
 
-        await Timer(Decimal(clock.period), units="fs")
+        await RisingEdge(dut.clock)
 
         utils.assert_output(dut.stage_wb.destination, destination, f"At clock {index}.")
-        await RisingEdge(dut.clock)
+        await Timer(Decimal(clock.period), units="fs")
 
 
 def test_TOP_LEVEL_synthesis():

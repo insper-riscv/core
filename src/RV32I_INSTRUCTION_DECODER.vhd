@@ -34,7 +34,7 @@ begin
     control_if.enable_flush     <= '0';
     control_if.enable_jump      <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                                    '0';
-    control_if.select_source    <= '0';
+    control_if.select_source    <= '1';
 
     control_id.select_jump     <= '0';
     control_id.enable_jump     <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
