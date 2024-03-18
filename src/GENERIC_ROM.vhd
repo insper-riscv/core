@@ -21,7 +21,7 @@ end entity;
 
 architecture RTL of GENERIC_ROM is
 
-    type memory_block is array(0 TO 2**ADDRESSABLE_WIDTH - 1) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
+    type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
 
     function memory_init return memory_block is
         variable tmp : memory_block := (others => (others => '0'));
@@ -43,7 +43,7 @@ begin
         variable index : natural;
     begin
         index := to_integer(unsigned(address));
-        if (index < memory_ROM'length) then
+        if (index < (2**ADDRESSABLE_WIDTH - 1)) then
             destination <= memory_ROM(index);
         else
             destination <= (others => '0');
