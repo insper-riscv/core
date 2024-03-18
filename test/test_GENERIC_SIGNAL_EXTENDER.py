@@ -10,9 +10,9 @@ import utils
 
 
 class GENERIC_SIGNAL_EXTENDER(utils.DUT):
-    source: utils.DUT.Input_pin
-    enable_unsigned: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    source = utils.DUT.Input_pin
+    enable_unsigned = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
 
 def test_GENERIC_SIGNAL_EXTENDER_synthesis():

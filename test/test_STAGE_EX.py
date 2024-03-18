@@ -12,7 +12,11 @@ from test_MODULE_ALU_CONTROLLER import MODULE_ALU_CONTROLLER
 
 
 class STAGE_EX(utils.DUT):
-    CHILDREN = [MODULE_ALU, MODULE_ALU_CONTROLLER]
+    source = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
+
+    module_alu_controller = MODULE_ALU_CONTROLLER
+    module_alu = MODULE_ALU
 
 
 def test_STAGE_EX_synthesis():

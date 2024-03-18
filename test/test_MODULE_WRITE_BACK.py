@@ -11,12 +11,12 @@ from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class MODULE_WRITE_BACK(utils.DUT):
-    CHILDREN = [GENERIC_MUX_2X1]
-    source_memory : utils.DUT.Input_pin
-    source_ex : utils.DUT.Input_pin
-    selector : utils.DUT.Input_pin
-    destination : utils.DUT.Output_pin
+    source_memory = utils.DUT.Input_pin
+    source_ex = utils.DUT.Input_pin
+    selector = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
+    mux = GENERIC_MUX_2X1
 
 
 @cocotb.test()

@@ -12,8 +12,16 @@ from test_MODULE_CONTROL_UNIT import MODULE_CONTROL_UNIT
 
 
 class STAGE_ID(utils.DUT):
-    CHILDREN = [MODULE_REGISTER_FILE, MODULE_CONTROL_UNIT]
+    control = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
+    select_destination = utils.DUT.Input_pin
+    data_destination = utils.DUT.Input_pin
+    address_jump = utils.DUT.Output_pin
+    control_if = utils.DUT.Output_pin
+    signals_ex = utils.DUT.Output_pin
 
+    module_control_unit = MODULE_CONTROL_UNIT
+    module_register_file = MODULE_REGISTER_FILE
 
 def test_STAGE_ID_synthesis():
     STAGE_ID.build_vhd()

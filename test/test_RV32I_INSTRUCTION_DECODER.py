@@ -10,13 +10,13 @@ import utils
 
 
 class RV32I_INSTRUCTION_DECODER(utils.DUT):
-    instruction: utils.DUT.Input_pin
-    control_if: utils.DUT.Output_pin
-    control_id: utils.DUT.Output_pin
-    control_ex: utils.DUT.Output_pin
-    control_mem: utils.DUT.Output_pin
-    control_wb: utils.DUT.Output_pin
-    immediate: utils.DUT.Output_pin
+    instruction = utils.DUT.Input_pin
+    control_if = utils.DUT.Output_pin
+    control_id = utils.DUT.Output_pin
+    control_ex = utils.DUT.Output_pin
+    control_mem = utils.DUT.Output_pin
+    control_wb = utils.DUT.Output_pin
+    immediate = utils.DUT.Output_pin
 
 
 @cocotb.test()

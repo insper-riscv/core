@@ -11,11 +11,11 @@ import utils
 
 
 class GENERIC_FLIP_FLOP(utils.DUT):
-    clock: utils.DUT.Input_pin
-    clear: utils.DUT.Input_pin
-    enable: utils.DUT.Input_pin
-    source: utils.DUT.Input_pin
-    state: utils.DUT.Output_pin
+    clock = utils.DUT.Input_pin
+    clear = utils.DUT.Input_pin
+    enable = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
+    state = utils.DUT.Output_pin
 
 
 @cocotb.test()

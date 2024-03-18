@@ -8,6 +8,8 @@ from cocotb.triggers import Timer, RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
+from test_GENERIC_ROM import GENERIC_ROM
+from test_GENERIC_RAM import GENERIC_RAM
 from test_STAGE_IF import STAGE_IF
 from test_STAGE_ID import STAGE_ID
 from test_STAGE_EX import STAGE_EX
@@ -16,11 +18,24 @@ from test_STAGE_WB import STAGE_WB
 
 
 class TOP_LEVEL(utils.DUT):
-    CHILDREN = [STAGE_IF, STAGE_ID, STAGE_EX, STAGE_MEM, STAGE_WB]
-    CLOCK: utils.DUT.Input_pin
-    SW: utils.DUT.Input_pin
-    LED: utils.DUT.Output_pin
-    destination: utils.DUT.Output_pin
+    clock = utils.DUT.Input_pin
+    data_program = utils.DUT.Input_pin
+    data_memory_in = utils.DUT.Input_pin
+    sw = utils.DUT.Input_pin
+    data_memory_out = utils.DUT.Output_pin
+    address_program = utils.DUT.Output_pin
+    address_memory = utils.DUT.Output_pin
+    memory_read = utils.DUT.Output_pin
+    memory_write = utils.DUT.Output_pin
+    led = utils.DUT.Output_pin
+
+    rom = GENERIC_ROM
+    ram = GENERIC_RAM
+    stage_if = STAGE_IF
+    stage_id = STAGE_ID
+    stage_ex = STAGE_EX
+    stage_mem = STAGE_MEM
+    stage_wb = STAGE_WB
 
 
 @cocotb.test()
@@ -36,18 +51,18 @@ async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL):
         "00000000000000000001000000000000",
     ]
 
-    clock = Clock(dut.CLOCK, 20000, units="ns")
+    clock = Clock(dut.clock, 20000, units="ns")
     cocotb.start_soon(clock.start(start_high=False))
 
     for index, (t_SW, t_LED, destination) in enumerate(
         zip(values_SW, values_LED, values_destination)
     ):
-        dut.SW.value = BinaryValue(t_SW)
+        dut.sw.value = BinaryValue(t_SW)
 
-        await RisingEdge(dut.CLOCK)
-        utils.assert_output(dut.LED, t_LED, f"At clock {index}.")
-        utils.assert_output(dut.destination, destination, f"At clock {index}.")
-        await FallingEdge(dut.CLOCK)
+        await RisingEdge(dut.clock)
+        utils.assert_output(dut.led, t_LED, f"At clock {index}.")
+        utils.assert_output(dut.stage_wb.destination, destination, f"At clock {index}.")
+        await FallingEdge(dut.clock)
 
 
 def test_TOP_LEVEL_synthesis():

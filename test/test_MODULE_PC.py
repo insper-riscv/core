@@ -14,13 +14,15 @@ from test_GENERIC_ADDER import GENERIC_ADDER
 
 
 class MODULE_PC(utils.DUT):
-    CHILDREN = [GENERIC_MUX_2X1, GENERIC_REGISTER, GENERIC_ADDER]
-    clock: utils.DUT.Input_pin
-    jump_address: utils.DUT.Input_pin
-    selector: utils.DUT.Input_pin
-    enable: utils.DUT.Input_pin
-    # pc           : utils.DUT.Output_pin
-    destination: utils.DUT.Output_pin
+    clock = utils.DUT.Input_pin
+    jump_address = utils.DUT.Input_pin
+    selector = utils.DUT.Input_pin
+    enable = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
+
+    mux_register_alu_1 = GENERIC_MUX_2X1
+    pc_register = GENERIC_REGISTER
+    adder = GENERIC_ADDER
 
 
 @cocotb.test()

@@ -12,31 +12,35 @@ from test_RV32I_REGISTER_FILE import RV32I_REGISTER_FILE
 
 
 class MODULE_REGISTER_FILE(utils.DUT):
-    CHILDREN = [RV32I_REGISTER_FILE]
-    clock : utils.DUT.Input_pin
-    enable : utils.DUT.Input_pin
-    address_destination : utils.DUT.Input_pin
-    data_destination : utils.DUT.Input_pin
-    instruction : utils.DUT.Input_pin
-    data_source_1 : utils.DUT.Output_pin
-    data_source_2 : utils.DUT.Output_pin
+    clock = utils.DUT.Input_pin
+    enable = utils.DUT.Input_pin
+    select_destination = utils.DUT.Input_pin
+    data_destination = utils.DUT.Input_pin
+    instruction = utils.DUT.Input_pin
+    data_source_1 = utils.DUT.Output_pin
+    data_source_2 = utils.DUT.Output_pin
+
+    register_file = RV32I_REGISTER_FILE
 
 @cocotb.test()
 async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE):
-    values_enable = ["1", "1", "1", "1", "1"]
-    values_address_destination = [
+    values_select_destination = [
         "00001",
         "00011",
         "00111",
         "01111",
         "11111",
+        "00001",
+        "00011",
     ]
     values_instruction = [
-        "00000000000100000000111110110011",
-        "00000000001100001000111110110011",
-        "00000000011100011000111110110011",
-        "00000000111100111000111110110011",
-        "00000001111101111000111110110011",
+        "0000000" + "00001" + "00000" + "000000000000000",
+        "0000000" + "00011" + "00001" + "000000000000000",
+        "0000000" + "00111" + "00011" + "000000000000000",
+        "0000000" + "01111" + "00111" + "000000000000000",
+        "0000000" + "11111" + "01111" + "000000000000000",
+        "0000000" + "00000" + "11111" + "000000000000000",
+        "0000000" + "00001" + "00000" + "000000000000000",
     ]
     values_data_destination = [
         "11111111111111110000000000000000",
@@ -44,51 +48,57 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE):
         "11111111000000000000000011111111",
         "00000000111111111111111100000000",
         "01111111111111111111111111111110",
+        "11111111111111111000000000000000",
+        "00000000000000001111111111111111",
     ]
     values_data_source_1 = [
         "00000000000000000000000000000000",
-        "11111111111111110000000000000000",
-        "00000000000000001111111111111111",
-        "11111111000000000000000011111111",
-        "00000000111111111111111100000000",
+        "00000000000000000000000000000000",
+        values_data_destination[0],
+        values_data_destination[1],
+        values_data_destination[2],
+        values_data_destination[3],
+        values_data_destination[4],
     ]
     values_data_source_2 = [
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
+        values_data_destination[0],
+        values_data_destination[1],
+        values_data_destination[2],
+        values_data_destination[3],
+        values_data_destination[4],
         "00000000000000000000000000000000",
     ]
     clock = Clock(dut.clock, 20000, units="ns")
 
     cocotb.start_soon(clock.start(start_high=False))
+    await RisingEdge(dut.clock)
 
     for index, (
-        enable,
-        address_destination,
+        select_destination,
         instruction,
-        data_destination,
         data_source_1,
         data_source_2,
+        data_destination,
     ) in enumerate(
         zip(
-            values_enable,
-            values_address_destination,
+            values_select_destination,
             values_instruction,
-            values_data_destination,
             values_data_source_1,
             values_data_source_2,
+            values_data_destination,
         )
     ):
-        dut.enable.value = BinaryValue(enable)
-        dut.address_destination.value = BinaryValue(address_destination)
+        dut.enable.value = BinaryValue("1")
+        dut.select_destination.value = BinaryValue(select_destination)
         dut.instruction.value = BinaryValue(instruction)
         dut.data_destination.value = BinaryValue(data_destination)
 
-        await RisingEdge(dut.clock)
-        await Timer(Decimal(20000), units="ns")
         utils.assert_output(dut.data_source_1, data_source_1, f"At clock {index}.")
         utils.assert_output(dut.data_source_2, data_source_2, f"At clock {index}.")
+
+        await RisingEdge(dut.clock)
+        await Timer(Decimal(20000), units="ns")
 
 
 def test_MODULE_REGISTER_FILE_synthesis():

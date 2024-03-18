@@ -11,11 +11,12 @@ from test_RV32I_ALU_CONTROLLER import RV32I_ALU_CONTROLLER
 
 
 class MODULE_ALU_CONTROLLER(utils.DUT):
-    CHILDREN = [RV32I_ALU_CONTROLLER]
-    opcode: utils.DUT.Input_pin
-    function_3: utils.DUT.Input_pin
-    function_7: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    opcode = utils.DUT.Input_pin
+    function_3 = utils.DUT.Input_pin
+    function_7 = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
+
+    alu_controller = RV32I_ALU_CONTROLLER
 
 
 @cocotb.test()
@@ -62,7 +63,7 @@ def test_MODULE_ALU_CONTROLLER_synthesis():
     # MODULE_ALU_CONTROLLER.build_netlistsvg()
 
 
-def test_MODULE_ALU_CONTROLLER_case_1():
+def test_MODULE_ALU_CONTROLLER_testcases():
     MODULE_ALU_CONTROLLER.test_with(
         [
             tb_MODULE_ALU_CONTROLLER_case_1,

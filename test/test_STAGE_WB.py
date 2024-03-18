@@ -11,7 +11,12 @@ from test_MODULE_WRITE_BACK import MODULE_WRITE_BACK
 
 
 class STAGE_WB(utils.DUT):
-    CHILDREN = [MODULE_WRITE_BACK]
+    source = utils.DUT.Input_pin
+    enable_destination = utils.DUT.Output_pin
+    select_destination = utils.DUT.Output_pin
+    destination = utils.DUT.Output_pin
+
+    module_write_back = MODULE_WRITE_BACK
 
 
 def test_STAGE_WB_synthesis():

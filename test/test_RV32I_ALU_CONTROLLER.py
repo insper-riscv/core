@@ -10,10 +10,10 @@ import utils
 
 
 class RV32I_ALU_CONTROLLER(utils.DUT):
-    opcode: utils.DUT.Input_pin
-    function_3: utils.DUT.Input_pin
-    function_7: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    opcode = utils.DUT.Input_pin
+    function_3 = utils.DUT.Input_pin
+    function_7 = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
 
 @cocotb.test()
