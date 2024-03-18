@@ -7,9 +7,12 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_MEM is
   
     port (
-        clock       : in  std_logic;
-        source      : in t_EX_MEM_SIGNALS;
-        destination : out t_MEM_WB_SIGNALS
+        clock          : in  std_logic;
+        source         : in  t_SIGNALS_EX_MEM;
+        control_memory : out t_CONTROL_MEM;
+        address_memory : out t_DATA;
+        data_memory    : out t_DATA;
+        destination    : out t_SIGNALS_MEM_WB
     );
 
 end entity;
@@ -20,19 +23,14 @@ architecture RTL of STAGE_MEM is
 
 begin
 
-    MODULE_MEMORY : entity WORK.MODULE_MEMORY
-        port map (
-            clock             => clock,
-            enable            => '1',      
-            enable_read       => source.mem_signals.enable_read,
-            enable_write      => source.mem_signals.enable_write,
-            source_ex         => source.pointer,    
-            register_source_2 => source.source_2,      
-            destination       => destination.destination
-        );
-    
-    destination.address <= source.pointer;
+    destination.control_wb         <= source.control_wb;
+
+    control_memory.enable_read     <= source.control_mem.enable_read;
+    control_memory.enable_write    <= source.control_mem.enable_write;
+
+    address_memory                 <= source.address_pointer;
+    data_memory                    <= source.data_source_2;
+
     destination.select_destination <= source.select_destination;
-    destination.wb_signals <= source.wb_signals;
 
 end architecture;
