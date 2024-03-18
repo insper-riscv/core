@@ -36,7 +36,7 @@ begin
         UPDATE : process(source, clear, clock, enable)
         begin
             if (rising_edge(clock)) then
-                SET_RESET : if (enable = '1') then
+                SET_RESET : if (enable = '0') then
                     source_0 <= source;
                 elsif (clear = '1') then
                     source_0 <= NULL_SIGNALS_IF_ID;
