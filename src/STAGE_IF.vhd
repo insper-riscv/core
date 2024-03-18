@@ -8,7 +8,8 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_IF is
 
     port (
-        control         : in  t_CONTROL_CLK_CLR_EN;
+        clock           : in  std_logic;
+        enable          : in  std_logic;
         source          : in  t_CONTROL_IF;
         address_jump    : in  t_DATA;
         address_program : out t_DATA
@@ -18,21 +19,21 @@ end entity;
 
 architecture RTL of STAGE_IF is
 
-    signal enable : std_logic;
+    signal enable_0 : std_logic;
 
 begin
 
     process(source.enable_stall) is
     begin
-        enable <= control.enable AND NOT source.enable_stall;
+        enable_0 <= enable AND NOT source.enable_stall;
     end process;
 
     MODULE_PC : entity WORK.MODULE_PC
         port map (
-            clock        => control.clock,
+            clock        => clock,
             jump_address => address_jump,
             selector     => source.select_source,
-            enable       => enable,
+            enable       => enable_0,
             destination  => address_program
         );
 
