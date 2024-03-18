@@ -1,3 +1,4 @@
+from inspect import isclass
 import os
 import typing as T
 import subprocess
@@ -18,7 +19,6 @@ runner = cocotb.runner.get_runner("ghdl")
 
 
 class DUT(T.Type[cocotb.handle.HierarchyObject]):
-    CHILDREN: T.List[T.Type["DUT"]] = []
     _log: T.Any
 
     class Input_pin(T.Type[cocotb.handle.ModifiableObject]):
@@ -35,8 +35,26 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         return case.__name__
 
     @classmethod
+    def _get_children(cls):
+        children: T.Set[T.Type[DUT]] = set()
+
+        for key in dir(cls):
+            if key.startswith("_"):
+                continue
+
+            value = getattr(cls, key)
+
+            if not isclass(value):
+                continue
+
+            if issubclass(value, DUT):
+                children.add(value)
+
+        return children
+
+    @classmethod
     def build_vhd(cls):
-        for child in cls.CHILDREN:
+        for child in cls._get_children():
             if child.__name__ in _BUILT:
                 continue
 
@@ -44,10 +62,14 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
             _BUILT.append(child.__name__)
 
         runner.build(
-            vhdl_sources=[f"src/{cls.__name__}.vhd"],
-            hdl_toplevel=cls.__name__.lower(),
             always=True,
-            build_args=["--std=08"]
+            build_args=["--std=08"],
+            vhdl_sources=[
+                "src/TOP_LEVEL_CONSTANTS.vhd",
+                f"src/{cls.__name__}.vhd",
+            ],
+            hdl_toplevel=cls.__name__.lower(),
+            hdl_library="work",
         )
 
     @classmethod
@@ -90,18 +112,21 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
     def test_with(
         cls,
         testcase: _TESTCASE_TYPE,
-        parameters: T.Optional[T.Mapping[str, object]] = None,
+        parameters: T.Mapping[str, object] = {},
     ):
         runner.test(
             hdl_toplevel=cls.__name__.lower(),
+            test_args=["--std=08"],
             test_module="test_" + cls.__name__,
             testcase=DUT._get_testcase_names(testcase),
-            parameters=parameters,  # type: ignore
+            parameters=parameters,
             hdl_toplevel_lang="vhdl",
+            hdl_toplevel_library="work",
+            waves=True,
         )
 
 
-def assert_output(pin: DUT.Output_pin, value: str, message: str = ""):
+def assert_output(pin: T.Type[DUT.Output_pin], value: str, message: str = ""):
     condition = pin.value.binstr == value
 
     assert condition, f"Expected {value} and obtained {pin.value.binstr}. {message}"
