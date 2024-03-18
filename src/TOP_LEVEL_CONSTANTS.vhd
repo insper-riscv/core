@@ -10,6 +10,7 @@ package TOP_LEVEL_CONSTANTS is
 
     constant XLEN : natural := 32;
     subtype XLEN_RANGE is natural range (XLEN - 1) downto 0;
+    subtype t_DATA is std_logic_vector(XLEN_RANGE);
 
     subtype INSTRUCTION_RANGE is natural range 31 downto 0;
     type RV32I_INSTRUCTION_TYPE is (
@@ -30,89 +31,95 @@ package TOP_LEVEL_CONSTANTS is
     subtype OPCODE_RANGE is natural range 6 downto 2;
     subtype t_OPCODE is std_logic_vector(OPCODE_RANGE);
 
+    subtype REGISTER_RANGE is natural range 4 downto 0;
+    subtype t_REGISTER is std_logic_vector(REGISTER_RANGE);
+
     type t_RV32I_INSTRUCTION is record
         funct_3            : t_FUNCTION;
-        funct_7            : std_logic_vector( 6 downto 0);
-        select_source_2    : std_logic_vector( 4 downto 0);
-        select_source_1    : std_logic_vector( 4 downto 0);
-        select_destination : std_logic_vector( 4 downto 0);
-        immediate_i        : std_logic_vector(31 downto 0);
-        immediate_s        : std_logic_vector(31 downto 0);
-        immediate_b        : std_logic_vector(31 downto 0);
-        immediate_u        : std_logic_vector(31 downto 0);
-        immediate_j        : std_logic_vector(31 downto 0);
-        shamt              : std_logic_vector(31 downto 0);
+        funct_7            : std_logic_vector(6 downto 0);
+        select_source_2    : t_REGISTER;
+        select_source_1    : t_REGISTER;
+        select_destination : t_REGISTER;
+        immediate_i        : t_DATA;
+        immediate_s        : t_DATA;
+        immediate_b        : t_DATA;
+        immediate_u        : t_DATA;
+        immediate_j        : t_DATA;
+        shamt              : t_DATA;
         opcode             : t_OPCODE;
         encoding           : RV32I_INSTRUCTION_TYPE;
     end record;
 
     function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION;
 
-    type t_IF_SIGNALS is record
-        enable_stall     : std_logic;
-        enable_flush     : std_logic;
-        enable_jump      : std_logic;
-        select_source_pc : std_logic;
-        source           : std_logic_vector(XLEN_RANGE);
+    type t_CONTROL_CLK_CLR_EN is record
+        clock  : std_logic;
+        clear  : std_logic;
+        enable : std_logic;
     end record;
 
-    type t_ID_SIGNALS is record
+    type t_CONTROL_IF is record
+        enable_stall  : std_logic;
+        enable_flush  : std_logic;
+        enable_jump   : std_logic;
+        select_source : std_logic;
+    end record;
+
+    type t_CONTROL_ID is record
         select_jump     : std_logic;
         enable_jump     : std_logic;
         enable_flush_id : std_logic;
         enable_flux_ex  : std_logic;
     end record;
 
-    type t_EX_SIGNALS is record
+    type t_CONTROL_EX is record
         select_source_1  : std_logic_vector(1 downto 0);
         select_source_2  : std_logic_vector(1 downto 0);
         select_operation : std_logic_vector(1 downto 0);
     end record;
 
-    type t_MEM_SIGNALS is record
+    type t_CONTROL_MEM is record
         enable_read  : std_logic;
         enable_write : std_logic;
     end record;
 
-    type t_WB_SIGNALS is record
-        enable_registers   : std_logic;
+    type t_CONTROL_WB is record
+        enable_destination : std_logic;
         select_destination : std_logic;
     end record;
 
-    type t_IF_ID_SIGNALS is record
-        pc                 : std_logic_vector(XLEN_RANGE);
-        instruction        : std_logic_vector(INSTRUCTION_RANGE);
+    type t_SIGNALS_IF_ID is record
+        address_program  : t_DATA;
+        data_instruction : t_DATA;
     end record;
 
-    type t_ID_EX_SIGNALS is record
-        ex_signals         : t_EX_SIGNALS;
-        mem_signals        : t_MEM_SIGNALS;
-        wb_signals         : t_WB_SIGNALS;
-        pc                 : std_logic_vector(XLEN_RANGE);
-        source_1           : std_logic_vector(XLEN_RANGE);
-        source_2           : std_logic_vector(XLEN_RANGE);
-        immediate          : std_logic_vector(XLEN_RANGE);
+    type t_SIGNALS_ID_EX is record
+        control_ex         : t_CONTROL_EX;
+        control_mem        : t_CONTROL_MEM;
+        control_wb         : t_CONTROL_WB;
+        address_program    : t_DATA;
+        data_source_1      : t_DATA;
+        data_source_2      : t_DATA;
+        data_immediate     : t_DATA;
         funct_7            : std_logic_vector(6 downto 0);
         funct_3            : t_FUNCTION;
         opcode             : t_OPCODE;
-        --select_source_1    : std_logic_vector(4 downto 0);
-        --select_source_2    : std_logic_vector(4 downto 0);
-        select_destination : std_logic_vector(4 downto 0);
+        select_destination : t_REGISTER;
     end record;
 
-    type t_EX_MEM_SIGNALS is record
-        mem_signals        : t_MEM_SIGNALS;
-        wb_signals         : t_WB_SIGNALS;
-        pointer            : std_logic_vector(XLEN_RANGE);
-        source_2           : std_logic_vector(XLEN_RANGE);
-        select_destination : std_logic_vector(4 downto 0);
+    type t_SIGNALS_EX_MEM is record
+        control_mem        : t_CONTROL_MEM;
+        control_wb         : t_CONTROL_WB;
+        address_pointer    : t_DATA;
+        data_source_2      : t_DATA;
+        select_destination : t_REGISTER;
     end record;
 
-    type t_MEM_WB_SIGNALS is record
-        wb_signals         : t_WB_SIGNALS;
-        destination        : std_logic_vector(XLEN_RANGE);
-        address            : std_logic_vector(XLEN_RANGE);
-        select_destination : std_logic_vector(4 downto 0);
+    type t_SIGNALS_MEM_WB is record
+        control_wb         : t_CONTROL_WB;
+        data_memory        : t_DATA;
+        data_destination   : t_DATA;
+        select_destination : t_REGISTER;
     end record;
 
     -- RV32I Base Instruction Set functions
@@ -190,11 +197,11 @@ package body TOP_LEVEL_CONSTANTS is
 
     function to_RV32I_INSTRUCTION(in_vec: std_logic_vector(INSTRUCTION_RANGE) := (others => '0')) return t_RV32I_INSTRUCTION is
         variable out_vec: t_RV32I_INSTRUCTION;
-        variable immediate_i: std_logic_vector(XLEN_RANGE);
-        variable immediate_s: std_logic_vector(XLEN_RANGE);
-        variable immediate_b: std_logic_vector(XLEN_RANGE);
-        variable immediate_u: std_logic_vector(XLEN_RANGE);
-        variable immediate_j: std_logic_vector(XLEN_RANGE);
+        variable immediate_i: t_DATA;
+        variable immediate_s: t_DATA;
+        variable immediate_b: t_DATA;
+        variable immediate_u: t_DATA;
+        variable immediate_j: t_DATA;
     begin
         immediate_i(31 downto 11) := (others => in_vec(31));
         immediate_i(10 downto  0) := in_vec(30 downto 20);
@@ -211,17 +218,17 @@ package body TOP_LEVEL_CONSTANTS is
         immediate_j(31 downto 21) := (others => in_vec(31));
         immediate_j(20 downto  0) := in_vec(31) & in_vec(19 downto 12) & in_vec(20) & in_vec(30 downto 21) & '0';
 
-        out_vec.funct_3     := in_vec(FUNCTION_RANGE);
-        out_vec.funct_7     := in_vec(31 downto 25);
+        out_vec.funct_3            := in_vec(FUNCTION_RANGE);
+        out_vec.funct_7            := in_vec(31 downto 25);
         out_vec.select_source_2    := in_vec(24 downto 20);
         out_vec.select_source_1    := in_vec(19 downto 15);
         out_vec.select_destination := in_vec(11 downto  7);
-        out_vec.immediate_i := immediate_i;
-        out_vec.immediate_s := immediate_s;
-        out_vec.immediate_b := immediate_b;
-        out_vec.immediate_u := immediate_u;
-        out_vec.immediate_j := immediate_j;
-        out_vec.opcode      := in_vec(OPCODE_RANGE);
+        out_vec.immediate_i        := immediate_i;
+        out_vec.immediate_s        := immediate_s;
+        out_vec.immediate_b        := immediate_b;
+        out_vec.immediate_u        := immediate_u;
+        out_vec.immediate_j        := immediate_j;
+        out_vec.opcode             := in_vec(OPCODE_RANGE);
 
         if out_vec.opcode(OPCODE_RANGE) = OPCODE_OP(OPCODE_RANGE) then
             out_vec.encoding := RV32I_INSTRUCTION_R_TYPE;
