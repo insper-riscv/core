@@ -3,6 +3,8 @@ import os
 import typing as T
 import subprocess
 from pathlib import Path
+import json
+import re
 
 import cocotb.binary
 import cocotb.handle
@@ -52,6 +54,28 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
 
         return children
 
+    @staticmethod
+    def _normalize_netlist_keys(filename):
+        def rename_keys(obj):
+            if isinstance(obj, dict):
+                for key in list(obj.keys()):
+                    new_key = key.replace('.', ' ')
+                    obj[new_key] = obj.pop(key)
+
+                    if isinstance(obj[new_key], (dict, list)):
+                        rename_keys(obj[new_key])
+            elif isinstance(obj, list):
+                for item in obj:
+                    rename_keys(item)
+
+        with open(filename, "r") as text_file:
+            design = json.load(text_file)
+
+        rename_keys(design)
+            
+        with open(filename, "w") as text_file:
+            json.dump(design, text_file, indent=4)
+
     @classmethod
     def build_vhd(cls):
         for child in cls._get_children():
@@ -69,7 +93,6 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 f"src/{cls.__name__}.vhd",
             ],
             hdl_toplevel=cls.__name__.lower(),
-            hdl_library="work",
         )
 
     @classmethod
@@ -81,21 +104,25 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
 
         print(True, os.getcwd())
 
-        exit_code = subprocess.call(
+        process = subprocess.Popen(
             [
                 "yosys",
                 "-m",
                 "ghdl",
                 "-p",
-                f"ghdl --work=top {entity}; prep -top {cls.__name__}; aigmap; write_json -compat-int {entity}.json",
+                f"ghdl --std=08 --work=top {entity}; prep -top {cls.__name__}; write_json -compat-int {entity}.json",
             ],
             cwd="sim_build",
+            stdout=subprocess.PIPE,
         )
 
-        if exit_code != 0:
-            raise SystemError("Failed to build synthesis!")
+        outs, errs = process.communicate(timeout=60)
 
-        exit_code = subprocess.call(
+        assert process.returncode == 0, outs.decode()
+
+        cls._normalize_netlist_keys(f"sim_build/{entity}.json")
+
+        process = subprocess.Popen(
             [
                 "netlistsvg",
                 f"{entity}.json",
@@ -103,10 +130,13 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 filename or f"{entity}_netlist.svg",
             ],
             cwd="sim_build",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
 
-        if exit_code != 0:
-            raise SystemError("Failed to build NetList SVG!")
+        outs, errs = process.communicate(timeout=5)
+
+        assert process.returncode == 0, errs.decode()
 
     @classmethod
     def test_with(
@@ -121,8 +151,6 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
             testcase=DUT._get_testcase_names(testcase),
             parameters=parameters,
             hdl_toplevel_lang="vhdl",
-            hdl_toplevel_library="work",
-            waves=True,
         )
 
 
