@@ -31,6 +31,7 @@ begin
     address_memory                 <= source.address_pointer;
     data_memory                    <= source.data_source_2;
 
+    destination.data_destination   <= source.address_pointer;
     destination.select_destination <= source.select_destination;
 
 end architecture;
