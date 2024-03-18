@@ -8,50 +8,55 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity STAGE_ID is
 
     port (
-        clock                : in  std_logic;
-        source               : in t_IF_ID_SIGNALS;
-        enable               : in std_logic;
-        address_destination  : in std_logic_vector(4 downto 0);
-        data_destination     : in std_logic_vector(XLEN_RANGE);
-        control_if           : out t_IF_SIGNALS;
-        destination          : out t_ID_EX_SIGNALS
+        control            : in  t_CONTROL_CLK_CLR_EN;
+        source             : in  t_SIGNALS_IF_ID;
+        select_destination : in  t_REGISTER;
+        data_destination   : in  t_DATA;
+        address_jump       : out t_DATA;
+        control_if         : out t_CONTROL_IF;
+        signals_ex         : out t_SIGNALS_ID_EX
     );
 
 end entity;
 
 architecture RTL of STAGE_ID is
 
-    signal data_source_1 : std_logic_vector(XLEN_RANGE);
+    signal data_source_1 : t_DATA;
 
 begin
 
-    MODULE_REGISTER_FILE : entity WORK.MODULE_REGISTER_FILE
-        port map (
-        clock               => clock,              
-        enable              => enable,             
-        address_destination => address_destination,
-        data_destination    => data_destination,   
-        instruction         => source.instruction,          
-        data_source_1       => data_source_1,      
-        data_source_2       => destination.source_2   
-    );
-
     MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT
         port map (
-            instruction      => source.instruction,
-            pc_out           => source.pc,
+            instruction      => source.data_instruction,
+            address_program  => source.address_program,
             data_source_1    => data_source_1,
-            immediate_source => destination.immediate,
+            jump_address     => address_jump,
+            immediate_source => signals_ex.data_immediate,
             control_if       => control_if,
-            control_ex       => destination.ex_signals,
-            control_mem      => destination.mem_signals,
-            control_wb       => destination.wb_signals
+            control_ex       => signals_ex.control_ex,
+            control_mem      => signals_ex.control_mem,
+            control_wb       => signals_ex.control_wb
     );
 
-    destination.source_1 <= data_source_1;
-    destination.funct_7 <= source.instruction(31 downto 25);
-    destination.funct_3 <= source.instruction(14 downto 12);
-    destination.opcode <= source.instruction(6 downto 2);
-    destination.select_destination <= source.instruction(11 downto 7);
+    MODULE_REGISTER_FILE : entity WORK.MODULE_REGISTER_FILE
+        port map (
+        clock              => control.clock,              
+        enable             => control.enable,             
+        select_destination => select_destination,
+        data_destination   => data_destination,   
+        instruction        => source.data_instruction,          
+        data_source_1      => data_source_1,      
+        data_source_2      => signals_ex.data_source_2   
+    );
+
+    process(source.data_instruction) is
+        variable instruction : t_RV32I_INSTRUCTION := to_RV32I_INSTRUCTION(source.data_instruction);
+    begin
+        signals_ex.data_source_1      <= data_source_1;
+        signals_ex.funct_7            <= instruction.funct_7;
+        signals_ex.funct_3            <= instruction.funct_3;
+        signals_ex.opcode             <= instruction.opcode;
+        signals_ex.select_destination <= instruction.select_destination;
+    end process;
 
 end architecture;
