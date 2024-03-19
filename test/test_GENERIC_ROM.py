@@ -12,8 +12,8 @@ from test_GENERIC_FLIP_FLOP import GENERIC_FLIP_FLOP
 
 
 class GENERIC_ROM(utils.DUT):
-    address: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    address = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
 
 @cocotb.test()

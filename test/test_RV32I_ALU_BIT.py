@@ -10,16 +10,16 @@ import utils
 
 
 class RV32I_ALU_BIT(utils.DUT):
-    invert_source_1: utils.DUT.Input_pin
-    invert_source_2: utils.DUT.Input_pin
-    select_function: utils.DUT.Input_pin
-    carry_in: utils.DUT.Input_pin
-    slt: utils.DUT.Input_pin
-    source_1: utils.DUT.Input_pin
-    source_2: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
-    carry_out: utils.DUT.Output_pin
-    overflow: utils.DUT.Output_pin
+    invert_source_1 = utils.DUT.Input_pin
+    invert_source_2 = utils.DUT.Input_pin
+    select_function = utils.DUT.Input_pin
+    carry_in = utils.DUT.Input_pin
+    slt = utils.DUT.Input_pin
+    source_1 = utils.DUT.Input_pin
+    source_2 = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
+    carry_out = utils.DUT.Output_pin
+    overflow = utils.DUT.Output_pin
 
 
 @cocotb.test()

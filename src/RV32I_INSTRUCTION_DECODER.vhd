@@ -9,11 +9,11 @@ entity RV32I_INSTRUCTION_DECODER is
 
     port (
         instruction : in  std_logic_vector(INSTRUCTION_RANGE);
-        control_if  : out t_IF_SIGNALS;
-        control_id  : out t_ID_SIGNALS;
-        control_ex  : out t_EX_SIGNALS;
-        control_mem : out t_MEM_SIGNALS;
-        control_wb  : out t_WB_SIGNALS;
+        control_if  : out t_CONTROL_IF;
+        control_id  : out t_CONTROL_ID;
+        control_ex  : out t_CONTROL_EX;
+        control_mem : out t_CONTROL_MEM;
+        control_wb  : out t_CONTROL_WB;
         immediate   : out std_logic_vector(INSTRUCTION_RANGE)
     );
 
@@ -34,8 +34,7 @@ begin
     control_if.enable_flush     <= '0';
     control_if.enable_jump      <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                                    '0';
-    control_if.select_source_pc <= '0';
-    control_if.source           <= (others => '0');
+    control_if.select_source    <= '1';
 
     control_id.select_jump     <= '0';
     control_id.enable_jump     <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
@@ -59,16 +58,12 @@ begin
     control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) else
                                 '0';
 
-    control_wb.enable_registers   <= '1' when (
+    control_wb.enable_destination <= '1' when (
                                          (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
                                          (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
                                      ) else
                                      '0';
-    control_wb.select_destination <= '1' when (
-                                         (rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE)) or 
-                                         (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
-                                     ) else
-                                     '0';
+    control_wb.select_destination <= '1';
 
     immediate <= rv32i_instruction.immediate_i when (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) else
                  rv32i_instruction.immediate_s when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else

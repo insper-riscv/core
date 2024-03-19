@@ -8,11 +8,15 @@ from cocotb.triggers import Timer
 
 import utils
 from test_MODULE_PC import MODULE_PC
-from test_MODULE_ROM import MODULE_ROM
 
 
 class STAGE_IF(utils.DUT):
-    CHILDREN = [MODULE_PC, MODULE_ROM]
+    control = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
+    address_jump = utils.DUT.Input_pin
+    address_program = utils.DUT.Output_pin
+
+    module_pc = MODULE_PC
 
 
 def test_STAGE_IF_synthesis():

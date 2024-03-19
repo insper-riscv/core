@@ -7,11 +7,15 @@ from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 
 import utils
-from test_MODULE_MEMORY import MODULE_MEMORY
 
 
 class STAGE_MEM(utils.DUT):
-    CHILDREN = [MODULE_MEMORY]
+    clock = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
+    control_memory = utils.DUT.Output_pin
+    address_memory = utils.DUT.Output_pin
+    data_memory = utils.DUT.Output_pin
+    destination = utils.DUT.Output_pin
 
 
 def test_STAGE_MEM_synthesis():

@@ -27,19 +27,20 @@ end entity;
 
 architecture RTL of RV32I_REGISTER_FILE is
 
-    subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
-    type memory_t is array((2**ADDRESS_WIDTH - 1) downto 0) of word_t;
+    -- subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
+    -- type memory_t is array((2**ADDRESS_WIDTH - 1) downto 0) of word_t;
 
-    function init_memory return memory_t is
-        variable tmp : memory_t := (others => (others => '0'));
-    begin
-        for i in 0 to (DATA_WIDTH - 1) loop
-            tmp(i) := (others => '0');
-        end loop;
-        return tmp;
-    end function;
+    -- function init_memory return memory_t is
+    --     variable tmp : memory_t := (others => (others => '0'));
+    -- begin
+    --     for i in 1 to (DATA_WIDTH - 1) loop
+    --         tmp(i) := (others => '0');
+    --     end loop;
+    --     return tmp;
+    -- end function;
 
-    shared variable registers : memory_t := init_memory;
+    type t_file is array (natural range <>) of std_logic_vector(DATA_WIDTH - 1 downto 0);
+    signal registers : t_file(0 to (2**ADDRESS_WIDTH - 1)) := (others => (others => '0'));
 
     constant ZERO         : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
     constant ADDRESS_ZERO : std_logic_vector((ADDRESS_WIDTH - 1) downto 0) := (others => '0');
@@ -50,15 +51,15 @@ begin
     begin
         if (rising_edge(clock)) then
             if (enable = '1') then
-                registers(to_integer(unsigned(address_destination))) := data_destination;
+                registers(to_integer(unsigned(address_destination))) <= data_destination;
             end if;
         end if;
     end process;
 
     data_source_1 <= ZERO when address_source_1 = ADDRESS_ZERO else
-                     registers(to_integer(unsigned(address_source_1)));
+                    registers(to_integer(unsigned(address_source_1)));
 
     data_source_2 <= ZERO when address_source_2 = ADDRESS_ZERO else
-                     registers(to_integer(unsigned(address_source_2)));
+                    registers(to_integer(unsigned(address_source_2)));
 
 end architecture;

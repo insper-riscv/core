@@ -10,7 +10,7 @@ entity GENERIC_ROM IS
     generic (
         DATA_WIDTH        : natural := XLEN;
         ADDRESS_WIDTH     : natural := XLEN;
-        ADDRESSABLE_WIDTH : natural := 10
+        ADDRESSABLE_WIDTH : natural := 7
     );
 
     port (
@@ -21,7 +21,7 @@ end entity;
 
 architecture RTL of GENERIC_ROM is
 
-    type memory_block is array(0 TO 2**ADDRESSABLE_WIDTH - 1) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
+    type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
 
     function memory_init return memory_block is
         variable tmp : memory_block := (others => (others => '0'));
@@ -39,6 +39,15 @@ architecture RTL of GENERIC_ROM is
 
 begin
 
-    destination <= memory_ROM(to_integer(unsigned(address)));
+    process(address)
+        variable index : natural;
+    begin
+        index := to_integer(unsigned(address));
+        if (index < (2**ADDRESSABLE_WIDTH - 1)) then
+            destination <= memory_ROM(index);
+        else
+            destination <= (others => '0');
+        end if;
+    end process;
 
 end architecture;

@@ -11,14 +11,15 @@ from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class GENERIC_MUX_4X1(utils.DUT):
-    CHILDREN = [GENERIC_MUX_2X1]
+    source_1 = utils.DUT.Input_pin
+    source_2 = utils.DUT.Input_pin
+    source_3 = utils.DUT.Input_pin
+    source_4 = utils.DUT.Input_pin
+    selector = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
-    source_1: utils.DUT.Input_pin
-    source_2: utils.DUT.Input_pin
-    source_3: utils.DUT.Input_pin
-    source_4: utils.DUT.Input_pin
-    selector: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    mux_1 = GENERIC_MUX_2X1
+    mux_2 = GENERIC_MUX_2X1
 
 
 @cocotb.test()

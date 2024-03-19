@@ -10,10 +10,10 @@ import utils
 
 
 class GENERIC_MUX_2X1(utils.DUT):
-    source_1: utils.DUT.Input_pin
-    source_2: utils.DUT.Input_pin
-    selector: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    source_1 = utils.DUT.Input_pin
+    source_2 = utils.DUT.Input_pin
+    selector = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
 
 @cocotb.test()

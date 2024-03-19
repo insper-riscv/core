@@ -5,43 +5,66 @@ library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity STAGE_EX is
+
+    generic (
+        GENERATE_REGISTERS : boolean := TRUE
+    );
   
     port (
-        source : in t_ID_EX_SIGNALS;
-        destination : out t_EX_MEM_SIGNALS
+        clock       : in  std_logic;
+        clear       : in  std_logic;
+        enable      : in  std_logic;
+        source      : in  t_SIGNALS_ID_EX;
+        destination : out t_SIGNALS_EX_MEM
     );
 
 end entity;
 
 architecture RTL of STAGE_EX is
 
-        signal select_function : std_logic_vector(3 downto 0);
+    signal source_0        : t_SIGNALS_ID_EX := NULL_SIGNALS_ID_EX;
+    signal select_function : std_logic_vector(3 downto 0);
 
 begin
 
-    MODULE_ALU : entity WORK.MODULE_ALU
-        port map (
-            select_source_1        => source.ex_signals.select_source_1,
-            select_source_2        => source.ex_signals.select_source_2,
-            source_pc              => source.pc,
-            source_register_1      => source.source_1,
-            source_register_2      => source.source_2,
-            source_immediate       => source.immediate,
-            select_function        => select_function,
-            source_register_2_out  => destination.source_2,
-            destination            => destination.pointer
-        );
+    PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
+        UPDATE : process(source, clear, clock, enable)
+        begin
+            if (rising_edge(clock)) then
+                SET_RESET : if (enable = '1') then
+                    source_0 <= source;
+                elsif (clear = '1') then
+                    source_0 <= NULL_SIGNALS_ID_EX;
+                end if;
+            end if;
+        end process;
+    else generate
+        source_0 <= source;
+    end generate;
 
     MODULE_ALU_CONTROLLER : entity WORK.MODULE_ALU_CONTROLLER
         port map (
-            opcode                 => source.opcode,
-            function_3             => source.funct_3,
-            function_7             => source.funct_7,
-            destination            => select_function
+            opcode      => source_0.opcode,
+            function_3  => source_0.funct_3,
+            function_7  => source_0.funct_7,
+            destination => select_function
         );
 
-    destination.mem_signals <= source.mem_signals;
-    destination.wb_signals <= source.wb_signals;
-    destination.select_destination <= source.select_destination;
+    MODULE_ALU : entity WORK.MODULE_ALU
+        port map (
+            select_source_1 => source_0.control_ex.select_source_1,
+            select_source_2 => source_0.control_ex.select_source_2,
+            address_program => source_0.address_program,
+            data_source_1   => source_0.data_source_1,
+            data_source_2   => source_0.data_source_2,
+            data_immediate  => source_0.data_immediate,
+            select_function => select_function,
+            destination     => destination.address_pointer
+        );
+
+    destination.control_mem        <= source_0.control_mem;
+    destination.control_wb         <= source_0.control_wb;
+    destination.data_source_2      <= source_0.data_source_2;
+    destination.select_destination <= source_0.select_destination;
 
 end architecture;

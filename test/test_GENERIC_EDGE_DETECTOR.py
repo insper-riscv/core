@@ -11,9 +11,9 @@ import utils
 
 
 class GENERIC_EDGE_DETECTOR(utils.DUT):
-    clock: utils.DUT.Input_pin
-    source: utils.DUT.Input_pin
-    pulse: utils.DUT.Output_pin
+    clock = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
+    pulse = utils.DUT.Output_pin
 
 
 @cocotb.test()

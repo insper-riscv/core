@@ -11,13 +11,14 @@ from test_RV32I_ALU_BIT import RV32I_ALU_BIT
 
 
 class RV32I_ALU(utils.DUT):
-    CHILDREN = [RV32I_ALU_BIT]
-    invert_source_1: utils.DUT.Input_pin
-    invert_source_2: utils.DUT.Input_pin
-    select_function: utils.DUT.Input_pin
-    source_1: utils.DUT.Input_pin
-    source_2: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    invert_source_1 = utils.DUT.Input_pin
+    invert_source_2 = utils.DUT.Input_pin
+    select_function = utils.DUT.Input_pin
+    source_1 = utils.DUT.Input_pin
+    source_2 = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
+
+    bit_to_bit = RV32I_ALU_BIT
 
 
 @cocotb.test()

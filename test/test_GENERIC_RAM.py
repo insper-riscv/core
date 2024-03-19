@@ -11,13 +11,13 @@ import utils
 
 
 class GENERIC_RAM(utils.DUT):
-    clock: utils.DUT.Input_pin
-    enable: utils.DUT.Input_pin
-    enable_read: utils.DUT.Input_pin
-    enable_write: utils.DUT.Input_pin
-    address: utils.DUT.Input_pin
-    source: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    clock = utils.DUT.Input_pin
+    enable = utils.DUT.Input_pin
+    enable_read = utils.DUT.Input_pin
+    enable_write = utils.DUT.Input_pin
+    address = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
 
 @cocotb.test()
