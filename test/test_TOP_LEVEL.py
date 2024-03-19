@@ -25,7 +25,6 @@ class TOP_LEVEL(utils.DUT):
     data_memory_out = utils.DUT.Output_pin
     address_program = utils.DUT.Output_pin
     address_memory = utils.DUT.Output_pin
-    alu_out = utils.DUT.Output_pin
     memory_read = utils.DUT.Output_pin
     memory_write = utils.DUT.Output_pin
     led = utils.DUT.Output_pin
