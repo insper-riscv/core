@@ -4,11 +4,7 @@ outline: 2
 
 # Unidade de Controle <Badge type="info" text="MODULE_CONTROL_UNIT.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do módulo unidade de controle](../../public/images/referencia/componentes/module_control_unit.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_CONTROL_UNIT.vhd).
 

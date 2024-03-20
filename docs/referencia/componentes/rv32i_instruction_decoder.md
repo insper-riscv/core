@@ -4,11 +4,7 @@ outline: 2
 
 # Decodificador de instruções <Badge type="info" text="RV32I_INSTRUCTION_DECODER.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do decodificador de instruções](../../public/images/referencia/componentes/rv32i_control_unit.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_INSTRUCTION_DECODER.vhd).
 

@@ -4,11 +4,7 @@ outline: 2
 
 # Bit da ULA <Badge type="info" text="RV32I_ALU_BIT.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas da ULA de BIT](../../public/images/referencia/componentes/rv32i_alu_bit.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU_BIT.vhd).
 

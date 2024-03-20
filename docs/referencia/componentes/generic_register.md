@@ -34,11 +34,7 @@ Entrada que reseta o contador.
 
 ### `enable`
 
-::: danger TO DO
-
-Escrever descrição enable
-
-:::
+Entrada de sinal que guarda o valor de entrada de dados no registrador.
 
 - tipo: `std_logic`
 
@@ -54,12 +50,6 @@ Saída de dados com o valor armazenado no registrador.
 
 - tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
 - padrão: `0...0`
-
-::: danger TO DO
-
-Work in progress.
-
-:::
 
 ## Diagrama RTL
 

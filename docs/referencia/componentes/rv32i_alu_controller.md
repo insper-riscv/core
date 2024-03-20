@@ -4,11 +4,7 @@ outline: 2
 
 # Controlador da ULA <Badge type="info" text="RV32I_ALU_CONROLLER.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do controlador da ULA](../../public/images/referencia/componentes/rv32i_alu_controller.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU_CONROLLER.vhd).
 

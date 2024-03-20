@@ -2,7 +2,7 @@
 outline: 2
 ---
 
-# Escrita de Resposta <Badge type="info" text="STAGE_WB.vhd"/>
+# Escrita e Retorno <Badge type="info" text="STAGE_WB.vhd"/>
 
 ![](/images/referencia/componentes/stage_wb_rtl.drawio.svg)
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/stage_wb_netlist.svg" alt="Diagrama de RTL do Escrita de Resposta" style="width: 100%; background-color: white;">
+<img src="../../public/images/referencia/componentes/stage_wb_netlist.svg" alt="Diagrama de RTL do Escrita e Retorno" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

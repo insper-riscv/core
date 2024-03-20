@@ -2,13 +2,9 @@
 outline: 2
 ---
 
-# Contador de Programa <Badge type="info" text="MODULE_pc.vhd"/>
+# Contador de Programa <Badge type="info" text="MODULE_PC.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do módulo PC](../../public/images/referencia/componentes/module_pc.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_PROGRAM_COUNTER.vhd).
 
@@ -24,7 +20,7 @@ Work in progress.
 
 ::: danger TO DO
 
-Diagrama a nível de registradores
+Work in progress.
 
 :::
 

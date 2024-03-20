@@ -4,11 +4,7 @@ outline: 2
 
 # Unidade de Controle da ULA <Badge type="info" text="MODULE_ALU_CONTROLLER.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do módulo unidade de controle da ULA](../../public/images/referencia/componentes/module_alu_controller.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_ALU_CONTROLLER.vhd).
 
@@ -24,7 +20,7 @@ Work in progress.
 
 ::: danger TO DO
 
-Diagrama a nível de registradores
+Work in progress.
 
 :::
 

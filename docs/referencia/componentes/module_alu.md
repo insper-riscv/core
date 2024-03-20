@@ -4,11 +4,7 @@ outline: 2
 
 # ULA <Badge type="info" text="MODULE_ALU.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas do módulo ULA](../../public/images/referencia/componentes/module_alu.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_ALU.vhd).
 

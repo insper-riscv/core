@@ -17,18 +17,6 @@ export default {
                                 text: 'Somador',
                                 link: '/referencia/componentes/generic_adder',
                             }, {
-                                text: 'Contador',
-                                link: '/referencia/componentes/generic_counter',
-                            }, {
-                                text: 'Debounce',
-                                link: '/referencia/componentes/generic_debounce',
-                            }, {
-                                text: 'Detector de borda',
-                                link: '/referencia/componentes/generic_edge_detector',
-                            }, {
-                                text: 'Flip Flop',
-                                link: '/referencia/componentes/generic_flip_flop',
-                            }, {
                                 text: 'MUX 2x1',
                                 link: '/referencia/componentes/generic_mux_2x1',
                             }, {
@@ -38,12 +26,27 @@ export default {
                                 text: 'RAM',
                                 link: '/referencia/componentes/generic_ram',
                             }, {
+                                text: 'ROM',
+                                link: '/referencia/componentes/generic_rom',
+                            }, {
                                 text: 'Registrador',
                                 link: '/referencia/componentes/generic_register',
-                            }, {
-                                text: 'Extensor de sinal',
-                                link: '/referencia/componentes/generic_signal_extender',
-                            },
+                            }, //{
+                            //    text: 'Extensor de sinal',
+                            //    link: '/referencia/componentes/generic_signal_extender',
+                            //}, {
+                            //    text: 'Flip Flop',
+                            //    link: '/referencia/componentes/generic_flip_flop',
+                            //}, {
+                            //    text: 'Debounce',
+                            //    link: '/referencia/componentes/generic_debounce',
+                            //}, {
+                            //    text: 'Detector de borda',
+                            //    link: '/referencia/componentes/generic_edge_detector',
+                            //}, {
+                            //    text: 'Contador',
+                            //    link: '/referencia/componentes/generic_counter',
+                            //},
                         ],
                     }, {
                         text: 'RV32I',
@@ -71,8 +74,14 @@ export default {
                         collapsed: true,
                         items: [
                             {
+                                text: 'Banco de Registradores',
+                                link: '/referencia/componentes/module_register_file',
+                            },{
                                 text: 'Contador de Programa',
                                 link: '/referencia/componentes/module_program_counter',
+                            }, {
+                                text: 'Escrita e Retorno',
+                                link: '/referencia/componentes/module_write_back',
                             }, {
                                 text: 'Unidade de Controle',
                                 link: '/referencia/componentes/module_control_unit',
@@ -101,7 +110,7 @@ export default {
                                 text: 'Acesso a Memória',
                                 link: '/referencia/componentes/stage_mem',
                             }, {
-                                text: 'Escrita de Resposta',
+                                text: 'Escrita e Retorno',
                                 link: '/referencia/componentes/stage_wb',
                             },
                         ],

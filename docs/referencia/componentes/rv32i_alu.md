@@ -4,11 +4,7 @@ outline: 2
 
 # Unidade Lógia Aritmética <Badge type="info" text="RV32I_ALU.vhd"/>
 
-::: danger TO DO
-
-Diagrama de portas
-
-:::
+![Diagrama de portas da ULA](../../public/images/referencia/componentes/rv32i_alu.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU.vhd).
 

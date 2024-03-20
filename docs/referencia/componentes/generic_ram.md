@@ -22,18 +22,14 @@ Largura dos vetores de entrada e saída de dados.
 Largura do vetor de entrada de endereço de memória.
 
 - tipo: `natural`
-- padrão: `32`
+- padrão: `XLEN`
 
 ### `ADDRESSABLE_WIDTH`
 
-::: danger TO DO
-
-Escrever descrição de ADDRESSABLE_WIDTH
-
-:::
+Expoente da potência que determina o tamanho da memória.
 
 - tipo: `natural`
-- padrão: `8`
+- padrão: `10`
 
 ## Interface de portas
 
