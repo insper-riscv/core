@@ -15,6 +15,7 @@ entity STAGE_ID is
         clock              : in  std_logic;
         clear              : in  std_logic;
         enable             : in  std_logic;
+        enable_destination : in  std_logic;
         source             : in  t_SIGNALS_IF_ID;
         select_destination : in  t_REGISTER;
         data_destination   : in  t_DATA;
@@ -36,7 +37,7 @@ begin
         UPDATE : process(source, clear, clock, enable)
         begin
             if (rising_edge(clock)) then
-                SET_RESET : if (enable = '0') then
+                SET_RESET : if (enable = '1') then
                     source_0 <= source;
                 elsif (clear = '1') then
                     source_0 <= NULL_SIGNALS_IF_ID;

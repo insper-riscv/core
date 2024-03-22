@@ -76,7 +76,8 @@ begin
         port map (
             clock               => CLOCK,
             clear               => '0',
-            enable              => enable_destination,
+            enable              => '1',
+            enable_destination  => enable_destination,
             source              => signals_if_id,
             select_destination  => select_destination,
             data_destination    => data_destination,
