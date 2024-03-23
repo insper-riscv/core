@@ -21,8 +21,7 @@ Largura dos vetores de entrada e saída de dados.
 
 ### `clock`
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do
-processador).
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
 
 - tipo: `std_logic`
 

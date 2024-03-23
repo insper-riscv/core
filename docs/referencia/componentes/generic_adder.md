@@ -17,7 +17,7 @@ Largura dos vetores de entrada e saída de dados.
 - tipo: `natural`
 - padrão: `XLEN`
 
-### `DEFAULT_SOURCE_1`
+### `DEFAULT_SOURCE_2`
 
 Valor padrão de incremento. Dispensa necessidade de `source_2`.
 
@@ -47,7 +47,8 @@ Saída de dados com o resultado de `source_1 + source_2`.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_adder_netlist.svg" alt="Diagrama de RTL do somador" style="width: 100%; background-color: white;">
+![Diagrama RTL do somador](../../public/images/referencia/componentes/generic_adder_netlist.svg)
+<!-- <img src="../../public/images/referencia/componentes/generic_adder_netlist.svg" alt="Diagrama de RTL do somador" style="width: 100%; background-color: white;"> -->
 
 ## Casos de teste
 

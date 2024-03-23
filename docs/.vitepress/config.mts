@@ -12,7 +12,8 @@ export default defineConfig({
       lang: 'pt'
     },
     en: {
-      label: 'English (comming soon)'
+      label: 'English (comming soon)',
+      lang: 'en'
     }
   },
 
@@ -31,6 +32,7 @@ export default defineConfig({
       {
         text: 'Guia',
         link: '/guia/',
+        activeMatch: '/referencia/'
       }, {
         text: 'Referência',
         link: '/referencia/componentes/',
@@ -84,6 +86,8 @@ export default defineConfig({
     sidebar: {
       ...require('../guia/config.ts').default.sidebar,
       ...require('../referencia/config.ts').default.sidebar,
+      ...require('../en/guia/config.ts').default.sidebar,
+      ...require('../en/referencia/config.ts').default.sidebar,
     },
 
     socialLinks: [
