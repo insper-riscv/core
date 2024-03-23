@@ -6,16 +6,16 @@ export default {
         '/en/guia/': [
             {
                 text: 'About',
-                link: '/guia/',
+                link: '/en/guia/',
             }, {
                 text: 'Introduction',
-                link: '/guia/introducao'
+                link: '/en/guia/introducao'
             }, {
                 text: 'Development',
-                link: '/guia/desenvolvimento'
+                link: '/en/guia/desenvolvimento'
             }, {
                 text: 'Bibliography',
-                link: '/guia/bibliografia'
+                link: '/en/guia/bibliografia'
             },
         ],
     },
