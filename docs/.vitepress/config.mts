@@ -12,8 +12,9 @@ export default defineConfig({
       lang: 'pt'
     },
     en: {
-      label: 'English (comming soon)',
-      lang: 'en'
+      label: 'English',
+      lang: 'en',
+      ...require('../en/config.ts').default
     }
   },
 
@@ -86,8 +87,6 @@ export default defineConfig({
     sidebar: {
       ...require('../guia/config.ts').default.sidebar,
       ...require('../referencia/config.ts').default.sidebar,
-      ...require('../en/guia/config.ts').default.sidebar,
-      ...require('../en/referencia/config.ts').default.sidebar,
     },
 
     socialLinks: [

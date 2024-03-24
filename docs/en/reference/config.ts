@@ -3,34 +3,34 @@ import type { DefaultTheme } from 'vitepress/types'
 
 export default {
     sidebar: {
-        '/en/referencia/': [
+        '/en/reference/': [
             {
                 text: 'Components',
-                link: '/en/referencia/componentes/',
+                link: '/en/reference/components/',
                 collapsed: false,
                 items: [
                     {
-                        text: 'Generic',
+                        text: 'Generics',
                         collapsed: true,
                         items: [
                             {
                                 text: 'Adder',
-                                link: '/en/referencia/componentes/generic_adder',
+                                link: '/en/reference/components/generic_adder',
                             }, {
                                 text: 'MUX 2:1',
-                                link: '/en/referencia/componentes/generic_mux_2x1',
+                                link: '/en/reference/components/generic_mux_2x1',
                             }, {
                                 text: 'MUX 4:1',
-                                link: '/en/referencia/componentes/generic_mux_4x1',
+                                link: '/en/reference/components/generic_mux_4x1',
                             }, {
                                 text: 'RAM',
-                                link: '/en/referencia/componentes/generic_ram',
+                                link: '/en/reference/components/generic_ram',
                             }, {
                                 text: 'ROM',
-                                link: '/en/referencia/componentes/generic_rom',
+                                link: '/en/reference/components/generic_rom',
                             }, {
                                 text: 'Register',
-                                link: '/en/referencia/componentes/generic_register',
+                                link: '/en/reference/components/generic_register',
                             }, 
                         ],
                     }, {
@@ -39,19 +39,19 @@ export default {
                         items: [
                             {
                                 text: 'Instruction Decoder',
-                                link: '/en/referencia/componentes/rv32i_instruction_decoder',
+                                link: '/en/reference/components/rv32i_instruction_decoder',
                             }, {
                                 text: 'Register File',
-                                link: '/en/referencia/componentes/rv32i_register_file',
+                                link: '/en/reference/components/rv32i_register_file',
                             }, {
                                 text: 'ALU Bit',
-                                link: '/en/referencia/componentes/rv32i_alu_bit',
+                                link: '/en/reference/components/rv32i_alu_bit',
                             }, {
                                 text: 'ALU',
-                                link: '/en/referencia/componentes/rv32i_alu',
+                                link: '/en/reference/components/rv32i_alu',
                             }, {
                                 text: 'ALU Controller',
-                                link: '/en/referencia/componentes/rv32i_alu_controller',
+                                link: '/en/reference/components/rv32i_alu_controller',
                             },
                         ],
                     }, {
@@ -60,22 +60,22 @@ export default {
                         items: [
                             {
                                 text: 'Register File',
-                                link: '/en/referencia/componentes/module_register_file',
+                                link: '/en/reference/components/module_register_file',
                             },{
                                 text: 'Program Counter',
-                                link: '/en/referencia/componentes/module_program_counter',
+                                link: '/en/reference/components/module_program_counter',
                             }, {
                                 text: 'Write Back',
-                                link: '/en/referencia/componentes/module_write_back',
+                                link: '/en/reference/components/module_write_back',
                             }, {
                                 text: 'Control Unit',
-                                link: '/en/referencia/componentes/module_control_unit',
+                                link: '/en/reference/components/module_control_unit',
                             }, {
                                 text: 'ALU',
-                                link: '/en/referencia/componentes/module_alu',
+                                link: '/en/reference/components/module_alu',
                             }, {
                                 text: 'ALU Controller',
-                                link: '/en/referencia/componentes/module_alu_controller',
+                                link: '/en/reference/components/module_alu_controller',
                             },
                         ],
                     }, {
@@ -84,29 +84,29 @@ export default {
                         items: [
                             {
                                 text: 'Instruction Fetch',
-                                link: '/en/referencia/componentes/stage_if',
+                                link: '/en/reference/components/stage_if',
                             }, {
                                 text: 'Instruction Decode',
-                                link: '/en/referencia/componentes/stage_id',
+                                link: '/en/reference/components/stage_id',
                             }, {
                                 text: 'Execute',
-                                link: '/en/referencia/componentes/stage_ex',
+                                link: '/en/reference/components/stage_ex',
                             }, {
                                 text: 'Memory Access',
-                                link: '/en/referencia/componentes/stage_mem',
+                                link: '/en/reference/components/stage_mem',
                             }, {
                                 text: 'Write Back',
-                                link: '/en/referencia/componentes/stage_wb',
+                                link: '/en/reference/components/stage_wb',
                             },
                         ],
                     }, 
                 ],
             }, {
                 text: 'Instructions',
-                link: '/en/referencia/isa/',
+                link: '/en/reference/isa/',
             }, {
                 text: 'Pseudo-instructions',
-                link: '/en/referencia/isa/pseudo',
+                link: '/en/reference/isa/pseudo',
             },
         ],
     },
