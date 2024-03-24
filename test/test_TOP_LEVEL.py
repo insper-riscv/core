@@ -39,7 +39,7 @@ class TOP_LEVEL(utils.DUT):
 
 
 @cocotb.test()
-@utils.append_wavedrom
+@utils.append_wavedrom(TOP_LEVEL)
 async def tb_TOP_LEVEL_case_1(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",

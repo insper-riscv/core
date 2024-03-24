@@ -21,7 +21,7 @@ class GENERIC_RAM(utils.DUT):
 
 
 @cocotb.test()
-@utils.append_wavedrom
+@utils.append_wavedrom(GENERIC_RAM)
 async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
     values_enable = ["0", "1", "1", "1", "1"]
     values_enable_read = ["1", "0", "1", "0", "1"]

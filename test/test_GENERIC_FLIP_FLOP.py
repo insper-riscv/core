@@ -19,7 +19,7 @@ class GENERIC_FLIP_FLOP(utils.DUT):
 
 
 @cocotb.test()
-@utils.append_wavedrom
+@utils.append_wavedrom(GENERIC_FLIP_FLOP)
 async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: utils.Trace):
     values_clear = ["0", "0", "1"]
     values_enable = ["1", "1", "0"]

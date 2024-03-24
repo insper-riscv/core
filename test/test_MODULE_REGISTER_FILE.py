@@ -23,7 +23,7 @@ class MODULE_REGISTER_FILE(utils.DUT):
     register_file = RV32I_REGISTER_FILE
 
 @cocotb.test()
-@utils.append_wavedrom
+@utils.append_wavedrom(MODULE_REGISTER_FILE)
 async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils.Trace):
     values_select_destination = [
         "00001",
