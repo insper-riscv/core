@@ -17,7 +17,7 @@ class GENERIC_ROM(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_ROM_case_1(dut: "GENERIC_ROM"):
+async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM):
     dut.address.value = BinaryValue("00000000000000000000000000000000")
 
     await Timer(Decimal(1), units="ns")

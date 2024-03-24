@@ -16,7 +16,7 @@ class GENERIC_ADDER(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_ADDER_case_1(dut: "GENERIC_ADDER"):
+async def tb_GENERIC_ADDER_case_1(dut: GENERIC_ADDER):
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
