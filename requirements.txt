@@ -1,10 +1,5 @@
 cocotb
-cocotb-test
-exceptiongroup
 find-libpython
-iniconfig
-packaging
-pluggy
 pytest
-tomli
-pytest-env
+pytest-check
+wavedrom
