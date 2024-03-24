@@ -26,7 +26,8 @@ class MODULE_PC(utils.DUT):
 
 
 @cocotb.test()
-async def tb_MODULE_PC_case_1(dut: MODULE_PC):
+@utils.append_wavedrom(MODULE_PC)
+async def tb_MODULE_PC_case_1(dut: MODULE_PC, trace: utils.Trace):
     values_jump_address = [
         "11111111111111110000000000000000",
         "11111111111111110000000000000000",
@@ -35,7 +36,7 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC):
         "11111111111111110000000000000000",
     ]
 
-    values_selector = ["1", "1", "0", "1", "1"]
+    values_selector = ["1", "1", "1", "0", "1"]
 
     values_enable = ["0", "1", "1", "1", "1"]
 
@@ -57,8 +58,10 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC):
         dut.enable.value = BinaryValue(enable)
         dut.selector.value = BinaryValue(selector)
 
-        await RisingEdge(dut.clock)
-        await Timer(Decimal(20000), units="ns")
+        # await RisingEdge(dut.clock)
+        # await Timer(Decimal(20000), units="ns")
+        await trace.cycle(1)
+
         utils.assert_output(dut.destination, destination, f"At clock {index}.")
 
 

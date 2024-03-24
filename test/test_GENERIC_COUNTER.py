@@ -41,19 +41,19 @@ async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER, trace: utils.Trace):
         dut.update.value = BinaryValue("1")
         dut.clear.value = BinaryValue("0")
 
-        await trace.wait(dut.clock)
+        await trace.cycle()
 
         dut.update.value = BinaryValue("0")
 
-        await trace.wait(dut.clock)
-        await trace.gap(dut.clock, 2**(i + 1) - 2)
-        await trace.wait(dut.clock)
+        await trace.cycle()
+        await trace.gap(2**(i + 1) - 2)
+        await trace.cycle()
 
         utils.assert_output(dut.state, "1", f"{i} 1")
 
         dut.clear.value = BinaryValue("1")
 
-        await trace.wait(dut.clock)
+        await trace.cycle()
 
 
 def test_GENERIC_COUNTER_synthesis():

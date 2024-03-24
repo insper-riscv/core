@@ -17,7 +17,7 @@ class GENERIC_EDGE_DETECTOR(utils.DUT):
 
 
 @cocotb.test()
-@utils.append_wavedrom
+@utils.append_wavedrom(GENERIC_EDGE_DETECTOR)
 async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: utils.Trace):
     values_source = ["0", "1", "0", "0"]
     values_pulse = ["0", "0", "0", "1"]
@@ -34,7 +34,7 @@ async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: uti
 
 
 @cocotb.test()
-@utils.append_wavedrom
+@utils.append_wavedrom(GENERIC_EDGE_DETECTOR)
 async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: utils.Trace):
     values_source = ["0", "1", "0", "0"]
     values_pulse = ["0", "0", "0", "1"]
