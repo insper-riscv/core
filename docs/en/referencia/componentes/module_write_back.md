@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Esctrita e Retorno <Badge type="info" text="MODULE_WRITE_BACK.vhd"/>
+# Write Back <Badge type="info" text="MODULE_WRITE_BACK.vhd"/>
 
-![Diagrama de portas do módulo escrita e retorno](../../public/images/referencia/componentes/module_write_back.drawio.svg)
+![Write Back Module Logic Gate Diagram](../../public/images/referencia/componentes/module_write_back.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_WRITE_BACK.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/module_write_back_netlist.svg" alt="Diagrama de RTL da Escrita e Retorno" style="width: 100%; background-color: white;">
+![Write Back Module RTL Diagram](../../public/images/referencia/componentes/module_write_back_netlist.svg)
 
 ## Test Cases
 

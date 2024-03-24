@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Escrita e Retorno <Badge type="info" text="STAGE_WB.vhd"/>
+# Write Back <Badge type="info" text="STAGE_WB.vhd"/>
 
-![](/images/referencia/componentes/stage_wb_rtl.drawio.svg)
+![Write Back Stage Logic Gate Diagram](/images/referencia/componentes/stage_wb_rtl.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_WB.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/stage_wb_netlist.svg" alt="Diagrama de RTL do Escrita e Retorno" style="width: 100%; background-color: white;">
+![Write Back Stage RTL Diagram](../../public/images/referencia/componentes/stage_wb_netlist.svg)
 
 ## Test Cases
 

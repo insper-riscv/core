@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Busca Instrução <Badge type="info" text="STAGE_IF.vhd"/>
+# Instruction Fetch <Badge type="info" text="STAGE_IF.vhd"/>
 
-![](/images/referencia/componentes/stage_if_rtl.drawio.svg)
+![Instruction Fetch Stage Logic Gate Diagram](/images/referencia/componentes/stage_if_rtl.drawio.svg)
 
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_IF.vhd).
@@ -27,7 +27,7 @@ Work in progress.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/stage_if_netlist.svg" alt="Diagrama de RTL do Busca Instrução" style="width: 100%; background-color: white;">
+![Instruction Fetch Stage RTL Diagram](../../public/images/referencia/componentes/stage_if_netlist.svg)
 
 ## Test Cases
 

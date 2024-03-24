@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Bit da ULA <Badge type="info" text="RV32I_ALU_BIT.vhd"/>
+# ALU Bit <Badge type="info" text="RV32I_ALU_BIT.vhd"/>
 
-![Diagrama de portas da ULA de BIT](../../public/images/referencia/componentes/rv32i_alu_bit.drawio.svg)
+![ALU Bit Logic Gate Diagram](../../public/images/referencia/componentes/rv32i_alu_bit.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU_BIT.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/rv32i_alu_bit_netlist.svg" alt="Diagrama de RTL do bit da ULA" style="width: 100%; background-color: white;">
+![ALU Bit RTL Diagram](../../public/images/referencia/componentes/rv32i_alu_bit_netlist.svg)
 
 ## Test Cases
 

@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Acesso a Memória <Badge type="info" text="STAGE_MEM.vhd"/>
+# Memory Access <Badge type="info" text="STAGE_MEM.vhd"/>
 
-![](/images/referencia/componentes/stage_mem_rtl.drawio.svg)
+![Memory Access Stage Logic Gate Diagram](/images/referencia/componentes/stage_mem_rtl.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_MEM.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/stage_mem_netlist.svg" alt="Diagrama de RTL do Acesso a Memória" style="width: 100%; background-color: white;">
+![Memory Access Stage RTL Diagram](../../public/images/referencia/componentes/stage_mem_netlist.svg)
 
 ## Test Cases
 

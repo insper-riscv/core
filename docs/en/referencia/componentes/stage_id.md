@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Decodifica Instrução <Badge type="info" text="STAGE_ID.vhd"/>
+# Instruction Decode <Badge type="info" text="STAGE_ID.vhd"/>
 
-![](/images/referencia/componentes/stage_id_rtl.drawio.svg)
+![Instruction Decode Stage Logic Gate Diagram](/images/referencia/componentes/stage_id_rtl.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_ID.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/stage_id_netlist.svg" alt="Diagrama de RTL do Decodifica Instrução" style="width: 100%; background-color: white;">
+![Instruction Decode Stage RTL Diagram](../../public/images/referencia/componentes/stage_id_netlist.svg)
 
 ## Test Cases
 

@@ -2,9 +2,9 @@
 outline: 2
 ---
 
-# Arquivo de registradores <Badge type="info" text="RV32I_REGISTER_FILE.vhd"/>
+# Register File <Badge type="info" text="RV32I_REGISTER_FILE.vhd"/>
 
-![Diagrama de portas do banco de registradores](../../public/images/referencia/componentes/rv32i_register_file.drawio.svg)
+![Register File Logic Gate Diagram](../../public/images/referencia/componentes/rv32i_register_file.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd).
 
@@ -77,7 +77,7 @@ Saída de valor de registrador secundária.
 
 ## RTL Diagram
 
-<img src="../../public/images/referencia/componentes/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
+![Register File RTL Diagram](../../public/images/referencia/componentes/rv32i_register_file_netlist.svg)
 
 ## Test Cases
 
