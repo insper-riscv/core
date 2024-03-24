@@ -4,7 +4,7 @@ outline: 2
 
 # Registrador <Badge type="info" text="GENERIC_REGISTER.vhd"/>
 
-![Diagrama de portas do registrador](../../public/images/referencia/componentes/generic_register.drawio.svg)
+![Diagrama de portas do registrador](/images/referencia/componentes/generic_register.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd).
 
@@ -52,15 +52,14 @@ Saída de dados com o valor armazenado no registrador.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_register_netlist.svg" alt="Diagrama de RTL do registrador" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_register_netlist.svg" alt="Diagrama de RTL do registrador" style="width: 100%; background-color: white;">
 
-## Casos de teste
+## Casos de teste <Badge type="info" text="test_GENERIC_REGISTER.py" />
 
-`test_GENERIC_REGISTER.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py).
 
-::: danger TO DO
+### Caso 1 <Badge type="info" text="tb_GENERIC_REGISTER_case_1" />
 
-Work in progress.
+Lógica sequencial:
 
-:::
+<img src="/images/referencia/componentes/tb_GENERIC_REGISTER_case_1.svg" alt="Caso de teste 1 do Registrador" style="width: 100%; background-color: white;">

@@ -26,7 +26,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/stage_wb_netlist.svg" alt="Diagrama de RTL do Escrita e Retorno" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/stage_wb_netlist.svg" alt="Diagrama de RTL do Escrita e Retorno" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

@@ -4,7 +4,7 @@ outline: 2
 
 # MUX 4x1 <Badge type="info" text="GENERIC_MUX_4X1.vhd"/>
 
-![Diagrama de portas do multiplexador 4 em 1](../../public/images/referencia/componentes/generic_mux_4x1.drawio.svg)
+![Diagrama de portas do multiplexador 4 em 1](/images/referencia/componentes/generic_mux_4x1.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_MUX_4X1.vhd).
 
@@ -62,7 +62,7 @@ Saída de dados com o valor de uma das entradas de dados (`source_1`, `source_2`
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_mux_4x1_netlist.svg" alt="Diagrama de RTL do mux 4x1" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_mux_4x1_netlist.svg" alt="Diagrama de RTL do mux 4x1" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

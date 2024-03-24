@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Execute Stage RTL Diagram](../../public/images/referencia/componentes/stage_ex_netlist.svg)
+![Execute Stage RTL Diagram](/images/referencia/componentes/stage_ex_netlist.svg)
 
 ## Test Cases
 

@@ -4,7 +4,7 @@ outline: 2
 
 # RAM <Badge type="info" text="GENERIC_RAM.vhd"/>
 
-![RAM Logic Gate Diagram](../../public/images/referencia/componentes/generic_ram.drawio.svg)
+![RAM Logic Gate Diagram](/images/referencia/componentes/generic_ram.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd).
 
@@ -77,7 +77,7 @@ Data output with the value of memory at the address defined by `address`.
 
 ## RTL Diagram
 
-![RAM RTL Diagram](../../public/images/referencia/componentes/generic_ram_netlist.svg)
+![RAM RTL Diagram](/images/referencia/componentes/generic_ram_netlist.svg)
 
 ## Test Cases
 

@@ -4,7 +4,7 @@ outline: 2
 
 # Adder <Badge type="info" text="GENERIC_ADDER.vhd"/>
 
-![Adder Logic Gate Diagram](../../public/images/referencia/componentes/generic_adder.drawio.svg)
+![Adder Logic Gate Diagram](/images/referencia/componentes/generic_adder.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd).
 
@@ -47,7 +47,7 @@ Output data with the result of `source_1 + source_2`.
 
 ## RTL Diagram
 
-![Adder RTL Diagram](../../public/images/referencia/componentes/generic_adder_netlist.svg)
+![Adder RTL Diagram](/images/referencia/componentes/generic_adder_netlist.svg)
 
 ## Test Cases
 

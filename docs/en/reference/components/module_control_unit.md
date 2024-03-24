@@ -4,7 +4,7 @@ outline: 2
 
 # Control Unit <Badge type="info" text="MODULE_CONTROL_UNIT.vhd"/>
 
-![Control Unit Module Logic Gate Diagram](../../public/images/referencia/componentes/module_control_unit.drawio.svg)
+![Control Unit Module Logic Gate Diagram](/images/referencia/componentes/module_control_unit.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_CONTROL_UNIT.vhd).
 
@@ -26,7 +26,7 @@ Diagrama a nível de registradores
 
 ## RTL Diagram
 
-![Control Unit Module RTL Diagram](../../public/images/referencia/componentes/module_control_unit_netlist.svg)
+![Control Unit Module RTL Diagram](/images/referencia/componentes/module_control_unit_netlist.svg)
 
 ## Test Cases
 

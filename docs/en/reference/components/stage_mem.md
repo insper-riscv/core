@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Memory Access Stage RTL Diagram](../../public/images/referencia/componentes/stage_mem_netlist.svg)
+![Memory Access Stage RTL Diagram](/images/referencia/componentes/stage_mem_netlist.svg)
 
 ## Test Cases
 

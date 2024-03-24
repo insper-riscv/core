@@ -4,7 +4,7 @@ outline: 2
 
 # Register File <Badge type="info" text="RV32I_REGISTER_FILE.vhd"/>
 
-![Register File Logic Gate Diagram](../../public/images/referencia/componentes/rv32i_register_file.drawio.svg)
+![Register File Logic Gate Diagram](/images/referencia/componentes/rv32i_register_file.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd).
 
@@ -77,7 +77,7 @@ Saída de valor de registrador secundária.
 
 ## RTL Diagram
 
-![Register File RTL Diagram](../../public/images/referencia/componentes/rv32i_register_file_netlist.svg)
+![Register File RTL Diagram](/images/referencia/componentes/rv32i_register_file_netlist.svg)
 
 ## Test Cases
 

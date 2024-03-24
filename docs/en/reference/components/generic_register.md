@@ -4,7 +4,7 @@ outline: 2
 
 # Register <Badge type="info" text="GENERIC_REGISTER.vhd"/>
 
-![Register Logic Gate Diagram](../../public/images/referencia/componentes/generic_register.drawio.svg)
+![Register Logic Gate Diagram](/images/referencia/componentes/generic_register.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd).
 
@@ -52,7 +52,7 @@ Data output with the value stored in the register.
 
 ## RTL Diagram
 
-![Register RTL Diagram](../../public/images/referencia/componentes/generic_register_netlist.svg)
+![Register RTL Diagram](/images/referencia/componentes/generic_register_netlist.svg)
 
 ## Test Cases
 

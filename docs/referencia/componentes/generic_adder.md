@@ -4,7 +4,7 @@ outline: 2
 
 # Somador <Badge type="info" text="GENERIC_ADDER.vhd"/>
 
-![Diagrama de portas do somador](../../public/images/referencia/componentes/generic_adder.drawio.svg)
+![Diagrama de portas do somador](/images/referencia/componentes/generic_adder.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd).
 
@@ -47,8 +47,8 @@ Saída de dados com o resultado de `source_1 + source_2`.
 
 ## Diagrama RTL
 
-![Diagrama RTL do somador](../../public/images/referencia/componentes/generic_adder_netlist.svg)
-<!-- <img src="../../public/images/referencia/componentes/generic_adder_netlist.svg" alt="Diagrama de RTL do somador" style="width: 100%; background-color: white;"> -->
+![Diagrama RTL do somador](/images/referencia/componentes/generic_adder_netlist.svg)
+<!-- <img src="/images/referencia/componentes/generic_adder_netlist.svg" alt="Diagrama de RTL do somador" style="width: 100%; background-color: white;"> -->
 
 ## Casos de teste
 

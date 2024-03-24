@@ -4,7 +4,7 @@ outline: 2
 
 # Program Counter <Badge type="info" text="MODULE_PC.vhd"/>
 
-![Program Counter Module Logic Gate Diagram](../../public/images/referencia/componentes/module_pc.drawio.svg)
+![Program Counter Module Logic Gate Diagram](/images/referencia/componentes/module_pc.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_PROGRAM_COUNTER.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Program Counter Module RTL Diagram](../../public/images/referencia/componentes/module_pc_netlist.svg)
+![Program Counter Module RTL Diagram](/images/referencia/componentes/module_pc_netlist.svg)
 
 ## Test Cases
 

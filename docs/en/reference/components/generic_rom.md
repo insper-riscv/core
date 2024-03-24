@@ -4,7 +4,7 @@ outline: 2
 
 # ROM <Badge type="info" text="GENERIC_ROM.vhd"/>
 
-![ROM Logic Gate Diagram](../../public/images/referencia/componentes/generic_rom.drawio.svg)
+![ROM Logic Gate Diagram](/images/referencia/componentes/generic_rom.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ROM.vhd).
 
@@ -47,7 +47,7 @@ Data output with the value of memory at the address defined by `address`.
 
 ## RTL Diagram
 
-![ROM RTL Diagram](../../public/images/referencia/componentes/generic_rom_netlist.svg)
+![ROM RTL Diagram](/images/referencia/componentes/generic_rom_netlist.svg)
 
 ## Test Cases
 

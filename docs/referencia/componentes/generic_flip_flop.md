@@ -4,7 +4,7 @@ outline: 2
 
 # Flip Flop <Badge type="info" text="GENERIC_FLIP_FLOP.vhd"/>
 
-![Diagrama de portas do flip flop](../../public/images/referencia/componentes/generic_flip_flop.drawio.svg)
+![Diagrama de portas do flip flop](/images/referencia/componentes/generic_flip_flop.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd).
 
@@ -20,7 +20,8 @@ Work in progress.
 
 ### `clock`
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do clock (sinal que varia seguindo a frequência de ciclos do
+processador).
 
 - tipo: `std_logic`
 
@@ -69,45 +70,14 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_flip_flop_netlist.svg" alt="Diagrama de RTL do flip flop" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_flip_flop_netlist.svg" alt="Diagrama de RTL do flip flop" style="width: 100%; background-color: white;">
 
-## Casos de teste
+## Casos de teste <Badge type="info" text="test_GENERIC_FLIP_FLOP.py" />
 
-`test_GENERIC_FLIP_FLOP.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py).
 
-### Caso 1 <Badge type="info" text="Lógica sequencial" />
+### Caso 1 <Badge type="info" text="tb_GENERIC_FLIP_FLOP_case_1" />
 
-1.
-   - `clear` &larr; `0`
-   - `enable` &larr; `1`
-   - `source` &larr; `1`
-   - `state` &rarr; `0`
-2.
-   - `Clock` &larr; borda de subida
-3.
-   - `state` &rarr; `1`
+Lógica sequencial:
 
-### Caso 2 <Badge type="info" text="Lógica sequencial" />
-
-1.
-   - `clear` &larr; `0`
-   - `enable` &larr; `1`
-   - `source` &larr; `0`
-   - `state` &rarr; `0`
-2.
-   - `Clock` &larr; borda de subida
-3.
-   - `state` &rarr; `0`
-
-### Caso 3 <Badge type="info" text="Lógica sequencial" />
-
-1.
-   - `clear` &larr; `0`
-   - `enable` &larr; `0`
-   - `source` &larr; `1`
-   - `state` &rarr; `0`
-2.
-   - `Clock` &larr; borda de subida
-3.
-   - `state` &rarr; `0`
+<img src="/images/referencia/componentes/tb_GENERIC_FLIP_FLOP_case_1.svg" alt="Caso de teste 1 do Flip Flop" style="width: 100%; background-color: white;">

@@ -4,7 +4,7 @@ outline: 2
 
 # ROM <Badge type="info" text="GENERIC_ROM.vhd"/>
 
-![Diagrama de portas da memória ROM](../../public/images/referencia/componentes/generic_rom.drawio.svg)
+![Diagrama de portas da memória ROM](/images/referencia/componentes/generic_rom.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ROM.vhd).
 
@@ -47,7 +47,7 @@ Saída de dados com o valor da memória no endereço definido por `address`.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_rom_netlist.svg" alt="Diagrama de RTL da ROM" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_rom_netlist.svg" alt="Diagrama de RTL da ROM" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

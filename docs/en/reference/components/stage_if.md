@@ -27,7 +27,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Instruction Fetch Stage RTL Diagram](../../public/images/referencia/componentes/stage_if_netlist.svg)
+![Instruction Fetch Stage RTL Diagram](/images/referencia/componentes/stage_if_netlist.svg)
 
 ## Test Cases
 

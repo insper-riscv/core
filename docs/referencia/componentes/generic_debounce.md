@@ -63,7 +63,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_debounce_netlist.svg" alt="Diagrama de RTL do debounce" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_debounce_netlist.svg" alt="Diagrama de RTL do debounce" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

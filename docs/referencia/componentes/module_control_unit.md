@@ -4,7 +4,7 @@ outline: 2
 
 # Unidade de Controle <Badge type="info" text="MODULE_CONTROL_UNIT.vhd"/>
 
-![Diagrama de portas do módulo unidade de controle](../../public/images/referencia/componentes/module_control_unit.drawio.svg)
+![Diagrama de portas do módulo unidade de controle](/images/referencia/componentes/module_control_unit.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_CONTROL_UNIT.vhd).
 
@@ -26,7 +26,7 @@ Diagrama a nível de registradores
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/module_control_unit_netlist.svg" alt="Diagrama de RTL da Unidade de Controle" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/module_control_unit_netlist.svg" alt="Diagrama de RTL da Unidade de Controle" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

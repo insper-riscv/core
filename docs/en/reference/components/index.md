@@ -10,5 +10,5 @@
 
 ![](/images/referencia/componentes/top_level_core.drawio.svg)
 
-<img src="../../public/images/referencia/componentes/top_level_netlist.svg" alt="Diagrama de RTL do Top Level" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/top_level_netlist.svg" alt="Diagrama de RTL do Top Level" style="width: 100%; background-color: white;">
 

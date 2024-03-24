@@ -4,7 +4,7 @@ outline: 2
 
 # Flip Flop <Badge type="info" text="GENERIC_FLIP_FLOP.vhd"/>
 
-![Diagrama de portas do flip flop](../../public/images/referencia/componentes/generic_flip_flop.drawio.svg)
+![Diagrama de portas do flip flop](/images/referencia/componentes/generic_flip_flop.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd).
 
@@ -70,7 +70,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Flip Flop RTL Diagram](../../public/images/referencia/componentes/generic_flip_flop_netlist.svg)
+![Flip Flop RTL Diagram](/images/referencia/componentes/generic_flip_flop_netlist.svg)
 
 ## Test Cases
 

@@ -4,7 +4,7 @@ outline: 2
 
 # Register File <Badge type="info" text="MODULE_REGISTER_FILE.vhd"/>
 
-![Register File Module Logic Gate Diagram](../../public/images/referencia/componentes/module_register_file.drawio.svg)
+![Register File Module Logic Gate Diagram](/images/referencia/componentes/module_register_file.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_REGISTER_FILE.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Register File Module RTL Diagram](../../public/images/referencia/componentes/module_register_file_netlist.svg)
+![Register File Module RTL Diagram](/images/referencia/componentes/module_register_file_netlist.svg)
 
 ## Test Cases
 

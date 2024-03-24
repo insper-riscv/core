@@ -26,7 +26,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/stage_id_netlist.svg" alt="Diagrama de RTL do Decodifica Instrução" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/stage_id_netlist.svg" alt="Diagrama de RTL do Decodifica Instrução" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

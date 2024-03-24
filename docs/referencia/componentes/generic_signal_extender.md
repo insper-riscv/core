@@ -30,7 +30,7 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_signal_extender_netlist.svg" alt="Diagrama de RTL do extensor de sinal" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_signal_extender_netlist.svg" alt="Diagrama de RTL do extensor de sinal" style="width: 100%; background-color: white;">
 
 ## Casos de teste
 

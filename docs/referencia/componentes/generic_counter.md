@@ -4,7 +4,7 @@ outline: 2
 
 # Contador <Badge type="info" text="GENERIC_COUNTER.vhd"/>
 
-![Diagrama de portas do contador](../../public/images/referencia/componentes/generic_counter.drawio.svg)
+![Diagrama de portas do contador](/images/referencia/componentes/generic_counter.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_COUNTER.vhd).
 
@@ -66,15 +66,14 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_counter_netlist.svg" alt="Diagrama de RTL do contador" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_counter_netlist.svg" alt="Diagrama de RTL do contador" style="width: 100%; background-color: white;">
 
-## Casos de teste
+## Casos de teste <Badge type="info" text="test_GENERIC_COUNTER.py" />
 
-`test_GENERIC_COUNTER.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_COUNTER.py).
 
-::: danger TO DO
+### Caso 1 <Badge type="info" text="tb_GENERIC_COUNTER_case_1" />
 
-Work in progress.
+Lógica sequencial:
 
-:::
+<img src="/images/referencia/componentes/tb_GENERIC_COUNTER_case_1.svg" alt="Caso de teste 1 do contador" style="width: 100%; background-color: white;">

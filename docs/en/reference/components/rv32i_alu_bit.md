@@ -4,7 +4,7 @@ outline: 2
 
 # ALU Bit <Badge type="info" text="RV32I_ALU_BIT.vhd"/>
 
-![ALU Bit Logic Gate Diagram](../../public/images/referencia/componentes/rv32i_alu_bit.drawio.svg)
+![ALU Bit Logic Gate Diagram](/images/referencia/componentes/rv32i_alu_bit.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU_BIT.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![ALU Bit RTL Diagram](../../public/images/referencia/componentes/rv32i_alu_bit_netlist.svg)
+![ALU Bit RTL Diagram](/images/referencia/componentes/rv32i_alu_bit_netlist.svg)
 
 ## Test Cases
 

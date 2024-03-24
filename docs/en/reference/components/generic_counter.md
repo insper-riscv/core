@@ -4,7 +4,7 @@ outline: 2
 
 # Counter <Badge type="info" text="GENERIC_COUNTER.vhd"/>
 
-![Counter Logic Gate Diagram](../../public/images/referencia/componentes/generic_counter.drawio.svg)
+![Counter Logic Gate Diagram](/images/referencia/componentes/generic_counter.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_COUNTER.vhd).
 
@@ -67,7 +67,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Counter RTL Diagram](../../public/images/referencia/componentes/generic_counter_netlist.svg)
+![Counter RTL Diagram](/images/referencia/componentes/generic_counter_netlist.svg)
 
 ## Test Cases
 

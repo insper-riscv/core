@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Write Back Stage RTL Diagram](../../public/images/referencia/componentes/stage_wb_netlist.svg)
+![Write Back Stage RTL Diagram](/images/referencia/componentes/stage_wb_netlist.svg)
 
 ## Test Cases
 

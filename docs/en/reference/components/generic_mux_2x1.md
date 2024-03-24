@@ -4,7 +4,7 @@ outline: 2
 
 # MUX 2:1 <Badge type="info" text="GENERIC_MUX_2X1.vhd"/>
 
-![MUX 2:1 Logic Gate Diagram](../../public/images/referencia/componentes/generic_mux_2x1.drawio.svg)
+![MUX 2:1 Logic Gate Diagram](/images/referencia/componentes/generic_mux_2x1.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_MUX_2X1.vhd).
 
@@ -45,7 +45,7 @@ Output data with the value of one of the data inputs (`source_1` or `source_2`).
 
 ## RTL Diagram
 
-![MUX 2:1 RTL Diagram](../../public/images/referencia/componentes/generic_mux_2x1_netlist.svg)
+![MUX 2:1 RTL Diagram](/images/referencia/componentes/generic_mux_2x1_netlist.svg)
 
 ## Test Cases
 

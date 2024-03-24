@@ -4,7 +4,7 @@ outline: 2
 
 # RAM <Badge type="info" text="GENERIC_RAM.vhd"/>
 
-![Diagrama de portas da memória RAM](../../public/images/referencia/componentes/generic_ram.drawio.svg)
+![Diagrama de portas da memória RAM](/images/referencia/componentes/generic_ram.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd).
 
@@ -77,15 +77,14 @@ Saída de dados com o valor da memória no endereço definido por `address`.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/generic_ram_netlist.svg" alt="Diagrama de RTL da RAM" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/generic_ram_netlist.svg" alt="Diagrama de RTL da RAM" style="width: 100%; background-color: white;">
 
-## Casos de teste
+## Casos de teste <Badge type="info" text="test_GENERIC_RAM.py" />
 
-`test_GENERIC_RAM.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_RAM.py).
 
-::: danger TO DO
+### Caso 1 <Badge type="info" text="tb_GENERIC_RAM_case_1" />
 
-Work in progress.
+Lógica sequencial:
 
-:::
+<img src="/images/referencia/componentes/tb_GENERIC_RAM_case_1.svg" alt="Caso de teste 1 da RAM" style="width: 100%; background-color: white;">

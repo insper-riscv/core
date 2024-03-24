@@ -64,7 +64,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![Debounce RTL Diagram](../../public/images/referencia/componentes/generic_debounce_netlist.svg)
+![Debounce RTL Diagram](/images/referencia/componentes/generic_debounce_netlist.svg)
 
 ## Test Cases
 

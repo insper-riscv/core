@@ -4,7 +4,7 @@ outline: 2
 
 # Arquivo de registradores <Badge type="info" text="RV32I_REGISTER_FILE.vhd"/>
 
-![Diagrama de portas do banco de registradores](../../public/images/referencia/componentes/rv32i_register_file.drawio.svg)
+![Diagrama de portas do banco de registradores](/images/referencia/componentes/rv32i_register_file.drawio.svg)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd).
 
@@ -77,15 +77,14 @@ Saída de valor de registrador secundária.
 
 ## Diagrama RTL
 
-<img src="../../public/images/referencia/componentes/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
+<img src="/images/referencia/componentes/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
 
-## Casos de teste
+## Casos de teste <Badge type="info" text="test_RV32I_REGISTER_FILE.py" />
 
-`test_RV32I_REGISTER_FILE.py`.
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_REGISTER_FILE.py).
 
-::: danger TO DO
+### Caso 1 <Badge type="info" text="tb_RV32I_REGISTER_FILE_case_1" />
 
-Work in progress.
+Lógica sequencial:
 
-:::
+<img src="/images/referencia/componentes/tb_RV32I_REGISTER_FILE_case_1.svg" alt="Caso de teste 1 do Arquivo de Registradores" style="width: 100%; background-color: white;">
