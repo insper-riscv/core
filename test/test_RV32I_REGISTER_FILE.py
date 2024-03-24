@@ -20,7 +20,8 @@ class RV32I_REGISTER_FILE(utils.DUT):
     data_source_2 = utils.DUT.Output_pin
 
 @cocotb.test()
-async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE):
+@utils.append_wavedrom
+async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.Trace):
     values_address_destination = [
         "00000",
         "00001",

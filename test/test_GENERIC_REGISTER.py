@@ -19,7 +19,8 @@ class GENERIC_REGISTER(utils.DUT):
 
 
 @cocotb.test()
-async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER):
+@utils.append_wavedrom
+async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
     values_clear = ["0", "0", "1", "0", "0"]
     values_enable = ["1", "0", "0", "1", "1"]
     values_source = [
