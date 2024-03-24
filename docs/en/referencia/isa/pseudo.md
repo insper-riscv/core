@@ -2,27 +2,27 @@
 outline: 2
 ---
 
-# Pseudo-instruções
+# Pseudo-instructions
 
-As pseudo-instruções são instruções que existem na linguagem de montagem, mas
-não existem na arquitetura do conjunto de instruções do processador. O montador
-mapeia pseudo-instruções em instruções do processador.
+Pseudo-instructions are instructions that exist in assembly language 
+but do not exist in the processor's instruction set architecture. 
+The assembler maps pseudo-instructions into processor instructions.
 
-## `la` (não-PIC)
+## `la` (non-PIC)
 
-Load Absolute Address (Carrega Endereço Absoluto).
+Load Absolute Address.
 
-Sendo `delta` = `symbol - pc`.
+Where `delta` = `symbol - pc`.
 
-### Formato
+### Format
 
 `la rd, symbol`
 
-### Implementação
+### Implementation
 
 `x[rd] = pc + imm(U) + imm(I)`
 
-### Instruções base
+### Base Instructions
 
 ```asm
 auipc rd, delta[31:12] + delta[11]
