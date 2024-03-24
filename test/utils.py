@@ -221,6 +221,7 @@ def append_wavedrom(model: "DUT"):
 
 class Trace:
     def __init__(self, *args: T.Any, clock: T.Any, model: T.Optional["DUT"] = None):
+        self.clock = clock
         self._trace = cocotb.wavedrom.trace(*args, clk=clock)
         self.model = model
 
@@ -237,19 +238,19 @@ class Trace:
     def enable(self):
         self._trace.enable()
 
-    async def wait(self, clock: T.Any, count: int = 1):
+    async def cycle(self, count: int = 1):
         for _ in range(count):
-            await cocotb.triggers.RisingEdge(clock)
-            await cocotb.triggers.FallingEdge(clock)
+            await cocotb.triggers.RisingEdge(self.clock)
+            await cocotb.triggers.FallingEdge(self.clock)
 
-    async def gap(self, clock: T.Any, count: int = 1):
+    async def gap(self, count: int = 1):
         if count < 1:
             return
 
         self._trace.insert_gap()
 
         self._trace.disable()
-        await self.wait(clock, count)
+        await self.cycle(count)
         self._trace.enable()
 
     def write(self, filename: str):
