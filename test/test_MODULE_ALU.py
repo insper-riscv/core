@@ -1,14 +1,10 @@
 import os
-from decimal import Decimal
 
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
 from test_GENERIC_MUX_4X1 import GENERIC_MUX_4X1
-from test_RV32I_ALU_CONTROLLER import RV32I_ALU_CONTROLLER
 from test_RV32I_ALU import RV32I_ALU
 
 
@@ -27,8 +23,8 @@ class MODULE_ALU(utils.DUT):
     alu = RV32I_ALU
 
 
-@cocotb.test()
-async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU"):
+@MODULE_ALU.testcase
+async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU", trace: utils.Trace):
     dut.select_source_1.value = BinaryValue("10")
     dut.select_source_2.value = BinaryValue("01")
     dut.address_program.value = BinaryValue("11111111111111111111111111111111")
@@ -37,15 +33,9 @@ async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU"):
     dut.data_immediate.value = BinaryValue("00000000000000000001000000000000")
     dut.select_function.value = BinaryValue("0001")
 
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000001000000000000")
 
-    utils.assert_output(dut.destination, "00000000000000000001000000000000")
-
-    await Timer(Decimal(1), units="ns")
-
-
-@cocotb.test()
-async def tb_MODULE_ALU_case_2(dut: "MODULE_ALU"):
     dut.select_source_1.value = BinaryValue("01")
     dut.select_source_2.value = BinaryValue("10")
     dut.address_program.value = BinaryValue("00000000000000000000000000000000")
@@ -54,11 +44,8 @@ async def tb_MODULE_ALU_case_2(dut: "MODULE_ALU"):
     dut.data_immediate.value = BinaryValue("00000000000000000001000000000000")
     dut.select_function.value = BinaryValue("0001")
 
-    await Timer(Decimal(1), units="ns")
-
-    utils.assert_output(dut.destination, "00000000000000000000000000000100")
-
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000100")
 
 
 def test_MODULE_ALU_synthesis():
@@ -70,7 +57,6 @@ def test_MODULE_ALU_testcases():
     MODULE_ALU.test_with(
         [
             tb_MODULE_ALU_case_1,
-            tb_MODULE_ALU_case_2,
         ]
     )
 

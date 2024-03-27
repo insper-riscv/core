@@ -1,10 +1,7 @@
 import os
-from decimal import Decimal
 
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
 
@@ -19,8 +16,8 @@ class RV32I_INSTRUCTION_DECODER(utils.DUT):
     immediate = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_RV32I_INSTRUCTION_DECODER_case_1(dut: RV32I_INSTRUCTION_DECODER):
+@RV32I_INSTRUCTION_DECODER.testcase
+async def tb_RV32I_INSTRUCTION_DECODER_case_1(dut: RV32I_INSTRUCTION_DECODER, trace: utils.Trace):
     values_instruction = [
         "11111111111100000000000000010011",
         "11111110000000000010111110100011",
@@ -48,8 +45,8 @@ async def tb_RV32I_INSTRUCTION_DECODER_case_1(dut: RV32I_INSTRUCTION_DECODER):
         
         dut.instruction.value = BinaryValue(instruction)
 
-        await Timer(Decimal(20000), units="ns")
-        utils.assert_output(dut.immediate, immediate, f"At clock {index}.")
+        await trace.cycle()
+        yield trace.check(dut.immediate, immediate, f"At clock {index}.")
 
 
 def test_RV32I_INSTRUCTION_DECODER_synthesis():
