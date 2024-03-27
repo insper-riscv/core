@@ -1,11 +1,9 @@
 from inspect import isclass
-import os
 import json
 import typing as T
 import subprocess
 from pathlib import Path
 import json
-import re
 
 import cocotb.binary
 import cocotb.handle
@@ -40,6 +38,37 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
             return [case.__name__ for case in case]
 
         return case.__name__
+
+    @classmethod
+    def testcase(cls, fn):
+        @cocotb.test()
+        async def _testcase_wrapper(dut: "DUT"):
+            signals = [
+                getattr(dut, key)
+                for key in dir(dut)
+                if not key.startswith("_")
+                and key != "clock"
+                and isinstance(getattr(dut, key), cocotb.handle.ModifiableObject)
+            ]
+
+            if hasattr(dut, "clock"):
+                tracer = Trace(*signals, clock=dut.clock, model=cls)
+            else:
+                tracer = Trace(*signals, clock=None, model=cls)
+
+            with tracer as trace:
+                pased = all([result async for result in fn(dut, trace)])
+
+                trace.write(f"../sim_build/{fn.__name__.lower()}.svg")
+
+                if not pased:
+                    message = "\n".join(pytest_check.check_log.get_failures())
+
+                    raise AssertionError(message)
+
+        _testcase_wrapper.__name__ = fn.__name__
+
+        return _testcase_wrapper
 
     @classmethod
     def _get_input_pins(cls):
@@ -167,7 +196,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
             stderr=subprocess.PIPE,
         )
 
-        outs, errs = process.communicate(timeout=5)
+        outs, errs = process.communicate(timeout=30)
 
         assert process.returncode == 0, errs.decode()
 
@@ -177,53 +206,30 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         testcase: _TESTCASE_TYPE,
         parameters: T.Mapping[str, object] = {},
     ):
-        runner.test(
-            hdl_toplevel=cls.__name__.lower(),
-            test_args=["--std=08"],
-            test_module="test_" + cls.__name__,
-            testcase=DUT._get_testcase_names(testcase),
-            parameters=parameters,
-            hdl_toplevel_lang="vhdl",
-        )
+        with check.check() as aaa:
+            aaa.set_max_fail(1)
+            runner.test(
+                hdl_toplevel=cls.__name__.lower(),
+                test_args=["--std=08"],
+                test_module="test_" + cls.__name__,
+                testcase=DUT._get_testcase_names(testcase),
+                parameters=parameters,
+                hdl_toplevel_lang="vhdl",
+            )
 
-
-def assert_output(pin: T.Type[DUT.Output_pin], value: str, message: str = ""):
-    condition = pin.value.binstr == value
-
-    assert condition, f"Expected {value} and obtained {pin.value.binstr}. {message}"
-
-
-def dump_waves(dut: "DUT", model: T.Optional["DUT"] = None):
-    signals = (
-        getattr(dut, key)
-        for key in dir(dut)
-        if not key.startswith("_")
-        and key != "clock"
-        and isinstance(getattr(dut, key), cocotb.handle.ModifiableObject)
-    )
-
-    return Trace(*signals, clock=dut.clock, model=model)
-
-
-def append_wavedrom(model: "DUT"):
-    def aux_1(fn):
-        async def aux(dut: "DUT"):
-            with dump_waves(dut, model) as trace:
-                await fn(dut, trace)
-                trace.write(f"../sim_build/{fn.__name__}.svg")
-
-        aux.__name__ = fn.__name__
-
-        return aux
-
-    return aux_1
+            if check.any_failures():
+                assert False
 
 
 class Trace:
     def __init__(self, *args: T.Any, clock: T.Any, model: T.Optional["DUT"] = None):
         self.clock = clock
-        self._trace = cocotb.wavedrom.trace(*args, clk=clock)
         self.model = model
+
+        if clock is not None:
+            self._trace = cocotb.wavedrom.trace(*args, clk=clock)
+        else:
+            self._trace = Trace2(*args)
 
     def __enter__(self):
         self._trace.__enter__()
@@ -239,9 +245,12 @@ class Trace:
         self._trace.enable()
 
     async def cycle(self, count: int = 1):
-        for _ in range(count):
-            await cocotb.triggers.RisingEdge(self.clock)
-            await cocotb.triggers.FallingEdge(self.clock)
+        if self.clock is not None:
+            for _ in range(count):
+                await cocotb.triggers.RisingEdge(self.clock)
+                await cocotb.triggers.FallingEdge(self.clock)
+        else:
+            await cocotb.triggers.Timer(cocotb.triggers.Decimal(1), units="step")
 
     async def gap(self, count: int = 1):
         if count < 1:
@@ -252,6 +261,22 @@ class Trace:
         self._trace.disable()
         await self.cycle(count)
         self._trace.enable()
+
+    def check(self, pin: T.Type[DUT.Output_pin], value: str, message: str = ""):
+        result = check.equal(pin.value.binstr, value, f"At pin \"{pin._name}\". {message}")
+
+        for signal in self._trace._signals:
+            if pin._name not in signal._samples:
+                continue
+
+            signal._samples[pin._name][-1] = "7" if result else "9"
+
+            if len(value) < 2:
+                signal._data[pin._name].append(pin.value)
+
+            break
+
+        return result
 
     def write(self, filename: str):
         source = self._trace.dumpj()
@@ -284,3 +309,41 @@ class Trace:
             return drawing.saveas(filename)
 
         raise ValueError("Invalid Wavedrom source!")
+
+class Trace2(cocotb.wavedrom.trace):
+    def __init__(self, *args):
+        self._signals = []
+        for arg in args:
+            self._signals.append(cocotb.wavedrom.Wavedrom(arg))
+        self._coro = None
+        self._cycles = 0
+        self._enabled = False
+
+    async def _monitor(self):
+        self._cycles = 0
+        while True:
+            await cocotb.triggers.ReadOnly()
+            if not self._enabled:
+                continue
+            self._cycles += 1
+            for sig in self._signals:
+                sig.sample()
+
+    def dumpj(self, header="", footer="", config=""):
+        trace = {"signal": []}
+        for sig in self._signals:
+            trace["signal"].extend(sig.get(add_clock=False))
+        if header:
+            if isinstance(header, dict):
+                trace["head"] = header
+            else:
+                trace["head"] = {"text": header}
+        if footer:
+            if isinstance(footer, dict):
+                trace["foot"] = footer
+            else:
+                trace["foot"] = {"text": footer}
+        if config:
+            trace["config"] = config
+        return json.dumps(trace, indent=4, sort_keys=False)
+
