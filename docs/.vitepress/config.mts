@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from "vitepress-plugin-mermaid"
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default defineConfig(withMermaid({
   title: 'CTI RISC-V',
   description: 'Documentação do Projeto',
   base: '/24a-CTI-RISCV/',
@@ -123,4 +124,4 @@ export default defineConfig({
       copyright: 'Copyright © 2024'
     },
   },
-})
+}))
