@@ -2,79 +2,110 @@
 outline: 2
 ---
 
-# Somador <Badge type="info" text="GENERIC_ADDER.vhd"/>
+# Somador
 
-![Diagrama de portas do somador](/images/referencia/componentes/generic_adder.drawio.svg)
+[<Badge type="tip" text="GENERIC_ADDER.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd).
+## Topologia
+
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_ADDER"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DATA_WIDTH
+            DEFAULT_SOURCE_2
+        end
+        D(("ADDER"))
+        style D scale:1.5
+    end
+    A([source_1]) -- DATA_WIDTH ---> TOP
+    B([source_2]) -- DATA_WIDTH ---> TOP
+    TOP -- DATA_WIDTH ---> C([destination])
+```
 
 ## Interface genérica
 
-### `DATA_WIDTH`
+### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
 
 Largura dos vetores de entrada e saída de dados.
 
-- tipo: `natural`
-- padrão: `XLEN`
+- Tipo: `natural`
+- Padrão: `XLEN` (constante externa)
 
-### `DEFAULT_SOURCE_2`
+### `DEFAULT_SOURCE_2` <Badge type="tip" text="GENERIC" />
 
-Valor padrão de incremento. Dispensa necessidade de `source_2`.
+Valor padrão de incremento. Dispensa necessidade de atribuir entrada `source_2`.
 
-- tipo: `integer`
-- padrão: `1`
+- Tipo: `integer`
+- Padrão: `1`
 
 ## Interface de portas
 
-### `source_1`
+### `source_1` <Badge type="warning" text="INPUT" />
 
-Entrada de dados primária.
+Vetor de entrada primário.
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `source_2`
+### `source_2` <Badge type="warning" text="INPUT" />
 
-Entrada de dados secundária.
+Vetor de entrada secundário.
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- padrão: `to_signed(DEFAULT_SOURCE_1, DATA_WIDTH)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
+- Padrão: `to_signed(DEFAULT_SOURCE_2, DATA_WIDTH)`
 
-### `destination`
+### `destination` <Badge type="danger" text="OUTPUT" />
 
 Saída de dados com o resultado de `source_1 + source_2`.
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: `(DATA_WIDTH - 1) downto 0`
+
+## Usagem
+
+### Incremento constante
+
+```vhdl
+CONSTANT_ADDER : entity WORK.GENERIC_ADDER
+    generic map (
+        DATA_WIDTH_0     => 32,
+        DEFAULT_SOURCE_2 => 1
+    )
+    port map (
+        source_1    => signal_source_1,
+        destination => signal_destination
+    );
+```
+
+### Somador
+
+```vhdl
+ADDER : entity WORK.GENERIC_ADDER
+    generic map (
+        DATA_WIDTH_0 => 32
+    )
+    port map (
+        source_1    => signal_source_1,
+        source_2    => signal_source_2,
+        destination => signal_destination
+    );
+```
 
 ## Diagrama RTL
 
-![Diagrama RTL do somador](/images/referencia/componentes/generic_adder_netlist.svg)
-<!-- <img src="/images/referencia/componentes/generic_adder_netlist.svg" alt="Diagrama de RTL do somador" style="width: 100%; background-color: white;"> -->
+![Diagrama de RTL do somador](/images/referencia/componentes/generic_adder_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-`test_GENERIC_ADDER.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ADDER.py).
+[<Badge type="tip" text="test_GENERIC_ADDER.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ADDER.py)
 
-### Caso 1 <Badge type="info" text="Lógica combinacional" />
+### Caso 1 <Badge type="info" text="tb_GENERIC_ADDER_case_1" />
 
-- `source_1` &larr; `00000000000000000000000000000000`
-- `source_2` &larr; `00000000000000000000000000000000`
-- `destination` &rarr; `00000000000000000000000000000000`
+Lógica combinacional:
 
-### Caso 2 <Badge type="info" text="Lógica combinacional" />
-
-- `source_1` &larr; `10101010101010101010101010101010`
-- `source_2` &larr; `01010101010101010101010101010101`
-- `destination` &rarr; `11111111111111111111111111111111`
-
-### Caso 3 <Badge type="info" text="Lógica combinacional" />
-
-- `source_1` &larr; `00101010101010101010101010101010`
-- `source_2` &larr; `00101010101010101010101010101010`
-- `destination` &rarr; `01010101010101010101010101010100`
-
-### Caso 4 <Badge type="info" text="Lógica combinacional" />
-
-- `source_1` &larr; `11111111111111111111111111111110`
-- `source_2` &larr; `00000000000000000000000000000001`
-- `destination` &rarr; `11111111111111111111111111111111`
+![Forma de onda do caso de teste 1 do somador](/images/referencia/componentes/tb_generic_adder_case_1.svg){.w-full .dark-invert}

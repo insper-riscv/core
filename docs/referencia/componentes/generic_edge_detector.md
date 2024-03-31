@@ -2,70 +2,88 @@
 outline: 2
 ---
 
-# Detector de Borda <Badge type="info" text="GENERIC_EDGE_DETECTOR.vhd"/>
+# Detector de Borda
 
-![Diagrama de portas do detector de borda](/images/referencia/componentes/generic_edge_detector.drawio.svg)
+[<Badge type="tip" text="GENERIC_EDGE_DETECTOR.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_EDGE_DETECTOR.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_EDGE_DETECTOR.vhd).
+## Topologia
 
-## Interface genérica
-
-::: danger TO DO
-
-Work in progress.
-
-:::
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_EDGE_DETECTOR"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            _[" "]
+        end
+        F[("private state_1\nprivate state_2")]
+        style F scale:1.2
+    end
+    A(((clock))) ---> TOP
+    C([source]) ---> TOP
+    TOP ---> D([pulse])
+```
 
 ## Interface de portas
 
-### `clock`
+### `clock` <Badge type="warning" text="INPUT" />
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do sinal de clock.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `source`
+### `source` <Badge type="warning" text="INPUT" />
 
-::: danger TO DO
+Sinal de entrada com ruído.
 
-Escrever descrição source
+- Tipo: `std_logic`
 
-:::
+### `pulse` <Badge type="danger" text="OUTPUT" />
 
-- tipo: `std_logic`
+Sinal de borda sincronizada com `clock`.
 
-### `pulse`
+- Tipo: `std_logic`
 
-::: danger TO DO
+## Usagem
 
-Escrever descrição pulse
+### Detector de borda de subida
 
-:::
+```vhdl
+EDGE_RAISE_DETECTOR : entity WORK.GENERIC_EDGE_DETECTOR(RISING_DETECTOR)
+    Port map (
+        clock  => clock,
+        source => signal_source,
+        pulse  => signal_pulse
+    );
+```
 
-- tipo: `std_logic`
+### Detector de borda de descida
 
-::: danger TO DO
-
-Work in progress.
-
-:::
+```vhdl
+EDGE_FALL_DETECTOR : entity WORK.GENERIC_EDGE_DETECTOR(FALLING_DETECTOR)
+    Port map (
+        clock  => signal_clock,
+        source => signal_source,
+        pulse  => signal_pulse
+    );
+```
 
 ## Diagrama RTL
 
-<img src="/images/referencia/componentes/generic_edge_detector_netlist.svg" alt="Diagrama de RTL do detector de borda" style="width: 100%; background-color: white;">
+![Diagrama de RTL do detector de borda](/images/referencia/componentes/generic_edge_detector_netlist.svg){.w-full .dark-invert}
 
-## Casos de teste <Badge type="info" text="test_GENERIC_EDGE_DETECTOR.py" />
+## Casos de teste
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_EDGE_DETECTOR.py).
+[<Badge type="tip" text="test_GENERIC_EDGE_DETECTOR.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_EDGE_DETECTOR.py)
 
-### Caso 1 <Badge type="info" text="tb_GENERIC_EDGE_DETECTOR_case_1" />
-
-Lógica sequencial:
-
-<img src="/images/referencia/componentes/tb_GENERIC_EDGE_DETECTOR_case_1.svg" alt="Caso de teste 1 do Detector de Borda" style="width: 100%; background-color: white;">
-
-### Caso 2 <Badge type="info" text="tb_GENERIC_EDGE_DETECTOR_case_2" />
+### Caso 1 <Badge type="info" text="tb_generic_edge_detector_case_1" />
 
 Lógica sequencial:
 
-<img src="/images/referencia/componentes/tb_GENERIC_EDGE_DETECTOR_case_2.svg" alt="Caso de teste 2 do Detector de Borda" style="width: 100%; background-color: white;">
+![Caso de teste 1 do Detector de Borda](/images/referencia/componentes/tb_generic_edge_detector_case_1.svg){.w-full .dark-invert}
+
+### Caso 2 <Badge type="info" text="tb_generic_edge_detector_case_2" />
+
+Lógica sequencial:
+
+![Forma de onda do caso de teste 2 do Detector de Borda](/images/referencia/componentes/tb_generic_edge_detector_case_2.svg){.w-full .dark-invert}

@@ -2,56 +2,69 @@
 outline: 2
 ---
 
-# Flip Flop <Badge type="info" text="GENERIC_FLIP_FLOP.vhd"/>
+# Flip Flop
 
-![Diagrama de portas do flip flop](/images/referencia/componentes/generic_flip_flop.drawio.svg)
+[<Badge type="tip" text="GENERIC_FLIP_FLOP.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd).
+## Topologia
 
-## Interface genérica
-
-::: danger TO DO
-
-Work in progress.
-
-:::
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_FLIP_FLOP"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            _[" "]
+        end
+        F[("state")]
+        style F scale:1.2
+    end
+    A(((clock))) ---> TOP
+    B([clear]) ---> TOP
+    C([enable]) ---> TOP
+    D([source]) ---> TOP
+    TOP ---> E([state])
+```
 
 ## Interface de portas
 
-### `clock`
+### `clock` <Badge type="warning" text="INPUT" />
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do
-processador).
+Entrada do sinal de clock.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `clear`
-
-Entrada que reseta o flip flop.
-
-- tipo: `std_logic`
-
-### `enable`
+### `clear` <Badge type="warning" text="INPUT" />
 
 ::: danger TO DO
 
-Escrever descrição enable
+Descrição.
 
 :::
 
 - tipo: `std_logic`
 
-### `source`
+### `enable` <Badge type="warning" text="INPUT" />
 
 ::: danger TO DO
 
-Escrever descrição source
+Descrição.
 
 :::
 
 - tipo: `std_logic`
 
-### `state`
+### `source` <Badge type="warning" text="INPUT" />
+
+::: danger TO DO
+
+Descrição.
+
+:::
+
+- tipo: `std_logic`
+
+### `state` <Badge type="danger" text="OUTPUT" />
 
 ::: danger TO DO
 
@@ -62,22 +75,29 @@ Escrever descrição state
 - tipo: `std_logic`
 - padrão: `0`
 
-::: danger TO DO
+## Usagem
 
-Work in progress.
-
-:::
+```vhdl
+FLIP_FLOP_1 : entity WORK.GENERIC_FLIP_FLOP
+    port map (
+        clock  => clock,
+        clear  => signal_clear,
+        enable => signal_enable,
+        source => signal_source,
+        state  => signal_state
+    );
+```
 
 ## Diagrama RTL
 
-<img src="/images/referencia/componentes/generic_flip_flop_netlist.svg" alt="Diagrama de RTL do flip flop" style="width: 100%; background-color: white;">
+![Diagrama de RTL do Flip Flop](/images/referencia/componentes/generic_flip_flop_netlist.svg){.w-full .dark-invert}
 
-## Casos de teste <Badge type="info" text="test_GENERIC_FLIP_FLOP.py" />
+## Casos de teste
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py).
+[<Badge type="tip" text="test_GENERIC_FLIP_FLOP.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py)
 
-### Caso 1 <Badge type="info" text="tb_GENERIC_FLIP_FLOP_case_1" />
+### Caso 1 <Badge type="info" text="tb_generic_flip_flop_case_1" />
 
 Lógica sequencial:
 
-<img src="/images/referencia/componentes/tb_GENERIC_FLIP_FLOP_case_1.svg" alt="Caso de teste 1 do Flip Flop" style="width: 100%; background-color: white;">
+![Forma de onda do caso de teste 1 do Flip Flop](/images/referencia/componentes/tb_generic_flip_flop_case_1.svg){.w-full .dark-invert}

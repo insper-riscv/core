@@ -2,78 +2,118 @@
 outline: 2
 ---
 
-# Contador <Badge type="info" text="GENERIC_COUNTER.vhd"/>
+# Contador
 
-![Diagrama de portas do contador](/images/referencia/componentes/generic_counter.drawio.svg)
+[<Badge type="tip" text="GENERIC_COUNTER.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_COUNTER.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_COUNTER.vhd).
+## Topologia
+
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_COUNTER"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DEFAULT_OVERFLOW
+        end
+        F[("overflow\ncount\nstate")]
+        style F scale:1.3
+    end
+    A(((clock))) ---> TOP
+    B([clear]) ---> TOP
+    C([update]) ---> TOP
+    D([source]) -- 5 ---> TOP
+    TOP ---> E([state])
+```
 
 ## Interface genérica
 
-### `DEFAULT_OVERFLOW`
+### `DEFAULT_OVERFLOW` <Badge type="tip" text="GENERIC" />
 
-Valor padrão de overflow.
+Valor Padrão de overflow.
 
-- tipo: `natural`
-- padrão: `CLOCK_FREQUENCY`
+- Tipo: `natural`
+- Padrão: `CLOCK_FREQUENCY` (constante externa)
 
 ## Interface de portas
 
-### `clock`
+### `clock` <Badge type="warning" text="INPUT" />
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do sinal de clock.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `clear`
+### `clear` <Badge type="warning" text="INPUT" />
 
-Entrada que reseta o contador.
+Atribui a saída `state` para sinal lógico baixo. Não reinicia a contagem.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `update`
+### `update` <Badge type="warning" text="INPUT" />
 
-Entrada que atualiza o valor de overflow.
+Entrada do signal de limpeza do estado do contador. Reinicia a contagem mas não
+limpa o estado do contador.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
+- Padrão: `'0'`
 
-### `source`
+### `source` <Badge type="warning" text="INPUT" />
 
-::: danger TO DO
+Valor `n` de estouro da contagem. A cada `2^n` ciclos de clock, atribui a saída
+`state` para sinal lógico alto.
 
-Escrever descrição source
+- Tipo: `std_logic_vector`
+- Largura: 5 bits `4 downto 0`
+- Padrão: `DEFAULT_OVERFLOW`
 
-:::
+### `state` <Badge type="danger" text="OUTPUT" />
 
-- tipo: `std_logic_vector(4 downto 0)`
+Estado do contador. Nível lógico alto caso tenha ultrapassado a contagem de
+ciclos definida.
 
-### `state`
+- Tipo: `std_logic`
+- Padrão: `0`
 
-::: danger TO DO
+## Usagem
 
-Escrever descrição state
+### Base de tempo constante
 
-:::
+```vhdl
+TIMER_COUNTER : entity WORK.GENERIC_COUNTER
+    generic map (
+        DEFAULT_OVERFLOW => 50_000_000 -- Valor da frequência do clock, equivalente a contagem de 1 segundo
+    )
+    port map (
+        clock  => clock,
+        clear  => signal_clear,
+        state  => signal_state
+    );
+```
 
-- tipo: `std_logic`
-- padrão: `0`
+### Base de tempo variável
 
-::: danger TO DO
-
-Work in progress.
-
-:::
+```vhdl
+TIMER_COUNTER : entity WORK.GENERIC_COUNTER
+    port map (
+        clock  => clock,
+        clear  => signal_clear,
+        update => signal_update,
+        source => signal_source,
+        state  => signal_state
+    );
+```
 
 ## Diagrama RTL
 
-<img src="/images/referencia/componentes/generic_counter_netlist.svg" alt="Diagrama de RTL do contador" style="width: 100%; background-color: white;">
+![Diagrama de RTL do contador](/images/referencia/componentes/generic_counter_netlist.svg){.w-full .dark-invert}
 
-## Casos de teste <Badge type="info" text="test_GENERIC_COUNTER.py" />
+## Casos de teste
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_COUNTER.py).
+[<Badge type="tip" text="test_GENERIC_COUNTER.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_COUNTER.py)
 
 ### Caso 1 <Badge type="info" text="tb_GENERIC_COUNTER_case_1" />
 
 Lógica sequencial:
 
-<img src="/images/referencia/componentes/tb_GENERIC_COUNTER_case_1.svg" alt="Caso de teste 1 do contador" style="width: 100%; background-color: white;">
+![Forma de onda do caso de teste 1 do contador](/images/referencia/componentes/tb_generic_counter_case_1.svg){.w-full .dark-invert}

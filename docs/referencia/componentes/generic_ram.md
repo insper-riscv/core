@@ -2,89 +2,142 @@
 outline: 2
 ---
 
-# RAM <Badge type="info" text="GENERIC_RAM.vhd"/>
+# RAM
 
-![Diagrama de portas da memória RAM](/images/referencia/componentes/generic_ram.drawio.svg)
+[<Badge type="tip" text="GENERIC_RAM.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd).
+## Topologia
+
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_RAM"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DATA_WIDTH
+            ADDRESS_WIDTH
+            ADDRESSABLE_WIDTH
+        end
+        H[("RAM")]
+        style H scale:2
+    end
+    A(((clock))) ---> TOP
+    B([enable]) ---> TOP
+    C([enable_read]) ---> TOP
+    D([enable_write]) ---> TOP
+    E([address]) -- ADDRESS_WIDTH ---> TOP
+    F([source]) -- DATA_WIDTH ---> TOP
+    TOP -- DATA_WIDTH ---> G([destination])
+```
 
 ## Interface genérica
 
-### `DATA_WIDTH`
+### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Largura dos vetores de entrada e saída de dados.
+Largura dos vetores de dados `source` e `destination`.
 
-- tipo: `natural`
-- padrão: `XLEN`
+- Tipo: `natural`
+- Padrão: `XLEN` (constante externa)
 
-### `ADDRESS_WIDTH`
+### `ADDRESS_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Largura do vetor de entrada de endereço de memória.
+Largura do vetor da entrada `address`.
 
-- tipo: `natural`
-- padrão: `XLEN`
+- Tipo: `natural`
+- Padrão: `XLEN` (constante externa)
 
-### `ADDRESSABLE_WIDTH`
+### `ADDRESSABLE_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Expoente da potência que determina o tamanho da memória.
+Largura do vetor de endereçamento com mapeamento na memória.
 
-- tipo: `natural`
-- padrão: `10`
+- Tipo: `natural`
+- Padrão: `10`
+
+::: warning ATENÇÃO!
+
+Deve ser menor ou igual a `ADDRESS_WIDTH`.
+
+:::
 
 ## Interface de portas
 
-### `clock`
+### `clock` <Badge type="warning" text="INPUT" />
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do sinal de clock.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `enable`
+### `enable` <Badge type="warning" text="INPUT" />
 
-Entrada de sinal que ativa uso da memória para leitura e/ou escrita.
+Entrada do sinal habilitação do uso da memória para leitura ou escrita.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `enable_read`
+### `enable_read` <Badge type="warning" text="INPUT" />
 
-Entrada de sinal que ativa leitura da memória.
+Entrada do sinal habilitação da leitura da memória. Saída `destination` assume
+sinal de alta impedância caso `enable_read = '0'`.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `enable_write`
+### `enable_write` <Badge type="warning" text="INPUT" />
 
-Entrada de sinal que ativa escrita da memória.
+Entrada do sinal habilitação da escrina da memória.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `address`
+### `address` <Badge type="warning" text="INPUT" />
 
 Entrada de endereço da memória.
 
-- tipo: `std_logic_vector((ADDRESS_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(ADDRESS_WIDTH - 1) downto 0`
 
-### `source`
+### `source` <Badge type="warning" text="INPUT" />
 
 Entrada de dados.
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `destination`
+### `destination` <Badge type="danger" text="OUTPUT" />
 
-Saída de dados com o valor da memória no endereço definido por `address`.
+Saída de dados assumindo valor armazenado no endereço em `address`. Caso seja
+endereçado um valor fora da largura mapeada assume sinal lógico baixo `"0...0"`
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
+
+## Usagem
+
+```vhdl
+RAM : entity WORK.GENERIC_RAM
+    generic map (
+        DATA_WIDTH_0      => 32;
+        ADDRESS_WIDTH     => 32;
+        ADDRESSABLE_WIDTH => 8
+    )
+    port map (
+        clock        => clock,
+        enable       => signal_enable,
+        enable_read  => signal_enable_read,
+        enable_write => signal_enable_write,
+        address      => signal_address,
+        source       => signal_source,
+        destination  => signal_destination
+    );
+```
 
 ## Diagrama RTL
 
-<img src="/images/referencia/componentes/generic_ram_netlist.svg" alt="Diagrama de RTL da RAM" style="width: 100%; background-color: white;">
+![Diagrama de RTL da RAM](/images/referencia/componentes/generic_ram_netlist.svg){.w-full .dark-invert}
+## Casos de teste
 
-## Casos de teste <Badge type="info" text="test_GENERIC_RAM.py" />
-
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_RAM.py).
+[<Badge type="tip" text="test_GENERIC_RAM.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_RAM.py)
 
 ### Caso 1 <Badge type="info" text="tb_GENERIC_RAM_case_1" />
 
 Lógica sequencial:
 
-<img src="/images/referencia/componentes/tb_GENERIC_RAM_case_1.svg" alt="Caso de teste 1 da RAM" style="width: 100%; background-color: white;">
+![Forma de onda do caso de teste 1 da RAM](/images/referencia/componentes/tb_generic_ram_case_1.svg){.w-full .dark-invert}

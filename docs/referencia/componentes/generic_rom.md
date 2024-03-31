@@ -2,60 +2,101 @@
 outline: 2
 ---
 
-# ROM <Badge type="info" text="GENERIC_ROM.vhd"/>
+# ROM
 
-![Diagrama de portas da memória ROM](/images/referencia/componentes/generic_rom.drawio.svg)
+[<Badge type="tip" text="GENERIC_ROM.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ROM.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ROM.vhd).
+## Topologia
+
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_ROM"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DATA_WIDTH
+            ADDRESS_WIDTH
+            ADDRESSABLE_WIDTH
+        end
+        C[("ROM")]
+        style C scale:2
+    end
+    A([address]) -- ADDRESS_WIDTH ---> TOP
+    TOP -- DATA_WIDTH ---> B([destination])
+```
 
 ## Interface genérica
 
-### `DATA_WIDTH`
+### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Largura dos vetores de entrada e saída de dados.
+Largura dos vetores de dados `source` e `destination`.
 
-- tipo: `natural`
-- padrão: `XLEN`
+- Tipo: `natural`
+- Padrão: `XLEN` (constante externa)
 
-### `ADDRESS_WIDTH`
+### `ADDRESS_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Largura do vetor de entrada de endereço de memória.
+Largura do vetor da entrada `address`.
 
-- tipo: `natural`
-- padrão: `XLEN`
+- Tipo: `natural`
+- Padrão: `XLEN` (constante externa)
 
-### `ADDRESSABLE_WIDTH`
+### `ADDRESSABLE_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Expoente da potência que determina o tamanho da memória.
+Largura do vetor de endereçamento com mapeamento na memória.
 
-- tipo: `natural`
-- padrão: `7`
+- Tipo: `natural`
+- Padrão: `10`
+
+::: warning ATENÇÃO!
+
+Deve ser menor ou igual a `ADDRESS_WIDTH`.
+
+:::
 
 ## Interface de portas
 
-### `address`
+### `address` <Badge type="warning" text="INPUT" />
 
 Entrada de endereço da memória.
 
-- tipo: `std_logic_vector((ADDRESS_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(ADDRESS_WIDTH - 1) downto 0`
 
-### `destination`
+### `destination` <Badge type="danger" text="OUTPUT" />
 
-Saída de dados com o valor da memória no endereço definido por `address`.
+Saída de dados assumindo valor armazenado no endereço em `address`. Caso seja
+endereçado um valor fora da largura mapeada assume sinal lógico baixo `"0...0"`
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-## Diagrama RTL
+## Usagem
 
-<img src="/images/referencia/componentes/generic_rom_netlist.svg" alt="Diagrama de RTL da ROM" style="width: 100%; background-color: white;">
+```vhdl
+ROM : entity WORK.GENERIC_ROM
+    generic map (
+        DATA_WIDTH_0      => 32;
+        ADDRESS_WIDTH     => 32;
+        ADDRESSABLE_WIDTH => 8
+    )
+    port map (
+        source       => signal_source,
+        destination  => signal_destination
+    );
+```
+
+## DiagROMa RTL
+
+![Diagrama de RTL da ROM](/images/referencia/componentes/generic_rom_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-`test_GENERIC_ROM.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ROM.py).
+[<Badge type="tip" text="test_GENERIC_ROM.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ROM.py)
 
-::: danger TO DO
+### Caso 1 <Badge type="info" text="tb_GENERIC_ROM_case_1" />
 
-Work in progress.
+Lógica sequencial:
 
-:::
+![Forma de onda do caso de teste 1 da ROM](/images/referencia/componentes/tb_generic_rom_case_1.svg){.w-full .dark-invert}

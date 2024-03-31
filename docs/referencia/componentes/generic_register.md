@@ -2,59 +2,114 @@
 outline: 2
 ---
 
-# Registrador <Badge type="info" text="GENERIC_REGISTER.vhd"/>
+# Registrador
 
-![Diagrama de portas do registrador](/images/referencia/componentes/generic_register.drawio.svg)
+[<Badge type="tip" text="GENERIC_REGISTER.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd)
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd).
+## Topologia
+
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_REGISTER"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DATA_WIDTH
+        end
+        F[("destination")]
+        style F scale:1.3
+    end
+    A(((clock))) ---> TOP
+    B([clear]) ---> TOP
+    C([enable]) ---> TOP
+    D([source]) -- DATA_WIDTH ---> TOP
+    TOP -- DATA_WIDTH ---> E([destination])
+```
 
 ## Interface genérica
 
-### `DATA_WIDTH`
+### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Largura dos vetores de entrada e saída de dados.
+Largura dos vetores de dados `source` e `destination`.
 
-- tipo: `natural`
-- padrão: `XLEN`
+- Tipo: `natural`
+- Padrão: `XLEN` (constante externa)
 
 ## Interface de portas
 
-### `clock`
+### `clock` <Badge type="warning" text="INPUT" />
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do processador).
+Entrada do sinal de clock.
 
-- tipo: `std_logic`
+- Tipo: `std_logic`
 
-### `clear`
+### `clear` <Badge type="warning" text="INPUT" />
 
-Entrada que reseta o contador.
+::: danger TO DO
 
-- tipo: `std_logic`
+Descrição.
 
-### `enable`
+:::
 
-Entrada de sinal que guarda o valor de entrada de dados no registrador.
+- Tipo: `std_logic`
 
-- tipo: `std_logic`
+### `enable` <Badge type="warning" text="INPUT" />
 
-### `source`
+::: danger TO DO
 
-Entrada de dados.
+Descrição.
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+:::
 
-### `destination`
+- Tipo: `std_logic`
 
-Saída de dados com o valor armazenado no registrador.
+### `source` <Badge type="warning" text="INPUT" />
 
-- tipo: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- padrão: `0...0`
+::: danger TO DO
+
+Descrição.
+
+:::
+
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
+
+### `destination` <Badge type="danger" text="OUTPUT" />
+
+::: danger TO DO
+
+Descrição.
+
+:::
+
+- Tipo: `std_logic_vector`
+- Largura: variável `(DATA_WIDTH - 1) downto 0`
+- Padrão: `"0...0"`
+
+## Usagem
+
+```vhdl
+REGISTER_1 : entity WORK.GENERIC_REGISTER
+    generic map (
+        DATA_WIDTH => 32
+    )
+    port map (
+        clock       => clock,
+        clear       => signal_clear,
+        enable      => signal_enable,
+        source      => signal_source,
+        destination => signal_destination
+    );
+```
 
 ## Diagrama RTL
 
-<img src="/images/referencia/componentes/generic_register_netlist.svg" alt="Diagrama de RTL do registrador" style="width: 100%; background-color: white;">
+![Diagrama de RTL do Registrador](/images/referencia/componentes/generic_register_netlist.svg){.w-full .dark-invert}
 
-## Casos de teste <Badge type="info" text="test_GENERIC_REGISTER.py" />
+## Casos de teste
+
+[<Badge type="tip" text="test_GENERIC_REGISTER.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py)
 
 [Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py).
 
@@ -62,4 +117,4 @@ Saída de dados com o valor armazenado no registrador.
 
 Lógica sequencial:
 
-<img src="/images/referencia/componentes/tb_GENERIC_REGISTER_case_1.svg" alt="Caso de teste 1 do Registrador" style="width: 100%; background-color: white;">
+![Forma de onda do caso de teste 1 do Registrador](/images/referencia/componentes/tb_generic_register_case_1.svg){.w-full .dark-invert}
