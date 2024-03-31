@@ -94,3 +94,11 @@
 .aside-curtain {
     display: none;
 }
+
+.w-full {
+    width: 100%;
+}
+
+:root.dark .dark-invert {
+    filter: saturate(200%) invert(80%) hue-rotate(180deg) contrast(130%);
+}
