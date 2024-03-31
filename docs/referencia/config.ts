@@ -10,6 +10,72 @@ export default {
                 collapsed: false,
                 items: [
                     {
+                        text: 'Estágios',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'IF - Busca Instrução',
+                                link: '/referencia/componentes/stage_if',
+                            }, {
+                                text: 'ID - Decodifica Instrução',
+                                link: '/referencia/componentes/stage_id',
+                            }, {
+                                text: 'EX - Executa',
+                                link: '/referencia/componentes/stage_ex',
+                            }, {
+                                text: 'MEM - Acessa à Memória',
+                                link: '/referencia/componentes/stage_mem',
+                            }, {
+                                text: 'WB - Escreve o Retorno',
+                                link: '/referencia/componentes/stage_wb',
+                            },
+                        ],
+                    },  {
+                        text: 'Módulos',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'Arquivo de Registradores',
+                                link: '/referencia/componentes/module_register_file',
+                            },{
+                                text: 'Contador de Programa',
+                                link: '/referencia/componentes/module_program_counter',
+                            }, {
+                                text: 'Escrita de Retorno',
+                                link: '/referencia/componentes/module_write_back',
+                            }, {
+                                text: 'Unidade de Controle',
+                                link: '/referencia/componentes/module_control_unit',
+                            }, {
+                                text: 'Unidade de Execução',
+                                link: '/referencia/componentes/module_execution_unit',
+                            }, {
+                                text: 'Unidade de Controle de execução',
+                                link: '/referencia/componentes/module_execution_control_unit',
+                            },
+                        ],
+                    }, {
+                        text: 'RV32I',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'Decodificador de instruções',
+                                link: '/referencia/componentes/rv32i_instruction_decoder',
+                            }, {
+                                text: 'Arquivo de Registradores',
+                                link: '/referencia/componentes/rv32i_register_file',
+                            }, {
+                                text: 'Bit da ULA',
+                                link: '/referencia/componentes/rv32i_alu_bit',
+                            }, {
+                                text: 'ULA',
+                                link: '/referencia/componentes/rv32i_alu',
+                            }, {
+                                text: 'Controlador da ULA',
+                                link: '/referencia/componentes/rv32i_alu_controller',
+                            },
+                        ],
+                    }, {
                         text: 'Genéricos',
                         collapsed: true,
                         items: [
@@ -17,10 +83,10 @@ export default {
                                 text: 'Somador',
                                 link: '/referencia/componentes/generic_adder',
                             }, {
-                                text: 'MUX 2x1',
+                                text: 'Multiplexador 2x1',
                                 link: '/referencia/componentes/generic_mux_2x1',
                             }, {
-                                text: 'MUX 4x1',
+                                text: 'Multiplexador 4x1',
                                 link: '/referencia/componentes/generic_mux_4x1',
                             }, {
                                 text: 'RAM',
@@ -48,73 +114,7 @@ export default {
                             //    link: '/referencia/componentes/generic_counter',
                             //},
                         ],
-                    }, {
-                        text: 'RV32I',
-                        collapsed: true,
-                        items: [
-                            {
-                                text: 'Decodificador de instruções',
-                                link: '/referencia/componentes/rv32i_instruction_decoder',
-                            }, {
-                                text: 'Arquivo de Registradores',
-                                link: '/referencia/componentes/rv32i_register_file',
-                            }, {
-                                text: 'Bit da ULA',
-                                link: '/referencia/componentes/rv32i_alu_bit',
-                            }, {
-                                text: 'ULA',
-                                link: '/referencia/componentes/rv32i_alu',
-                            }, {
-                                text: 'Controlador da ULA',
-                                link: '/referencia/componentes/rv32i_alu_controller',
-                            },
-                        ],
-                    }, {
-                        text: 'Módulos',
-                        collapsed: true,
-                        items: [
-                            {
-                                text: 'Banco de Registradores',
-                                link: '/referencia/componentes/module_register_file',
-                            },{
-                                text: 'Contador de Programa',
-                                link: '/referencia/componentes/module_program_counter',
-                            }, {
-                                text: 'Escrita e Retorno',
-                                link: '/referencia/componentes/module_write_back',
-                            }, {
-                                text: 'Unidade de Controle',
-                                link: '/referencia/componentes/module_control_unit',
-                            }, {
-                                text: 'ULA',
-                                link: '/referencia/componentes/module_alu',
-                            }, {
-                                text: 'Unidade de Controle da ULA',
-                                link: '/referencia/componentes/module_alu_controller',
-                            },
-                        ],
-                    }, {
-                        text: 'Estágios',
-                        collapsed: true,
-                        items: [
-                            {
-                                text: 'Busca Instrução',
-                                link: '/referencia/componentes/stage_if',
-                            }, {
-                                text: 'Decodifica Instrução',
-                                link: '/referencia/componentes/stage_id',
-                            }, {
-                                text: 'Executa',
-                                link: '/referencia/componentes/stage_ex',
-                            }, {
-                                text: 'Acesso a Memória',
-                                link: '/referencia/componentes/stage_mem',
-                            }, {
-                                text: 'Escrita e Retorno',
-                                link: '/referencia/componentes/stage_wb',
-                            },
-                        ],
-                    }, 
+                    },
                 ],
             }, {
                 text: 'Instruções',
