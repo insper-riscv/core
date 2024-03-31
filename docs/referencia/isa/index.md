@@ -248,9 +248,9 @@ imediato possui uma sintaxe seguindo os segmentos:
 
 Sendo, para cada segmento, `inst` o vetor da instrução.
 
-## Build
-
 ---
+
+## Carrega Constante
 
 ### `LUI` <Badge type="info" text="RV32I Base" />
 
@@ -261,9 +261,9 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 #### Sintaxe
 
-| Tipo |   31-12    |    11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: |
-|  U   | imm[31:12] |     rd     | `0110111` |
+| Tipo |   31-12    | 11-7 |    6-0    |
+| :--: | :--------: | :--: | :-------: |
+|  U   | imm[31:12] |  rd  | `0110111` |
 
 #### Formato
 
@@ -279,14 +279,14 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 Add Upper Immediate (Adiciona Superior Imediato).
 
-Desloca o valor do imediato 12 bits para a esquerda, preenchendo os 12 bits 
-mais baixos com zero e o adiciona ao PC. Escreve o resultado no registrador `rd`
+Desloca o valor do imediato 12 bits para a esquerda, preenchendo os 12 bits mais
+baixos com zero e o adiciona ao PC. Escreve o resultado no registrador `rd`
 
 #### Sintaxe
 
-| Tipo |   31-12    |    11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: |
-|  U   | imm[31:12] |    rd      | `0010111` |
+| Tipo |   31-12    | 11-7 |    6-0    |
+| :--: | :--------: | :--: | :-------: |
+|  U   | imm[31:12] |  rd  | `0010111` |
 
 #### Formato
 
@@ -294,177 +294,24 @@ mais baixos com zero e o adiciona ao PC. Escreve o resultado no registrador `rd`
 
 #### Implementação
 
-`x[rd] = pc + sext(immediate[31:12] << 12)`
+`x[rd] = pc + sext(imm[31:12] << 12)`
 
 ---
 
-## Shift
-
-
-
-### `SLL` <Badge type="info" text="RV32I Base" />
-
-Shift Left Logical (Deslocamento à Esquerda Lógico).
-
-Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado pelos
-5 bits menos significativos do valor do registrador `rs2`. Os bits remanescentes
-de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos com zeros. O resultado
-é escrito no registrador `rd`.
-
-#### Sintaxe
-
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |     rs2    |  rs1      |   001    |    rd     | `0110011` |    
-
-#### Formato
-
-`sll rd, rs1, rs2`
-
-#### Implementação
-
-`x[rd] = x[rs1] << x[rs2]`
-
-
----
-
-### `SLLI` <Badge type="info" text="RV32I Base" />
-
-Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
-
-Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado pelo `shamt`.
-Os bits vazios de `rs1` são preenchidos com zeros. O resultado é escrito no registrador `rd`.
-Só é permitido quando `shamt[5] = 0`.
-
-#### Sintaxe
-
-| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   000000   |   shamt    |    rs1    |   001    |    rd     | `0010011` |    
-
-#### Formato
-
-`slli rd, rs1, shamt`
-
-#### Implementação
-
-`x[rd] = x[rs1] << shamt`
-
-
----
-
-### `SRL` <Badge type="info" text="RV32I Base" />
-
-Shift Right Logical (Deslocamento à Direita Lógico).
-
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelos
-5 bits menos significativos do valor do registrador `rs2`. Os bits remanescentes
-de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos com zeros. O resultado
-é escrito no registrador `rd`.
-
-#### Sintaxe
-
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
-
-#### Formato
-
-`srl rd, rs1, rs2`
-
-#### Implementação
-
-`x[rd] = x[rs1] >> x[rs2]`
-
----
-
-### `SRLI` <Badge type="info" text="RV32I Base" />
-
-Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
-
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelo `shamt`.
-Os bits vazios de `rs1` são preenchidos com zeros. O resultado é escrito no registrador `rd`.
-Só é permitido quando `shamt[5] = 0`.
-
-#### Sintaxe
-
-| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   000000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
-
-#### Formato
-
-`srli rd, rs1, shamt`
-
-#### Implementação
-
-`x[rd] = x[rs1] >>shamt`
-
----
-
-### `SRA` <Badge type="info" text="RV32I Base" />
-
-Shift Right Arithmetic (Deslocamento à Direita Aritmético).
-
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelos
-5 bits menos significativos do valor do registrador `rs2`. Os bits remanescentes
-de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos com cópias do bit mais significativo
-de `rs1`. O resultado é escrito no registrador `rd`.
-
-#### Sintaxe
-
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0100000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
-
-#### Formato
-
-`sra rd, rs1, rs2`
-
-#### Implementação
-
-`x[rd] = x[rs1] >> x[rs2]`
-
----
-
-### `SRAI` <Badge type="info" text="RV32I Base" />
-
-Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
-
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado pelo `shamt`. 
-Os bits vazios de `rs1` são preenchidos com cópias do bit mais significativo de `rs1`. 
-O resultado é escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
-
-#### Sintaxe
-
-| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   010000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
-
-#### Formato
-
-`srai rd, rs1, shamt`
-
-#### Implementação
-
-`x[rd] = x[rs1] >> shamt`
-
----
-
-## Arithmetic
+## Lógica Aritmética
 
 ### `ADD` <Badge type="info" text="RV32I Base" />
 
 Add (Adição).
 
-Soma os registradores `rs1` e `rs2` e armazena o resultado no registrador `rd`. Em caso de
-overflow, ele é ignorado.
+Soma os registradores `rs1` e `rs2` e armazena o resultado no registrador `rd`.
+Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   000    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  000  |  rd  | OP  |
 
 #### Formato
 
@@ -480,14 +327,14 @@ overflow, ele é ignorado.
 
 Add Immediate (Adição Imediata).
 
-Soma o registrador `rs1` com o sinal estendido do imediato e armazena o resultado no registrador `rd`.
-Em caso de overflow, ele é ignorado.
+Soma o registrador `rs1` com o sinal estendido do imediato e armazena o
+resultado no registrador `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
-  
-| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   immediate[11:0]   |    rs1    |   000    |    rd     | `0010011` |  
+
+| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  000  |  rd  | OP-IMM |
 
 #### Formato
 
@@ -503,14 +350,14 @@ Em caso de overflow, ele é ignorado.
 
 Subtract (Subtração).
 
-Subtrai o registrador `rs1` pelo `rs2` e armazena o resultado no registrador `rd`. Em caso de
-overflow, ele é ignorado.
+Subtrai o registrador `rs1` pelo `rs2` e armazena o resultado no registrador
+`rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0100000  |    rs2     |    rs1    |   000    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0100000 |  rs2  |  rs1  |  000  |  rd  | OP  |
 
 #### Formato
 
@@ -526,14 +373,14 @@ overflow, ele é ignorado.
 
 Multiply (Multiplicação).
 
-Multiplica os registradores `rs1` e `rs2` e armazena o resultado no registrador `rd`. Em caso de
-overflow, ele é ignorado.
+Multiplica os registradores `rs1` e `rs2` e armazena o resultado no registrador
+`rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   000    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  000  |  rd  | OP  |
 
 #### Formato
 
@@ -549,14 +396,14 @@ overflow, ele é ignorado.
 
 Multiply High (Multiplicação Superior).
 
-Multiplica os registradores `rs1` e `rs2`, considerando que são números de complemento de dois
-e armazena a metade superior do produto no registrador `rd`.
+Multiplica os registradores `rs1` e `rs2`, considerando que são números de
+complemento de dois e armazena a metade superior do produto no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   001    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  001  |  rd  | OP  |
 
 #### Formato
 
@@ -570,16 +417,18 @@ e armazena a metade superior do produto no registrador `rd`.
 
 ### `MULHSU` <Badge type="tip" text="“M” Standard Extension" />
 
-Multiply High Signed and Unsigned (Multiplicação Superior com Sinal e Sem Sinal).
+Multiply High Signed and Unsigned (Multiplicação Superior com Sinal e Sem
+Sinal).
 
-Multiplica os registradores `rs1` e `rs2`, considerando que `rs1` é um número de complemento de dois
-e `rs2` é um número sem sinal, e armazena a metade superior do produto no registrador `rd`.
+Multiplica os registradores `rs1` e `rs2`, considerando que `rs1` é um número de
+complemento de dois e `rs2` é um número sem sinal, e armazena a metade superior
+do produto no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   010    |    rd     | `0110011` |   
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  010  |  rd  | OP  |
 
 #### Formato
 
@@ -595,14 +444,14 @@ e `rs2` é um número sem sinal, e armazena a metade superior do produto no regi
 
 Multiply High Unsigned (Multiplicação Superior Sem Sinal).
 
-Multiplica os registradores `rs1` e `rs2`, considerando que ambos são números sem sinal, e armazena
-a metade superior do produto no registrador `rd`.
+Multiplica os registradores `rs1` e `rs2`, considerando que ambos são números
+sem sinal, e armazena a metade superior do produto no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   011    |    rd     | `0110011` |   
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  011  |  rd  | OP  |
 
 #### Formato
 
@@ -618,14 +467,15 @@ a metade superior do produto no registrador `rd`.
 
 Divide (Divisão).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números de complemento de dois, arredondando
-para zero, e armazena o quociente no registrador `rd`.
+Divide o registrador `rs1` por `rs2`, considerando que são números de
+complemento de dois, arredondando para zero, e armazena o quociente no
+registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   100    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  100  |  rd  | OP  |
 
 #### Formato
 
@@ -641,14 +491,14 @@ para zero, e armazena o quociente no registrador `rd`.
 
 Divide Unsigned (Divisão Sem Sinal).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal, arredondando
-para zero, e armazena o quociente no registrador `rd`.
+Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal,
+arredondando para zero, e armazena o quociente no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  101  |  rd  | OP  |
 
 #### Formato
 
@@ -664,14 +514,15 @@ para zero, e armazena o quociente no registrador `rd`.
 
 Remainder (Resto).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números de complemento de dois, arredondando
-para zero, e armazena o resto no registrador `rd`.
+Divide o registrador `rs1` por `rs2`, considerando que são números de
+complemento de dois, arredondando para zero, e armazena o resto no registrador
+`rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   110    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  110  |  rd  | OP  |
 
 #### Formato
 
@@ -687,14 +538,14 @@ para zero, e armazena o resto no registrador `rd`.
 
 Remainder Unsigned (Resto Sem Sinal).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal, arredondando
-para zero, e armazena o resto no registrador `rd`.
+Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal,
+arredondando para zero, e armazena o resto no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000001  |    rs2     |    rs1    |   111    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000001 |  rs2  |  rs1  |  111  |  rd  | OP  |
 
 #### Formato
 
@@ -706,20 +557,20 @@ para zero, e armazena o resto no registrador `rd`.
 
 ---
 
-## Logical
+## Lógicas Booleana
 
 ### `XOR` <Badge type="info" text="RV32I Base" />
 
 Exclusive OR (OU Exclusivo).
 
-Realiza a operação lógica XOR, bit a bit, entre os registradores `rs1` e `rs2` e armazena o resultado
-no registrador `rd`.
+Realiza a operação lógica XOR, bit a bit, entre os registradores `rs1` e `rs2` e
+armazena o resultado no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   100    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  100  |  rd  | OP  |
 
 #### Formato
 
@@ -735,14 +586,14 @@ no registrador `rd`.
 
 Exclusive OR Immediate (OU Exclusivo Imediato).
 
-Realiza a operação lógica XOR, bit a bit, entre o registrador `rs1` e o imediato 
+Realiza a operação lógica XOR, bit a bit, entre o registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador `rd`.
 
 #### Sintaxe
-  
-| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   immediate[11:0]   |    rs1    |   100    |    rd     | `0010011` |  
+
+| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  100  |  rd  | OP-IMM |
 
 #### Formato
 
@@ -758,14 +609,14 @@ com sinal estendido e armazena o resultado no registrador `rd`.
 
 OR (OU).
 
-Realiza a operação lógica OR, bit a bit, entre os registradores `rs1` e `rs2` e armazena o resultado
-no registrador `rd`.
+Realiza a operação lógica OR, bit a bit, entre os registradores `rs1` e `rs2` e
+armazena o resultado no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   110    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  110  |  rd  | OP  |
 
 #### Formato
 
@@ -781,14 +632,14 @@ no registrador `rd`.
 
 OR Immediate (OU Imediato).
 
-Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato 
+Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador `rd`.
 
 #### Sintaxe
-  
-| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   immediate[11:0]   |    rs1    |   110    |    rd     | `0010011` |  
+
+| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  110  |  rd  | OP-IMM |
 
 #### Formato
 
@@ -804,14 +655,14 @@ com sinal estendido e armazena o resultado no registrador `rd`.
 
 AND (E).
 
-Realiza a operação lógica AND, bit a bit, entre os registradores `rs1` e `rs2` e armazena o resultado
-no registrador `rd`.
+Realiza a operação lógica AND, bit a bit, entre os registradores `rs1` e `rs2` e
+armazena o resultado no registrador `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   111    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  111  |  rd  | OP  |
 
 #### Formato
 
@@ -827,14 +678,14 @@ no registrador `rd`.
 
 AND Immediate (E Imediato).
 
-Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato 
+Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador `rd`.
 
 #### Sintaxe
-  
-| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   immediate[11:0]   |    rs1    |   111    |    rd     | `0010011` |  
+
+| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  111  |  rd  | OP-IMM |
 
 #### Formato
 
@@ -844,23 +695,174 @@ com sinal estendido e armazena o resultado no registrador `rd`.
 
 `x[rd] = x[rs1] & sext(immediate)`
 
+---
+
+## Operação de Deslocamento
+
+### `SLL` <Badge type="info" text="RV32I Base" />
+
+Shift Left Logical (Deslocamento à Esquerda Lógico).
+
+Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado
+pelos 5 bits menos significativos do valor do registrador `rs2`. Os bits
+remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
+com zeros. O resultado é escrito no registrador `rd`.
+
+#### Sintaxe
+
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  001  |  rd  | OP  |
+
+#### Formato
+
+`sll rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] << x[rs2]`
 
 ---
 
-## Compare
+### `SLLI` <Badge type="info" text="RV32I Base" />
+
+Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
+
+Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado
+pelo `shamt`. Os bits vazios de `rs1` são preenchidos com zeros. O resultado é
+escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
+
+#### Sintaxe
+
+| Tipo | 31-26  | 25-20 | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :----: | :---: | :---: | :---: | :--: | :----: |
+|  I   | 000000 | shamt |  rs1  |  001  |  rd  | OP-IMM |
+
+#### Formato
+
+`slli rd, rs1, shamt`
+
+#### Implementação
+
+`x[rd] = x[rs1] << shamt`
+
+---
+
+### `SRL` <Badge type="info" text="RV32I Base" />
+
+Shift Right Logical (Deslocamento à Direita Lógico).
+
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
+pelos 5 bits menos significativos do valor do registrador `rs2`. Os bits
+remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
+com zeros. O resultado é escrito no registrador `rd`.
+
+#### Sintaxe
+
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  101  |  rd  | OP  |
+
+#### Formato
+
+`srl rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] >> x[rs2]`
+
+---
+
+### `SRLI` <Badge type="info" text="RV32I Base" />
+
+Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
+
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
+pelo `shamt`. Os bits vazios de `rs1` são preenchidos com zeros. O resultado é
+escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
+
+#### Sintaxe
+
+| Tipo | 31-26  | 25-20 | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :----: | :---: | :---: | :---: | :--: | :----: |
+|  I   | 000000 | shamt |  rs1  |  101  |  rd  | OP-IMM |
+
+#### Formato
+
+`srli rd, rs1, shamt`
+
+#### Implementação
+
+`x[rd] = x[rs1] >>shamt`
+
+---
+
+### `SRA` <Badge type="info" text="RV32I Base" />
+
+Shift Right Arithmetic (Deslocamento à Direita Aritmético).
+
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
+pelos 5 bits menos significativos do valor do registrador `rs2`. Os bits
+remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
+com cópias do bit mais significativo de `rs1`. O resultado é escrito no
+registrador `rd`.
+
+#### Sintaxe
+
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0100000 |  rs2  |  rs1  |  101  |  rd  | OP  |
+
+#### Formato
+
+`sra rd, rs1, rs2`
+
+#### Implementação
+
+`x[rd] = x[rs1] >> x[rs2]`
+
+---
+
+### `SRAI` <Badge type="info" text="RV32I Base" />
+
+Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
+
+Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
+pelo `shamt`. Os bits vazios de `rs1` são preenchidos com cópias do bit mais
+significativo de `rs1`. O resultado é escrito no registrador `rd`. Só é
+permitido quando `shamt[5] = 0`.
+
+#### Sintaxe
+
+| Tipo | 31-26  | 25-20 | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :----: | :---: | :---: | :---: | :--: | :----: |
+|  I   | 010000 | shamt |  rs1  |  101  |  rd  | OP-IMM |
+
+#### Formato
+
+`srai rd, rs1, shamt`
+
+#### Implementação
+
+`x[rd] = x[rs1] >> shamt`
+
+---
+
+## Comparação
 
 ### `SLT` <Badge type="info" text="RV32I Base" />
 
 Set if Less Than (Definir se Menor que).
 
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são 
-complemento de dois, em caso positivo, armazena 1 no registrador `rd`, caso contrário, armazena 0.
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
+que são complemento de dois, em caso positivo, armazena 1 no registrador `rd`,
+caso contrário, armazena 0.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   010    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  010  |  rd  | OP  |
 
 #### Formato
 
@@ -876,15 +878,15 @@ complemento de dois, em caso positivo, armazena 1 no registrador `rd`, caso cont
 
 Set if Less Than Immediate (Definir se Menor que Imediato).
 
-Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal, 
-considerando que são complemento de dois, em caso positivo, armazena 1 no registrador `rd`,
-caso contrário, armazena 0.
+Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal,
+considerando que são complemento de dois, em caso positivo, armazena 1 no
+registrador `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
-  
-| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   immediate[11:0]   |    rs1    |   010    |    rd     | `0010011` |  
+
+| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  010  |  rd  | OP-IMM |
 
 #### Formato
 
@@ -900,15 +902,15 @@ caso contrário, armazena 0.
 
 Set if Less Than Immediate Unisgned(Definir se Menor que Imediato Sem Sinal).
 
-Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal, 
-considerando que são sem sinal, em caso positivo, armazena 1 no registrador `rd`,
-caso contrário, armazena 0.
+Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal,
+considerando que são sem sinal, em caso positivo, armazena 1 no registrador
+`rd`, caso contrário, armazena 0.
 
 #### Sintaxe
-  
-| Tipo |         31-20       |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :-----------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   immediate[11:0]   |    rs1    |   011    |    rd     | `0010011` |  
+
+| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  011  |  rd  | OP-IMM |
 
 #### Formato
 
@@ -924,14 +926,15 @@ caso contrário, armazena 0.
 
 Set if Less Than Unsigned(Definir se Menor que Sem Sinal).
 
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são 
-sem sinal, em caso positivo, armazena 1 no registrador `rd`, caso contrário, armazena 0.
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
+que são sem sinal, em caso positivo, armazena 1 no registrador `rd`, caso
+contrário, armazena 0.
 
 #### Sintaxe
 
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   011    |    rd     | `0110011` |    
+| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
+| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
+|  R   | 0000000 |  rs2  |  rs1  |  011  |  rd  | OP  |
 
 #### Formato
 
@@ -941,165 +944,23 @@ sem sinal, em caso positivo, armazena 1 no registrador `rd`, caso contrário, ar
 
 `x[rd] = x[rs1] < x[rs2]`
 
-
 ---
 
-
-## Branch
-
-### `BEQ` <Badge type="info" text="RV32I Base" />
-
-
-Branch if Equal (Desvio se Igual)
-
-Verifica se o registrador `rs1` é igual ao registrador `rs2`, em caso positivo, modifica o PC
-para o valor atual somado ao offset com extensão de sinal.
-
-#### Sintaxe
-
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   000    |    offset[4:1|11]     | `1100011` |    
-
-#### Formato
-
-`beq rs1, rs2, offset`
-
-#### Implementação
-
-`if (rs1 == rs2) pc += sext(offset)`
-
----
-
-### `BNE` <Badge type="info" text="RV32I Base" />
-
-Branch if Not Equal (Desvio se Não Igual)
-
-Verifica se o registrador `rs1` não é igual ao registrador `rs2`, em caso positivo, modifica o PC
-para o valor atual somado ao offset com extensão de sinal.
-
-#### Sintaxe
-
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   001    |    offset[4:1|11]     | `1100011` |    
-
-#### Formato
-
-`bnq rs1, rs2, offset`
-
-#### Implementação
-
-`if (rs1 != rs2) pc += sext(offset)`
-
----
-
-### `BLT` <Badge type="info" text="RV32I Base" />
-
-Branch if Less Than (Desvio se Menor que)
-
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são números em complemento de dois, 
-em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
-
-#### Sintaxe
-
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   000    |    offset[4:1|11]     | `1100011` |    
-
-#### Formato
-
-`blt rs1, rs2, offset`
-
-#### Implementação
-
-`if (rs1 < rs2) pc += sext(offset)`
-
----
-
-### `BGE` <Badge type="info" text="RV32I Base" />
-
-Branch if Greater Than or Equal(Desvio se Maior ou Igual que)
-
-Verifica se o registrador `rs1` é maior ou igual ao registrador `rs2`, considerando que são números em complemento de dois, 
-em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
-
-#### Sintaxe
-
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   101    |    offset[4:1|11]     | `1100011` |    
-
-#### Formato
-
-`bge rs1, rs2, offset`
-
-#### Implementação
-
-`if (rs1 >= rs2) pc += sext(offset)`
-
----
-
-### `BLTU` <Badge type="info" text="RV32I Base" />
-
-Branch if Less Than Unsigned(Desvio se Menor que Sem Sinal)
-
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando que são números sem sinal,
-em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
-
-#### Sintaxe
-
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   110    |    offset[4:1|11]     | `1100011` |    
-
-#### Formato
-
-`bltu rs1, rs2, offset`
-
-#### Implementação
-
-`if (rs1 < rs2) pc += sext(offset)`
-
----
-
-### `BGEU` <Badge type="info" text="RV32I Base" />
-
-Branch if Greater or Equal Than Unsigned(Desvio se Maior ou Igual que Sem Sinal)
-
-Verifica se o registrador `rs1` é maior ou igual que o registrador `rs2`, considerando que são números sem sinal,
-em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
-
-#### Sintaxe
-
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   110    |    offset[4:1|11]     | `1100011` |    
-
-#### Formato
-
-`bgeu rs1, rs2, offset`
-
-#### Implementação
-
-`if (rs1 >= rs2) pc += sext(offset)`
-
----
-
-## Link
+## Desvio Incondicional
 
 ### `JAL` <Badge type="info" text="RV32I Base" />
 
 Jump and Link (Salto e Link).
 
-Escreve o endereço da próxima instrução (PC+4) no registrador `rd` e modifica o PC para o valor atual
-somado ao offset com extensão de sinal. Se `rd` for omitido, o valor de retorno é armazenado em `x1`.
+Escreve o endereço da próxima instrução (PC+4) no registrador `rd` e modifica o
+PC para o valor atual somado ao offset com extensão de sinal. Se `rd` for
+omitido, o valor de retorno é armazenado em `x1`.
 
 #### Sintaxe
 
-| Tipo |             31-12           |    11-7   |    6-0    |
-| :--: | :-------------------------: | :-------: | :-------: |
-|  J   |  offset[20|10:1|11|19:12]   |    rd     | `1100011` |
+| Tipo |   31-12   | 11-7 | 6-0 |
+| :--: | :-------: | :--: | :-: |
+|  J   | offset[20 | 10:1 | 11  |
 
 #### Formato
 
@@ -1115,18 +976,19 @@ somado ao offset com extensão de sinal. Se `rd` for omitido, o valor de retorno
 
 Jump and Link Register (Salto e Link por Registrador).
 
-Realiza um cópia do PC para `rs1 + sext(offset)`, mascara bit menos significativo do endereço resultante e 
-armazena o endereço anterior de PC+4 no registrador `rd`. Se `rd` for omitido, o valor é armazenado em `x1`. 
+Realiza um cópia do PC para `rs1 + sext(offset)`, mascara bit menos
+significativo do endereço resultante e armazena o endereço anterior de PC+4 no
+registrador `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
 
 #### Sintaxe
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   000    |    rd     | `1100111` |  
+
+| Tipo |    31-20     | 19-15 | 14-12 | 11-7 |    6-0    |
+| :--: | :----------: | :---: | :---: | :--: | :-------: |
+|  I   | offset[11:0] |  rs1  |  000  |  rd  | `1100111` |
 
 #### Formato
 
-`jalr rd, offset(rs1) `
+`jalr rd, offset(rs1)`
 
 #### Implementação
 
@@ -1134,20 +996,165 @@ armazena o endereço anterior de PC+4 no registrador `rd`. Se `rd` for omitido, 
 
 ---
 
-## Loads
+## Desvio Condicional
+
+### `BEQ` <Badge type="info" text="RV32I Base" />
+
+Branch if Equal (Desvio se Igual)
+
+Verifica se o registrador `rs1` é igual ao registrador `rs2`, em caso positivo,
+modifica o PC para o valor atual somado ao offset com extensão de sinal.
+
+#### Sintaxe
+
+| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
+| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
+|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 000  | offset[4:1 |
+
+#### Formato
+
+`beq rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 == rs2) pc += sext(offset)`
+
+---
+
+### `BNE` <Badge type="info" text="RV32I Base" />
+
+Branch if Not Equal (Desvio se Não Igual)
+
+Verifica se o registrador `rs1` não é igual ao registrador `rs2`, em caso
+positivo, modifica o PC para o valor atual somado ao offset com extensão de
+sinal.
+
+#### Sintaxe
+
+| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
+| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
+|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 001  | offset[4:1 |
+
+#### Formato
+
+`bnq rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 != rs2) pc += sext(offset)`
+
+---
+
+### `BLT` <Badge type="info" text="RV32I Base" />
+
+Branch if Less Than (Desvio se Menor que)
+
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
+que são números em complemento de dois, em caso positivo, modifica o PC para o
+valor atual somado ao offset com extensão de sinal.
+
+#### Sintaxe
+
+| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
+| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
+|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 000  | offset[4:1 |
+
+#### Formato
+
+`blt rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 < rs2) pc += sext(offset)`
+
+---
+
+### `BGE` <Badge type="info" text="RV32I Base" />
+
+Branch if Greater Than or Equal(Desvio se Maior ou Igual que)
+
+Verifica se o registrador `rs1` é maior ou igual ao registrador `rs2`,
+considerando que são números em complemento de dois, em caso positivo, modifica
+o PC para o valor atual somado ao offset com extensão de sinal.
+
+#### Sintaxe
+
+| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
+| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
+|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 101  | offset[4:1 |
+
+#### Formato
+
+`bge rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 >= rs2) pc += sext(offset)`
+
+---
+
+### `BLTU` <Badge type="info" text="RV32I Base" />
+
+Branch if Less Than Unsigned(Desvio se Menor que Sem Sinal)
+
+Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
+que são números sem sinal, em caso positivo, modifica o PC para o valor atual
+somado ao offset com extensão de sinal.
+
+#### Sintaxe
+
+| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
+| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
+|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 110  | offset[4:1 |
+
+#### Formato
+
+`bltu rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 < rs2) pc += sext(offset)`
+
+---
+
+### `BGEU` <Badge type="info" text="RV32I Base" />
+
+Branch if Greater or Equal Than Unsigned(Desvio se Maior ou Igual que Sem Sinal)
+
+Verifica se o registrador `rs1` é maior ou igual que o registrador `rs2`,
+considerando que são números sem sinal, em caso positivo, modifica o PC para o
+valor atual somado ao offset com extensão de sinal.
+
+#### Sintaxe
+
+| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
+| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
+|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 110  | offset[4:1 |
+
+#### Formato
+
+`bgeu rs1, rs2, offset`
+
+#### Implementação
+
+`if (rs1 >= rs2) pc += sext(offset)`
+
+---
+
+## Busca na Memória
 
 ### `LB` <Badge type="info" text="RV32I Base" />
 
 Load Byte (Carrega Byte).
 
-Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
-com extensão de sinal.
+Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor
+no registrador `rd`, com extensão de sinal.
 
 #### Sintaxe
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   000    |    rd     | `0000011` |  
+
+| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :---: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  000  |  rd  | LOAD |
 
 #### Formato
 
@@ -1163,14 +1170,14 @@ com extensão de sinal.
 
 Load Halfword (Carrega Halfword).
 
-Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
-com extensão de sinal.
+Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o
+valor no registrador `rd`, com extensão de sinal.
 
 #### Sintaxe
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   001    |    rd     | `0000011` |  
+
+| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :---: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  001  |  rd  | LOAD |
 
 #### Formato
 
@@ -1180,21 +1187,20 @@ com extensão de sinal.
 
 `x[rd] = sext(M[x[rs1] + sext(offset)][15:0])`
 
-
 ---
 
 ### `LBU` <Badge type="info" text="RV32I Base" />
 
 Load Byte Unsigned(Carrega Byte Sem Sinal).
 
-Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
-com extensão de zero.
+Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor
+no registrador `rd`, com extensão de zero.
 
 #### Sintaxe
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   100    |    rd     | `0000011` |  
+
+| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :---: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  100  |  rd  | LOAD |
 
 #### Formato
 
@@ -1210,14 +1216,14 @@ com extensão de zero.
 
 Load Halfword Unsigned(Carrega Halfword Sem Sinal).
 
-Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`,
-com extensão de zero.
+Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o
+valor no registrador `rd`, com extensão de zero.
 
 #### Sintaxe
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   101    |    rd     | `0000011` |  
+
+| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :---: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  101  |  rd  | LOAD |
 
 #### Formato
 
@@ -1233,13 +1239,14 @@ com extensão de zero.
 
 Load Word (Carrega Word).
 
-Carrega quatro bytes da memória no endereço `rs1 + sext(offset)` e armazena o valor no registrador `rd`.
+Carrega quatro bytes da memória no endereço `rs1 + sext(offset)` e armazena o
+valor no registrador `rd`.
 
 #### Sintaxe
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   010    |    rd     | `0000011` |  
+
+| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :---: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  010  |  rd  | LOAD |
 
 #### Formato
 
@@ -1251,19 +1258,20 @@ Carrega quatro bytes da memória no endereço `rs1 + sext(offset)` e armazena o 
 
 ---
 
-## Stores
+## Escrita na Memória
 
 ### `SB` <Badge type="info" text="RV32I Base" />
 
 Store Byte (Armazena Byte).
 
-Armazena o byte menos significativo do registrador `rs2` na memória no endereço `rs1 + sext(offset)`.
+Armazena o byte menos significativo do registrador `rs2` na memória no endereço
+`rs1 + sext(offset)`.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  S   |    offset[11:5]    |    rs2     |    rs1    |   000    |       offset[4:0]     | `0100011` |    
+| Tipo |    31-25     | 24-20 | 19-15 | 14-12 |    11-7     |  6-0  |
+| :--: | :----------: | :---: | :---: | :---: | :---------: | :---: |
+|  S   | offset[11:5] |  rs2  |  rs1  |  000  | offset[4:0] | STORE |
 
 #### Formato
 
@@ -1279,13 +1287,14 @@ Armazena o byte menos significativo do registrador `rs2` na memória no endereç
 
 Store Halfword (Armazena Halfword).
 
-Armazena os dois bytes menos significativo do registrador `rs2` na memória no endereço `rs1 + sext(offset)`.
+Armazena os dois bytes menos significativo do registrador `rs2` na memória no
+endereço `rs1 + sext(offset)`.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  S   |    offset[11:5]    |    rs2     |    rs1    |   001    |       offset[4:0]     | `0100011` |    
+| Tipo |    31-25     | 24-20 | 19-15 | 14-12 |    11-7     |  6-0  |
+| :--: | :----------: | :---: | :---: | :---: | :---------: | :---: |
+|  S   | offset[11:5] |  rs2  |  rs1  |  001  | offset[4:0] | STORE |
 
 #### Formato
 
@@ -1301,13 +1310,14 @@ Armazena os dois bytes menos significativo do registrador `rs2` na memória no e
 
 Store Word (Armazena Word).
 
-Armazena os quatro bytes menos significativo do registrador `rs2` na memória no endereço `rs1 + sext(offset)`.
+Armazena os quatro bytes menos significativo do registrador `rs2` na memória no
+endereço `rs1 + sext(offset)`.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  S   |    offset[11:5]    |    rs2     |    rs1    |   010    |       offset[4:0]     | `0100011` |    
+| Tipo |    31-25     | 24-20 | 19-15 | 14-12 |    11-7     |  6-0  |
+| :--: | :----------: | :---: | :---: | :---: | :---------: | :---: |
+|  S   | offset[11:5] |  rs2  |  rs1  |  010  | offset[4:0] | STORE |
 
 #### Formato
 
