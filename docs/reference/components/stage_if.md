@@ -19,6 +19,12 @@ Work in progress.
 
 ## Interface de portas
 
+### `clock` <Badge type="warning" text="INPUT" />
+
+Entrada do sinal de clock.
+
+- Tipo: `std_logic`
+
 ::: danger TO DO
 
 Work in progress.

@@ -3,10 +3,10 @@ import type { DefaultTheme } from 'vitepress/types'
 
 export default {
     sidebar: {
-        '/referencia/': [
+        '/reference/': [
             {
                 text: 'Componentes',
-                link: '/referencia/componentes/',
+                link: '/reference/components/',
                 collapsed: false,
                 items: [
                     {
@@ -15,19 +15,19 @@ export default {
                         items: [
                             {
                                 text: 'IF - Busca Instrução',
-                                link: '/referencia/componentes/stage_if',
+                                link: '/reference/components/stage_if',
                             }, {
                                 text: 'ID - Decodifica Instrução',
-                                link: '/referencia/componentes/stage_id',
+                                link: '/reference/components/stage_id',
                             }, {
                                 text: 'EX - Executa',
-                                link: '/referencia/componentes/stage_ex',
+                                link: '/reference/components/stage_ex',
                             }, {
                                 text: 'MEM - Acessa à Memória',
-                                link: '/referencia/componentes/stage_mem',
+                                link: '/reference/components/stage_mem',
                             }, {
                                 text: 'WB - Escreve o Retorno',
-                                link: '/referencia/componentes/stage_wb',
+                                link: '/reference/components/stage_wb',
                             },
                         ],
                     },  {
@@ -36,22 +36,22 @@ export default {
                         items: [
                             {
                                 text: 'Arquivo de Registradores',
-                                link: '/referencia/componentes/module_register_file',
+                                link: '/reference/components/module_register_file',
                             },{
                                 text: 'Contador de Programa',
-                                link: '/referencia/componentes/module_program_counter',
+                                link: '/reference/components/module_program_counter',
                             }, {
                                 text: 'Escrita de Retorno',
-                                link: '/referencia/componentes/module_write_back',
+                                link: '/reference/components/module_write_back',
                             }, {
                                 text: 'Unidade de Controle',
-                                link: '/referencia/componentes/module_control_unit',
+                                link: '/reference/components/module_control_unit',
                             }, {
                                 text: 'Unidade de Execução',
-                                link: '/referencia/componentes/module_execution_unit',
+                                link: '/reference/components/module_execution_unit',
                             }, {
                                 text: 'Unidade de Controle de execução',
-                                link: '/referencia/componentes/module_execution_control_unit',
+                                link: '/reference/components/module_execution_control_unit',
                             },
                         ],
                     }, {
@@ -60,19 +60,19 @@ export default {
                         items: [
                             {
                                 text: 'Decodificador de instruções',
-                                link: '/referencia/componentes/rv32i_instruction_decoder',
+                                link: '/reference/components/rv32i_instruction_decoder',
                             }, {
                                 text: 'Arquivo de Registradores',
-                                link: '/referencia/componentes/rv32i_register_file',
+                                link: '/reference/components/rv32i_register_file',
                             }, {
                                 text: 'Bit da ULA',
-                                link: '/referencia/componentes/rv32i_alu_bit',
+                                link: '/reference/components/rv32i_alu_bit',
                             }, {
                                 text: 'ULA',
-                                link: '/referencia/componentes/rv32i_alu',
+                                link: '/reference/components/rv32i_alu',
                             }, {
                                 text: 'Controlador da ULA',
-                                link: '/referencia/componentes/rv32i_alu_controller',
+                                link: '/reference/components/rv32i_alu_controller',
                             },
                         ],
                     }, {
@@ -81,47 +81,47 @@ export default {
                         items: [
                             {
                                 text: 'Somador',
-                                link: '/referencia/componentes/generic_adder',
+                                link: '/reference/components/generic_adder',
                             }, {
                                 text: 'Multiplexador 2x1',
-                                link: '/referencia/componentes/generic_mux_2x1',
+                                link: '/reference/components/generic_mux_2x1',
                             }, {
                                 text: 'Multiplexador 4x1',
-                                link: '/referencia/componentes/generic_mux_4x1',
+                                link: '/reference/components/generic_mux_4x1',
                             }, {
                                 text: 'RAM',
-                                link: '/referencia/componentes/generic_ram',
+                                link: '/reference/components/generic_ram',
                             }, {
                                 text: 'ROM',
-                                link: '/referencia/componentes/generic_rom',
+                                link: '/reference/components/generic_rom',
                             }, {
                                 text: 'Registrador',
-                                link: '/referencia/componentes/generic_register',
+                                link: '/reference/components/generic_register',
                             }, //{
                             //    text: 'Extensor de sinal',
-                            //    link: '/referencia/componentes/generic_signal_extender',
+                            //    link: '/reference/components/generic_signal_extender',
                             //}, {
                             //    text: 'Flip Flop',
-                            //    link: '/referencia/componentes/generic_flip_flop',
+                            //    link: '/reference/components/generic_flip_flop',
                             //}, {
                             //    text: 'Debounce',
-                            //    link: '/referencia/componentes/generic_debounce',
+                            //    link: '/reference/components/generic_debounce',
                             //}, {
                             //    text: 'Detector de borda',
-                            //    link: '/referencia/componentes/generic_edge_detector',
+                            //    link: '/reference/components/generic_edge_detector',
                             //}, {
                             //    text: 'Contador',
-                            //    link: '/referencia/componentes/generic_counter',
+                            //    link: '/reference/components/generic_counter',
                             //},
                         ],
                     },
                 ],
             }, {
                 text: 'Instruções',
-                link: '/referencia/isa/',
+                link: '/reference/isa/',
             }, {
                 text: 'Pseudo-instruções',
-                link: '/referencia/isa/pseudo',
+                link: '/reference/isa/pseudo',
             },
         ],
     },

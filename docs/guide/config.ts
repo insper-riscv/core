@@ -3,19 +3,22 @@ import type { DefaultTheme } from 'vitepress/types'
 
 export default {
     sidebar: {
-        '/guia/': [
+        '/guide/': [
             {
                 text: 'Sobre',
-                link: '/guia/',
+                link: '/guide/',
             }, {
                 text: 'Introdução',
-                link: '/guia/introducao'
+                link: '/guide/introduction'
+            }, {
+                text: 'Começando',
+                link: '/guide/getting-started'
             }, {
                 text: 'Desenvolvimento',
-                link: '/guia/desenvolvimento'
+                link: '/guide/desenvolvimento'
             }, {
                 text: 'Bibliografia',
-                link: '/guia/bibliografia'
+                link: '/guide/bibliography'
             },
         ],
     },
