@@ -53,7 +53,7 @@ async def tb_GENERIC_ADDER_case_3(dut: "GENERIC_ADDER"):
 
 @cocotb.test()
 async def tb_GENERIC_ADDER_case_4(dut: "GENERIC_ADDER"):
-    dut.source_1.value = BinaryValue("11111111111111111111111111111110")
+    dut.source_1.value = BinaryValue("11111111111111111111111111111110") 
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
 
     await Timer(Decimal(1), units="ns")
