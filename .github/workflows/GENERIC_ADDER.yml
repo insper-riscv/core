@@ -1,5 +1,4 @@
 name: GENERIC_ADDER
-
 'on':
   workflow_dispatch: {}
   push:
