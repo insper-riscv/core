@@ -8,6 +8,7 @@ from cocotb.triggers import Timer
 
 import utils
 
+
 class GENERIC_ADDER(utils.DUT):
     source_1 = utils.DUT.Input_pin
     source_2 = utils.DUT.Input_pin
