@@ -1,26 +1,171 @@
 import sys
 
-def create_binary_instructions(assembly, memory):
-    instruction_opcode = {
-        "lui"  : "0110111",
-        "addi" : "0010011",
-        "jal"  : "1101111",
-    }
+instruction_opcode = {
+    "lui"    : "0110111",
+    "auipc"  : "0010111",
+    "sll"    : "0110011",
+    "slli"   : "0010011",
+    "srl"    : "0110011",
+    "srli"   : "0010011",
+    "sra"    : "0110011",
+    "srai"   : "0010011",
+    "add"    : "0110011",
+    "addi"   : "0010011",
+    "sub"    : "0110011",
+    "mul"    : "0110011",
+    "mulh"   : "0110011",
+    "mulhsu" : "0110011",
+    "mulhu"  : "0110011",
+    "div"    : "0110011",
+    "divu"   : "0110011",
+    "rem"    : "0110011",
+    "remu"   : "0110011",
+    "xor"    : "0110011",
+    "xori"   : "0010011",
+    "or"     : "0110011",
+    "ori"    : "0010011",
+    "and"    : "0110011",
+    "andi"   : "0010011",
+    "slt"    : "0110011",
+    "slti"   : "0010011",
+    "sltiu"  : "0010011",
+    "sltu"   : "0110011",
+    "beq"    : "1100011",
+    "bne"    : "1100011",
+    "blt"    : "1100011",
+    "bge"    : "1100011",
+    "bltu"   : "1100011",
+    "bgeu"   : "1100011",
+    "jal"    : "1101111",
+    "jalr"   : "1100111",
+    "lb"     : "0000011",
+    "lh"     : "0000011",
+    "lbu"    : "0000011",
+    "lhu"    : "0000011",
+    "lw"     : "0000011",
+    "sb"     : "0100011",
+    "sh"     : "0100011",
+    "sw"     : "0100011",
+}
 
-    instruction_funct3 = {
-        "addi" : "000",
-        "add"  : "000",
-    }
+instruction_funct3 = {
+    "sll"    : "001",
+    "slli"   : "001",
+    "srl"    : "101",
+    "srli"   : "101",
+    "sra"    : "101",
+    "srai"   : "101",
+    "add"    : "000",
+    "addi"   : "000",
+    "sub"    : "000",
+    "mul"    : "000",
+    "mulh"   : "001",
+    "mulhsu" : "010",
+    "mulhu"  : "011",
+    "div"    : "100",
+    "divu"   : "101",
+    "rem"    : "110",
+    "remu"   : "111",
+    "xor"    : "100",
+    "xori"   : "100",
+    "or"     : "110",
+    "ori"    : "110",
+    "and"    : "111",
+    "andi"   : "111",
+    "slt"    : "010",
+    "slti"   : "010",
+    "sltiu"  : "011",
+    "sltu"   : "011",
+    "beq"    : "000",
+    "bne"    : "001",
+    "blt"    : "100",
+    "bge"    : "101",
+    "bltu"   : "110",
+    "bgeu"   : "111",
+    "jalr"   : "000",
+    "lb"     : "000",
+    "lh"     : "001",
+    "lbu"    : "100",
+    "lhu"    : "101",
+    "lw"     : "010",
+    "sb"     : "000",
+    "sh"     : "001",
+    "sw"     : "010",
+}
 
-    instruction_funct7 = {
-        "add" : "0000000",
-    }
+instruction_funct7 = {
+    "sll"    : "0000000",
+    "slli"   : "0000000",
+    "srl"    : "0000000",
+    "srli"   : "0000000",
+    "sra"    : "0100000",
+    "srai"   : "0100000",
+    "add"    : "0000000",
+    "sub"    : "0100000",
+    "mul"    : "0000001",
+    "mulh"   : "0000001",
+    "mulhsu" : "0000001",
+    "mulhu"  : "0000001",
+    "div"    : "0000001",
+    "divu"   : "0000001",
+    "rem"    : "0000001",
+    "remu"   : "0000001",
+    "xor"    : "0000000",
+    "or"     : "0000000",
+    "and"    : "0000000",
+    "slt"    : "0000000", 
+    "sltu"   : "0000000",
+}
 
-    instruction_type = {
-        "lui"  : "U",
-        "addi" : "I",
-        "jal"  : "J",
-    }
+instruction_type = {
+    "lui"    : "U",
+    "auipc"  : "U",
+    "sll"    : "R",
+    "slli"   : "I",
+    "srl"    : "R",
+    "srli"   : "I",
+    "sra"    : "R",
+    "srai"   : "I",
+    "add"    : "R",
+    "addi"   : "I",
+    "sub"    : "R",
+    "mul"    : "R",
+    "mulh"   : "R",
+    "mulhsu" : "R",
+    "mulhu"  : "R",
+    "div"    : "R",
+    "divu"   : "R",
+    "rem"    : "R",
+    "remu"   : "R",
+    "xor"    : "R",
+    "xori"   : "I",
+    "or"     : "R",
+    "ori"    : "I",
+    "and"    : "R",
+    "andi"   : "I",
+    "slt"    : "R",
+    "slti"   : "I",
+    "sltiu"  : "I",
+    "sltu"   : "R",
+    "beq"    : "B",
+    "bne"    : "B",
+    "blt"    : "B",
+    "bge"    : "B",
+    "bltu"   : "B",
+    "bgeu"   : "B",
+    "jal"    : "J",
+    "jalr"   : "I",
+    "lb"     : "I",
+    "lh"     : "I",
+    "lbu"    : "I",
+    "lhu"    : "I",
+    "lw"     : "I",
+    "sb"     : "S",
+    "sh"     : "S",
+    "sw"     : "S",
+}
+
+def create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type):
 
     with open(assembly, "r") as asm_file: 
         asm_lines = asm_file.readlines()
@@ -42,7 +187,12 @@ def create_binary_instructions(assembly, memory):
                 offset_list = line_list[2].split("(")
                 line_list = [line_list[0], line_list[1], offset_list[1], offset_list[0]]
 
-            immediate = "{0:012b}".format(int(line_list[3]))
+            if line_list[0] in instruction_funct7:
+                funct7 = instruction_funct7[line_list[0]]
+                shamt = "{0:05b}".format(int(line_list[3]))
+                immediate = funct7 + shamt
+            else:
+                immediate = "{0:012b}".format(int(line_list[3]))
             rs1 = "{0:05b}".format(int(line_list[2][1:]))
             funct3 = instruction_funct3[line_list[0]]
             rd = "{0:05b}".format(int(line_list[1][1:]))
@@ -135,7 +285,7 @@ def create_binary_instructions(assembly, memory):
 #def main():
 #    assembly = sys.argv[1]
 #    memory = sys.argv[2]
-#    create_binary_instructions(assembly, memory)
+#    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
 #    
 #
 #if __name__ == "__main__":
