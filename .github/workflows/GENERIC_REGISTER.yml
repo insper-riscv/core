@@ -8,7 +8,6 @@ name: GENERIC_REGISTER
     - .github/workflows/GENERIC_REGISTER.yml
 jobs:
   run-tests:
-    name: GENERIC_REGISTER
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

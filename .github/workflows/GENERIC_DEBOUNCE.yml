@@ -8,7 +8,6 @@ name: GENERIC_DEBOUNCE
     - .github/workflows/GENERIC_DEBOUNCE.yml
 jobs:
   run-tests:
-    name: GENERIC_DEBOUNCE
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

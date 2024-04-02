@@ -8,7 +8,6 @@ name: GENERIC_FLIP_FLOP
     - .github/workflows/GENERIC_FLIP_FLOP.yml
 jobs:
   run-tests:
-    name: GENERIC_FLIP_FLOP
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

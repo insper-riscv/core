@@ -8,7 +8,6 @@ name: STAGE_WB
     - .github/workflows/STAGE_WB.yml
 jobs:
   run-tests:
-    name: STAGE_WB
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

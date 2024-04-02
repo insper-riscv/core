@@ -8,7 +8,6 @@ name: STAGE_MEM
     - .github/workflows/STAGE_MEM.yml
 jobs:
   run-tests:
-    name: STAGE_MEM
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

@@ -8,7 +8,6 @@ name: STAGE_EX
     - .github/workflows/STAGE_EX.yml
 jobs:
   run-tests:
-    name: STAGE_EX
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

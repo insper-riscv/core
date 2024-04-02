@@ -8,7 +8,6 @@ name: MODULE_WRITE_BACK
     - .github/workflows/MODULE_WRITE_BACK.yml
 jobs:
   run-tests:
-    name: MODULE_WRITE_BACK
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

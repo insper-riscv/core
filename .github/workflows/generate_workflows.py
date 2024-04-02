@@ -5,7 +5,7 @@ import yaml
 files = os.listdir('test')
 
 for file in files:
-    if file.startswith('utils'):
+    if not file.startswith('test'):
         continue
 
     yaml_content = {
@@ -22,7 +22,6 @@ for file in files:
         },
         'jobs': {
             'run-tests': {
-                'name': f'{file[5:-3]}',
                 'runs-on': 'ubuntu-latest',
                 'steps': [
                     {

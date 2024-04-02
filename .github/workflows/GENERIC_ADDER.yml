@@ -8,7 +8,6 @@ name: GENERIC_ADDER
     - .github/workflows/GENERIC_ADDER.yml
 jobs:
   run-tests:
-    name: GENERIC_ADDER
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

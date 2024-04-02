@@ -8,7 +8,6 @@ name: GENERIC_EDGE_DETECTOR
     - .github/workflows/GENERIC_EDGE_DETECTOR.yml
 jobs:
   run-tests:
-    name: GENERIC_EDGE_DETECTOR
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

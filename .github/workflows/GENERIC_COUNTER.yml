@@ -8,7 +8,6 @@ name: GENERIC_COUNTER
     - .github/workflows/GENERIC_COUNTER.yml
 jobs:
   run-tests:
-    name: GENERIC_COUNTER
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

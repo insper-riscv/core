@@ -8,7 +8,6 @@ name: MODULE_REGISTER_FILE
     - .github/workflows/MODULE_REGISTER_FILE.yml
 jobs:
   run-tests:
-    name: MODULE_REGISTER_FILE
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

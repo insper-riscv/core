@@ -8,7 +8,6 @@ name: GENERIC_RAM
     - .github/workflows/GENERIC_RAM.yml
 jobs:
   run-tests:
-    name: GENERIC_RAM
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

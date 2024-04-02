@@ -8,7 +8,6 @@ name: GENERIC_ROM
     - .github/workflows/GENERIC_ROM.yml
 jobs:
   run-tests:
-    name: GENERIC_ROM
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

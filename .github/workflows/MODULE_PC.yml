@@ -8,7 +8,6 @@ name: MODULE_PC
     - .github/workflows/MODULE_PC.yml
 jobs:
   run-tests:
-    name: MODULE_PC
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

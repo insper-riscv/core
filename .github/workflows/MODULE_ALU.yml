@@ -8,7 +8,6 @@ name: MODULE_ALU
     - .github/workflows/MODULE_ALU.yml
 jobs:
   run-tests:
-    name: MODULE_ALU
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

@@ -8,7 +8,6 @@ name: GENERIC_SIGNAL_EXTENDER
     - .github/workflows/GENERIC_SIGNAL_EXTENDER.yml
 jobs:
   run-tests:
-    name: GENERIC_SIGNAL_EXTENDER
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

@@ -8,7 +8,6 @@ name: MODULE_ALU_CONTROLLER
     - .github/workflows/MODULE_ALU_CONTROLLER.yml
 jobs:
   run-tests:
-    name: MODULE_ALU_CONTROLLER
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

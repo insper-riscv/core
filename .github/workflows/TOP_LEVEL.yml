@@ -8,7 +8,6 @@ name: TOP_LEVEL
     - .github/workflows/TOP_LEVEL.yml
 jobs:
   run-tests:
-    name: TOP_LEVEL
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

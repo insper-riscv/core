@@ -8,7 +8,6 @@ name: STAGE_IF
     - .github/workflows/STAGE_IF.yml
 jobs:
   run-tests:
-    name: STAGE_IF
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

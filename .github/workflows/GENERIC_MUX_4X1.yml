@@ -8,7 +8,6 @@ name: GENERIC_MUX_4X1
     - .github/workflows/GENERIC_MUX_4X1.yml
 jobs:
   run-tests:
-    name: GENERIC_MUX_4X1
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
