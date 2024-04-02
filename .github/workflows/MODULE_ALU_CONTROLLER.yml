@@ -8,6 +8,7 @@ name: MODULE_ALU_CONTROLLER
     - .github/workflows/MODULE_ALU_CONTROLLER.yml
 jobs:
   run-tests:
+    name: MODULE_ALU_CONTROLLER tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -23,5 +24,5 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run pytest
+    - name: Run Tests
       run: pytest -s

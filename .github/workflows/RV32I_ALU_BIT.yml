@@ -8,6 +8,7 @@ name: RV32I_ALU_BIT
     - .github/workflows/RV32I_ALU_BIT.yml
 jobs:
   run-tests:
+    name: RV32I_ALU_BIT tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -23,5 +24,5 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run pytest
+    - name: Run Tests
       run: pytest -s

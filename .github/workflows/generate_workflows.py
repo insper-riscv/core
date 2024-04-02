@@ -22,6 +22,7 @@ for file in files:
         },
         'jobs': {
             'run-tests': {
+                'name': f'{file[5:-3]} tests',
                 'runs-on': 'ubuntu-latest',
                 'steps': [
                     {
@@ -48,7 +49,7 @@ for file in files:
                         'run': 'pip install -r requirements.txt'
                     },
                     {
-                        'name': 'Run pytest',
+                        'name': 'Run Tests',
                         'run': 'pytest -s'
                     }
                 ]
