@@ -56,7 +56,7 @@ for file in files:
         }
     }
 
-    filename = ".github/workflows/" + os.path.splitext(file)[0][5:] + '.yaml'
+    filename = ".github/workflows/" + os.path.splitext(file)[0][5:] + '.yml'
     with open(filename, 'w') as file_workflow:
         yaml.dump(yaml_content, 
                   file_workflow, 
