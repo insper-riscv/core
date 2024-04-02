@@ -5,6 +5,7 @@ name: MODULE_CONTROL_UNIT
     paths:
     - src/**
     - test/**
+    - .github/workflows/MODULE_CONTROL_UNIT.yml
 jobs:
   run-tests:
     name: MODULE_CONTROL_UNIT

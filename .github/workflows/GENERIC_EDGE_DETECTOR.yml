@@ -5,6 +5,7 @@ name: GENERIC_EDGE_DETECTOR
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_EDGE_DETECTOR.yml
 jobs:
   run-tests:
     name: GENERIC_EDGE_DETECTOR

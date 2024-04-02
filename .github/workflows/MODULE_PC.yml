@@ -5,6 +5,7 @@ name: MODULE_PC
     paths:
     - src/**
     - test/**
+    - .github/workflows/MODULE_PC.yml
 jobs:
   run-tests:
     name: MODULE_PC

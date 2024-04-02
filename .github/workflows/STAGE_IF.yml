@@ -5,6 +5,7 @@ name: STAGE_IF
     paths:
     - src/**
     - test/**
+    - .github/workflows/STAGE_IF.yml
 jobs:
   run-tests:
     name: STAGE_IF

@@ -5,6 +5,7 @@ name: STAGE_WB
     paths:
     - src/**
     - test/**
+    - .github/workflows/STAGE_WB.yml
 jobs:
   run-tests:
     name: STAGE_WB

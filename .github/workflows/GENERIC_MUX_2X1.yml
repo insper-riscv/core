@@ -5,6 +5,7 @@ name: GENERIC_MUX_2X1
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_MUX_2X1.yml
 jobs:
   run-tests:
     name: GENERIC_MUX_2X1

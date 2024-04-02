@@ -5,6 +5,7 @@ name: MODULE_ALU
     paths:
     - src/**
     - test/**
+    - .github/workflows/MODULE_ALU.yml
 jobs:
   run-tests:
     name: MODULE_ALU

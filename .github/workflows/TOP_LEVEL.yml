@@ -5,6 +5,7 @@ name: TOP_LEVEL
     paths:
     - src/**
     - test/**
+    - .github/workflows/TOP_LEVEL.yml
 jobs:
   run-tests:
     name: TOP_LEVEL

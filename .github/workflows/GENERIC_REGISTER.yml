@@ -5,6 +5,7 @@ name: GENERIC_REGISTER
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_REGISTER.yml
 jobs:
   run-tests:
     name: GENERIC_REGISTER

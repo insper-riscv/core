@@ -5,6 +5,7 @@ name: STAGE_MEM
     paths:
     - src/**
     - test/**
+    - .github/workflows/STAGE_MEM.yml
 jobs:
   run-tests:
     name: STAGE_MEM

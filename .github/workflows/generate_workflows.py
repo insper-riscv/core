@@ -16,6 +16,7 @@ for file in files:
                 'paths': [
                     f'src/**',
                     f'test/**',
+                    f'.github/workflows/{file[5:-3]}.yml'
                 ]
             }
         },

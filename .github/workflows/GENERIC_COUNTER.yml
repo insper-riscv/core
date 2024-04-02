@@ -5,6 +5,7 @@ name: GENERIC_COUNTER
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_COUNTER.yml
 jobs:
   run-tests:
     name: GENERIC_COUNTER

@@ -5,6 +5,7 @@ name: GENERIC_SIGNAL_EXTENDER
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_SIGNAL_EXTENDER.yml
 jobs:
   run-tests:
     name: GENERIC_SIGNAL_EXTENDER

@@ -5,6 +5,7 @@ name: GENERIC_RAM
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_RAM.yml
 jobs:
   run-tests:
     name: GENERIC_RAM

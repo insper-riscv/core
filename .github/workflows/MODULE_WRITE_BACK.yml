@@ -5,6 +5,7 @@ name: MODULE_WRITE_BACK
     paths:
     - src/**
     - test/**
+    - .github/workflows/MODULE_WRITE_BACK.yml
 jobs:
   run-tests:
     name: MODULE_WRITE_BACK

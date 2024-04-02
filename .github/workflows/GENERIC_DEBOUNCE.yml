@@ -5,6 +5,7 @@ name: GENERIC_DEBOUNCE
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_DEBOUNCE.yml
 jobs:
   run-tests:
     name: GENERIC_DEBOUNCE

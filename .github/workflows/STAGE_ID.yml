@@ -5,6 +5,7 @@ name: STAGE_ID
     paths:
     - src/**
     - test/**
+    - .github/workflows/STAGE_ID.yml
 jobs:
   run-tests:
     name: STAGE_ID

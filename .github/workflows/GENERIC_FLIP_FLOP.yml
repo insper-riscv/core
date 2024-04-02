@@ -5,6 +5,7 @@ name: GENERIC_FLIP_FLOP
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_FLIP_FLOP.yml
 jobs:
   run-tests:
     name: GENERIC_FLIP_FLOP

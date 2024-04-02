@@ -5,6 +5,7 @@ name: GENERIC_ROM
     paths:
     - src/**
     - test/**
+    - .github/workflows/GENERIC_ROM.yml
 jobs:
   run-tests:
     name: GENERIC_ROM

@@ -5,6 +5,7 @@ name: MODULE_REGISTER_FILE
     paths:
     - src/**
     - test/**
+    - .github/workflows/MODULE_REGISTER_FILE.yml
 jobs:
   run-tests:
     name: MODULE_REGISTER_FILE
