@@ -84,6 +84,8 @@ begin
         signals_ex.funct_3            <= instruction.funct_3;
         signals_ex.opcode             <= instruction.opcode;
         signals_ex.select_destination <= instruction.select_destination;
+        signals_ex.select_source_1    <= instruction.select_source_1;
+        signals_ex.select_source_2    <= instruction.select_source_2;
     end process;
 
 end architecture;
