@@ -3,9 +3,8 @@ name: STAGE_MEM
   workflow_dispatch: {}
   push:
     paths:
-    - src/STAGE_MEM.vhd
-    - test/test_STAGE_MEM.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: STAGE_MEM

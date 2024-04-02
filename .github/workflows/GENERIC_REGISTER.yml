@@ -3,9 +3,8 @@ name: GENERIC_REGISTER
   workflow_dispatch: {}
   push:
     paths:
-    - src/GENERIC_REGISTER.vhd
-    - test/test_GENERIC_REGISTER.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: GENERIC_REGISTER

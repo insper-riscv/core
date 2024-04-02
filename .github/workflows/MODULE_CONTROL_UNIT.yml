@@ -3,9 +3,8 @@ name: MODULE_CONTROL_UNIT
   workflow_dispatch: {}
   push:
     paths:
-    - src/MODULE_CONTROL_UNIT.vhd
-    - test/test_MODULE_CONTROL_UNIT.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: MODULE_CONTROL_UNIT

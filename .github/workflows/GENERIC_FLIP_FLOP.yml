@@ -3,9 +3,8 @@ name: GENERIC_FLIP_FLOP
   workflow_dispatch: {}
   push:
     paths:
-    - src/GENERIC_FLIP_FLOP.vhd
-    - test/test_GENERIC_FLIP_FLOP.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: GENERIC_FLIP_FLOP

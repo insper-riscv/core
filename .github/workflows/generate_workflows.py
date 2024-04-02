@@ -14,9 +14,8 @@ for file in files:
             'workflow_dispatch': {},
             'push': {
                 'paths': [
-                    f'src/{file[5:-3]}.vhd',
-                    f'test/{file}',
-                    f'.github/workflows**'
+                    f'src/**',
+                    f'test/**',
                 ]
             }
         },

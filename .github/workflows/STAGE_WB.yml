@@ -3,9 +3,8 @@ name: STAGE_WB
   workflow_dispatch: {}
   push:
     paths:
-    - src/STAGE_WB.vhd
-    - test/test_STAGE_WB.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: STAGE_WB

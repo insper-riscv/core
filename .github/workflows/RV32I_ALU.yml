@@ -3,9 +3,8 @@ name: RV32I_ALU
   workflow_dispatch: {}
   push:
     paths:
-    - src/RV32I_ALU.vhd
-    - test/test_RV32I_ALU.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: RV32I_ALU

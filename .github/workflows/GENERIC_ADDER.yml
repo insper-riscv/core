@@ -3,9 +3,8 @@ name: GENERIC_ADDER
   workflow_dispatch: {}
   push:
     paths:
-    - src/GENERIC_ADDER.vhd
-    - test/test_GENERIC_ADDER.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: GENERIC_ADDER

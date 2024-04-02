@@ -3,9 +3,8 @@ name: MODULE_ALU
   workflow_dispatch: {}
   push:
     paths:
-    - src/MODULE_ALU.vhd
-    - test/test_MODULE_ALU.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: MODULE_ALU

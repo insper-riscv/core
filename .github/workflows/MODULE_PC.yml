@@ -3,9 +3,8 @@ name: MODULE_PC
   workflow_dispatch: {}
   push:
     paths:
-    - src/MODULE_PC.vhd
-    - test/test_MODULE_PC.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: MODULE_PC

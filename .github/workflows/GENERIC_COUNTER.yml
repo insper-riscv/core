@@ -3,9 +3,8 @@ name: GENERIC_COUNTER
   workflow_dispatch: {}
   push:
     paths:
-    - src/GENERIC_COUNTER.vhd
-    - test/test_GENERIC_COUNTER.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: GENERIC_COUNTER

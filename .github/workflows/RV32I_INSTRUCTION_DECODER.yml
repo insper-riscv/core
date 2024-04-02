@@ -3,9 +3,8 @@ name: RV32I_INSTRUCTION_DECODER
   workflow_dispatch: {}
   push:
     paths:
-    - src/RV32I_INSTRUCTION_DECODER.vhd
-    - test/test_RV32I_INSTRUCTION_DECODER.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: RV32I_INSTRUCTION_DECODER

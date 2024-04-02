@@ -3,9 +3,8 @@ name: TOP_LEVEL
   workflow_dispatch: {}
   push:
     paths:
-    - src/TOP_LEVEL.vhd
-    - test/test_TOP_LEVEL.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: TOP_LEVEL

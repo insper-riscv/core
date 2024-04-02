@@ -3,9 +3,8 @@ name: MODULE_WRITE_BACK
   workflow_dispatch: {}
   push:
     paths:
-    - src/MODULE_WRITE_BACK.vhd
-    - test/test_MODULE_WRITE_BACK.py
-    - .github/workflows**
+    - src/**
+    - test/**
 jobs:
   run-tests:
     name: MODULE_WRITE_BACK
