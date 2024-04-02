@@ -1,0 +1,27 @@
+name: RV32I_REGISTER_FILE
+'on':
+  workflow_dispatch: {}
+  push:
+    paths:
+    - src/RV32I_REGISTER_FILE.vhd
+    - test/test_RV32I_REGISTER_FILE.py
+jobs:
+  run-tests:
+    name: RV32I_REGISTER_FILE
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: pip
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run pytest
+      run: pytest -s

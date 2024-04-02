@@ -1,0 +1,27 @@
+name: MODULE_ALU_CONTROLLER
+'on':
+  workflow_dispatch: {}
+  push:
+    paths:
+    - src/MODULE_ALU_CONTROLLER.vhd
+    - test/test_MODULE_ALU_CONTROLLER.py
+jobs:
+  run-tests:
+    name: MODULE_ALU_CONTROLLER
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: pip
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run pytest
+      run: pytest -s

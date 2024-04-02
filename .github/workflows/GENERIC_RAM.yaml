@@ -1,0 +1,27 @@
+name: GENERIC_RAM
+'on':
+  workflow_dispatch: {}
+  push:
+    paths:
+    - src/GENERIC_RAM.vhd
+    - test/test_GENERIC_RAM.py
+jobs:
+  run-tests:
+    name: GENERIC_RAM
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: pip
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run pytest
+      run: pytest -s
