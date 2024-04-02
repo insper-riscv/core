@@ -5,6 +5,7 @@ name: TOP_LEVEL
     paths:
     - src/TOP_LEVEL.vhd
     - test/test_TOP_LEVEL.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: TOP_LEVEL

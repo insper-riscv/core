@@ -5,6 +5,7 @@ name: GENERIC_DEBOUNCE
     paths:
     - src/GENERIC_DEBOUNCE.vhd
     - test/test_GENERIC_DEBOUNCE.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_DEBOUNCE

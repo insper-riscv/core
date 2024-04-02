@@ -5,6 +5,7 @@ name: MODULE_ALU_CONTROLLER
     paths:
     - src/MODULE_ALU_CONTROLLER.vhd
     - test/test_MODULE_ALU_CONTROLLER.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: MODULE_ALU_CONTROLLER

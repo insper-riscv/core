@@ -5,6 +5,7 @@ name: RV32I_ALU_CONTROLLER
     paths:
     - src/RV32I_ALU_CONTROLLER.vhd
     - test/test_RV32I_ALU_CONTROLLER.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: RV32I_ALU_CONTROLLER

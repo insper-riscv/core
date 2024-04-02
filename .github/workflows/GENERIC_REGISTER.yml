@@ -5,6 +5,7 @@ name: GENERIC_REGISTER
     paths:
     - src/GENERIC_REGISTER.vhd
     - test/test_GENERIC_REGISTER.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_REGISTER

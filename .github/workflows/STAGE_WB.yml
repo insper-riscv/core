@@ -5,6 +5,7 @@ name: STAGE_WB
     paths:
     - src/STAGE_WB.vhd
     - test/test_STAGE_WB.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: STAGE_WB

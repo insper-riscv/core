@@ -5,6 +5,7 @@ name: GENERIC_FLIP_FLOP
     paths:
     - src/GENERIC_FLIP_FLOP.vhd
     - test/test_GENERIC_FLIP_FLOP.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_FLIP_FLOP

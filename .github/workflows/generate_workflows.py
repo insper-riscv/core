@@ -15,7 +15,8 @@ for file in files:
             'push': {
                 'paths': [
                     f'src/{file[5:-3]}.vhd',
-                    f'test/{file}'
+                    f'test/{file}',
+                    f'.github/workflows**'
                 ]
             }
         },

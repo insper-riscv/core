@@ -5,6 +5,7 @@ name: GENERIC_RAM
     paths:
     - src/GENERIC_RAM.vhd
     - test/test_GENERIC_RAM.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_RAM

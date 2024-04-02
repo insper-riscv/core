@@ -5,6 +5,7 @@ name: STAGE_MEM
     paths:
     - src/STAGE_MEM.vhd
     - test/test_STAGE_MEM.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: STAGE_MEM

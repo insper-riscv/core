@@ -5,6 +5,7 @@ name: STAGE_ID
     paths:
     - src/STAGE_ID.vhd
     - test/test_STAGE_ID.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: STAGE_ID

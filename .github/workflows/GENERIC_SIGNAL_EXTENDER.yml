@@ -5,6 +5,7 @@ name: GENERIC_SIGNAL_EXTENDER
     paths:
     - src/GENERIC_SIGNAL_EXTENDER.vhd
     - test/test_GENERIC_SIGNAL_EXTENDER.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_SIGNAL_EXTENDER

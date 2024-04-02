@@ -5,6 +5,7 @@ name: MODULE_CONTROL_UNIT
     paths:
     - src/MODULE_CONTROL_UNIT.vhd
     - test/test_MODULE_CONTROL_UNIT.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: MODULE_CONTROL_UNIT

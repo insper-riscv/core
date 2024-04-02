@@ -5,6 +5,7 @@ name: MODULE_ALU
     paths:
     - src/MODULE_ALU.vhd
     - test/test_MODULE_ALU.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: MODULE_ALU

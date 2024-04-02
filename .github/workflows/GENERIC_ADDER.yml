@@ -5,6 +5,7 @@ name: GENERIC_ADDER
     paths:
     - src/GENERIC_ADDER.vhd
     - test/test_GENERIC_ADDER.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_ADDER

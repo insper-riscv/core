@@ -5,6 +5,7 @@ name: GENERIC_MUX_2X1
     paths:
     - src/GENERIC_MUX_2X1.vhd
     - test/test_GENERIC_MUX_2X1.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_MUX_2X1

@@ -5,6 +5,7 @@ name: GENERIC_EDGE_DETECTOR
     paths:
     - src/GENERIC_EDGE_DETECTOR.vhd
     - test/test_GENERIC_EDGE_DETECTOR.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_EDGE_DETECTOR

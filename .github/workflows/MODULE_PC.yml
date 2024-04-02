@@ -5,6 +5,7 @@ name: MODULE_PC
     paths:
     - src/MODULE_PC.vhd
     - test/test_MODULE_PC.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: MODULE_PC

@@ -5,6 +5,7 @@ name: GENERIC_ROM
     paths:
     - src/GENERIC_ROM.vhd
     - test/test_GENERIC_ROM.py
+    - .github/workflows**
 jobs:
   run-tests:
     name: GENERIC_ROM
