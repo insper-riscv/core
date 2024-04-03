@@ -60,7 +60,7 @@ for file in files:
         'steps':[
             {
                 'name': f'{file[5:-3]}',
-                'run': f'pytest -k {file[:-3]}'
+                'run': f'pytest -k {file[5:-3]}'
             }
         ]
     }
