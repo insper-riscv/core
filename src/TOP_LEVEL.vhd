@@ -88,11 +88,17 @@ begin
 
     STAGE_EX : entity WORK.STAGE_EX
         port map (
-            clock       => CLOCK,
-            clear       => '0',
-            enable      => '1',
-            source      => signals_id_ex,
-            destination => signals_ex_mem
+            clock                     => CLOCK,
+            clear                     => '0',
+            enable                    => '1',
+            selector_forwarding_mem   => signals_mem_wb.select_destination,
+            enable_mem                => signals_mem_wb.control_wb.enable_destination,
+            selector_forwarding_wb    => select_destination,
+            enable_wb                 => enable_destination,
+            forwarding_mem_source     => signals_mem_wb.data_destination,
+            forwarding_wb_source      => data_destination,
+            source                    => signals_id_ex,
+            destination               => signals_ex_mem
         );
 
     STAGE_MEM : entity WORK.STAGE_MEM

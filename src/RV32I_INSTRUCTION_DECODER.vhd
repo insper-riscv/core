@@ -34,7 +34,8 @@ begin
     control_if.enable_flush     <= '0';
     control_if.enable_jump      <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                                    '0';
-    control_if.select_source    <= '1';
+    control_if.select_source    <= '0' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
+                                   '1';
 
     control_id.select_jump     <= '0';
     control_id.enable_jump     <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
@@ -47,7 +48,7 @@ begin
                                    "00";
     control_ex.select_source_2  <= "01" when (
                                        (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) or 
-                                       (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE)
                                    ) else
                                    "00";
     control_ex.select_operation <= (others => '0');
@@ -55,14 +56,22 @@ begin
 
     control_mem.enable_read  <= '1' when (rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE)) else
                                 '0';
-    control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) else
+    control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else
                                 '0';
 
     control_wb.enable_destination <= '1' when (
                                          (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
-                                         (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE)or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE)
                                      ) else
                                      '0';
+    control_wb.select_destination <= '1' when (
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE)or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE)
+                                     ) else
+                                     '0';
+                                     
     control_wb.select_destination <= '1' when rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE) else
                                      '0';
 

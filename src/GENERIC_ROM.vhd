@@ -26,11 +26,13 @@ architecture RTL of GENERIC_ROM is
     function memory_init return memory_block is
         variable tmp : memory_block := (others => (others => '0'));
     begin
-  
+    
+        -- start memory
         tmp(0) := "00000000000000000001010000110111";
         tmp(4) := "00000000000000000001010000110111";
         tmp(8) := "00000000000000000001010000110111";
         tmp(12) := "00000000000000000001010000110111";
+        -- end memory
 
         return tmp;
     end function;

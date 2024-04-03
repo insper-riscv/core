@@ -62,8 +62,8 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 trace.write(f"../sim_build/{fn.__name__.lower()}.svg")
 
                 if not pased:
-                    message = "\n".join(pytest_check.check_log.get_failures())
-
+                    message = "\n".join(check.check_log.get_failures())
+                    
                     raise AssertionError(message)
 
         _testcase_wrapper.__name__ = fn.__name__
