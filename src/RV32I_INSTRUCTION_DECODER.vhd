@@ -43,12 +43,21 @@ begin
     control_id.enable_flush_id <= '0';
     control_id.enable_flux_ex  <= '0';
 
-    control_ex.select_source_1  <= "01" when (rv32i_instruction.opcode = OPCODE_AUIPC(OPCODE_RANGE)) else
+    control_ex.select_source_1  <= "01" when (
+                                        rv32i_instruction.opcode = OPCODE_AUIPC(OPCODE_RANGE) or
+                                        rv32i_instruction.opcode = OPCODE_JAL(OPCODE_RANGE) or
+                                        rv32i_instruction.opcode = OPCODE_JALR(OPCODE_RANGE)
+                                        ) else
                                    "10" when (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE)) else
                                    "00";
     control_ex.select_source_2  <= "01" when (
                                        (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) or 
-                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE)
+                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE) or 
+                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE)
+                                   ) else
+                                   "10" when (
+                                        rv32i_instruction.opcode = OPCODE_JAL(OPCODE_RANGE) or
+                                        rv32i_instruction.opcode = OPCODE_JALR(OPCODE_RANGE)
                                    ) else
                                    "00";
     control_ex.select_operation <= (others => '0');
