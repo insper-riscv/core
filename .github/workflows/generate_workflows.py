@@ -12,7 +12,7 @@ yaml_content = {
                 'paths': [
                     f'src/**',
                     f'test/**',
-                    f'.github/workflows/vhdl_tests.yml'
+                    f'.github/workflows/vhd_tests.yml'
                 ]
             }
         },

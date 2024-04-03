@@ -5,7 +5,7 @@ name: Run tests
     paths:
     - src/**
     - test/**
-    - .github/workflows/vhdl_tests.yml
+    - .github/workflows/vhd_tests.yml
 jobs:
   setup-env:
     name: Setup environment
