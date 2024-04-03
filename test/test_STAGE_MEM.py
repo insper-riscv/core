@@ -14,6 +14,7 @@ class STAGE_MEM(utils.DUT):
     destination = utils.DUT.Output_pin
 
 
+@pytest.mark.synthesis
 def test_STAGE_MEM_synthesis():
     STAGE_MEM.build_vhd()
     # STAGE_MEM.build_netlistsvg()

@@ -126,11 +126,13 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.overflow, "0")
 
 
+@pytest.mark.synthesis
 def test_RV32I_ALU_BIT_synthesis():
     RV32I_ALU_BIT.build_vhd()
     # RV32I_ALU_BIT.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_RV32I_ALU_BIT_testcases():
     RV32I_ALU_BIT.test_with(
         [

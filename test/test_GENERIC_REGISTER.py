@@ -49,11 +49,13 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
         yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
+@pytest.mark.synthesis
 def test_GENERIC_REGISTER_synthesis():
     GENERIC_REGISTER.build_vhd()
     # GENERIC_REGISTER.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_GENERIC_REGISTER_testcases():
     GENERIC_REGISTER.test_with(
         [

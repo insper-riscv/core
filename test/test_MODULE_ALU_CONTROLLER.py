@@ -40,11 +40,13 @@ async def tb_MODULE_ALU_CONTROLLER_case_1(dut: "MODULE_ALU_CONTROLLER", trace: u
     yield trace.check(dut.destination, "0110")
 
 
+@pytest.mark.synthesis
 def test_MODULE_ALU_CONTROLLER_synthesis():
     MODULE_ALU_CONTROLLER.build_vhd()
     # MODULE_ALU_CONTROLLER.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_MODULE_ALU_CONTROLLER_testcases():
     MODULE_ALU_CONTROLLER.test_with(
         [

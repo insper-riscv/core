@@ -12,6 +12,7 @@ class GENERIC_DEBOUNCE(utils.DUT):
     state_register = GENERIC_FLIP_FLOP
 
 
+@pytest.mark.synthesis
 def test_GENERIC_DEBOUNCE_synthesis():
     GENERIC_DEBOUNCE.build_vhd()
     # GENERIC_DEBOUNCE.build_netlistsvg()

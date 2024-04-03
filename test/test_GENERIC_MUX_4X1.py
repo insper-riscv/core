@@ -46,11 +46,13 @@ async def tb_GENERIC_MUX_4X1_case_1(dut: GENERIC_MUX_4X1, trace: utils.Trace):
     yield trace.check(dut.destination, "00000000000000000000000000000100")
 
 
+@pytest.mark.synthesis
 def test_GENERIC_MUX_4X1_synthesis():
     GENERIC_MUX_4X1.build_vhd()
     # GENERIC_MUX_4X1.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_GENERIC_MUX_4X1_testcases():
     GENERIC_MUX_4X1.test_with(
         [

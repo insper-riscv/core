@@ -36,11 +36,13 @@ async def tb_MODULE_CONTROL_UNIT_case_1(dut: "MODULE_CONTROL_UNIT", trace: utils
     yield trace.check(dut.immediate_source, "00000000000000000001000000000000")
 
 
+@pytest.mark.synthesis
 def test_MODULE_CONTROL_UNIT_synthesis():
     MODULE_CONTROL_UNIT.build_vhd()
     # MODULE_CONTROL_UNIT.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_MODULE_CONTROL_UNIT_testcases():
     MODULE_CONTROL_UNIT.test_with(
         [

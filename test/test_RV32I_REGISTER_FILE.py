@@ -106,11 +106,13 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.T
         yield trace.check(dut.data_source_2, data_source_2, f"At clock {index}.")
 
 
+@pytest.mark.synthesis
 def test_RV32I_REGISTER_FILE_synthesis():
     RV32I_REGISTER_FILE.build_vhd()
     # RV32I_REGISTER_FILE.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_RV32I_REGISTER_FILE_testcases():
     RV32I_REGISTER_FILE.test_with(
         [

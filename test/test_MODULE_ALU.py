@@ -48,11 +48,13 @@ async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU", trace: utils.Trace):
     yield trace.check(dut.destination, "00000000000000000000000000000100")
 
 
+@pytest.mark.synthesis
 def test_MODULE_ALU_synthesis():
     MODULE_ALU.build_vhd()
     # MODULE_ALU.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_MODULE_ALU_testcases():
     MODULE_ALU.test_with(
         [
