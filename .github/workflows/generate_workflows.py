@@ -5,7 +5,7 @@ import yaml
 files = os.listdir('test')
 
 yaml_content = {
-        'name': f'Run tests',
+        'name': f'VHD tests',
         'on': {
             'workflow_dispatch': {},
             'push': {
