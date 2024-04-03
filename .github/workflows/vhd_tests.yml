@@ -13,6 +13,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
     - name: Install GHDL
       uses: ghdl/setup-ghdl-ci@nightly
       with:
@@ -25,11 +32,14 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     
-    - name: GENERIC_ADDER test
-      run: pytest -k GENERIC_ADDER
-
-    - name: GENERIC_COUNTER test
-      run: pytest -k GENERIC_COUNTER
-
-    - name: GENERIC_DEBOUNCE test
-      run: pytest -k GENERIC_DEBOUNCE
+  run-tests:
+      name: Run tests
+      needs: setup-env
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          test_name: [GENERIC_ADDER, GENERIC_COUNTER, GENERIC_DEBOUNCE, GENERIC_EDGE_DETECTOR, GENERIC_FLIP_FLOP, GENERIC_MUX_2X1, GENERIC_MUX_4X1, GENERIC_RAM, GENERIC_REGISTER, GENERIC_ROM, GENERIC_SIGNAL_EXTENDER, MODULE_ALU, MODULE_ALU_CONTROLLER, MODULE_CONTROL_UNIT, MODULE_PC, MODULE_REGISTER_FILE, MODULE_WRITE_BACK, RV32I_ALU, RV32I_ALU_BIT, RV32I_ALU_CONTROLLER, RV32I_INSTRUCTION_DECODER, RV32I_REGISTER_FILE, STAGE_EX, STAGE_ID, STAGE_IF, STAGE_MEM, STAGE_WB, TOP_LEVEL]
+  
+      steps:
+        - name: Run test
+          run: pytest -k ${{ matrix.test_name }}
