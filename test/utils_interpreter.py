@@ -170,8 +170,12 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
     with open(assembly, "r") as asm_file: 
         asm_lines = asm_file.readlines()
 
+    asm_file.close()
+
     with open(memory, "r") as mem_file: 
         mem_lines = mem_file.readlines()
+
+    mem_file.close()
 
     list_instructions = []
     for line in asm_lines:
@@ -280,6 +284,8 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
     with open(memory, "w") as new_mem_file: 
         for line_final in new_memory_lines:
             new_mem_file.write(line_final)
+
+    new_mem_file.close()
 
 
 #def main():

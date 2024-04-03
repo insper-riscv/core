@@ -72,7 +72,7 @@ begin
                                      ) else
                                      '0';
                                      
-    control_wb.select_destination <= '1' when rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE) else
+    control_wb.select_destination <= '1' when rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE else
                                      '0';
 
     immediate <= rv32i_instruction.immediate_i when (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) else

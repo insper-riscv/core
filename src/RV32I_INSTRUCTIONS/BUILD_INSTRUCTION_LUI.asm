@@ -1,4 +1,4 @@
-auipc x8, 1
-auipc x8, 1
-auipc x8, 1
-auipc x8, 1
+lui x8, 1
+lui x8, 1
+lui x8, 1
+lui x8, 1

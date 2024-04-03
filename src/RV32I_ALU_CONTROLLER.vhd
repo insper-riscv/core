@@ -33,6 +33,7 @@ begin
                    "0001" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_ORI ) else
                    "0010" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_ADDI) else
                    "0001" when (opcode = OPCODE_LUI(OPCODE_RANGE)   ) else
+                   "0001" when (opcode = OPCODE_AUIPC(OPCODE_RANGE)   ) else
                    "0000";
 
 end architecture;
