@@ -1,4 +1,5 @@
 import os
+import random
 
 import pytest
 from cocotb.binary import BinaryValue
