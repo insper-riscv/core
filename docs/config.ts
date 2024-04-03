@@ -34,31 +34,31 @@ export default defineConfig({
       },
     ],
 
-    search: {
-      options: {
-        locales: {
-          root: {
-            translations: {
-              button: {
-                buttonText: "Pesquisar",
-                buttonAriaLabel: "Pesquisar"
-              },
-              modal: {
-                displayDetails: "Exibição detalhada",
-                resetButtonTitle: "Limpar pesquisa",
-                noResultsText: "Não há resultados para",
-                backButtonTitle: "Voltar",
-                footer: {
-                  closeText: "Fechar",
-                  navigateText: "Navegação",
-                  selectText: "Selecionar",
-                }
-              }
-            }
-          }
-        }
-      }
-    },
+    //search: {
+    //  options: {
+    //    locales: {
+    //      root: {
+    //        translations: {
+    //          button: {
+    //            buttonText: "Pesquisar",
+    //            buttonAriaLabel: "Pesquisar"
+    //          },
+    //          modal: {
+    //            displayDetails: "Exibição detalhada",
+    //            resetButtonTitle: "Limpar pesquisa",
+    //            noResultsText: "Não há resultados para",
+    //            backButtonTitle: "Voltar",
+    //            footer: {
+    //              closeText: "Fechar",
+    //              navigateText: "Navegação",
+    //              selectText: "Selecionar",
+    //            }
+    //          }
+    //        }
+    //      }
+    //    }
+    //  }
+    //},
 
     sidebar: {
       ...require('./guide/config.ts').default.sidebar,
