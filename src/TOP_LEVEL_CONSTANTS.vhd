@@ -22,7 +22,8 @@ package TOP_LEVEL_CONSTANTS is
         RV32I_INSTRUCTION_J_TYPE
     );
 
-    subtype FUNCTION_RANGE is natural range 2 downto 0;
+    --subtype FUNCTION_RANGE is natural range 2 downto 0;
+    subtype FUNCTION_RANGE is natural range 14 downto 12;
     subtype t_FUNCTION is std_logic_vector(FUNCTION_RANGE);
 
     subtype OPCODE_FULL_RANGE is natural range 6 downto 0;

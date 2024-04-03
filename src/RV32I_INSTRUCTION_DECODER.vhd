@@ -45,8 +45,7 @@ begin
 
     control_ex.select_source_1  <= "01" when (
                                         rv32i_instruction.opcode = OPCODE_AUIPC(OPCODE_RANGE) or
-                                        rv32i_instruction.opcode = OPCODE_JAL(OPCODE_RANGE) or
-                                        rv32i_instruction.opcode = OPCODE_JALR(OPCODE_RANGE)
+                                        rv32i_instruction.opcode = OPCODE_JAL(OPCODE_RANGE)
                                         ) else
                                    "10" when (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE)) else
                                    "00";

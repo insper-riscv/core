@@ -18,8 +18,8 @@ entity RV32I_FORWARDING_UNIT_ALU is
         enable_write_mem         : in  std_logic;
         register_destination_wb  : in  t_REGISTER;
         enable_write_wb          : in  std_logic;
-        mux_control_1            : out  std_logic_vector(1 downto 0);
-        mux_control_2            : out  std_logic_vector(1 downto 0)
+        mux_control_1            : out  std_logic_vector(1 downto 0) := (others => '0');
+        mux_control_2            : out  std_logic_vector(1 downto 0) := (others => '0')
     );
 
 end entity;
@@ -33,16 +33,16 @@ begin
     
     process(register_source_1, register_source_2, register_destination_mem, register_destination_wb)
     begin
-        MUX_CONTROLLER_1 : if (enable_write_mem = '1' and register_source_1 = register_destination_mem) then
+        MUX_CONTROLLER_1 : if (enable_write_mem = '1' and register_source_1 = register_destination_mem  and register_destination_mem /= "00000") then
             mux_control_1 <= "10";
-        elsif (enable_write_mem = '1' and register_source_1 = register_destination_wb) then
+        elsif (enable_write_mem = '1' and register_source_1 = register_destination_wb and register_destination_wb /= "00000") then
             mux_control_1 <= "01";
         else
             mux_control_1 <= "00";
         end if;
-        MUX_CONTROLLER_2 : if (enable_write_mem = '1' and register_source_2 = register_destination_mem) then
+        MUX_CONTROLLER_2 : if (enable_write_mem = '1' and register_source_2 = register_destination_mem and register_destination_mem /= "00000") then
             mux_control_2 <= "10";
-        elsif (enable_write_mem = '1' and register_source_2 = register_destination_wb) then
+        elsif (enable_write_mem = '1' and register_source_2 = register_destination_wb and register_destination_wb /= "00000") then
             mux_control_2 <= "01";
         else
             mux_control_2 <= "00";
