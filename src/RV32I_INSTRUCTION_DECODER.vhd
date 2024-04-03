@@ -61,19 +61,13 @@ begin
 
     control_wb.enable_destination <= '1' when (
                                          (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
-                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE)or 
-                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE)
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE) or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE)
                                      ) else
                                      '0';
-    control_wb.select_destination <= '1' when (
-                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
-                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE)or 
-                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE)
-                                     ) else
-                                     '0';
-                                     
-    control_wb.select_destination <= '1' when rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE else
-                                     '0';
+    control_wb.select_destination <= '0' when rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE) else
+                                     '1';
 
     immediate <= rv32i_instruction.immediate_i when (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) else
                  rv32i_instruction.immediate_s when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else
