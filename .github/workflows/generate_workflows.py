@@ -16,11 +16,17 @@ yaml_content = {
                 ]
             }
         },
-        'jobs': {
-            'setup-env': {
-                'name': f'Setup environment',
-                'runs-on': 'ubuntu-latest',
-                'steps': [
+        'jobs': {}
+    }
+
+for file in files:
+    if not file.startswith('test'):
+        continue
+
+    yaml_content['jobs'][file[5:-3]] = {
+        'name': f'{file[5:-3]}',
+        'runs-on':'ubuntu-latest',
+        'steps':  [
                     {
                         'name': 'Checkout code',
                         'uses': 'actions/checkout@v3'
@@ -44,26 +50,13 @@ yaml_content = {
                         'name': 'Install dependencies',
                         'run': 'pip install -r requirements.txt'
                     },
+                    {
+                        'name': 'Run tests',
+                        'run': f'pytest -k  {file[5:-3]}'
+                    }
                 ]
-            }
         }
-    }
 
-for file in files:
-    if not file.startswith('test'):
-        continue
-
-    yaml_content['jobs'][file[5:-3]] = {
-        'name': f'{file[5:-3]}',
-        'needs': 'setup-env',
-        'runs-on':'ubuntu-latest',
-        'steps':[
-            {
-                'name': f'{file[5:-3]}',
-                'run': f'pytest -k {file[5:-3]}'
-            }
-        ]
-    }
 
 filename = ".github/workflows/vhd_tests.yml"
 with open(filename, 'w') as file_workflow:
