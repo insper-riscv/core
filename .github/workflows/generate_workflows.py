@@ -4,25 +4,21 @@ import yaml
 
 files = os.listdir('test')
 
-for file in files:
-    if not file.startswith('test'):
-        continue
-
-    yaml_content = {
-        'name': f'{file[5:-3]}',
+yaml_content = {
+        'name': f'Run tests',
         'on': {
             'workflow_dispatch': {},
             'push': {
                 'paths': [
                     f'src/**',
                     f'test/**',
-                    f'.github/workflows/{file[5:-3]}.yml'
+                    f'.github/workflows/vhdl_tests.yml'
                 ]
             }
         },
         'jobs': {
-            'run-tests': {
-                'name': f'{file[5:-3]} tests',
+            'setup-env': {
+                'name': f'Setup environment',
                 'runs-on': 'ubuntu-latest',
                 'steps': [
                     {
@@ -48,19 +44,31 @@ for file in files:
                         'name': 'Install dependencies',
                         'run': 'pip install -r requirements.txt'
                     },
-                    {
-                        'name': 'Run Tests',
-                        'run': 'pytest -s'
-                    }
                 ]
             }
         }
     }
 
-    filename = ".github/workflows/" + os.path.splitext(file)[0][5:] + '.yml'
-    with open(filename, 'w') as file_workflow:
-        yaml.dump(yaml_content, 
-                  file_workflow, 
-                  default_flow_style=False,
-                  sort_keys=False
-        )
+for file in files:
+    if not file.startswith('test'):
+        continue
+
+    yaml_content['jobs'][file[5:-3]] = {
+        'name': f'{file[5:-3]}',
+        'needs': 'setup-env',
+        'runs-on':'ubuntu-latest',
+        'steps':[
+            {
+                'name': f'{file[5:-3]}',
+                'run': f'pytest -k {file[:-3]}'
+            }
+        ]
+    }
+
+filename = ".github/workflows/vhd_tests.yml"
+with open(filename, 'w') as file_workflow:
+    yaml.dump(yaml_content, 
+              file_workflow, 
+              default_flow_style=False,
+              sort_keys=False
+    )
