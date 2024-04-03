@@ -24,6 +24,7 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
+  
   run-tests:
     name: Run tests
     needs: setup-env
@@ -34,4 +35,4 @@ jobs:
 
     steps:
       - name: Run test
-        run: pytest -k ${{ matrix.test_name }}
+        run: python pytest -k ${{ matrix.test_name }}
