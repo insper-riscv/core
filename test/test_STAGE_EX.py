@@ -1,10 +1,6 @@
 import os
-from decimal import Decimal
 
 import pytest
-import cocotb
-from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
 from test_MODULE_ALU import MODULE_ALU

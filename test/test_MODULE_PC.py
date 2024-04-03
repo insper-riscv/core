@@ -1,10 +1,8 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -25,8 +23,7 @@ class MODULE_PC(utils.DUT):
     adder = GENERIC_ADDER
 
 
-@cocotb.test()
-@utils.append_wavedrom(MODULE_PC)
+@MODULE_PC.testcase
 async def tb_MODULE_PC_case_1(dut: MODULE_PC, trace: utils.Trace):
     values_jump_address = [
         "11111111111111110000000000000000",
@@ -58,11 +55,8 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC, trace: utils.Trace):
         dut.enable.value = BinaryValue(enable)
         dut.selector.value = BinaryValue(selector)
 
-        # await RisingEdge(dut.clock)
-        # await Timer(Decimal(20000), units="ns")
-        await trace.cycle(1)
-
-        utils.assert_output(dut.destination, destination, f"At clock {index}.")
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
 def test_MODULE_PC_synthesis():

@@ -3,7 +3,6 @@ import os
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Decimal, Timer, RisingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -19,8 +18,7 @@ class RV32I_REGISTER_FILE(utils.DUT):
     data_source_1 = utils.DUT.Output_pin
     data_source_2 = utils.DUT.Output_pin
 
-@cocotb.test()
-@utils.append_wavedrom(RV32I_REGISTER_FILE)
+@RV32I_REGISTER_FILE.testcase
 async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.Trace):
     values_address_destination = [
         "00000",
@@ -103,12 +101,9 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.T
         dut.address_source_2.value = BinaryValue(address_source_2)
         dut.data_destination.value = BinaryValue(data_destination)
 
-        await Timer(Decimal(clock.period), units="fs")
-
-        utils.assert_output(dut.data_source_1, data_source_1, f"At clock {index}.")
-        utils.assert_output(dut.data_source_2, data_source_2, f"At clock {index}.")
-
-        await RisingEdge(dut.clock)
+        await trace.cycle()
+        yield trace.check(dut.data_source_1, data_source_1, f"At clock {index}.")
+        yield trace.check(dut.data_source_2, data_source_2, f"At clock {index}.")
 
 
 def test_RV32I_REGISTER_FILE_synthesis():

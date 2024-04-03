@@ -1,10 +1,8 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -18,8 +16,7 @@ class GENERIC_FLIP_FLOP(utils.DUT):
     state = utils.DUT.Output_pin
 
 
-@cocotb.test()
-@utils.append_wavedrom(GENERIC_FLIP_FLOP)
+@GENERIC_FLIP_FLOP.testcase
 async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: utils.Trace):
     values_clear = ["0", "0", "1"]
     values_enable = ["1", "1", "0"]
@@ -36,10 +33,8 @@ async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: utils.Trace
         dut.enable.value = BinaryValue(enable)
         dut.source.value = BinaryValue(source)
 
-        await RisingEdge(dut.clock)
-        await Timer(Decimal(20000), units="ns")
-        utils.assert_output(dut.state, state, f"At clock {index}.")
-        await Timer(Decimal(20000), units="ns")
+        await trace.cycle()
+        yield trace.check(dut.state, state, f"At clock {index}.")
 
 
 def test_GENERIC_FLIP_FLOP_synthesis():

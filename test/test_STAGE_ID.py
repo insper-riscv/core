@@ -1,10 +1,6 @@
 import os
-from decimal import Decimal
 
 import pytest
-import cocotb
-from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
 from test_MODULE_REGISTER_FILE import MODULE_REGISTER_FILE
@@ -22,6 +18,7 @@ class STAGE_ID(utils.DUT):
 
     module_control_unit = MODULE_CONTROL_UNIT
     module_register_file = MODULE_REGISTER_FILE
+
 
 def test_STAGE_ID_synthesis():
     STAGE_ID.build_vhd()

@@ -1,10 +1,7 @@
 import os
-from decimal import Decimal
 
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
 
@@ -16,48 +13,35 @@ class GENERIC_MUX_2X1(utils.DUT):
     destination = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1):
-    dut.source_1.value = BinaryValue("00001111000011110000111100001111")
-    dut.source_2.value = BinaryValue("11110000111100001111000011110000")
+@GENERIC_MUX_2X1.testcase
+async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1, trace: utils.Trace):
+    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000010")
     dut.selector.value = BinaryValue("0")
 
-    await Timer(Decimal(1), units="ns")
-    utils.assert_output(dut.destination, "00001111000011110000111100001111")
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000001")
 
-
-@cocotb.test()
-async def tb_GENERIC_MUX_2X1_case_2(dut: GENERIC_MUX_2X1):
-    dut.source_1.value = BinaryValue("00001111000011110000111100001111")
-    dut.source_2.value = BinaryValue("11110000111100001111000011110000")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000010")
     dut.selector.value = BinaryValue("1")
 
-    await Timer(Decimal(1), units="ns")
-    utils.assert_output(dut.destination, "11110000111100001111000011110000")
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000010")
 
-
-@cocotb.test()
-async def tb_GENERIC_MUX_2X1_case_3(dut: GENERIC_MUX_2X1):
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000011")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000100")
     dut.selector.value = BinaryValue("0")
 
-    await Timer(Decimal(1), units="ns")
-    utils.assert_output(dut.destination, "00000000000000000000000000000000")
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000011")
 
-
-@cocotb.test()
-async def tb_GENERIC_MUX_2X1_case_4(dut: GENERIC_MUX_2X1):
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000011")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000100")
     dut.selector.value = BinaryValue("1")
 
-    await Timer(Decimal(1), units="ns")
-    utils.assert_output(dut.destination, "11111111111111111111111111111111")
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000100")
 
 
 def test_GENERIC_MUX_2X1_synthesis():
@@ -69,9 +53,6 @@ def test_GENERIC_MUX_2X1_testcases():
     GENERIC_MUX_2X1.test_with(
         [
             tb_GENERIC_MUX_2X1_case_1,
-            tb_GENERIC_MUX_2X1_case_2,
-            tb_GENERIC_MUX_2X1_case_3,
-            tb_GENERIC_MUX_2X1_case_4,
         ]
     )
 
