@@ -11,10 +11,10 @@ hero:
     alt: RISC-V
   actions:
     - text: Report
-      link: /en/guia/
+      link: /en/guide/
       theme: brand
     - text: Architecture
-      link: /en/referencia/componentes/
+      link: /en/reference/components/
       theme: alt
     - text: Project
       link: /en/sobre
