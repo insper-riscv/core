@@ -22,7 +22,8 @@ package TOP_LEVEL_CONSTANTS is
         RV32I_INSTRUCTION_J_TYPE
     );
 
-    subtype FUNCTION_RANGE is natural range 2 downto 0;
+    --subtype FUNCTION_RANGE is natural range 2 downto 0;
+    subtype FUNCTION_RANGE is natural range 14 downto 12;
     subtype t_FUNCTION is std_logic_vector(FUNCTION_RANGE);
 
     subtype OPCODE_FULL_RANGE is natural range 6 downto 0;
@@ -134,6 +135,8 @@ package TOP_LEVEL_CONSTANTS is
         funct_3            : t_FUNCTION;
         opcode             : t_OPCODE;
         select_destination : t_REGISTER;
+        select_source_1    : t_REGISTER;
+        select_source_2    : t_REGISTER;
     end record;
 
     constant NULL_SIGNALS_ID_EX : t_SIGNALS_ID_EX := (
@@ -147,7 +150,9 @@ package TOP_LEVEL_CONSTANTS is
         funct_7            => (others => '0'),
         funct_3            => (others => '0'),
         opcode             => (others => '0'),
-        select_destination => (others => '0')
+        select_destination => (others => '0'),
+        select_source_1    => (others => '0'),
+        select_source_2    => (others => '0')
     );
 
     type t_SIGNALS_EX_MEM is record

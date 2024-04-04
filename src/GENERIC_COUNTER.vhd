@@ -3,12 +3,11 @@ USE IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_COUNTER is
 
     generic (
-        DEFAULT_OVERFLOW : natural := CLOCK_FREQUENCY  -- 1 second
+        DEFAULT_OVERFLOW : natural := 2**10
     );
 
     port (
@@ -23,36 +22,43 @@ end entity;
 
 architecture RTL of GENERIC_COUNTER is
 
-    -- No signals
+    signal overflow : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(DEFAULT_OVERFLOW, 32));
+    signal count    : std_logic_vector(31 downto 0) := (others => '0');
 
 begin
 
-    COUNTER : process(clock, update)
-        variable selector : integer;
-        variable overflow : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(DEFAULT_OVERFLOW, 32));
-        variable count    : std_logic_vector(31 downto 0) := (others => '0');
+    UPDATE_OVERFLOW : process(clock, update)
+    begin
+        if rising_edge(clock) AND (update = '1') then
+            for i in 0 to 31 loop
+                if (i = to_integer(unsigned(source))) then
+                    overflow(i) <= '1';
+                else
+                    overflow(i) <= '0';
+                end if;
+            end loop;
+        end if;
+    end process;
+
+    COUNTER : process(clock, update, count, overflow)
     begin
         if rising_edge(clock) then
-            count := std_logic_vector(unsigned(count) + 1);
-
-            UPDATE_OVERFLOW : if (update = '1') then
-                selector := to_integer(unsigned(source(4 downto 0)));
-                overflow := (others =>'0');
-
-                for i in 0 to 31 loop
-                    if (i = selector) then
-                        overflow(i) := '1';
-                    end if;
-                end loop;
-            end if;
-
-            UPDATE_STATE : if (count = overflow) then
-                state <= '1';
-                count := (others => '0');
-            end if;
-
-            CLEAR_STATE : if (clear = '1') then
+            if (update = '1') then
+                count(31 downto 1) <= (others => '0');
+                count(0) <= '1';
                 state <= '0';
+            else
+                CLEAR_STATE : if (clear = '1') then
+                    state <= '0';
+                end if;
+
+                UPDATE_STATE : if (count = overflow) then
+                    count(31 downto 1) <= (others => '0');
+                    count(0) <= '1';
+                    state <= '1';
+                else
+                    count <= std_logic_vector(unsigned(count) + 1);
+                end if;
             end if;
         end if;
     end process;

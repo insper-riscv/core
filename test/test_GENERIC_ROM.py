@@ -1,14 +1,9 @@
 import os
-from decimal import Decimal
 
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
-from test_GENERIC_EDGE_DETECTOR import GENERIC_EDGE_DETECTOR
-from test_GENERIC_FLIP_FLOP import GENERIC_FLIP_FLOP
 
 
 class GENERIC_ROM(utils.DUT):
@@ -16,15 +11,12 @@ class GENERIC_ROM(utils.DUT):
     destination = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_ROM_case_1(dut: "GENERIC_ROM"):
+@GENERIC_ROM.testcase
+async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: utils.Trace):
     dut.address.value = BinaryValue("00000000000000000000000000000000")
 
-    await Timer(Decimal(1), units="ns")
-
-    utils.assert_output(dut.destination, "00000000000000000001010000110111")
-
-    await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000001010000110111")
 
 
 def test_GENERIC_ROM_synthesis():

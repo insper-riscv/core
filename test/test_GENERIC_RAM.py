@@ -1,10 +1,8 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -20,8 +18,8 @@ class GENERIC_RAM(utils.DUT):
     destination = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM):
+@GENERIC_RAM.testcase
+async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
     values_enable = ["0", "1", "1", "1", "1"]
     values_enable_read = ["1", "0", "1", "0", "1"]
     values_enable_write = ["1", "1", "0", "1", "0"]
@@ -73,10 +71,8 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM):
         dut.address.value = BinaryValue(address)
         dut.source.value = BinaryValue(source)
 
-        await RisingEdge(dut.clock)
-        await Timer(Decimal(20000), units="ns")
-        utils.assert_output(dut.destination, destination, f"At clock {index}.")
-        await Timer(Decimal(20000), units="ns")
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
 def test_GENERIC_RAM_synthesis():

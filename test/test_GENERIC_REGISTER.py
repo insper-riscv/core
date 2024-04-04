@@ -1,10 +1,8 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -18,8 +16,8 @@ class GENERIC_REGISTER(utils.DUT):
     destination = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER):
+@GENERIC_REGISTER.testcase
+async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
     values_clear = ["0", "0", "1", "0", "0"]
     values_enable = ["1", "0", "0", "1", "1"]
     values_source = [
@@ -47,10 +45,8 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER):
         dut.enable.value = BinaryValue(enable)
         dut.source.value = BinaryValue(source)
 
-        await RisingEdge(dut.clock)
-        await Timer(Decimal(20000), units="ns")
-        utils.assert_output(dut.destination, destination, f"At clock {index}.")
-        await Timer(Decimal(20000), units="ns")
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
 def test_GENERIC_REGISTER_synthesis():

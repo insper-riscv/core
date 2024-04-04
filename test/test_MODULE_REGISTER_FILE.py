@@ -1,10 +1,8 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -22,8 +20,8 @@ class MODULE_REGISTER_FILE(utils.DUT):
 
     register_file = RV32I_REGISTER_FILE
 
-@cocotb.test()
-async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE):
+@MODULE_REGISTER_FILE.testcase
+async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils.Trace):
     values_select_destination = [
         "00001",
         "00011",
@@ -34,13 +32,13 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE):
         "00011",
     ]
     values_instruction = [
-        "0000000" + "00001" + "00000" + "000000000000000",
-        "0000000" + "00011" + "00001" + "000000000000000",
-        "0000000" + "00111" + "00011" + "000000000000000",
-        "0000000" + "01111" + "00111" + "000000000000000",
-        "0000000" + "11111" + "01111" + "000000000000000",
-        "0000000" + "00000" + "11111" + "000000000000000",
-        "0000000" + "00001" + "00000" + "000000000000000",
+        "00000000000100000000000000000000",
+        "00000000001100001000000000000000",
+        "00000000011100011000000000000000",
+        "00000000111100111000000000000000",
+        "00000001111101111000000000000000",
+        "00000000000011111000000000000000",
+        "00000000000100000000000000000000",
     ]
     values_data_destination = [
         "11111111111111110000000000000000",
@@ -72,7 +70,7 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE):
     clock = Clock(dut.clock, 20000, units="ns")
 
     cocotb.start_soon(clock.start(start_high=False))
-    await RisingEdge(dut.clock)
+    await trace.cycle()
 
     for index, (
         select_destination,
@@ -94,11 +92,9 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE):
         dut.instruction.value = BinaryValue(instruction)
         dut.data_destination.value = BinaryValue(data_destination)
 
-        utils.assert_output(dut.data_source_1, data_source_1, f"At clock {index}.")
-        utils.assert_output(dut.data_source_2, data_source_2, f"At clock {index}.")
-
-        await RisingEdge(dut.clock)
-        await Timer(Decimal(20000), units="ns")
+        yield trace.check(dut.data_source_1, data_source_1, f"At clock {index}.")
+        yield trace.check(dut.data_source_2, data_source_2, f"At clock {index}.")
+        await trace.cycle()
 
 
 def test_MODULE_REGISTER_FILE_synthesis():

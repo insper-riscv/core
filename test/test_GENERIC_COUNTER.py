@@ -1,11 +1,9 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 import cocotb.runner
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -19,35 +17,41 @@ class GENERIC_COUNTER(utils.DUT):
     state = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER):
+@GENERIC_COUNTER.testcase
+async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER, trace: utils.Trace):
     clock = Clock(dut.clock, 20000, units="ns")
 
     cocotb.start_soon(clock.start(start_high=False))
 
     dut.clear.value = BinaryValue("1")
+    dut.update.value = BinaryValue("0")
+    dut.source.value = 0
 
-    await RisingEdge(dut.clock)
-    await FallingEdge(dut.clock)
+    await trace.cycle()
 
-    utils.assert_output(dut.state, "0")
+    for i in range(5):
+        yield trace.check(dut.state, "0")
 
-    dut.source.value = BinaryValue("00001")
-    dut.update.value = BinaryValue("1")
-    dut.clear.value = BinaryValue("0")
+        dut.source.value = i + 1
+        dut.update.value = BinaryValue("1")
+        dut.clear.value = BinaryValue("0")
 
-    await FallingEdge(dut.clock)
-    await FallingEdge(dut.clock)
-    await FallingEdge(dut.clock)
+        await trace.cycle()
 
-    utils.assert_output(dut.state, "1")
+        dut.update.value = BinaryValue("0")
 
-    dut.clear.value = BinaryValue("1")
+        await trace.cycle()
+        await trace.gap(2**(i + 1) - 2)
+        await trace.cycle()
 
-    await RisingEdge(dut.clock)
-    await FallingEdge(dut.clock)
+        yield trace.check(dut.state, "1")
 
-    utils.assert_output(dut.state, "0")
+        dut.clear.value = BinaryValue("1")
+
+        await trace.cycle()
+
+    yield trace.check(dut.state, "0")
+    await trace.cycle()
 
 
 def test_GENERIC_COUNTER_synthesis():

@@ -1,10 +1,9 @@
 import os
-from decimal import Decimal
 
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer, RisingEdge, FallingEdge
+from cocotb.triggers import RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
@@ -16,8 +15,8 @@ class GENERIC_EDGE_DETECTOR(utils.DUT):
     pulse = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR):
+@GENERIC_EDGE_DETECTOR.testcase
+async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: utils.Trace):
     values_source = ["0", "1", "0", "0"]
     values_pulse = ["0", "0", "0", "1"]
     clock = Clock(dut.clock, 20000, units="ns")
@@ -28,12 +27,12 @@ async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR):
         dut.source.value = BinaryValue(source_rise)
 
         await RisingEdge(dut.clock)
-        utils.assert_output(dut.pulse, pulse, f"At clock {index}.")
+        yield trace.check(dut.pulse, pulse, f"At clock {index}.")
         await FallingEdge(dut.clock)
 
 
-@cocotb.test()
-async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR):
+@GENERIC_EDGE_DETECTOR.testcase
+async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: utils.Trace):
     values_source = ["0", "1", "0", "0"]
     values_pulse = ["0", "0", "0", "1"]
     clock = Clock(dut.clock, 20000, units="ns")
@@ -44,7 +43,7 @@ async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR):
         dut.source.value = BinaryValue(source_fall)
 
         await FallingEdge(dut.clock)
-        utils.assert_output(dut.pulse, pulse, f"At clock {index}.")
+        yield trace.check(dut.pulse, pulse, f"At clock {index}.")
         await RisingEdge(dut.clock)
 
 

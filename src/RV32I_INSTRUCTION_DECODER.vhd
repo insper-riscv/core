@@ -34,7 +34,8 @@ begin
     control_if.enable_flush     <= '0';
     control_if.enable_jump      <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                                    '0';
-    control_if.select_source    <= '1';
+    control_if.select_source    <= '0' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
+                                   '1';
 
     control_id.select_jump     <= '0';
     control_id.enable_jump     <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
@@ -42,12 +43,20 @@ begin
     control_id.enable_flush_id <= '0';
     control_id.enable_flux_ex  <= '0';
 
-    control_ex.select_source_1  <= "01" when (rv32i_instruction.opcode = OPCODE_AUIPC(OPCODE_RANGE)) else
+    control_ex.select_source_1  <= "01" when (
+                                        rv32i_instruction.opcode = OPCODE_AUIPC(OPCODE_RANGE) or
+                                        rv32i_instruction.opcode = OPCODE_JAL(OPCODE_RANGE)
+                                        ) else
                                    "10" when (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE)) else
                                    "00";
     control_ex.select_source_2  <= "01" when (
                                        (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) or 
-                                       (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE) or 
+                                       (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE)
+                                   ) else
+                                   "10" when (
+                                        rv32i_instruction.opcode = OPCODE_JAL(OPCODE_RANGE) or
+                                        rv32i_instruction.opcode = OPCODE_JALR(OPCODE_RANGE)
                                    ) else
                                    "00";
     control_ex.select_operation <= (others => '0');
@@ -55,15 +64,18 @@ begin
 
     control_mem.enable_read  <= '1' when (rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE)) else
                                 '0';
-    control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) else
+    control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else
                                 '0';
 
     control_wb.enable_destination <= '1' when (
                                          (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 
-                                         (rv32i_instruction.opcode = OPCODE_LUI(OPCODE_RANGE))
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE) or 
+                                         (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE)
                                      ) else
                                      '0';
-    control_wb.select_destination <= '1';
+    control_wb.select_destination <= '0' when rv32i_instruction.opcode = OPCODE_LOAD(OPCODE_RANGE) else
+                                     '1';
 
     immediate <= rv32i_instruction.immediate_i when (rv32i_instruction.encoding = RV32I_INSTRUCTION_I_TYPE) else
                  rv32i_instruction.immediate_s when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else
