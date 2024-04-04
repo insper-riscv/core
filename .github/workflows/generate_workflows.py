@@ -4,6 +4,11 @@ import yaml
 
 files = os.listdir('test')
 
+files_without_testcases = {
+    'test_GENERIC_SIGNAL_EXTENDER.py', 
+    'test_GENERIC_DEBOUNCE.py'
+}
+
 yaml_content = {
         'name': f'VHD tests',
         'on': {
@@ -54,13 +59,15 @@ for file in files:
                         'name': 'Run Synthesis',
                         'run': f'pytest -k  {file[5:-3]} -m synthesis'
                     },
+                ]
+        }
+    
+    if not file.startswith('test_STAGE') and file not in files_without_testcases:
+        yaml_content['jobs'][file[5:-3]]['steps'].append(
                     {
                         'name': 'Run Test Cases',
                         'run': f'pytest -k  {file[5:-3]} -m testcases'
-                    }
-                    
-                ]
-        }
+                    })
 
 
 filename = ".github/workflows/vhd_tests.yml"
