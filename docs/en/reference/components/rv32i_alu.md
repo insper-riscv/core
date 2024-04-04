@@ -2,13 +2,19 @@
 outline: 2
 ---
 
-# Arithmetic Logic Unit (ALU) <Badge type="info" text="RV32I_ALU.vhd"/>
+# Unidade Lógia Aritmética
 
-![ALU Logic Gate Diagram](/images/referencia/componentes/rv32i_alu.drawio.svg)
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU.vhd" target="blank" style="float:right"><Badge type="tip" text="RV32I_ALU.vhd &boxbox;" /></a>
 
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU.vhd).
+<<< @/../src/RV32I_ALU.vhd{vhdl:line-numbers}
 
-## Generic Map
+:::
+
+## Topology
+
+![Diagrama de portas da ULA](/images/reference/components/rv32i_alu.drawio.svg)
+
+## Generic interface
 
 ::: danger TO DO
 
@@ -16,7 +22,7 @@ Work in progress.
 
 :::
 
-## Port Map
+## Port interface
 
 ::: danger TO DO
 
@@ -24,17 +30,26 @@ Work in progress.
 
 :::
 
-## RTL Diagram
+## RTL View
 
-![ALU RTL Diagram](/images/referencia/componentes/rv32i_alu_netlist.svg)
+<img src="/images/reference/components/rv32i_alu_netlist.svg" alt="Diagrama de RTL da Unidade Lógia Aritmética" style="width: 100%; background-color: white;">
 
-## Test Cases
+## Test cases
 
-`test_RV32I_ALU.py`.
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_ALU.py).
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_ALU.py" target="blank" style="float:right"><Badge type="tip" text="test_RV32I_ALU.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ::: danger TO DO
 
-Work in progress.
+```md
+### Case 1 <Badge type="info" text="tb_rv32i_alu_case_1" />
+
+Waveform:
+
+![Waveform from caso de teste 1 do Unidade Lógia Aritmética](/images/reference/components/tb_rv32i_alu_case_1.svg){.w-full .dark-invert}
+```
 
 :::

@@ -2,19 +2,26 @@
 outline: 2
 ---
 
-# Acesso a Memória <Badge type="info" text="STAGE_MEM.vhd"/>
+# MEM - Acessa a Memória
 
-![](/images/referencia/componentes/stage_mem_rtl.drawio.svg)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_MEM.vhd" target="blank" style="float:right"><Badge type="tip" text="STAGE_MEM.vhd &boxbox;" /></a>
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_MEM.vhd).
+<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+
+:::
+
+## Topologia
+
+![Topologia do Acessa a Memória](/images/reference/components/stage_mem.drawio.svg){.w-full .dark-invert}
 
 ## Interface genérica
 
-::: danger TO DO
+### `GENERATE_REGISTERS` <Badge type="tip" text="GENERIC" />
 
-Work in progress.
+Define geração de registradores de pipeline.
 
-:::
+- Tipo: `boolean `
+- Padrão: `TRUE`
 
 ## Interface de portas
 
@@ -30,17 +37,34 @@ Work in progress.
 
 :::
 
-## Diagrama RTL
-
-<img src="/images/referencia/componentes/stage_mem_netlist.svg" alt="Diagrama de RTL do Acesso a Memória" style="width: 100%; background-color: white;">
-
-## Casos de teste
-
-`test_STAGE_MEM.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_STAGE_MEM.py).
+## Usagem
 
 ::: danger TO DO
 
 Work in progress.
+
+:::
+
+## Diagrama RTL
+
+![Diagrama de RTL do Decodifica Instrução](/images/reference/components/stage_mem_netlist.svg){.w-full .dark-invert}
+
+## Casos de teste
+
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_STAGE_MEM.py" target="blank" style="float:right"><Badge type="tip" text="test_STAGE_MEM.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
+
+::: danger TO DO
+
+```md
+### Caso 1 <Badge type="info" text="tb_stage_mem_case_1" />
+
+Forma de onda:
+
+![Forma de onda do caso de teste 1 do Decodifica Instrução](/images/reference/components/tb_stage_mem_case_1.svg){.w-full .dark-invert}
+```
 
 :::

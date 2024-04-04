@@ -2,11 +2,17 @@
 outline: 2
 ---
 
-# Arquivo de registradores <Badge type="info" text="RV32I_REGISTER_FILE.vhd"/>
+# Arquivo de registradores
 
-![Diagrama de portas do banco de registradores](/images/referencia/componentes/rv32i_register_file.drawio.svg)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd" target="blank" style="float:right"><Badge type="tip" text="RV32I_REGISTER_FILE.vhd &boxbox;" /></a>
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd).
+<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+
+:::
+
+## Topologia
+
+![Topologia do banco de registradores](/images/reference/components/rv32i_register_file.drawio.svg)
 
 ## Interface genérica
 
@@ -76,14 +82,18 @@ Saída de valor de registrador secundária.
 
 ## Diagrama RTL
 
-<img src="/images/referencia/componentes/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
+<img src="/images/reference/components/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
 
-## Casos de teste <Badge type="info" text="test_RV32I_REGISTER_FILE.py" />
+## Casos de teste
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_REGISTER_FILE.py).
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_REGISTER_FILE.py" target="blank" style="float:right"><Badge type="tip" text="test_RV32I_REGISTER_FILE.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_RV32I_REGISTER_FILE_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-<img src="/images/referencia/componentes/tb_RV32I_REGISTER_FILE_case_1.svg" alt="Caso de teste 1 do Arquivo de Registradores" style="width: 100%; background-color: white;">
+<img src="/images/reference/components/tb_RV32I_REGISTER_FILE_case_1.svg" alt="Caso de teste 1 do Arquivo de Registradores" style="width: 100%; background-color: white;">

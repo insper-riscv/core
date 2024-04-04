@@ -4,7 +4,11 @@ outline: 2
 
 # Debounce
 
-[<Badge type="tip" text="GENERIC_DEBOUNCE.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_DEBOUNCE.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_DEBOUNCE.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_DEBOUNCE.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_DEBOUNCE.vhd{vhdl:line-numbers}
+
+:::
 
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
@@ -81,7 +85,7 @@ DEBOUNCE_1 : entity WORK.GENERIC_DEBOUNCE
 
 ## Diagrama RTL
 
-![Diagrama de RTL do debounce](/images/referencia/componentes/generic_debounce_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do debounce](/images/reference/components/generic_debounce_netlist.svg){.w-full .dark-invert}
 
 ### Dependências
 
@@ -90,16 +94,20 @@ DEBOUNCE_1 : entity WORK.GENERIC_DEBOUNCE
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_DEBOUNCE.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_DEBOUNCE.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_DEBOUNCE.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_DEBOUNCE.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ::: danger TO DO
 
 ```md
 ### Caso 1 <Badge type="info" text="tb_GENERIC_DEBOUNCE_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 do debounce](/images/referencia/componentes/tb_GENERIC_DEBOUNCE_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do debounce](/images/reference/components/tb_GENERIC_DEBOUNCE_case_1.svg){.w-full .dark-invert}
 ```
 
 :::

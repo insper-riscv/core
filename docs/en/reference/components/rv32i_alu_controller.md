@@ -2,13 +2,19 @@
 outline: 2
 ---
 
-# ALU Controller <Badge type="info" text="RV32I_ALU_CONROLLER.vhd"/>
+# Controlador da ULA
 
-![ALU Controller Logic Gate Diagram](/images/referencia/componentes/rv32i_alu_controller.drawio.svg)
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU_CONROLLER.vhd" target="blank" style="float:right"><Badge type="tip" text="RV32I_ALU_CONROLLER.vhd &boxbox;" /></a>
 
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_ALU_CONROLLER.vhd).
+<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
 
-## Generic Map
+:::
+
+## Topology
+
+![Topologia do controlador da ULA](/images/reference/components/rv32i_alu_controller.drawio.svg)
+
+## Generic interface
 
 ::: danger TO DO
 
@@ -16,7 +22,7 @@ Work in progress.
 
 :::
 
-## Port Map
+## Port interface
 
 ::: danger TO DO
 
@@ -24,17 +30,26 @@ Work in progress.
 
 :::
 
-## RTL Diagram
+## RTL View
 
-![ALU Controller RTL Diagram](/images/referencia/componentes/rv32i_alu_controller_netlist.svg)
+<img src="/images/reference/components/rv32i_alu_controller_netlist.svg" alt="RTL view from Controlador da ULA" style="width: 100%; background-color: white;">
 
-## Test Cases
+## Test cases
 
-`test_RV32I_ALU_CONROLLER.py`.
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_ALU_CONROLLER.py).
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_ALU_CONROLLER.py" target="blank" style="float:right"><Badge type="tip" text="test_RV32I_ALU_CONROLLER.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ::: danger TO DO
 
-Work in progress.
+```md
+### Case 1 <Badge type="info" text="tb_rv32i_alu_conroller_case_1" />
+
+Waveform:
+
+![Waveform from caso de teste 1 do Controlador da ULA](/images/reference/components/tb_rv32i_alu_conroller_case_1.svg){.w-full .dark-invert}
+```
 
 :::

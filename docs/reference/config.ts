@@ -5,11 +5,18 @@ export default {
     sidebar: {
         '/reference/': [
             {
-                text: 'Componentes',
+                text: 'Organização',
                 link: '/reference/components/',
                 collapsed: false,
                 items: [
                     {
+                        text: 'Estruturas de dados',
+                    }, {
+                        text: 'Constantes Globais',
+                    }, {
+                        text: 'Top Level',
+                        link: '/reference/components/',
+                    }, {
                         text: 'Estágios',
                         collapsed: true,
                         items: [
@@ -35,23 +42,23 @@ export default {
                         collapsed: true,
                         items: [
                             {
-                                text: 'Arquivo de Registradores',
-                                link: '/reference/components/module_register_file',
-                            },{
                                 text: 'Contador de Programa',
                                 link: '/reference/components/module_program_counter',
-                            }, {
-                                text: 'Escrita de Retorno',
-                                link: '/reference/components/module_write_back',
                             }, {
                                 text: 'Unidade de Controle',
                                 link: '/reference/components/module_control_unit',
                             }, {
+                                text: 'Arquivo de Registradores',
+                                link: '/reference/components/module_register_file',
+                            }, {
+                                text: 'Controlador da Unidade de Execução',
+                                link: '/reference/components/module_execution_unit_controller',
+                            }, {
                                 text: 'Unidade de Execução',
                                 link: '/reference/components/module_execution_unit',
                             }, {
-                                text: 'Unidade de Controle de execução',
-                                link: '/reference/components/module_execution_control_unit',
+                                text: 'Escrita de Retorno',
+                                link: '/reference/components/module_write_back',
                             },
                         ],
                     }, {
@@ -68,7 +75,7 @@ export default {
                                 text: 'Bit da ULA',
                                 link: '/reference/components/rv32i_alu_bit',
                             }, {
-                                text: 'ULA',
+                                text: 'Unidade Lógica e Aritmética',
                                 link: '/reference/components/rv32i_alu',
                             }, {
                                 text: 'Controlador da ULA',
@@ -117,11 +124,25 @@ export default {
                     },
                 ],
             }, {
-                text: 'Instruções',
-                link: '/reference/isa/',
+                text: 'Especificação',
+                items: [
+                    {
+                        text: 'Conjunto de Instruções',
+                        link: '/reference/isa/',
+                    }, {
+                        text: 'Pseudo-instruções',
+                        link: '/reference/isa/pseudo',
+                    },
+                ],
             }, {
-                text: 'Pseudo-instruções',
-                link: '/reference/isa/pseudo',
+                text: 'Testes',
+                items: [
+                    {
+                        text: 'Estrutura',
+                    }, {
+                        text: 'Utilidades',
+                    },
+                ],
             },
         ],
     },

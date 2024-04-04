@@ -4,7 +4,11 @@ outline: 2
 
 # Registrador
 
-[<Badge type="tip" text="GENERIC_REGISTER.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_REGISTER.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_REGISTER.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_REGISTER.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -105,16 +109,18 @@ REGISTER_1 : entity WORK.GENERIC_REGISTER
 
 ## Diagrama RTL
 
-![Diagrama de RTL do Registrador](/images/referencia/componentes/generic_register_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do Registrador](/images/reference/components/generic_register_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_REGISTER.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_REGISTER.py &boxbox;" /></a>
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py).
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_GENERIC_REGISTER_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 do Registrador](/images/referencia/componentes/tb_generic_register_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do Registrador](/images/reference/components/tb_generic_register_case_1.svg){.w-full .dark-invert}

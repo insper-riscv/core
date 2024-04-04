@@ -2,113 +2,122 @@
 outline: 2
 ---
 
-# MUX 4:1 <Badge type="info" text="GENERIC_MUX_4X1.vhd"/>
+# Multiplexador 4x1
 
-![MUX 4:1 Logic Gate Diagram](/images/referencia/componentes/generic_mux_4x1.drawio.svg)
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_MUX_4X1.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_MUX_4X1.vhd &boxbox;" /></a>
 
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_MUX_4X1.vhd).
+<<< @/../src/GENERIC_MUX_4X1.vhd{vhdl:line-numbers}
 
-## Generic Map
+:::
 
-### `DATA_WIDTH`
+## Topology
 
-Width of input and output data vectors.
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_MUX_4X1"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DATA_WIDTH
+        end
+        E("GENERIC_MUX_2X1")
+        click E href "./generic_mux_2x1.html"
+    end
+    A([source_1]) -- DATA_WIDTH ---> TOP
+    B([source_2]) -- DATA_WIDTH ---> TOP
+    C([selector]) ---> TOP
+    TOP -- DATA_WIDTH ---> D([destination])
+```
 
-- type: `natural`
-- default: `XLEN`
+## Generic interface
 
-## Port Map
+### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
 
-### `source_1`
+Largura dos vetores de entrada e saída de dados.
 
-Primary data input.
+- Type: `natural`
+- Default: `XLEN` (external constant)
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- default: `0...0`
+## Port interface
 
-### `source_2`
+### `source_1` <Badge type="warning" text="INPUT" />
 
-Secondary data input.
+Vetor de entrada primário. `destination <= source_1` se `selector = "00"`.
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- default: `0...0`
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-### `source_3`
+### `source_2` <Badge type="warning" text="INPUT" />
 
-Tertiary data input.
+Vetor de entrada secundário. `destination <= source_2` se `selector = "01"`.
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- default: `0...0`
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-### `source_4`
+### `source_3` <Badge type="warning" text="INPUT" />
 
-Quaternary data input.
+Vetor de entrada terciário. `destination <= source_3` se `selector = "10"`.
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- default: `0...0`
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-### `selector`
+### `source_4` <Badge type="warning" text="INPUT" />
 
-Selector that determines which input of data will be used.
+Vetor de entrada quaternário. `destination <= source_4` se `selector = "11"`.
 
-- type: `std_logic_vector(1 downto 0)`
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-### `destination`
+### `selector` <Badge type="warning" text="INPUT" />
 
-Output data with the value of one of the data inputs (`source_1`, `source_2`, `source_3`, or `source_4`).
+Seleção do vetor de saída de `destination`.
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Type: `std_logic`
 
-## RTL Diagram
+### `destination` <Badge type="danger" text="OUTPUT" />
 
-![MUX 4:1 RTL Diagram](/images/referencia/componentes/generic_mux_4x1_netlist.svg)
+Vetor de saída.
 
-## Test Cases
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-`test_GENERIC_MUX_4X1.py`.
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_4X1.py).
+## Usage
 
-### Case 1
+```vhdl
+MUX_1 : entity WORK.GENERIC_MUX_4X1
+    generic map (
+        DATA_WIDTH_0 => 32
+    )
+    port map (
+        source_1    => signal_source_1,
+        source_2    => signal_source_2,
+        source_3    => signal_source_3,
+        source_4    => signal_source_4,
+        selector    => signal_selector,
+        destination => signal_destination
+    );
+```
 
-Combinational Logic:
+## RTL View
 
-- `source_1` &larr; `00001111000011110000111100001111`
-- `source_2` &larr; `11110000111100001111000011110000`
-- `source_3` &larr; `00000000111111111111111100000000`
-- `source_4` &larr; `11111111000000000000000011111111`
-- `selector` &larr; `00`
-- `destination` &rarr; `00001111000011110000111100001111`
+![RTL view from mux 4x1](/images/reference/components/generic_mux_4x1_netlist.svg){.w-full .dark-invert}
 
-### Case 2
+### Dependências
 
-Combinational Logic:
+- `MUX_1`: [Multiplexador 2x1](./generic_mux_2x1.html)
+- `MUX_2`: [Multiplexador 2x1](./generic_mux_2x1.html)
 
-- `source_1` &larr; `00001111000011110000111100001111`
-- `source_2` &larr; `11110000111100001111000011110000`
-- `source_3` &larr; `00000000111111111111111100000000`
-- `source_4` &larr; `11111111000000000000000011111111`
-- `selector` &larr; `01`
-- `destination` &rarr; `11110000111100001111000011110000`
+## Test cases
 
-### Case 3
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_4X1.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_MUX_4X1.py &boxbox;" /></a>
 
-Combinational Logic:
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
 
-- `source_1` &larr; `00001111000011110000111100001111`
-- `source_2` &larr; `11110000111100001111000011110000`
-- `source_3` &larr; `00000000111111111111111100000000`
-- `source_4` &larr; `11111111000000000000000011111111`
-- `selector` &larr; `10`
-- `destination` &rarr; `00000000111111111111111100000000`
+:::
 
-### Case 4
+### Case 1 <Badge type="info" text="tb_generic_mux_4x1_case_1" />
 
-Combinational Logic:
+Waveform:
 
-- `source_1` &larr; `00001111000011110000111100001111`
-- `source_2` &larr; `11110000111100001111000011110000`
-- `source_3` &larr; `00000000111111111111111100000000`
-- `source_4` &larr; `11111111000000000000000011111111`
-- `selector` &larr; `11`
-- `destination` &rarr; `11111111000000000000000011111111`
-
+![Waveform from caso de teste 1 do Flip Flop](/images/reference/components/tb_generic_mux_4x1_case_1.svg){.w-full .dark-invert}

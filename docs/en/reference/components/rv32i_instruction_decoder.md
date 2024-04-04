@@ -2,13 +2,19 @@
 outline: 2
 ---
 
-# Instruction Decoder <Badge type="info" text="RV32I_INSTRUCTION_DECODER.vhd"/>
+# Decodificador de Instruções
 
-![Instruction Decoder Logic Gate Diagram](/images/referencia/componentes/rv32i_control_unit.drawio.svg)
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_INSTRUCTION_DECODER.vhd" target="blank" style="float:right"><Badge type="tip" text="RV32I_INSTRUCTION_DECODER.vhd &boxbox;" /></a>
 
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_INSTRUCTION_DECODER.vhd).
+<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
 
-## Generic Map
+:::
+
+## Topology
+
+![Topologia do decodificador de Instruções](/images/reference/components/rv32i_control_unit.drawio.svg)
+
+## Generic interface
 
 ::: danger TO DO
 
@@ -16,7 +22,7 @@ Work in progress.
 
 :::
 
-## Port Map
+## Port interface
 
 ::: danger TO DO
 
@@ -24,17 +30,26 @@ Work in progress.
 
 :::
 
-## RTL Diagram
+## RTL View
 
-![Instruction Decoder RTL Diagram](/images/referencia/componentes/rv32i_instruction_decoder_netlist.svg)
+<img src="/images/reference/components/rv32i_instruction_decoder_netlist.svg" alt="RTL view from Decodificador de Instruções" style="width: 100%; background-color: white;">
 
-## Test Cases
+## Test cases
 
-`test_RV32I_INSTRUCTION_DECODER.py`.
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_INSTRUCTION_DECODER.py).
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_INSTRUCTION_DECODER.py" target="blank" style="float:right"><Badge type="tip" text="test_RV32I_INSTRUCTION_DECODER.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ::: danger TO DO
 
-Work in progress.
+```md
+### Case 1 <Badge type="info" text="tb_rv32i_instruction_decoder_case_1" />
+
+Waveform:
+
+![Waveform from caso de teste 1 do Decodificador de Instruções](/images/reference/components/tb_rv32i_instruction_decoder_case_1.svg){.w-full .dark-invert}
+```
 
 :::

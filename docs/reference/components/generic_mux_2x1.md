@@ -4,7 +4,11 @@ outline: 2
 
 # Multiplexador 2x1
 
-[<Badge type="tip" text="GENERIC_MUX_2X1.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_MUX_2X1.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_MUX_2X1.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_MUX_2X1.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_MUX_2X1.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -80,14 +84,18 @@ MUX_1 : entity WORK.GENERIC_MUX_2X1
 
 ## Diagrama RTL
 
-![Diagrama de RTL do mux 2x1](/images/referencia/componentes/generic_mux_2x1_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do mux 2x1](/images/reference/components/generic_mux_2x1_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_MUX_2X1.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_2X1.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_2X1.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_MUX_2X1.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_generic_mux_2x1_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 do Flip Flop](/images/referencia/componentes/tb_generic_mux_2x1_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do Flip Flop](/images/reference/components/tb_generic_mux_2x1_case_1.svg){.w-full .dark-invert}

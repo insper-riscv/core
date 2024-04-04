@@ -10,7 +10,6 @@ export default defineConfig({
       {
         text: 'Guide',
         link: '/en/guide/',
-        activeMatch: '/en/reference/'
       }, {
         text: 'Reference',
         link: '/en/reference/components/',

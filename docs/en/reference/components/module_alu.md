@@ -4,7 +4,7 @@ outline: 2
 
 # ALU <Badge type="info" text="MODULE_ALU.vhd"/>
 
-![ALU Module Logic Gate Diagram](/images/referencia/componentes/module_alu.drawio.svg)
+![ALU Module Logic Gate Diagram](/images/reference/components/module_alu.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_ALU.vhd).
 
@@ -26,7 +26,7 @@ Diagrama a nível de registradores
 
 ## RTL Diagram
 
-![ALU Module RTL Diagram](/images/referencia/componentes/module_alu_netlist.svg)
+![ALU Module RTL Diagram](/images/reference/components/module_alu_netlist.svg)
 
 ## Test Cases
 

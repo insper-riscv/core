@@ -2,11 +2,17 @@
 outline: 2
 ---
 
-# Unidade de Controle <Badge type="info" text="MODULE_CONTROL_UNIT.vhd"/>
+# Unidade de Controle
 
-![Diagrama de portas do módulo unidade de controle](/images/referencia/componentes/module_control_unit.drawio.svg)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_CONTROL_UNIT.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_CONTROL_UNIT.vhd &boxbox;" /></a>
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_CONTROL_UNIT.vhd).
+<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+
+:::
+
+## Topologia
+
+![Topologia da Unidade de Controle](/images/reference/components/module_control_unit.drawio.svg){.w-full .dark-invert}
 
 ## Interface genérica
 
@@ -24,17 +30,34 @@ Diagrama a nível de registradores
 
 :::
 
-## Diagrama RTL
-
-<img src="/images/referencia/componentes/module_control_unit_netlist.svg" alt="Diagrama de RTL da Unidade de Controle" style="width: 100%; background-color: white;">
-
-## Casos de teste
-
-`test_MODULE_CONTROL_UNIT.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_MODULE_CONTROL_UNIT.py).
+## Usagem
 
 ::: danger TO DO
 
 Work in progress.
+
+:::
+
+## Diagrama RTL
+
+![Diagrama de RTL da Unidade de Controle](/images/reference/components/module_control_unit_netlist.svg){.w-full .dark-invert}
+
+## Casos de teste
+
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_MODULE_CONTROL_UNIT.py" target="blank" style="float:right"><Badge type="tip" text="test_MODULE_CONTROL_UNIT.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
+
+::: danger TO DO
+
+```md
+### Caso 1 <Badge type="info" text="tb_module_control_unit_case_1" />
+
+Forma de onda:
+
+![Forma de onda do caso de teste 1 da Unidade de Controle](/images/reference/components/tb_module_control_unit_case_1.svg){.w-full .dark-invert}
+```
 
 :::

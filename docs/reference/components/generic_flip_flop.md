@@ -4,7 +4,11 @@ outline: 2
 
 # Flip Flop
 
-[<Badge type="tip" text="GENERIC_FLIP_FLOP.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_FLIP_FLOP.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_FLIP_FLOP.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_FLIP_FLOP.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -90,14 +94,18 @@ FLIP_FLOP_1 : entity WORK.GENERIC_FLIP_FLOP
 
 ## Diagrama RTL
 
-![Diagrama de RTL do Flip Flop](/images/referencia/componentes/generic_flip_flop_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do Flip Flop](/images/reference/components/generic_flip_flop_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_FLIP_FLOP.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_FLIP_FLOP.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_FLIP_FLOP.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_generic_flip_flop_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 do Flip Flop](/images/referencia/componentes/tb_generic_flip_flop_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do Flip Flop](/images/reference/components/tb_generic_flip_flop_case_1.svg){.w-full .dark-invert}

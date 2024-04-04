@@ -4,7 +4,11 @@ outline: 2
 
 # Somador
 
-[<Badge type="tip" text="GENERIC_ADDER.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_ADDER.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_ADDER.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -98,14 +102,18 @@ ADDER : entity WORK.GENERIC_ADDER
 
 ## Diagrama RTL
 
-![Diagrama de RTL do somador](/images/referencia/componentes/generic_adder_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do somador](/images/reference/components/generic_adder_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_ADDER.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ADDER.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ADDER.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_ADDER.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_GENERIC_ADDER_case_1" />
 
-Lógica combinacional:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 do somador](/images/referencia/componentes/tb_generic_adder_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do somador](/images/reference/components/tb_generic_adder_case_1.svg){.w-full .dark-invert}

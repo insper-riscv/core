@@ -4,7 +4,11 @@ outline: 2
 
 # Detector de Borda
 
-[<Badge type="tip" text="GENERIC_EDGE_DETECTOR.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_EDGE_DETECTOR.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_EDGE_DETECTOR.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_EDGE_DETECTOR.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_EDGE_DETECTOR.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -70,20 +74,24 @@ EDGE_FALL_DETECTOR : entity WORK.GENERIC_EDGE_DETECTOR(FALLING_DETECTOR)
 
 ## Diagrama RTL
 
-![Diagrama de RTL do detector de borda](/images/referencia/componentes/generic_edge_detector_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do detector de borda](/images/reference/components/generic_edge_detector_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_EDGE_DETECTOR.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_EDGE_DETECTOR.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_EDGE_DETECTOR.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_EDGE_DETECTOR.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_generic_edge_detector_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Caso de teste 1 do Detector de Borda](/images/referencia/componentes/tb_generic_edge_detector_case_1.svg){.w-full .dark-invert}
+![Caso de teste 1 do Detector de Borda](/images/reference/components/tb_generic_edge_detector_case_1.svg){.w-full .dark-invert}
 
 ### Caso 2 <Badge type="info" text="tb_generic_edge_detector_case_2" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 2 do Detector de Borda](/images/referencia/componentes/tb_generic_edge_detector_case_2.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 2 do Detector de Borda](/images/reference/components/tb_generic_edge_detector_case_2.svg){.w-full .dark-invert}

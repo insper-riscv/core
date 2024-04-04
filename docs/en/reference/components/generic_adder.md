@@ -2,79 +2,118 @@
 outline: 2
 ---
 
-# Adder <Badge type="info" text="GENERIC_ADDER.vhd"/>
+# Somador
 
-![Adder Logic Gate Diagram](/images/referencia/componentes/generic_adder.drawio.svg)
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_ADDER.vhd &boxbox;" /></a>
 
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ADDER.vhd).
+<<< @/../src/GENERIC_ADDER.vhd{vhdl:line-numbers}
 
-## Generic Map
+:::
 
-### `DATA_WIDTH`
+## Topology
 
-Width of input and output data vectors.
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_ADDER"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DATA_WIDTH
+            DEFAULT_SOURCE_2
+        end
+        D(("ADDER"))
+        style D scale:1.5
+    end
+    A([source_1]) -- DATA_WIDTH ---> TOP
+    B([source_2]) -- DATA_WIDTH ---> TOP
+    TOP -- DATA_WIDTH ---> C([destination])
+```
 
-- type: `natural`
-- default: `XLEN`
+## Generic interface
 
-### `DEFAULT_SOURCE_2`
+### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
 
-Default value of increment. Eliminates the need for `source_2`.
+Largura dos vetores de entrada e saída de dados.
 
-- type: `integer`
-- default: `1`
+- Type: `natural`
+- Default: `XLEN` (external constant)
 
-## Port Map
+### `DEFAULT_SOURCE_2` <Badge type="tip" text="GENERIC" />
 
-### `source_1`
+Valor padrão de incremento. Dispensa necessidade de atribuir entrada `source_2`.
 
-Primary data input.
+- Type: `integer`
+- Default: `1`
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+## Port interface
 
-### `source_2`
+### `source_1` <Badge type="warning" text="INPUT" />
 
-Secondary data input.
+Vetor de entrada primário.
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
-- default: `to_signed(DEFAULT_SOURCE_1, DATA_WIDTH)`
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-### `destination`
+### `source_2` <Badge type="warning" text="INPUT" />
 
-Output data with the result of `source_1 + source_2`.
+Vetor de entrada secundário.
 
-- type: `std_logic_vector((DATA_WIDTH - 1) downto 0)`
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
+- Default: `to_signed(DEFAULT_SOURCE_2, DATA_WIDTH)`
 
-## RTL Diagram
+### `destination` <Badge type="danger" text="OUTPUT" />
 
-![Adder RTL Diagram](/images/referencia/componentes/generic_adder_netlist.svg)
+Saída de dados com o resultado de `source_1 + source_2`.
 
-## Test Cases
+- Type: `std_logic_vector`
+- Width: variable`(DATA_WIDTH - 1) downto 0`
 
-`test_GENERIC_ADDER.py`.
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ADDER.py).
+## Usage
 
-### Case 1 <Badge type="info" text="Combinational Logic" />
+### Incremento constante
 
-- `source_1` &larr; `00000000000000000000000000000000`
-- `source_2` &larr; `00000000000000000000000000000000`
-- `destination` &rarr; `00000000000000000000000000000000`
+```vhdl
+CONSTANT_ADDER : entity WORK.GENERIC_ADDER
+    generic map (
+        DATA_WIDTH_0     => 32,
+        DEFAULT_SOURCE_2 => 1
+    )
+    port map (
+        source_1    => signal_source_1,
+        destination => signal_destination
+    );
+```
 
-### Case 2 <Badge type="info" text="Combinational Logic" />
+### Somador
 
-- `source_1` &larr; `10101010101010101010101010101010`
-- `source_2` &larr; `01010101010101010101010101010101`
-- `destination` &rarr; `11111111111111111111111111111111`
+```vhdl
+ADDER : entity WORK.GENERIC_ADDER
+    generic map (
+        DATA_WIDTH_0 => 32
+    )
+    port map (
+        source_1    => signal_source_1,
+        source_2    => signal_source_2,
+        destination => signal_destination
+    );
+```
 
-### Case 3 <Badge type="info" text="Combinational Logic" />
+## RTL View
 
-- `source_1` &larr; `00101010101010101010101010101010`
-- `source_2` &larr; `00101010101010101010101010101010`
-- `destination` &rarr; `01010101010101010101010101010100`
+![RTL view from somador](/images/reference/components/generic_adder_netlist.svg){.w-full .dark-invert}
 
-### Case 4 <Badge type="info" text="Combinational Logic" />
+## Test cases
 
-- `source_1` &larr; `11111111111111111111111111111110`
-- `source_2` &larr; `00000000000000000000000000000001`
-- `destination` &rarr; `11111111111111111111111111111111`
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ADDER.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_ADDER.py &boxbox;" /></a>
 
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
+
+### Case 1 <Badge type="info" text="tb_GENERIC_ADDER_case_1" />
+
+Waveform:
+
+![Waveform from caso de teste 1 do somador](/images/reference/components/tb_generic_adder_case_1.svg){.w-full .dark-invert}

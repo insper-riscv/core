@@ -4,7 +4,7 @@ outline: 2
 
 # ALU Controller <Badge type="info" text="MODULE_ALU_CONTROLLER.vhd"/>
 
-![ALU Controller Module Logic Gate Diagram](/images/referencia/componentes/module_alu_controller.drawio.svg)
+![ALU Controller Module Logic Gate Diagram](/images/reference/components/module_alu_controller.drawio.svg)
 
 [View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_ALU_CONTROLLER.vhd).
 
@@ -26,7 +26,7 @@ Work in progress.
 
 ## RTL Diagram
 
-![ALU Controller Module RTL Diagram](/images/referencia/componentes/module_alu_controller_netlist.svg)
+![ALU Controller Module RTL Diagram](/images/reference/components/module_alu_controller_netlist.svg)
 
 ## Test Cases
 

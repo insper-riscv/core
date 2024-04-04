@@ -4,7 +4,11 @@ outline: 2
 
 # RAM
 
-[<Badge type="tip" text="GENERIC_RAM.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_RAM.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_RAM.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_RAM.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -131,13 +135,17 @@ RAM : entity WORK.GENERIC_RAM
 
 ## Diagrama RTL
 
-![Diagrama de RTL da RAM](/images/referencia/componentes/generic_ram_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL da RAM](/images/reference/components/generic_ram_netlist.svg){.w-full .dark-invert}
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_RAM.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_RAM.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_RAM.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_RAM.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_GENERIC_RAM_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 da RAM](/images/referencia/componentes/tb_generic_ram_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 da RAM](/images/reference/components/tb_generic_ram_case_1.svg){.w-full .dark-invert}

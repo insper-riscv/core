@@ -2,11 +2,17 @@
 outline: 2
 ---
 
-# Contador de Programa <Badge type="info" text="MODULE_PC.vhd"/>
+# Contador de Programa
 
-![Diagrama de portas do módulo PC](/images/referencia/componentes/module_pc.drawio.svg)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_PROGRAM_COUNTER.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_PROGRAM_COUNTER.vhd &boxbox;" /></a>
 
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_PROGRAM_COUNTER.vhd).
+<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+
+:::
+
+## Topologia
+
+![Topologia do Contador de Programa](/images/reference/components/module_program_counter.drawio.svg){.w-full .dark-invert}
 
 ## Interface genérica
 
@@ -30,17 +36,34 @@ Work in progress.
 
 :::
 
-## Diagrama RTL
-
-<img src="/images/referencia/componentes/module_pc_netlist.svg" alt="Diagrama de RTL do Contador de Programa" style="width: 100%; background-color: white;">
-
-## Casos de teste
-
-`test_MODULE_PROGRAM_COUNTER.py`.
-[Ver código fonte](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_MODULE_PROGRAM_COUNTER.py).
+## Usagem
 
 ::: danger TO DO
 
 Work in progress.
+
+:::
+
+## Diagrama RTL
+
+![Diagrama de RTL do Contador de Programa](/images/reference/components/module_program_counter_netlist.svg){.w-full .dark-invert}
+
+## Casos de teste
+
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_MODULE_PROGRAM_COUNTER.py" target="blank" style="float:right"><Badge type="tip" text="test_MODULE_PROGRAM_COUNTER.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
+
+::: danger TO DO
+
+```md
+### Caso 1 <Badge type="info" text="tb_module_program_counter_case_1" />
+
+Forma de onda:
+
+![Forma de onda do caso de teste 1 da Controlador da Unidade de Execução/images/reference/components/tb_module_program_counter_case_1.svg){.w-full .dark-invert}
+```
 
 :::

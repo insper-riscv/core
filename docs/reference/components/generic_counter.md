@@ -4,7 +4,11 @@ outline: 2
 
 # Contador
 
-[<Badge type="tip" text="GENERIC_COUNTER.vhd &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_COUNTER.vhd)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_COUNTER.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_COUNTER.vhd &boxbox;" /></a>
+
+<<< @/../src/GENERIC_COUNTER.vhd{vhdl:line-numbers}
+
+:::
 
 ## Topologia
 
@@ -106,14 +110,18 @@ TIMER_COUNTER : entity WORK.GENERIC_COUNTER
 
 ## Diagrama RTL
 
-![Diagrama de RTL do contador](/images/referencia/componentes/generic_counter_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL do contador](/images/reference/components/generic_counter_netlist.svg){.w-full .dark-invert}
 
 ## Casos de teste
 
-[<Badge type="tip" text="test_GENERIC_COUNTER.py &boxbox;" />](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_COUNTER.py)
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_COUNTER.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_COUNTER.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+
+:::
 
 ### Caso 1 <Badge type="info" text="tb_GENERIC_COUNTER_case_1" />
 
-Lógica sequencial:
+Forma de onda:
 
-![Forma de onda do caso de teste 1 do contador](/images/referencia/componentes/tb_generic_counter_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do contador](/images/reference/components/tb_generic_counter_case_1.svg){.w-full .dark-invert}

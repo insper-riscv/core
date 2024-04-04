@@ -2,77 +2,112 @@
 outline: 2
 ---
 
-# Debounce <Badge type="info" text="GENERIC_DEBOUNCE.vhd"/>
+# Debounce
 
-::: danger TO DO
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_DEBOUNCE.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_DEBOUNCE.vhd &boxbox;" /></a>
 
-Diagrama de portas
-
-:::
-
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_DEBOUNCE.vhd).
-
-## Generic Map
-
-::: danger TO DO
-
-Work in progress.
+<<< @/../src/GENERIC_DEBOUNCE.vhd{vhdl:line-numbers}
 
 :::
 
-## Port Map
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
+flowchart LR
+    subgraph TOP ["GENERIC_DEBOUNCE"]
+        direction LR
+        subgraph GENERIC ["generic map"]
+            direction LR
+            DEFAULT_OVERFLOW
+        end
+        E["EDGE_DETECTOR"]
+        click E href "./generic_edge_detector.html"
+        F[("state")]
+        style F scale:1.3
+        click F href "./generic_flip_flop.html"
+    end
+    A(((clock))) ---> TOP
+    B([clear]) ---> TOP
+    C([source]) ---> TOP
+    TOP ---> D([state])
+```
 
-### `clock`
+## Port interface
 
-Entrada do clock (sinal que varia seguindo a frequência de ciclos do
-processador).
+### `clock` <Badge type="warning" text="INPUT" />
 
-- tipo: `std_logic`
+Entrada do sinal de clock.
 
-### `clear`
+- Type: `std_logic`
+
+### `clear` <Badge type="warning" text="INPUT" />
 
 Entrada que reseta o debounce.
 
-- tipo: `std_logic`
-- padrão: `0`
+- Type: `std_logic`
+- Default: `'0'`
 
-### `source`
+### `source` <Badge type="warning" text="INPUT" />
 
 ::: danger TO DO
 
-Escrever descrição source
+```md
+[DESCRIÇÃO]
+
+- Type: `std_logic`
+```
 
 :::
 
-- tipo: `std_logic`
-
-### `state`
+### `state` <Badge type="danger" text="OUTPUT" />
 
 ::: danger TO DO
 
-Escrever descrição state
+```md
+[DESCRIÇÃO]
+
+- Type: `std_logic`
+- Default: `'0'`
+```
 
 :::
 
-- tipo: `std_logic`
+## Usage
 
-::: danger TO DO
+```vhdl
+DEBOUNCE_1 : entity WORK.GENERIC_DEBOUNCE
+    Port map (
+        clock  => clock,
+        clear  => signal_clear,
+        source => signal_source,
+        state  => signal_state
+    );
+```
 
-Work in progress.
+## RTL View
+
+![RTL view from debounce](/images/reference/components/generic_debounce_netlist.svg){.w-full .dark-invert}
+
+### Dependências
+
+- `EDGE_DETECTOR`: [Detector de borda](./generic_edge_detector.html)
+- `STATE_REGISTER`: [Flip Flop](./generic_flip_flop.html)
+
+## Test cases
+
+::: details Source <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_DEBOUNCE.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_DEBOUNCE.py &boxbox;" /></a>
+
+<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
 
 :::
 
-## RTL Diagram
-
-![Debounce RTL Diagram](/images/referencia/componentes/generic_debounce_netlist.svg)
-
-## Test Cases
-
-`test_GENERIC_DEBOUNCE.py`.
-[View source code](https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_DEBOUNCE.py).
-
 ::: danger TO DO
 
-Work in progress.
+```md
+### Case 1 <Badge type="info" text="tb_GENERIC_DEBOUNCE_case_1" />
+
+Waveform:
+
+![Waveform from caso de teste 1 do debounce](/images/reference/components/tb_GENERIC_DEBOUNCE_case_1.svg){.w-full .dark-invert}
+```
 
 :::
