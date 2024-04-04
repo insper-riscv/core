@@ -22,5 +22,7 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
+    - name: Run Synthesis
+      run: pytest -k GENERIC_ADDER -m synthesis
     - name: Run Stress Test
       run: pytest -k GENERIC_ADDER -m stress
