@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/node": "^20.11.30",
     "mermaid": "^10.9.0",
+    "panzoom": "^9.4.3",
     "vitepress": "^1.0.1",
     "vitepress-plugin-mermaid": "^2.0.16"
   }
