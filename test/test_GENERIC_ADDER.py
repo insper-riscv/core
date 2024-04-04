@@ -50,6 +50,7 @@ async def tb_GENERIC_ADDER_case_1(dut: GENERIC_ADDER, trace: utils.Trace):
 
 
 @cocotb.test()
+@cocotb.test()
 async def tb_GENERIC_ADDER_stress(dut: "GENERIC_ADDER"):
     for _ in range(1_000_000):
         source_1 = random.getrandbits(32)
