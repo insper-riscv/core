@@ -10,6 +10,10 @@ outline: 2
 
 :::
 
+## Topologia
+
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -30,6 +34,8 @@ flowchart LR
     C([source]) ---> TOP
     TOP ---> D([state])
 ```
+
+</pan-container>
 
 ## Interface de portas
 
@@ -85,12 +91,16 @@ DEBOUNCE_1 : entity WORK.GENERIC_DEBOUNCE
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do debounce](/images/reference/components/generic_debounce_netlist.svg){.w-full .dark-invert}
 
 ### Dependências
 
 - `EDGE_DETECTOR`: [Detector de borda](./generic_edge_detector.html)
 - `STATE_REGISTER`: [Flip Flop](./generic_flip_flop.html)
+
+</pan-container>
 
 ## Casos de teste
 
@@ -107,7 +117,12 @@ DEBOUNCE_1 : entity WORK.GENERIC_DEBOUNCE
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do debounce](/images/reference/components/tb_generic_debounce_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

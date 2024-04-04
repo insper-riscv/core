@@ -12,7 +12,11 @@ outline: 2
 
 ## Topologia
 
+<pan-container>
+
 ![Topologia do Contador de Programa](/images/reference/components/module_program_counter.drawio.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Interface genérica
 
@@ -46,7 +50,11 @@ Work in progress.
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Contador de Programa](/images/reference/components/module_program_counter_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -63,7 +71,12 @@ Work in progress.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 da Controlador da Unidade de Execução/images/reference/components/tb_module_program_counter_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

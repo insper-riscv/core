@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -29,6 +31,8 @@ flowchart LR
     C([selector]) ---> TOP
     TOP -- DATA_WIDTH ---> D([destination])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -101,12 +105,16 @@ MUX_1 : entity WORK.GENERIC_MUX_4X1
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do mux 4x1](/images/reference/components/generic_mux_4x1_netlist.svg){.w-full .dark-invert}
 
 ### Dependências
 
 - `MUX_1`: [Multiplexador 2x1](./generic_mux_2x1.html)
 - `MUX_2`: [Multiplexador 2x1](./generic_mux_2x1.html)
+
+</pan-container>
 
 ## Casos de teste
 
@@ -120,4 +128,8 @@ MUX_1 : entity WORK.GENERIC_MUX_4X1
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Flip Flop](/images/reference/components/tb_generic_mux_4x1_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

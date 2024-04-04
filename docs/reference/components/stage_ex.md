@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'step' } } }%%
 flowchart LR
@@ -51,6 +53,8 @@ flowchart LR
     STATE & EXU ==> J[[destination\n$.control_mem\n$.control_wb\n$.address_pointer\n$.data_source_2\n$.select_destination]]
 ```
 
+</pan-container>
+
 ## Interface genérica
 
 ### `GENERATE_REGISTERS` <Badge type="tip" text="GENERIC" />
@@ -84,7 +88,11 @@ Work in progress.
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Decodifica Instrução](/images/reference/components/stage_ex_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -101,7 +109,12 @@ Work in progress.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Decodifica Instrução](/images/reference/components/tb_stage_ex_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

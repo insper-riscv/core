@@ -12,7 +12,11 @@ outline: 2
 
 ## Topologia
 
+<pan-container>
+
 ![Topologia do banco de registradores](/images/reference/components/rv32i_register_file.drawio.svg)
+
+</pan-container>
 
 ## Interface genérica
 
@@ -82,7 +86,11 @@ Saída de valor de registrador secundária.
 
 ## Diagrama RTL
 
-<img src="/images/reference/components/rv32i_register_file_netlist.svg" alt="Diagrama de RTL do arquivo de registradores" style="width: 100%; background-color: white;">
+<pan-container>
+
+![Diagrama de RTL do arquivo de registradores](/images/reference/components/rv32i_register_file_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -96,4 +104,8 @@ Saída de valor de registrador secundária.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 <img src="/images/reference/components/tb_rv32i_register_file_case_1.svg" alt="Caso de teste 1 do Arquivo de Registradores" style="width: 100%; background-color: white;">
+
+</pan-container>

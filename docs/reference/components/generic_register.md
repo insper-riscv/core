@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -30,6 +32,8 @@ flowchart LR
     D([source]) -- DATA_WIDTH ---> TOP
     TOP -- DATA_WIDTH ---> E([destination])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -109,7 +113,11 @@ REGISTER_1 : entity WORK.GENERIC_REGISTER
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Registrador](/images/reference/components/generic_register_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -123,4 +131,8 @@ REGISTER_1 : entity WORK.GENERIC_REGISTER
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Registrador](/images/reference/components/tb_generic_register_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

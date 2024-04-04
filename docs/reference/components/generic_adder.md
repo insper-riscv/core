@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -29,6 +31,8 @@ flowchart LR
     B([source_2]) -- DATA_WIDTH ---> TOP
     TOP -- DATA_WIDTH ---> C([destination])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -102,7 +106,11 @@ ADDER : entity WORK.GENERIC_ADDER
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do somador](/images/reference/components/generic_adder_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -116,4 +124,8 @@ ADDER : entity WORK.GENERIC_ADDER
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do somador](/images/reference/components/tb_generic_adder_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

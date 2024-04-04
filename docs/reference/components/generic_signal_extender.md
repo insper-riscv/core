@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -27,6 +29,8 @@ flowchart LR
     F([source]) -- SOURCE_WIDTH ---> TOP
     TOP -- DESTINATION_WIDTH ---> G([destination])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -67,7 +71,11 @@ Vetor de entrada de dados com sinal estendido.
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Extensor de Sinal](/images/reference/components/generic_signal_extender_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -84,7 +92,12 @@ Vetor de entrada de dados com sinal estendido.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Extensor de Sinal](/images/reference/components/tb_generic_signal_extender_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

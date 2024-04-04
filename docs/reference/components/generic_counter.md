@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -30,6 +32,8 @@ flowchart LR
     D([source]) -- 5 ---> TOP
     TOP ---> E([state])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -110,7 +114,11 @@ TIMER_COUNTER : entity WORK.GENERIC_COUNTER
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do contador](/images/reference/components/generic_counter_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -124,4 +132,8 @@ TIMER_COUNTER : entity WORK.GENERIC_COUNTER
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do contador](/images/reference/components/tb_generic_counter_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

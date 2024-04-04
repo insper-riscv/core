@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -29,6 +31,8 @@ flowchart LR
     A([address]) -- ADDRESS_WIDTH ---> TOP
     TOP -- DATA_WIDTH ---> B([destination])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -95,6 +99,8 @@ ROM : entity WORK.GENERIC_ROM
 
 ![Diagrama de RTL da ROM](/images/reference/components/generic_rom_netlist.svg){.w-full .dark-invert}
 
+</pan-container>
+
 ## Casos de teste
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ROM.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_ROM.py &boxbox;" /></a>
@@ -107,4 +113,8 @@ ROM : entity WORK.GENERIC_ROM
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 da ROM](/images/reference/components/tb_generic_rom_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

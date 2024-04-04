@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -35,6 +37,8 @@ flowchart LR
 
     F == XLEN ==> E([address_program])
 ```
+
+</pan-container>
 
 ## Interface de portas
 
@@ -60,7 +64,11 @@ Work in progress.
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Busca Instrução](/images/reference/components/stage_if_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -77,7 +85,12 @@ Work in progress.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Busca Instrução](/images/reference/components/tb_stage_if_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

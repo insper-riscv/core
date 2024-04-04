@@ -12,7 +12,11 @@ outline: 2
 
 ## Topologia
 
+<pan-container>
+
 ![Topologia do Escreve o Retorno](/images/reference/components/stage_wb.drawio.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Interface genérica
 
@@ -47,7 +51,11 @@ Work in progress.
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Escreve o Retorno](/images/reference/components/stage_wb_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -64,7 +72,12 @@ Work in progress.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Escreve o Retorno](/images/reference/components/tb_stage_wb_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

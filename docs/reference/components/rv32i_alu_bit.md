@@ -12,7 +12,11 @@ outline: 2
 
 ## Topologia
 
+<pan-container>
+
 ![Diagrama de portas da ULA de BIT](/images/reference/components/rv32i_alu_bit.drawio.svg)
+
+</pan-container>
 
 ## Interface genérica
 
@@ -32,7 +36,11 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="/images/reference/components/rv32i_alu_bit_netlist.svg" alt="Diagrama de RTL do bit da ULA" style="width: 100%; background-color: white;">
+<pan-container>
+
+![Diagrama de RTL do bit da ULA](/images/reference/components/rv32i_alu_bit_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -42,14 +50,12 @@ Work in progress.
 
 :::
 
-::: danger TO DO
-
-```md
 ### Caso 1 <Badge type="info" text="tb_rv32i_alu_bit_case_1" />
 
 Forma de onda:
 
-![Forma de onda do caso de teste 1 do Bit da ULA](/images/reference/components/tb_rv32i_alu_bit_case_1.svg){.w-full .dark-invert}
-```
+<pan-container :grid="false">
 
-:::
+![Forma de onda do caso de teste 1 do Bit da ULA](/images/reference/components/tb_rv32i_alu_bit_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -34,6 +36,8 @@ flowchart LR
     F([source]) -- DATA_WIDTH ---> TOP
     TOP -- DATA_WIDTH ---> G([destination])
 ```
+
+</pan-container>
 
 ## Interface genérica
 
@@ -135,7 +139,11 @@ RAM : entity WORK.GENERIC_RAM
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL da RAM](/images/reference/components/generic_ram_netlist.svg){.w-full .dark-invert}
+</pan-container>
+
 ## Casos de teste
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_RAM.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_RAM.py &boxbox;" /></a>
@@ -148,4 +156,8 @@ RAM : entity WORK.GENERIC_RAM
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 da RAM](/images/reference/components/tb_generic_ram_case_1.svg){.w-full .dark-invert}
+
+</pan-container>

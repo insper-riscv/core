@@ -12,7 +12,11 @@ outline: 2
 
 ## Topologia
 
+<pan-container>
+
 ![Topologia da Controlador da Unidade de Execução](/images/reference/components/module_alu_controller.drawio.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Interface genérica
 
@@ -40,7 +44,11 @@ Work in progress.
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL da Unidade de Controle da ULA](/images/reference/components/module_alu_controller_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -57,7 +65,12 @@ Work in progress.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 da Controlador da Unidade de Execução](/images/reference/components/tb_module_execution_unit_controller_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

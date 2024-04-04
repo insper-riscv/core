@@ -12,7 +12,11 @@ outline: 2
 
 ## Topologia
 
+<pan-container>
+
 ![Diagrama de portas da ULA](/images/reference/components/rv32i_alu.drawio.svg)
+
+</pan-container>
 
 ## Interface genérica
 
@@ -32,7 +36,11 @@ Work in progress.
 
 ## Diagrama RTL
 
-<img src="/images/reference/components/rv32i_alu_netlist.svg" alt="Diagrama de RTL da Unidade Lógia Aritmética" style="width: 100%; background-color: white;">
+<pan-container :max-zoom="8">
+
+![Diagrama de RTL da Unidade Lógia Aritmética](/images/reference/components/rv32i_alu_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -49,7 +57,12 @@ Work in progress.
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Unidade Lógia Aritmética](/images/reference/components/tb_rv32i_alu_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
+
 ```
 
 :::

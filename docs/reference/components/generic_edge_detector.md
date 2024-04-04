@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -27,6 +29,8 @@ flowchart LR
     C([source]) ---> TOP
     TOP ---> D([pulse])
 ```
+
+</pan-container>
 
 ## Interface de portas
 
@@ -74,7 +78,11 @@ EDGE_FALL_DETECTOR : entity WORK.GENERIC_EDGE_DETECTOR(FALLING_DETECTOR)
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do detector de borda](/images/reference/components/generic_edge_detector_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -88,10 +96,16 @@ EDGE_FALL_DETECTOR : entity WORK.GENERIC_EDGE_DETECTOR(FALLING_DETECTOR)
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Caso de teste 1 do Detector de Borda](/images/reference/components/tb_generic_edge_detector_case_1.svg){.w-full .dark-invert}
 
 ### Caso 2 <Badge type="info" text="tb_generic_edge_detector_case_2" />
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 2 do Detector de Borda](/images/reference/components/tb_generic_edge_detector_case_2.svg){.w-full .dark-invert}
+
+</pan-container>

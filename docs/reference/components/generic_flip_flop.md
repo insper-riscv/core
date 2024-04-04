@@ -12,6 +12,8 @@ outline: 2
 
 ## Topologia
 
+<pan-container selector=".mermaid">
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepBefore' } } }%%
 flowchart LR
@@ -29,6 +31,8 @@ flowchart LR
     D([source]) ---> TOP
     TOP ---> E([state])
 ```
+
+</pan-container>
 
 ## Interface de portas
 
@@ -94,7 +98,11 @@ FLIP_FLOP_1 : entity WORK.GENERIC_FLIP_FLOP
 
 ## Diagrama RTL
 
+<pan-container>
+
 ![Diagrama de RTL do Flip Flop](/images/reference/components/generic_flip_flop_netlist.svg){.w-full .dark-invert}
+
+</pan-container>
 
 ## Casos de teste
 
@@ -108,4 +116,8 @@ FLIP_FLOP_1 : entity WORK.GENERIC_FLIP_FLOP
 
 Forma de onda:
 
+<pan-container :grid="false">
+
 ![Forma de onda do caso de teste 1 do Flip Flop](/images/reference/components/tb_generic_flip_flop_case_1.svg){.w-full .dark-invert}
+
+</pan-container>
