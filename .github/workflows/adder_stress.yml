@@ -1,6 +1,9 @@
-name: ADDER Stress Test
+name: Adder Stress Test
 'on':
   workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/adder_stress.yml
 jobs:
   GENERIC_ADDER_STRESS_TEST:
     runs-on: ubuntu-latest
