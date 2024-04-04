@@ -22,4 +22,4 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run Stress Test
-      run: pytest -k  GENERIC_ADDER -m stress
+      run: pytest -k GENERIC_ADDER -m stress
