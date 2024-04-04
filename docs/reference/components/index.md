@@ -104,7 +104,7 @@ Work in progress.
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_TOP_LEVEL.py" target="blank" style="float:right"><Badge type="tip" text="test_TOP_LEVEL.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_TOP_LEVEL.py{py:line-numbers}
 
 :::
 

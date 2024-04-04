@@ -112,7 +112,7 @@ MUX_1 : entity WORK.GENERIC_MUX_4X1
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_MUX_4X1.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_MUX_4X1.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_GENERIC_MUX_4X1.py{py:line-numbers}
 
 :::
 

@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/GENERIC_ROM.vhd" target="blank" style="float:right"><Badge type="tip" text="GENERIC_ROM.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/GENERIC_ROM.vhd{vhdl:line-numbers}
 
 :::
 
@@ -99,7 +99,7 @@ ROM : entity WORK.GENERIC_ROM
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_ROM.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_ROM.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_GENERIC_ROM.py{py:line-numbers}
 
 :::
 

@@ -80,7 +80,7 @@ EDGE_FALL_DETECTOR : entity WORK.GENERIC_EDGE_DETECTOR(FALLING_DETECTOR)
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_EDGE_DETECTOR.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_EDGE_DETECTOR.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_GENERIC_EDGE_DETECTOR.py{py:line-numbers}
 
 :::
 

@@ -115,7 +115,7 @@ REGISTER_1 : entity WORK.GENERIC_REGISTER
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_GENERIC_REGISTER.py" target="blank" style="float:right"><Badge type="tip" text="test_GENERIC_REGISTER.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_GENERIC_REGISTER.py{py:line-numbers}
 
 :::
 

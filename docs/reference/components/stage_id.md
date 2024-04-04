@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_ID.vhd" target="blank" style="float:right"><Badge type="tip" text="STAGE_ID.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/STAGE_ID.vhd{vhdl:line-numbers}
 
 :::
 
@@ -98,7 +98,7 @@ Work in progress.
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_STAGE_ID.py" target="blank" style="float:right"><Badge type="tip" text="test_STAGE_ID.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_STAGE_ID.py{py:line-numbers}
 
 :::
 

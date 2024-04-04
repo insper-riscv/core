@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_REGISTER_FILE.vhd" target="blank" style="float:right"><Badge type="tip" text="RV32I_REGISTER_FILE.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/RV32I_REGISTER_FILE.vhd{vhdl:line-numbers}
 
 :::
 
@@ -88,7 +88,7 @@ Saída de valor de registrador secundária.
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_REGISTER_FILE.py" target="blank" style="float:right"><Badge type="tip" text="test_RV32I_REGISTER_FILE.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_RV32I_REGISTER_FILE.py{py:line-numbers}
 
 :::
 

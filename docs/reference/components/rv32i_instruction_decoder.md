@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/RV32I_INSTRUCTION_DECODER.vhd" target="blank" style="float:right"><Badge type="tip" text="RV32I_INSTRUCTION_DECODER.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/RV32I_INSTRUCTION_DECODER.vhd{vhdl:line-numbers}
 
 :::
 
@@ -38,7 +38,7 @@ Work in progress.
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_RV32I_INSTRUCTION_DECODER.py" target="blank" style="float:right"><Badge type="tip" text="test_RV32I_INSTRUCTION_DECODER.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_RV32I_INSTRUCTION_DECODER.py{py:line-numbers}
 
 :::
 
