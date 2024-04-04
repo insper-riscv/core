@@ -49,9 +49,8 @@ async def tb_GENERIC_ADDER_case_1(dut: GENERIC_ADDER, trace: utils.Trace):
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
 
 
-@cocotb.test()
-@cocotb.test()
-async def tb_GENERIC_ADDER_stress(dut: "GENERIC_ADDER"):
+@GENERIC_ADDER.testcase
+async def tb_GENERIC_ADDER_stress(dut: "GENERIC_ADDER", trace: utils.Trace):
     for _ in range(1_000_000):
         source_1 = random.getrandbits(32)
         source_2 = random.getrandbits(32)
@@ -65,7 +64,6 @@ async def tb_GENERIC_ADDER_stress(dut: "GENERIC_ADDER"):
 
         yield trace.check(dut.destination, utils.convert_to_binstr(source_1+source_2, 32), message)
     
-
 
 @pytest.mark.synthesis
 def test_GENERIC_ADDER_synthesis():

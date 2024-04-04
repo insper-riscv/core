@@ -348,3 +348,8 @@ class Trace2(cocotb.wavedrom.trace):
             trace["config"] = config
         return json.dumps(trace, indent=4, sort_keys=False)
 
+
+def convert_to_binstr(value: int, length: int) -> str:
+    if len(bin(value)[2:]) < length:
+        return bin(value)[2:].zfill(length)
+    return bin(value)[-32:]
