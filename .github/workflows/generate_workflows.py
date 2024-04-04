@@ -51,9 +51,14 @@ for file in files:
                         'run': 'pip install -r requirements.txt'
                     },
                     {
-                        'name': 'Run tests',
-                        'run': f'pytest -k  {file[5:-3]}'
+                        'name': 'Run Synthesis',
+                        'run': f'pytest -k  {file[5:-3]} -m synthesis'
+                    },
+                    {
+                        'name': 'Run Test Cases',
+                        'run': f'pytest -k  {file[5:-3]} -m testcases'
                     }
+                    
                 ]
         }
 

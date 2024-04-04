@@ -24,8 +24,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_ADDER
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_ADDER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_ADDER -m testcases
   GENERIC_COUNTER:
     name: GENERIC_COUNTER
     runs-on: ubuntu-latest
@@ -43,8 +45,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_COUNTER
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_COUNTER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_COUNTER -m testcases
   GENERIC_DEBOUNCE:
     name: GENERIC_DEBOUNCE
     runs-on: ubuntu-latest
@@ -62,8 +66,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_DEBOUNCE
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_DEBOUNCE -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_DEBOUNCE -m testcases
   GENERIC_EDGE_DETECTOR:
     name: GENERIC_EDGE_DETECTOR
     runs-on: ubuntu-latest
@@ -81,8 +87,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_EDGE_DETECTOR
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_EDGE_DETECTOR -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_EDGE_DETECTOR -m testcases
   GENERIC_FLIP_FLOP:
     name: GENERIC_FLIP_FLOP
     runs-on: ubuntu-latest
@@ -100,8 +108,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_FLIP_FLOP
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_FLIP_FLOP -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_FLIP_FLOP -m testcases
   GENERIC_MUX_2X1:
     name: GENERIC_MUX_2X1
     runs-on: ubuntu-latest
@@ -119,8 +129,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_MUX_2X1
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_MUX_2X1 -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_MUX_2X1 -m testcases
   GENERIC_MUX_4X1:
     name: GENERIC_MUX_4X1
     runs-on: ubuntu-latest
@@ -138,8 +150,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_MUX_4X1
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_MUX_4X1 -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_MUX_4X1 -m testcases
   GENERIC_RAM:
     name: GENERIC_RAM
     runs-on: ubuntu-latest
@@ -157,8 +171,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_RAM
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_RAM -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_RAM -m testcases
   GENERIC_REGISTER:
     name: GENERIC_REGISTER
     runs-on: ubuntu-latest
@@ -176,8 +192,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_REGISTER
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_REGISTER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_REGISTER -m testcases
   GENERIC_ROM:
     name: GENERIC_ROM
     runs-on: ubuntu-latest
@@ -195,8 +213,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_ROM
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_ROM -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_ROM -m testcases
   GENERIC_SIGNAL_EXTENDER:
     name: GENERIC_SIGNAL_EXTENDER
     runs-on: ubuntu-latest
@@ -214,8 +234,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  GENERIC_SIGNAL_EXTENDER
+    - name: Run Synthesis
+      run: pytest -k  GENERIC_SIGNAL_EXTENDER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  GENERIC_SIGNAL_EXTENDER -m testcases
   MODULE_ALU:
     name: MODULE_ALU
     runs-on: ubuntu-latest
@@ -233,8 +255,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  MODULE_ALU
+    - name: Run Synthesis
+      run: pytest -k  MODULE_ALU -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  MODULE_ALU -m testcases
   MODULE_ALU_CONTROLLER:
     name: MODULE_ALU_CONTROLLER
     runs-on: ubuntu-latest
@@ -252,8 +276,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  MODULE_ALU_CONTROLLER
+    - name: Run Synthesis
+      run: pytest -k  MODULE_ALU_CONTROLLER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  MODULE_ALU_CONTROLLER -m testcases
   MODULE_CONTROL_UNIT:
     name: MODULE_CONTROL_UNIT
     runs-on: ubuntu-latest
@@ -271,8 +297,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  MODULE_CONTROL_UNIT
+    - name: Run Synthesis
+      run: pytest -k  MODULE_CONTROL_UNIT -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  MODULE_CONTROL_UNIT -m testcases
   MODULE_PC:
     name: MODULE_PC
     runs-on: ubuntu-latest
@@ -290,8 +318,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  MODULE_PC
+    - name: Run Synthesis
+      run: pytest -k  MODULE_PC -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  MODULE_PC -m testcases
   MODULE_REGISTER_FILE:
     name: MODULE_REGISTER_FILE
     runs-on: ubuntu-latest
@@ -309,8 +339,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  MODULE_REGISTER_FILE
+    - name: Run Synthesis
+      run: pytest -k  MODULE_REGISTER_FILE -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  MODULE_REGISTER_FILE -m testcases
   MODULE_WRITE_BACK:
     name: MODULE_WRITE_BACK
     runs-on: ubuntu-latest
@@ -328,8 +360,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  MODULE_WRITE_BACK
+    - name: Run Synthesis
+      run: pytest -k  MODULE_WRITE_BACK -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  MODULE_WRITE_BACK -m testcases
   RV32I_ALU:
     name: RV32I_ALU
     runs-on: ubuntu-latest
@@ -347,8 +381,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  RV32I_ALU
+    - name: Run Synthesis
+      run: pytest -k  RV32I_ALU -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  RV32I_ALU -m testcases
   RV32I_ALU_BIT:
     name: RV32I_ALU_BIT
     runs-on: ubuntu-latest
@@ -366,8 +402,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  RV32I_ALU_BIT
+    - name: Run Synthesis
+      run: pytest -k  RV32I_ALU_BIT -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  RV32I_ALU_BIT -m testcases
   RV32I_ALU_CONTROLLER:
     name: RV32I_ALU_CONTROLLER
     runs-on: ubuntu-latest
@@ -385,8 +423,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  RV32I_ALU_CONTROLLER
+    - name: Run Synthesis
+      run: pytest -k  RV32I_ALU_CONTROLLER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  RV32I_ALU_CONTROLLER -m testcases
   RV32I_INSTRUCTION_DECODER:
     name: RV32I_INSTRUCTION_DECODER
     runs-on: ubuntu-latest
@@ -404,8 +444,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  RV32I_INSTRUCTION_DECODER
+    - name: Run Synthesis
+      run: pytest -k  RV32I_INSTRUCTION_DECODER -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  RV32I_INSTRUCTION_DECODER -m testcases
   RV32I_REGISTER_FILE:
     name: RV32I_REGISTER_FILE
     runs-on: ubuntu-latest
@@ -423,8 +465,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  RV32I_REGISTER_FILE
+    - name: Run Synthesis
+      run: pytest -k  RV32I_REGISTER_FILE -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  RV32I_REGISTER_FILE -m testcases
   STAGE_EX:
     name: STAGE_EX
     runs-on: ubuntu-latest
@@ -442,8 +486,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  STAGE_EX
+    - name: Run Synthesis
+      run: pytest -k  STAGE_EX -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  STAGE_EX -m testcases
   STAGE_ID:
     name: STAGE_ID
     runs-on: ubuntu-latest
@@ -461,8 +507,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  STAGE_ID
+    - name: Run Synthesis
+      run: pytest -k  STAGE_ID -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  STAGE_ID -m testcases
   STAGE_IF:
     name: STAGE_IF
     runs-on: ubuntu-latest
@@ -480,8 +528,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  STAGE_IF
+    - name: Run Synthesis
+      run: pytest -k  STAGE_IF -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  STAGE_IF -m testcases
   STAGE_MEM:
     name: STAGE_MEM
     runs-on: ubuntu-latest
@@ -499,8 +549,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  STAGE_MEM
+    - name: Run Synthesis
+      run: pytest -k  STAGE_MEM -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  STAGE_MEM -m testcases
   STAGE_WB:
     name: STAGE_WB
     runs-on: ubuntu-latest
@@ -518,8 +570,10 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  STAGE_WB
+    - name: Run Synthesis
+      run: pytest -k  STAGE_WB -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  STAGE_WB -m testcases
   TOP_LEVEL:
     name: TOP_LEVEL
     runs-on: ubuntu-latest
@@ -537,5 +591,7 @@ jobs:
         cache: pip
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run tests
-      run: pytest -k  TOP_LEVEL
+    - name: Run Synthesis
+      run: pytest -k  TOP_LEVEL -m synthesis
+    - name: Run Test Cases
+      run: pytest -k  TOP_LEVEL -m testcases
