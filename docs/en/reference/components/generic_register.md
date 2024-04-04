@@ -119,7 +119,7 @@ REGISTER_1 : entity WORK.GENERIC_REGISTER
 
 :::
 
-### Case 1 <Badge type="info" text="tb_GENERIC_REGISTER_case_1" />
+### Case 1 <Badge type="info" text="tb_generic_register_case_1" />
 
 Waveform:
 

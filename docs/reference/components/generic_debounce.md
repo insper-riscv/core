@@ -103,11 +103,11 @@ DEBOUNCE_1 : entity WORK.GENERIC_DEBOUNCE
 ::: danger TO DO
 
 ```md
-### Caso 1 <Badge type="info" text="tb_GENERIC_DEBOUNCE_case_1" />
+### Caso 1 <Badge type="info" text="tb_generic_debounce_case_1" />
 
 Forma de onda:
 
-![Forma de onda do caso de teste 1 do debounce](/images/reference/components/tb_GENERIC_DEBOUNCE_case_1.svg){.w-full .dark-invert}
+![Forma de onda do caso de teste 1 do debounce](/images/reference/components/tb_generic_debounce_case_1.svg){.w-full .dark-invert}
 ```
 
 :::

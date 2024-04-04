@@ -92,8 +92,8 @@ Saída de valor de registrador secundária.
 
 :::
 
-### Caso 1 <Badge type="info" text="tb_RV32I_REGISTER_FILE_case_1" />
+### Caso 1 <Badge type="info" text="tb_rv32i_register_file_case_1" />
 
 Forma de onda:
 
-<img src="/images/reference/components/tb_RV32I_REGISTER_FILE_case_1.svg" alt="Caso de teste 1 do Arquivo de Registradores" style="width: 100%; background-color: white;">
+<img src="/images/reference/components/tb_rv32i_register_file_case_1.svg" alt="Caso de teste 1 do Arquivo de Registradores" style="width: 100%; background-color: white;">
