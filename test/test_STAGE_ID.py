@@ -19,7 +19,7 @@ class STAGE_ID(utils.DUT):
     module_control_unit = MODULE_CONTROL_UNIT
     module_register_file = MODULE_REGISTER_FILE
 
-
+@pytest.mark.synthesis
 def test_STAGE_ID_synthesis():
     STAGE_ID.build_vhd()
     # STAGE_ID.build_netlistsvg()

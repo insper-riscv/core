@@ -47,11 +47,13 @@ async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: uti
         await RisingEdge(dut.clock)
 
 
+@pytest.mark.synthesis
 def test_GENERIC_EDGE_DETECTOR_synthesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
     # GENERIC_EDGE_DETECTOR.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_GENERIC_EDGE_DETECTOR_testcases():
     GENERIC_EDGE_DETECTOR.test_with(
         [

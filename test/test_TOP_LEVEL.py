@@ -109,11 +109,13 @@ async def tb_TOP_LEVEL_case_3(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
 
+@pytest.mark.synthesis
 def test_TOP_LEVEL_synthesis():
     TOP_LEVEL.build_vhd()
     # TOP_LEVEL.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_TOP_LEVEL_testcases():
     assembly = "./src/RV32I_INSTRUCTIONS/BUILD_INSTRUCTION_LUI.asm"
     memory = "./src/GENERIC_ROM.vhd"

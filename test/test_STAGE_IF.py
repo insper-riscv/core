@@ -15,6 +15,7 @@ class STAGE_IF(utils.DUT):
     module_pc = MODULE_PC
 
 
+@pytest.mark.synthesis
 def test_STAGE_IF_synthesis():
     STAGE_IF.build_vhd()
     # STAGE_IF.build_netlistsvg()

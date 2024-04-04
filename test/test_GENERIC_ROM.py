@@ -19,11 +19,13 @@ async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: utils.Trace):
     yield trace.check(dut.destination, "00000000000000000001010000110111")
 
 
+@pytest.mark.synthesis
 def test_GENERIC_ROM_synthesis():
     GENERIC_ROM.build_vhd()
     # GENERIC_ROM.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_GENERIC_ROM_testcases():
     GENERIC_ROM.test_with(
         [

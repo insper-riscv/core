@@ -19,6 +19,7 @@ class STAGE_EX(utils.DUT):
     module_alu_register_source = MODULE_ALU_REGISTER_SOURCE
 
 
+@pytest.mark.synthesis
 def test_STAGE_EX_synthesis():
     STAGE_EX.build_vhd()
     # STAGE_EX.build_netlistsvg()
