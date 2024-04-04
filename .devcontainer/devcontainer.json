@@ -1,8 +1,11 @@
 {
+    "name": "cti-risc-v",
     "build": {
         "dockerfile": "Dockerfile",        
     },
-    "postCreateCommand": "pip3 install --user -r requirements-docker.txt",
+    "postCreateCommand": "pip install -r requirements.txt",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/root/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/root/workspace",
     "customizations": {
         "vscode": {
             "extensions": [

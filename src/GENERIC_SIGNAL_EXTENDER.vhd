@@ -7,8 +7,8 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_SIGNAL_EXTENDER is
 
     generic (
-        SOURCE_WIDTH      : natural :=  DATA_WIDTH;
-        DESTINATION_WIDTH : natural := DATA_WIDTH
+        SOURCE_WIDTH      : natural := XLEN / 2;
+        DESTINATION_WIDTH : natural := XLEN
     );
 
     port (
@@ -18,6 +18,17 @@ entity GENERIC_SIGNAL_EXTENDER is
     );
 
 end entity;
+
+architecture LOGICAL_UPPER of GENERIC_SIGNAL_EXTENDER is
+
+    -- No signals
+
+begin
+
+    destination((DESTINATION_WIDTH - 1) downto (DESTINATION_WIDTH - SOURCE_WIDTH)) <= source;
+    destination((DESTINATION_WIDTH - SOURCE_WIDTH - 1) downto 0) <= (others => '0');
+
+end architecture;
 
 architecture LOWER_EXTEND of GENERIC_SIGNAL_EXTENDER is
 
@@ -30,16 +41,5 @@ begin
 
     destination((DESTINATION_WIDTH - 1) downto SOURCE_WIDTH) <= upper;
     destination((SOURCE_WIDTH - 1) downto 0) <= source;
-
-end architecture;
-
-architecture LOGICAL_UPPER of GENERIC_SIGNAL_EXTENDER is
-
-    -- No signals
-
-begin
-
-    destination((DESTINATION_WIDTH - 1) downto (DESTINATION_WIDTH - SOURCE_WIDTH)) <= source;
-    destination((DESTINATION_WIDTH - SOURCE_WIDTH - 1) downto 0) <= (others => '0');
 
 end architecture;

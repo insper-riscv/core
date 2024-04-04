@@ -1,62 +1,68 @@
-from decimal import Decimal
+import os
 
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.triggers import Timer
 
 import utils
 
 
 class GENERIC_ADDER(utils.DUT):
-    source_1: utils.DUT.Input_pin
-    source_2: utils.DUT.Input_pin
-    destination: utils.DUT.Output_pin
+    source_1 = utils.DUT.Input_pin
+    source_2 = utils.DUT.Input_pin
+    destination = utils.DUT.Output_pin
 
 
-@cocotb.test()
-async def tb_GENERIC_ADDER(dut: "GENERIC_ADDER"):
-    values_source_1 = [
-        "00000000000000000000000000000000",
-        "10101010101010101010101010101010",
-        "00101010101010101010101010101010",
-        "11111111111111111111111111111110",
-    ]
-    values_source_2 = [
-        "00000000000000000000000000000000",
-        "01010101010101010101010101010101",
-        "00101010101010101010101010101010",
-        "00000000000000000000000000000001",
-    ]
-    values_destination = [
-        "00000000000000000000000000000000",
-        "11111111111111111111111111111111",
-        "01010101010101010101010101010100",
-        "11111111111111111111111111111111",
-    ]
+@GENERIC_ADDER.testcase
+async def tb_GENERIC_ADDER_case_1(dut: GENERIC_ADDER, trace: utils.Trace):
+    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
-    for index, (source_1, source_2, destination) in enumerate(
-        zip(values_source_1, values_source_2, values_destination)
-    ):
-        dut.source_1.value = BinaryValue(source_1)
-        dut.source_2.value = BinaryValue(source_2)
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000000")
 
-        await Timer(Decimal(1), units="ns")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000001")
 
-        condition = dut.destination.value.binstr == destination
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000001")
 
-        if not condition:
-            dut._log.error(
-                f"Expected value: {destination} Obtained value: {dut.destination.value.binstr}"
-            )
+    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000001")
 
-        assert condition, f"Error in test {index}: inA={source_1} inB={source_2}"
-        await Timer(Decimal(1), units="ns")
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000010")
+
+    dut.source_1.value = BinaryValue("10101010101010101010101010101010")
+    dut.source_2.value = BinaryValue("01010101010101010101010101010101")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "11111111111111111111111111111111")
+
+    dut.source_1.value = BinaryValue("00101010101010101010101010101010")
+    dut.source_2.value = BinaryValue("00101010101010101010101010101010")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "01010101010101010101010101010100")
+
+    dut.source_1.value = BinaryValue("11111111111111111111111111111110")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000001")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "11111111111111111111111111111111")
 
 
-def test_GENERIC_ADDER():
-    GENERIC_ADDER.test_with(tb_GENERIC_ADDER)
+def test_GENERIC_ADDER_synthesis():
+    GENERIC_ADDER.build_vhd()
+    # GENERIC_ADDER.build_netlistsvg()
+
+
+def test_GENERIC_ADDER_testcases():
+    GENERIC_ADDER.test_with(
+        [
+            tb_GENERIC_ADDER_case_1,
+        ]
+    )
 
 
 if __name__ == "__main__":
-    test_GENERIC_ADDER()
+    pytest.main(["-k", os.path.basename(__file__)])
