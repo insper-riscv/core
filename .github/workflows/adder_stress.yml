@@ -1,0 +1,22 @@
+name: ADDER Stress Test
+'on':
+  workflow_dispatch: {}
+jobs:
+  GENERIC_ADDER_STRESS_TEST:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: pip
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run Stress Test
+      run: pytest -k  GENERIC_ADDER -m stress
