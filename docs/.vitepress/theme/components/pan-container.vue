@@ -165,4 +165,14 @@ onMounted(() => {
         }
     }
 }
+
+@media (max-width: 768px) {
+    .custom-block--info {
+        display: none;
+    }
+
+    .custom-block--info + * {
+        margin-left: auto;
+    }
+}
 </style>
