@@ -39,5 +39,7 @@ export default defineConfig(withMermaid({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/pfeinsper/24a-CTI-RISCV' }
     ],
+
+    lastUpdated: true,
   },
 }))
