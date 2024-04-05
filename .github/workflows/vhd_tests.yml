@@ -6,10 +6,70 @@ name: VHD tests
     - src/**
     - test/**
     - .github/workflows/vhd_tests.yml
+
 jobs:
-  GENERIC_ADDER:
-    name: GENERIC_ADDER
+  test:
+    name: Test ${{ matrix.component }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          include:
+            - component: GENERIC_ADDER
+              test_cases: true
+            - component: GENERIC_COUNTER
+              test_cases: true
+            - component: GENERIC_DEBOUNCE
+              test_cases: false
+            - component: GENERIC_EDGE_DETECTOR
+              test_cases: true
+            - component: GENERIC_FLIP_FLOP
+              test_cases: true
+            - component: GENERIC_MUX_2X1
+              test_cases: true
+            - component: GENERIC_MUX_4X1
+              test_cases: true
+            - component: GENERIC_RAM
+              test_cases: true
+            - component: GENERIC_REGISTER
+              test_cases: true
+            - component: GENERIC_ROM
+              test_cases: true
+            - component: GENERIC_SIGNAL_EXTENDER
+              test_cases: false
+            - component: MODULE_ALU
+              test_cases: true
+            - component: MODULE_ALU_CONTROLLER
+              test_cases: true
+            - component: MODULE_CONTROL_UNIT
+              test_cases: true
+            - component: MODULE_PC
+              test_cases: true
+            - component: MODULE_REGISTER_FILE
+              test_cases: true
+            - component: MODULE_WRITE_BACK
+              test_cases: true
+            - component: RV32I_ALU
+              test_cases: true
+            - component: RV32I_ALU_BIT
+              test_cases: true
+            - component: RV32I_ALU_CONTROLLER
+              test_cases: true
+            - component: RV32I_INSTRUCTION_DECODER
+              test_cases: true
+            - component: RV32I_REGISTER_FILE
+              test_cases: true
+            - component: STAGE_EX
+              test_cases: false
+            - component: STAGE_ID
+              test_cases: false
+            - component: STAGE_IF
+              test_cases: false
+            - component: STAGE_MEM
+              test_cases: false
+            - component: STAGE_WB
+              test_cases: false
+            - component: TOP_LEVEL
+              test_cases: true
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -25,559 +85,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run Synthesis
-      run: pytest -k  GENERIC_ADDER -m synthesis
+      run: pytest -k ${{ matrix.component }} -m synthesis
     - name: Run Test Cases
-      run: pytest -k  GENERIC_ADDER -m testcases
-  GENERIC_COUNTER:
-    name: GENERIC_COUNTER
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_COUNTER -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_COUNTER -m testcases
-  GENERIC_DEBOUNCE:
-    name: GENERIC_DEBOUNCE
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_DEBOUNCE -m synthesis
-  GENERIC_EDGE_DETECTOR:
-    name: GENERIC_EDGE_DETECTOR
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_EDGE_DETECTOR -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_EDGE_DETECTOR -m testcases
-  GENERIC_FLIP_FLOP:
-    name: GENERIC_FLIP_FLOP
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_FLIP_FLOP -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_FLIP_FLOP -m testcases
-  GENERIC_MUX_2X1:
-    name: GENERIC_MUX_2X1
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_MUX_2X1 -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_MUX_2X1 -m testcases
-  GENERIC_MUX_4X1:
-    name: GENERIC_MUX_4X1
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_MUX_4X1 -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_MUX_4X1 -m testcases
-  GENERIC_RAM:
-    name: GENERIC_RAM
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_RAM -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_RAM -m testcases
-  GENERIC_REGISTER:
-    name: GENERIC_REGISTER
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_REGISTER -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_REGISTER -m testcases
-  GENERIC_ROM:
-    name: GENERIC_ROM
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_ROM -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  GENERIC_ROM -m testcases
-  GENERIC_SIGNAL_EXTENDER:
-    name: GENERIC_SIGNAL_EXTENDER
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  GENERIC_SIGNAL_EXTENDER -m synthesis
-  MODULE_ALU:
-    name: MODULE_ALU
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  MODULE_ALU -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  MODULE_ALU -m testcases
-  MODULE_ALU_CONTROLLER:
-    name: MODULE_ALU_CONTROLLER
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  MODULE_ALU_CONTROLLER -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  MODULE_ALU_CONTROLLER -m testcases
-  MODULE_CONTROL_UNIT:
-    name: MODULE_CONTROL_UNIT
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  MODULE_CONTROL_UNIT -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  MODULE_CONTROL_UNIT -m testcases
-  MODULE_PC:
-    name: MODULE_PC
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  MODULE_PC -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  MODULE_PC -m testcases
-  MODULE_REGISTER_FILE:
-    name: MODULE_REGISTER_FILE
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  MODULE_REGISTER_FILE -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  MODULE_REGISTER_FILE -m testcases
-  MODULE_WRITE_BACK:
-    name: MODULE_WRITE_BACK
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  MODULE_WRITE_BACK -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  MODULE_WRITE_BACK -m testcases
-  RV32I_ALU:
-    name: RV32I_ALU
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  RV32I_ALU -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  RV32I_ALU -m testcases
-  RV32I_ALU_BIT:
-    name: RV32I_ALU_BIT
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  RV32I_ALU_BIT -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  RV32I_ALU_BIT -m testcases
-  RV32I_ALU_CONTROLLER:
-    name: RV32I_ALU_CONTROLLER
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  RV32I_ALU_CONTROLLER -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  RV32I_ALU_CONTROLLER -m testcases
-  RV32I_INSTRUCTION_DECODER:
-    name: RV32I_INSTRUCTION_DECODER
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  RV32I_INSTRUCTION_DECODER -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  RV32I_INSTRUCTION_DECODER -m testcases
-  RV32I_REGISTER_FILE:
-    name: RV32I_REGISTER_FILE
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  RV32I_REGISTER_FILE -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  RV32I_REGISTER_FILE -m testcases
-  STAGE_EX:
-    name: STAGE_EX
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  STAGE_EX -m synthesis
-  STAGE_ID:
-    name: STAGE_ID
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  STAGE_ID -m synthesis
-  STAGE_IF:
-    name: STAGE_IF
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  STAGE_IF -m synthesis
-  STAGE_MEM:
-    name: STAGE_MEM
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  STAGE_MEM -m synthesis
-  STAGE_WB:
-    name: STAGE_WB
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  STAGE_WB -m synthesis
-  TOP_LEVEL:
-    name: TOP_LEVEL
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Synthesis
-      run: pytest -k  TOP_LEVEL -m synthesis
-    - name: Run Test Cases
-      run: pytest -k  TOP_LEVEL -m testcases
+      if: ${{ contains(matrix.test_cases, true) }}
+      run: pytest -k ${{ matrix.component }} -m testcases
