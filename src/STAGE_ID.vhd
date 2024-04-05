@@ -64,7 +64,7 @@ begin
     MODULE_REGISTER_FILE : entity WORK.MODULE_REGISTER_FILE
         port map (
         clock              => clock,              
-        enable             => enable,             
+        enable             => enable_destination,             
         select_destination => select_destination,
         data_destination   => data_destination,   
         instruction        => source_0.data_instruction,          
@@ -73,13 +73,12 @@ begin
     );
 
     signals_ex.address_program <= source_0.address_program;
+    signals_ex.data_source_1   <= data_source_1;
 
     process(source_0.data_instruction) is
         variable instruction : t_RV32I_INSTRUCTION;
     begin
         instruction := to_RV32I_INSTRUCTION(source_0.data_instruction);
-
-        signals_ex.data_source_1      <= data_source_1;
         signals_ex.funct_7            <= instruction.funct_7;
         signals_ex.funct_3            <= instruction.funct_3;
         signals_ex.opcode             <= instruction.opcode;

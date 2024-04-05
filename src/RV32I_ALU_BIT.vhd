@@ -7,7 +7,7 @@ entity RV32I_ALU_BIT is
     port (
         invert_source_1 : in  std_logic;
         invert_source_2 : in  std_logic;
-        select_function : in  std_logic_vector(1 downto 0);
+        select_function : in  std_logic_vector(2 downto 0);
         carry_in        : in  std_logic;
         slt             : in  std_logic;
         source_1        : in  std_logic;
@@ -35,9 +35,10 @@ begin
     half_add <= source_1_auxiliar XOR source_2_auxiliar;
     full_add <= half_add XOR carry_in;
 
-    destination <= source_1_auxiliar AND source_2_auxiliar when (select_function = "00") else
-                   source_1_auxiliar OR  source_2_auxiliar when (select_function = "01") else
-                   full_add when (select_function = "10") else
+    destination <= source_1_auxiliar AND source_2_auxiliar when (select_function = "000") else
+                   source_1_auxiliar OR  source_2_auxiliar when (select_function = "001") else
+                   half_add when (select_function = "010") else
+                   full_add when (select_function = "011") else
                    slt;
 
     carry_auxiliar <= (source_1_auxiliar AND source_2_auxiliar) OR (half_add AND carry_in);
