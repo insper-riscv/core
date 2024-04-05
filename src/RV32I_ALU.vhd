@@ -14,7 +14,7 @@ entity RV32I_ALU is
     port (
         invert_source_1 : in  std_logic;
         invert_source_2 : in  std_logic;
-        select_function : in  std_logic_vector(1 downto 0);
+        select_function : in  std_logic_vector(2 downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)

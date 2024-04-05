@@ -11,6 +11,12 @@ from test_MODULE_ALU_REGISTER_SOURCE import MODULE_ALU_REGISTER_SOURCE
 
 class STAGE_EX(utils.DUT):
     source = utils.DUT.Input_pin
+    selector_forwarding_mem = utils.DUT.Input_pin
+    enable_mem              = utils.DUT.Input_pin
+    selector_forwarding_wb  = utils.DUT.Input_pin
+    enable_wb               = utils.DUT.Input_pin
+    forwarding_mem_source   = utils.DUT.Input_pin
+    forwarding_wb_source    = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
     module_alu_controller = MODULE_ALU_CONTROLLER

@@ -31,7 +31,7 @@ async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU", trace: utils.Trace):
     dut.data_source_1.value = BinaryValue("10101010101010101010101010101010")
     dut.data_source_2.value = BinaryValue("01010101010101010101010101010101")
     dut.data_immediate.value = BinaryValue("00000000000000000001000000000000")
-    dut.select_function.value = BinaryValue("0001")
+    dut.select_function.value = BinaryValue("00001")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000001000000000000")
@@ -42,7 +42,7 @@ async def tb_MODULE_ALU_case_1(dut: "MODULE_ALU", trace: utils.Trace):
     dut.data_source_1.value = BinaryValue("10101010101010101010101010101010")
     dut.data_source_2.value = BinaryValue("01010101010101010101010101010101")
     dut.data_immediate.value = BinaryValue("00000000000000000001000000000000")
-    dut.select_function.value = BinaryValue("0001")
+    dut.select_function.value = BinaryValue("00001")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000100")
