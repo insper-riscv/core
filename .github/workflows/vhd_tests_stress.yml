@@ -1,0 +1,86 @@
+name: VHD stress testing routine
+'on':
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    name: Test ${{ matrix.component }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          include:
+            - component: GENERIC_ADDER
+              test_cases: true
+            - component: GENERIC_COUNTER
+              test_cases: false
+            - component: GENERIC_DEBOUNCE
+              test_cases: false
+            - component: GENERIC_EDGE_DETECTOR
+              test_cases: false
+            - component: GENERIC_FLIP_FLOP
+              test_cases: false
+            - component: GENERIC_MUX_2X1
+              test_cases: false
+            - component: GENERIC_MUX_4X1
+              test_cases: false
+            - component: GENERIC_RAM
+              test_cases: false
+            - component: GENERIC_REGISTER
+              test_cases: false
+            - component: GENERIC_ROM
+              test_cases: false
+            - component: GENERIC_SIGNAL_EXTENDER
+              test_cases: false
+            - component: MODULE_ALU
+              test_cases: false
+            - component: MODULE_ALU_CONTROLLER
+              test_cases: false
+            - component: MODULE_CONTROL_UNIT
+              test_cases: false
+            - component: MODULE_PC
+              test_cases: false
+            - component: MODULE_REGISTER_FILE
+              test_cases: false
+            - component: MODULE_WRITE_BACK
+              test_cases: false
+            - component: RV32I_ALU
+              test_cases: false
+            - component: RV32I_ALU_BIT
+              test_cases: false
+            - component: RV32I_ALU_CONTROLLER
+              test_cases: false
+            - component: RV32I_INSTRUCTION_DECODER
+              test_cases: false
+            - component: RV32I_REGISTER_FILE
+              test_cases: false
+            - component: STAGE_EX
+              test_cases: false
+            - component: STAGE_ID
+              test_cases: false
+            - component: STAGE_IF
+              test_cases: false
+            - component: STAGE_MEM
+              test_cases: false
+            - component: STAGE_WB
+              test_cases: false
+            - component: TOP_LEVEL
+              test_cases: false
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: pip
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run Synthesis
+      run: pytest -k ${{ matrix.component }} -m synthesis
+    - name: Run Test Cases
+      if: ${{ contains(matrix.test_cases, true) }}
+      run: pytest -k ${{ matrix.component }} -m stress
