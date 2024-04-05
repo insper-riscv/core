@@ -1,11 +1,11 @@
 <template>
 
 <div class="diagram custom-block">
-    <div class="panzoom-wrap" ref="wrap" :class="{'show-grid': props.grid && zoom > 1}" :style="gridStyle">
+    <div class="panzoom-wrap" ref="wrap" :class="{fullscreen, 'show-grid': props.grid && (fullscreen || zoom > 1)}" :style="gridStyle">
         <slot />
     </div>
 
-    <div class="custom-block--footer">
+    <div class="custom-block--footer" :class="{fullscreen}">
         <p class="custom-block--info">
             zoom: <i><code>alt+scroll</code></i>
         </p>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineProps, onMounted } from 'vue'
+import { ref, defineProps, onMounted } from 'vue'
 import panZoom from 'panzoom'
 
 const props = defineProps({
@@ -47,6 +47,7 @@ const props = defineProps({
 const zoomStep = (props.maxZoom - 1) / 32
 const wrap = ref(null)
 const zoom = ref(1)
+const fullscreen = ref(false)
 let instance = null
 const gridStyle = ref({
     '--x': 0,
@@ -63,7 +64,13 @@ function zoomFit() {
 }
 
 function enterFullscreen() {
-    wrap.value.parentNode.requestFullscreen();
+    if (fullscreen.value) {
+        document.exitFullscreen()
+
+        return
+    }
+
+    wrap.value.parentNode.requestFullscreen()
 }
 
 onMounted(() => {
@@ -73,7 +80,7 @@ onMounted(() => {
         bounds: true,
         boundsPadding: 1.0,
         autocenter: true,
-        beforeWheel: (event) => !event.altKey,
+        beforeWheel: (event) => !event.altKey && !fullscreen.value,
     })
 
     instance.on('zoom', (event) => {
@@ -95,6 +102,12 @@ onMounted(() => {
             '--x': transform.x,
             '--y': transform.y,
         }
+    })
+
+    document.addEventListener('fullscreenchange', () => {
+        fullscreen.value = document.fullscreenElement === wrap.value.parentNode
+
+        instance?.zoomAbs(0, 0, 1)
     })
 })
 </script>
@@ -118,7 +131,7 @@ onMounted(() => {
         cursor: grab;
         transition: background-image 2s;
 
-        &:fullscreen {
+        &.fullscreen {
             height: calc(100vh - 42px);
         }
 
@@ -139,6 +152,10 @@ onMounted(() => {
         padding-top: 8px;
         display: flex;
         gap: 8px;
+
+        &.fullscreen {
+            padding: 8px 16px 0 16px;
+        }
     }
 
     .custom-block--info {
