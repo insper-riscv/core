@@ -13,8 +13,63 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        component: [GENERIC_ADDER, GENERIC_COUNTER, GENERIC_DEBOUNCE, GENERIC_EDGE_DETECTOR, GENERIC_FLIP_FLOP, GENERIC_MUX_2X1, GENERIC_MUX_4X1, GENERIC_RAM, GENERIC_REGISTER, GENERIC_ROM, GENERIC_SIGNAL_EXTENDER, MODULE_ALU, MODULE_ALU_CONTROLLER, MODULE_CONTROL_UNIT, MODULE_PC, MODULE_REGISTER_FILE, MODULE_WRITE_BACK, RV32I_ALU, RV32I_ALU_BIT, RV32I_ALU_CONTROLLER, RV32I_INSTRUCTION_DECODER, RV32I_REGISTER_FILE, STAGE_EX, STAGE_ID, STAGE_IF, STAGE_MEM, STAGE_WB, TOP_LEVEL]
-        test_cases: [true, true, false, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, true]
+          include:
+            - component: GENERIC_ADDER
+              test_cases: true
+            - component: GENERIC_COUNTER
+              test_cases: true
+            - component: GENERIC_DEBOUNCE
+              test_cases: false
+            - component: GENERIC_EDGE_DETECTOR
+              test_cases: true
+            - component: GENERIC_FLIP_FLOP
+              test_cases: true
+            - component: GENERIC_MUX_2X1
+              test_cases: true
+            - component: GENERIC_MUX_4X1
+              test_cases: true
+            - component: GENERIC_RAM
+              test_cases: true
+            - component: GENERIC_REGISTER
+              test_cases: true
+            - component: GENERIC_ROM
+              test_cases: true
+            - component: GENERIC_SIGNAL_EXTENDER
+              test_cases: false
+            - component: MODULE_ALU
+              test_cases: true
+            - component: MODULE_ALU_CONTROLLER
+              test_cases: true
+            - component: MODULE_CONTROL_UNIT
+              test_cases: true
+            - component: MODULE_PC
+              test_cases: true
+            - component: MODULE_REGISTER_FILE
+              test_cases: true
+            - component: MODULE_WRITE_BACK
+              test_cases: true
+            - component: RV32I_ALU
+              test_cases: true
+            - component: RV32I_ALU_BIT
+              test_cases: true
+            - component: RV32I_ALU_CONTROLLER
+              test_cases: true
+            - component: RV32I_INSTRUCTION_DECODER
+              test_cases: true
+            - component: RV32I_REGISTER_FILE
+              test_cases: true
+            - component: STAGE_EX
+              test_cases: false
+            - component: STAGE_ID
+              test_cases: false
+            - component: STAGE_IF
+              test_cases: false
+            - component: STAGE_MEM
+              test_cases: false
+            - component: STAGE_WB
+              test_cases: false
+            - component: TOP_LEVEL
+              test_cases: true
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
