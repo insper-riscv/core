@@ -1,5 +1,4 @@
 import DefaultTheme from 'vitepress/theme'
-import panZoom from 'vue-panzoom'
 
 import panContainer from './components/pan-container.vue'
 import Layout from './layout.vue'
@@ -12,7 +11,6 @@ export default {
     Layout,
 
     enhanceApp({ app }) {
-        app.use(panZoom)
         app.component('pan-container', panContainer)
     }
 }
