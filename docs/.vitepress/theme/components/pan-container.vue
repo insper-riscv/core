@@ -162,10 +162,6 @@ onMounted(() => {
         input[type="range"] {
             accent-color: var(--vp-c-text-3);
             height: 1em;
-
-            :root.dark & {
-                accent-color: var(--vp-c-text-3);
-            }
         }
     }
 }
