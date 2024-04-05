@@ -100,6 +100,8 @@ Forma de onda:
 
 ![Caso de teste 1 do Detector de Borda](/images/reference/components/tb_generic_edge_detector_case_1.svg){.w-full .dark-invert}
 
+</pan-container>
+
 ### Caso 2 <Badge type="info" text="tb_generic_edge_detector_case_2" />
 
 Forma de onda:

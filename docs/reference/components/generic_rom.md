@@ -95,7 +95,9 @@ ROM : entity WORK.GENERIC_ROM
     );
 ```
 
-## DiagROMa RTL
+## Diagrama RTL
+
+<pan-container>
 
 ![Diagrama de RTL da ROM](/images/reference/components/generic_rom_netlist.svg){.w-full .dark-invert}
 
