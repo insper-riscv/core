@@ -8,92 +8,55 @@
  * -------------------------------------------------------------------------- */
 
  :root {
-    --vp-c-brand: #FDB616;
-    --vp-c-brand-light: #003262;
-    --vp-c-brand-lighter: #003262;
-    --vp-c-brand-lightest: #003262;
-    --vp-c-brand-dark: #FDB616;
-    --vp-c-brand-darker: #FDB616;
-    --vp-c-brand-dimm: rgba(0 50 98 / 0.749);
-    --vp-c-brand-accent: #003262;
+    --vp-c-brand-1: #003262;
+    --vp-c-brand-2: #003262;
+    --vp-c-brand-3: #FDB616;
+    --vp-c-brand-soft: rgba(0, 50, 98, .16);
 }
 
 .dark {
-    --vp-c-brand: #003262;
-    --vp-c-brand-light: #FDB616;
-    --vp-c-brand-lighter: #FDB616;
-    --vp-c-brand-lightest: #FDB616;
-    --vp-c-brand-dark: #011E41;
-    --vp-c-brand-darker: #011E41;
-    --vp-c-brand-dimm: rgba(0 50 98 / 0.75);
-    --vp-c-brand-accent: #FDB616;
+    --vp-c-brand-1: #FDB616;
+    --vp-c-brand-2: #FDB616;
+    --vp-c-brand-3: #003262;
+    --vp-c-brand-soft: rgba(253, 182, 22, .16);
 }
 
 ::selection {
-    background-color: rgba(0 50 98 / 0.75);
-    background-color: rgba(0 50 98 / 0.75);
-    color: #000000
-}
-  
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
-  
-:root {
-    --vp-button-brand-border: var(--vp-c-brand-light);
-    --vp-button-brand-text: var(--vp-c-white);
-    --vp-button-brand-bg: var(--vp-c-brand);
-    --vp-button-brand-hover-border: var(--vp-c-brand-light);
-    --vp-button-brand-hover-text: var(--vp-c-white);
-    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
-    --vp-button-brand-active-border: var(--vp-c-brand-light);
-    --vp-button-brand-active-text: var(--vp-c-white);
-    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
-}
-  
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
-  
-:root {
-    --vp-home-hero-name-color: #003262;
+    background-color: color-mix(in oklab, var(--vp-c-brand-1) 50%, transparent 50%);
+    color: var(--vp-c-neutral);
 }
 
-.dark {
-    --vp-home-hero-name-color: #FDB616;
-}
-  
 /**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
-  
+  * Badge
+  * -------------------------------------------------------------------------- */
+
 :root {
-    --vp-custom-block-tip-border: var(--vp-c-brand-light);
-    --vp-custom-block-tip-text: var(--vp-c-brand-darker);
-    --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+    --vp-badge-success-border: transparent;
+    --vp-badge-success-text: var(--vp-c-success-1);
+    --vp-badge-success-bg: var(--vp-c-success-soft);
 }
-  
-.dark {
-    --vp-custom-block-tip-border: var(--vp-c-brand);
-    --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
-    --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+
+.VPBadge.success {
+    border-color: var(--vp-badge-success-border);
+    color: var(--vp-badge-success-text);
+    background-color: var(--vp-badge-success-bg);
 }
-  
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
-  
-.DocSearch {
-    --docsearch-primary-color: var(--vp-c-brand) !important;
+
+:root {
+    --vp-badge-neutral-border: transparent;
+    --vp-badge-neutral-text: var(--vp-c-neutral-1);
+    --vp-badge-neutral-bg: var(--vp-c-neutral-soft);
 }
-  
+
+.VPBadge.neutral {
+    border-color: var(--vp-badge-neutral-border);
+    color: var(--vp-badge-neutral-text);
+    background-color: var(--vp-badge-neutral-bg);
+}
+
 /**
   * Others
   * -------------------------------------------------------------------------- */
-  
-.aside-curtain {
-    display: none;
-}
 
 .w-full {
     width: 100%;
