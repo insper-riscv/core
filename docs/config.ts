@@ -20,6 +20,15 @@ export default defineConfig({
             text: 'Sobre',
             link: '/guide/',
           }, {
+            text: 'Começando',
+            link: '/guide/',
+          }, {
+            text: 'Organização',
+            link: '/reference/components/',
+          }, {
+            text: 'Especificação',
+            link: '/reference/components/',
+          }, {
             text: 'Bibliografia',
             link: '/guide/bibliography'
           }, {
