@@ -62,7 +62,7 @@ begin
             destination => select_function
         );
 
-    RV32I_FORWARDING_UNIT_ALU : entity WORK.RV32I_FORWARDING_UNIT_ALU
+    CPU_EXECUTION_FOWARDING_UNIT : entity WORK.CPU_EXECUTION_FOWARDING_UNIT
         port map (
             register_source_1        => source_0.select_source_1,
             register_source_2        => source_0.select_source_2,

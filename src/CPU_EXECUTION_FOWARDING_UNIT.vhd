@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity RV32I_FORWARDING_UNIT_ALU is
+entity CPU_EXECUTION_FOWARDING_UNIT is
 
     generic (
         ADDRESS_WIDTH : natural := 5
@@ -24,7 +24,7 @@ entity RV32I_FORWARDING_UNIT_ALU is
 
 end entity;
 
-architecture RTL of RV32I_FORWARDING_UNIT_ALU is
+architecture RTL of CPU_EXECUTION_FOWARDING_UNIT is
 
     -- No signals
 
@@ -38,23 +38,5 @@ begin
     mux_control_2 <= "10" when (enable_write_mem = '1' and register_source_2 = register_destination_mem and register_destination_mem /= "00000") else
                      "01" when (enable_write_wb = '1' and register_source_2 = register_destination_wb and register_destination_wb /= "00000") else
                      "00";
-
-    --process(register_source_1, register_source_2, register_destination_mem, register_destination_wb)
-    --begin
-    --    MUX_CONTROLLER_1 : if (enable_write_mem = '1' and register_source_1 = register_destination_mem) then
-    --        mux_control_1 <= "10";
-    --    elsif (enable_write_wb = '1' and register_source_1 = register_destination_wb) then
-    --        mux_control_1 <= "01";
-    --    else
-    --        mux_control_1 <= "00";
-    --    end if;
-    --    MUX_CONTROLLER_2 : if (enable_write_mem = '1' and register_source_2 = register_destination_mem) then
-    --        mux_control_2 <= "10";
-    --    elsif (enable_write_wb = '1' and register_source_2 = register_destination_wb) then
-    --        mux_control_2 <= "01";
-    --    else
-    --        mux_control_2 <= "00";
-    --    end if;
-    --end process;
 
 end architecture;
