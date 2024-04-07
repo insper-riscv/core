@@ -5,7 +5,7 @@ import pytest
 import utils
 
 
-class RV32I_FORWARDING_UNIT_ALU(utils.DUT):
+class CPU_EXECUTION_FOWARDING_UNIT(utils.DUT):
     register_source_1        = utils.DUT.Input_pin
     register_source_2        = utils.DUT.Input_pin
     register_destination_mem = utils.DUT.Input_pin
@@ -16,9 +16,9 @@ class RV32I_FORWARDING_UNIT_ALU(utils.DUT):
     mux_control_2            = utils.DUT.Output_pin
 
 
-def test_RV32I_FORWARDING_UNIT_ALU_synthesis():
-    RV32I_FORWARDING_UNIT_ALU.build_vhd()
-    # RV32I_FORWARDING_UNIT_ALU.build_netlistsvg()
+def test_CPU_EXECUTION_FOWARDING_UNIT_synthesis():
+    CPU_EXECUTION_FOWARDING_UNIT.build_vhd()
+    # CPU_EXECUTION_FOWARDING_UNIT.build_netlistsvg()
 
 
 if __name__ == "__main__":
