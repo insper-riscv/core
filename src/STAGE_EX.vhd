@@ -54,7 +54,7 @@ begin
         source_0 <= source;
     end generate;
 
-    MODULE_ALU_CONTROLLER : entity WORK.MODULE_ALU_CONTROLLER
+    MODULE_EXECUTION_UNIT_CONTROLLER : entity WORK.MODULE_EXECUTION_UNIT_CONTROLLER
         port map (
             opcode      => source_0.opcode,
             function_3  => source_0.funct_3,
@@ -74,28 +74,20 @@ begin
             mux_control_2            => selector_forward_2
         );
 
-    MODULE_ALU_REGISTER_SOURCE : entity WORK.MODULE_ALU_REGISTER_SOURCE
+    MODULE_EXECUTION_UNIT : entity WORK.MODULE_EXECUTION_UNIT
         port map (
-            register_source_1     => source_0.data_source_1,
-            register_source_2     => source_0.data_source_2,
+            select_forward_1      => selector_forward_1,
+            select_forward_2      => selector_forward_2,
+            select_source_1       => source_0.control_ex.select_source_1,
+            select_source_2       => source_0.control_ex.select_source_2,
+            address_program       => source_0.address_program,
             forwarding_mem_source => forwarding_mem_source,
             forwarding_wb_source  => forwarding_wb_source,
-            select_source_1       => selector_forward_1,
-            select_source_2       => selector_forward_2,
-            data_source_1         => forward_register_1,
-            data_source_2         => forward_register_2
-        );
-
-    MODULE_ALU : entity WORK.MODULE_ALU
-        port map (
-            select_source_1 => source_0.control_ex.select_source_1,
-            select_source_2 => source_0.control_ex.select_source_2,
-            address_program => source_0.address_program,
-            data_source_1   => forward_register_1,
-            data_source_2   => forward_register_2,
-            data_immediate  => source_0.data_immediate,
-            select_function => select_function,
-            destination     => destination.address_pointer
+            data_source_1         => source_0.data_source_1,
+            data_source_2         => source_0.data_source_2,
+            data_immediate        => source_0.data_immediate,
+            select_function       => select_function,
+            destination           => destination.address_pointer
         );
 
     destination.control_mem        <= source_0.control_mem;

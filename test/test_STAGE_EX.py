@@ -3,10 +3,9 @@ import os
 import pytest
 
 import utils
-from test_MODULE_ALU import MODULE_ALU
-from test_MODULE_ALU_CONTROLLER import MODULE_ALU_CONTROLLER
+from test_MODULE_EXECUTION_UNIT import MODULE_EXECUTION_UNIT
+from test_MODULE_EXECUTION_UNIT_CONTROLLER import MODULE_EXECUTION_UNIT_CONTROLLER
 from test_CPU_EXECUTION_FOWARDING_UNIT import CPU_EXECUTION_FOWARDING_UNIT
-from test_MODULE_ALU_REGISTER_SOURCE import MODULE_ALU_REGISTER_SOURCE
 
 
 class STAGE_EX(utils.DUT):
@@ -19,10 +18,9 @@ class STAGE_EX(utils.DUT):
     forwarding_wb_source    = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
-    module_alu_controller = MODULE_ALU_CONTROLLER
-    module_alu = MODULE_ALU
+    module_execution_unit_controller = MODULE_EXECUTION_UNIT_CONTROLLER
+    module_execution_unit = MODULE_EXECUTION_UNIT
     cpu_execution_fowarding_unit = CPU_EXECUTION_FOWARDING_UNIT
-    module_alu_register_source = MODULE_ALU_REGISTER_SOURCE
 
 
 @pytest.mark.synthesis
