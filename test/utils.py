@@ -190,6 +190,8 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 f"{entity}.json",
                 "-o",
                 filename or f"{entity}_netlist.svg",
+                "--skin",
+                "../test/data/netlistsvg/digital.svg",
             ],
             cwd="sim_build",
             stdout=subprocess.PIPE,
