@@ -7,7 +7,7 @@ import utils
 from test_RV32I_ALU_CONTROLLER import RV32I_ALU_CONTROLLER
 
 
-class MODULE_ALU_CONTROLLER(utils.DUT):
+class MODULE_EXECUTION_UNIT_CONTROLLER(utils.DUT):
     opcode = utils.DUT.Input_pin
     function_3 = utils.DUT.Input_pin
     function_7 = utils.DUT.Input_pin
@@ -16,8 +16,8 @@ class MODULE_ALU_CONTROLLER(utils.DUT):
     alu_controller = RV32I_ALU_CONTROLLER
 
 
-@MODULE_ALU_CONTROLLER.testcase
-async def tb_MODULE_ALU_CONTROLLER_case_1(dut: "MODULE_ALU_CONTROLLER", trace: utils.Trace):
+@MODULE_EXECUTION_UNIT_CONTROLLER.testcase
+async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT_CONTROLLER", trace: utils.Trace):
     dut.opcode.value = BinaryValue("01100")
     dut.function_3.value = BinaryValue("111")
     dut.function_7.value = BinaryValue("0000000")
@@ -41,16 +41,16 @@ async def tb_MODULE_ALU_CONTROLLER_case_1(dut: "MODULE_ALU_CONTROLLER", trace: u
 
 
 @pytest.mark.synthesis
-def test_MODULE_ALU_CONTROLLER_synthesis():
-    MODULE_ALU_CONTROLLER.build_vhd()
-    # MODULE_ALU_CONTROLLER.build_netlistsvg()
+def test_MODULE_EXECUTION_UNIT_CONTROLLER_synthesis():
+    MODULE_EXECUTION_UNIT_CONTROLLER.build_vhd()
+    # MODULE_EXECUTION_UNIT_CONTROLLER.build_netlistsvg()
 
 
 @pytest.mark.testcases
-def test_MODULE_ALU_CONTROLLER_testcases():
-    MODULE_ALU_CONTROLLER.test_with(
+def test_MODULE_EXECUTION_UNIT_CONTROLLER_testcases():
+    MODULE_EXECUTION_UNIT_CONTROLLER.test_with(
         [
-            tb_MODULE_ALU_CONTROLLER_case_1,
+            tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1,
         ]
     )
 

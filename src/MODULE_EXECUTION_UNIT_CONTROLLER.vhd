@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity MODULE_ALU_CONTROLLER is
+entity MODULE_EXECUTION_UNIT_CONTROLLER is
 
     generic (
         DATA_WIDTH : natural := XLEN
@@ -20,7 +20,7 @@ entity MODULE_ALU_CONTROLLER is
 
 end entity;
 
-architecture RTL of MODULE_ALU_CONTROLLER is
+architecture RTL of MODULE_EXECUTION_UNIT_CONTROLLER is
 
 begin
 

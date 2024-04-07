@@ -36,9 +36,9 @@ jobs:
               test_cases: true
             - component: GENERIC_SIGNAL_EXTENDER
               test_cases: false
-            - component: MODULE_ALU
+            - component: MODULE_EXECUTION_UNIT
               test_cases: true
-            - component: MODULE_ALU_CONTROLLER
+            - component: MODULE_EXECUTION_UNIT_CONTROLLER
               test_cases: true
             - component: MODULE_CONTROL_UNIT
               test_cases: true
