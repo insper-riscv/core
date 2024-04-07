@@ -28,7 +28,7 @@ begin
         enable_0 <= enable AND NOT source.enable_stall;
     end process;
 
-    MODULE_PC : entity WORK.MODULE_PC
+    MODULE_PROGRAM_COUNTER : entity WORK.MODULE_PROGRAM_COUNTER
         port map (
             clock        => clock,
             jump_address => address_jump,

@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
-entity MODULE_PC is
+entity MODULE_PROGRAM_COUNTER is
 
     generic (
         DATA_WIDTH : natural := XLEN
@@ -21,7 +21,7 @@ entity MODULE_PC is
 
 end entity;
 
-architecture RTL of MODULE_PC is
+architecture RTL of MODULE_PROGRAM_COUNTER is
 
         signal adder_out      : std_logic_vector((DATA_WIDTH - 1) downto 0);
         signal mux_out        : std_logic_vector((DATA_WIDTH - 1) downto 0);
