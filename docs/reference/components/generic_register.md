@@ -37,7 +37,7 @@ flowchart LR
 
 ## Interface genérica
 
-### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
+### `DATA_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura dos vetores de dados `source` e `destination`.
 
@@ -46,13 +46,13 @@ Largura dos vetores de dados `source` e `destination`.
 
 ## Interface de portas
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 
 - Tipo: `std_logic`
 
-### `clear` <Badge type="warning" text="INPUT" />
+### `clear` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 
@@ -62,7 +62,7 @@ Descrição.
 
 - Tipo: `std_logic`
 
-### `enable` <Badge type="warning" text="INPUT" />
+### `enable` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 
@@ -72,7 +72,7 @@ Descrição.
 
 - Tipo: `std_logic`
 
-### `source` <Badge type="warning" text="INPUT" />
+### `source` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 

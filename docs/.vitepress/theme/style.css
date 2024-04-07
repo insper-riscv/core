@@ -44,8 +44,8 @@
 
 :root {
     --vp-badge-neutral-border: transparent;
-    --vp-badge-neutral-text: var(--vp-c-neutral-1);
-    --vp-badge-neutral-bg: var(--vp-c-neutral-soft);
+    --vp-badge-neutral-text: var(--vp-c-indigo-1);
+    --vp-badge-neutral-bg: var(--vp-c-indigo-soft);
 }
 
 .VPBadge.neutral {

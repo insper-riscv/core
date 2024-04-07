@@ -34,24 +34,24 @@ flowchart LR
 
 ## Interface genérica
 
-### `SOURCE_WIDTH` <Badge type="tip" text="GENERIC" />
+### `SOURCE_WIDTH` <Badge type="neutral" text="GENERIC" />
 - Tipo: `natural`
 - Padrão: `XLEN` (constante externa)
 
-### `DESTINATION_WIDTH` <Badge type="tip" text="GENERIC" />
+### `DESTINATION_WIDTH` <Badge type="neutral" text="GENERIC" />
 - Tipo: `natural`
 - Padrão: `XLEN` (constante externa)
 
 ## Interface de portas
 
-### `source` <Badge type="warning" text="INPUT" />
+### `source` <Badge type="success" text="INPUT" />
 
 Vetor de entrada de dados.
 
 - Tipo: `std_logic_vector`
 - Largura: `(SOURCE_WIDTH - 1) downto 0`
 
-### `enable_unsigned` <Badge type="warning" text="INPUT" />
+### `enable_unsigned` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 

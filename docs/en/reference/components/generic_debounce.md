@@ -33,20 +33,20 @@ flowchart LR
 
 ## Port interface
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 
 - Type: `std_logic`
 
-### `clear` <Badge type="warning" text="INPUT" />
+### `clear` <Badge type="success" text="INPUT" />
 
 Entrada que reseta o debounce.
 
 - Type: `std_logic`
 - Default: `'0'`
 
-### `source` <Badge type="warning" text="INPUT" />
+### `source` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 

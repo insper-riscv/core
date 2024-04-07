@@ -33,7 +33,7 @@ flowchart LR
 
 ## Generic interface
 
-### `DEFAULT_OVERFLOW` <Badge type="tip" text="GENERIC" />
+### `DEFAULT_OVERFLOW` <Badge type="neutral" text="GENERIC" />
 
 Valor Padrão de overflow.
 
@@ -42,19 +42,19 @@ Valor Padrão de overflow.
 
 ## Port interface
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 
 - Type: `std_logic`
 
-### `clear` <Badge type="warning" text="INPUT" />
+### `clear` <Badge type="success" text="INPUT" />
 
 Atribui a saída `state` para sinal lógico baixo. Não reinicia a contagem.
 
 - Type: `std_logic`
 
-### `update` <Badge type="warning" text="INPUT" />
+### `update` <Badge type="success" text="INPUT" />
 
 Entrada do signal de limpeza do estado do contador. Reinicia a contagem mas não
 limpa o estado do contador.
@@ -62,7 +62,7 @@ limpa o estado do contador.
 - Type: `std_logic`
 - Default: `'0'`
 
-### `source` <Badge type="warning" text="INPUT" />
+### `source` <Badge type="success" text="INPUT" />
 
 Valor `n` de estouro da contagem. A cada `2^n` ciclos de clock, atribui a saída
 `state` para sinal lógico alto.

@@ -32,7 +32,7 @@ Largura dos vetores de entrada e saída de endereços.
 
 ## Port interface
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 

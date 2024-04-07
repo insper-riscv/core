@@ -36,14 +36,14 @@ flowchart LR
 
 ## Interface genérica
 
-### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
+### `DATA_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura dos vetores de entrada e saída de dados.
 
 - Tipo: `natural`
 - Padrão: `XLEN` (constante externa)
 
-### `DEFAULT_SOURCE_2` <Badge type="tip" text="GENERIC" />
+### `DEFAULT_SOURCE_2` <Badge type="neutral" text="GENERIC" />
 
 Valor padrão de incremento. Dispensa necessidade de atribuir entrada `source_2`.
 
@@ -52,14 +52,14 @@ Valor padrão de incremento. Dispensa necessidade de atribuir entrada `source_2`
 
 ## Interface de portas
 
-### `source_1` <Badge type="warning" text="INPUT" />
+### `source_1` <Badge type="success" text="INPUT" />
 
 Vetor de entrada primário.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `source_2` <Badge type="warning" text="INPUT" />
+### `source_2` <Badge type="success" text="INPUT" />
 
 Vetor de entrada secundário.
 

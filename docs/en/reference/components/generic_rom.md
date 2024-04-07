@@ -32,21 +32,21 @@ flowchart LR
 
 ## Generic interface
 
-### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
+### `DATA_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura dos vetores de dados `source` e `destination`.
 
 - Type: `natural`
 - Default: `XLEN` (external constant)
 
-### `ADDRESS_WIDTH` <Badge type="tip" text="GENERIC" />
+### `ADDRESS_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura do vetor da entrada `address`.
 
 - Type: `natural`
 - Default: `XLEN` (external constant)
 
-### `ADDRESSABLE_WIDTH` <Badge type="tip" text="GENERIC" />
+### `ADDRESSABLE_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura do vetor de endereçamento com mapeamento na memória.
 
@@ -61,7 +61,7 @@ Deve ser menor ou igual a `ADDRESS_WIDTH`.
 
 ## Port interface
 
-### `address` <Badge type="warning" text="INPUT" />
+### `address` <Badge type="success" text="INPUT" />
 
 Entrada de endereço da memória.
 

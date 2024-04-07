@@ -36,7 +36,7 @@ flowchart LR
 
 ## Interface genérica
 
-### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
+### `DATA_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura dos vetores de entrada e saída de dados.
 
@@ -45,35 +45,35 @@ Largura dos vetores de entrada e saída de dados.
 
 ## Interface de portas
 
-### `source_1` <Badge type="warning" text="INPUT" />
+### `source_1` <Badge type="success" text="INPUT" />
 
 Vetor de entrada primário. `destination <= source_1` se `selector = "00"`.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `source_2` <Badge type="warning" text="INPUT" />
+### `source_2` <Badge type="success" text="INPUT" />
 
 Vetor de entrada secundário. `destination <= source_2` se `selector = "01"`.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `source_3` <Badge type="warning" text="INPUT" />
+### `source_3` <Badge type="success" text="INPUT" />
 
 Vetor de entrada terciário. `destination <= source_3` se `selector = "10"`.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `source_4` <Badge type="warning" text="INPUT" />
+### `source_4` <Badge type="success" text="INPUT" />
 
 Vetor de entrada quaternário. `destination <= source_4` se `selector = "11"`.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`
 
-### `selector` <Badge type="warning" text="INPUT" />
+### `selector` <Badge type="success" text="INPUT" />
 
 Seleção do vetor de saída de `destination`.
 

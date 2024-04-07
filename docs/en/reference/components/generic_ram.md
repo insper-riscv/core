@@ -37,21 +37,21 @@ flowchart LR
 
 ## Generic interface
 
-### `DATA_WIDTH` <Badge type="tip" text="GENERIC" />
+### `DATA_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura dos vetores de dados `source` e `destination`.
 
 - Type: `natural`
 - Default: `XLEN` (external constant)
 
-### `ADDRESS_WIDTH` <Badge type="tip" text="GENERIC" />
+### `ADDRESS_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura do vetor da entrada `address`.
 
 - Type: `natural`
 - Default: `XLEN` (external constant)
 
-### `ADDRESSABLE_WIDTH` <Badge type="tip" text="GENERIC" />
+### `ADDRESSABLE_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura do vetor de endereçamento com mapeamento na memória.
 
@@ -66,39 +66,39 @@ Deve ser menor ou igual a `ADDRESS_WIDTH`.
 
 ## Port interface
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 
 - Type: `std_logic`
 
-### `enable` <Badge type="warning" text="INPUT" />
+### `enable` <Badge type="success" text="INPUT" />
 
 Entrada do sinal habilitação do uso da memória para leitura ou escrita.
 
 - Type: `std_logic`
 
-### `enable_read` <Badge type="warning" text="INPUT" />
+### `enable_read` <Badge type="success" text="INPUT" />
 
 Entrada do sinal habilitação da leitura da memória. Saída `destination` assume
 sinal de alta impedância caso `enable_read = '0'`.
 
 - Type: `std_logic`
 
-### `enable_write` <Badge type="warning" text="INPUT" />
+### `enable_write` <Badge type="success" text="INPUT" />
 
 Entrada do sinal habilitação da escrina da memória.
 
 - Type: `std_logic`
 
-### `address` <Badge type="warning" text="INPUT" />
+### `address` <Badge type="success" text="INPUT" />
 
 Entrada de endereço da memória.
 
 - Type: `std_logic_vector`
 - Width: variable`(ADDRESS_WIDTH - 1) downto 0`
 
-### `source` <Badge type="warning" text="INPUT" />
+### `source` <Badge type="success" text="INPUT" />
 
 Entrada de dados.
 

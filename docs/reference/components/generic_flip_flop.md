@@ -36,13 +36,13 @@ flowchart LR
 
 ## Interface de portas
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 
 - Tipo: `std_logic`
 
-### `clear` <Badge type="warning" text="INPUT" />
+### `clear` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 
@@ -52,7 +52,7 @@ Descrição.
 
 - tipo: `std_logic`
 
-### `enable` <Badge type="warning" text="INPUT" />
+### `enable` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 
@@ -62,7 +62,7 @@ Descrição.
 
 - tipo: `std_logic`
 
-### `source` <Badge type="warning" text="INPUT" />
+### `source` <Badge type="success" text="INPUT" />
 
 ::: danger TO DO
 

@@ -20,7 +20,7 @@ outline: 2
 
 ## Interface genérica
 
-### `GENERATE_REGISTERS` <Badge type="tip" text="GENERIC" />
+### `GENERATE_REGISTERS` <Badge type="neutral" text="GENERIC" />
 
 Define geração de registradores de pipeline.
 
@@ -29,7 +29,7 @@ Define geração de registradores de pipeline.
 
 ## Interface de portas
 
-### `clock` <Badge type="warning" text="INPUT" />
+### `clock` <Badge type="success" text="INPUT" />
 
 Entrada do sinal de clock.
 
