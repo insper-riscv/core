@@ -11,7 +11,7 @@ from test_GENERIC_REGISTER import GENERIC_REGISTER
 from test_GENERIC_ADDER import GENERIC_ADDER
 
 
-class MODULE_PC(utils.DUT):
+class MODULE_PROGRAM_COUNTER(utils.DUT):
     clock = utils.DUT.Input_pin
     jump_address = utils.DUT.Input_pin
     selector = utils.DUT.Input_pin
@@ -23,8 +23,8 @@ class MODULE_PC(utils.DUT):
     adder = GENERIC_ADDER
 
 
-@MODULE_PC.testcase
-async def tb_MODULE_PC_case_1(dut: MODULE_PC, trace: utils.Trace):
+@MODULE_PROGRAM_COUNTER.testcase
+async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: utils.Trace):
     values_jump_address = [
         "11111111111111110000000000000000",
         "11111111111111110000000000000000",
@@ -60,16 +60,16 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC, trace: utils.Trace):
 
 
 @pytest.mark.synthesis
-def test_MODULE_PC_synthesis():
-    MODULE_PC.build_vhd()
-    # MODULE_PC.build_netlistsvg()
+def test_MODULE_PROGRAM_COUNTER_synthesis():
+    MODULE_PROGRAM_COUNTER.build_vhd()
+    # MODULE_PROGRAM_COUNTER.build_netlistsvg()
 
 
 @pytest.mark.testcases
-def test_MODULE_PC_testcases():
-    MODULE_PC.test_with(
+def test_MODULE_PROGRAM_COUNTER_testcases():
+    MODULE_PROGRAM_COUNTER.test_with(
         [
-            tb_MODULE_PC_case_1,
+            tb_MODULE_PROGRAM_COUNTER_case_1,
         ]
     )
 

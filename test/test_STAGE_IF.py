@@ -3,7 +3,7 @@ import os
 import pytest
 
 import utils
-from test_MODULE_PC import MODULE_PC
+from test_MODULE_PROGRAM_COUNTER import MODULE_PROGRAM_COUNTER
 
 
 class STAGE_IF(utils.DUT):
@@ -12,7 +12,7 @@ class STAGE_IF(utils.DUT):
     address_jump = utils.DUT.Input_pin
     address_program = utils.DUT.Output_pin
 
-    module_pc = MODULE_PC
+    module_program_counter = MODULE_PROGRAM_COUNTER
 
 
 @pytest.mark.synthesis
