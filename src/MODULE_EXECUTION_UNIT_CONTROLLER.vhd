@@ -12,9 +12,9 @@ entity MODULE_EXECUTION_UNIT_CONTROLLER is
     );
   
     port (
-        opcode                 : in t_OPCODE;
-        function_3             : in t_FUNCTION;
-        function_7             : in std_logic_vector(6 downto 0);
+        opcode                 : in  t_OPCODE;
+        function_3             : in  t_FUNCTION3;
+        function_7             : in  t_FUNCTION7;
         destination            : out std_logic_vector(4 downto 0)
     );
 
