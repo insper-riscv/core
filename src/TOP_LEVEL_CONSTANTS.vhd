@@ -22,9 +22,11 @@ package TOP_LEVEL_CONSTANTS is
         RV32I_INSTRUCTION_J_TYPE
     );
 
-    --subtype FUNCTION_RANGE is natural range 2 downto 0;
-    subtype FUNCTION_RANGE is natural range 14 downto 12;
-    subtype t_FUNCTION is std_logic_vector(FUNCTION_RANGE);
+    subtype FUNCTION3_RANGE is natural range 14 downto 12;
+    subtype t_FUNCTION3 is std_logic_vector(FUNCTION3_RANGE);
+
+    subtype FUNCTION7_RANGE is natural range 31 downto 25;
+    subtype t_FUNCTION7 is std_logic_vector(FUNCTION7_RANGE);
 
     subtype OPCODE_FULL_RANGE is natural range 6 downto 0;
     subtype t_OPCODE_FULL is std_logic_vector(OPCODE_FULL_RANGE);
@@ -36,8 +38,8 @@ package TOP_LEVEL_CONSTANTS is
     subtype t_REGISTER is std_logic_vector(REGISTER_RANGE);
 
     type t_RV32I_INSTRUCTION is record
-        funct_3            : t_FUNCTION;
-        funct_7            : std_logic_vector(6 downto 0);
+        funct_3            : t_FUNCTION3;
+        funct_7            : t_FUNCTION7;
         select_source_2    : t_REGISTER;
         select_source_1    : t_REGISTER;
         select_destination : t_REGISTER;
@@ -131,8 +133,8 @@ package TOP_LEVEL_CONSTANTS is
         data_source_1      : t_DATA;
         data_source_2      : t_DATA;
         data_immediate     : t_DATA;
-        funct_7            : std_logic_vector(6 downto 0);
-        funct_3            : t_FUNCTION;
+        funct_7            : t_FUNCTION7;
+        funct_3            : t_FUNCTION3;
         opcode             : t_OPCODE;
         select_destination : t_REGISTER;
         select_source_1    : t_REGISTER;
@@ -186,60 +188,53 @@ package TOP_LEVEL_CONSTANTS is
     );
 
     -- RV32I Base Instruction Set functions
-    constant FUNCTION_JALR    : t_FUNCTION := "000";
-    constant FUNCTION_BEQ     : t_FUNCTION := "000";
-    constant FUNCTION_BNE     : t_FUNCTION := "001";
-    constant FUNCTION_BLT     : t_FUNCTION := "100";
-    constant FUNCTION_BGE     : t_FUNCTION := "101";
-    constant FUNCTION_BLTU    : t_FUNCTION := "110";
-    constant FUNCTION_BGEU    : t_FUNCTION := "111";
-    constant FUNCTION_LB      : t_FUNCTION := "000";
-    constant FUNCTION_LH      : t_FUNCTION := "001";
-    constant FUNCTION_LW      : t_FUNCTION := "010";
-    constant FUNCTION_LBU     : t_FUNCTION := "100";
-    constant FUNCTION_LHU     : t_FUNCTION := "101";
-    constant FUNCTION_SB      : t_FUNCTION := "000";
-    constant FUNCTION_SH      : t_FUNCTION := "001";
-    constant FUNCTION_SW      : t_FUNCTION := "010";
-    constant FUNCTION_ADDI    : t_FUNCTION := "000";
-    constant FUNCTION_SLTI    : t_FUNCTION := "010";
-    constant FUNCTION_SLTIU   : t_FUNCTION := "011";
-    constant FUNCTION_XORI    : t_FUNCTION := "100";
-    constant FUNCTION_ORI     : t_FUNCTION := "110";
-    constant FUNCTION_ANDI    : t_FUNCTION := "111";
-    constant FUNCTION_SLLI    : t_FUNCTION := "001";
-    constant FUNCTION_SRLI    : t_FUNCTION := "101";
-    constant FUNCTION_SRAI    : t_FUNCTION := "101";
-    constant FUNCTION_ADD     : t_FUNCTION := "000";
-    constant FUNCTION_SUB     : t_FUNCTION := "000";
-    constant FUNCTION_SLL     : t_FUNCTION := "001";
-    constant FUNCTION_SLT     : t_FUNCTION := "010";
-    constant FUNCTION_SLTU    : t_FUNCTION := "011";
-    constant FUNCTION_XOR     : t_FUNCTION := "100";
-    constant FUNCTION_SRL     : t_FUNCTION := "101";
-    constant FUNCTION_SRA     : t_FUNCTION := "101";
-    constant FUNCTION_OR      : t_FUNCTION := "110";
-    constant FUNCTION_AND     : t_FUNCTION := "111";
-    constant FUNCTION_FENCE   : t_FUNCTION := "000";
-    constant FUNCTION_FENCE_I : t_FUNCTION := "001";
-    constant FUNCTION_ECALL   : t_FUNCTION := "000";
-    constant FUNCTION_EBREAK  : t_FUNCTION := "000";
-    constant FUNCTION_CSRRW   : t_FUNCTION := "001";
-    constant FUNCTION_CSRRS   : t_FUNCTION := "010";
-    constant FUNCTION_CSRRC   : t_FUNCTION := "011";
-    constant FUNCTION_CSRRWI  : t_FUNCTION := "101";
-    constant FUNCTION_CSRRSI  : t_FUNCTION := "110";
-    constant FUNCTION_CSRRCI  : t_FUNCTION := "111";
+    constant FUNCTION_JALR    : t_FUNCTION3 := "000";
+    constant FUNCTION_BEQ     : t_FUNCTION3 := "000";
+    constant FUNCTION_BNE     : t_FUNCTION3 := "001";
+    constant FUNCTION_BLT     : t_FUNCTION3 := "100";
+    constant FUNCTION_BGE     : t_FUNCTION3 := "101";
+    constant FUNCTION_BLTU    : t_FUNCTION3 := "110";
+    constant FUNCTION_BGEU    : t_FUNCTION3 := "111";
+    constant FUNCTION_LB      : t_FUNCTION3 := "000";
+    constant FUNCTION_LH      : t_FUNCTION3 := "001";
+    constant FUNCTION_LW      : t_FUNCTION3 := "010";
+    constant FUNCTION_LBU     : t_FUNCTION3 := "100";
+    constant FUNCTION_LHU     : t_FUNCTION3 := "101";
+    constant FUNCTION_SB      : t_FUNCTION3 := "000";
+    constant FUNCTION_SH      : t_FUNCTION3 := "001";
+    constant FUNCTION_SW      : t_FUNCTION3 := "010";
+    constant FUNCTION_ADDI    : t_FUNCTION3 := "000";
+    constant FUNCTION_SLTI    : t_FUNCTION3 := "010";
+    constant FUNCTION_SLTIU   : t_FUNCTION3 := "011";
+    constant FUNCTION_XORI    : t_FUNCTION3 := "100";
+    constant FUNCTION_ORI     : t_FUNCTION3 := "110";
+    constant FUNCTION_ANDI    : t_FUNCTION3 := "111";
+    constant FUNCTION_SLLI    : t_FUNCTION3 := "001";
+    constant FUNCTION_SRLI    : t_FUNCTION3 := "101";
+    constant FUNCTION_SRAI    : t_FUNCTION3 := "101";
+    constant FUNCTION_ADD     : t_FUNCTION3 := "000";
+    constant FUNCTION_SUB     : t_FUNCTION3 := "000";
+    constant FUNCTION_SLL     : t_FUNCTION3 := "001";
+    constant FUNCTION_SLT     : t_FUNCTION3 := "010";
+    constant FUNCTION_SLTU    : t_FUNCTION3 := "011";
+    constant FUNCTION_XOR     : t_FUNCTION3 := "100";
+    constant FUNCTION_SRL     : t_FUNCTION3 := "101";
+    constant FUNCTION_SRA     : t_FUNCTION3 := "101";
+    constant FUNCTION_OR      : t_FUNCTION3 := "110";
+    constant FUNCTION_AND     : t_FUNCTION3 := "111";
+    constant FUNCTION_FENCE   : t_FUNCTION3 := "000";
+    constant FUNCTION_ECALL   : t_FUNCTION3 := "000";
+    constant FUNCTION_EBREAK  : t_FUNCTION3 := "000";
 
     -- RV32M Standard Extension Set functions
-    constant FUNCTION_MUL    : t_FUNCTION := "000";
-    constant FUNCTION_MULH   : t_FUNCTION := "001";
-    constant FUNCTION_MULHSU : t_FUNCTION := "010";
-    constant FUNCTION_MULHU  : t_FUNCTION := "011";
-    constant FUNCTION_DIV    : t_FUNCTION := "100";
-    constant FUNCTION_DIVU   : t_FUNCTION := "101";
-    constant FUNCTION_REM    : t_FUNCTION := "110";
-    constant FUNCTION_REMU   : t_FUNCTION := "111";
+    constant FUNCTION_MUL    : t_FUNCTION3 := "000";
+    constant FUNCTION_MULH   : t_FUNCTION3 := "001";
+    constant FUNCTION_MULHSU : t_FUNCTION3 := "010";
+    constant FUNCTION_MULHU  : t_FUNCTION3 := "011";
+    constant FUNCTION_DIV    : t_FUNCTION3 := "100";
+    constant FUNCTION_DIVU   : t_FUNCTION3 := "101";
+    constant FUNCTION_REM    : t_FUNCTION3 := "110";
+    constant FUNCTION_REMU   : t_FUNCTION3 := "111";
 
     -- RV32I Base Instruction Set opcodes
     constant OPCODE_OP     : t_OPCODE_FULL := "0110011";
@@ -281,8 +276,8 @@ package body TOP_LEVEL_CONSTANTS is
         immediate_j(31 downto 21) := (others => in_vec(31));
         immediate_j(20 downto  0) := in_vec(31) & in_vec(19 downto 12) & in_vec(20) & in_vec(30 downto 21) & '0';
 
-        out_vec.funct_3            := in_vec(FUNCTION_RANGE);
-        out_vec.funct_7            := in_vec(31 downto 25);
+        out_vec.funct_3            := in_vec(FUNCTION3_RANGE);
+        out_vec.funct_7            := in_vec(FUNCTION7_RANGE);
         out_vec.select_source_2    := in_vec(24 downto 20);
         out_vec.select_source_1    := in_vec(19 downto 15);
         out_vec.select_destination := in_vec(11 downto  7);
