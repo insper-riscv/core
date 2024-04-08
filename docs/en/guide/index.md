@@ -2,16 +2,7 @@
 import { VPTeamMembers } from 'vitepress/theme'
 </script>
 
-# About
-
-The central objective of this project is the development of an Intellectual Property 
-(IP) for a processor based on the RISC-V architecture, specifically for aerospace 
-applications. The hardware design must be modular, allowing for adaptation to a variety 
-of operational scenarios. The processor will initially be tested on an Intel FPGA. It 
-is crucial that the processor be capable of supporting the execution of a real-time 
-operating system, ensuring efficiency and reliability in aerospace environments. 
-Additionally, the project will include detailed unit and integration testing to ensure 
-the quality and functionality of the processor at all stages of development.
+<!--@include: @/report/.abstract.md-->
 
 <script>
 const a = {

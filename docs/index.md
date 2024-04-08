@@ -10,15 +10,12 @@ hero:
     dark: /images/RISC-V_Stacked_White_Yellow.svg
     alt: RISC-V
   actions:
-    - text: Sobre
-      link: /guide/
+    - text: Relatório
+      link: /report/
     - text: Começando
       link: /guide/
       theme: alt
     - text: Arquitetura
-      link: /reference/components/
-      theme: alt
-    - text: Especificação
       link: /reference/components/
       theme: alt
 
