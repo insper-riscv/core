@@ -37,7 +37,7 @@ architecture RTL of MODULE_EXECUTION_UNIT is
 
 begin
 
-    MUX_FORWARD_ALU_1 : entity WORK.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_4X1
         port map (
             source_1    => data_source_1,
             source_2    => forwarding_wb_source,
@@ -47,7 +47,7 @@ begin
             destination => forward_source_1
         );
 
-    MUX_FORWARD_ALU_2 : entity WORK.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_2 : entity WORK.GENERIC_MUX_4X1
         port map (
             source_1    => data_source_2,
             source_2    => forwarding_wb_source,
