@@ -12,5 +12,8 @@
     "panzoom": "^9.4.3",
     "vitepress": "^1.0.1",
     "vitepress-plugin-mermaid": "^2.0.16"
+  },
+  "dependencies": {
+    "markdown-it-footnote": "^4.0.0"
   }
 }

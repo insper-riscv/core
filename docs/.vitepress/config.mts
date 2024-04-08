@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from "vitepress-plugin-mermaid"
+import markdownItFootnote from "markdown-it-footnote"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig(withMermaid({
@@ -17,7 +18,7 @@ export default defineConfig(withMermaid({
       label: 'English',
       lang: 'en',
       ...require('../en/config.ts').default
-    }
+    },
   },
 
   head: [
@@ -41,5 +42,11 @@ export default defineConfig(withMermaid({
     ],
 
     lastUpdated: true,
+  },
+
+  markdown:  {
+    config(md) {
+      md.use(markdownItFootnote)
+    }
   },
 }))
