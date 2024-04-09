@@ -13,7 +13,9 @@ outline: 2
 ## Topologia
 
 <pan-container selector=".mermaid">
-<!--@include: @/.mermaid/generic-adder-topology.md-->
+
+<!--@include: @/.includes/generic_adder-topology.md-->
+
 </pan-container>
 
 ## Interface genérica

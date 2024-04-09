@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia do decodificador de Instruções](/images/reference/components/rv32i_control_unit.drawio.svg)
+<!--@include: @/.includes/rv32i_instruction_decoder-topology.md-->
 
 </pan-container>
 

@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia do banco de registradores](/images/reference/components/rv32i_register_file.drawio.svg)
+<!--@include: @/.includes/rv32i_register_file-topology.md-->
 
 </pan-container>
 

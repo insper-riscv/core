@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_WRITE_BACK.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_WRITE_BACK.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/MODULE_WRITE_BACK.vhd{vhdl:line-numbers}
 
 :::
 
@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia da Esctrita de Retorno](/images/reference/components/module_write_back.drawio.svg){.w-full .dark-invert}
+<!--@include: @/.includes/module_write_back-topology.md-->
 
 </pan-container>
 

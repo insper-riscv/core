@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Diagrama de portas da ULA de BIT](/images/reference/components/rv32i_alu_bit.drawio.svg)
+<!--@include: @/.includes/rv32i_alu_bit-topology.md-->
 
 </pan-container>
 

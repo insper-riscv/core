@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia do Acessa a Memória](/images/reference/components/stage_mem.drawio.svg){.w-full .dark-invert}
+<!--@include: @/.includes/stage_mem-topology.md-->
 
 </pan-container>
 

@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_REGISTER_FILE.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_REGISTER_FILE.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/MODULE_REGISTER_FILE.vhd{vhdl:line-numbers}
 
 :::
 
@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia do Arquivo de Registradores](/images/reference/components/module_register_file.drawio.svg){.w-full .dark-invert}
+<!--@include: @/.includes/module_register_file-topology.md-->
 
 </pan-container>
 

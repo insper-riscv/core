@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia do Escreve o Retorno](/images/reference/components/stage_wb.drawio.svg){.w-full .dark-invert}
+<!--@include: @/.includes/stage_wb-topology.md-->
 
 </pan-container>
 

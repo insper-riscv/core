@@ -32,71 +32,7 @@ outline: 2
 
 <pan-container selector=".mermaid">
 
-```mermaid
-flowchart LR
-    PC & ROM ==> IF/ID
-
-    CU & RF -.-> ID/EX
-    CU -.-> PC
-    CU ===> PC
-    ID/EX -.-> EX/MEM
-    EX/MEM -.-> MEM/WB
-
-    ALU ==> EX/MEM
-    ID/EX ===> EX/MEM
-
-    MEM ==> MEM/WB
-    EX/MEM ==> MEM/WB
-
-    subgraph STEP_WB ["Write Back"]
-        MEM/WB[("<span style="padding:4em 0;writing-mode:vertical-lr">Registrador MEM/WB</span>")]
-        WB((("Write\nBack")))
-        MEM/WB -..-> WB
-        MEM/WB ===> WB & WB
-    end
-
-    subgraph STEP_MEM ["Memory Access"]
-        EX/MEM[("<span style="padding:4em 0;writing-mode:vertical-lr">Registrador EX/MEM</span>")]
-        MEM[("\n\nMemory\n\n\n")]
-        EX/MEM -..-> MEM
-        EX/MEM ===> MEM
-    end
-
-    subgraph STEP_EX ["Execute"]
-        ID/EX[("<span style="padding:4em 0;writing-mode:vertical-lr">Registrador ID/EX</span>")]
-        ALU_CTRL[["Execution\nControl\nUnit"]]
-        ALU{"Execution\nUnit"}
-        ALU_CTRL -..-> ALU
-        ID/EX -..-> ALU_CTRL
-        ID/EX ==> ALU
-    end
-
-    subgraph STEP_ID ["Instruction Decode"]
-        IF/ID[("<span style="padding:4em 0;writing-mode:vertical-lr">Registrador IF/ID</span>")]
-        CU[["Control\nUnit"]]
-        RF[("\n\nRegister\nFile\n\n\n")]
-        CU -.-> RF
-        RF ===> CU
-        IF/ID ===> CU & RF
-    end
-
-    subgraph STEP_IF ["Instruction Fetch"]
-        PC[("<span style="padding:4em 0;writing-mode:vertical-lr">Program Counter</span>")]
-        ROM[("\n\nProgram\nMemory\n\n\n")]
-
-        PC ==> ROM
-    end
-
-    STEP_IF ~~~ STEP_ID
-    STEP_ID ~~~ STEP_EX
-    STEP_EX ~~~ STEP_MEM
-    STEP_MEM ~~~ STEP_WB
-
-    WB_NODE(" ")
-
-    WB ===> WB_NODE
-    RF ==== WB_NODE
-```
+<!--@include: @/.includes/top_level-topology.md-->
 
 </pan-container>
 

@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Diagrama de portas da ULA](/images/reference/components/rv32i_alu.drawio.svg)
+<!--@include: @/.includes/rv32i_alu-topology.md-->
 
 </pan-container>
 

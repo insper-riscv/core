@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_EXECUTION_UNIT_CONTROLLER.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_EXECUTION_UNIT_CONTROLLER.vhd &boxbox;" /></a>
 
-<<< @/../src/TOP_LEVEL.vhd{vhdl:line-numbers}
+<<< @/../src/MODULE_ALU_CONTROLLER.vhd{vhdl:line-numbers}
 
 :::
 
@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia da Controlador da Unidade de Execução](/images/reference/components/module_alu_controller.drawio.svg){.w-full .dark-invert}
+<!--@include: @/.includes/module_execution_unit_controller-topology.md-->
 
 </pan-container>
 

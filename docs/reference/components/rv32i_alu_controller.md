@@ -14,7 +14,7 @@ outline: 2
 
 <pan-container>
 
-![Topologia do controlador da ULA](/images/reference/components/rv32i_alu_controller.drawio.svg)
+<!--@include: @/.includes/rv32i_alu_conroller-topology.md-->
 
 </pan-container>
 
