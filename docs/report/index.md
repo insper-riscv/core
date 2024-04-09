@@ -1,9 +1,8 @@
 ---
-title: Desenvolvimento de RISC-V para Uso Aeroespacial
-titleTemplate: Projeto Final de Engenharia
+title: Insper | Projeto Final de Engenharia
+titleTemplate: Desenvolvimento de RISC-V para Uso Aeroespacial
 description: Relatório Versão Intermediária do Projeto Final de Engenharia
 pageClass: printing-doc
-aside: 'left'
 editLink: false
 ---
 
@@ -73,10 +72,15 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
 
 <!--@include: @/report/.resumo.md-->
 <!--@include: @/report/.abstract.md-->
+
+<section class="printing-doc--columns-section">
+
 <!--@include: @/report/.introducao.md-->
 <!--@include: @/report/.metodologia.md-->
 <!--@include: @/report/.resultados.md-->
 <!--@include: @/report/.conclusao.md-->
+
+</section>
 
 ## Referências
 
@@ -105,6 +109,27 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
             font-size: 12pt;
         }
 
+        li {
+            break-inside: avoid-column;
+        }
+
+        p, table {
+            break-inside: avoid-page;
+        }
+
+        table {
+            column-span: all;
+        }
+
+        h1, h2, h3, h4, h5, h6, img, svg, figure {
+            column-span: all;
+            break-inside: avoid-column;
+        }
+
+        figure {
+            margin: 16px 0;
+        }
+
         .table-of-contents {
             ul {
                 list-style: none;
@@ -116,10 +141,6 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
             }
         }
 
-        .footnotes-list {
-            list-style: none;
-            padding-left: 0;
-        }
         .footnotes-sep,
         .footnote-backref {
             display: none;
@@ -128,6 +149,12 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
         @media print {
             font-size: 12pt;
             font-family: "Times New Roman";
+
+            a {
+                color: currentcolor;
+                font: inherit;
+                text-decoration: none;
+            }
 
             h2 {
                 padding-top: 0;
@@ -142,9 +169,14 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
                 opacity: 0;
             }
 
+            .printing-doc--columns-section {
+                columns: 2;
+            }
+
             .VPNav,
             .VPLocalNav,
             .VPFooter,
+            .VPDocFooter,
             .header-anchor {
                 display: none;
             }
