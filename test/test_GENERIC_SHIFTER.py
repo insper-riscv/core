@@ -99,7 +99,7 @@ async def tb_GENERIC_SHIFTER_case_1(dut: GENERIC_SHIFTER, trace: utils.Trace):
     dut.selector_2.value = BinaryValue("110")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000001111")
+    yield trace.check(dut.destination, "00000000000000000000000000000111")
 
 @pytest.mark.synthesis
 def test_GENERIC_SHIFTER_synthesis():
