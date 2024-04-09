@@ -46,6 +46,18 @@ async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1, trace: utils.Trace):
     await trace.cycle()
     yield trace.check(dut.destination, "00000100")
 
+@GENERIC_MUX_2X1.testcase
+async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: utils.Trace):
+    bits = 5
+    for i in range(2**bits):
+        for j in range(2**bits):
+            for k in range(2):
+                dut.source_1.value = BinaryValue(utils.convert_to_binstr(i, bits))
+                dut.source_2.value = BinaryValue(utils.convert_to_binstr(j, bits))
+                dut.selector.value = BinaryValue(utils.convert_to_binstr(k, 1))
+
+                await trace.cycle()
+                yield trace.check(dut.destination, utils.convert_to_binstr(i if k == 0 else j, bits))
 
 @pytest.mark.synthesis
 def test_GENERIC_MUX_2X1_synthesis():
@@ -59,6 +71,15 @@ def test_GENERIC_MUX_2X1_testcases():
         [
             tb_GENERIC_MUX_2X1_case_1,
         ]
+    )
+
+@pytest.mark.stress
+def test_GENERIC_MUX_2X1_stress():
+    GENERIC_MUX_2X1.test_with(
+        [
+            tb_GENERIC_MUX_2X1_case_stress,
+        ],
+        parameters={"DATA_WIDTH": 5},
     )
 
 
