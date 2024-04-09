@@ -39,17 +39,17 @@ begin
         end process;
 
     shift_l <= source when (selector_1 = select_default_0((SELECTOR_WIDTH - 1) downto 0)) else
-               source(0) & shift_32(to_integer(unsigned(selector_1)) downto 0) when (selector_1 = select_default_1((SELECTOR_WIDTH - 1) downto 0)) else
+               source(0) & shift_32((to_integer(unsigned(selector_1)) - 1) downto 0) when (selector_1 = select_default_1((SELECTOR_WIDTH - 1) downto 0)) else
                source((DATA_WIDTH - 1) - to_integer(unsigned(selector_1)) downto 0) & shift_32(to_integer(unsigned(selector_1)) - 1) when (selector_1 = select_default_0((SELECTOR_WIDTH - 1) downto 1) & '1') else
                source((DATA_WIDTH - 1) - (to_integer(unsigned(selector_1))) downto 0) & shift_32((to_integer(unsigned(selector_1)) - 1) downto 0);
 
     shift_r <= source when (selector_1 = select_default_0((SELECTOR_WIDTH - 1) downto 0)) else
-               shift_32(to_integer(unsigned(selector_1)) downto 0) & source(DATA_WIDTH - 1) when (selector_1 = select_default_1((SELECTOR_WIDTH - 1) downto 0)) else
+               shift_32((to_integer(unsigned(selector_1)) - 1) downto 0) & source(DATA_WIDTH - 1) when (selector_1 = select_default_1((SELECTOR_WIDTH - 1) downto 0)) else
                shift_32(to_integer(unsigned(selector_1))) & source((DATA_WIDTH - 1) downto to_integer(unsigned(selector_1))) when (selector_1 = select_default_0((SELECTOR_WIDTH - 1) downto 1) & '1') else
                shift_32((to_integer(unsigned(selector_1)) - 1) downto 0) & source((DATA_WIDTH - 1) - (to_integer(unsigned(selector_1))) downto 0);
     
     shift_r_a <= source when (selector_1 = select_default_0((SELECTOR_WIDTH - 1) downto 0)) else
-                 tmp_r_a(to_integer(unsigned(selector_1)) downto 0) & source(DATA_WIDTH - 1) when (selector_1 = select_default_1((SELECTOR_WIDTH - 1) downto 0)) else
+                 tmp_r_a((to_integer(unsigned(selector_1)) - 1) downto 0) & source(DATA_WIDTH - 1) when (selector_1 = select_default_1((SELECTOR_WIDTH - 1) downto 0)) else
                  tmp_r_a(to_integer(unsigned(selector_1))) & source((DATA_WIDTH - 1) downto to_integer(unsigned(selector_1))) when (selector_1 = select_default_0((SELECTOR_WIDTH - 1) downto 1) & '1') else
                  tmp_r_a((to_integer(unsigned(selector_1)) - 1) downto 0) & source((DATA_WIDTH - 1) - (to_integer(unsigned(selector_1))) downto 0);
 
