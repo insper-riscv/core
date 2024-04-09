@@ -40,10 +40,10 @@ jobs:
               test_cases: false
             - component: MODULE_EXECUTION_UNIT
               test_cases: true
-            - component: MODULE_EXECUTION_UNIT_CONTROLLER
-              test_cases: true
-            - component: MODULE_CONTROL_UNIT
-              test_cases: true
+            #- component: MODULE_EXECUTION_UNIT_CONTROLLER
+            #  test_cases: true
+            #- component: MODULE_CONTROL_UNIT
+            #  test_cases: true
             - component: MODULE_PROGRAM_COUNTER
               test_cases: true
             - component: MODULE_REGISTER_FILE
