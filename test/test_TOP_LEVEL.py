@@ -371,6 +371,120 @@ async def tb_TOP_LEVEL_SLLI(dut: TOP_LEVEL, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SRL(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SRLI(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SRA(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
+        "00000000000000000001000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000001000000",
+        "10000000000000000000000000000000",
+        "11111110000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SRAI(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000001000000000000",
+        "00000000000000000000000001000000",
+        "00000000000000000000000001000000",
+        "10000000000000000000000000000000",
+        "11111110000000000000000000000000",
+        "11111110000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000001000000",
+        "11111110000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
 @pytest.mark.synthesis
 def test_TOP_LEVEL_synthesis():
     TOP_LEVEL.build_vhd()
@@ -494,6 +608,42 @@ def test_TOP_LEVEL_testcases():
     TOP_LEVEL.test_with(
         testcase=[
             tb_TOP_LEVEL_SLLI
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRL.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SRL
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRLI.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SRLI
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRA.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SRA
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRAI.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SRAI
         ],
     )
 

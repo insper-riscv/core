@@ -80,6 +80,13 @@ async def tb_GENERIC_SHIFTER_case_1(dut: GENERIC_SHIFTER, trace: utils.Trace):
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000111")
 
+    dut.source.value = BinaryValue("00000000000000000000000100000000")
+    dut.selector_1.value = BinaryValue("01000")
+    dut.selector_2.value = BinaryValue("101")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000000000000001")
+
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.selector_1.value = BinaryValue("11101")
     dut.selector_2.value = BinaryValue("110")
