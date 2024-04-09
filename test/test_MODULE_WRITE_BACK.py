@@ -43,11 +43,13 @@ async def tb_MODULE_WRITE_BACK_case_1(dut: MODULE_WRITE_BACK, trace: utils.Trace
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
 
+@pytest.mark.synthesis
 def test_MODULE_WRITE_BACK_synthesis():
     MODULE_WRITE_BACK.build_vhd()
     # MODULE_WRITE_BACK.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_MODULE_WRITE_BACK_testcases():
     MODULE_WRITE_BACK.test_with(
         [

@@ -20,8 +20,8 @@ entity STAGE_EX is
         enable_mem              : in std_logic;
         selector_forwarding_wb  : in t_REGISTER;
         enable_wb               : in std_logic;
-        forwarding_mem_source : in std_logic_vector((DATA_WIDTH - 1) downto 0);
-        forwarding_wb_source : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        forwarding_mem_source   : in std_logic_vector((DATA_WIDTH - 1) downto 0);
+        forwarding_wb_source    : in std_logic_vector((DATA_WIDTH - 1) downto 0);
         source      : in  t_SIGNALS_ID_EX;
         destination : out t_SIGNALS_EX_MEM
     );
@@ -31,7 +31,7 @@ end entity;
 architecture RTL of STAGE_EX is
 
     signal source_0        : t_SIGNALS_ID_EX := NULL_SIGNALS_ID_EX;
-    signal select_function : std_logic_vector(3 downto 0);
+    signal select_function : std_logic_vector(4 downto 0);
     signal forward_register_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal forward_register_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal selector_forward_1 : std_logic_vector(1 downto 0);

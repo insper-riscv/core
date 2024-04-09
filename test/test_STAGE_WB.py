@@ -15,6 +15,7 @@ class STAGE_WB(utils.DUT):
     module_write_back = MODULE_WRITE_BACK
 
 
+@pytest.mark.synthesis
 def test_STAGE_WB_synthesis():
     STAGE_WB.build_vhd()
     # STAGE_WB.build_netlistsvg()

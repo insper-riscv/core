@@ -18,7 +18,7 @@ entity MODULE_ALU is
         data_source_1          : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         data_source_2          : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         data_immediate         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        select_function        : in  std_logic_vector(3 downto 0);
+        select_function        : in  std_logic_vector(4 downto 0);
         -- source_memory          : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         -- source_write_back      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         -- select_foward_1        : in  std_logic_vector(1 downto 0);
@@ -57,9 +57,9 @@ begin
 
     ALU : entity WORK.RV32I_ALU
         port map (
-            invert_source_1 => select_function(3),
-            invert_source_2 => select_function(2),
-            select_function => select_function(1 downto 0),
+            invert_source_1 => select_function(4),
+            invert_source_2 => select_function(3),
+            select_function => select_function(2 downto 0),
             source_1        => alu_source_1,
             source_2        => alu_source_2,
             destination     => destination

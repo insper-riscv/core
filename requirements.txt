@@ -3,3 +3,4 @@ find-libpython
 pytest
 pytest-check
 wavedrom
+PyYAML

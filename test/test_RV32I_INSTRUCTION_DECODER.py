@@ -49,11 +49,13 @@ async def tb_RV32I_INSTRUCTION_DECODER_case_1(dut: RV32I_INSTRUCTION_DECODER, tr
         yield trace.check(dut.immediate, immediate, f"At clock {index}.")
 
 
+@pytest.mark.synthesis
 def test_RV32I_INSTRUCTION_DECODER_synthesis():
     RV32I_INSTRUCTION_DECODER.build_vhd()
     # RV32I_INSTRUCTION_DECODER.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_RV32I_INSTRUCTION_DECODER_testcases():
     RV32I_INSTRUCTION_DECODER.test_with(
         [

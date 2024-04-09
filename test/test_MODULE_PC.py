@@ -59,11 +59,13 @@ async def tb_MODULE_PC_case_1(dut: MODULE_PC, trace: utils.Trace):
         yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
+@pytest.mark.synthesis
 def test_MODULE_PC_synthesis():
     MODULE_PC.build_vhd()
     # MODULE_PC.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_MODULE_PC_testcases():
     MODULE_PC.test_with(
         [

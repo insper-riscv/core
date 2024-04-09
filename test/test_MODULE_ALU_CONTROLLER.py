@@ -23,28 +23,30 @@ async def tb_MODULE_ALU_CONTROLLER_case_1(dut: "MODULE_ALU_CONTROLLER", trace: u
     dut.function_7.value = BinaryValue("0000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0000")
+    yield trace.check(dut.destination, "00000")
 
     dut.opcode.value = BinaryValue("01100")
     dut.function_3.value = BinaryValue("000")
     dut.function_7.value = BinaryValue("0000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0010")
+    yield trace.check(dut.destination, "00011")
 
     dut.opcode.value = BinaryValue("01100")
     dut.function_3.value = BinaryValue("000")
     dut.function_7.value = BinaryValue("0100000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0110")
+    yield trace.check(dut.destination, "01011")
 
 
+@pytest.mark.synthesis
 def test_MODULE_ALU_CONTROLLER_synthesis():
     MODULE_ALU_CONTROLLER.build_vhd()
     # MODULE_ALU_CONTROLLER.build_netlistsvg()
 
 
+@pytest.mark.testcases
 def test_MODULE_ALU_CONTROLLER_testcases():
     MODULE_ALU_CONTROLLER.test_with(
         [
