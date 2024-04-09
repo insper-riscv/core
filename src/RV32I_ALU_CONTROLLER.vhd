@@ -27,13 +27,15 @@ begin
                    "00001" when (opcode = OPCODE_OP(OPCODE_RANGE)    ) and(function_3 = FUNCTION_OR  ) and (function_7 = "0000000") else
                    "00011" when (opcode = OPCODE_OP(OPCODE_RANGE)    ) and(function_3 = FUNCTION_ADD ) and (function_7 = "0000000") else
                    "01011" when (opcode = OPCODE_OP(OPCODE_RANGE)    ) and(function_3 = FUNCTION_SUB ) and (function_7 = "0100000") else
-                   "01100" when (opcode = OPCODE_OP(OPCODE_RANGE)    ) and(function_3 = FUNCTION_SLT ) and (function_7 = "0000000") else
+                   "01111" when (opcode = OPCODE_OP(OPCODE_RANGE)    ) and(function_3 = FUNCTION_SLT ) and (function_7 = "0000000") else
+                   "00100" when (opcode = OPCODE_OP(OPCODE_RANGE)    ) and(function_3 = FUNCTION_SLL ) and (function_7 = "0000000") else
                    "00011" when (opcode = OPCODE_LOAD(OPCODE_RANGE)  ) and(function_3 = FUNCTION_LW  ) else
                    "00011" when (opcode = OPCODE_STORE(OPCODE_RANGE) ) and(function_3 = FUNCTION_SW  ) else
                    "00000" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_ANDI) else
                    "00010" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_XORI) else
                    "00001" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_ORI ) else
                    "00011" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_ADDI) else
+                   "00100" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_SLLI) and (function_7 = "0000000") else
                    "00001" when (opcode = OPCODE_LUI(OPCODE_RANGE)   ) else
                    "00001" when (opcode = OPCODE_AUIPC(OPCODE_RANGE) ) else
                    "00000";

@@ -30,6 +30,7 @@ architecture CPU of RV32I_ALU is
     signal carry    : std_logic_vector( DATA_WIDTH      downto 0);
     signal slt      : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
     signal overflow : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal shift    : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
 
 begin
 
@@ -53,7 +54,20 @@ begin
             );
     end generate;
 
-    destination <= result;
+    GENERIC_SHIFTER : entity WORK.GENERIC_SHIFTER
+            port map (
+                source      => source_1,
+                selector_1  => source_2(4 downto 0),
+                selector_2  => select_function,
+                destination => shift
+            );
+
+    destination <= shift when (
+                       select_function = "100" or
+                       select_function = "101" or
+                       select_function = "110"
+                    ) else 
+                   result;
 
     --flag_z  <= '1' when (result = ZERO) else
     --           '0';
