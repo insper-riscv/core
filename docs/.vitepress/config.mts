@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
-import { withMermaid } from "vitepress-plugin-mermaid"
-import markdownItFootnote from "markdown-it-footnote"
+import { withMermaid } from 'vitepress-plugin-mermaid'
+import markdownItFootnote from 'markdown-it-footnote'
+import implicitFigures from 'markdown-it-image-figures'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig(withMermaid({
@@ -22,7 +23,7 @@ export default defineConfig(withMermaid({
   },
 
   head: [
-    ['link', { rel: 'icon', href: "/24a-CTI-RISCV/images/RISC-V_Stacked_Color.svg" }],
+    ['link', { rel: 'icon', href: '/24a-CTI-RISCV/images/RISC-V_Stacked_Color.svg' }],
   ],
 
   themeConfig: {
@@ -47,6 +48,9 @@ export default defineConfig(withMermaid({
   markdown:  {
     config(md) {
       md.use(markdownItFootnote)
+      md.use(implicitFigures, {
+        figcaption: true,
+      })
     }
   },
 }))
