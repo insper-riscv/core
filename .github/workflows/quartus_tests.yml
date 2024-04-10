@@ -23,4 +23,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      - run: ls
+      - name: Quartus Folder
+        run: cd quartus
+      - name: Synthesis
+        run: quartus_map "top_level"
