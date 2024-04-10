@@ -21,3 +21,4 @@ jobs:
           run: |
             cd quartus
             quartus_map "top level"
+            
