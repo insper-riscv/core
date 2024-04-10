@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: chriz2600/quartus-lite:latest
+      env:
+        NODE_ENV: development
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/volume_mount
+      options: --cpus 1
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
