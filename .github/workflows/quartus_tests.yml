@@ -16,11 +16,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      - name: Run the build process with Docker
-        uses: addnab/docker-run-action@v3
-        with:
-            image: chriz2600/quartus-lite:latest
-            options: -v ${{ github.workspace }}:/var/www
-            run: |
+      - run: |
               cd quartus
               quartus_map "top_level"
