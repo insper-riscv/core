@@ -18,10 +18,10 @@ jobs:
         - name: Build the Docker image
           run: docker build . --file .devcontainer/Dockerfile --tag my-image-name:local
         - name: Run Synthesis
-          run: docker run -it -v $PWD:/srv -w/srv cd quartus && quartus_map "top_level"
+          run: docker run  -v $PWD:/srv -w/srv cd quartus && quartus_map "top_level"
         - name: Run Elaboration
-          run: docker run -it -v $PWD:/srv -w/srv cd quartus && quartus_map "top_level" --analysis_and_elaboration --enable_register_retiming=on 
+          run: docker run -v $PWD:/srv -w/srv cd quartus && quartus_map "top_level" --analysis_and_elaboration --enable_register_retiming=on 
         - name: Run Fitter
-          run: docker run -it -v $PWD:/srv -w/srv cd quartus && quartus_fit "top_level"
+          run: docker run -v $PWD:/srv -w/srv cd quartus && quartus_fit "top_level"
         - name: Run Timing Analysis
-          run: docker run -it -v $PWD:/srv -w/srv cd quartus && quartus_sta "top_level" --do_report_timing --multicorner
+          run: docker run -v $PWD:/srv -w/srv cd quartus && quartus_sta "top_level" --do_report_timing --multicorner
