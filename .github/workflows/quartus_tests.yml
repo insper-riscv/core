@@ -9,19 +9,17 @@ name: Quartus Tests
 jobs:
 
   build:
-
+    name: Build docker
     runs-on: ubuntu-latest
-
     steps:
-        - name: Check out code
-          uses: actions/checkout@v3
-        - name: Build the Docker image
-          run: docker build . --file .devcontainer/Dockerfile -t local
-        - name: Run Synthesis
-          run: sudo docker run -v $PWD:/srv -w/srv local cd quartus && quartus_map "top_level"
-        - name: Run Elaboration
-          run: sudo docker run -v $PWD:/srv -w/srv local cd quartus && quartus_map "top_level" --analysis_and_elaboration --enable_register_retiming=on 
-        - name: Run Fitter
-          run: sudo docker run -v $PWD:/srv -w/srv local cd quartus && quartus_fit "top_level"
-        - name: Run Timing Analysis
-          run: sudo docker run -v $PWD:/srv -w/srv local cd quartus && quartus_sta "top_level" --do_report_timing --multicorner
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+            image: chriz2600/quartus-lite:latest
+            options: -v ${{ github.workspace }}:/var/www
+            run: |
+                composer install
+                npm install
+                npm run production
