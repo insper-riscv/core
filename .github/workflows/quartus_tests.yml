@@ -16,9 +16,8 @@ jobs:
         - name: Check out code
           uses: actions/checkout@v3
         - name: Set up Quartus
-          uses: pfeinsper/24a-CTI-RISCV@v1
+          uses: pfeinsper/24a-CTI-RISCV@dev/timing_analysis
         - name: Run Quartus tests
           run: |
             cd quartus
             quartus_map "top level"
-            
