@@ -15,15 +15,9 @@ jobs:
     steps:
         - name: Check out code
           uses: actions/checkout@v3
-        - name: Build the Docker image
-          run: docker build . --file .devcontainer/Dockerfile -t local
-        - name: Docker ps
-          run: docker ps
-        - name: Run Synthesis
-          run: docker run -v $PWD:/srv -w/srv local cd quartus && quartus_map "top_level"
-        - name: Run Elaboration
-          run: docker run -v $PWD:/srv -w/srv local cd quartus && quartus_map "top_level" --analysis_and_elaboration --enable_register_retiming=on 
-        - name: Run Fitter
-          run: docker run -v $PWD:/srv -w/srv local cd quartus && quartus_fit "top_level"
-        - name: Run Timing Analysis
-          run: docker run -v $PWD:/srv -w/srv local cd quartus && quartus_sta "top_level" --do_report_timing --multicorner
+        - name: Set up Quartus
+          uses: pfeinsper/24a-CTI-RISCV@v1
+        - name: Run Quartus tests
+          run: |
+            cd quartus
+            quartus_map "top level"

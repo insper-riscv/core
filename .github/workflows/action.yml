@@ -1,0 +1,5 @@
+name: 'Container'
+description: 'Cria um container com a imagem Dockerfile'
+runs:
+  using: 'docker'
+  image: '.devcontainer/Dockerfile'
