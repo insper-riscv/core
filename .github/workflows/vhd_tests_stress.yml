@@ -2,7 +2,8 @@ name: VHD stress testing routine
 'on':
   workflow_dispatch: {}
   push:
-  - .github/workflows/vhd_tests_stress.yml
+    paths:
+    - .github/workflows/vhd_tests_stress.yml
 
 jobs:
   test:
