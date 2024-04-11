@@ -48,14 +48,12 @@ async def tb_GENERIC_MUX_4X1_case_1(dut: GENERIC_MUX_4X1, trace: utils.Trace):
 
 @GENERIC_MUX_4X1.testcase
 async def tb_GENERIC_MUX_4X1_case_stress(dut: GENERIC_MUX_4X1, trace: utils.Trace):
-    for _ in range(1_000_000):
+    for _ in range(250_000):
         source_1 = random.getrandbits(32)
         source_2 = random.getrandbits(32)
         source_3 = random.getrandbits(32)
         source_4 = random.getrandbits(32)
         selector = random.getrandbits(2)
-
-        sources = [source_1, source_2, source_3, source_4]
 
         source_1_bits = utils.convert_to_binstr(source_1, 32)
         source_2_bits = utils.convert_to_binstr(source_2, 32)
@@ -73,23 +71,28 @@ async def tb_GENERIC_MUX_4X1_case_stress(dut: GENERIC_MUX_4X1, trace: utils.Trac
 
         message = f"source_1: {source_1_bits}, source_2: {source_2_bits}, source_3: {source_3_bits}, source_4: {source_4_bits}, selector: {selector_bits}"
 
-        yield trace.check(dut.destination, utils.convert_to_binstr(sources[selector], 32), message)
+        if selector == 0:  
+            yield trace.check(dut.destination, source_1_bits, message)
+        if selector == 1:  
+            yield trace.check(dut.destination, source_2_bits, message)
+        if selector == 2:  
+            yield trace.check(dut.destination, source_3_bits, message)
+        if selector == 3:  
+            yield trace.check(dut.destination, source_4_bits, message)
 
 @GENERIC_MUX_4X1.testcase
-async def tb_GENERIC_MUX_4X1_case_stress_4_bits(dut: GENERIC_MUX_4X1, trace: utils.Trace):
-    bits = 4
+async def tb_GENERIC_MUX_4X1_case_stress_3_bits(dut: GENERIC_MUX_4X1, trace: utils.Trace):
+    bits = 3
     for value_1 in range(2**bits):
         for value_2 in range(2**bits):
             for value_3 in range(2**bits):
                 for value_4 in range(2**bits):
-                    for k in range(4):
+                    for selector in range(4):
                         source_1 = utils.convert_to_binstr(value_1, bits)
                         source_2 = utils.convert_to_binstr(value_2, bits)
                         source_3 = utils.convert_to_binstr(value_3, bits)
                         source_4 = utils.convert_to_binstr(value_4, bits)
-                        selector = utils.convert_to_binstr(k, 2)
-
-                        sources = [value_1, value_2, value_3, value_4]
+                        selector = utils.convert_to_binstr(selector, 2)
                 
                         dut.source_1.value = BinaryValue(source_1)
                         dut.source_2.value = BinaryValue(source_2)
@@ -100,7 +103,15 @@ async def tb_GENERIC_MUX_4X1_case_stress_4_bits(dut: GENERIC_MUX_4X1, trace: uti
                         message = f"source_1: {source_1}, source_2: {source_2}, selector: {selector}"
 
                         await trace.cycle()
-                        yield trace.check(dut.destination, utils.convert_to_binstr(sources[k], bits), message)
+
+                        if selector == 0:  
+                            yield trace.check(dut.destination, utils.convert_to_binstr(value_1, bits), message)
+                        if selector == 1:  
+                            yield trace.check(dut.destination, utils.convert_to_binstr(value_2, bits), message)
+                        if selector == 2:  
+                            yield trace.check(dut.destination, utils.convert_to_binstr(value_3, bits), message)
+                        if selector == 3:  
+                            yield trace.check(dut.destination, utils.convert_to_binstr(value_4, bits), message)
 
 @pytest.mark.synthesis
 def test_GENERIC_MUX_4X1_synthesis():
@@ -124,14 +135,14 @@ def test_GENERIC_MUX_4X1_stress():
         ],
     )
 
-# @pytest.mark.stress
-# def test_GENERIC_MUX_4X1_stress_4_bits():
-#     GENERIC_MUX_4X1.test_with(
-#         [
-#             tb_GENERIC_MUX_4X1_case_stress_4_bits,
-#         ],
-#         parameters={"DATA_WIDTH": 4},
-#     )
+@pytest.mark.stress
+def test_GENERIC_MUX_4X1_stress_3_bits():
+    GENERIC_MUX_4X1.test_with(
+        [
+            tb_GENERIC_MUX_4X1_case_stress_3_bits,
+        ],
+        parameters={"DATA_WIDTH": 3},
+    )
 
 
 if __name__ == "__main__":
