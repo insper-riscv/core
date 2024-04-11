@@ -69,6 +69,16 @@ virtualização no BIOS, e alguns usuários precisam adicionar sua conta ao grup
 
 ## Iniciando o ambiente
 
+::: danger **Para usuários Linux**
+
+Antes de iniciar o ambiente, caso esteja utilizando o **Ubuntu** e possivelmente outras distros Linux, 
+é necessário adicionar o caminho `/run` em **Settings** > **Resources** > **File Sharing** e clique em **Apply & Restart**. 
+Caso não faça isso, é provável que o ambiente não inicie pois o Docker não terá permissão para acessar o diretório.
+
+![Docker Config](/public/images/docker_config.png)  
+
+:::
+
 ::: danger TO DO
 
 Explicação
