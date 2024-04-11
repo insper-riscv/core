@@ -192,7 +192,7 @@ def test_GENERIC_REGISTER_stress_15_bits():
         [
             tb_GENERIC_REGISTER_case_stress_15_bits,
         ],
-        {'DATA_WIDTH': 5}
+        {'DATA_WIDTH': 15}
     )
 
 
