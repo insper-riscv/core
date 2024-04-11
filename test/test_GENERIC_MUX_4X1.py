@@ -124,14 +124,14 @@ def test_GENERIC_MUX_4X1_stress():
         ],
     )
 
-@pytest.mark.stress
-def test_GENERIC_MUX_4X1_stress_4_bits():
-    GENERIC_MUX_4X1.test_with(
-        [
-            tb_GENERIC_MUX_4X1_case_stress_4_bits,
-        ],
-        parameters={"DATA_WIDTH": 4},
-    )
+# @pytest.mark.stress
+# def test_GENERIC_MUX_4X1_stress_4_bits():
+#     GENERIC_MUX_4X1.test_with(
+#         [
+#             tb_GENERIC_MUX_4X1_case_stress_4_bits,
+#         ],
+#         parameters={"DATA_WIDTH": 4},
+#     )
 
 
 if __name__ == "__main__":

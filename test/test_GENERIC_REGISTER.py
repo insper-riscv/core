@@ -1,4 +1,6 @@
+from email import message
 import os
+import random
 
 import pytest
 import cocotb
@@ -52,6 +54,116 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
         yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
+@GENERIC_REGISTER.testcase
+async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Trace):
+    clear = "0"
+    enable = "1"
+
+    for _ in range(200_000):
+        source = random.getrandbits(32)
+
+        source_bits = utils.convert_to_binstr(source, 32)
+        destination = source_bits
+
+        dut.clear.value = BinaryValue(clear)
+        dut.enable.value = BinaryValue(enable)
+        dut.source.value = BinaryValue(source_bits)
+
+        message = f"Enable: {enable}, Clear: {clear}, Source: {source_bits}, Destination: {destination}"
+
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, message)
+    
+    enable = "0"
+    source = random.getrandbits(32)
+    source_bits = utils.convert_to_binstr(source, 32)
+    destination = source_bits
+
+    for _ in range(200_000):
+        source = random.getrandbits(32)
+
+        source_bits = utils.convert_to_binstr(source, 32)
+
+        dut.clear.value = BinaryValue(clear)
+        dut.enable.value = BinaryValue(enable)
+        dut.source.value = BinaryValue(source_bits)
+
+        message = f"Enable: {enable}, Clear: {clear}, Source: {source_bits}, Destination: {destination}"
+
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, message)
+
+    clear = "1"
+    enable = "0"
+    destination = utils.convert_to_binstr(0, 32)
+
+    for _ in range(200_000):
+        source = random.getrandbits(32)
+
+        source_bits = utils.convert_to_binstr(source, 32)
+
+        dut.clear.value = BinaryValue(clear)
+        dut.enable.value = BinaryValue(enable)
+        dut.source.value = BinaryValue(source_bits)
+
+        message = f"Enable: {enable}, Clear: {clear}, Source: {source_bits}, Destination: {destination}"
+
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, message)
+
+@GENERIC_REGISTER.testcase
+async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: utils.Trace):
+    bits = 15
+    
+    clear = "0"
+    enable = "1"
+
+    for source in range(2**bits):
+        source_bits = utils.convert_to_binstr(source, 32)
+        destination = source_bits
+
+        dut.clear.value = BinaryValue(clear)
+        dut.enable.value = BinaryValue(enable)
+        dut.source.value = BinaryValue(source_bits)
+
+        message = f"Enable: {enable}, Clear: {clear}, Source: {source_bits}, Destination: {destination}"
+
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, message)
+    
+    enable = "0"
+    source = random.getrandbits(32)
+    source_bits = utils.convert_to_binstr(source, 32)
+    destination = source_bits
+
+    for source in range(2**bits):
+        source_bits = utils.convert_to_binstr(source, 32)
+
+        dut.clear.value = BinaryValue(clear)
+        dut.enable.value = BinaryValue(enable)
+        dut.source.value = BinaryValue(source_bits)
+
+        message = f"Enable: {enable}, Clear: {clear}, Source: {source_bits}, Destination: {destination}"
+
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, message)
+
+    clear = "1"
+    enable = "0"
+    destination = utils.convert_to_binstr(0, 32)
+
+    for source in range(2**bits):
+        source_bits = utils.convert_to_binstr(source, 32)
+
+        dut.clear.value = BinaryValue(clear)
+        dut.enable.value = BinaryValue(enable)
+        dut.source.value = BinaryValue(source_bits)
+
+        message = f"Enable: {enable}, Clear: {clear}, Source: {source_bits}, Destination: {destination}"
+
+        await trace.cycle()
+        yield trace.check(dut.destination, destination, message)
+
 @pytest.mark.synthesis
 def test_GENERIC_REGISTER_synthesis():
     GENERIC_REGISTER.build_vhd()
@@ -64,6 +176,23 @@ def test_GENERIC_REGISTER_testcases():
         [
             tb_GENERIC_REGISTER_case_1,
         ]
+    )
+
+@pytest.mark.stress
+def test_GENERIC_REGISTER_stress():
+    GENERIC_REGISTER.test_with(
+        [
+            tb_GENERIC_REGISTER_case_stress,
+        ],
+    )
+
+@pytest.mark.stress
+def test_GENERIC_REGISTER_stress_15_bits():
+    GENERIC_REGISTER.test_with(
+        [
+            tb_GENERIC_REGISTER_case_stress_15_bits,
+        ],
+        {'DATA_WIDTH': 5}
     )
 
 
