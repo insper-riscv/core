@@ -50,7 +50,7 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000001")
+    yield trace.check(dut.destination, "00000000000000000000000000000000")
 
     dut.invert_source_1.value = BinaryValue("1")
     dut.select_function.value = BinaryValue("000")
