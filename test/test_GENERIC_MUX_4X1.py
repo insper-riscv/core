@@ -19,6 +19,7 @@ class GENERIC_MUX_4X1(utils.DUT):
     destination = utils.DUT.Output_pin
 
 
+
 @GENERIC_MUX_4X1.testcase
 async def tb_GENERIC_MUX_4X1_case_1(dut: GENERIC_MUX_4X1, trace: utils.Trace):
     dut.source_1.value = BinaryValue("00000001")
@@ -43,7 +44,7 @@ async def tb_GENERIC_MUX_4X1_case_1(dut: GENERIC_MUX_4X1, trace: utils.Trace):
     dut.selector.value = BinaryValue("11")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000100")
+    yield trace.check(dut.destination, "00000100")
 
 @GENERIC_MUX_4X1.testcase
 async def tb_GENERIC_MUX_4X1_case_stress(dut: GENERIC_MUX_4X1, trace: utils.Trace):
