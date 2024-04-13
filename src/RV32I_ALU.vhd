@@ -46,7 +46,6 @@ begin
     carry(0) <= invert_source_1 XOR invert_bit_2;
     slt(0)   <= overflow(DATA_WIDTH - 1) when (select_function /= "111" or invert_source_2 /= '0') else 
                 overflow(DATA_WIDTH);
-    slt((DATA_WIDTH - 1) downto 1) <= (others => '0');
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH) generate
         FOR_BIT : entity WORK.RV32I_ALU_BIT
