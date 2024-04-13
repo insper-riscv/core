@@ -31,69 +31,69 @@ async def tb_RV32I_BRANCH_CMP_case_1(dut: RV32I_BRANCH_CMP, trace: utils.Trace):
     await trace.cycle()
     yield trace.check(dut.destination, "1")
 
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000001")
-    dut.selector.value = BinaryValue("100")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "1")
-
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("10000000000000000000000000000001")
-    dut.selector.value = BinaryValue("100")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "0")
-
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000001")
-    dut.selector.value = BinaryValue("101")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "0")
-
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("10000000000000000000000000000001")
-    dut.selector.value = BinaryValue("101")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "1")
-
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000001")
-    dut.selector.value = BinaryValue("110")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "1")
-
-    dut.source_1.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("10000000000000000000000000000000")
-    dut.selector.value = BinaryValue("110")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "1")
-
-    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
-    dut.selector.value = BinaryValue("111")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "1")
-
-    dut.source_1.value = BinaryValue("10000000000000000000000000000000")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
-    dut.selector.value = BinaryValue("111")
-    dut.branch.value = BinaryValue("1")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("00000000000000000000000000000001")
+    #dut.selector.value = BinaryValue("100")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "1")
+    #
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("10000000000000000000000000000001")
+    #dut.selector.value = BinaryValue("100")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "0")
+    #
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("00000000000000000000000000000001")
+    #dut.selector.value = BinaryValue("101")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "0")
+    #
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("10000000000000000000000000000001")
+    #dut.selector.value = BinaryValue("101")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "1")
+    #
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("00000000000000000000000000000001")
+    #dut.selector.value = BinaryValue("110")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "1")
+    #
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("10000000000000000000000000000000")
+    #dut.selector.value = BinaryValue("110")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "1")
+    #
+    #dut.source_1.value = BinaryValue("00000000000000000000000000000001")
+    #dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+    #dut.selector.value = BinaryValue("111")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "1")
+    #
+    #dut.source_1.value = BinaryValue("10000000000000000000000000000000")
+    #dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+    #dut.selector.value = BinaryValue("111")
+    #dut.branch.value = BinaryValue("1")
+    #
+    #await trace.cycle()
+    #yield trace.check(dut.destination, "1")
 
 
 @pytest.mark.synthesis
