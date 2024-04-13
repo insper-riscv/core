@@ -20,8 +20,11 @@ end entity;
 architecture RTL of STAGE_IF is
 
     signal enable_0 : std_logic;
+    signal jump     : std_logic;
 
 begin
+
+    jump <= source.select_source XOR source.enable_jump;
 
     process(source.enable_stall) is
     begin
@@ -32,7 +35,7 @@ begin
         port map (
             clock        => clock,
             jump_address => address_jump,
-            selector     => source.select_source,
+            selector     => jump,
             enable       => enable_0,
             destination  => address_program
         );

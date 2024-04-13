@@ -248,7 +248,7 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
             list_instructions.append(instruction)
 
         if line_type == "B":
-            immediate = "{0:012b}".format(int(line_list[3]))
+            immediate = "{0:013b}".format(int(line_list[3]))
             imm_12 = immediate[0]
             imm_10_5 = immediate[2:8]
             rs2 = "{0:05b}".format(int(line_list[2][1:]))
@@ -257,7 +257,7 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
             imm_11 = immediate[1]
             imm_4_1 = immediate[8:12]
             opcode = instruction_opcode[line_list[0]]
-            instruction = imm_12 + imm_10_5 + rs2 + rs1 + funct3 + imm_11 + imm_4_1 + opcode
+            instruction = imm_12 + imm_10_5 + rs2 + rs1 + funct3 + imm_4_1 + imm_11 + opcode
             list_instructions.append(instruction)
 
     index_instruction = 0

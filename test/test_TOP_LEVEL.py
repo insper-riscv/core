@@ -382,6 +382,58 @@ async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_BEQ(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_BNE(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
 @pytest.mark.synthesis
 def test_TOP_LEVEL_synthesis():
     TOP_LEVEL.build_vhd()
@@ -505,6 +557,24 @@ def test_TOP_LEVEL_testcases():
     TOP_LEVEL.test_with(
         testcase=[
             tb_TOP_LEVEL_LW
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BEQ.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_BEQ
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BNE.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_BNE
         ],
     )
 
