@@ -321,6 +321,67 @@ async def tb_TOP_LEVEL_ORI(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SW(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")      
+
 async def tb_TOP_LEVEL_SLL(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
@@ -593,6 +654,17 @@ async def tb_TOP_LEVEL_SLTIU(dut: TOP_LEVEL, trace: utils.Trace):
         "00000000000000000000000000000001",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001010",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
@@ -712,6 +784,24 @@ def test_TOP_LEVEL_testcases():
     TOP_LEVEL.test_with(
         testcase=[
             tb_TOP_LEVEL_XORI
+        ],
+    )
+    
+    assembly = "./src/RV32I_INSTRUCTIONS/STORE_INSTRUCTION_SW.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SW
+        ],
+    )
+    
+    assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LW.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_LW
         ],
     )
 
