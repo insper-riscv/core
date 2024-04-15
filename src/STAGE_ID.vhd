@@ -94,7 +94,7 @@ begin
                                          '0';
     end process;
 
-    BRANCH_CMP : entity WORK.RV32I_BRANCH_CMP
+    BRANCH_COMPARE_UNIT : entity WORK.CPU_BRANCH_COMPARE_UNIT
         port map (
             source_1    => data_source_1,
             source_2    => data_source_2,

@@ -5,7 +5,7 @@ import pytest
 import utils
 from test_MODULE_REGISTER_FILE import MODULE_REGISTER_FILE
 from test_MODULE_CONTROL_UNIT import MODULE_CONTROL_UNIT
-from test_RV32I_BRANCH_CMP import RV32I_BRANCH_CMP
+from test_CPU_BRANCH_COMPARE_UNIT import CPU_BRANCH_COMPARE_UNIT
 
 
 class STAGE_ID(utils.DUT):
@@ -19,7 +19,7 @@ class STAGE_ID(utils.DUT):
 
     module_control_unit = MODULE_CONTROL_UNIT
     module_register_file = MODULE_REGISTER_FILE
-    rv32i_branch_cmp = RV32I_BRANCH_CMP
+    cpu_branch_compare_unit = CPU_BRANCH_COMPARE_UNIT
 
 @pytest.mark.synthesis
 def test_STAGE_ID_synthesis():
