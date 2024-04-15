@@ -10,7 +10,7 @@ entity MODULE_EXECUTION_UNIT_CONTROLLER is
     generic (
         DATA_WIDTH : natural := XLEN
     );
-  
+
     port (
         opcode                 : in  t_OPCODE;
         function_3             : in  t_FUNCTION3;
@@ -20,7 +20,7 @@ entity MODULE_EXECUTION_UNIT_CONTROLLER is
 
 end entity;
 
-architecture RTL of MODULE_EXECUTION_UNIT_CONTROLLER is
+architecture RV32I of MODULE_EXECUTION_UNIT_CONTROLLER is
 
 begin
 
@@ -31,4 +31,5 @@ begin
             function_7  => function_7,
             destination => destination
         );
+
 end architecture;

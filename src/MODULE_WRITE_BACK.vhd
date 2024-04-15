@@ -9,7 +9,7 @@ entity MODULE_WRITE_BACK is
     generic (
         DATA_WIDTH  : natural := XLEN
     );
-  
+
     port (
         source_memory : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_ex     : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -19,7 +19,7 @@ entity MODULE_WRITE_BACK is
 
 end entity;
 
-architecture RTL of MODULE_WRITE_BACK is
+architecture RV32I of MODULE_WRITE_BACK is
 
     -- No signals
 
