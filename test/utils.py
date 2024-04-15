@@ -18,12 +18,42 @@ import pytest_check as check
 _TESTCASE_TYPE = T.Union[
     T.Callable[["DUT"], None], T.Sequence[T.Callable[["DUT"], None]]
 ]
-_BUILT: T.List[str] = []
+_BUILT: T.Dict[str, bool] = {}
 
 runner = cocotb.runner.get_runner("ghdl")
 
 
+class VHD_Package():
+    children: T.List[T.Type["VHD_Package"]] = []
+
+    @classmethod
+    def build_vhd(cls, timeout: int = 60):
+        for child in cls.children:
+            if child.__name__ in _BUILT: # type: ignore
+                continue
+
+            child.build_vhd()
+            _BUILT[child.__name__] = True # type: ignore
+
+        process = subprocess.Popen(
+            [
+                "ghdl",
+                "-a",
+                "--std=08",
+                "--work=top",
+                f"../src/{cls.__name__}.vhd",
+            ],
+            cwd="sim_build",
+            stdout=subprocess.PIPE,
+        )
+
+        outs, errs = process.communicate(timeout=timeout)
+
+        assert process.returncode == 0, outs.decode()
+
+
 class DUT(T.Type[cocotb.handle.HierarchyObject]):
+    _package: T.Union[T.Type[VHD_Package], None] = None
     _log: T.Any
 
     class Input_pin(T.Type[cocotb.handle.ModifiableObject]):
@@ -37,7 +67,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         if isinstance(case, list):
             return [case.__name__ for case in case]
 
-        return case.__name__
+        return case.__name__ # type: ignore
 
     @classmethod
     def testcase(cls, fn):
@@ -147,15 +177,12 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 continue
 
             child.build_vhd()
-            _BUILT.append(child.__name__)
+            _BUILT[child.__name__] = True
 
         runner.build(
             always=True,
             build_args=["--std=08"],
-            vhdl_sources=[
-                "src/TOP_LEVEL_CONSTANTS.vhd",
-                f"src/{cls.__name__}.vhd",
-            ],
+            vhdl_sources=f"src/{cls.__name__}.vhd",
             hdl_toplevel=cls.__name__.lower(),
         )
 
