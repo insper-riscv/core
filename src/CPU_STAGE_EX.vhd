@@ -2,38 +2,36 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
+use WORK.CPU.ALL;
 
-entity STAGE_EX is
+entity CPU_STAGE_EX is
 
     generic (
-        GENERATE_REGISTERS : boolean := TRUE;
-        DATA_WIDTH  : natural := XLEN;
-        ADDRESS_WIDTH : natural := 5
+        GENERATE_REGISTERS : boolean := TRUE
     );
   
     port (
-        clock       : in  std_logic;
-        clear       : in  std_logic;
-        enable      : in  std_logic;
-        selector_forwarding_mem : in t_REGISTER;
-        enable_mem              : in std_logic;
-        selector_forwarding_wb  : in t_REGISTER;
-        enable_wb               : in std_logic;
-        forwarding_mem_source   : in std_logic_vector((DATA_WIDTH - 1) downto 0);
-        forwarding_wb_source    : in std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source      : in  t_SIGNALS_ID_EX;
-        destination : out t_SIGNALS_EX_MEM
+        clock                   : in  std_logic;
+        clear                   : in  std_logic;
+        enable                  : in  std_logic;
+        selector_forwarding_mem : in  RV32I.t_REGISTER;
+        enable_mem              : in  std_logic;
+        selector_forwarding_wb  : in  RV32I.t_REGISTER;
+        enable_wb               : in  std_logic;
+        forwarding_mem_source   : in  t_DATA;
+        forwarding_wb_source    : in  t_DATA;
+        source                  : in  t_SIGNALS_ID_EX;
+        destination             : out t_SIGNALS_EX_MEM
     );
 
 end entity;
 
-architecture RTL of STAGE_EX is
+architecture RTL of CPU_STAGE_EX is
 
-    signal source_0        : t_SIGNALS_ID_EX := NULL_SIGNALS_ID_EX;
-    signal select_function : std_logic_vector(4 downto 0);
-    signal forward_register_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal forward_register_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal source_0           : t_SIGNALS_ID_EX := NULL_SIGNALS_ID_EX;
+    signal select_function    : std_logic_vector(4 downto 0);
+    signal forward_register_1 : t_DATA;
+    signal forward_register_2 : t_DATA;
     signal selector_forward_1 : std_logic_vector(1 downto 0);
     signal selector_forward_2 : std_logic_vector(1 downto 0);
 
@@ -64,14 +62,14 @@ begin
 
     CPU_EXECUTION_FOWARDING_UNIT : entity WORK.CPU_EXECUTION_FOWARDING_UNIT
         port map (
-            register_source_1        => source_0.select_source_1,
-            register_source_2        => source_0.select_source_2,
-            register_destination_mem => selector_forwarding_mem,
-            enable_write_mem         => enable_mem,
-            register_destination_wb  => selector_forwarding_wb,
-            enable_write_wb          => enable_wb,
-            mux_control_1            => selector_forward_1,
-            mux_control_2            => selector_forward_2
+            stage_ex_select_source_1     => source_0.select_source_1,
+            stage_ex_select_source_2     => source_0.select_source_2,
+            stage_mem_enable_destination => selector_forwarding_mem,
+            stage_mem_select_destination => enable_mem,
+            stage_wb_enable_destination  => selector_forwarding_wb,
+            stage_wb_select_destination  => enable_wb,
+            stage_id_select_source_1     => selector_forward_1,
+            stage_id_select_source_2     => selector_forward_2
         );
 
     MODULE_EXECUTION_UNIT : entity WORK.MODULE_EXECUTION_UNIT
