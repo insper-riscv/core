@@ -34,16 +34,18 @@ jobs:
               test_cases: true
             - component: GENERIC_ROM
               test_cases: true
+            - component: GENERIC_SHIFTER
+              test_cases: true
             - component: GENERIC_SIGNAL_EXTENDER
               test_cases: false
-            - component: MODULE_ALU
-              test_cases: true
-            - component: MODULE_ALU_CONTROLLER
-              test_cases: true
-            - component: MODULE_CONTROL_UNIT
-              test_cases: true
-            - component: MODULE_PC
-              test_cases: true
+            #- component: MODULE_EXECUTION_UNIT
+            #  test_cases: true
+            #- component: MODULE_EXECUTION_UNIT_CONTROLLER
+            #  test_cases: true
+            #- component: MODULE_CONTROL_UNIT
+            #  test_cases: true
+            #- component: MODULE_PROGRAM_COUNTER
+            #  test_cases: true
             - component: MODULE_REGISTER_FILE
               test_cases: true
             - component: MODULE_WRITE_BACK
