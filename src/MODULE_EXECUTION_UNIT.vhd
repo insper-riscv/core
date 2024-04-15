@@ -10,7 +10,7 @@ entity MODULE_EXECUTION_UNIT is
     generic (
         DATA_WIDTH : natural := XLEN
     );
-  
+
     port (
         select_forward_1       : in  std_logic_vector(1 downto 0);
         select_forward_2       : in  std_logic_vector(1 downto 0);
@@ -28,7 +28,7 @@ entity MODULE_EXECUTION_UNIT is
 
 end entity;
 
-architecture RTL of MODULE_EXECUTION_UNIT is
+architecture RV32I of MODULE_EXECUTION_UNIT is
 
     signal forward_source_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal forward_source_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);

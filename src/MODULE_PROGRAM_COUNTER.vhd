@@ -21,7 +21,7 @@ entity MODULE_PROGRAM_COUNTER is
 
 end entity;
 
-architecture RTL of MODULE_PROGRAM_COUNTER is
+architecture RV32I of MODULE_PROGRAM_COUNTER is
 
         signal adder_out      : std_logic_vector((DATA_WIDTH - 1) downto 0);
         signal mux_out        : std_logic_vector((DATA_WIDTH - 1) downto 0);

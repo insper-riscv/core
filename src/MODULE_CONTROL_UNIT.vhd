@@ -2,20 +2,19 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
+use WORK.MODULES.ALL;
+use G.GENERICS.all;
 
 entity MODULE_CONTROL_UNIT is
 
     generic (
-        DATA_WIDTH    : natural := XLEN;
-        ADDRESS_WIDTH : natural := 5
+        DATA_WIDTH    : natural := XLEN
     );
 
     port (
         instruction      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         address_program  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         data_source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        --source_id        : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         jump_address     : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         immediate_source : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         control_if       : out t_CONTROL_IF;
@@ -26,7 +25,12 @@ entity MODULE_CONTROL_UNIT is
 
 end entity;
 
-architecture RTL of MODULE_CONTROL_UNIT is
+architecture RV32I of MODULE_CONTROL_UNIT is
+
+        package G is new G.GENERICS
+            generic map (
+                DATA_WIDTH => 32
+            );
 
         signal immediate_tmp : std_logic_vector((DATA_WIDTH - 1) downto 0);
         signal adder_out_1   : std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -46,21 +50,21 @@ begin
             immediate   => immediate_tmp
         );
 
-    ADDER_1 : entity WORK.GENERIC_ADDER
+    ADDER_1 : entity G.GENERIC_ADDER
         port map (
             source_1    => address_program,
             source_2    => immediate_tmp,
             destination => adder_out_1
         );
 
-    ADDER_2 : entity WORK.GENERIC_ADDER
+    ADDER_2 : entity G.GENERIC_ADDER
         port map (
             source_1    => immediate_tmp,
             source_2    => data_source_1,
             destination => adder_out_2
         );
 
-    MUX : entity WORK.GENERIC_MUX_2X1
+    MUX : entity G.GENERIC_MUX_2X1
         port map (
             source_1    => adder_out_1,
             source_2    => adder_out_2,

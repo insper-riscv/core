@@ -23,7 +23,7 @@ entity MODULE_REGISTER_FILE is
 
 end entity;
 
-architecture RTL of MODULE_REGISTER_FILE is
+architecture RV32I of MODULE_REGISTER_FILE is
 
 begin   
 
