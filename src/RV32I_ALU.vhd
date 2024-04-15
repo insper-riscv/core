@@ -22,9 +22,7 @@ entity RV32I_ALU is
 
 end entity;
 
-architecture CPU of RV32I_ALU is
-
-    --constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+architecture RTL of RV32I_ALU is
 
     signal result   : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal carry    : std_logic_vector( DATA_WIDTH      downto 0);
