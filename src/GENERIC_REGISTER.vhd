@@ -7,7 +7,7 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity GENERIC_REGISTER is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        DATA_WIDTH : natural := 8
     );
 
     port (

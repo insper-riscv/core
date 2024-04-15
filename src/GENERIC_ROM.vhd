@@ -3,13 +3,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_ROM IS
 
     generic (
-        DATA_WIDTH        : natural := XLEN;
-        ADDRESS_WIDTH     : natural := XLEN;
+        DATA_WIDTH        : natural := 8;
+        ADDRESS_WIDTH     : natural := 8;
         ADDRESSABLE_WIDTH : natural := 7
     );
 
@@ -17,6 +16,7 @@ entity GENERIC_ROM IS
         address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) 
     );
+
 end entity;
 
 architecture RTL of GENERIC_ROM is

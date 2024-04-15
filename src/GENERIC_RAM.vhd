@@ -3,16 +3,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_RAM is
 
     generic (
-        DATA_WIDTH        : natural := XLEN;
-        ADDRESS_WIDTH     : natural := XLEN;
+        DATA_WIDTH        : natural := 8;
+        ADDRESS_WIDTH     : natural := 8;
         BYTE_WIDTH        : natural := 8;
         HALFWORD_WIDTH    : natural := 16;
-        ADDRESSABLE_WIDTH : natural := 10
+        ADDRESSABLE_WIDTH : natural := 7
     );
 
     port (
