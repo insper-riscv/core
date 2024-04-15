@@ -1,11 +1,6 @@
-name: VHD tests
+name: VHD stress testing routine
 'on':
   workflow_dispatch: {}
-  push:
-    paths:
-    - src/**
-    - test/**
-    - .github/workflows/vhd_tests.yml
 
 jobs:
   test:
@@ -15,63 +10,61 @@ jobs:
       matrix:
           include:
             - component: GENERIC_ADDER
-              test_cases: true
+              enabled: true
             - component: GENERIC_COUNTER
-              test_cases: true
+              enabled: false
             - component: GENERIC_DEBOUNCE
-              test_cases: false
+              enabled: false
             - component: GENERIC_EDGE_DETECTOR
-              test_cases: true
+              enabled: false
             - component: GENERIC_FLIP_FLOP
-              test_cases: true
+              enabled: false
             - component: GENERIC_MUX_2X1
-              test_cases: true
+              enabled: false
             - component: GENERIC_MUX_4X1
-              test_cases: true
+              enabled: false
             - component: GENERIC_RAM
-              test_cases: true
+              enabled: false
             - component: GENERIC_REGISTER
-              test_cases: true
+              enabled: false
             - component: GENERIC_ROM
-              test_cases: true
-            - component: GENERIC_SHIFTER
-              test_cases: true
+              enabled: false
             - component: GENERIC_SIGNAL_EXTENDER
-              test_cases: false
-            - component: MODULE_EXECUTION_UNIT
-              test_cases: true
-            - component: MODULE_EXECUTION_UNIT_CONTROLLER
-              test_cases: true
+              enabled: false
+            - component: MODULE_ALU
+              enabled: false
+            - component: MODULE_ALU_CONTROLLER
+              enabled: false
             - component: MODULE_CONTROL_UNIT
-              test_cases: true
-            - component: MODULE_PROGRAM_COUNTER
-              test_cases: true
+              enabled: false
+            - component: MODULE_PC
+              enabled: false
             - component: MODULE_REGISTER_FILE
-              test_cases: true
+              enabled: false
             - component: MODULE_WRITE_BACK
-              test_cases: true
+              enabled: false
             - component: RV32I_ALU
-              test_cases: true
+              enabled: false
             - component: RV32I_ALU_BIT
-              test_cases: true
+              enabled: false
             - component: RV32I_ALU_CONTROLLER
-              test_cases: true
+              enabled: false
             - component: RV32I_INSTRUCTION_DECODER
-              test_cases: true
+              enabled: false
             - component: RV32I_REGISTER_FILE
-              test_cases: true
+              enabled: false
             - component: STAGE_EX
-              test_cases: false
+              enabled: false
             - component: STAGE_ID
-              test_cases: false
+              enabled: false
             - component: STAGE_IF
-              test_cases: false
+              enabled: false
             - component: STAGE_MEM
-              test_cases: false
+              enabled: false
             - component: STAGE_WB
-              test_cases: false
+              enabled: false
             - component: TOP_LEVEL
-              test_cases: true
+              enabled: false
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -87,7 +80,8 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run Synthesis
+      if: ${{ contains(matrix.enabled, true) }}
       run: pytest -k ${{ matrix.component }} -m synthesis
     - name: Run Test Cases
-      if: ${{ contains(matrix.test_cases, true) }}
-      run: pytest -k ${{ matrix.component }} -m testcases
+      if: ${{ contains(matrix.enabled, true) }}
+      run: pytest -k ${{ matrix.component }} -m stress
