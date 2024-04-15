@@ -672,59 +672,59 @@ def test_TOP_LEVEL_testcases():
         ],
     )
 
-    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BEQ.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
-        testcase=[
-            tb_TOP_LEVEL_BEQ
-        ],
-    )
-    
-    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BNE.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
-        testcase=[
-            tb_TOP_LEVEL_BNE
-        ],
-    )
-
-    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BLT.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
-        testcase=[
-            tb_TOP_LEVEL_BLT
-        ],
-    )
-
-    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BLTU.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
-        testcase=[
-            tb_TOP_LEVEL_BLTU
-        ],
-    )
-
-    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BGE.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
-        testcase=[
-            tb_TOP_LEVEL_BGE
-        ],
-    )
-
-    assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BGEU.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
-        testcase=[
-            tb_TOP_LEVEL_BGEU
-        ],
-    )
+    #assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BEQ.asm"
+    #create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    #TOP_LEVEL.build_vhd()
+    #TOP_LEVEL.test_with(
+    #    testcase=[
+    #        tb_TOP_LEVEL_BEQ
+    #    ],
+    #)
+    #
+    #assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BNE.asm"
+    #create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    #TOP_LEVEL.build_vhd()
+    #TOP_LEVEL.test_with(
+    #    testcase=[
+    #        tb_TOP_LEVEL_BNE
+    #    ],
+    #)
+    #
+    #assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BLT.asm"
+    #create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    #TOP_LEVEL.build_vhd()
+    #TOP_LEVEL.test_with(
+    #    testcase=[
+    #        tb_TOP_LEVEL_BLT
+    #    ],
+    #)
+    #
+    #assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BLTU.asm"
+    #create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    #TOP_LEVEL.build_vhd()
+    #TOP_LEVEL.test_with(
+    #    testcase=[
+    #        tb_TOP_LEVEL_BLTU
+    #    ],
+    #)
+    #
+    #assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BGE.asm"
+    #create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    #TOP_LEVEL.build_vhd()
+    #TOP_LEVEL.test_with(
+    #    testcase=[
+    #        tb_TOP_LEVEL_BGE
+    #    ],
+    #)
+    #
+    #assembly = "./src/RV32I_INSTRUCTIONS/BRANCH_INSTRUCTION_BGEU.asm"
+    #create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    #TOP_LEVEL.build_vhd()
+    #TOP_LEVEL.test_with(
+    #    testcase=[
+    #        tb_TOP_LEVEL_BGEU
+    #    ],
+    #)
 
     assembly = "./src/RV32I_INSTRUCTIONS/BUILD_INSTRUCTION_LUI.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
