@@ -3,9 +3,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
+use WORK.CPU.ALL;
 
-entity STAGE_ID is
+entity CPU_STAGE_ID is
 
     generic (
         GENERATE_REGISTERS : boolean := TRUE
@@ -26,7 +26,7 @@ entity STAGE_ID is
 
 end entity;
 
-architecture RTL of STAGE_ID is
+architecture RTL of CPU_STAGE_ID is
 
     signal source_0      : t_SIGNALS_IF_ID := NULL_SIGNALS_IF_ID;
     signal data_source_1 : t_DATA;

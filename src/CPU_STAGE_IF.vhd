@@ -3,9 +3,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
+use WORK.CPU.ALL;
 
-entity STAGE_IF is
+entity CPU_STAGE_IF is
 
     port (
         clock           : in  std_logic;
@@ -17,7 +17,7 @@ entity STAGE_IF is
 
 end entity;
 
-architecture RTL of STAGE_IF is
+architecture RTL of CPU_STAGE_IF is
 
     signal enable_0 : std_logic;
 

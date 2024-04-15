@@ -2,14 +2,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
+use WORK.CPU.ALL;
 
-entity STAGE_WB is
+entity CPU_STAGE_WB is
 
     generic (
         GENERATE_REGISTERS : boolean := TRUE
     );
-  
+
     port (
         clock              : in  std_logic;
         clear              : in  std_logic;
@@ -22,7 +22,7 @@ entity STAGE_WB is
 
 end entity;
 
-architecture RTL of STAGE_WB is
+architecture RTL of CPU_STAGE_WB is
 
     signal source_0 : t_SIGNALS_MEM_WB := NULL_SIGNALS_MEM_WB;
 
