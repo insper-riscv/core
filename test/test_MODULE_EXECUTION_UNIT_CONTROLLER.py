@@ -4,10 +4,13 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_MODULES_package import MODULES
 from test_RV32I_ALU_CONTROLLER import RV32I_ALU_CONTROLLER
 
 
 class MODULE_EXECUTION_UNIT_CONTROLLER(utils.DUT):
+    _package = MODULES
+
     opcode = utils.DUT.Input_pin
     function_3 = utils.DUT.Input_pin
     function_7 = utils.DUT.Input_pin

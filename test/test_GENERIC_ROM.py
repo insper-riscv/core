@@ -4,9 +4,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_ROM(utils.DUT):
+    _package = GENERICS
+
     address = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 

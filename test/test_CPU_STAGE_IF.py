@@ -3,10 +3,13 @@ import os
 import pytest
 
 import utils
+from test_CPU_package import CPU
 from test_MODULE_PROGRAM_COUNTER import MODULE_PROGRAM_COUNTER
 
 
-class STAGE_IF(utils.DUT):
+class CPU_STAGE_IF(utils.DUT):
+    _package = CPU
+
     control = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     address_jump = utils.DUT.Input_pin
@@ -16,9 +19,9 @@ class STAGE_IF(utils.DUT):
 
 
 @pytest.mark.synthesis
-def test_STAGE_IF_synthesis():
-    STAGE_IF.build_vhd()
-    # STAGE_IF.build_netlistsvg()
+def test_CPU_STAGE_IF_synthesis():
+    CPU_STAGE_IF.build_vhd()
+    # CPU_STAGE_IF.build_netlistsvg()
 
 
 if __name__ == "__main__":

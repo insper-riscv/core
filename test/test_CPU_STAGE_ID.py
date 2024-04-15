@@ -3,11 +3,14 @@ import os
 import pytest
 
 import utils
+from test_CPU_package import CPU
 from test_MODULE_REGISTER_FILE import MODULE_REGISTER_FILE
 from test_MODULE_CONTROL_UNIT import MODULE_CONTROL_UNIT
 
 
-class STAGE_ID(utils.DUT):
+class CPU_STAGE_ID(utils.DUT):
+    _package = CPU
+
     control = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     select_destination = utils.DUT.Input_pin
@@ -20,9 +23,9 @@ class STAGE_ID(utils.DUT):
     module_register_file = MODULE_REGISTER_FILE
 
 @pytest.mark.synthesis
-def test_STAGE_ID_synthesis():
-    STAGE_ID.build_vhd()
-    # STAGE_ID.build_netlistsvg()
+def test_CPU_STAGE_ID_synthesis():
+    CPU_STAGE_ID.build_vhd()
+    # CPU_STAGE_ID.build_netlistsvg()
 
 
 if __name__ == "__main__":

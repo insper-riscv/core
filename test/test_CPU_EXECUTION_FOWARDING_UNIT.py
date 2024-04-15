@@ -3,17 +3,20 @@ import os
 import pytest
 
 import utils
+from test_CPU_package import CPU
 
 
 class CPU_EXECUTION_FOWARDING_UNIT(utils.DUT):
-    register_source_1        = utils.DUT.Input_pin
-    register_source_2        = utils.DUT.Input_pin
-    register_destination_mem = utils.DUT.Input_pin
-    enable_write_mem         = utils.DUT.Input_pin
-    register_destination_wb  = utils.DUT.Input_pin
-    enable_write_wb          = utils.DUT.Input_pin
-    mux_control_1            = utils.DUT.Output_pin
-    mux_control_2            = utils.DUT.Output_pin
+    _package = CPU
+
+    stage_ex_select_source_1     = utils.DUT.Input_pin
+    stage_ex_select_source_2     = utils.DUT.Input_pin
+    stage_mem_enable_destination = utils.DUT.Input_pin
+    stage_mem_select_destination = utils.DUT.Input_pin
+    stage_wb_enable_destination  = utils.DUT.Input_pin
+    stage_wb_select_destination  = utils.DUT.Input_pin
+    stage_id_select_source_1     = utils.DUT.Output_pin
+    stage_id_select_source_2     = utils.DUT.Output_pin
 
 
 def test_CPU_EXECUTION_FOWARDING_UNIT_synthesis():

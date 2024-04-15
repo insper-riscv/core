@@ -4,9 +4,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_RV32I_package import RV32I
 
 
 class RV32I_ALU_BIT(utils.DUT):
+    _package = RV32I
+
     invert_source_1 = utils.DUT.Input_pin
     invert_source_2 = utils.DUT.Input_pin
     select_function = utils.DUT.Input_pin

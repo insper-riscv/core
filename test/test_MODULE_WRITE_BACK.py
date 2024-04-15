@@ -4,10 +4,13 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_MODULES_package import MODULES
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class MODULE_WRITE_BACK(utils.DUT):
+    _package = MODULES
+
     source_memory = utils.DUT.Input_pin
     source_ex = utils.DUT.Input_pin
     selector = utils.DUT.Input_pin
