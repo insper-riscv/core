@@ -22,5 +22,6 @@ jobs:
         image: gianvr/pfe:latest
         options: -v ${{ github.workspace }}:/var/www
         run: |
+            ls
             cd quartus
             quartus_map "top_level"
