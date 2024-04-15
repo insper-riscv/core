@@ -3,9 +3,12 @@ import os
 import pytest
 
 import utils
+from test_CPU_package import CPU
 
 
-class STAGE_MEM(utils.DUT):
+class CPU_STAGE_MEM(utils.DUT):
+    _package = CPU
+
     clock = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     control_memory = utils.DUT.Output_pin
@@ -18,9 +21,9 @@ class STAGE_MEM(utils.DUT):
 
 
 @pytest.mark.synthesis
-def test_STAGE_MEM_synthesis():
-    STAGE_MEM.build_vhd()
-    # STAGE_MEM.build_netlistsvg()
+def test_CPU_STAGE_MEM_synthesis():
+    CPU_STAGE_MEM.build_vhd()
+    # CPU_STAGE_MEM.build_netlistsvg()
 
 
 if __name__ == "__main__":

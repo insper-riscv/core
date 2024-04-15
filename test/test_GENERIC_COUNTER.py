@@ -7,9 +7,12 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_COUNTER(utils.DUT):
+    _package = GENERICS
+
     clock = utils.DUT.Input_pin
     clear = utils.DUT.Input_pin
     update = utils.DUT.Input_pin

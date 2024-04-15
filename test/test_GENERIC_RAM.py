@@ -6,9 +6,12 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_RAM(utils.DUT):
+    _package = GENERICS
+
     clock = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
     enable_read = utils.DUT.Input_pin

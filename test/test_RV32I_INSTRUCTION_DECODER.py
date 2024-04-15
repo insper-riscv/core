@@ -4,9 +4,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_RV32I_package import RV32I
 
 
 class RV32I_INSTRUCTION_DECODER(utils.DUT):
+    _package = RV32I
+
     instruction = utils.DUT.Input_pin
     control_if = utils.DUT.Output_pin
     control_id = utils.DUT.Output_pin

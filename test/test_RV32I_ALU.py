@@ -4,11 +4,14 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_RV32I_package import RV32I
 from test_RV32I_ALU_BIT import RV32I_ALU_BIT
 from test_GENERIC_SHIFTER import GENERIC_SHIFTER
 
 
 class RV32I_ALU(utils.DUT):
+    _package = RV32I
+
     invert_source_1 = utils.DUT.Input_pin
     invert_source_2 = utils.DUT.Input_pin
     select_function = utils.DUT.Input_pin

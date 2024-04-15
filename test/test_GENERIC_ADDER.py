@@ -5,9 +5,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_ADDER(utils.DUT):
+    _package = GENERICS
+
     source_1 = utils.DUT.Input_pin
     source_2 = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin

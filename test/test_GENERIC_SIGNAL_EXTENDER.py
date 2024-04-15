@@ -3,9 +3,12 @@ import os
 import pytest
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_SIGNAL_EXTENDER(utils.DUT):
+    _package = GENERICS
+
     source = utils.DUT.Input_pin
     enable_unsigned = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin

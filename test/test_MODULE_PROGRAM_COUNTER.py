@@ -6,12 +6,15 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_MODULES_package import MODULES
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 from test_GENERIC_REGISTER import GENERIC_REGISTER
 from test_GENERIC_ADDER import GENERIC_ADDER
 
 
 class MODULE_PROGRAM_COUNTER(utils.DUT):
+    _package = MODULES
+
     clock = utils.DUT.Input_pin
     jump_address = utils.DUT.Input_pin
     selector = utils.DUT.Input_pin

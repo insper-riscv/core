@@ -3,12 +3,15 @@ import os
 import pytest
 
 import utils
+from test_CPU_package import CPU
 from test_MODULE_EXECUTION_UNIT import MODULE_EXECUTION_UNIT
 from test_MODULE_EXECUTION_UNIT_CONTROLLER import MODULE_EXECUTION_UNIT_CONTROLLER
 from test_CPU_EXECUTION_FOWARDING_UNIT import CPU_EXECUTION_FOWARDING_UNIT
 
 
-class STAGE_EX(utils.DUT):
+class CPU_STAGE_EX(utils.DUT):
+    _package = CPU
+
     source = utils.DUT.Input_pin
     selector_forwarding_mem = utils.DUT.Input_pin
     enable_mem              = utils.DUT.Input_pin
@@ -24,9 +27,9 @@ class STAGE_EX(utils.DUT):
 
 
 @pytest.mark.synthesis
-def test_STAGE_EX_synthesis():
-    STAGE_EX.build_vhd()
-    # STAGE_EX.build_netlistsvg()
+def test_CPU_STAGE_EX_synthesis():
+    CPU_STAGE_EX.build_vhd()
+    # CPU_STAGE_EX.build_netlistsvg()
 
 
 if __name__ == "__main__":

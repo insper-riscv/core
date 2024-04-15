@@ -4,9 +4,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_RV32I_package import RV32I
 
 
 class RV32I_ALU_CONTROLLER(utils.DUT):
+    _package = RV32I
+
     opcode = utils.DUT.Input_pin
     function_3 = utils.DUT.Input_pin
     function_7 = utils.DUT.Input_pin

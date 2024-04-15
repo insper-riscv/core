@@ -4,11 +4,14 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_MODULES_package import MODULES
 from test_GENERIC_MUX_4X1 import GENERIC_MUX_4X1
 from test_RV32I_ALU import RV32I_ALU
 
 
 class MODULE_EXECUTION_UNIT(utils.DUT):
+    _package = MODULES
+
     select_forward_1 = utils.DUT.Input_pin
     select_forward_2 = utils.DUT.Input_pin
     select_source_1 = utils.DUT.Input_pin
