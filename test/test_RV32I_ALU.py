@@ -6,6 +6,7 @@ from cocotb.binary import BinaryValue
 import utils
 from test_RV32I_package import RV32I
 from test_RV32I_ALU_BIT import RV32I_ALU_BIT
+from test_GENERIC_SHIFTER import GENERIC_SHIFTER
 
 
 class RV32I_ALU(utils.DUT):
@@ -19,6 +20,7 @@ class RV32I_ALU(utils.DUT):
     destination = utils.DUT.Output_pin
 
     bit_to_bit = RV32I_ALU_BIT
+    generic_shifter = GENERIC_SHIFTER
 
 
 @RV32I_ALU.testcase
@@ -46,12 +48,12 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
-    dut.select_function.value = BinaryValue("110")
+    dut.select_function.value = BinaryValue("111")
     dut.source_1.value = BinaryValue("11111111111111111111111111111111")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000001")
+    yield trace.check(dut.destination, "00000000000000000000000000000000")
 
     dut.invert_source_1.value = BinaryValue("1")
     dut.select_function.value = BinaryValue("000")
@@ -81,12 +83,21 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
 
     dut.invert_source_1.value = BinaryValue("1")
     dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("100")
+    dut.select_function.value = BinaryValue("111")
     dut.source_1.value = BinaryValue("11111111111111111111111111111111")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000001")
+
+    dut.invert_source_1.value = BinaryValue("0")
+    dut.invert_source_2.value = BinaryValue("0")
+    dut.select_function.value = BinaryValue("100")
+    dut.source_1.value = BinaryValue("00000000000000000000000000001000")
+    dut.source_2.value = BinaryValue("00000000000000000000000000001000")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000100000000000")
 
 
 
