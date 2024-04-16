@@ -32,7 +32,7 @@ class VHD_Package():
             if child.__name__ in _BUILT: # type: ignore
                 continue
 
-            child.build_vhd()
+            child.build_vhd(timeout)
             _BUILT[child.__name__] = True # type: ignore
 
         process = subprocess.Popen(
@@ -172,6 +172,9 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
 
     @classmethod
     def build_vhd(cls):
+        if cls._package is not None:
+            cls._package.build_vhd()
+
         for child in cls._get_children():
             if child.__name__ in _BUILT:
                 continue
@@ -182,7 +185,9 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         runner.build(
             always=True,
             build_args=["--std=08"],
-            vhdl_sources=f"src/{cls.__name__}.vhd",
+            vhdl_sources=[
+                f"src/{cls.__name__}.vhd"
+            ],
             hdl_toplevel=cls.__name__.lower(),
         )
 
@@ -378,4 +383,4 @@ class Trace2(cocotb.wavedrom.trace):
 def convert_to_binstr(value: int, length: int) -> str:
     if len(bin(value)[2:]) < length:
         return bin(value)[2:].zfill(length)
-    return bin(value)[-32:]
+    return bin(value)[-length:]

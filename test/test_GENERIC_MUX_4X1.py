@@ -20,29 +20,29 @@ class GENERIC_MUX_4X1(utils.DUT):
 
 @GENERIC_MUX_4X1.testcase
 async def tb_GENERIC_MUX_4X1_case_1(dut: GENERIC_MUX_4X1, trace: utils.Trace):
-    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000010")
-    dut.source_3.value = BinaryValue("00000000000000000000000000000011")
-    dut.source_4.value = BinaryValue("00000000000000000000000000000100")
+    dut.source_1.value = BinaryValue("00000001")
+    dut.source_2.value = BinaryValue("00000010")
+    dut.source_3.value = BinaryValue("00000011")
+    dut.source_4.value = BinaryValue("00000100")
     dut.selector.value = BinaryValue("00")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000001")
+    yield trace.check(dut.destination, "00000001")
 
     dut.selector.value = BinaryValue("01")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000010")
+    yield trace.check(dut.destination, "00000010")
 
     dut.selector.value = BinaryValue("10")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000011")
+    yield trace.check(dut.destination, "00000011")
 
     dut.selector.value = BinaryValue("11")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000100")
+    yield trace.check(dut.destination, "00000100")
 
 
 @pytest.mark.synthesis

@@ -16,10 +16,10 @@ class GENERIC_ROM(utils.DUT):
 
 @GENERIC_ROM.testcase
 async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: utils.Trace):
-    dut.address.value = BinaryValue("00000000000000000000000000000000")
+    dut.address.value = BinaryValue("00000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000001010000110111")
+    yield trace.check(dut.destination, "00000001")
 
 
 @pytest.mark.synthesis
