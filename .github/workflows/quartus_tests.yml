@@ -19,9 +19,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Run Synthesis
-      run: 
-        cd /var/www/quartus |
-        quartus_map /var/www/quartus/top_level
+      run: quartus_map /var/www/quartus/top_level
 
     - name: Run Elaboration
       run: quartus_map /var/www/quartus/top_level --analysis_and_elaboration --enable_register_retiming=on --enable_wysiwyg_resynthesis=on
@@ -30,4 +28,4 @@ jobs:
       run: quartus_fit /var/www/quartus/top_level
 
     - name: Run Timing Analysis
-      run: quartus sta /var/www/quartus/top_level --do_report_timing -multicorner
+      run: quartus sta /var/www/quartus/top_level --do_report_timing --multicorner
