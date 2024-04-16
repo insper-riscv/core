@@ -26,14 +26,13 @@ architecture RTL of RV32I_ALU is
     signal carry            : std_logic_vector((DATA_WIDTH) downto 0);
     signal carry_extended   : std_logic;
     signal slt              : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
-    signal overflow         : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal shift            : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
     carry(0) <= select_function(3) XOR select_function(4);
 
-    slt(0) <=   carry_extended when (select_function = "00111") else 
+    slt(0) <=   carry_extended when (select_function = "00111") else
                 carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1) XOR result(DATA_WIDTH - 1);
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
@@ -45,8 +44,7 @@ begin
                 source_1        => source_1(i),
                 source_2        => source_2(i),
                 destination     => result(i),
-                carry_out       => carry(i + 1),
-                overflow        => overflow(i)
+                carry_out       => carry(i + 1)
             );
     end generate;
 
@@ -63,8 +61,7 @@ begin
 
     SHIFTER : entity WORK.RV32I_ALU_SHIFTER
         generic map (
-            DATA_WIDTH  => WORK.RV32I.XLEN,
-            SHAMT_WIDTH => 5
+            DATA_WIDTH  => WORK.RV32I.XLEN
         )
         port map (
             select_function => select_function,
