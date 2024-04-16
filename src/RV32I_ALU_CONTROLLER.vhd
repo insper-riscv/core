@@ -43,6 +43,8 @@ begin
                    "00100" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_SLLI ) and (function_7 = "0000000") else
                    "00101" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_SRLI ) and (function_7 = "0000000") else
                    "00110" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_SRAI ) and (function_7 = "0100000") else
+                   "00011" when (opcode = OPCODE_JAL(OPCODE_RANGE)   ) else
+                   "00011" when (opcode = OPCODE_JALR(OPCODE_RANGE)  ) else
                    "00001" when (opcode = OPCODE_LUI(OPCODE_RANGE)   ) else
                    "00001" when (opcode = OPCODE_AUIPC(OPCODE_RANGE) ) else
                    "00000";

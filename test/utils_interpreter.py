@@ -222,7 +222,7 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
             list_instructions.append(instruction)
 
         if line_type == "J":
-            immediate = "{0:020b}".format(int(line_list[2]))
+            immediate = "{0:021b}".format(int(line_list[2]))
             imm_20 = immediate[0]
             imm_10_1 = immediate[10:20]
             imm_11 = immediate[9]
