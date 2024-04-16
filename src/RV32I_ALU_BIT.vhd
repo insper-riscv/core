@@ -11,8 +11,7 @@ entity RV32I_ALU_BIT is
         source_1        : in  std_logic;
         source_2        : in  std_logic;
         destination     : out std_logic;
-        carry_out       : out std_logic;
-        overflow        : out std_logic
+        carry_out       : out std_logic
     );
 
 end entity;
@@ -41,6 +40,5 @@ begin
 
     carry_auxiliar <= (source_1_auxiliar AND source_2_auxiliar) OR (half_add AND carry_in);
     carry_out      <= carry_auxiliar;
-    overflow       <= carry_auxiliar XOR carry_in XOR full_add;
 
 end architecture;
