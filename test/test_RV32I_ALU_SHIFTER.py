@@ -6,112 +6,111 @@ from cocotb.binary import BinaryValue
 import utils
 
 
-class GENERIC_SHIFTER(utils.DUT):
-    source      = utils.DUT.Input_pin
-    selector_1  = utils.DUT.Input_pin
-    selector_2  = utils.DUT.Input_pin
+class RV32I_ALU_SHIFTER(utils.DUT):
+    source = utils.DUT.Input_pin
+    shamt = utils.DUT.Input_pin
+    select_function = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
-    destination_q = utils.DUT.Output_pin
 
 
-@GENERIC_SHIFTER.testcase
-async def tb_GENERIC_SHIFTER_case_1(dut: GENERIC_SHIFTER, trace: utils.Trace):
+@RV32I_ALU_SHIFTER.testcase
+async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: utils.Trace):
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("00000")
-    dut.selector_2.value = BinaryValue("101")
+    dut.shamt.value = BinaryValue("00000")
+    dut.select_function.value = BinaryValue("00101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("00000")
-    dut.selector_2.value = BinaryValue("101")
+    dut.shamt.value = BinaryValue("00000")
+    dut.select_function.value = BinaryValue("00101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("00001")
-    dut.selector_2.value = BinaryValue("100")
+    dut.shamt.value = BinaryValue("00001")
+    dut.select_function.value = BinaryValue("00100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111110")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("00001")
-    dut.selector_2.value = BinaryValue("101")
+    dut.shamt.value = BinaryValue("00001")
+    dut.select_function.value = BinaryValue("00101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "01111111111111111111111111111111")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("11110")
-    dut.selector_2.value = BinaryValue("100")
+    dut.shamt.value = BinaryValue("11110")
+    dut.select_function.value = BinaryValue("00100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11000000000000000000000000000000")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("11101")
-    dut.selector_2.value = BinaryValue("100")
+    dut.shamt.value = BinaryValue("11101")
+    dut.select_function.value = BinaryValue("00100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11100000000000000000000000000000")
 
     dut.source.value = BinaryValue("00000000000000000000000000001000")
-    dut.selector_1.value = BinaryValue("00010")
-    dut.selector_2.value = BinaryValue("100")
+    dut.shamt.value = BinaryValue("00010")
+    dut.select_function.value = BinaryValue("00100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000100000")
 
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("11110")
-    dut.selector_2.value = BinaryValue("101")
+    dut.shamt.value = BinaryValue("11110")
+    dut.select_function.value = BinaryValue("00101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000011")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("11101")
-    dut.selector_2.value = BinaryValue("101")
+    dut.shamt.value = BinaryValue("11101")
+    dut.select_function.value = BinaryValue("00101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000111")
 
     dut.source.value = BinaryValue("00000000000000000000000100000000")
-    dut.selector_1.value = BinaryValue("01000")
-    dut.selector_2.value = BinaryValue("101")
+    dut.shamt.value = BinaryValue("01000")
+    dut.select_function.value = BinaryValue("00101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000001")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("11101")
-    dut.selector_2.value = BinaryValue("110")
+    dut.shamt.value = BinaryValue("11101")
+    dut.select_function.value = BinaryValue("00110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
     dut.source.value = BinaryValue("01111111111111111111111111111111")
-    dut.selector_1.value = BinaryValue("11100")
-    dut.selector_2.value = BinaryValue("110")
+    dut.shamt.value = BinaryValue("11100")
+    dut.select_function.value = BinaryValue("00110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000111")
 
 @pytest.mark.synthesis
-def test_GENERIC_SHIFTER_synthesis():
-    GENERIC_SHIFTER.build_vhd()
-    # GENERIC_SHIFTER.build_netlistsvg()
+def test_RV32I_ALU_SHIFTER_synthesis():
+    RV32I_ALU_SHIFTER.build_vhd()
+    RV32I_ALU_SHIFTER.build_netlistsvg()
 
 
 @pytest.mark.testcases
-def test_GENERIC_SHIFTER_testcases():
-    GENERIC_SHIFTER.test_with(
+def test_RV32I_ALU_SHIFTER_testcases():
+    RV32I_ALU_SHIFTER.test_with(
         [
-            tb_GENERIC_SHIFTER_case_1,
+            tb_RV32I_ALU_SHIFTER_case_1,
         ]
     )
 

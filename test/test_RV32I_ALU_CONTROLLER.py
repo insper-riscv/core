@@ -11,32 +11,32 @@ class RV32I_ALU_CONTROLLER(utils.DUT):
     _package = RV32I
 
     opcode = utils.DUT.Input_pin
-    function_3 = utils.DUT.Input_pin
-    function_7 = utils.DUT.Input_pin
+    funct3 = utils.DUT.Input_pin
+    funct7 = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
 
 @RV32I_ALU_CONTROLLER.testcase
 async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER", trace: utils.Trace):
     dut.opcode.value = BinaryValue("01100")
-    dut.function_3.value = BinaryValue("111")
-    dut.function_7.value = BinaryValue("0000000")
+    dut.funct3.value = BinaryValue("111")
+    dut.funct7.value = BinaryValue("0000000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000")
 
-    dut.function_3.value = BinaryValue("110")
+    dut.funct3.value = BinaryValue("110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00001")
 
-    dut.function_3.value = BinaryValue("000")
-    dut.function_7.value = BinaryValue("0100000")
+    dut.funct3.value = BinaryValue("000")
+    dut.funct7.value = BinaryValue("0100000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "01011")
 
-    dut.function_7.value = BinaryValue("0000000")
+    dut.funct7.value = BinaryValue("0000000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00011")

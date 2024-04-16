@@ -10,8 +10,6 @@ from test_RV32I_package import RV32I
 class RV32I_ALU_BIT(utils.DUT):
     _package = RV32I
 
-    invert_source_1 = utils.DUT.Input_pin
-    invert_source_2 = utils.DUT.Input_pin
     select_function = utils.DUT.Input_pin
     carry_in = utils.DUT.Input_pin
     slt = utils.DUT.Input_pin
@@ -24,9 +22,7 @@ class RV32I_ALU_BIT(utils.DUT):
 
 @RV32I_ALU_BIT.testcase
 async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
-    dut.select_function.value = BinaryValue("000")
+    dut.select_function.value = BinaryValue("00000")
     dut.carry_in.value = BinaryValue("0")
     dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
@@ -37,9 +33,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "0")
     yield trace.check(dut.overflow, "1")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
-    dut.select_function.value = BinaryValue("001")
+    dut.select_function.value = BinaryValue("00001")
     dut.carry_in.value = BinaryValue("0")
     dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("1")
@@ -50,9 +44,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "0")
     yield trace.check(dut.overflow, "1")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
-    dut.select_function.value = BinaryValue("011")
+    dut.select_function.value = BinaryValue("00011")
     dut.carry_in.value = BinaryValue("1")
     dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
@@ -63,9 +55,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "1")
     yield trace.check(dut.overflow, "0")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
-    dut.select_function.value = BinaryValue("110")
+    dut.select_function.value = BinaryValue("00110")
     dut.carry_in.value = BinaryValue("1")
     dut.slt.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("1")
@@ -76,9 +66,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "1")
     yield trace.check(dut.overflow, "0")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("000")
+    dut.select_function.value = BinaryValue("11000")
     dut.carry_in.value = BinaryValue("0")
     dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
@@ -89,9 +77,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "0")
     yield trace.check(dut.overflow, "1")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("001")
+    dut.select_function.value = BinaryValue("11001")
     dut.carry_in.value = BinaryValue("0")
     dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("1")
@@ -102,9 +88,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "0")
     yield trace.check(dut.overflow, "1")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("011")
+    dut.select_function.value = BinaryValue("11011")
     dut.carry_in.value = BinaryValue("1")
     dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
@@ -115,9 +99,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.carry_out, "1")
     yield trace.check(dut.overflow, "0")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("110")
+    dut.select_function.value = BinaryValue("11110")
     dut.carry_in.value = BinaryValue("1")
     dut.slt.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("1")
