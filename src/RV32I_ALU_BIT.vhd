@@ -23,10 +23,14 @@ architecture RTL of RV32I_ALU_BIT is
     signal half_add          : std_logic;
     signal full_add          : std_logic;
     signal carry_auxiliar    : std_logic;
+    signal sltu_invert_bit   : std_logic;
 
 begin
 
-    source_1_auxiliar <= source_1 XOR select_function(3);
+    sltu_invert_bit <= '1' when (select_function(2 downto 0) = "111") else
+                       select_function(3);
+
+    source_1_auxiliar <= source_1 XOR sltu_invert_bit;
     source_2_auxiliar <= source_2 XOR select_function(4);
 
     half_add <= source_1_auxiliar XOR source_2_auxiliar;
@@ -35,8 +39,8 @@ begin
     destination <= source_1_auxiliar AND source_2_auxiliar when (select_function(2 downto 0) = "000") else
                    source_1_auxiliar OR  source_2_auxiliar when (select_function(2 downto 0) = "001") else
                    half_add when (select_function(2 downto 0) = "010") else
-                   full_add when (select_function(2 downto 0) = "011") else
-                   slt;
+                   full_add;-- when (select_function(2 downto 0) = "011") else
+                   --slt;
 
     carry_auxiliar <= (source_1_auxiliar AND source_2_auxiliar) OR (half_add AND carry_in);
     carry_out      <= carry_auxiliar;
