@@ -40,8 +40,8 @@ architecture RTL OF GENERIC_RAM IS
 
 begin
 
-    -- Ajusta o enderecamento para o acesso de 32 bits.
-    local_address <= address((ADDRESSABLE_WIDTH + 1) downto 2);
+    -- Ajusta o enderecamento para o acesso endereçavel.
+    local_address <= address((ADDRESSABLE_WIDTH - 1) downto 0);
 
     WRITE : process(clock)
     begin
