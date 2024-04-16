@@ -7,18 +7,21 @@ name: Quartus Tests
       - src/**
       - .github/workflows/quartus_tests.yml
 jobs:
-
-  build:
-    name: Build docker
+  quartus:
+    name: Quartus Tests
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
       uses: actions/checkout@v3
-    - name: Run the build process with Docker
+    - name: Run Synthesis
       uses: addnab/docker-run-action@v3
       with:
         image: gianvr/pfe:latest
         options: -v ${{ github.workspace }}:/var/www
         run: |
             cd /var/www/quartus
-            quartus_map "top_level"
+            quartus_map top_level
+            quartus_map top_level --analysis_and_elaboration --enable_register_retiming=on --enable_wysiwyg_resynthesis=on
+            quartus_fit top_level
+            quartus sta top_level --do_report_timing -multicorner
+  
