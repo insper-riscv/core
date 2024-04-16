@@ -8,7 +8,7 @@ library WORK;
 entity RV32I_ALU_SHIFTER is
 
     generic (
-        DATA_WIDTH  : natural   := 8;
+        DATA_WIDTH  : natural   := WORK.RV32I.XLEN;
         SHAMT_WIDTH : natural   := natural(ceil(log2(real(DATA_WIDTH))))
     );
 
@@ -49,7 +49,7 @@ begin
                             LOW_VEC((DATA_WIDTH - 1) downto 1) & source(DATA_WIDTH - 1) when (shamt = HIGH_SELECTOR) else
                             '0' & source((DATA_WIDTH - 1) downto 1) when (shamt = ONE_SELECTOR) else
                             LOW_VEC((index - 1) downto 0) & source((DATA_WIDTH - 1) downto index);
-    
+
     shift_right_arithmetical <= source when (shamt = LOW_SELECTOR) else
                                 sign_vec((DATA_WIDTH - 1) downto 1) & source(DATA_WIDTH - 1) when (shamt = HIGH_SELECTOR) else
                                 sign_vec(0) & source((DATA_WIDTH - 1) downto 1) when (shamt = ONE_SELECTOR) else
