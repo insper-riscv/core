@@ -5,9 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity RV32I_ALU_BIT is
 
     port (
-        invert_source_1 : in  std_logic;
-        invert_source_2 : in  std_logic;
-        select_function : in  std_logic_vector(2 downto 0);
+        select_function : in  std_logic_vector(4 downto 0);
         carry_in        : in  std_logic;
         slt             : in  std_logic;
         source_1        : in  std_logic;
@@ -29,16 +27,16 @@ architecture RTL of RV32I_ALU_BIT is
 
 begin
 
-    source_1_auxiliar <= source_1 XOR invert_source_1;
-    source_2_auxiliar <= source_2 XOR invert_source_2;
+    source_1_auxiliar <= source_1 XOR select_function(3);
+    source_2_auxiliar <= source_2 XOR select_function(4);
 
     half_add <= source_1_auxiliar XOR source_2_auxiliar;
     full_add <= half_add XOR carry_in;
 
-    destination <= source_1_auxiliar AND source_2_auxiliar when (select_function = "000") else
-                   source_1_auxiliar OR  source_2_auxiliar when (select_function = "001") else
-                   half_add when (select_function = "010") else
-                   full_add when (select_function = "011") else
+    destination <= source_1_auxiliar AND source_2_auxiliar when (select_function(2 downto 0) = "000") else
+                   source_1_auxiliar OR  source_2_auxiliar when (select_function(2 downto 0) = "001") else
+                   half_add when (select_function(2 downto 0) = "010") else
+                   full_add when (select_function(2 downto 0) = "011") else
                    slt;
 
     carry_auxiliar <= (source_1_auxiliar AND source_2_auxiliar) OR (half_add AND carry_in);
