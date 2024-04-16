@@ -21,14 +21,14 @@ end entity;
 
 architecture RTL of RV32I_INSTRUCTION_DECODER is
 
-    -- No signal
+    shared variable rv32i_instruction : t_RV32I_INSTRUCTION;
 
 begin
 
     process(instruction) is
-        variable rv32i_instruction : t_RV32I_INSTRUCTION;
-    begin
+		begin
         rv32i_instruction := to_RV32I_INSTRUCTION(instruction);
+		 end process;
         
         control_if.enable_stall     <= '0';
         control_if.enable_flush     <= '0';
@@ -83,6 +83,6 @@ begin
                     rv32i_instruction.immediate_u when (rv32i_instruction.encoding = RV32I_INSTRUCTION_U_TYPE) else
                     rv32i_instruction.immediate_j when (rv32i_instruction.encoding = RV32I_INSTRUCTION_J_TYPE) else
                     (others => '0');
-    end process;
+    
     
 end architecture;
