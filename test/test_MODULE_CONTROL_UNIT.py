@@ -5,7 +5,6 @@ from cocotb.binary import BinaryValue
 
 import utils
 from test_MODULES_package import MODULES
-from test_RV32I_INSTRUCTION_DECODER import RV32I_INSTRUCTION_DECODER
 from test_GENERIC_ADDER import GENERIC_ADDER
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
@@ -23,7 +22,6 @@ class MODULE_CONTROL_UNIT(utils.DUT):
     control_mem = utils.DUT.Output_pin
     control_wb = utils.DUT.Output_pin
 
-    control_unit =  RV32I_INSTRUCTION_DECODER
     adder_1 = GENERIC_ADDER
     adder_2 = GENERIC_ADDER
     mux = GENERIC_MUX_2X1
