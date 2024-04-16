@@ -28,4 +28,4 @@ jobs:
       run: quartus_fit /var/www/quartus/top_level
 
     - name: Run Timing Analysis
-      run: quartus sta /var/www/quartus/top_level --do_report_timing --multicorner
+      run: quartus_sta /var/www/quartus/top_level --do_report_timing --multicorner
