@@ -21,18 +21,18 @@ end entity;
 
 architecture RTL of RV32I_ALU is
 
-    signal result           : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal result_extended  : std_logic;
-    signal carry            : std_logic_vector((DATA_WIDTH) downto 0);
-    signal carry_extended   : std_logic;
-    signal slt              : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
-    signal shift            : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal result            : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal result_extended   : std_logic;
+    signal carry             : std_logic_vector((DATA_WIDTH) downto 0);
+    signal carry_extended    : std_logic;
+    signal slt               : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
+    signal shift             : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
     carry(0) <= select_function(3) XOR select_function(4);
 
-    slt(0) <=   carry_extended when (select_function = "00111") else
+    slt(0) <=   carry_extended XOR carry(DATA_WIDTH) XOR result_extended when (select_function = "00111") else
                 carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1) XOR result(DATA_WIDTH - 1);
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
@@ -75,6 +75,10 @@ begin
                         select_function = "00101" or
                         select_function = "00110"
                     ) else 
+                    slt when (
+                        select_function = "00111" or
+                        select_function = "01111"
+                    ) else
                     result;
 
 end architecture;
