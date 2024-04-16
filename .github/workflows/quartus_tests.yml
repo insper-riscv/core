@@ -8,8 +8,8 @@ on:
       - .github/workflows/quartus_tests.yml
 
 jobs:
-  quartus:
-    name: Quartus Tests
+  synthesis:
+    name: Synthesis
     runs-on: ubuntu-latest
     container:
       image: gianvr/pfe:latest
@@ -17,15 +17,44 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v3
+    - name: Run quartus_map
+      run: quartus_map top_level
 
-    - name: Run Synthesis
-      run: quartus_map /var/www/quartus/top_level
+  elaboration:
+    name: Elaboration
+    needs: synthesis
+    runs-on: ubuntu-latest
+    container:
+      image: gianvr/pfe:latest
+      options: -v ${{ github.workspace }}:/var/www
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+    - name: Run quartus_map with additional options
+      run: quartus_map top_level --analysis_and_elaboration --enable_register_retiming=on --enable_wysiwyg_resynthesis=on
 
-    - name: Run Elaboration
-      run: quartus_map /var/www/quartus/top_level --analysis_and_elaboration --enable_register_retiming=on --enable_wysiwyg_resynthesis=on
+  fitter:
+    name: Fitter
+    needs: elaboration
+    runs-on: ubuntu-latest
+    container:
+      image: gianvr/pfe:latest
+      options: -v ${{ github.workspace }}:/var/www
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+    - name: Run quartus_fit
+      run: quartus_fit top_level
 
-    - name: Run Fitter
-      run: quartus_fit /var/www/quartus/top_level
-
-    - name: Run Timing Analysis
-      run: quartus_sta /var/www/quartus/top_level --do_report_timing --multicorner
+  timing_analysis:
+    name: Timing Analysis
+    needs: fitter
+    runs-on: ubuntu-latest
+    container:
+      image: gianvr/pfe:latest
+      options: -v ${{ github.workspace }}:/var/www
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+    - name: Run quartus_sta
+      run: quartus sta top_level --do_report_timing -multicorner
