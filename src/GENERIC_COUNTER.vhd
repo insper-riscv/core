@@ -15,7 +15,7 @@ entity GENERIC_COUNTER is
         clear  : in  std_logic;
         update : in  std_logic;
         source : in  std_logic_vector(4 downto 0);
-        state  : out std_logic := '00'
+        state  : out std_logic := '0'
     );
 
 end entity;
