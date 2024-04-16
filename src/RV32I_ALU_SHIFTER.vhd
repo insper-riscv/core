@@ -23,72 +23,53 @@ end entity;
 
 architecture RTL of RV32I_ALU_SHIFTER is
 
-    constant HIGH_SELECTOR  : std_logic_vector((SHAMT_WIDTH - 1) downto 0)  := (others => '1');
-    constant LOW_SELECTOR   : std_logic_vector((SHAMT_WIDTH - 1) downto 0)  := (others => '0');
-    constant ONE_SELECTOR   : std_logic_vector((SHAMT_WIDTH - 1) downto 0)  := std_logic_vector(to_unsigned(1, SHAMT_WIDTH));
-    constant LOW_VEC        : std_logic_vector((DATA_WIDTH  - 1) downto 0)  := (others => '0');
+    type t_file is array (natural range <>) of std_logic_vector(DATA_WIDTH - 1 downto 0);
+    signal data                 : t_file(0 to (DATA_WIDTH - 1));
 
-    signal index                    : natural;
-    signal sign_vec                 : std_logic_vector((DATA_WIDTH  - 1) downto 0);
-    signal shift_left_logical       : std_logic_vector((DATA_WIDTH  - 1) downto 0);
-    signal shift_right_logical      : std_logic_vector((DATA_WIDTH  - 1) downto 0);
-    signal shift_right_arithmetical : std_logic_vector((DATA_WIDTH  - 1) downto 0);
+    signal msb                  : std_logic := '0';
+    signal msb_vector           : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal source_auxiliar      : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal reversed_source      : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal destination_auxiliar : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal reversed_destination : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
-    signal aaa : std_logic_vector((DATA_WIDTH  - 1) downto 0);
-    signal bbb : std_logic_vector((DATA_WIDTH  - 1) downto 0);
-    signal ccc : std_logic_vector((DATA_WIDTH  - 1) downto 0);
+    function reverse_vector (
+        in_vec: in std_logic_vector
+    ) return std_logic_vector is
+        variable out_vec: std_logic_vector(in_vec'RANGE);
+        alias auxiliar: std_logic_vector(in_vec'REVERSE_RANGE) is in_vec;
+    begin
+        for i in auxiliar'RANGE loop
+            out_vec(i) := auxiliar(i);
+        end loop;
+        return out_vec;
+    end function;
 
 begin
 
-    index <=    to_integer(unsigned(shamt));
+    msb_vector <=   (others => source(DATA_WIDTH - 1)) when (select_function(2 downto 0) = "110") else
+                    (others => '0');
 
-    sign_vec <= (others => source(DATA_WIDTH - 1));
+    reversed_source <= reverse_vector(source);
 
-    process(source, index)
-    begin
-        aaa <= source;
-        LEFT_LOGICAL : for i in 2 to (DATA_WIDTH - 2) loop
-            if i = index then
-                exit;
-            end if;
-            aaa <= aaa(DATA_WIDTH - 2 downto 0) & '0';
-        end loop;
+    source_auxiliar <=  source when (select_function(2 downto 0) = "100") else
+                        reversed_source;
 
-        bbb <= source;
-        RIGHT_LOGICAL : for i in 2 to (DATA_WIDTH - 2) loop
-            if i = index then
-                exit;
-            end if;
-            bbb <= '0' & bbb(DATA_WIDTH - 1 downto 1);
-        end loop;
+    BUILD : for i in 0 to (DATA_WIDTH - 1) generate
+        BUILD_ROW : if (i = 0) generate
+            data(i) <= source_auxiliar;
+        elsif (i = DATA_WIDTH - 1) generate
+            data(i) <= msb_vector;
+        else generate
+            data(i) <= source_auxiliar((DATA_WIDTH - i - 1) downto 0) & msb_vector((i - 1) downto 0);
+        end generate;
+    end generate;
 
-        ccc <= source;
-        RIGHT_ARITHMETICAL : for i in 2 to (DATA_WIDTH - 2) loop
-            if i = index then
-                exit;
-            end if;
-            ccc <= source(DATA_WIDTH - 1) & ccc(DATA_WIDTH - 1 downto 1);
-        end loop;
-    end process;
+    destination_auxiliar <= data(to_integer(unsigned(shamt)));
 
-    shift_left_logical <=   source when (shamt = LOW_SELECTOR) else
-                            source(0) & LOW_VEC((DATA_WIDTH - 2) downto 0) when (shamt = HIGH_SELECTOR) else
-                            source((DATA_WIDTH - 2) downto 0) & '0' when (shamt = ONE_SELECTOR) else
-                            aaa;
+    reversed_destination <= reverse_vector(destination_auxiliar);
 
-    shift_right_logical <=  source when (shamt = LOW_SELECTOR) else
-                            LOW_VEC((DATA_WIDTH - 1) downto 1) & source(DATA_WIDTH - 1) when (shamt = HIGH_SELECTOR) else
-                            '0' & source((DATA_WIDTH - 1) downto 1) when (shamt = ONE_SELECTOR) else
-                            bbb;
-
-    shift_right_arithmetical <= source when (shamt = LOW_SELECTOR) else
-                                sign_vec((DATA_WIDTH - 1) downto 1) & source(DATA_WIDTH - 1) when (shamt = HIGH_SELECTOR) else
-                                sign_vec(0) & source((DATA_WIDTH - 1) downto 1) when (shamt = ONE_SELECTOR) else
-                                ccc;
-
-    destination <=  shift_left_logical       when (select_function(2 downto 0) = "100") else
-                    shift_right_logical      when (select_function(2 downto 0) = "101") else
-                    shift_right_arithmetical when (select_function(2 downto 0) = "110") else
-                    source;
+    destination <=  destination_auxiliar when (select_function(2 downto 0) = "100") else
+                    reversed_destination;
 
 end architecture;
