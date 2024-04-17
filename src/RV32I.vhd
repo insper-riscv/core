@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.MATH_REAL.ALL;
 
 library WORK;
 
@@ -160,6 +161,69 @@ package RV32I is
     function to_instruction(
         in_vec : std_logic_vector(INSTRUCTION_RANGE)
     ) return t_INSTRUCTION;
+
+    component RV32I_REGISTER_FILE
+        generic (
+            DATA_WIDTH    : natural := XLEN;
+            ADDRESS_WIDTH : natural := REGISTER_WIDTH
+        );
+        port (
+            clock               : in  std_logic;
+            enable              : in  std_logic := '0';
+            address_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+            address_source_1    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+            address_source_2    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+            data_destination    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            data_source_1       : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+            data_source_2       : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        );
+    end component;
+
+    component RV32I_ALU_BIT
+        port (
+            select_function : in  std_logic_vector(5 downto 0);
+            carry_in        : in  std_logic;
+            source_1        : in  std_logic;
+            source_2        : in  std_logic;
+            destination     : out std_logic;
+            carry_out       : out std_logic
+        );
+    end component;
+
+    component RV32I_ALU_SHIFTER
+        generic (
+            DATA_WIDTH  : natural := XLEN;
+            SHAMT_WIDTH : natural := natural(ceil(log2(real(DATA_WIDTH))))
+        );
+        port (
+            select_function : in  std_logic_vector(5 downto 0);
+            shamt           : in  std_logic_vector((SHAMT_WIDTH - 1) downto 0);
+            source          : in  std_logic_vector((DATA_WIDTH  - 1) downto 0);
+            destination     : out std_logic_vector((DATA_WIDTH  - 1) downto 0)
+        );
+    end component;
+
+    component RV32I_ALU
+        generic (
+            DATA_WIDTH : natural := XLEN
+        );
+        port (
+            select_function : in  std_logic_vector(5 downto 0);
+            source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            overflow        : out std_logic;
+            destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        );
+    end component;
+
+    component RV32I_ALU_CONTROLLER
+        port (
+            opcode      : in  t_OPCODE;
+            funct3      : in  t_FUNCT3;
+            funct7      : in  t_FUNCT7;
+            destination : out std_logic_vector(5 downto 0)
+        );
+    end component;
 
 end package;
 
