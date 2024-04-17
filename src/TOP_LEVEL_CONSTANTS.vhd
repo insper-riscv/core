@@ -94,15 +94,19 @@ package TOP_LEVEL_CONSTANTS is
     );
 
     type t_CONTROL_MEM is record
-        enable_read  : std_logic;
-        enable_write : std_logic;
-        funct_3      : t_FUNCTION;
+        enable_read    : std_logic;
+        enable_write   : std_logic;
+        store_byte     : std_logic;
+        store_halfword : std_logic;
+        funct_3        : t_FUNCTION;
     end record;
 
     constant NULL_CONTROL_MEM : t_CONTROL_MEM := (
-        enable_read  => '0',
-        enable_write => '0',
-        funct_3      => (others => '0')
+        enable_read    => '0',
+        enable_write   => '0',
+        store_byte     => '0',
+        store_halfword => '0',
+        funct_3        => (others => '0')
     );
 
     type t_CONTROL_WB is record

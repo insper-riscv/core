@@ -19,6 +19,8 @@ entity STAGE_MEM is
         address_memory : out t_DATA;
         data_memory    : out t_DATA;
         funct_3        : out t_FUNCTION;
+        store_byte     : out  std_logic;
+        store_halfword : out  std_logic;
         destination    : out t_SIGNALS_MEM_WB
     );
 
@@ -53,6 +55,8 @@ begin
     address_memory                 <= source_0.address_pointer;
     data_memory                    <= source_0.data_source_2;
     funct_3                        <= source_0.control_mem.funct_3;
+    store_byte                     <= source_0.control_mem.store_byte;
+    store_halfword                 <= source_0.control_mem.store_halfword;
 
     destination.data_memory        <= (others => '-');
     destination.data_destination   <= source_0.address_pointer;

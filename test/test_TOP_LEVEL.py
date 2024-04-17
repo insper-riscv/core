@@ -28,6 +28,8 @@ class TOP_LEVEL(utils.DUT):
     address_memory = utils.DUT.Output_pin
     memory_read = utils.DUT.Output_pin
     memory_write = utils.DUT.Output_pin
+    store_byte     = utils.DUT.Output_pin
+    store_halfword = utils.DUT.Output_pin
     led = utils.DUT.Output_pin
 
     rom = GENERIC_ROM
@@ -316,6 +318,73 @@ async def tb_TOP_LEVEL_ORI(dut: TOP_LEVEL, trace: utils.Trace):
         "11111111111000000000000000000111",
         "00000000000000000000000000000000",
         "11111111111000000000000000000111",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SB(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000001001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000010000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        if index == 8:
+            yield trace.check(dut.memory_write, '1', f"At clock {index}.")
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_SH(dut: TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000011000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000011000001001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000001000001001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000001000001010000001",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
@@ -1131,6 +1200,24 @@ def test_TOP_LEVEL_testcases():
     TOP_LEVEL.test_with(
         testcase=[
             tb_TOP_LEVEL_XORI
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/STORE_INSTRUCTION_SB.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SB
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/STORE_INSTRUCTION_SH.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
+        testcase=[
+            tb_TOP_LEVEL_SH
         ],
     )
     

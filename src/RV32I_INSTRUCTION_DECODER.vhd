@@ -74,6 +74,17 @@ begin
         control_mem.enable_write <= '1' when (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE) else
                                     '0';
         control_mem.funct_3 <= rv32i_instruction.funct_3;
+        control_mem.store_byte <= '1' when (
+                                      (rv32i_instruction.funct_3 = "000") and 
+                                      (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE)
+                                      ) else
+                                      '0';
+        control_mem.store_halfword <= '1' when (
+                                      (rv32i_instruction.funct_3 = "001") and 
+                                      (rv32i_instruction.encoding = RV32I_INSTRUCTION_S_TYPE)
+                                      ) else
+                                      '0';
+
 
         control_wb.enable_destination <= '1' when (
                                             (rv32i_instruction.encoding = RV32I_INSTRUCTION_R_TYPE) or 

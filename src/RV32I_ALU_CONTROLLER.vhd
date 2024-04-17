@@ -37,6 +37,8 @@ begin
                    "00011" when (opcode = OPCODE_LOAD(OPCODE_RANGE)  ) and(function_3 = FUNCTION_LBU  ) else
                    "00011" when (opcode = OPCODE_LOAD(OPCODE_RANGE)  ) and(function_3 = FUNCTION_LHU  ) else
                    "00011" when (opcode = OPCODE_LOAD(OPCODE_RANGE)  ) and(function_3 = FUNCTION_LW   ) else
+                   "00011" when (opcode = OPCODE_STORE(OPCODE_RANGE) ) and(function_3 = FUNCTION_SB   ) else
+                   "00011" when (opcode = OPCODE_STORE(OPCODE_RANGE) ) and(function_3 = FUNCTION_SH   ) else
                    "00011" when (opcode = OPCODE_STORE(OPCODE_RANGE) ) and(function_3 = FUNCTION_SW   ) else
                    "00000" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_ANDI ) else
                    "00010" when (opcode = OPCODE_OP_IMM(OPCODE_RANGE)) and(function_3 = FUNCTION_XORI ) else
