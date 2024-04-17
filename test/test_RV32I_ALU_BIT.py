@@ -20,16 +20,16 @@ class RV32I_ALU_BIT(utils.DUT):
 
 @RV32I_ALU_BIT.testcase
 async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
-    dut.select_function.value = BinaryValue("000000")
+    dut.select_function.value = BinaryValue("0000")
     dut.carry_in.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0", "At cycle 0")
+    yield trace.check(dut.destination, "1", "At cycle 0")
     yield trace.check(dut.carry_out, "0", "At cycle 0")
 
-    dut.select_function.value = BinaryValue("000001")
+    dut.select_function.value = BinaryValue("0000")
     dut.carry_in.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
@@ -38,7 +38,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.destination, "1", "At cycle 1")
     yield trace.check(dut.carry_out, "0", "At cycle 1")
 
-    dut.select_function.value = BinaryValue("000011")
+    dut.select_function.value = BinaryValue("0000")
     dut.carry_in.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
@@ -47,7 +47,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.destination, "0", "At cycle 2")
     yield trace.check(dut.carry_out, "1", "At cycle 2")
 
-    dut.select_function.value = BinaryValue("000110")
+    dut.select_function.value = BinaryValue("0000")
     dut.carry_in.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
@@ -56,7 +56,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.destination, "0", "At cycle 3")
     yield trace.check(dut.carry_out, "1", "At cycle 3")
 
-    dut.select_function.value = BinaryValue("011000")
+    dut.select_function.value = BinaryValue("0111")
     dut.carry_in.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
@@ -65,7 +65,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.destination, "0", "At cycle 4")
     yield trace.check(dut.carry_out, "0", "At cycle 4")
 
-    dut.select_function.value = BinaryValue("011001")
+    dut.select_function.value = BinaryValue("0110")
     dut.carry_in.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
@@ -74,7 +74,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.destination, "1", "At cycle 5")
     yield trace.check(dut.carry_out, "0", "At cycle 5")
 
-    dut.select_function.value = BinaryValue("011011")
+    dut.select_function.value = BinaryValue("0111")
     dut.carry_in.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
@@ -83,7 +83,7 @@ async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
     yield trace.check(dut.destination, "0", "At cycle 6")
     yield trace.check(dut.carry_out, "1", "At cycle 6")
 
-    dut.select_function.value = BinaryValue("011110")
+    dut.select_function.value = BinaryValue("0000")
     dut.carry_in.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
