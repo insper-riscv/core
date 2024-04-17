@@ -67,7 +67,7 @@ async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Tr
     for _ in range(qnt_tests):
         source = random.getrandbits(32)
 
-        source_bits = utils.convert_to_binstr(source, 32)
+        source_bits = '{0:0{1}b}'.format(source, 32)
         destination = source_bits
 
         dut.clear.value = BinaryValue(clear)
@@ -80,7 +80,7 @@ async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Tr
         yield trace.check(dut.destination, destination, message)
     
     source = random.getrandbits(32)
-    source_bits = utils.convert_to_binstr(source, 32)
+    source_bits = '{0:0{1}b}'.format(source, 32)
     destination = source_bits
 
     dut.clear.value = BinaryValue(clear)
@@ -94,7 +94,7 @@ async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Tr
     for _ in range(qnt_tests):
         source = random.getrandbits(32)
 
-        source_bits = utils.convert_to_binstr(source, 32)
+        source_bits = '{0:0{1}b}'.format(source, 32)
 
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)
@@ -107,12 +107,12 @@ async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Tr
 
     clear = "1"
     enable = "0"
-    destination = utils.convert_to_binstr(0, 32)
+    destination = '{0:0{1}b}'.format(0, 32)
 
     for _ in range(qnt_tests):
         source = random.getrandbits(32)
 
-        source_bits = utils.convert_to_binstr(source, 32)
+        source_bits = '{0:0{1}b}'.format(source, 32)
 
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)
@@ -134,7 +134,7 @@ async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: 
     cocotb.start_soon(clock.start(start_high=False))
 
     for source in range(2**bits):
-        source_bits = utils.convert_to_binstr(source, bits)
+        source_bits = '{0:0{1}b}'.format(source, bits)
         destination = source_bits
 
         dut.clear.value = BinaryValue(clear)
@@ -148,7 +148,7 @@ async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: 
     
 
     source = random.getrandbits(bits)
-    source_bits = utils.convert_to_binstr(source, bits)
+    source_bits = '{0:0{1}b}'.format(source, bits)
     destination = source_bits
 
     dut.clear.value = BinaryValue(clear)
@@ -160,7 +160,7 @@ async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: 
     enable = "0"
 
     for source in range(2**bits):
-        source_bits = utils.convert_to_binstr(source, bits)
+        source_bits = '{0:0{1}b}'.format(source, bits)
 
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)
@@ -173,10 +173,10 @@ async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: 
 
     clear = "1"
     enable = "0"
-    destination = utils.convert_to_binstr(0, 32)
+    destination = '{0:0{1}b}'.format(0, bits)
 
     for source in range(2**bits):
-        source_bits = utils.convert_to_binstr(source, 32)
+        source_bits = '{0:0{1}b}'.format(source, bits)
 
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)
