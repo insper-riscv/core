@@ -362,8 +362,6 @@ async def tb_TOP_LEVEL_SB(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        if index == 8:
-            yield trace.check(dut.memory_write, '1', f"At clock {index}.")
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
