@@ -43,6 +43,7 @@ architecture RTL of TOP_LEVEL is
     signal address_memory_0      : t_DATA;
     signal data_memory_in_0      : t_DATA;
     signal data_memory_out_0     : t_DATA;
+    signal data_memory_funct_0     : t_FUNCTION;
 
     signal source_wb             : t_SIGNALS_MEM_WB;
 
@@ -110,6 +111,7 @@ begin
             control_memory => control_memory,
             address_memory => address_memory_0,
             data_memory    => data_memory_out_0,
+            funct_3        => data_memory_funct_0,
             destination    => signals_mem_wb
         );
 
@@ -134,9 +136,16 @@ begin
     end generate;
 
     source_wb.control_wb         <= signals_mem_wb.control_wb;
-    source_wb.data_memory        <= data_memory_in_0;
+    --source_wb.data_memory        <= data_memory_in_0;
     source_wb.data_destination   <= signals_mem_wb.data_destination;
     source_wb.select_destination <= signals_mem_wb.select_destination;
+
+    CPU_LOAD_EXTENDER : entity WORK.CPU_LOAD_EXTENDER
+        port map (
+            source      => data_memory_in_0,
+            selector    => data_memory_funct_0,
+            destination => source_wb.data_memory
+        );
 
     STAGE_WB : entity WORK.STAGE_WB
         port map (
