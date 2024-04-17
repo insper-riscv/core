@@ -11,9 +11,10 @@ entity RV32I_ALU is
     );
   
     port (
-        select_function : in  std_logic_vector(4 downto 0);
+        select_function : in  std_logic_vector(5 downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        overflow        : out std_logic;
         destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -21,26 +22,31 @@ end entity;
 
 architecture RTL of RV32I_ALU is
 
-    signal result            : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal result_extended   : std_logic;
-    signal carry             : std_logic_vector((DATA_WIDTH) downto 0);
-    signal carry_extended    : std_logic;
-    signal slt               : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
-    signal shift             : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal result               : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal result_extended      : std_logic;
+    signal carry                : std_logic_vector((DATA_WIDTH) downto 0);
+    signal carry_extended       : std_logic;
+    signal overflow_auxiliar    : std_logic;
+    signal slt                  : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
+    signal shift                : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
     carry(0) <= select_function(3) XOR select_function(4);
 
-    slt(0) <=   carry_extended XOR carry(DATA_WIDTH) XOR result_extended when (select_function = "00111") else
-                carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1) XOR result(DATA_WIDTH - 1);
+    overflow_auxiliar <=    carry_extended XOR carry(DATA_WIDTH) when (select_function(5) = '1') else
+                            carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1);
+
+    overflow <= overflow_auxiliar;
+
+    slt(0) <=   overflow_auxiliar XOR result_extended when (select_function(5) = '1') else
+                overflow_auxiliar XOR result(DATA_WIDTH - 1);
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
         FOR_BIT : entity WORK.RV32I_ALU_BIT
             port map (
                 select_function => select_function,
                 carry_in        => carry(i),
-                slt             => slt(i),
                 source_1        => source_1(i),
                 source_2        => source_2(i),
                 destination     => result(i),
@@ -50,9 +56,8 @@ begin
 
     EXTENDED_SIGN_BIT : entity WORK.RV32I_ALU_BIT
         port map (
-            select_function => select_function,
+            select_function => "000011",
             carry_in        => carry(DATA_WIDTH),
-            slt             => '0',
             source_1        => '0',
             source_2        => '0',
             destination     => result_extended,
@@ -71,13 +76,12 @@ begin
         );
 
     destination <=  shift when (
-                        select_function = "00100" or
-                        select_function = "00101" or
-                        select_function = "00110"
+                        select_function = "000100" or
+                        select_function = "000101" or
+                        select_function = "000110"
                     ) else 
                     slt when (
-                        select_function = "00111" or
-                        select_function = "01111"
+                        select_function(2 downto 0) = "111"
                     ) else
                     result;
 

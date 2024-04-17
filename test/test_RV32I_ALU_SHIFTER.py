@@ -17,49 +17,49 @@ class RV32I_ALU_SHIFTER(utils.DUT):
 async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: utils.Trace):
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("00000")
-    dut.select_function.value = BinaryValue("00101")
+    dut.select_function.value = BinaryValue("000101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("00000")
-    dut.select_function.value = BinaryValue("00101")
+    dut.select_function.value = BinaryValue("000101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("00001")
-    dut.select_function.value = BinaryValue("00100")
+    dut.select_function.value = BinaryValue("000100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111110")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("00001")
-    dut.select_function.value = BinaryValue("00101")
+    dut.select_function.value = BinaryValue("000101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "01111111111111111111111111111111")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("11110")
-    dut.select_function.value = BinaryValue("00100")
+    dut.select_function.value = BinaryValue("000100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11000000000000000000000000000000")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("11101")
-    dut.select_function.value = BinaryValue("00100")
+    dut.select_function.value = BinaryValue("000100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11100000000000000000000000000000")
 
     dut.source.value = BinaryValue("00000000000000000000000000001000")
     dut.shamt.value = BinaryValue("00010")
-    dut.select_function.value = BinaryValue("00100")
+    dut.select_function.value = BinaryValue("000100")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000100000")
@@ -67,35 +67,35 @@ async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: utils.Trace
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("11110")
-    dut.select_function.value = BinaryValue("00101")
+    dut.select_function.value = BinaryValue("000101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000011")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("11101")
-    dut.select_function.value = BinaryValue("00101")
+    dut.select_function.value = BinaryValue("000101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000111")
 
     dut.source.value = BinaryValue("00000000000000000000000100000000")
     dut.shamt.value = BinaryValue("01000")
-    dut.select_function.value = BinaryValue("00101")
+    dut.select_function.value = BinaryValue("000101")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000001")
 
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("11101")
-    dut.select_function.value = BinaryValue("00110")
+    dut.select_function.value = BinaryValue("000110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")
 
     dut.source.value = BinaryValue("01111111111111111111111111111111")
     dut.shamt.value = BinaryValue("11100")
-    dut.select_function.value = BinaryValue("00110")
+    dut.select_function.value = BinaryValue("000110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000111")
