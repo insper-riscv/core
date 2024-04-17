@@ -8,13 +8,13 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity RV32I_REGISTER_FILE is
 
     generic (
-        DATA_WIDTH      : natural   := WORK.RV32I.XLEN;
-        ADDRESS_WIDTH   : natural   := WORK.RV32I.REGISTER_WIDTH
+        DATA_WIDTH    : natural := WORK.RV32I.XLEN;
+        ADDRESS_WIDTH : natural := WORK.RV32I.REGISTER_WIDTH
     );
 
     port (
         clock               : in  std_logic;
-        enable              : in  std_logic                                         := '0';
+        enable              : in  std_logic := '0';
         address_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
         address_source_1    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
         address_source_2    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
