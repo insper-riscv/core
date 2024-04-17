@@ -48,9 +48,9 @@ begin
         end if;
     end process;
 
-    destination <= ram(to_integer(unsigned(local_address))) when (
-                       enable_read = '1' and enable = '1'
-                   ) else
-                   (others => 'Z');
+    destination <=  ram(to_integer(unsigned(local_address))) when (
+                        enable_read = '1' and enable = '1'
+                    ) else
+                    (others => 'Z');
 
 end architecture;
