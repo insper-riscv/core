@@ -179,9 +179,22 @@ package RV32I is
         );
     end component;
 
+    component RV32I_ALU
+        generic (
+            DATA_WIDTH : natural := XLEN
+        );
+        port (
+            select_function : in  std_logic_vector(3 downto 0);
+            source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            overflow        : out std_logic;
+            destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        );
+    end component;
+
     component RV32I_ALU_BIT
         port (
-            select_function : in  std_logic_vector(5 downto 0);
+            select_function : in  std_logic_vector(3 downto 0);
             carry_in        : in  std_logic;
             source_1        : in  std_logic;
             source_2        : in  std_logic;
@@ -196,23 +209,10 @@ package RV32I is
             SHAMT_WIDTH : natural := natural(ceil(log2(real(DATA_WIDTH))))
         );
         port (
-            select_function : in  std_logic_vector(5 downto 0);
+            select_function : in  std_logic_vector(3 downto 0);
             shamt           : in  std_logic_vector((SHAMT_WIDTH - 1) downto 0);
             source          : in  std_logic_vector((DATA_WIDTH  - 1) downto 0);
             destination     : out std_logic_vector((DATA_WIDTH  - 1) downto 0)
-        );
-    end component;
-
-    component RV32I_ALU
-        generic (
-            DATA_WIDTH : natural := XLEN
-        );
-        port (
-            select_function : in  std_logic_vector(5 downto 0);
-            source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-            source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-            overflow        : out std_logic;
-            destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
         );
     end component;
 
