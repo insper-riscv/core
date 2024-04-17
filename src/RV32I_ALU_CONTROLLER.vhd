@@ -22,9 +22,12 @@ architecture RTL of RV32I_ALU_CONTROLLER is
 
 begin
 
-    destination <=  funct7(5) & funct3 when (
+    destination <=  funct7(30) & funct3 when (
                         opcode = WORK.RV32I.OPCODE_OP or
                         opcode = WORK.RV32I.OPCODE_OP_IMM
+                    ) else
+                    '0' & WORK.RV32I.FUNCT3_ADDI when (
+                        opcode = WORK.RV32I.OPCODE_SYSTEM
                     ) else
                     '0' & WORK.RV32I.FUNCT3_ADD when (
                         opcode = WORK.RV32I.OPCODE_LOAD or
