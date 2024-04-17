@@ -13,7 +13,7 @@ entity RV32I_ALU_SHIFTER is
     );
 
     port (
-        select_function : in  std_logic_vector(4 downto 0);
+        select_function : in  std_logic_vector(5 downto 0);
         shamt           : in  std_logic_vector((SHAMT_WIDTH - 1) downto 0);
         source          : in  std_logic_vector((DATA_WIDTH  - 1) downto 0);
         destination     : out std_logic_vector((DATA_WIDTH  - 1) downto 0)

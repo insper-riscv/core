@@ -12,103 +12,85 @@ class RV32I_ALU_BIT(utils.DUT):
 
     select_function = utils.DUT.Input_pin
     carry_in = utils.DUT.Input_pin
-    slt = utils.DUT.Input_pin
     source_1 = utils.DUT.Input_pin
     source_2 = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
     carry_out = utils.DUT.Output_pin
-    overflow = utils.DUT.Output_pin
 
 
 @RV32I_ALU_BIT.testcase
 async def tb_RV32I_ALU_BIT_case_1(dut: RV32I_ALU_BIT, trace: utils.Trace):
-    dut.select_function.value = BinaryValue("00000")
+    dut.select_function.value = BinaryValue("000000")
     dut.carry_in.value = BinaryValue("0")
-    dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0")
-    yield trace.check(dut.carry_out, "0")
-    yield trace.check(dut.overflow, "1")
+    yield trace.check(dut.destination, "0", "At cycle 0")
+    yield trace.check(dut.carry_out, "0", "At cycle 0")
 
-    dut.select_function.value = BinaryValue("00001")
+    dut.select_function.value = BinaryValue("000001")
     dut.carry_in.value = BinaryValue("0")
-    dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
-    yield trace.check(dut.carry_out, "0")
-    yield trace.check(dut.overflow, "1")
+    yield trace.check(dut.destination, "1", "At cycle 1")
+    yield trace.check(dut.carry_out, "0", "At cycle 1")
 
-    dut.select_function.value = BinaryValue("00011")
+    dut.select_function.value = BinaryValue("000011")
     dut.carry_in.value = BinaryValue("1")
-    dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0")
-    yield trace.check(dut.carry_out, "1")
-    yield trace.check(dut.overflow, "0")
+    yield trace.check(dut.destination, "0", "At cycle 2")
+    yield trace.check(dut.carry_out, "1", "At cycle 2")
 
-    dut.select_function.value = BinaryValue("00110")
+    dut.select_function.value = BinaryValue("000110")
     dut.carry_in.value = BinaryValue("1")
-    dut.slt.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
-    yield trace.check(dut.carry_out, "1")
-    yield trace.check(dut.overflow, "0")
+    yield trace.check(dut.destination, "0", "At cycle 3")
+    yield trace.check(dut.carry_out, "1", "At cycle 3")
 
-    dut.select_function.value = BinaryValue("11000")
+    dut.select_function.value = BinaryValue("011000")
     dut.carry_in.value = BinaryValue("0")
-    dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0")
-    yield trace.check(dut.carry_out, "0")
-    yield trace.check(dut.overflow, "1")
+    yield trace.check(dut.destination, "0", "At cycle 4")
+    yield trace.check(dut.carry_out, "0", "At cycle 4")
 
-    dut.select_function.value = BinaryValue("11001")
+    dut.select_function.value = BinaryValue("011001")
     dut.carry_in.value = BinaryValue("0")
-    dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
-    yield trace.check(dut.carry_out, "0")
-    yield trace.check(dut.overflow, "1")
+    yield trace.check(dut.destination, "1", "At cycle 5")
+    yield trace.check(dut.carry_out, "0", "At cycle 5")
 
-    dut.select_function.value = BinaryValue("11011")
+    dut.select_function.value = BinaryValue("011011")
     dut.carry_in.value = BinaryValue("1")
-    dut.slt.value = BinaryValue("0")
     dut.source_1.value = BinaryValue("0")
     dut.source_2.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "0")
-    yield trace.check(dut.carry_out, "1")
-    yield trace.check(dut.overflow, "0")
+    yield trace.check(dut.destination, "0", "At cycle 6")
+    yield trace.check(dut.carry_out, "1", "At cycle 6")
 
-    dut.select_function.value = BinaryValue("11110")
+    dut.select_function.value = BinaryValue("011110")
     dut.carry_in.value = BinaryValue("1")
-    dut.slt.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("1")
     dut.source_2.value = BinaryValue("0")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
-    yield trace.check(dut.carry_out, "1")
-    yield trace.check(dut.overflow, "0")
+    yield trace.check(dut.destination, "0", "At cycle 7")
+    yield trace.check(dut.carry_out, "1", "At cycle 7")
 
 
 @pytest.mark.synthesis
