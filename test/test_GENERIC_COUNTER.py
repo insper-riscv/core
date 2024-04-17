@@ -32,7 +32,7 @@ async def tb_GENERIC_COUNTER_case_1(dut: GENERIC_COUNTER, trace: utils.Trace):
     for i in range(5):
         yield trace.check(dut.state, "0")
 
-        dut.source.value = BinaryValue(utils.convert_to_binstr(i+1, 5))
+        dut.source.value = BinaryValue('{0:0{1}b}'.format(i+1, 5))
         dut.update.value = BinaryValue("1")
         dut.clear.value = BinaryValue("0")
 

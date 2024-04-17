@@ -61,12 +61,12 @@ async def tb_GENERIC_ADDER_stress(dut: GENERIC_ADDER, trace: utils.Trace):
         source_1 = random.getrandbits(8)
         source_2 = random.getrandbits(8)
     
-        dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 32)[-32:])
-        dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 32)[-32:])
+        dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 32))
+        dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 32))
     
         await trace.cycle()
 
-        message = f"source_1: {'{0:0{1}b}'.format(source_1, 32)[-32:]}, source_2: {'{0:0{1}b}'.format(source_2, 32)[-32:]}"
+        message = f"source_1: {'{0:0{1}b}'.format(source_1, 32)}, source_2: {'{0:0{1}b}'.format(source_2, 32)}"
 
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1+source_2, 32)[-32:], message)
 
@@ -75,8 +75,8 @@ async def tb_GENERIC_ADDER_stress_5_bits(dut: "GENERIC_ADDER", trace: utils.Trac
     bits = 5
     for i in range(2**bits):
         for j in range(2**bits):
-                source_1 = '{0:0{1}b}'.format(i, bits)[-bits:]
-                source_2 = '{0:0{1}b}'.format(j, bits)[-bits:]
+                source_1 = '{0:0{1}b}'.format(i, bits)
+                source_2 = '{0:0{1}b}'.format(j, bits)
 
                 dut.source_1.value = BinaryValue(source_1)
                 dut.source_2.value = BinaryValue(source_2)
