@@ -13,7 +13,7 @@ entity RV32I_ALU_SHIFTER is
     );
 
     port (
-        select_function : in  std_logic_vector(5 downto 0);
+        select_function : in  std_logic_vector(3 downto 0);
         shamt           : in  std_logic_vector((SHAMT_WIDTH - 1) downto 0);
         source          : in  std_logic_vector((DATA_WIDTH  - 1) downto 0);
         destination     : out std_logic_vector((DATA_WIDTH  - 1) downto 0)
@@ -47,13 +47,13 @@ architecture RTL of RV32I_ALU_SHIFTER is
 
 begin
 
-    msb_vector <=   (others => source(DATA_WIDTH - 1)) when (select_function(2 downto 0) = "110") else
+    msb_vector <=   (others => source(DATA_WIDTH - 1)) when (select_function(3) = '1') else
                     (others => '0');
 
     reversed_source <= reverse_vector(source);
 
-    source_auxiliar <=  source when (select_function(2 downto 0) = "100") else
-                        reversed_source;
+    source_auxiliar <=  reversed_source when (select_function(2) = '1') else
+                        source;
 
     BUILD : for i in 0 to (DATA_WIDTH - 1) generate
         BUILD_ROW : if (i = 0) generate
@@ -69,7 +69,7 @@ begin
 
     reversed_destination <= reverse_vector(destination_auxiliar);
 
-    destination <=  destination_auxiliar when (select_function(2 downto 0) = "100") else
-                    reversed_destination;
+    destination <=  reversed_destination when (select_function(2) = '1') else
+                    destination_auxiliar;
 
 end architecture;

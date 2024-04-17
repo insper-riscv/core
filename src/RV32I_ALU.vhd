@@ -11,7 +11,7 @@ entity RV32I_ALU is
     );
   
     port (
-        select_function : in  std_logic_vector(5 downto 0);
+        select_function : in  std_logic_vector(3 downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         overflow        : out std_logic;
@@ -32,14 +32,19 @@ architecture RTL of RV32I_ALU is
 
 begin
 
-    carry(0) <= select_function(3) XOR select_function(4);
+    carry(0) <= '1' when (
+                    select_function = "1000" or
+                    select_function = "0010" or
+                    select_function = "0011"
+                ) else
+                '0';
 
-    overflow_auxiliar <=    carry_extended XOR carry(DATA_WIDTH) when (select_function(5) = '1') else
+    overflow_auxiliar <=    carry_extended XOR carry(DATA_WIDTH) when (select_function(1 downto 0) = "11") else
                             carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1);
 
     overflow <= overflow_auxiliar;
 
-    slt(0) <=   overflow_auxiliar XOR result_extended when (select_function(5) = '1') else
+    slt(0) <=   overflow_auxiliar XOR result_extended when (select_function(1 downto 0) = "11") else
                 overflow_auxiliar XOR result(DATA_WIDTH - 1);
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
@@ -56,7 +61,7 @@ begin
 
     EXTENDED_SIGN_BIT : entity WORK.RV32I_ALU_BIT
         port map (
-            select_function => "000011",
+            select_function => "0000",
             carry_in        => carry(DATA_WIDTH),
             source_1        => '0',
             source_2        => '0',
@@ -76,12 +81,12 @@ begin
         );
 
     destination <=  shift when (
-                        select_function = "000100" or
-                        select_function = "000101" or
-                        select_function = "000110"
+                        select_function = "0001" or
+                        select_function = "0101"
                     ) else 
                     slt when (
-                        select_function(2 downto 0) = "111"
+                        select_function = "1010" or
+                        select_function = "1011"
                     ) else
                     result;
 
