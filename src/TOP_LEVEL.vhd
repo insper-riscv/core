@@ -17,6 +17,8 @@ entity TOP_LEVEL is
         DATA_PROGRAM    : in  t_DATA                       := (others => '0');
         DATA_MEMORY_IN  : in  t_DATA                       := (others => '0');
         SW              : in  std_logic_vector(3 downto 0) := (others => '0');
+        STORE_BYTE      : out std_logic;
+        STORE_HALFWORD  : out std_logic;
         DATA_MEMORY_OUT : out t_DATA;
         ADDRESS_PROGRAM : out t_DATA;
         ADDRESS_MEMORY  : out t_DATA;
@@ -34,7 +36,7 @@ architecture RTL of TOP_LEVEL is
     signal signals_id_ex         : t_SIGNALS_ID_EX;
     signal signals_ex_mem        : t_SIGNALS_EX_MEM;
     signal signals_mem_wb        : t_SIGNALS_MEM_WB;
-    signal enable_destination       : std_logic;
+    signal enable_destination    : std_logic;
     signal address_jump          : t_DATA;
     signal select_destination    : t_REGISTER;
     signal data_destination      : t_DATA;
@@ -43,6 +45,9 @@ architecture RTL of TOP_LEVEL is
     signal address_memory_0      : t_DATA;
     signal data_memory_in_0      : t_DATA;
     signal data_memory_out_0     : t_DATA;
+    signal data_memory_funct_0   : t_FUNCTION;
+    signal store_byte_0          : std_logic;
+    signal store_halfword_0        : std_logic;
 
     signal source_wb             : t_SIGNALS_MEM_WB;
 
@@ -110,6 +115,9 @@ begin
             control_memory => control_memory,
             address_memory => address_memory_0,
             data_memory    => data_memory_out_0,
+            funct_3        => data_memory_funct_0,
+            store_byte     => store_byte_0,
+            store_halfword => store_halfword_0,
             destination    => signals_mem_wb
         );
 
@@ -117,26 +125,37 @@ begin
     DATA_MEMORY_OUT <= data_memory_out_0;
     MEMORY_READ     <= control_memory.enable_read;
     MEMORY_WRITE    <= control_memory.enable_write;
+    STORE_BYTE      <= store_byte_0;
+    STORE_HALFWORD  <= store_halfword_0;
 
-    MEMORY_SOURCE : if EXTERNAL_PROGRAM = TRUE generate
-        data_memory_in_0 <= DATA_MEMORY_IN;
-    else generate
+    --MEMORY_SOURCE : if EXTERNAL_PROGRAM = TRUE generate
+    --    data_memory_in_0 <= DATA_MEMORY_IN;
+    --else generate
         RAM : entity WORK.GENERIC_RAM
             port map (
-                clock        => CLOCK,
-                enable       => '1',      
-                enable_read  => control_memory.enable_read,
-                enable_write => control_memory.enable_write,
-                address      => address_memory_0,
-                source       => data_memory_out_0,
-                destination  => data_memory_in_0 
+                clock          => CLOCK,
+                enable         => '1',      
+                enable_read    => control_memory.enable_read,
+                enable_write   => control_memory.enable_write,
+                store_byte     => store_byte_0,
+                store_halfword => store_halfword_0,
+                address        => address_memory_0,
+                source         => data_memory_out_0,
+                destination    => data_memory_in_0 
             );
-    end generate;
+    --end generate;
 
     source_wb.control_wb         <= signals_mem_wb.control_wb;
-    source_wb.data_memory        <= data_memory_in_0;
+    --source_wb.data_memory        <= data_memory_in_0;
     source_wb.data_destination   <= signals_mem_wb.data_destination;
     source_wb.select_destination <= signals_mem_wb.select_destination;
+
+    CPU_LOAD_EXTENDER : entity WORK.CPU_LOAD_EXTENDER
+        port map (
+            source      => data_memory_in_0,
+            selector    => data_memory_funct_0,
+            destination => source_wb.data_memory
+        );
 
     STAGE_WB : entity WORK.STAGE_WB
         port map (
