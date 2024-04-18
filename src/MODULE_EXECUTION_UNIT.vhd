@@ -7,80 +7,84 @@ library WORK;
 entity MODULE_EXECUTION_UNIT is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        FUNCTION_WIDTH : natural := WORK.CPU.EXECUTION_CONTROL_WIDTH;
+        DATA_WIDTH     : natural := WORK.CPU.DATA_WIDTH
     );
 
     port (
-        select_forward_1       : in  std_logic_vector(1 downto 0);
-        select_forward_2       : in  std_logic_vector(1 downto 0);
-        select_source_1        : in  std_logic_vector(1 downto 0);
-        select_source_2        : in  std_logic_vector(1 downto 0);
-        address_program        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        forwarding_mem_source  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        forwarding_wb_source   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_1          : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_2          : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_immediate         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        select_function        : in  std_logic_vector(4 downto 0);
-        destination            : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        select_forward_1 : in  std_logic_vector(1 downto 0);
+        select_forward_2 : in  std_logic_vector(1 downto 0);
+        select_source_1  : in  std_logic_vector(1 downto 0);
+        select_source_2  : in  std_logic_vector(1 downto 0);
+        select_function  : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
+        address_program  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_mem       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_wb        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_1         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_2         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        immediate        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RV32I of MODULE_EXECUTION_UNIT is
 
-    signal forward_source_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal forward_source_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal alu_source_1     : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal alu_source_2     : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    package G is new WORK.GENERICS
+            generic map (
+                DATA_WIDTH => WORK.RV32I.XLEN
+            );
+
+    signal forward_source_1 : WORK.RV32I.t_DATA;
+    signal forward_source_2 : WORK.RV32I.t_DATA;
+    signal alu_source_1     : WORK.RV32I.t_DATA;
+    signal alu_source_2     : WORK.RV32I.t_DATA;
 
 begin
 
-    MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_1 : component G.GENERIC_MUX_4X1
         port map (
-            source_1    => data_source_1,
-            source_2    => forwarding_wb_source,
-            source_3    => forwarding_mem_source,
-            source_4    => (others => '0'),
             selector    => select_forward_1,
+            source_1    => source_1,
+            source_2    => source_wb,
+            source_3    => source_mem,
+            source_4    => (others => '0'),
             destination => forward_source_1
         );
 
-    MUX_FORWARD_SOURCE_2 : entity WORK.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_2 : component G.GENERIC_MUX_4X1
         port map (
-            source_1    => data_source_2,
-            source_2    => forwarding_wb_source,
-            source_3    => forwarding_mem_source,
-            source_4    => (others => '0'),
             selector    => select_forward_2,
+            source_1    => source_2,
+            source_2    => source_wb,
+            source_3    => source_mem,
+            source_4    => (others => '0'),
             destination => forward_source_2
         );
 
-    MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_4X1
+    MUX_ALU_SOURCE_1 : component G.GENERIC_MUX_4X1
         port map (
+            selector    => select_source_1,
             source_1    => forward_source_1,
             source_2    => address_program,
             source_3    => std_logic_vector(to_unsigned(0, DATA_WIDTH)),
             source_4    => (others => '0'),
-            selector    => select_source_1,
             destination => alu_source_1
         );
 
-    MUX_REGISTER_ALU_2 : entity WORK.GENERIC_MUX_4X1
+    MUX_ALU_SOURCE_2 : component G.GENERIC_MUX_4X1
         port map (
+            selector    => select_source_2,
             source_1    => forward_source_2,
-            source_2    => data_immediate,
+            source_2    => immediate,
             source_3    => std_logic_vector(to_unsigned(4, DATA_WIDTH)),
             source_4    => (others => '0'),
-            selector    => select_source_2,
             destination => alu_source_2
         );
 
     ALU : entity WORK.RV32I_ALU
         port map (
-            invert_source_1 => select_function(4),
-            invert_source_2 => select_function(3),
-            select_function => select_function(2 downto 0),
+            select_function => select_function,
             source_1        => alu_source_1,
             source_2        => alu_source_2,
             destination     => destination

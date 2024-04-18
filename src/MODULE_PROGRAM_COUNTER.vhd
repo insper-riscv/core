@@ -7,14 +7,15 @@ library WORK;
 entity MODULE_PROGRAM_COUNTER is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        DATA_WIDTH : natural := WORK.CPU.DATA_WIDTH
     );
 
     port (
         clock        : in  std_logic;
-        jump_address : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        selector     : in  std_logic;
+        clear        : in  std_logic;
         enable       : in  std_logic;
+        selector     : in  std_logic;
+        source       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -22,36 +23,44 @@ end entity;
 
 architecture RV32I of MODULE_PROGRAM_COUNTER is
 
-        signal adder_out      : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal mux_out        : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal pc_destination : std_logic_vector((DATA_WIDTH - 1) downto 0);
-
-begin   
-
-    MUX_REGISTER_ALU_1 : entity WORK.GENERIC_MUX_2X1
-        port map (
-            source_1    => jump_address,
-            source_2    => adder_out,
-            selector    => selector,
-            destination => mux_out
+    package G is new WORK.GENERICS
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
         );
 
-    PC_REGISTER : entity WORK.GENERIC_REGISTER
+    signal count_source    : WORK.RV32I.t_DATA;
+    signal count_current   : WORK.RV32I.t_DATA;
+    signal count_increment : WORK.RV32I.t_DATA;
+
+begin
+
+    destination <= count_current;
+
+    MUX_SOURCE : component G.GENERIC_MUX_2X1
+        port map (
+            selector    => selector,
+            source_1    => count_increment,
+            source_2    => source,
+            destination => count_source
+        );
+
+    COUNT_REGISTER : component G.GENERIC_REGISTER
         port map (
             clock       => clock,
-            clear       => '0',
+            clear       => clear,
             enable      => enable,
-            source      => mux_out,
-            destination => pc_destination
+            source      => count_source,
+            destination => count_current
         );
 
-    ADDER : entity WORK.GENERIC_ADDER
+    COUNT_ADDER : component G.GENERIC_ADDER
+        generic map (
+            DATA_WIDTH       => DATA_WIDTH,
+            DEFAULT_SOURCE_2 => 4
+        )
         port map (
-            source_1    => pc_destination,
-            source_2    => std_logic_vector(to_unsigned(4, 32)),
-            destination => adder_out
+            source_1    => count_current,
+            destination => count_increment
         );
-
-    destination <= pc_destination;
 
 end architecture;

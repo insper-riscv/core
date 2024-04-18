@@ -7,14 +7,15 @@ library WORK;
 entity MODULE_EXECUTION_UNIT_CONTROLLER is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        OPCODE_WIDTH : natural := WORK.CPU.OPCODE_WIDTH;
+        DATA_WIDTH   : natural := WORK.CPU.EXECUTION_CONTROL_WIDTH
     );
 
     port (
-        opcode                 : in  t_OPCODE;
-        function_3             : in  t_FUNCTION3;
-        function_7             : in  t_FUNCTION7;
-        destination            : out std_logic_vector(4 downto 0)
+        opcode      : in  std_logic_vector((OPCODE_WIDTH - 1) downto 0);
+        funct_3     : in  std_logic_vector(2 downto 0);
+        funct_7     : in  std_logic_vector(6 downto 0);
+        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
@@ -26,8 +27,8 @@ begin
     ALU_CONTROLLER : entity WORK.RV32I_ALU_CONTROLLER
         port map (
             opcode      => opcode,
-            function_3  => function_3,
-            function_7  => function_7,
+            funct3      => funct_3,
+            funct7      => funct_7,
             destination => destination
         );
 
