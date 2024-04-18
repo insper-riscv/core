@@ -2,7 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.CPU.ALL;
 
 entity CPU_STAGE_MEM is
 
@@ -14,21 +13,18 @@ entity CPU_STAGE_MEM is
         clock          : in  std_logic;
         clear          : in  std_logic;
         enable         : in  std_logic;
-        source         : in  t_SIGNALS_EX_MEM;
-        control_memory : out t_CONTROL_MEM;
-        address_memory : out t_DATA;
-        data_memory    : out t_DATA;
-        funct_3        : out t_FUNCTION;
-        store_byte     : out  std_logic;
-        store_halfword : out  std_logic;
-        destination    : out t_SIGNALS_MEM_WB
+        source         : in  WORK.CPU.t_SIGNALS_EX_MEM;
+        control_memory : out WORK.CPU.t_CONTROL_MEM;
+        address_memory : out WORK.CPU.t_DATA;
+        data_memory    : out WORK.CPU.t_DATA;
+        destination    : out WORK.CPU.t_SIGNALS_MEM_WB
     );
 
 end entity;
 
-architecture RTL of CPU_STAGE_MEM is
+architecture RV32I of CPU_STAGE_MEM is
 
-    signal source_0 : t_SIGNALS_EX_MEM := NULL_SIGNALS_EX_MEM;
+    signal source_0 : WORK.CPU.t_SIGNALS_EX_MEM := WORK.CPU.NULL_SIGNALS_EX_MEM;
 
 begin
 
@@ -39,7 +35,7 @@ begin
                 SET_RESET : if (enable = '1') then
                     source_0 <= source;
                 elsif (clear = '1') then
-                    source_0 <= NULL_SIGNALS_EX_MEM;
+                    source_0 <= WORK.CPU.NULL_SIGNALS_EX_MEM;
                 end if;
             end if;
         end process;

@@ -2,7 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.CPU.ALL;
 
 entity CPU_STAGE_WB is
 
@@ -14,17 +13,17 @@ entity CPU_STAGE_WB is
         clock              : in  std_logic;
         clear              : in  std_logic;
         enable             : in  std_logic;
-        source             : in  t_SIGNALS_MEM_WB;
+        source             : in  WORK.CPU.t_SIGNALS_MEM_WB;
         enable_destination : out std_logic;
-        select_destination : out t_REGISTER;
-        destination        : out t_DATA
+        select_destination : out WORK.CPU.t_REGISTER;
+        destination        : out WORK.CPU.t_DATA
     );
 
 end entity;
 
-architecture RTL of CPU_STAGE_WB is
+architecture RV32I of CPU_STAGE_WB is
 
-    signal source_0 : t_SIGNALS_MEM_WB := NULL_SIGNALS_MEM_WB;
+    signal source_0 : WORK.CPU.t_SIGNALS_MEM_WB := WORK.CPU.NULL_SIGNALS_MEM_WB;
 
 begin
 
@@ -35,7 +34,7 @@ begin
                 SET_RESET : if (enable = '1') then
                     source_0 <= source;
                 elsif (clear = '1') then
-                    source_0 <= NULL_SIGNALS_MEM_WB;
+                    source_0 <= WORK.CPU.NULL_SIGNALS_MEM_WB;
                 end if;
             end if;
         end process;
@@ -43,12 +42,12 @@ begin
         source_0 <= source;
     end generate;
 
-    MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK
+    MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK(RV32I)
         port map (
-            source_memory => source_0.data_memory,
-            source_ex     => source_0.data_destination,
-            selector      => source_0.control_wb.select_destination,
-            destination   => destination
+            source_memory    => source_0.data_memory,
+            source_execution => source_0.data_destination,
+            selector         => source_0.control_wb.select_destination,
+            destination      => destination
         );
 
     select_destination <= source_0.select_destination;

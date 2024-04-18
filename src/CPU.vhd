@@ -6,10 +6,31 @@ library WORK;
 
 package CPU is
 
-    constant REGISTER_ADDERESS_WIDTH : natural := WORK.RV32I.REGISTER_WIDTH;
+    -- generic (
+    --     DATA_WIDTH              : natural := 8;
+    --     INSTRUCTION_WIDTH       : natural := 8;
+    --     OPCODE_WIDTH            : natural := 8;
+    --     REGISTER_ADDRESS_WIDTH  : natural := 8;
+    --     EXECUTION_CONTROL_WIDTH : natural := 8
+    -- );
 
-    subtype t_DATA     is WORK.RV32I.t_DATA;
-    subtype t_REGISTER is WORK.RV32I.t_REGISTER;
+    constant DATA_WIDTH              : natural := WORK.RV32I.XLEN;
+    constant INSTRUCTION_WIDTH       : natural := WORK.RV32I.INSTRUCTION_WIDTH;
+    constant OPCODE_WIDTH            : natural := WORK.RV32I.OPCODE_WIDTH;
+    constant REGISTER_ADDRESS_WIDTH  : natural := 5;
+    constant EXECUTION_CONTROL_WIDTH : natural := 4;
+
+    subtype DATA_RANGE              is natural range (DATA_WIDTH              - 1) downto 0;
+    subtype INSTRUCTION_RANGE       is natural range (INSTRUCTION_WIDTH       - 1) downto 0;
+    subtype OPCODE_RANGE            is natural range (OPCODE_WIDTH            - 1) downto 0;
+    subtype REGISTER_ADDRESS_RANGE  is natural range (REGISTER_ADDRESS_WIDTH  - 1) downto 0;
+    subtype FUNCTION_RANGE          is natural range (EXECUTION_CONTROL_WIDTH - 1) downto 0;
+
+    subtype t_DATA        is std_logic_vector(DATA_RANGE);
+    subtype t_INSTRUCTION is std_logic_vector(INSTRUCTION_RANGE);
+    subtype t_OPCODE      is std_logic_vector(OPCODE_RANGE);
+    subtype t_REGISTER    is std_logic_vector(REGISTER_ADDRESS_RANGE);
+    subtype t_FUNCTION    is std_logic_vector(FUNCTION_RANGE);
 
     type t_CONTROL_IF is record
         enable_stall  : std_logic;
@@ -237,7 +258,7 @@ package CPU is
 
     component CPU_EXECUTION_FOWARDING_UNIT
         generic (
-            ADDRESS_WIDTH : natural := REGISTER_ADDERESS_WIDTH
+            ADDRESS_WIDTH : natural := REGISTER_ADDRESS_WIDTH
         );
         port (
             stage_ex_select_source_1     : in  t_REGISTER;

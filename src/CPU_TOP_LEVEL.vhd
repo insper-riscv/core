@@ -3,7 +3,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.CPU.ALL;
 
 entity CPU_TOP_LEVEL is
 
@@ -11,41 +10,42 @@ entity CPU_TOP_LEVEL is
         clock           : in  std_logic := '0';
         clear           : in  std_logic := '0';
         enable          : in  std_logic := '1';
-        data_program    : in  t_DATA := (others => '0');
-        data_memory_in  : in  t_DATA := (others => '0');
+        data_program    : in  WORK.CPU.t_DATA := (others => '0');
+        data_memory_in  : in  WORK.CPU.t_DATA := (others => '0');
         memory_read     : out std_logic;
         memory_write    : out std_logic;
-        data_memory_out : out t_DATA;
-        address_program : out t_DATA;
-        address_memory  : out t_DATA;
+        data_memory_out : out WORK.CPU.t_DATA;
+        address_program : out WORK.CPU.t_DATA;
+        address_memory  : out WORK.CPU.t_DATA
     );
 
 end entity;
 
 architecture RV32I of CPU_TOP_LEVEL is
 
-    signal control_if            : t_CONTROL_IF;
-    signal signals_if_id         : t_SIGNALS_IF_ID;
-    signal signals_id_ex         : t_SIGNALS_ID_EX;
-    signal signals_ex_mem        : t_SIGNALS_EX_MEM;
-    signal signals_mem_wb        : t_SIGNALS_MEM_WB;
+    signal control_if            : WORK.CPU.t_CONTROL_IF;
+    signal signals_if_id         : WORK.CPU.t_SIGNALS_IF_ID;
+    signal signals_id_ex         : WORK.CPU.t_SIGNALS_ID_EX;
+    signal signals_ex_mem        : WORK.CPU.t_SIGNALS_EX_MEM;
+    signal signals_mem_wb        : WORK.CPU.t_SIGNALS_MEM_WB;
     signal enable_destination    : std_logic;
-    signal address_jump          : t_DATA;
-    signal select_destination    : t_REGISTER;
-    signal data_destination      : t_DATA;
+    signal address_jump          : WORK.RV32I.t_DATA;
+    signal select_destination    : WORK.RV32I.t_REGISTER;
+    signal data_destination      : WORK.RV32I.t_DATA;
 
-    signal control_memory        : t_CONTROL_MEM;
-    signal address_memory_0      : t_DATA;
-    signal data_memory_in_0      : t_DATA;
-    signal data_memory_out_0     : t_DATA;
+    signal control_memory        : WORK.CPU.t_CONTROL_MEM;
+    signal address_memory_0      : WORK.RV32I.t_DATA;
+    signal data_memory_in_0      : WORK.RV32I.t_DATA;
+    signal data_memory_out_0     : WORK.RV32I.t_DATA;
 
-    signal source_wb             : t_SIGNALS_MEM_WB;
+    signal source_wb             : WORK.CPU.t_SIGNALS_MEM_WB;
 
 begin
 
     INSTRUCTION_FETCH : entity WORK.CPU_STAGE_IF(RV32I)
         port map (
             clock           => clock,
+            clear           => clear,
             enable          => enable,
             source          => control_if,
             address_jump    => address_jump,
