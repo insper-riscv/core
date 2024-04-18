@@ -7,29 +7,32 @@ use WORK.TOP_LEVEL_CONSTANTS.ALL;
 entity MODULE_WRITE_BACK is
 
     generic (
-        DATA_WIDTH  : natural := XLEN
+        DATA_WIDTH  : natural := WORK.CPU.DATA_WIDTH
     );
 
     port (
-        source_memory : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_ex     : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        selector      : in  std_logic;
-        destination   : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        selector         : in  std_logic;
+        source_memory    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_execution : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RV32I of MODULE_WRITE_BACK is
 
-    -- No signals
+    package G is new WORK.GENERICS
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        );
 
 begin
 
-    MUX : entity WORK.GENERIC_MUX_2X1
+    MUX_SOURCE : component G.GENERIC_MUX_2X1
         port map (
-            source_1 => source_memory,
-            source_2 => source_ex,
-            selector => selector,
+            selector    => selector,
+            source_1    => source_memory,
+            source_2    => source_execution,
             destination => destination
         );
 
