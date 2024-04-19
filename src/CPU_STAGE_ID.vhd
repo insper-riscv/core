@@ -85,7 +85,7 @@ begin
         signals_ex.select_destination <= instruction.select_destination;
         signals_ex.select_source_1    <= instruction.select_source_1;
         signals_ex.select_source_2    <= instruction.select_source_2;
-        branch                        <= '1'  when (instruction.encoding = RV32I_INSTRUCTION_B_TYPE) else
+        branch                        <= '1'  when WORK.RV32I.INSTRUCTION_B_TYPE else
                                          '0';
     end process;
 

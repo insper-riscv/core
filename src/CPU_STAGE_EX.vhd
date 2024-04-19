@@ -91,5 +91,6 @@ begin
     destination.control_wb         <= source_0.control_wb;
     destination.data_source_2      <= source_0.data_source_2;
     destination.select_destination <= source_0.select_destination;
+    destination.funct_3            <= source_0.funct_3;
 
 end architecture;

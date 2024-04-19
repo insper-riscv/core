@@ -10,14 +10,15 @@ entity CPU_STAGE_MEM is
     );
 
     port (
-        clock          : in  std_logic;
-        clear          : in  std_logic;
-        enable         : in  std_logic;
-        source         : in  WORK.CPU.t_SIGNALS_EX_MEM;
-        control_memory : out WORK.CPU.t_CONTROL_MEM;
-        address_memory : out WORK.CPU.t_DATA;
-        data_memory    : out WORK.CPU.t_DATA;
-        destination    : out WORK.CPU.t_SIGNALS_MEM_WB
+        clock           : in  std_logic;
+        clear           : in  std_logic;
+        enable          : in  std_logic;
+        source          : in  WORK.CPU.t_SIGNALS_EX_MEM;
+        data_memory_in  : in  WORK.CPU.t_DATA;
+        control_memory  : out WORK.CPU.t_CONTROL_MEM;
+        address_memory  : out WORK.CPU.t_DATA;
+        data_memory_out : out WORK.CPU.t_DATA;
+        destination     : out WORK.CPU.t_SIGNALS_MEM_WB
     );
 
 end entity;
@@ -49,13 +50,22 @@ begin
     control_memory.enable_write    <= source_0.control_mem.enable_write;
 
     address_memory                 <= source_0.address_pointer;
-    data_memory                    <= source_0.data_source_2;
-    funct_3                        <= source_0.control_mem.funct_3;
-    store_byte                     <= source_0.control_mem.store_byte;
-    store_halfword                 <= source_0.control_mem.store_halfword;
 
-    destination.data_memory        <= (others => '-');
     destination.data_destination   <= source_0.address_pointer;
     destination.select_destination <= source_0.select_destination;
+
+    CPU_STORE_EXTENDER : entity WORK.CPU_STORE_EXTENDER
+        port map (
+            source      => source_0.data_source_2,
+            selector    => source_0.funct_3,
+            destination => data_memory_out
+        );
+
+    CPU_LOAD_EXTENDER : entity WORK.CPU_LOAD_EXTENDER
+        port map (
+            source      => data_memory_in,
+            selector    => source_0.funct_3,
+            destination => destination.data_memory
+        );
 
 end architecture;

@@ -14,9 +14,6 @@ class CPU_STAGE_MEM(utils.DUT):
     control_memory = utils.DUT.Output_pin
     address_memory = utils.DUT.Output_pin
     data_memory = utils.DUT.Output_pin
-    funct_3 = utils.DUT.Output_pin
-    store_byte = utils.DUT.Output_pin
-    store_halfword = utils.DUT.Output_pin
     destination = utils.DUT.Output_pin
 
 

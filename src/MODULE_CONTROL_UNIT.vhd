@@ -53,24 +53,43 @@ begin
             when WORK.RV32I.INSTRUCTION_J_TYPE =>
                 control_if.enable_jump <= '1';
             when others =>
-                control_if.enable_jump <= '0';
+                case temp.opcode is
+                    when WORK.RV32I.OPCODE_JALR =>
+                        control_if.enable_jump <= '1';
+                    when others =>
+                        control_if.enable_jump <= '0';
+                end case;
         end case;
 
-        case temp.encoding is
-            when WORK.RV32I.INSTRUCTION_J_TYPE =>
                 control_if.select_source <= '1';
+                control_if.select_source <= '1';
+            when others =>
+                control_if.select_source <= '0';
+        end case;
+        control_if.select_source <= '1';
             when others =>
                 control_if.select_source <= '0';
         end case;
 
         -- Instruction Decode controls
-        control_id.select_jump <= '0';
+
+        case temp.opcode is
+            when WORK.RV32I.OPCODE_JALR =>
+                control_id.select_jump <= '1';
+            when others =>
+                control_id.select_jump <= '0';
+        end case;
 
         case temp.encoding is
             when WORK.RV32I.INSTRUCTION_J_TYPE =>
-                control_if.enable_jump <= '1';
+                control_id.enable_jump <= '1';
             when others =>
-                control_if.enable_jump <= '0';
+                case temp.opcode is
+                    when WORK.RV32I.OPCODE_JALR =>
+                        control_id.enable_jump <= '1';
+                    when others =>
+                        control_id.enable_jump <= '0';
+                end case;
         end case;
 
         control_id.enable_flush_id <= '0';
@@ -81,7 +100,8 @@ begin
 
         case temp.opcode is
             when    WORK.RV32I.OPCODE_AUIPC |
-                    WORK.RV32I.OPCODE_JAL   =>
+                    WORK.RV32I.OPCODE_JAL   |
+                    WORK.RV32I.OPCODE_JALR  =>
                 control_ex.select_source_1 <= "01";
             when WORK.RV32I.OPCODE_LUI =>
                 control_ex.select_source_1 <= "10";
@@ -89,16 +109,16 @@ begin
                 control_ex.select_source_1 <= "00";
         end case;
 
-        case temp.encoding is
-            when    WORK.RV32I.INSTRUCTION_I_TYPE   |
-                    WORK.RV32I.INSTRUCTION_U_TYPE   |
-                    WORK.RV32I.INSTRUCTION_S_TYPE   =>
-                control_ex.select_source_2 <= "01";
+        case temp.opcode is
+            when    WORK.RV32I.OPCODE_JAL   |
+                    WORK.RV32I.OPCODE_JALR  =>
+                control_ex.select_source_2 <= "10";
             when others =>
-                case temp.opcode is
-                    when    WORK.RV32I.OPCODE_JAL   |
-                            WORK.RV32I.OPCODE_JALR  =>
-                        control_ex.select_source_2 <= "10";
+                case temp.encoding is
+                    when    WORK.RV32I.INSTRUCTION_I_TYPE   |
+                            WORK.RV32I.INSTRUCTION_U_TYPE   |
+                            WORK.RV32I.INSTRUCTION_S_TYPE   =>
+                        control_ex.select_source_2 <= "01";
                     when others =>
                         control_ex.select_source_2 <= "00";
                 end case;

@@ -15,9 +15,7 @@ class GENERIC_RAM(utils.DUT):
     clock = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
     enable_read = utils.DUT.Input_pin
-    enable_write = utils.DUT.Input_pin
-    store_byte = utils.DUT.Input_pin
-    store_halfword = utils.DUT.Input_pin    
+    enable_write = utils.DUT.Input_pin  
     address = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
@@ -25,11 +23,9 @@ class GENERIC_RAM(utils.DUT):
 
 @GENERIC_RAM.testcase
 async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
-    values_enable = ["0", "1", "1", "1", "1", "1", "1", "1", "1"]
-    values_enable_read = ["1", "0", "1", "0", "1", "0", "1", "0", "1"]
-    values_store_byte = ["0", "0", "0", "0", "0", "1", "1", "0", "0"]
-    values_store_halfword = ["0", "0", "0", "0", "0", "0", "0", "1", "1"]
-    values_enable_write = ["1", "1", "0", "1", "0", "1", "0", "1", "0"]
+    values_enable = ["0", "1", "1", "1", "1"]
+    values_enable_read = ["1", "0", "1", "0", "1"]
+    values_enable_write = ["1", "1", "0", "1", "0"]
     values_address = [
         "00000001",
         "00000001",
@@ -59,8 +55,6 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
         enable,
         enable_read,
         enable_write,
-        store_byte,
-        store_halfword,
         address,
         source,
         destination,
@@ -69,8 +63,6 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
             values_enable,
             values_enable_read,
             values_enable_write,
-            values_store_byte,
-            values_store_halfword,
             values_address,
             values_source,
             values_destination,
@@ -79,8 +71,6 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
         dut.enable.value = BinaryValue(enable)
         dut.enable_read.value = BinaryValue(enable_read)
         dut.enable_write.value = BinaryValue(enable_write)
-        dut.store_byte.value = BinaryValue(store_byte)
-        dut.store_halfword.value = BinaryValue(store_halfword)
         dut.address.value = BinaryValue(address)
         dut.source.value = BinaryValue(source)
 

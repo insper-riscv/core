@@ -86,14 +86,15 @@ begin
 
     MEMORY_ACCESS : entity WORK.CPU_STAGE_MEM(RV32I)
         port map (
-            clock          => clock,
-            clear          => clear,
-            enable         => enable,
-            source         => signals_ex_mem,
-            control_memory => control_memory,
-            address_memory => address_memory_0,
-            data_memory    => data_memory_out_0,
-            destination    => signals_mem_wb
+            clock           => clock,
+            clear           => clear,
+            enable          => enable,
+            source          => signals_ex_mem,
+            data_memory_in  => data_memory_in_0,
+            control_memory  => control_memory,
+            address_memory  => address_memory_0,
+            data_memory_out => data_memory_out_0,
+            destination     => signals_mem_wb
         );
 
     address_memory   <= address_memory_0;

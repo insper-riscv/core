@@ -96,6 +96,7 @@ package CPU is
         address_pointer    : t_DATA;
         data_source_2      : t_DATA;
         select_destination : t_REGISTER;
+        funct_3            : t_FUNCTION;
     end record;
 
     constant NULL_CONTROL_IF : t_CONTROL_IF := (
@@ -154,7 +155,8 @@ package CPU is
         control_wb         => NULL_CONTROL_WB,
         address_pointer    => (others => '0'),
         data_source_2      => (others => '0'),
-        select_destination => (others => '0')
+        select_destination => (others => '0'),
+        funct_3            => (others => '0')
     );
 
     constant NULL_SIGNALS_MEM_WB : t_SIGNALS_MEM_WB := (
