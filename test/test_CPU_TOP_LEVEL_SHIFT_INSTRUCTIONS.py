@@ -8,55 +8,45 @@ from cocotb.clock import Clock
 from utils_interpreter import *
 
 import utils
-from test_GENERIC_ROM import GENERIC_ROM
-from test_GENERIC_RAM import GENERIC_RAM
-from test_STAGE_IF import STAGE_IF
-from test_STAGE_ID import STAGE_ID
-from test_STAGE_EX import STAGE_EX
-from test_STAGE_MEM import STAGE_MEM
-from test_STAGE_WB import STAGE_WB
+from test_CPU_package import CPU
+from test_CPU_STAGE_IF import CPU_STAGE_IF
+from test_CPU_STAGE_ID import CPU_STAGE_ID
+from test_CPU_STAGE_EX import CPU_STAGE_EX
+from test_CPU_STAGE_MEM import CPU_STAGE_MEM
+from test_CPU_STAGE_WB import CPU_STAGE_WB
 from test_CPU_LOAD_EXTENDER import CPU_LOAD_EXTENDER
 
-class TOP_LEVEL(utils.DUT):
+class CPU_TOP_LEVEL(utils.DUT):
+    _package = CPU
+
     clock = utils.DUT.Input_pin
     data_program = utils.DUT.Input_pin
     data_memory_in = utils.DUT.Input_pin
-    sw = utils.DUT.Input_pin
     data_memory_out = utils.DUT.Output_pin
     address_program = utils.DUT.Output_pin
     address_memory = utils.DUT.Output_pin
     memory_read = utils.DUT.Output_pin
     memory_write = utils.DUT.Output_pin
-    store_byte     = utils.DUT.Output_pin
-    store_halfword = utils.DUT.Output_pin
-    led = utils.DUT.Output_pin
 
-    rom = GENERIC_ROM
-    ram = GENERIC_RAM
-    stage_if = STAGE_IF
-    stage_id = STAGE_ID
-    stage_ex = STAGE_EX
-    stage_mem = STAGE_MEM
-    stage_wb = STAGE_WB
+    stage_if = CPU_STAGE_IF
+    stage_id = CPU_STAGE_ID
+    stage_ex = CPU_STAGE_EX
+    stage_mem = CPU_STAGE_MEM
+    stage_wb = CPU_STAGE_WB
     cpu_load_extender = CPU_LOAD_EXTENDER
 
-@TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_LB(dut: TOP_LEVEL, trace: utils.Trace):
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
         "00000000000000000000000000001000",
-        "00000000000000000000000010000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000001000",
-        "11111111111111111111111110000000",
+        "00000000000000000000100000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "11111111111111111111111110000010",
+        "00000000000000000000100000000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
@@ -71,54 +61,17 @@ async def tb_TOP_LEVEL_LB(dut: TOP_LEVEL, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
-@TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_LBU(dut: TOP_LEVEL, trace: utils.Trace):
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
         "00000000000000000000000000001000",
         "00000000000000000000000010000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000001000",
         "00000000000000000000000010000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000010000010",
-        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-    ]
-
-    clock = Clock(dut.clock, 2_000_000_000, units="fs")
-
-    await cocotb.start(clock.start(start_high=False))
-
-    for index, (destination, ) in enumerate(
-        zip(values_destination)
-    ):
-
-        await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.") 
-
-@TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_LH(dut: TOP_LEVEL, trace: utils.Trace):
-    values_destination = [
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-        "00000000000000000000000000001000",
-        "00000000000000001000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000001000",
-        "11111111111111111000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "11111111111111111000000000000010",
+        "00000000000000000000000010000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
@@ -133,23 +86,20 @@ async def tb_TOP_LEVEL_LH(dut: TOP_LEVEL, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
-@TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_LHU(dut: TOP_LEVEL, trace: utils.Trace):
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-        "00000000000000000000000000001000",
-        "00000000000000001000000000000000",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000001000",
-        "00000000000000001000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000001000000000000010",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
@@ -164,23 +114,78 @@ async def tb_TOP_LEVEL_LHU(dut: TOP_LEVEL, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
-@TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-        "00000000000000000000000000001000",
-        "00000000000000000000000000001000",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
+        "00000000000000000001000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000001000",
-        "00000000000000000000000000001000",
+        "00000000000000000000000001000000",
+        "10000000000000000000000000000000",
+        "11111110000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+    values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000001010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000001000000000000",
+        "00000000000000000000000001000000",
+        "00000000000000000000000001000000",
+        "10000000000000000000000000000000",
+        "11111110000000000000000000000000",
+        "11111110000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000001000000",
+        "11111110000000000000000000000000",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
@@ -196,51 +201,60 @@ async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
 
 @pytest.mark.testcases
-def test_TOP_LEVEL_LOAD_INSTRUCTIONS_testcases():
+def test_CPU_TOP_LEVEL_SHIFT_INSTRUCTIONS_testcases():
     memory = "./src/GENERIC_ROM.vhd"
 
-    assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LB.asm"
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SLL.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
+    CPU_TOP_LEVEL.build_vhd()
+    CPU_TOP_LEVEL.test_with(
         testcase=[
-            tb_TOP_LEVEL_LB
+            tb_CPU_TOP_LEVEL_SLL
         ],
     )
 
-    assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LBU.asm"
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SLLI.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
+    CPU_TOP_LEVEL.build_vhd()
+    CPU_TOP_LEVEL.test_with(
         testcase=[
-            tb_TOP_LEVEL_LBU
+            tb_CPU_TOP_LEVEL_SLLI
         ],
     )
 
-    assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LH.asm"
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRL.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
+    CPU_TOP_LEVEL.build_vhd()
+    CPU_TOP_LEVEL.test_with(
         testcase=[
-            tb_TOP_LEVEL_LH
+            tb_CPU_TOP_LEVEL_SRL
         ],
     )
 
-    assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LHU.asm"
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRLI.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
+    CPU_TOP_LEVEL.build_vhd()
+    CPU_TOP_LEVEL.test_with(
         testcase=[
-            tb_TOP_LEVEL_LHU
+            tb_CPU_TOP_LEVEL_SRLI
         ],
     )
-    
-    assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LW.asm"
+
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRA.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    TOP_LEVEL.build_vhd()
-    TOP_LEVEL.test_with(
+    CPU_TOP_LEVEL.build_vhd()
+    CPU_TOP_LEVEL.test_with(
         testcase=[
-            tb_TOP_LEVEL_LW
+            tb_CPU_TOP_LEVEL_SRA
+        ],
+    )
+
+    assembly = "./src/RV32I_INSTRUCTIONS/SHIFT_INSTRUCTION_SRAI.asm"
+    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    CPU_TOP_LEVEL.build_vhd()
+    CPU_TOP_LEVEL.test_with(
+        testcase=[
+            tb_CPU_TOP_LEVEL_SRAI
         ],
     )
 
