@@ -96,7 +96,7 @@ package CPU is
         address_pointer    : t_DATA;
         data_source_2      : t_DATA;
         select_destination : t_REGISTER;
-        funct_3            : t_FUNCTION;
+        funct_3            : WORK.RV32I.t_FUNCT3;
     end record;
 
     constant NULL_CONTROL_IF : t_CONTROL_IF := (

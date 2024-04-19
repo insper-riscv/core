@@ -4,6 +4,8 @@ import pytest
 
 import utils
 from test_CPU_package import CPU
+from test_CPU_STORE_EXTENDER import CPU_STORE_EXTENDER
+from test_CPU_LOAD_EXTENDER import CPU_LOAD_EXTENDER
 
 
 class CPU_STAGE_MEM(utils.DUT):
@@ -15,6 +17,9 @@ class CPU_STAGE_MEM(utils.DUT):
     address_memory = utils.DUT.Output_pin
     data_memory = utils.DUT.Output_pin
     destination = utils.DUT.Output_pin
+
+    cpu_store_extender = CPU_STORE_EXTENDER
+    cpu_load_extender = CPU_LOAD_EXTENDER
 
 
 @pytest.mark.synthesis

@@ -61,15 +61,7 @@ begin
                 end case;
         end case;
 
-                control_if.select_source <= '1';
-                control_if.select_source <= '1';
-            when others =>
-                control_if.select_source <= '0';
-        end case;
         control_if.select_source <= '1';
-            when others =>
-                control_if.select_source <= '0';
-        end case;
 
         -- Instruction Decode controls
 

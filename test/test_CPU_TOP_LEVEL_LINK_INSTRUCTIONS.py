@@ -14,7 +14,6 @@ from test_CPU_STAGE_ID import CPU_STAGE_ID
 from test_CPU_STAGE_EX import CPU_STAGE_EX
 from test_CPU_STAGE_MEM import CPU_STAGE_MEM
 from test_CPU_STAGE_WB import CPU_STAGE_WB
-from test_CPU_LOAD_EXTENDER import CPU_LOAD_EXTENDER
 
 class CPU_TOP_LEVEL(utils.DUT):
     _package = CPU
@@ -33,7 +32,6 @@ class CPU_TOP_LEVEL(utils.DUT):
     stage_ex = CPU_STAGE_EX
     stage_mem = CPU_STAGE_MEM
     stage_wb = CPU_STAGE_WB
-    cpu_load_extender = CPU_LOAD_EXTENDER
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_JUMP_INSTRUCTIONS_JAL(dut: CPU_TOP_LEVEL, trace: utils.Trace):
