@@ -947,7 +947,7 @@ considerando que são sem sinal, em caso positivo, armazena 1 no registrador de 
 Set if Less Than Unsigned(Definir se Menor que Sem Sinal).
 
 Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazenado no
-registrador `rs2`, considerando que são sem sinal, em caso positivo, armazena 1 no 
+registrador `rs2`, considerando que são valores sem sinal, em caso positivo, armazena 1 no 
 registrador de destino `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
@@ -1027,9 +1027,44 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   000    |    offset[4:1|11]     |   BRANCH  | 
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                B
+            </td>
+            <td style="text-align: center;">
+                offset[12|10:5]
+            </td>
+            <td style="text-align: center;">
+                rs2
+            </td>
+            <td style="text-align: center;">
+                rs1
+            </td>
+            <td style="text-align: center;">
+                000
+            </td>
+            <td style="text-align: center;">
+                offset[4:1|11]
+            </td>
+            <td style="text-align: center;">
+                BRANCH
+            </td>
+        </tr>
+    </tbody>
+</table> 
 
 #### Formato
 
@@ -1050,9 +1085,44 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   001    |    offset[4:1|11]     |   BRANCH  | 
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                B
+            </td>
+            <td style="text-align: center;">
+                offset[12|10:5]
+            </td>
+            <td style="text-align: center;">
+                rs2
+            </td>
+            <td style="text-align: center;">
+                rs1
+            </td>
+            <td style="text-align: center;">
+                001
+            </td>
+            <td style="text-align: center;">
+                offset[4:1|11]
+            </td>
+            <td style="text-align: center;">
+                BRANCH
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 #### Formato
 
@@ -1074,9 +1144,44 @@ modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   100    |    offset[4:1|11]     |   BRANCH  | 
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                B
+            </td>
+            <td style="text-align: center;">
+                offset[12|10:5]
+            </td>
+            <td style="text-align: center;">
+                rs2
+            </td>
+            <td style="text-align: center;">
+                rs1
+            </td>
+            <td style="text-align: center;">
+                100
+            </td>
+            <td style="text-align: center;">
+                offset[4:1|11]
+            </td>
+            <td style="text-align: center;">
+                BRANCH
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 #### Formato
 
@@ -1098,9 +1203,44 @@ o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   101    |    offset[4:1|11]     |   BRANCH  | 
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                B
+            </td>
+            <td style="text-align: center;">
+                offset[12|10:5]
+            </td>
+            <td style="text-align: center;">
+                rs2
+            </td>
+            <td style="text-align: center;">
+                rs1
+            </td>
+            <td style="text-align: center;">
+                101
+            </td>
+            <td style="text-align: center;">
+                offset[4:1|11]
+            </td>
+            <td style="text-align: center;">
+                BRANCH
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 #### Formato
 
@@ -1122,9 +1262,44 @@ somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   110    |    offset[4:1|11]     |   BRANCH  | 
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                B
+            </td>
+            <td style="text-align: center;">
+                offset[12|10:5]
+            </td>
+            <td style="text-align: center;">
+                rs2
+            </td>
+            <td style="text-align: center;">
+                rs1
+            </td>
+            <td style="text-align: center;">
+                110
+            </td>
+            <td style="text-align: center;">
+                offset[4:1|11]
+            </td>
+            <td style="text-align: center;">
+                BRANCH
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 #### Formato
 
@@ -1146,9 +1321,44 @@ valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
-| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
-|  B   |   offset[12|10:5]  |    rs2     |    rs1    |    111   |    offset[4:1|11]     |   BRANCH  | 
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 25</th>
+            <th style="text-align: center; white-space: nowrap;">24 - 20</th>
+            <th style="text-align: center; white-space: nowrap;">19 - 15</th>
+            <th style="text-align: center; white-space: nowrap;">14 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                B
+            </td>
+            <td style="text-align: center;">
+                offset[12|10:5]
+            </td>
+            <td style="text-align: center;">
+                rs2
+            </td>
+            <td style="text-align: center;">
+                rs1
+            </td>
+            <td style="text-align: center;">
+                111
+            </td>
+            <td style="text-align: center;">
+                offset[4:1|11]
+            </td>
+            <td style="text-align: center;">
+                BRANCH
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 #### Formato
 
