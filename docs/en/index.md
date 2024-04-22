@@ -12,15 +12,15 @@ hero:
   actions:
     - text: About
       link: /en/guide/
-    - text: Getting started
-      link: /en/guide/
-      theme: alt
+    #- text: Getting started
+    #  link: /en/guide/
+    #  theme: alt
     - text: Architecture
       link: /en/reference/components/
       theme: alt
-    - text: Specification
-      link: /en/reference/components/
-      theme: alt
+    #- text: Specification
+    #  link: /en/reference/components/
+    #  theme: alt
 
 features:
   - title: RISC-V Bare Metal
