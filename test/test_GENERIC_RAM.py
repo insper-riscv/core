@@ -25,16 +25,16 @@ class GENERIC_RAM(utils.DUT):
 async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
     values_enable = ["0", "1", "1", "1", "1"]
     values_enable_read = ["1", "0", "1", "0", "1"]
-    values_enable_write = ["1", "1", "0", "1", "0"]
+    values_enable_write = ["0", "1", "0", "1", "0"]
     values_address = [
+        "00000000",
         "00000001",
         "00000001",
-        "00000001",
-        "00010001",
-        "00010001",
+        "10000000",
+        "10000000",
     ]
     values_source = [
-        "00001111",
+        "00000000",
         "00001111",
         "00000000",
         "11110000",

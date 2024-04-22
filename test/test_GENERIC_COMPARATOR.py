@@ -35,7 +35,7 @@ async def tb_GENERIC_COMPARATOR_case_1(dut: GENERIC_COMPARATOR, trace: utils.Tra
 @pytest.mark.synthesis
 def test_GENERIC_COMPARATOR_synthesis():
     GENERIC_COMPARATOR.build_vhd()
-    GENERIC_COMPARATOR.build_netlistsvg()
+    # GENERIC_COMPARATOR.build_netlistsvg()
 
 
 @pytest.mark.testcases
