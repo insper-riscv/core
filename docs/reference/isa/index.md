@@ -311,8 +311,9 @@ ao PC. O resultado é então escrito no registrador de destino `rd`.
 
 Add (Adição).
 
-Soma os registradores `rs1` e `rs2` e armazena o resultado no registrador `rd`.
-Em caso de overflow, ele é ignorado.
+Soma o valor armazenado no registrador `rs1` com o valor 
+armazenado no registrador `rs2` e armazena o resultado 
+no registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
@@ -334,8 +335,9 @@ Em caso de overflow, ele é ignorado.
 
 Add Immediate (Adição Imediata).
 
-Soma o registrador `rs1` com o sinal estendido do imediato e armazena o
-resultado no registrador `rd`. Em caso de overflow, ele é ignorado.
+Soma o valor armazenado no registrador `rs1` com o sinal estendido 
+do imediato e armazena o resultado no registrador de destino `rd`. 
+Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
@@ -357,8 +359,9 @@ resultado no registrador `rd`. Em caso de overflow, ele é ignorado.
 
 Subtract (Subtração).
 
-Subtrai o registrador `rs1` pelo `rs2` e armazena o resultado no registrador
-`rd`. Em caso de overflow, ele é ignorado.
+Subtrai o valor armazenado no registrador `rs2` do valor 
+armazenado no registrador `rs1` e armazena o resultado no 
+registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
@@ -380,8 +383,9 @@ Subtrai o registrador `rs1` pelo `rs2` e armazena o resultado no registrador
 
 Multiply (Multiplicação).
 
-Multiplica os registradores `rs1` e `rs2` e armazena o resultado no registrador
-`rd`. Em caso de overflow, ele é ignorado.
+Multiplica o valor armazenado no registrador `rs1` pelo valor 
+armazenado no registrador `rs2` e armazena o resultado no 
+registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
@@ -403,8 +407,9 @@ Multiplica os registradores `rs1` e `rs2` e armazena o resultado no registrador
 
 Multiply High (Multiplicação Superior).
 
-Multiplica os registradores `rs1` e `rs2`, considerando que são números de
-complemento de dois e armazena a metade superior do produto no registrador `rd`.
+Multiplica o valor armazenado no registrador `rs1` pelo valor 
+armazenado no registrador `rs2` considerando que são números 
+de complemento de dois e armazena a metade superior do produto no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -427,9 +432,10 @@ complemento de dois e armazena a metade superior do produto no registrador `rd`.
 Multiply High Signed and Unsigned (Multiplicação Superior com Sinal e Sem
 Sinal).
 
-Multiplica os registradores `rs1` e `rs2`, considerando que `rs1` é um número de
-complemento de dois e `rs2` é um número sem sinal, e armazena a metade superior
-do produto no registrador `rd`.
+Multiplica o valor armazenado no registrador `rs1` pelo valor 
+armazenado no registrador `rs2`, considerando que o valor em rs1 é
+de complemento de dois e que o valor em rs2 é um número sem sinal, armazenando a metade superior do 
+produto no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -451,8 +457,9 @@ do produto no registrador `rd`.
 
 Multiply High Unsigned (Multiplicação Superior Sem Sinal).
 
-Multiplica os registradores `rs1` e `rs2`, considerando que ambos são números
-sem sinal, e armazena a metade superior do produto no registrador `rd`.
+Multiplica o valor armazenado no registrador `rs1` pelo valor 
+armazenado no registrador `rs2`, considerando que ambos 
+são números sem sinal, e armazena a metade superior do produto no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -474,9 +481,11 @@ sem sinal, e armazena a metade superior do produto no registrador `rd`.
 
 Divide (Divisão).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números de
-complemento de dois, arredondando para zero, e armazena o quociente no
-registrador `rd`.
+Divide o valor armazenado no registrador `rs1` pelo 
+valor armazenado no registrador `rs2`, considerando 
+que ambos são números de complemento de dois, arredondando para zero, e 
+armazena o quociente no registrador de destino `rd`.
+
 
 #### Sintaxe
 
@@ -498,8 +507,10 @@ registrador `rd`.
 
 Divide Unsigned (Divisão Sem Sinal).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal,
-arredondando para zero, e armazena o quociente no registrador `rd`.
+Divide o valor armazenado no registrador `rs1` 
+pelo valor armazenado no registrador `rs2`, 
+considerando que são números sem sinal, arredondando para zero, e 
+armazena o quociente no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -521,9 +532,10 @@ arredondando para zero, e armazena o quociente no registrador `rd`.
 
 Remainder (Resto).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números de
-complemento de dois, arredondando para zero, e armazena o resto no registrador
-`rd`.
+Divide o valor armazenado no registrador `rs1` 
+pelo valor armazenado no registrador `rs2`, 
+considerando que são números de complemento de dois, arredondando para zero, 
+e armazena o resto no registrador de destino `rd`. 
 
 #### Sintaxe
 
@@ -545,8 +557,9 @@ complemento de dois, arredondando para zero, e armazena o resto no registrador
 
 Remainder Unsigned (Resto Sem Sinal).
 
-Divide o registrador `rs1` por `rs2`, considerando que são números sem sinal,
-arredondando para zero, e armazena o resto no registrador `rd`.
+Divide o valor armazenado no registrador `rs1` pelo valor 
+armazenado no registrador `rs2`, considerando que são 
+números sem sinal, arredondando para zero, e armazena o resto no registrador de destino `rd`. 
 
 #### Sintaxe
 
@@ -570,8 +583,8 @@ arredondando para zero, e armazena o resto no registrador `rd`.
 
 Exclusive OR (OU Exclusivo).
 
-Realiza a operação lógica XOR, bit a bit, entre os registradores `rs1` e `rs2` e
-armazena o resultado no registrador `rd`.
+Realiza a operação lógica XOR, bit a bit, entre os valores armazenados nos 
+registradores `rs1` e `rs2` e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -593,8 +606,8 @@ armazena o resultado no registrador `rd`.
 
 Exclusive OR Immediate (OU Exclusivo Imediato).
 
-Realiza a operação lógica XOR, bit a bit, entre o registrador `rs1` e o imediato
-com sinal estendido e armazena o resultado no registrador `rd`.
+Realiza a operação lógica XOR, bit a bit, entre o valor armazenado no registrador `rs1` e o imediato
+com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -616,8 +629,8 @@ com sinal estendido e armazena o resultado no registrador `rd`.
 
 OR (OU).
 
-Realiza a operação lógica OR, bit a bit, entre os registradores `rs1` e `rs2` e
-armazena o resultado no registrador `rd`.
+Realiza a operação lógica OR, bit a bit, entre os valores armazenados nos registradores `rs1` e `rs2` e
+armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -639,8 +652,8 @@ armazena o resultado no registrador `rd`.
 
 OR Immediate (OU Imediato).
 
-Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato
-com sinal estendido e armazena o resultado no registrador `rd`.
+Realiza a operação lógica OR, bit a bit, entre o valor armazenado no registrador `rs1` e o imediato
+com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -662,8 +675,8 @@ com sinal estendido e armazena o resultado no registrador `rd`.
 
 AND (E).
 
-Realiza a operação lógica AND, bit a bit, entre os registradores `rs1` e `rs2` e
-armazena o resultado no registrador `rd`.
+Realiza a operação lógica AND, bit a bit, entre os valores armazenados nos registradores `rs1` e `rs2` e
+armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -685,8 +698,8 @@ armazena o resultado no registrador `rd`.
 
 AND Immediate (E Imediato).
 
-Realiza a operação lógica OR, bit a bit, entre o registrador `rs1` e o imediato
-com sinal estendido e armazena o resultado no registrador `rd`.
+Realiza a operação lógica OR, bit a bit, entre o valor armazenado no registrador `rs1` e o imediato
+com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -710,10 +723,10 @@ com sinal estendido e armazena o resultado no registrador `rd`.
 
 Shift Left Logical (Deslocamento à Esquerda Lógico).
 
-Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado
-pelos 5 bits menos significativos do valor do registrador `rs2`. Os bits
+Desloca o valor armazenado no registrador `rs1` à esquerda pelo número de posições indicado
+pelos 5 bits menos significativos do valor armazenado no registrador `rs2`. Os bits
 remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
-com zeros. O resultado é escrito no registrador `rd`.
+com zeros. O resultado é escrito no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -735,9 +748,9 @@ com zeros. O resultado é escrito no registrador `rd`.
 
 Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
 
-Desloca o valor do registrador `rs1` à esquerda pelo número de posições indicado
+Desloca o valor armazenado no registrador `rs1` à esquerda pelo número de posições indicado
 pelo `shamt`. Os bits vazios de `rs1` são preenchidos com zeros. O resultado é
-escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
+escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
 
 #### Sintaxe
 
@@ -759,10 +772,10 @@ escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
 
 Shift Right Logical (Deslocamento à Direita Lógico).
 
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
-pelos 5 bits menos significativos do valor do registrador `rs2`. Os bits
+Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
+pelos 5 bits menos significativos do valor armazenado no registrador `rs2`. Os bits
 remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
-com zeros. O resultado é escrito no registrador `rd`.
+com zeros. O resultado é escrito no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -784,9 +797,9 @@ com zeros. O resultado é escrito no registrador `rd`.
 
 Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
 
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
+Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
 pelo `shamt`. Os bits vazios de `rs1` são preenchidos com zeros. O resultado é
-escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
+escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
 
 #### Sintaxe
 
@@ -808,11 +821,11 @@ escrito no registrador `rd`. Só é permitido quando `shamt[5] = 0`.
 
 Shift Right Arithmetic (Deslocamento à Direita Aritmético).
 
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
-pelos 5 bits menos significativos do valor do registrador `rs2`. Os bits
+Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
+pelos 5 bits menos significativos do valor armazenado no registrador `rs2`. Os bits
 remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
 com cópias do bit mais significativo de `rs1`. O resultado é escrito no
-registrador `rd`.
+registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -834,9 +847,9 @@ registrador `rd`.
 
 Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
 
-Desloca o valor do registrador `rs1` à direita pelo número de posições indicado
+Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
 pelo `shamt`. Os bits vazios de `rs1` são preenchidos com cópias do bit mais
-significativo de `rs1`. O resultado é escrito no registrador `rd`. Só é
+significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. Só é
 permitido quando `shamt[5] = 0`.
 
 #### Sintaxe
@@ -861,9 +874,9 @@ permitido quando `shamt[5] = 0`.
 
 Set if Less Than (Definir se Menor que).
 
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
-que são complemento de dois, em caso positivo, armazena 1 no registrador `rd`,
-caso contrário, armazena 0.
+Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazenado no 
+registrador `rs2`, considerandoque são complemento de dois, em caso positivo, armazena 
+1 no registrador de destino `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
 
@@ -885,9 +898,9 @@ caso contrário, armazena 0.
 
 Set if Less Than Immediate (Definir se Menor que Imediato).
 
-Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal,
+Verifica se o valor armazenado no registrador `rs1` é menor que o imediato com extensão de sinal,
 considerando que são complemento de dois, em caso positivo, armazena 1 no
-registrador `rd`, caso contrário, armazena 0.
+registrador de destino `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
 
@@ -909,8 +922,8 @@ registrador `rd`, caso contrário, armazena 0.
 
 Set if Less Than Immediate Unisgned(Definir se Menor que Imediato Sem Sinal).
 
-Verifica se o registrador `rs1` é menor que o imediato com extensão de sinal,
-considerando que são sem sinal, em caso positivo, armazena 1 no registrador
+Verifica se o valor armazenado no registrador `rs1` é menor que o imediato com extensão de sinal,
+considerando que são sem sinal, em caso positivo, armazena 1 no registrador de destino
 `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
@@ -933,9 +946,9 @@ considerando que são sem sinal, em caso positivo, armazena 1 no registrador
 
 Set if Less Than Unsigned(Definir se Menor que Sem Sinal).
 
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
-que são sem sinal, em caso positivo, armazena 1 no registrador `rd`, caso
-contrário, armazena 0.
+Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazenado no
+registrador `rs2`, considerando que são sem sinal, em caso positivo, armazena 1 no 
+registrador de destino `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
 
@@ -959,7 +972,7 @@ contrário, armazena 0.
 
 Jump and Link (Salto e Link).
 
-Escreve o endereço da próxima instrução (PC+4) no registrador `rd` e modifica o
+Escreve o endereço da próxima instrução (PC+4) no registrador de destino `rd` e modifica o
 PC para o valor atual somado ao offset com extensão de sinal. Se `rd` for
 omitido, o valor de retorno é armazenado em `x1`.
 
@@ -985,7 +998,7 @@ Jump and Link Register (Salto e Link por Registrador).
 
 Realiza um cópia do PC para `rs1 + sext(offset)`, mascara bit menos
 significativo do endereço resultante e armazena o endereço anterior de PC+4 no
-registrador `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
+registrador de destino `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
 
 #### Sintaxe
 
@@ -1009,14 +1022,14 @@ registrador `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
 
 Branch if Equal (Desvio se Igual)
 
-Verifica se o registrador `rs1` é igual ao registrador `rs2`, em caso positivo,
-modifica o PC para o valor atual somado ao offset com extensão de sinal.
+Verifica se o valor armazenado no registrador `rs1` é igual ao valor armazenado no registrador `rs2`, 
+em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
-| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
-|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 000  | offset[4:1 |
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   000    |    offset[4:1|11]     |   BRANCH  | 
 
 #### Formato
 
@@ -1032,15 +1045,14 @@ modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 Branch if Not Equal (Desvio se Não Igual)
 
-Verifica se o registrador `rs1` não é igual ao registrador `rs2`, em caso
-positivo, modifica o PC para o valor atual somado ao offset com extensão de
-sinal.
+Verifica se o valor armazenado no registrador `rs1` é diferente do valor armazenado no registrador `rs2`, 
+em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
-| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
-|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 001  | offset[4:1 |
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   001    |    offset[4:1|11]     |   BRANCH  | 
 
 #### Formato
 
@@ -1056,15 +1068,15 @@ sinal.
 
 Branch if Less Than (Desvio se Menor que)
 
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
-que são números em complemento de dois, em caso positivo, modifica o PC para o
-valor atual somado ao offset com extensão de sinal.
+Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazenado no 
+registrador `rs2`, considerando que são números em complemento de dois, em caso positivo, 
+modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
-| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
-|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 000  | offset[4:1 |
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   100    |    offset[4:1|11]     |   BRANCH  | 
 
 #### Formato
 
@@ -1080,15 +1092,15 @@ valor atual somado ao offset com extensão de sinal.
 
 Branch if Greater Than or Equal(Desvio se Maior ou Igual que)
 
-Verifica se o registrador `rs1` é maior ou igual ao registrador `rs2`,
-considerando que são números em complemento de dois, em caso positivo, modifica
+Verifica se o valor armazenado no registrador `rs1` é maior ou igual ao valor armazenado no 
+registrador `rs2`, considerando que são números em complemento de dois, em caso positivo, modifica
 o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
-| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
-|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 101  | offset[4:1 |
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   101    |    offset[4:1|11]     |   BRANCH  | 
 
 #### Formato
 
@@ -1104,15 +1116,15 @@ o PC para o valor atual somado ao offset com extensão de sinal.
 
 Branch if Less Than Unsigned(Desvio se Menor que Sem Sinal)
 
-Verifica se o registrador `rs1` é menor que o registrador `rs2`, considerando
-que são números sem sinal, em caso positivo, modifica o PC para o valor atual
+Verifica se o valor armazenado no registrador `rs1` é menor ao valor armazenado no registrador `rs2`, 
+considerando que são números sem sinal, em caso positivo, modifica o PC para o valor atual
 somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
-| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
-|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 110  | offset[4:1 |
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |   110    |    offset[4:1|11]     |   BRANCH  | 
 
 #### Formato
 
@@ -1128,15 +1140,15 @@ somado ao offset com extensão de sinal.
 
 Branch if Greater or Equal Than Unsigned(Desvio se Maior ou Igual que Sem Sinal)
 
-Verifica se o registrador `rs1` é maior ou igual que o registrador `rs2`,
+Verifica se o valor armazenado no registrador `rs1` é maior ou igual ao valor armazenado no registrador `rs2`,
 considerando que são números sem sinal, em caso positivo, modifica o PC para o
 valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |   31-25   | 24-20 | 19-15 | 14-12 | 11-7 |    6-0     |
-| :--: | :-------: | :---: | :---: | :---: | :--: | :--------: |
-|  B   | offset[12 | 10:5] |  rs2  |  rs1  | 110  | offset[4:1 |
+| Tipo |        31-25       |   24-20    |   19-15   |  14-12   |          11-7         |    6-0    |
+| :--: | :----------------: | :--------: | :-------: | :------: | :-------------------: | :-------: |
+|  B   |   offset[12|10:5]  |    rs2     |    rs1    |    111   |    offset[4:1|11]     |   BRANCH  | 
 
 #### Formato
 
@@ -1155,7 +1167,7 @@ valor atual somado ao offset com extensão de sinal.
 Load Byte (Carrega Byte).
 
 Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor
-no registrador `rd`, com extensão de sinal.
+no registrador de destino `rd`, com extensão de sinal.
 
 #### Sintaxe
 
@@ -1178,7 +1190,7 @@ no registrador `rd`, com extensão de sinal.
 Load Halfword (Carrega Halfword).
 
 Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o
-valor no registrador `rd`, com extensão de sinal.
+valor no registrador de destino `rd`, com extensão de sinal.
 
 #### Sintaxe
 
@@ -1201,7 +1213,7 @@ valor no registrador `rd`, com extensão de sinal.
 Load Byte Unsigned(Carrega Byte Sem Sinal).
 
 Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor
-no registrador `rd`, com extensão de zero.
+no registrador de destino `rd`, com extensão de zero.
 
 #### Sintaxe
 
@@ -1224,7 +1236,7 @@ no registrador `rd`, com extensão de zero.
 Load Halfword Unsigned(Carrega Halfword Sem Sinal).
 
 Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o
-valor no registrador `rd`, com extensão de zero.
+valor no registrador de destino `rd`, com extensão de zero.
 
 #### Sintaxe
 
@@ -1247,7 +1259,7 @@ valor no registrador `rd`, com extensão de zero.
 Load Word (Carrega Word).
 
 Carrega quatro bytes da memória no endereço `rs1 + sext(offset)` e armazena o
-valor no registrador `rd`.
+valor no registrador de destino `rd`.
 
 #### Sintaxe
 
@@ -1271,7 +1283,7 @@ valor no registrador `rd`.
 
 Store Byte (Armazena Byte).
 
-Armazena o byte menos significativo do registrador `rs2` na memória no endereço
+Armazena o byte menos significativo do valor armazenado no registrador `rs2` na memória no endereço
 `rs1 + sext(offset)`.
 
 #### Sintaxe
@@ -1294,7 +1306,7 @@ Armazena o byte menos significativo do registrador `rs2` na memória no endereç
 
 Store Halfword (Armazena Halfword).
 
-Armazena os dois bytes menos significativo do registrador `rs2` na memória no
+Armazena os dois bytes menos significativo do valor armazenado no registrador `rs2` na memória no
 endereço `rs1 + sext(offset)`.
 
 #### Sintaxe
@@ -1317,7 +1329,7 @@ endereço `rs1 + sext(offset)`.
 
 Store Word (Armazena Word).
 
-Armazena os quatro bytes menos significativo do registrador `rs2` na memória no
+Armazena os quatro bytes menos significativo do valor armazenado no registrador `rs2` na memória no
 endereço `rs1 + sext(offset)`.
 
 #### Sintaxe

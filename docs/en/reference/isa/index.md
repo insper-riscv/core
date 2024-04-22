@@ -312,7 +312,7 @@ and adds it to the PC. Writes the result into register `rd`.
 
 Add.
 
-Adds registers `rs1` and `rs2` and stores the result into register `rd`. 
+Adds values from registers `rs1` and `rs2` and stores the result into register `rd`. 
 If overflow occurs, it is ignored.
 
 #### Syntax
@@ -335,7 +335,7 @@ If overflow occurs, it is ignored.
 
 Add Immediate.
 
-Adds register `rs1` with the sign-extended immediate and stores the result into register `rd`.
+Adds value from register `rs1` with the sign-extended immediate and stores the result into register `rd`.
 If overflow occurs, it is ignored.
 
 #### Syntax
@@ -358,7 +358,7 @@ If overflow occurs, it is ignored.
 
 Subtract.
 
-Subtracts register `rs2` from `rs1` and stores the result into register `rd`. 
+Subtracts value stored in register `rs2` from `rs1` and stores the result into register `rd`. 
 If overflow occurs, it is ignored.
 
 #### Syntax
