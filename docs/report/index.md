@@ -26,7 +26,7 @@ editLink: false
 <br/>
 
 **Relatório**  
-**Versão Intermediária**  
+**Versão Final**  
 **do Projeto Final de Engenharia**
 {style="text-align: center; padding-bottom: 6em;"}
 
@@ -84,8 +84,6 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
 <!--@include: @/report/.anexoA.md-->
 
 </section>
-
-## Referências
 
 <style>
     .printing-doc {
