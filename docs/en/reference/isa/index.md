@@ -176,6 +176,8 @@ but type has too many instructions to be covered by funct3 alone;
 - `rd`: Address of destination register;
 - `imm`: Immediate vector.
 
+Observation: In some cases, it is possible to see that a bit of the instruction represents a range of bits, such as imm[31:20], for example. These are situations where the most significant bits of the immediate value correspond to the most significant bit of the instruction sign extended.
+
 ### Opcode
 
 Opcodes are 7-bit segments of the instruction vector. Each type of instruction 
@@ -260,6 +262,10 @@ Load Upper Immediate.
 Loads 32-bit constants. `LUI` places the immediate value into 
 the upper 20 bits of register `rd`, filling the lower 12 bits with zeros.
 
+Stores 32-bit constants in registers. `LUI` uses the immediate value from the 20 most significant
+bits of the instruction into the 20 most significant bits of the destination register `rd`,
+filling the 12 least significant bits with zeros.
+
 #### Syntax
 
 | Type |   31-12    |    11-7    |    6-0    |
@@ -280,8 +286,9 @@ the upper 20 bits of register `rd`, filling the lower 12 bits with zeros.
 
 Add Upper Immediate.
 
-Shifts the immediate value 12 bits to the left, filling the lower 12 bits 
-with zero, and adds it to the PC. Writes the result into register `rd`.
+Shifts the immediate value, which is the 20 most significant bits of the instruction, 
+12 bits to the left, filling the 12 least significant bits with zeros 
+and adds it to the PC. Writes the result into register `rd`.
 
 #### Syntax
 
@@ -296,164 +303,6 @@ with zero, and adds it to the PC. Writes the result into register `rd`.
 #### Implementation
 
 `x[rd] = pc + sext(immediate[31:12] << 12)`
-
----
-
-## Shift
-
-
-
-### `SLL` <Badge type="info" text="RV32I Base" />
-
-Shift Left Logical.
-
-Shifts the value of register `rs1` to the left by the number of positions indicated by the
-5 least significant bits of the value of register `rs2`. The remaining bits
-of `rs2` are ignored. Empty bits in `rs1` are filled with zeros. The result
-is written into register `rd`.
-
-#### Syntax
-
-| Type |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |     rs2    |  rs1      |   001    |    rd     | `0110011` |    
-
-#### Format
-
-`sll rd, rs1, rs2`
-
-#### Implementation
-
-`x[rd] = x[rs1] << x[rs2]`
-
-
----
-
-### `SLLI` <Badge type="info" text="RV32I Base" />
-
-Shift Left Logical Immediate.
-
-Shifts the value of register `rs1` to the left by the number of positions indicated by `shamt`.
-Empty bits in `rs1` are filled with zeros. The result is written into register `rd`.
-Only permitted when `shamt[5] = 0`.
-
-#### Syntax
-
-| Type |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   000000   |   shamt    |    rs1    |   001    |    rd     | `0010011` |    
-
-#### Format
-
-`slli rd, rs1, shamt`
-
-#### Implementation
-
-`x[rd] = x[rs1] << shamt`
-
-
----
-
-### `SRL` <Badge type="info" text="RV32I Base" />
-
-Shift Right Logical.
-
-Shifts the value of register `rs1` to the right by the number of positions indicated by the
-5 least significant bits of the value of register `rs2`. The remaining bits
-of `rs2` are ignored. Empty bits in `rs1` are filled with zeros. The result
-is written into register `rd`.
-
-
-#### Syntax
-
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0000000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
-
-#### Format
-
-`srl rd, rs1, rs2`
-
-#### Implementation
-
-`x[rd] = x[rs1] >> x[rs2]`
-
----
-
-### `SRLI` <Badge type="info" text="RV32I Base" />
-
-Shift Right Logical Immediate.
-
-Shifts the value of register `rs1` to the right by the number of positions indicated by `shamt`.
-Empty bits in `rs1` are filled with zeros. The result is written into register `rd`.
-Only permitted when `shamt[5] = 0`.
-
-
-#### Syntax
-
-| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   000000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
-
-#### Format
-
-`srli rd, rs1, shamt`
-
-#### Implementation
-
-`x[rd] = x[rs1] >>shamt`
-
----
-
-### `SRA` <Badge type="info" text="RV32I Base" />
-
-Shift Right Arithmetic.
-
-Shifts the value of register `rs1` to the right by the number of positions indicated by the
-5 least significant bits of the value of register `rs2`. The remaining bits
-of `rs2` are ignored. Empty bits in `rs1` are filled with copies of the most significant bit
-of `rs1`. The result is written into register `rd`.
-
-
-#### Syntax
-
-| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  R   |   0100000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
-
-#### Format
-
-`sra rd, rs1, rs2`
-
-#### Implementation
-
-`x[rd] = x[rs1] >> x[rs2]`
-
----
-
-### `SRAI` <Badge type="info" text="RV32I Base" />
-
-Shift Right Arithmetic Immediate.
-
-Shifts the value of register `rs1` to the right by the number of positions indicated by `shamt`.
-Empty bits in `rs1` are filled with copies of the most significant bit of `rs1`.
-The result is written into register `rd`.
-Only permitted when `shamt[5] = 0`.
-
-
-#### Syntax
-
-| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   010000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
-
-#### Format
-
-`srai rd, rs1, shamt`
-
-#### Implementation
-
-`x[rd] = x[rs1] >> shamt`
 
 ---
 
@@ -853,6 +702,162 @@ and stores the result into register `rd`.
 
 ---
 
+## Shift
+
+### `SLL` <Badge type="info" text="RV32I Base" />
+
+Shift Left Logical.
+
+Shifts the value of register `rs1` to the left by the number of positions indicated by the
+5 least significant bits of the value of register `rs2`. The remaining bits
+of `rs2` are ignored. Empty bits in `rs1` are filled with zeros. The result
+is written into register `rd`.
+
+#### Syntax
+
+| Type |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |     rs2    |  rs1      |   001    |    rd     | `0110011` |    
+
+#### Format
+
+`sll rd, rs1, rs2`
+
+#### Implementation
+
+`x[rd] = x[rs1] << x[rs2]`
+
+
+---
+
+### `SLLI` <Badge type="info" text="RV32I Base" />
+
+Shift Left Logical Immediate.
+
+Shifts the value of register `rs1` to the left by the number of positions indicated by `shamt`.
+Empty bits in `rs1` are filled with zeros. The result is written into register `rd`.
+Only permitted when `shamt[5] = 0`.
+
+#### Syntax
+
+| Type |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   000000   |   shamt    |    rs1    |   001    |    rd     | `0010011` |    
+
+#### Format
+
+`slli rd, rs1, shamt`
+
+#### Implementation
+
+`x[rd] = x[rs1] << shamt`
+
+
+---
+
+### `SRL` <Badge type="info" text="RV32I Base" />
+
+Shift Right Logical.
+
+Shifts the value of register `rs1` to the right by the number of positions indicated by the
+5 least significant bits of the value of register `rs2`. The remaining bits
+of `rs2` are ignored. Empty bits in `rs1` are filled with zeros. The result
+is written into register `rd`.
+
+
+#### Syntax
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0000000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
+
+#### Format
+
+`srl rd, rs1, rs2`
+
+#### Implementation
+
+`x[rd] = x[rs1] >> x[rs2]`
+
+---
+
+### `SRLI` <Badge type="info" text="RV32I Base" />
+
+Shift Right Logical Immediate.
+
+Shifts the value of register `rs1` to the right by the number of positions indicated by `shamt`.
+Empty bits in `rs1` are filled with zeros. The result is written into register `rd`.
+Only permitted when `shamt[5] = 0`.
+
+
+#### Syntax
+
+| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   000000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
+
+#### Format
+
+`srli rd, rs1, shamt`
+
+#### Implementation
+
+`x[rd] = x[rs1] >>shamt`
+
+---
+
+### `SRA` <Badge type="info" text="RV32I Base" />
+
+Shift Right Arithmetic.
+
+Shifts the value of register `rs1` to the right by the number of positions indicated by the
+5 least significant bits of the value of register `rs2`. The remaining bits
+of `rs2` are ignored. Empty bits in `rs1` are filled with copies of the most significant bit
+of `rs1`. The result is written into register `rd`.
+
+
+#### Syntax
+
+| Tipo |   31-25    |   24-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  R   |   0100000  |    rs2     |    rs1    |   101    |    rd     | `0110011` |    
+
+#### Format
+
+`sra rd, rs1, rs2`
+
+#### Implementation
+
+`x[rd] = x[rs1] >> x[rs2]`
+
+---
+
+### `SRAI` <Badge type="info" text="RV32I Base" />
+
+Shift Right Arithmetic Immediate.
+
+Shifts the value of register `rs1` to the right by the number of positions indicated by `shamt`.
+Empty bits in `rs1` are filled with copies of the most significant bit of `rs1`.
+The result is written into register `rd`.
+Only permitted when `shamt[5] = 0`.
+
+
+#### Syntax
+
+| Tipo |   31-26    |   25-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------: | :--------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   010000   |   shamt    |    rs1    |   101    |    rd     | `0010011` |    
+
+#### Format
+
+`srai rd, rs1, shamt`
+
+#### Implementation
+
+`x[rd] = x[rs1] >> shamt`
+
+---
+
 ## Compare
 
 ### `SLT` <Badge type="info" text="RV32I Base" />
@@ -948,6 +953,53 @@ If true, stores 1 into register `rd`, otherwise stores 0.
 
 ---
 
+## Link
+
+### `JAL` <Badge type="info" text="RV32I Base" />
+
+Jump and Link.
+
+Writes the address of the next instruction (PC+4) into register `rd` and modifies the PC to the current
+value plus the sign-extended offset. If `rd` is omitted, the return address is stored in `x1`.
+
+#### Syntax
+
+| Tipo |             31-12           |    11-7   |    6-0    |
+| :--: | :-------------------------: | :-------: | :-------: |
+|  J   |  offset[20|10:1|11|19:12]   |    rd     | `1100011` |
+
+#### Format
+
+`jal rd, offset`
+
+#### Implementation
+
+`x[rd] = pc+4; pc += sext(offset)`
+
+---
+
+### `JALR` <Badge type="info" text="RV32I Base" />
+
+Jump and Link Register.
+
+Copies the PC to `rs1 + sext(offset)`, masks the least significant bit of the resulting address, and
+stores the previous PC+4 address into register `rd`. If `rd` is omitted, the value is stored in `x1`.
+
+#### Syntax
+  
+| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
+| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
+|  I   |   offset[11:0]   |    rs1    |   000    |    rd     | `1100111` |  
+
+#### Format
+
+`jalr rd, offset(rs1) `
+
+#### Implementation
+
+`t =pc+4; pc=(x[rs1]+sext(offset))&∼1; x[rd]=t`
+
+---
 
 ## Branch
 
@@ -1086,54 +1138,6 @@ If true, modifies the PC to the current value plus the sign-extended offset.
 #### Implementation
 
 `if (rs1 >= rs2) pc += sext(offset)`
-
----
-
-## Link
-
-### `JAL` <Badge type="info" text="RV32I Base" />
-
-Jump and Link.
-
-Writes the address of the next instruction (PC+4) into register `rd` and modifies the PC to the current
-value plus the sign-extended offset. If `rd` is omitted, the return address is stored in `x1`.
-
-#### Syntax
-
-| Tipo |             31-12           |    11-7   |    6-0    |
-| :--: | :-------------------------: | :-------: | :-------: |
-|  J   |  offset[20|10:1|11|19:12]   |    rd     | `1100011` |
-
-#### Format
-
-`jal rd, offset`
-
-#### Implementation
-
-`x[rd] = pc+4; pc += sext(offset)`
-
----
-
-### `JALR` <Badge type="info" text="RV32I Base" />
-
-Jump and Link Register.
-
-Copies the PC to `rs1 + sext(offset)`, masks the least significant bit of the resulting address, and
-stores the previous PC+4 address into register `rd`. If `rd` is omitted, the value is stored in `x1`.
-
-#### Syntax
-  
-| Tipo |         31-20    |   19-15   |  14-12   |   11-7    |    6-0    |
-| :--: | :--------------: | :-------: | :------: | :-------: | :-------: |
-|  I   |   offset[11:0]   |    rs1    |   000    |    rd     | `1100111` |  
-
-#### Format
-
-`jalr rd, offset(rs1) `
-
-#### Implementation
-
-`t =pc+4; pc=(x[rs1]+sext(offset))&∼1; x[rd]=t`
 
 ---
 

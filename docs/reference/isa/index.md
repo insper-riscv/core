@@ -176,6 +176,10 @@ Sendo, para cada segmento:
 - `rd`: Endereça registrador de destinação;
 - `imm`: Vetor do imediato.
 
+Observação: Em alguns caso, é possível ver que um bit da instrução representa um 
+intervalo de bits, como imm[31:20] por exemplo. Esses são casos onde os bits 
+mais significativos do imediato são o bit mais significativo da instrução extendido.
+
 ### Opcode
 
 Opcodes são segmentos de 7 bits do vetor de instrução. Cada tipo de instrução
@@ -256,8 +260,10 @@ Sendo, para cada segmento, `inst` o vetor da instrução.
 
 Load Upper Immediate (Carregar Superior Imediato).
 
-Carrega constantes de 32 bits. `LUI` coloca o valor imediato nos 20 bits
-superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
+Carrega registradores com valores constantes de 32 bits. `LUI` guarda o valor 
+imediato dos 20 bits mais significativos da instrução nos 20 bits mais 
+significativos do registrador de destino `rd`, preenchendo os 12 bits menos 
+significativos com zero.
 
 #### Sintaxe
 
@@ -279,8 +285,9 @@ superiores do registrador `rd`, preenchendo os 12 bits mais baixos com zeros.
 
 Add Upper Immediate (Adiciona Superior Imediato).
 
-Desloca o valor do imediato 12 bits para a esquerda, preenchendo os 12 bits mais
-baixos com zero e o adiciona ao PC. Escreve o resultado no registrador `rd`
+Desloca o valor do imediato da instrução, que consiste nos 20 bits mais significativos, 
+12 bits à esquerda, preenchendo os 12 bits menos significativos com zero, e o adiciona 
+ao PC. O resultado é então escrito no registrador de destino `rd`. 
 
 #### Sintaxe
 
