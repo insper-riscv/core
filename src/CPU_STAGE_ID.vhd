@@ -69,6 +69,14 @@ begin
         data_source_2      => data_source_2  
     );
 
+    BRANCH_COMPARE_UNIT: entity WORK.MODULE_BRANCH_COMPARE_UNIT(RV32I)
+        port map (
+            source_1        => data_source_1,
+            source_2        => data_source_2,
+            select_function => '0' & funct_3,
+            destination     => control_if.enable_jump
+        );
+
     signals_ex.address_program <= source_0.address_program;
     signals_ex.data_source_1   <= data_source_1;
     signals_ex.data_source_2   <= data_source_2;
@@ -88,14 +96,5 @@ begin
         branch                        <= '1'  when WORK.RV32I.INSTRUCTION_B_TYPE else
                                          '0';
     end process;
-
-    BRANCH_COMPARE_UNIT : entity WORK.CPU_BRANCH_COMPARE_UNIT
-        port map (
-            source_1    => data_source_1,
-            source_2    => data_source_2,
-            selector    => funct_3,
-            branch      => branch,
-            destination => control_if.enable_jump
-        );
 
 end architecture;

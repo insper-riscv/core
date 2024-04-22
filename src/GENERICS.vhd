@@ -10,17 +10,28 @@ package GENERICS is
         DATA_WIDTH : natural := 8
     );
 
-    constant GENERIC_DATA_WIDTH : natural := DATA_WIDTH;
-
     component GENERIC_ADDER
         generic (
-            DATA_WIDTH       : natural := GENERIC_DATA_WIDTH;
+            DATA_WIDTH       : natural := DATA_WIDTH;
             DEFAULT_SOURCE_2 : integer := 1
         );
         port (
             source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
             source_2    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := std_logic_vector(to_signed(DEFAULT_SOURCE_2, DATA_WIDTH));
             destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        );
+    end component;
+
+    component GENERIC_COMPARATOR
+        generic (
+            DATA_WIDTH : natural := DATA_WIDTH
+        );
+        port (
+            source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+            flag_equal    : out std_logic;
+            flag_less     : out std_logic;
+            flag_greather : out std_logic
         );
     end component;
 
@@ -53,7 +64,7 @@ package GENERICS is
 
     component GENERIC_MUX_2X1
         generic (
-            DATA_WIDTH : natural := GENERIC_DATA_WIDTH
+            DATA_WIDTH : natural := DATA_WIDTH
         );
         port (
             source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -65,7 +76,7 @@ package GENERICS is
 
     component GENERIC_MUX_4X1
         generic (
-            DATA_WIDTH : natural := GENERIC_DATA_WIDTH
+            DATA_WIDTH : natural := DATA_WIDTH
         );
         port (
             source_1     : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
@@ -79,7 +90,7 @@ package GENERICS is
 
     component GENERIC_RAM
         generic (
-            DATA_WIDTH        : natural := GENERIC_DATA_WIDTH;
+            DATA_WIDTH        : natural := DATA_WIDTH;
             ADDRESS_WIDTH     : natural := 8;
             ADDRESSABLE_WIDTH : natural := 7
         );
@@ -96,7 +107,7 @@ package GENERICS is
 
     component GENERIC_REGISTER
         generic (
-            DATA_WIDTH : natural := GENERIC_DATA_WIDTH
+            DATA_WIDTH : natural := DATA_WIDTH
         );
         port (
             clock       : in  std_logic;
@@ -122,7 +133,7 @@ package GENERICS is
     component GENERIC_SIGNAL_EXTENDER
         generic (
             SOURCE_WIDTH      : natural := 4;
-            DESTINATION_WIDTH : natural := GENERIC_DATA_WIDTH
+            DESTINATION_WIDTH : natural := DATA_WIDTH
         );
         port (
             source          : in  std_logic_vector((SOURCE_WIDTH - 1) downto 0);
