@@ -79,7 +79,6 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
 <!--@include: @/report/.metodologia.md-->
 <!--@include: @/report/.resultados.md-->
 <!--@include: @/report/.conclusao.md-->
-<!--@include: @/report/.referencias.md-->
 
 </section>
 
