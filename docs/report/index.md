@@ -9,7 +9,7 @@ editLink: false
 ## Capa { style="position: absolute; visibility: hidden;"}
 
 **Desenvolvimento de RISC-V para Uso Aeroespacial**
-{style="text-align: center; padding-top: 11em; padding-bottom: 6em;"}
+{style="text-align: center; padding-top: 5em; padding-bottom: 6em;"}
 
 <br/>
 
@@ -41,7 +41,7 @@ editLink: false
 **Giancarlo Vanoni Ruggiero**  
 **Luciano Felix Dias**  
 **Tiago Vitorino Seixas**
-{style="text-align: center; padding-top: 9em; padding-bottom: 6em;"}
+{style="text-align: center; padding-top: 5em; padding-bottom: 5em;"}
 
 <br/>
 
@@ -49,8 +49,8 @@ editLink: false
 
 <br/>
 
-**Relatório Versão Intermediária do Projeto Final de Engenharia**
-{style="text-align: center; padding-bottom: 5em;"}
+**Relatório Versão Final do Projeto Final de Engenharia**
+{style="text-align: center; padding-bottom: 8em;"}
 
 <br/>
 
@@ -58,7 +58,37 @@ Relatório apresentado ao curso de Engenharia, como requisito para o Trabalho de
 Professor Orientador: Prof. Rafael Corsi Ferrão<br/><br/>
 Mentor na Empresa: Saulo Finco<br/><br/>
 Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
-{style="margin-left: 33%; padding-bottom: 11em;"}
+{style="margin-left: 33%; padding-bottom: 5em;"}
+
+<br/>
+
+**São Paulo-SP**  
+**Março 2024**
+{style="text-align: center;"}
+
+--- {class="break-page"}
+
+**Giancarlo Vanoni Ruggiero**  
+**Luciano Felix Dias**  
+**Tiago Vitorino Seixas**
+{style="text-align: center; padding-top: 5em; padding-bottom: 5em;"}
+
+<br/>
+
+# RISC-V Development for Aerospatial Application  {style="text-align: center;"}
+
+<br/>
+
+**Capstone Design Report Report Final Version**
+{style="text-align: center; padding-bottom: 8em;"}
+
+<br/>
+
+Undergraduate Capstone Design Project Report submitted to the Engineering program (Computer/Mechanical/Mechatronic) in partial fulfillment of the requirements for the Bachelor’s Degree in Engineering. <br/><br/>
+Advisor: Rafael Corsi Ferrão<br/><br/>
+Company Mentor: Saulo Finco<br/><br/>
+General Coordinator TCC/PFE: Dr. Luciano Pereira Soares
+{style="margin-left: 33%; padding-bottom: 3em;"}
 
 <br/>
 
@@ -158,7 +188,7 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
             }
 
             h2 {
-                padding-top: 0;
+                /* padding-top: 0; */
                 border-top: none;
             }
 
