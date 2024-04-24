@@ -6,19 +6,13 @@ library WORK;
 
 package CPU is
 
-    -- generic (
-    --     DATA_WIDTH              : natural := 8;
-    --     INSTRUCTION_WIDTH       : natural := 8;
-    --     OPCODE_WIDTH            : natural := 8;
-    --     REGISTER_ADDRESS_WIDTH  : natural := 8;
-    --     EXECUTION_CONTROL_WIDTH : natural := 8
-    -- );
-
-    constant DATA_WIDTH              : natural := WORK.RV32I.XLEN;
-    constant INSTRUCTION_WIDTH       : natural := WORK.RV32I.INSTRUCTION_WIDTH;
-    constant OPCODE_WIDTH            : natural := WORK.RV32I.OPCODE_WIDTH;
-    constant REGISTER_ADDRESS_WIDTH  : natural := 5;
-    constant EXECUTION_CONTROL_WIDTH : natural := 4;
+    generic (
+        DATA_WIDTH              : natural := WORK.RV32I.XLEN;
+        INSTRUCTION_WIDTH       : natural := WORK.RV32I.INSTRUCTION_WIDTH;
+        OPCODE_WIDTH            : natural := WORK.RV32I.OPCODE_WIDTH;
+        REGISTER_ADDRESS_WIDTH  : natural := 5;
+        EXECUTION_CONTROL_WIDTH : natural := 4
+    );
 
     subtype DATA_RANGE              is natural range (DATA_WIDTH              - 1) downto 0;
     subtype INSTRUCTION_RANGE       is natural range (INSTRUCTION_WIDTH       - 1) downto 0;
@@ -165,113 +159,5 @@ package CPU is
         data_destination   => (others => '0'),
         select_destination => (others => '0')
     );
-
-    component CPU_TOP_LEVEL
-        port (
-            clock           : in  std_logic := '0';
-            enable          : in  std_logic := '1';
-            data_program    : in  CPU.t_DATA := (others => '0');
-            data_memory_in  : in  CPU.t_DATA := (others => '0');
-            memory_read     : out std_logic;
-            memory_write    : out std_logic;
-            data_memory_out : out CPU.t_DATA;
-            address_program : out CPU.t_DATA;
-            address_memory  : out CPU.t_DATA
-        );
-    end component;
-
-    component CPU_STAGE_IF
-        port (
-            clock           : in  std_logic;
-            enable          : in  std_logic;
-            source          : in  t_CONTROL_IF;
-            address_jump    : in  t_DATA;
-            address_program : out t_DATA
-        );
-    end component;
-
-    component CPU_STAGE_ID
-        generic (
-            GENERATE_REGISTERS : boolean := TRUE
-        );
-        port (
-            clock              : in  std_logic;
-            clear              : in  std_logic;
-            enable             : in  std_logic;
-            enable_destination : in  std_logic;
-            source             : in  t_SIGNALS_IF_ID;
-            select_destination : in  t_REGISTER;
-            data_destination   : in  t_DATA;
-            address_jump       : out t_DATA;
-            control_if         : out t_CONTROL_IF;
-            signals_ex         : out t_SIGNALS_ID_EX
-        );
-    end component;
-
-    component CPU_STAGE_EX
-        generic (
-            GENERATE_REGISTERS : boolean := TRUE
-        );
-        port (
-            clock                   : in  std_logic;
-            clear                   : in  std_logic;
-            enable                  : in  std_logic;
-            selector_forwarding_mem : in  t_REGISTER;
-            enable_mem              : in  std_logic;
-            selector_forwarding_wb  : in  t_REGISTER;
-            enable_wb               : in  std_logic;
-            forwarding_mem_source   : in  t_DATA;
-            forwarding_wb_source    : in  t_DATA;
-            source                  : in  t_SIGNALS_ID_EX;
-            destination             : out t_SIGNALS_EX_MEM
-        );
-    end component;
-
-    component CPU_STAGE_MEM
-        generic (
-            GENERATE_REGISTERS : boolean := TRUE
-        );
-        port (
-            clock          : in  std_logic;
-            clear          : in  std_logic;
-            enable         : in  std_logic;
-            source         : in  t_SIGNALS_EX_MEM;
-            control_memory : out t_CONTROL_MEM;
-            address_memory : out t_DATA;
-            data_memory    : out t_DATA;
-            destination    : out t_SIGNALS_MEM_WB
-        );
-    end component;
-
-    component CPU_STAGE_WB
-        generic (
-            GENERATE_REGISTERS : boolean := TRUE
-        );
-        port (
-            clock              : in  std_logic;
-            clear              : in  std_logic;
-            enable             : in  std_logic;
-            source             : in  t_SIGNALS_MEM_WB;
-            enable_destination : out std_logic;
-            select_destination : out t_REGISTER;
-            destination        : out t_DATA
-        );
-    end component;
-
-    component CPU_EXECUTION_FOWARDING_UNIT
-        generic (
-            ADDRESS_WIDTH : natural := REGISTER_ADDRESS_WIDTH
-        );
-        port (
-            stage_ex_select_source_1     : in  t_REGISTER;
-            stage_ex_select_source_2     : in  t_REGISTER;
-            stage_mem_enable_destination : in  t_REGISTER;
-            stage_mem_select_destination : in  std_logic;
-            stage_wb_enable_destination  : in  t_REGISTER;
-            stage_wb_select_destination  : in  std_logic;
-            stage_id_select_source_1     : out std_logic_vector(1 downto 0);
-            stage_id_select_source_2     : out std_logic_vector(1 downto 0)
-        );
-    end component;
 
 end package;
