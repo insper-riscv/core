@@ -7,9 +7,9 @@ library WORK;
 entity CPU_LOAD_EXTENDER is
   
     port (
-        source      : in  WORK.CPU.t_DATA;
+        source      : in  WORK.RV32I.t_DATA;
         selector    : in  WORK.RV32I.t_FUNCT3;
-        destination : out WORK.CPU.t_DATA
+        destination : out WORK.RV32I.t_DATA
     );
 
 end entity;

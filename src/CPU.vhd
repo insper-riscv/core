@@ -6,13 +6,19 @@ library WORK;
 
 package CPU is
 
-    generic (
-        DATA_WIDTH              : natural := WORK.RV32I.XLEN;
-        INSTRUCTION_WIDTH       : natural := WORK.RV32I.INSTRUCTION_WIDTH;
-        OPCODE_WIDTH            : natural := WORK.RV32I.OPCODE_WIDTH;
-        REGISTER_ADDRESS_WIDTH  : natural := 5;
-        EXECUTION_CONTROL_WIDTH : natural := 4
-    );
+    --generic (
+    --    GENERIC_DATA_WIDTH              : natural := WORK.RV32I.XLEN;
+    --    GENERIC_INSTRUCTION_WIDTH       : natural := WORK.RV32I.INSTRUCTION_WIDTH;
+    --    GENERIC_OPCODE_WIDTH            : natural := WORK.RV32I.OPCODE_WIDTH;
+    --    GENERIC_REGISTER_ADDRESS_WIDTH  : natural := 5;
+    --    GENERIC_EXECUTION_CONTROL_WIDTH : natural := 4
+    --);
+
+    constant DATA_WIDTH              : natural := WORK.RV32I.XLEN;
+    constant INSTRUCTION_WIDTH       : natural := WORK.RV32I.INSTRUCTION_WIDTH;
+    constant OPCODE_WIDTH            : natural := WORK.RV32I.OPCODE_WIDTH;
+    constant REGISTER_ADDRESS_WIDTH  : natural := 5;
+    constant EXECUTION_CONTROL_WIDTH : natural := 4;
 
     subtype DATA_RANGE              is natural range (DATA_WIDTH              - 1) downto 0;
     subtype INSTRUCTION_RANGE       is natural range (INSTRUCTION_WIDTH       - 1) downto 0;

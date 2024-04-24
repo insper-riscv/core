@@ -5,6 +5,8 @@ from cocotb.binary import BinaryValue
 
 import utils
 from test_MODULES_package import MODULES
+from test_RV32I_BRANCH_CONTROLLER import RV32I_BRANCH_CONTROLLER
+from test_GENERIC_COMPARATOR import GENERIC_COMPARATOR
 
 class MODULE_BRANCH_COMPARE_UNIT(utils.DUT):
     _package = MODULES
@@ -13,6 +15,9 @@ class MODULE_BRANCH_COMPARE_UNIT(utils.DUT):
     source_2 = utils.DUT.Input_pin
     select_function = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
+
+    rv32i_branch_controller = RV32I_BRANCH_CONTROLLER
+    generic_comparator = GENERIC_COMPARATOR
 
 
 @MODULE_BRANCH_COMPARE_UNIT.testcase

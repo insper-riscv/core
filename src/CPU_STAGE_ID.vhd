@@ -29,6 +29,8 @@ architecture RV32I of CPU_STAGE_ID is
 
     signal source_0      : WORK.CPU.t_SIGNALS_IF_ID := WORK.CPU.NULL_SIGNALS_IF_ID;
     signal data_source_1 : WORK.CPU.t_DATA;
+    signal data_source_2 : WORK.CPU.t_DATA;
+    signal funct_3       : WORK.RV32I.t_FUNCT3;
 
 begin
 
@@ -96,5 +98,13 @@ begin
         branch                        <= '1'  when WORK.RV32I.INSTRUCTION_B_TYPE else
                                          '0';
     end process;
+
+    BRANCH_UNIT: entity WORK.MODULE_BRANCH_UNIT(RV32I)
+        port map (
+            source_1        => data_source_1,
+            source_2        => data_source_2,
+            select_function => '0' & funct_3,
+            destination     => control_if.enable_jump
+        );
 
 end architecture;
