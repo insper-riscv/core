@@ -27,11 +27,11 @@ class CPU_TOP_LEVEL(utils.DUT):
     memory_read = utils.DUT.Output_pin
     memory_write = utils.DUT.Output_pin
 
-    stage_if = CPU_STAGE_IF
-    stage_id = CPU_STAGE_ID
-    stage_ex = CPU_STAGE_EX
-    stage_mem = CPU_STAGE_MEM
-    stage_wb = CPU_STAGE_WB
+    instruction_fetch = CPU_STAGE_IF
+    instruction_decode = CPU_STAGE_ID
+    execute = CPU_STAGE_EX
+    memory_access = CPU_STAGE_MEM
+    write_back = CPU_STAGE_WB
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: utils.Trace):
@@ -55,7 +55,7 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: utils.Trace):
@@ -83,7 +83,7 @@ async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: utils.Trace):
@@ -111,7 +111,7 @@ async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
@@ -139,7 +139,7 @@ async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: utils.Trace):
@@ -167,7 +167,7 @@ async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
@@ -195,7 +195,7 @@ async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_BRANCH_INSTRUCTIONS_testcases():

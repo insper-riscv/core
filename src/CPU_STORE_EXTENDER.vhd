@@ -20,8 +20,8 @@ architecture RTL of CPU_STORE_EXTENDER is
 
 begin
 
-    destination <= LOW_MEMORY((WORK.CPU.DATA_WIDTH - 1) downto  8) & source(15 downto 0) when selector = "000" else
-                   LOW_MEMORY((WORK.CPU.DATA_WIDTH - 1) downto 16) & source( 7 downto 0) when selector = "001" else
+    destination <= LOW_MEMORY((WORK.CPU.DATA_WIDTH - 1) downto  8) & source( 7 downto 0) when selector = "000" else
+                   LOW_MEMORY((WORK.CPU.DATA_WIDTH - 1) downto 16) & source(15 downto 0) when selector = "001" else
                    source;    
 
 end architecture;

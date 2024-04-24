@@ -41,11 +41,11 @@ class CPU_TOP_LEVEL(utils.DUT):
     memory_read = utils.DUT.Output_pin
     memory_write = utils.DUT.Output_pin
 
-    stage_if = CPU_STAGE_IF
-    stage_id = CPU_STAGE_ID
-    stage_ex = CPU_STAGE_EX
-    stage_mem = CPU_STAGE_MEM
-    stage_wb = CPU_STAGE_WB
+    INSTRUCTION_FETCH = CPU_STAGE_IF
+    INSTRUCTION_DECODE = CPU_STAGE_ID
+    EXECUTE = CPU_STAGE_EX
+    MEMORY_ACCESS = CPU_STAGE_MEM
+    WRITE_BACK = CPU_STAGE_WB
 
 @pytest.mark.synthesis
 def test_CPU_TOP_LEVEL_synthesis():
