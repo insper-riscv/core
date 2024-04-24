@@ -6,9 +6,14 @@ library WORK;
 
 entity MODULE_CONTROL_UNIT is
 
+    generic (
+        DATA_WIDTH        : natural := WORK.RV32I.FUNCT3_WIDTH + 1;
+        INSTRUCTION_WIDTH : natural := WORK.RV32I.OPCODE_WIDTH
+    );
+
     port (
-        instruction : in  WORK.CPU.t_INSTRUCTION;
-        immediate   : out WORK.CPU.t_DATA;
+        instruction : in  std_logic_vector((INSTRUCTION_WIDTH - 1) downto 0);
+        immediate   : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         control_if  : out WORK.CPU.t_CONTROL_IF;
         control_id  : out WORK.CPU.t_CONTROL_ID;
         control_ex  : out WORK.CPU.t_CONTROL_EX;
