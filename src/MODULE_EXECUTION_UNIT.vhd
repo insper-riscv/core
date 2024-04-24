@@ -30,11 +30,6 @@ end entity;
 
 architecture RV32I of MODULE_EXECUTION_UNIT is
 
-    package G is new WORK.GENERICS
-            generic map (
-                DATA_WIDTH => WORK.RV32I.XLEN
-            );
-
     signal forward_source_1 : WORK.RV32I.t_DATA;
     signal forward_source_2 : WORK.RV32I.t_DATA;
     signal alu_source_1     : WORK.RV32I.t_DATA;
@@ -42,7 +37,10 @@ architecture RV32I of MODULE_EXECUTION_UNIT is
 
 begin
 
-    MUX_FORWARD_SOURCE_1 : component G.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             selector    => select_forward_1,
             source_1    => source_1,
@@ -52,7 +50,10 @@ begin
             destination => forward_source_1
         );
 
-    MUX_FORWARD_SOURCE_2 : component G.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_2 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             selector    => select_forward_2,
             source_1    => source_2,
@@ -62,7 +63,10 @@ begin
             destination => forward_source_2
         );
 
-    MUX_ALU_SOURCE_1 : component G.GENERIC_MUX_4X1
+    MUX_ALU_SOURCE_1 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             selector    => select_source_1,
             source_1    => forward_source_1,
@@ -72,7 +76,10 @@ begin
             destination => alu_source_1
         );
 
-    MUX_ALU_SOURCE_2 : component G.GENERIC_MUX_4X1
+    MUX_ALU_SOURCE_2 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             selector    => select_source_2,
             source_1    => forward_source_2,
