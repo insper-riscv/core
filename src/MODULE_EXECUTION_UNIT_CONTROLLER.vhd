@@ -7,8 +7,8 @@ library WORK;
 entity MODULE_EXECUTION_UNIT_CONTROLLER is
 
     generic (
-        OPCODE_WIDTH : natural := WORK.CPU.OPCODE_WIDTH;
-        DATA_WIDTH   : natural := WORK.CPU.EXECUTION_CONTROL_WIDTH
+        OPCODE_WIDTH : natural := WORK.RV32I.OPCODE_WIDTH;
+        DATA_WIDTH   : natural := 4
     );
 
     port (

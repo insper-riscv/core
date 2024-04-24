@@ -6,8 +6,8 @@ library WORK;
 entity MODULE_REGISTER_FILE is
 
     generic (
-        DATA_WIDTH    : natural := WORK.CPU.DATA_WIDTH;
-        ADDRESS_WIDTH : natural := WORK.CPU.REGISTER_ADDRESS_WIDTH
+        DATA_WIDTH    : natural := WORK.RV32I.XLEN;
+        ADDRESS_WIDTH : natural := WORK.RV32I.REGISTER_WIDTH
     );
 
     port (

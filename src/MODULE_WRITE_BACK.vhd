@@ -6,7 +6,7 @@ library WORK;
 entity MODULE_WRITE_BACK is
 
     generic (
-        DATA_WIDTH  : natural := WORK.CPU.DATA_WIDTH
+        DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
 
     port (
@@ -20,14 +20,14 @@ end entity;
 
 architecture RV32I of MODULE_WRITE_BACK is
 
-    package G is new WORK.GENERICS
-        generic map (
-            DATA_WIDTH => WORK.RV32I.XLEN
-        );
+    -- No signals
 
 begin
 
-    MUX_SOURCE : component G.GENERIC_MUX_2X1
+    MUX_SOURCE : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             selector    => selector,
             source_1    => source_memory,

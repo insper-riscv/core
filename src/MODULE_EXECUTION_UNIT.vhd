@@ -7,8 +7,8 @@ library WORK;
 entity MODULE_EXECUTION_UNIT is
 
     generic (
-        FUNCTION_WIDTH : natural := WORK.CPU.EXECUTION_CONTROL_WIDTH;
-        DATA_WIDTH     : natural := WORK.CPU.DATA_WIDTH
+        FUNCTION_WIDTH : natural := 4;
+        DATA_WIDTH     : natural := WORK.RV32I.XLEN
     );
 
     port (

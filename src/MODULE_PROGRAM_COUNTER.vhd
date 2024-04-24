@@ -7,7 +7,7 @@ library WORK;
 entity MODULE_PROGRAM_COUNTER is
 
     generic (
-        DATA_WIDTH : natural := WORK.CPU.DATA_WIDTH
+        DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
 
     port (
@@ -23,11 +23,6 @@ end entity;
 
 architecture RV32I of MODULE_PROGRAM_COUNTER is
 
-    package G is new WORK.GENERICS
-        generic map (
-            DATA_WIDTH => WORK.RV32I.XLEN
-        );
-
     signal count_source    : WORK.RV32I.t_DATA;
     signal count_current   : WORK.RV32I.t_DATA;
     signal count_increment : WORK.RV32I.t_DATA;
@@ -36,7 +31,10 @@ begin
 
     destination <= count_current;
 
-    MUX_SOURCE : component G.GENERIC_MUX_2X1
+    MUX_SOURCE : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             selector    => selector,
             source_1    => count_increment,
@@ -44,7 +42,10 @@ begin
             destination => count_source
         );
 
-    COUNT_REGISTER : component G.GENERIC_REGISTER
+    COUNT_REGISTER : entity WORK.GENERIC_REGISTER
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             clock       => clock,
             clear       => clear,
@@ -53,9 +54,9 @@ begin
             destination => count_current
         );
 
-    COUNT_ADDER : component G.GENERIC_ADDER
+    COUNT_ADDER : entity WORK.GENERIC_ADDER
         generic map (
-            DATA_WIDTH       => DATA_WIDTH,
+            DATA_WIDTH       => WORK.RV32I.XLEN,
             DEFAULT_SOURCE_2 => 4
         )
         port map (
