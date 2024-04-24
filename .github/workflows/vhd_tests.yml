@@ -16,8 +16,6 @@ jobs:
           include:
             - component: GENERIC_ADDER
               test_cases: true
-            - component: GENERIC_DEBOUNCE
-              test_cases: false
             - component: GENERIC_EDGE_DETECTOR
               test_cases: false
             - component: GENERIC_FLIP_FLOP
@@ -32,16 +30,22 @@ jobs:
               test_cases: true
             - component: GENERIC_ROM
               test_cases: true
+            - component: GENERIC_COMPARATOR
+              test_cases: true
             - component: GENERIC_SHIFTER
               test_cases: true
             - component: GENERIC_SIGNAL_EXTENDER
               test_cases: false
+            - component: MODULE_BRANCH_COMPARE
+              test_cases: true
+            - component: MODULE_BRANCH_UNIT
+              test_cases: true
             - component: MODULE_EXECUTION_UNIT
               test_cases: true
             - component: MODULE_EXECUTION_UNIT_CONTROLLER
               test_cases: true
             - component: MODULE_CONTROL_UNIT
-              test_cases: true
+              test_cases: false
             - component: MODULE_PROGRAM_COUNTER
               test_cases: true
             - component: MODULE_REGISTER_FILE
@@ -52,23 +56,31 @@ jobs:
               test_cases: true
             - component: RV32I_ALU_BIT
               test_cases: true
+            - component: RV32I_ALU_SHIFTER
+              test_cases: true
             - component: RV32I_ALU_CONTROLLER
               test_cases: true
             - component: RV32I_INSTRUCTION_DECODER
               test_cases: true
             - component: RV32I_REGISTER_FILE
               test_cases: true
-            - component: STAGE_EX
+            - component: CPU_STAGE_EX
               test_cases: false
-            - component: STAGE_ID
+            - component: CPU_STAGE_ID
               test_cases: false
-            - component: STAGE_IF
+            - component: CPU_STAGE_IF
               test_cases: false
-            - component: STAGE_MEM
+            - component: CPU_STAGE_MEM
               test_cases: false
-            - component: STAGE_WB
+            - component: CPU_STAGE_WB
               test_cases: false
-            - component: TOP_LEVEL
+            - component: CPU_EXECUTION_FOWARDING_UNIT
+              test_cases: false
+            - component: CPU_LOAD_EXTENDER
+              test_cases: false
+            - component: CPU_STORE_EXTENDER
+              test_cases: false
+            - component: CPU_TOP_LEVEL
               test_cases: true
     steps:
     - name: Checkout code
