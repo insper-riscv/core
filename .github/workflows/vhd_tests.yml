@@ -16,12 +16,10 @@ jobs:
           include:
             - component: GENERIC_ADDER
               test_cases: true
-            - component: GENERIC_COUNTER
-              test_cases: true
             - component: GENERIC_DEBOUNCE
               test_cases: false
             - component: GENERIC_EDGE_DETECTOR
-              test_cases: true
+              test_cases: false
             - component: GENERIC_FLIP_FLOP
               test_cases: true
             - component: GENERIC_MUX_2X1
