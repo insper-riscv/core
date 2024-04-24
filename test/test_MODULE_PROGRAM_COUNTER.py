@@ -16,19 +16,19 @@ class MODULE_PROGRAM_COUNTER(utils.DUT):
     _package = MODULES
 
     clock = utils.DUT.Input_pin
-    jump_address = utils.DUT.Input_pin
     selector = utils.DUT.Input_pin
+    source = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
-    mux_register_alu_1 = GENERIC_MUX_2X1
-    pc_register = GENERIC_REGISTER
-    adder = GENERIC_ADDER
+    mux_source = GENERIC_MUX_2X1
+    count_register = GENERIC_REGISTER
+    count_adder = GENERIC_ADDER
 
 
 @MODULE_PROGRAM_COUNTER.testcase
 async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: utils.Trace):
-    values_jump_address = [
+    values_source = [
         "11111111111111110000000000000000",
         "11111111111111110000000000000000",
         "11111111111111110000000000000000",
@@ -36,30 +36,30 @@ async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: u
         "11111111111111110000000000000000",
     ]
 
-    values_selector = ["1", "1", "1", "0", "1"]
+    values_selector = ["0", "1", "0", "0", "1"]
 
-    values_enable = ["0", "1", "1", "1", "1"]
+    values_enable = ["1", "1", "1", "0", "0"]
 
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000100",
-        "00000000000000000000000000001000",
         "11111111111111110000000000000000",
+        "11111111111111110000000000000100",
         "11111111111111110000000000000100",
     ]
 
     clock = Clock(dut.clock, 20000, units="ns")
     cocotb.start_soon(clock.start(start_high=False))
 
-    for index, (jump_address, selector, enable, destination) in enumerate(
-        zip(values_jump_address, values_selector, values_enable, values_destination)
+    for index, (source, selector, enable, destination) in enumerate(
+        zip(values_source, values_selector, values_enable, values_destination)
     ):
-        dut.jump_address.value = BinaryValue(jump_address)
+        dut.source.value = BinaryValue(source)
         dut.enable.value = BinaryValue(enable)
         dut.selector.value = BinaryValue(selector)
 
-        await trace.cycle()
         yield trace.check(dut.destination, destination, f"At clock {index}.")
+        await trace.cycle()
 
 
 @pytest.mark.synthesis

@@ -7,8 +7,8 @@ library WORK;
 entity MODULE_CONTROL_UNIT is
 
     generic (
-        DATA_WIDTH        : natural := WORK.RV32I.FUNCT3_WIDTH + 1;
-        INSTRUCTION_WIDTH : natural := WORK.RV32I.OPCODE_WIDTH
+        DATA_WIDTH        : natural := WORK.RV32I.XLEN;
+        INSTRUCTION_WIDTH : natural := WORK.RV32I.INSTRUCTION_WIDTH
     );
 
     port (
@@ -87,6 +87,13 @@ begin
                     when others =>
                         control_id.enable_jump <= '0';
                 end case;
+        end case;
+
+        case temp.encoding is
+            when WORK.RV32I.INSTRUCTION_B_TYPE =>
+                control_id.enable_branch <= '1';
+            when others =>
+                control_id.enable_branch <= '0';
         end case;
 
         control_id.enable_flush_id <= '0';

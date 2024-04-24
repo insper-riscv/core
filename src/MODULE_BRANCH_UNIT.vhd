@@ -10,6 +10,7 @@ entity MODULE_BRANCH_UNIT is
     );
 
     port (
+        selector         : in  std_logic;
         source_program   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_immediate : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_register  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -26,6 +27,9 @@ architecture RV32I of MODULE_BRANCH_UNIT is
 begin
 
     ADDER_1 : entity WORK.GENERIC_ADDER
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             source_1    => source_program,
             source_2    => source_immediate,
@@ -33,6 +37,9 @@ begin
         );
 
     ADDER_2 : entity WORK.GENERIC_ADDER
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             source_1    => source_immediate,
             source_2    => source_register,
@@ -40,10 +47,13 @@ begin
         );
 
     MUX_1 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             source_1    => program_plus_immediate,
             source_2    => register_plus_immediate,
-            selector    => control_id.select_jump,
+            selector    => selector,
             destination => destination
         );
 

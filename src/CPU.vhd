@@ -27,7 +27,7 @@ package CPU is
     subtype FUNCTION_RANGE          is natural range (EXECUTION_CONTROL_WIDTH - 1) downto 0;
 
     subtype t_DATA        is std_logic_vector(DATA_RANGE);
-    subtype t_INSTRUCTION is std_logic_vector(INSTRUCTION_RANGE);
+    subtype t_PROGRAM     is std_logic_vector(INSTRUCTION_RANGE);
     subtype t_OPCODE      is std_logic_vector(OPCODE_RANGE);
     subtype t_REGISTER    is std_logic_vector(REGISTER_ADDRESS_RANGE);
     subtype t_FUNCTION    is std_logic_vector(FUNCTION_RANGE);
@@ -42,6 +42,7 @@ package CPU is
     type t_CONTROL_ID is record
         select_jump     : std_logic;
         enable_jump     : std_logic;
+        enable_branch   : std_logic;
         enable_flush_id : std_logic;
         enable_flux_ex  : std_logic;
     end record;
@@ -109,6 +110,7 @@ package CPU is
     constant NULL_CONTROL_ID : t_CONTROL_ID := (
         select_jump     => '0',
         enable_jump     => '0',
+        enable_branch   => '0',
         enable_flush_id => '0',
         enable_flux_ex  => '0'
     );

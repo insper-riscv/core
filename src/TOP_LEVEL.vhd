@@ -18,14 +18,13 @@ end entity;
 
 architecture RTL of TOP_LEVEL is
 
-    signal data_program        : WORK.RV32I.t_INSTRUCTION;
+    signal data_program        : WORK.RV32I.t_PROGRAM;
     signal data_memory_in      : WORK.RV32I.t_DATA;
     signal data_memory_out     : WORK.RV32I.t_DATA;
     signal enable_memory_read  : std_logic;
     signal enable_memory_write : std_logic;
     signal address_program     : WORK.RV32I.t_DATA;
     signal address_memory      : WORK.RV32I.t_DATA;
-    signal data_memory_funct_0   : t_FUNCTION;
 
 begin
 
@@ -54,10 +53,10 @@ begin
             clock           => CLOCK,
             clear           => '0',
             enable          => '1',
-            data_program    => data_program,
-            data_memory_in  => data_memory_in,
             memory_read     => enable_memory_read,
             memory_write    => enable_memory_write,
+            data_program    => data_program,
+            data_memory_in  => data_memory_in,
             data_memory_out => data_memory_out,
             address_program => address_program,
             address_memory  => address_memory

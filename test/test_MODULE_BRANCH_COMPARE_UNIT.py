@@ -96,7 +96,7 @@ async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, 
 @pytest.mark.synthesis
 def test_MODULE_BRANCH_COMPARE_UNIT_synthesis():
     MODULE_BRANCH_COMPARE_UNIT.build_vhd()
-    MODULE_BRANCH_COMPARE_UNIT.build_netlistsvg()
+    # MODULE_BRANCH_COMPARE_UNIT.build_netlistsvg()
 
 
 @pytest.mark.testcases

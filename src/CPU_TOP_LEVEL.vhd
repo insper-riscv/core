@@ -10,10 +10,10 @@ entity CPU_TOP_LEVEL is
         clock           : in  std_logic := '0';
         clear           : in  std_logic := '0';
         enable          : in  std_logic := '1';
-        data_program    : in  WORK.CPU.t_DATA := (others => '0');
-        data_memory_in  : in  WORK.CPU.t_DATA := (others => '0');
         memory_read     : out std_logic;
         memory_write    : out std_logic;
+        data_program    : in  WORK.CPU.t_PROGRAM := (others => '0');
+        data_memory_in  : in  WORK.CPU.t_DATA := (others => '0');
         data_memory_out : out WORK.CPU.t_DATA;
         address_program : out WORK.CPU.t_DATA;
         address_memory  : out WORK.CPU.t_DATA

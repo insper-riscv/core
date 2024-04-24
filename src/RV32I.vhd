@@ -16,6 +16,7 @@ package RV32I is
     subtype REGISTER_RANGE    is natural range  4 downto  0;
 
     subtype t_DATA        is std_logic_vector(XLEN_RANGE);
+    subtype t_PROGRAM     is std_logic_vector(INSTRUCTION_RANGE);
     subtype t_FUNCT3      is std_logic_vector(FUNCT3_RANGE);
     subtype t_FUNCT7      is std_logic_vector(FUNCT7_RANGE);
     subtype t_OPCODE_FULL is std_logic_vector(OPCODE_FULL_RANGE);

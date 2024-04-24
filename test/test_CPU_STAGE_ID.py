@@ -7,6 +7,7 @@ from test_CPU_package import CPU
 from test_MODULE_REGISTER_FILE import MODULE_REGISTER_FILE
 from test_MODULE_CONTROL_UNIT import MODULE_CONTROL_UNIT
 from test_MODULE_BRANCH_COMPARE_UNIT import MODULE_BRANCH_COMPARE_UNIT
+from test_MODULE_BRANCH_UNIT import MODULE_BRANCH_UNIT
 
 
 class CPU_STAGE_ID(utils.DUT):
@@ -23,6 +24,7 @@ class CPU_STAGE_ID(utils.DUT):
     module_control_unit = MODULE_CONTROL_UNIT
     module_register_file = MODULE_REGISTER_FILE
     BRANCH_COMPARE_UNIT = MODULE_BRANCH_COMPARE_UNIT
+    BRANCH_UNIT = MODULE_BRANCH_UNIT
 
 @pytest.mark.synthesis
 def test_CPU_STAGE_ID_synthesis():

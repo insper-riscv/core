@@ -12,8 +12,8 @@ class MODULE_EXECUTION_UNIT_CONTROLLER(utils.DUT):
     _package = MODULES
 
     opcode = utils.DUT.Input_pin
-    function_3 = utils.DUT.Input_pin
-    function_7 = utils.DUT.Input_pin
+    funct_3 = utils.DUT.Input_pin
+    funct_7 = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
     alu_controller = RV32I_ALU_CONTROLLER
@@ -22,22 +22,22 @@ class MODULE_EXECUTION_UNIT_CONTROLLER(utils.DUT):
 @MODULE_EXECUTION_UNIT_CONTROLLER.testcase
 async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT_CONTROLLER", trace: utils.Trace):
     dut.opcode.value = BinaryValue("01100")
-    dut.function_3.value = BinaryValue("111")
-    dut.function_7.value = BinaryValue("0000000")
+    dut.funct_3.value = BinaryValue("111")
+    dut.funct_7.value = BinaryValue("0000000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000")
 
     dut.opcode.value = BinaryValue("01100")
-    dut.function_3.value = BinaryValue("000")
-    dut.function_7.value = BinaryValue("0000000")
+    dut.funct_3.value = BinaryValue("000")
+    dut.funct_7.value = BinaryValue("0000000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00011")
 
     dut.opcode.value = BinaryValue("01100")
-    dut.function_3.value = BinaryValue("000")
-    dut.function_7.value = BinaryValue("0100000")
+    dut.funct_3.value = BinaryValue("000")
+    dut.funct_7.value = BinaryValue("0100000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "01011")
