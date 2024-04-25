@@ -160,9 +160,9 @@ begin
 
         case temp.opcode is
             when WORK.RV32I.OPCODE_LOAD =>
-                control_wb.select_destination <= '1';
-            when others =>
                 control_wb.select_destination <= '0';
+            when others =>
+                control_wb.select_destination <= '1';
         end case;
     end process;
     

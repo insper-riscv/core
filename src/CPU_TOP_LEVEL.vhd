@@ -104,7 +104,7 @@ begin
     data_memory_in_0 <= data_memory_in;
 
     source_wb.control_wb         <= signals_mem_wb.control_wb;
-    source_wb.data_memory        <= data_memory_in_0;
+    source_wb.data_memory        <= signals_mem_wb.data_memory;
     source_wb.data_destination   <= signals_mem_wb.data_destination;
     source_wb.select_destination <= signals_mem_wb.select_destination;
 

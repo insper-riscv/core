@@ -6,35 +6,25 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 from utils_interpreter import *
+from utils_GENERIC_ROM import *
 
 import utils
-from test_CPU_package import CPU
-from test_CPU_STAGE_IF import CPU_STAGE_IF
-from test_CPU_STAGE_ID import CPU_STAGE_ID
-from test_CPU_STAGE_EX import CPU_STAGE_EX
-from test_CPU_STAGE_MEM import CPU_STAGE_MEM
-from test_CPU_STAGE_WB import CPU_STAGE_WB
+from test_GENERIC_ROM import GENERIC_ROM
+from test_GENERIC_RAM import GENERIC_RAM
+from test_CPU_TOP_LEVEL import CPU_TOP_LEVEL
 
-class CPU_TOP_LEVEL(utils.DUT):
-    _package = CPU
 
+class TOP_LEVEL(utils.DUT):
     clock = utils.DUT.Input_pin
-    data_program = utils.DUT.Input_pin
-    data_memory_in = utils.DUT.Input_pin
-    data_memory_out = utils.DUT.Output_pin
-    address_program = utils.DUT.Output_pin
-    address_memory = utils.DUT.Output_pin
-    memory_read = utils.DUT.Output_pin
-    memory_write = utils.DUT.Output_pin
+    sw = utils.DUT.Input_pin
+    led = utils.DUT.Output_pin
 
-    instruction_fetch = CPU_STAGE_IF
-    instruction_decode = CPU_STAGE_ID
-    execute = CPU_STAGE_EX
-    memory_access = CPU_STAGE_MEM
-    write_back = CPU_STAGE_WB
+    rom = GENERIC_ROM
+    ram = GENERIC_RAM
+    cpu = CPU_TOP_LEVEL
 
-@CPU_TOP_LEVEL.testcase
-async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_LB(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -62,10 +52,10 @@ async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
-@CPU_TOP_LEVEL.testcase
-async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_LBU(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -93,10 +83,10 @@ async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.") 
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.") 
 
-@CPU_TOP_LEVEL.testcase
-async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_LH(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -124,10 +114,10 @@ async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
-@CPU_TOP_LEVEL.testcase
-async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_LHU(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -155,10 +145,10 @@ async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
-@CPU_TOP_LEVEL.testcase
-async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: utils.Trace):
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -186,59 +176,58 @@ async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.write_back.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @pytest.mark.testcases
-def test_CPU_TOP_LEVEL_LOAD_INSTRUCTIONS_testcases():
+def test_TOP_LEVEL_LOAD_INSTRUCTIONS_testcases():
     memory = "./src/GENERIC_ROM.vhd"
 
     assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LB.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    CPU_TOP_LEVEL.build_vhd()
-    CPU_TOP_LEVEL.test_with(
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
         testcase=[
-            tb_CPU_TOP_LEVEL_LB
+            tb_TOP_LEVEL_LB
         ],
     )
 
     assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LBU.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    CPU_TOP_LEVEL.build_vhd()
-    CPU_TOP_LEVEL.test_with(
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
         testcase=[
-            tb_CPU_TOP_LEVEL_LBU
+            tb_TOP_LEVEL_LBU
         ],
     )
-
+    
     assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LH.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    CPU_TOP_LEVEL.build_vhd()
-    CPU_TOP_LEVEL.test_with(
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
         testcase=[
-            tb_CPU_TOP_LEVEL_LH
+            tb_TOP_LEVEL_LH
         ],
     )
-
+    
     assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LHU.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    CPU_TOP_LEVEL.build_vhd()
-    CPU_TOP_LEVEL.test_with(
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
         testcase=[
-            tb_CPU_TOP_LEVEL_LHU
+            tb_TOP_LEVEL_LHU
         ],
     )
     
     assembly = "./src/RV32I_INSTRUCTIONS/LOAD_INSTRUCTION_LW.asm"
     create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
-    CPU_TOP_LEVEL.build_vhd()
-    CPU_TOP_LEVEL.test_with(
+    TOP_LEVEL.build_vhd()
+    TOP_LEVEL.test_with(
         testcase=[
-            tb_CPU_TOP_LEVEL_LW
+            tb_TOP_LEVEL_LW
         ],
     )
 
-    assembly = "./src/RV32I_INSTRUCTIONS/BUILD_INSTRUCTION_LUI.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    create_GENERIC_ROM(memory)
 
 if __name__ == "__main__":
     pytest.main(["-k", os.path.basename(__file__)])

@@ -32,12 +32,20 @@ begin
     LED(7 downto 1) <= (others => '0');
 
     ROM : entity WORK.GENERIC_ROM
+        generic map (
+            DATA_WIDTH    => WORK.RV32I.XLEN,
+            ADDRESS_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             address     => address_program,
             destination => data_program
         );
 
     RAM : entity WORK.GENERIC_RAM
+        generic map (
+            DATA_WIDTH    => WORK.RV32I.XLEN,
+            ADDRESS_WIDTH => WORK.RV32I.XLEN
+        )
         port map (
             clock        => CLOCK,
             enable       => '1',      

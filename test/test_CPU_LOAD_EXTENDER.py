@@ -14,7 +14,15 @@ class CPU_LOAD_EXTENDER(utils.DUT):
     selector    = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
-    output_1 = utils.DUT.Output_pin
+    tmp = utils.DUT.Output_pin
+
+@CPU_LOAD_EXTENDER.testcase
+async def tb_CPU_LOAD_EXTENDER_case_1(dut: CPU_LOAD_EXTENDER, trace: utils.Trace):
+    dut.source.value = BinaryValue("00000000000000000000000010000000")
+    dut.selector.value = BinaryValue("000")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "11111111111111111111111110000000")
 
 @pytest.mark.synthesis
 def test_CPU_LOAD_EXTENDER_synthesis():
@@ -26,7 +34,7 @@ def test_CPU_LOAD_EXTENDER_synthesis():
 def test_CPU_LOAD_EXTENDER_testcases():
     CPU_LOAD_EXTENDER.test_with(
         [
-            #tb_CPU_LOAD_EXTENDER_case_1,
+            tb_CPU_LOAD_EXTENDER_case_1,
         ]
     )
 
