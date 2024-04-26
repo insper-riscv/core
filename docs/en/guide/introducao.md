@@ -1,6 +1,6 @@
 # RISC-V Development for Aerospace Applications
 
-![](/public/images/capa_ilustrativa.jpg)  
+![](/images/capa_ilustrativa.jpg)  
 
 ## Introduction
 
