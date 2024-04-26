@@ -82,7 +82,7 @@ begin
 
     destination <=  shift when (
                         select_function = "0001" or
-                        select_function = "0101"
+                        select_function(2 downto 0) = "101"
                     ) else 
                     slt when (
                         select_function = "1010" or

@@ -65,20 +65,14 @@ begin
         signals_ex.funct_7            <= instruction.funct_7;
         signals_ex.funct_3            <= instruction.funct_3;
         funct_3                       <= instruction.funct_3;
-        case instruction.opcode is
-            when WORK.RV32I.OPCODE_BRANCH =>
-                enable_branch <= '1';
-            when    others =>
-                enable_branch <= '0';
-        end case;
         signals_ex.opcode             <= instruction.opcode;
         signals_ex.select_destination <= instruction.select_destination;
         signals_ex.select_source_1    <= instruction.select_source_1;
         signals_ex.select_source_2    <= instruction.select_source_2;
     end process;
 
-    --control_if.enable_jump <= control_id.enable_branch AND is_branch_condition;
     branch <= control_id.enable_jump OR is_branch_condition;
+    enable_branch <= control_id.enable_branch;
 
     MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT(RV32I)
         port map (
