@@ -1,0 +1,97 @@
+.printing-doc {
+    p,
+    li {
+        text-align: justify;
+    }
+
+    .break-page,
+    h2 {
+        page-break-before : always;
+    }
+
+    hr {
+        margin: 32px 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 12pt;
+    }
+
+    li {
+        break-inside: avoid-column;
+    }
+
+    p, table {
+        break-inside: avoid-page;
+    }
+
+    table {
+        column-span: all;
+    }
+
+    h1, h2, h3, h4, h5, h6, img, svg, figure {
+        column-span: all;
+        break-inside: avoid-column;
+    }
+
+    figure {
+        margin: 16px 0;
+    }
+
+    .table-of-contents {
+        ul {
+            list-style: none;
+        }
+
+        li:nth-child(1),
+        li:nth-child(2) {
+            display: none;
+        }
+    }
+
+    .footnotes-sep,
+    .footnote-backref {
+        display: none;
+    }
+
+    @media print {
+        font-size: 12pt;
+        font-family: "Times New Roman";
+
+        a {
+            color: currentcolor;
+            font: inherit;
+            text-decoration: none;
+        }
+
+        h2 {
+            /* padding-top: 0; */
+            border-top: none;
+        }
+
+        p {
+            line-height: 20pt;
+        }
+
+        hr.break-page {
+            opacity: 0;
+        }
+
+        .printing-doc--columns-section {
+            columns: 1;
+        }
+
+        .VPNav,
+        .VPLocalNav,
+        .VPFooter,
+        .VPDocFooter,
+        .header-anchor {
+            display: none;
+        }
+    }
+}

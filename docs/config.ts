@@ -71,6 +71,7 @@ export default defineConfig({
     sidebar: {
       ...require('./guide/config.ts').default.sidebar,
       ...require('./reference/config.ts').default.sidebar,
+      ...require('./report/config.ts').default.sidebar,
     },
 
     outline: 'deep',
