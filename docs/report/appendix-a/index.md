@@ -1,4 +1,14 @@
-## Apêndice A - Registros da Arquitetura
+---
+title: Insper | Projeto Final de Engenharia
+titleTemplate: Desenvolvimento de RISC-V para Uso Aeroespacial
+description: Apêndice B - Registros da Arquitetura
+pageClass: printing-doc
+editLink: false
+---
+
+# Apêndice B<br> Registros da Arquitetura {style="font-size: 2em;"}
+---
+
 Os registros da arquitetura foram definidos no arquivo TOP_LEVEL_CONSTANTS.vhd, que determina as constantes globais do projeto.
 
 t_CONTROL_IF
