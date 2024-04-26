@@ -6,9 +6,12 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_RV32I_package import RV32I
 
 
 class RV32I_REGISTER_FILE(utils.DUT):
+    _package = RV32I
+
     clock = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
     address_destination = utils.DUT.Input_pin

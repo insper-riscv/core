@@ -4,87 +4,87 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_RV32I_package import RV32I
 from test_RV32I_ALU_BIT import RV32I_ALU_BIT
+from test_RV32I_ALU_SHIFTER import RV32I_ALU_SHIFTER
 
 
 class RV32I_ALU(utils.DUT):
-    invert_source_1 = utils.DUT.Input_pin
-    invert_source_2 = utils.DUT.Input_pin
+    _package = RV32I
+
     select_function = utils.DUT.Input_pin
     source_1 = utils.DUT.Input_pin
     source_2 = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
     bit_to_bit = RV32I_ALU_BIT
+    generic_shifter = RV32I_ALU_SHIFTER
 
 
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
-    dut.select_function.value = BinaryValue("000")
+    dut.select_function.value = BinaryValue("0111")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("11111111111111111111111111111111")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000000")
+    yield trace.check(dut.destination, "00000000000000000000000000000000", "At 0")
 
-    dut.select_function.value = BinaryValue("001")
+    dut.select_function.value = BinaryValue("0110") # 000001
     dut.source_1.value = BinaryValue("11111111111111111111111111111111")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "11111111111111111111111111111111")
+    yield trace.check(dut.destination, "11111111111111111111111111111111", "At 1")
 
-    dut.select_function.value = BinaryValue("011")
+    dut.select_function.value = BinaryValue("0000") # 000011
     dut.source_1.value = BinaryValue("11111111111111110000000000000000")
     dut.source_2.value = BinaryValue("00000000000000001111111111111111")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "11111111111111111111111111111111")
+    yield trace.check(dut.destination, "11111111111111111111111111111111", "At 2")
 
-    dut.select_function.value = BinaryValue("110")
+    dut.select_function.value = BinaryValue("1011") # 110111
     dut.source_1.value = BinaryValue("11111111111111111111111111111111")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000001")
+    yield trace.check(dut.destination, "00000000000000000000000000000000", "At 3")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("000")
+    dut.select_function.value = BinaryValue("1000") # 001000
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("11111111111111111111111111111111")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "11111111111111111111111111111111")
+    yield trace.check(dut.destination, "00000000000000000000000000000001", "At 4")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("001")
+    dut.select_function.value = BinaryValue("1110") # 010001
     dut.source_1.value = BinaryValue("11111111111111111111111111111111")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "11111111111111111111111111111111")
+    yield trace.check(dut.destination, "11111111111111111111111111111111", "At 5")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("0")
-    dut.select_function.value = BinaryValue("011")
+    dut.select_function.value = BinaryValue("1000") # 001011
     dut.source_1.value = BinaryValue("11111111111111110000000000000000")
     dut.source_2.value = BinaryValue("11111111111111110000000000000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000000")
+    yield trace.check(dut.destination, "00000000000000000000000000000000", "At 6")
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
-    dut.select_function.value = BinaryValue("100")
-    dut.source_1.value = BinaryValue("11111111111111111111111111111111")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+    dut.select_function.value = BinaryValue("1010") # 010111
+    dut.source_1.value = BinaryValue("00000000000000000000000000000010")
+    dut.source_2.value = BinaryValue("00000000000000000000000000000100")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000001")
+    yield trace.check(dut.destination, "00000000000000000000000000000001", "At 7")
 
+    dut.select_function.value = BinaryValue("0001") # 000100
+    dut.source_1.value = BinaryValue("00000000000000000000000000001000")
+    dut.source_2.value = BinaryValue("00000000000000000000000000001000")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "00000000000000000000100000000000", "At 8")
 
 
 @pytest.mark.synthesis

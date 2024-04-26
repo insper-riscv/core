@@ -3,59 +3,91 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity RV32I_ALU is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
   
     port (
-        invert_source_1 : in  std_logic;
-        invert_source_2 : in  std_logic;
-        select_function : in  std_logic_vector(2 downto 0);
+        select_function : in  std_logic_vector(3 downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        overflow        : out std_logic;
         destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
-architecture CPU of RV32I_ALU is
+architecture RTL of RV32I_ALU is
 
-    --constant ZERO : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-
-    signal result   : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal carry    : std_logic_vector( DATA_WIDTH      downto 0);
-    signal slt      : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-    signal overflow : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal result               : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal result_extended      : std_logic;
+    signal carry                : std_logic_vector((DATA_WIDTH) downto 0);
+    signal carry_extended       : std_logic;
+    signal overflow_auxiliar    : std_logic;
+    signal slt                  : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
+    signal shift                : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
-    carry(0) <= invert_source_1 XOR invert_source_2;
-    slt(0)   <= overflow(DATA_WIDTH - 1);
-    slt((DATA_WIDTH - 1) downto 1) <= (others => '0');
+    carry(0) <= '1' when (
+                    select_function = "1000" or
+                    select_function = "0010" or
+                    select_function = "0011"
+                ) else
+                '0';
+
+    overflow_auxiliar <=    carry_extended XOR carry(DATA_WIDTH) when (select_function(1 downto 0) = "11") else
+                            carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1);
+
+    overflow <= overflow_auxiliar;
+
+    slt(0) <=   overflow_auxiliar XOR result_extended when (select_function(1 downto 0) = "11") else
+                overflow_auxiliar XOR result(DATA_WIDTH - 1);
 
     BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
         FOR_BIT : entity WORK.RV32I_ALU_BIT
             port map (
-                invert_source_1 => invert_source_1,
-                invert_source_2 => invert_source_2,
                 select_function => select_function,
                 carry_in        => carry(i),
-                slt             => slt(i),
                 source_1        => source_1(i),
                 source_2        => source_2(i),
                 destination     => result(i),
-                carry_out       => carry(i + 1),
-                overflow        => overflow(i)
+                carry_out       => carry(i + 1)
             );
     end generate;
 
-    destination <= result;
+    EXTENDED_SIGN_BIT : entity WORK.RV32I_ALU_BIT
+        port map (
+            select_function => "0000",
+            carry_in        => carry(DATA_WIDTH),
+            source_1        => '0',
+            source_2        => '0',
+            destination     => result_extended,
+            carry_out       => carry_extended
+        );
 
-    --flag_z  <= '1' when (result = ZERO) else
-    --           '0';
+    SHIFTER : entity WORK.RV32I_ALU_SHIFTER
+        generic map (
+            DATA_WIDTH  => WORK.RV32I.XLEN
+        )
+        port map (
+            select_function => select_function,
+            shamt           => source_2(4 downto 0),
+            source          => source_1,
+            destination     => shift
+        );
+
+    destination <=  shift when (
+                        select_function = "0001" or
+                        select_function(2 downto 0) = "101"
+                    ) else 
+                    slt when (
+                        select_function = "1010" or
+                        select_function = "1011"
+                    ) else
+                    result;
 
 end architecture;

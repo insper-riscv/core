@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+library WORK;
+
 entity GENERIC_FLIP_FLOP is
 
     port (

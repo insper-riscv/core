@@ -194,19 +194,31 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
             if line_list[0] in instruction_funct7:
                 funct7 = instruction_funct7[line_list[0]]
                 shamt = "{0:05b}".format(int(line_list[3]))
+                if len(shamt) != 5:
+                    raise Exception("invalid shamt - type I instruction")
                 immediate = funct7 + shamt
             else:
                 immediate = "{0:012b}".format(int(line_list[3]))
+                if len(immediate) != 12:
+                    raise Exception("invalid immediate - type I instruction")
             rs1 = "{0:05b}".format(int(line_list[2][1:]))
+            if len(rs1) != 5:
+                raise Exception("invalid rs1 - type I instruction")
             funct3 = instruction_funct3[line_list[0]]
             rd = "{0:05b}".format(int(line_list[1][1:]))
+            if len(rd) != 5:
+                raise Exception("invalid rd - type I instruction")
             opcode = instruction_opcode[line_list[0]]
             instruction = immediate + rs1 + funct3 + rd + opcode
             list_instructions.append(instruction)
 
         if line_type == "U":
             immediate = "{0:020b}".format(int(line_list[2]))
+            if len(immediate) != 20:
+                raise Exception("invalid immediate - type U instruction")
             rd = "{0:05b}".format(int(line_list[1][1:]))
+            if len(rd) != 5:
+                raise Exception("invalid rd - type U instruction")
             opcode = instruction_opcode[line_list[0]]
             instruction = immediate + rd + opcode
             list_instructions.append(instruction)
@@ -214,20 +226,30 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
         if line_type == "R":
             funct7 = instruction_funct7[line_list[0]]
             rs2 = "{0:05b}".format(int(line_list[3][1:]))
+            if len(rs2) != 5:
+                raise Exception("invalid rs2 - type R instruction")
             rs1 = "{0:05b}".format(int(line_list[2][1:]))
+            if len(rs1) != 5:
+                raise Exception("invalid rs1 - type R instruction")
             funct3 = instruction_funct3[line_list[0]]
             rd = "{0:05b}".format(int(line_list[1][1:]))
+            if len(rd) != 5:
+                raise Exception("invalid rd - type R instruction")
             opcode = instruction_opcode[line_list[0]]
             instruction = funct7 + rs2 + rs1 + funct3 + rd + opcode
             list_instructions.append(instruction)
 
         if line_type == "J":
-            immediate = "{0:020b}".format(int(line_list[2]))
+            immediate = "{0:021b}".format(int(line_list[2]))
+            if len(immediate) != 21:
+                raise Exception("invalid immediate - type J instruction")
             imm_20 = immediate[0]
             imm_10_1 = immediate[10:20]
             imm_11 = immediate[9]
             imm_19_12 = immediate[1:9]
             rd = "{0:05b}".format(int(line_list[1][1:]))
+            if len(rd) != 5:
+                raise Exception("invalid rd - type J instruction")
             opcode = instruction_opcode[line_list[0]]
             instruction = imm_20 + imm_10_1  + imm_11 + imm_19_12 + rd + opcode
             list_instructions.append(instruction)
@@ -238,9 +260,15 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
             line_list = [line_list[0], line_list[1], offset_list[1], offset_list[0]]
 
             immediate = "{0:012b}".format(int(line_list[3]))
+            if len(immediate) != 12:
+                raise Exception("invalid immediate - type S instruction")
             imm_11_5 = immediate[0:7]
             rs2 = "{0:05b}".format(int(line_list[1][1:]))
+            if len(rs2) != 5:
+                raise Exception("invalid rs2 - type S instruction")
             rs1 = "{0:05b}".format(int(line_list[2][1:]))
+            if len(rs1) != 5:
+                raise Exception("invalid rs1 - type S instruction")
             funct3 = instruction_funct3[line_list[0]]
             imm_4_0 = immediate[7:12]
             opcode = instruction_opcode[line_list[0]]
@@ -248,16 +276,22 @@ def create_binary_instructions(assembly, memory, instruction_opcode, instruction
             list_instructions.append(instruction)
 
         if line_type == "B":
-            immediate = "{0:012b}".format(int(line_list[3]))
+            immediate = "{0:013b}".format(int(line_list[3]))
+            if len(immediate) != 13:
+                raise Exception("invalid immediate - type B instruction")
             imm_12 = immediate[0]
             imm_10_5 = immediate[2:8]
             rs2 = "{0:05b}".format(int(line_list[2][1:]))
+            if len(rs2) != 5:
+                raise Exception("invalid rs2 - type B instruction")
             rs1 = "{0:05b}".format(int(line_list[1][1:]))
+            if len(rs1) != 5:
+                raise Exception("invalid rs1 - type B instruction")
             funct3 = instruction_funct3[line_list[0]]
             imm_11 = immediate[1]
             imm_4_1 = immediate[8:12]
             opcode = instruction_opcode[line_list[0]]
-            instruction = imm_12 + imm_10_5 + rs2 + rs1 + funct3 + imm_11 + imm_4_1 + opcode
+            instruction = imm_12 + imm_10_5 + rs2 + rs1 + funct3 + imm_4_1 + imm_11 + opcode
             list_instructions.append(instruction)
 
     index_instruction = 0

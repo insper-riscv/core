@@ -3,3 +3,5 @@ add x3, x1, x1
 add x3, x1, x1
 addi x0, x0, 0
 add x3, x1, x1
+add x3, x1, x1
+add x3, x1, x1

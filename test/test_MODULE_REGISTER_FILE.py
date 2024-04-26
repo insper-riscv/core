@@ -6,15 +6,19 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_MODULES_package import MODULES
 from test_RV32I_REGISTER_FILE import RV32I_REGISTER_FILE
 
 
 class MODULE_REGISTER_FILE(utils.DUT):
+    _package = MODULES
+
     clock = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
     select_destination = utils.DUT.Input_pin
+    select_source_1 = utils.DUT.Input_pin
+    select_source_2 = utils.DUT.Input_pin
     data_destination = utils.DUT.Input_pin
-    instruction = utils.DUT.Input_pin
     data_source_1 = utils.DUT.Output_pin
     data_source_2 = utils.DUT.Output_pin
 
@@ -31,14 +35,23 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
         "00001",
         "00011",
     ]
-    values_instruction = [
-        "00000000000100000000000000000000",
-        "00000000001100001000000000000000",
-        "00000000011100011000000000000000",
-        "00000000111100111000000000000000",
-        "00000001111101111000000000000000",
-        "00000000000011111000000000000000",
-        "00000000000100000000000000000000",
+    values_select_source_1 = [
+        "00000",
+        "00001",
+        "00011",
+        "00111",
+        "01111",
+        "11111",
+        "00000",
+    ]
+    values_select_source_2 = [
+        "00001",
+        "00011",
+        "00111",
+        "01111",
+        "11111",
+        "00000",
+        "00001",
     ]
     values_data_destination = [
         "11111111111111110000000000000000",
@@ -74,14 +87,16 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
 
     for index, (
         select_destination,
-        instruction,
+        select_source_1,
+        select_source_2,
         data_source_1,
         data_source_2,
         data_destination,
     ) in enumerate(
         zip(
             values_select_destination,
-            values_instruction,
+            values_select_source_1,
+            values_select_source_2,
             values_data_source_1,
             values_data_source_2,
             values_data_destination,
@@ -89,7 +104,8 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
     ):
         dut.enable.value = BinaryValue("1")
         dut.select_destination.value = BinaryValue(select_destination)
-        dut.instruction.value = BinaryValue(instruction)
+        dut.select_source_1.value = BinaryValue(select_source_1)
+        dut.select_source_2.value = BinaryValue(select_source_2)
         dut.data_destination.value = BinaryValue(data_destination)
 
         yield trace.check(dut.data_source_1, data_source_1, f"At clock {index}.")

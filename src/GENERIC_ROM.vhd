@@ -3,13 +3,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_ROM IS
 
     generic (
-        DATA_WIDTH        : natural := XLEN;
-        ADDRESS_WIDTH     : natural := XLEN;
+        DATA_WIDTH        : natural := 8;
+        ADDRESS_WIDTH     : natural := 8;
         ADDRESSABLE_WIDTH : natural := 7
     );
 
@@ -17,6 +16,7 @@ entity GENERIC_ROM IS
         address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) 
     );
+
 end entity;
 
 architecture RTL of GENERIC_ROM is
@@ -28,10 +28,14 @@ architecture RTL of GENERIC_ROM is
     begin
     
         -- start memory
-        tmp(0) := "00000000000000000001010000110111";
-        tmp(4) := "00000000000000000001010000110111";
-        tmp(8) := "00000000000000000001010000110111";
-        tmp(12) := "00000000000000000001010000110111";
+        tmp(0) := "00000001";
+        tmp(1) := "00000010";
+        tmp(2) := "00000100";
+        tmp(3) := "00001000";
+        tmp(4) := "00010000";
+        tmp(5) := "00100000";
+        tmp(6) := "01000000";
+        tmp(7) := "10000000";
         -- end memory
 
         return tmp;

@@ -1,0 +1,87 @@
+name: VHD stress testing routine
+'on':
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    name: Test ${{ matrix.component }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          include:
+            - component: GENERIC_ADDER
+              enabled: true
+            - component: GENERIC_COUNTER
+              enabled: false
+            - component: GENERIC_DEBOUNCE
+              enabled: false
+            - component: GENERIC_EDGE_DETECTOR
+              enabled: false
+            - component: GENERIC_FLIP_FLOP
+              enabled: false
+            - component: GENERIC_MUX_2X1
+              enabled: false
+            - component: GENERIC_MUX_4X1
+              enabled: false
+            - component: GENERIC_RAM
+              enabled: false
+            - component: GENERIC_REGISTER
+              enabled: false
+            - component: GENERIC_ROM
+              enabled: false
+            - component: GENERIC_SIGNAL_EXTENDER
+              enabled: false
+            - component: MODULE_ALU
+              enabled: false
+            - component: MODULE_ALU_CONTROLLER
+              enabled: false
+            - component: MODULE_CONTROL_UNIT
+              enabled: false
+            - component: MODULE_PC
+              enabled: false
+            - component: MODULE_REGISTER_FILE
+              enabled: false
+            - component: MODULE_WRITE_BACK
+              enabled: false
+            - component: RV32I_ALU
+              enabled: false
+            - component: RV32I_ALU_BIT
+              enabled: false
+            - component: RV32I_ALU_CONTROLLER
+              enabled: false
+            - component: RV32I_INSTRUCTION_DECODER
+              enabled: false
+            - component: RV32I_REGISTER_FILE
+              enabled: false
+            - component: STAGE_EX
+              enabled: false
+            - component: STAGE_ID
+              enabled: false
+            - component: STAGE_IF
+              enabled: false
+            - component: STAGE_MEM
+              enabled: false
+            - component: STAGE_WB
+              enabled: false
+            - component: TOP_LEVEL
+              enabled: false
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: pip
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run Synthesis
+      if: ${{ contains(matrix.enabled, true) }}
+      run: pytest -k ${{ matrix.component }} -m synthesis
+    - name: Run Test Cases
+      if: ${{ contains(matrix.enabled, true) }}
+      run: pytest -k ${{ matrix.component }} -m stress

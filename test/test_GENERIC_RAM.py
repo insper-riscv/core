@@ -6,13 +6,16 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_RAM(utils.DUT):
+    _package = GENERICS
+
     clock = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
     enable_read = utils.DUT.Input_pin
-    enable_write = utils.DUT.Input_pin
+    enable_write = utils.DUT.Input_pin  
     address = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
@@ -22,27 +25,27 @@ class GENERIC_RAM(utils.DUT):
 async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
     values_enable = ["0", "1", "1", "1", "1"]
     values_enable_read = ["1", "0", "1", "0", "1"]
-    values_enable_write = ["1", "1", "0", "1", "0"]
+    values_enable_write = ["0", "1", "0", "1", "0"]
     values_address = [
-        "00000000000000000000000000000001",
-        "00000000000000000000000000000001",
-        "00000000000000000000000000000001",
-        "00000000000000000000000001000001",
-        "00000000000000000000000001000001",
+        "00000000",
+        "00000001",
+        "00000001",
+        "10000000",
+        "10000000",
     ]
     values_source = [
-        "00001111000011110000111100001111",
-        "00001111000011110000111100001111",
-        "00000000000000000000000000000000",
-        "11110000111100001111000011110000",
-        "00000000000000000000000000000000",
+        "00000000",
+        "00001111",
+        "00000000",
+        "11110000",
+        "00000000",
     ]
     values_destination = [
-        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
-        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
-        "00001111000011110000111100001111",
-        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
-        "11110000111100001111000011110000",
+        "ZZZZZZZZ",
+        "ZZZZZZZZ",
+        "00001111",
+        "ZZZZZZZZ",
+        "11110000",
     ]
     clock = Clock(dut.clock, 20000, units="ns")
 
