@@ -10,6 +10,7 @@ entity CPU_STAGE_IF is
         clock           : in  std_logic;
         clear           : in  std_logic;
         enable          : in  std_logic;
+        branch          : in std_logic;
         source          : in  WORK.CPU.t_CONTROL_IF;
         address_jump    : in  WORK.CPU.t_DATA;
         address_program : out WORK.CPU.t_DATA
@@ -24,7 +25,10 @@ architecture RV32I of CPU_STAGE_IF is
 
 begin
 
-    jump <= source.select_source XOR source.enable_jump;
+    process(source.select_source, branch) is
+    begin
+        jump <= source.select_source XOR branch;
+    end process;
 
     process(source.enable_stall) is
     begin
@@ -36,7 +40,7 @@ begin
             clock        => clock,
             clear        => clear,
             enable       => enable_0,
-            selector     => source.select_source,
+            selector     => jump,
             source       => address_jump,
             destination  => address_program
         );

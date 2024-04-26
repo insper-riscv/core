@@ -12,6 +12,7 @@ entity MODULE_BRANCH_COMPARE_UNIT is
     );
 
     port (
+        enable          : in  std_logic;
         select_function : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -33,6 +34,7 @@ begin
 
     COMPARE: entity WORK.RV32I_BRANCH_CONTROLLER
         port map (
+            enable          => enable,
             select_function => select_function(2 downto 0),
             flag_sign_1     => sign_1,
             flag_sign_2     => sign_2,

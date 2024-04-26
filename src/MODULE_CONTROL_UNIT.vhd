@@ -54,17 +54,17 @@ begin
 
         control_if.enable_flush <= '0';
 
-        case temp.encoding is
-            when WORK.RV32I.INSTRUCTION_J_TYPE =>
-                control_if.enable_jump <= '1';
-            when others =>
-                case temp.opcode is
-                    when WORK.RV32I.OPCODE_JALR =>
-                        control_if.enable_jump <= '1';
-                    when others =>
-                        control_if.enable_jump <= '0';
-                end case;
-        end case;
+        --case temp.encoding is
+        --    when WORK.RV32I.INSTRUCTION_J_TYPE =>
+        --        control_if.enable_jump <= '1';
+        --    when others =>
+        --        case temp.opcode is
+        --            when WORK.RV32I.OPCODE_JALR =>
+        --                control_if.enable_jump <= '1';
+        --            when others =>
+        --                control_if.enable_jump <= '0';
+        --        end case;
+        --end case;
 
         control_if.select_source <= '1';
 

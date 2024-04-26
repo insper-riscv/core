@@ -20,11 +20,12 @@ class CPU_STAGE_ID(utils.DUT):
     address_jump = utils.DUT.Output_pin
     control_if = utils.DUT.Output_pin
     signals_ex = utils.DUT.Output_pin
+    branch = utils.DUT.Output_pin
 
     module_control_unit = MODULE_CONTROL_UNIT
     module_register_file = MODULE_REGISTER_FILE
-    BRANCH_COMPARE_UNIT = MODULE_BRANCH_COMPARE_UNIT
-    BRANCH_UNIT = MODULE_BRANCH_UNIT
+    branch_compare_unit = MODULE_BRANCH_COMPARE_UNIT
+    branch_unit = MODULE_BRANCH_UNIT
 
 @pytest.mark.synthesis
 def test_CPU_STAGE_ID_synthesis():

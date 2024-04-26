@@ -16,8 +16,8 @@ class MODULE_BRANCH_COMPARE_UNIT(utils.DUT):
     select_function = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
-    rv32i_branch_controller = RV32I_BRANCH_CONTROLLER
-    generic_comparator = GENERIC_COMPARATOR
+    compare = RV32I_BRANCH_CONTROLLER
+    comparator = GENERIC_COMPARATOR
 
 
 @MODULE_BRANCH_COMPARE_UNIT.testcase

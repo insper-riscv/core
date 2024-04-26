@@ -7,6 +7,7 @@ library WORK;
 entity RV32I_BRANCH_CONTROLLER is
 
     port (
+        enable          : in  std_logic;
         select_function : in  WORK.RV32I.t_FUNCT3;
         flag_sign_1     : in  std_logic;
         flag_sign_2     : in  std_logic;
@@ -24,21 +25,26 @@ architecture RV32I of RV32I_BRANCH_CONTROLLER is
 
 begin
 
-    DECODE: process(select_function)
+    DECODE: process(select_function, flag_equal, flag_less, flag_greather, flag_sign_1, flag_sign_2, enable)
+        variable tmp_destination : std_logic;
     begin
         case select_function is
-            when    WORK.RV32I.FUNCT3_BEQ |
-                    WORK.RV32I.FUNCT3_BNE =>
-                destination <= flag_equal;
-            when    WORK.RV32I.FUNCT3_BLT |
-                    WORK.RV32I.FUNCT3_BGE =>
-                destination <= (flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2);
-            when    WORK.RV32I.FUNCT3_BLTU |
-                    WORK.RV32I.FUNCT3_BGEU =>
-                destination <= flag_less;
+            when WORK.RV32I.FUNCT3_BEQ =>
+                tmp_destination := flag_equal;
+            when WORK.RV32I.FUNCT3_BNE =>
+                tmp_destination := NOT flag_equal;
+            when WORK.RV32I.FUNCT3_BLT =>
+                tmp_destination := (flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2);
+            when WORK.RV32I.FUNCT3_BGE =>
+                tmp_destination := NOT ((flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2));
+            when WORK.RV32I.FUNCT3_BLTU =>
+                tmp_destination := flag_less;
+            when WORK.RV32I.FUNCT3_BGEU =>
+                tmp_destination := flag_greather;
             when    others =>
-                destination <= '0';
+                tmp_destination := '0';
         end case;
+        destination <= tmp_destination AND enable;
     end process;
 
 end architecture;

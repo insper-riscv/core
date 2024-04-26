@@ -18,6 +18,7 @@ entity CPU_STAGE_ID is
         source             : in  WORK.CPU.t_SIGNALS_IF_ID;
         select_destination : in  WORK.CPU.t_REGISTER;
         data_destination   : in  WORK.CPU.t_DATA;
+        branch             : out std_logic;
         address_jump       : out WORK.CPU.t_DATA;
         control_if         : out WORK.CPU.t_CONTROL_IF;
         signals_ex         : out WORK.CPU.t_SIGNALS_ID_EX
@@ -33,6 +34,7 @@ architecture RV32I of CPU_STAGE_ID is
     signal data_source_2       : WORK.CPU.t_DATA;
     signal funct_3             : WORK.RV32I.t_FUNCT3;
     signal is_branch_condition : std_logic;
+    signal enable_branch       : std_logic;
 
 begin
 
@@ -63,13 +65,20 @@ begin
         signals_ex.funct_7            <= instruction.funct_7;
         signals_ex.funct_3            <= instruction.funct_3;
         funct_3                       <= instruction.funct_3;
+        case instruction.opcode is
+            when WORK.RV32I.OPCODE_BRANCH =>
+                enable_branch <= '1';
+            when    others =>
+                enable_branch <= '0';
+        end case;
         signals_ex.opcode             <= instruction.opcode;
         signals_ex.select_destination <= instruction.select_destination;
         signals_ex.select_source_1    <= instruction.select_source_1;
         signals_ex.select_source_2    <= instruction.select_source_2;
     end process;
 
-    control_if.enable_jump <= control_id.enable_branch AND is_branch_condition;
+    --control_if.enable_jump <= control_id.enable_branch AND is_branch_condition;
+    branch <= control_id.enable_jump OR is_branch_condition;
 
     MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT(RV32I)
         port map (
@@ -105,6 +114,7 @@ begin
 
     BRANCH_COMPARE_UNIT: entity WORK.MODULE_BRANCH_COMPARE_UNIT(RV32I)
         port map (
+            enable          => enable_branch,
             source_1        => data_source_1,
             source_2        => data_source_2,
             select_function => '0' & funct_3,

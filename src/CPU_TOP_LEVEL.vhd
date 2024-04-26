@@ -23,7 +23,7 @@ end entity;
 
 architecture RV32I of CPU_TOP_LEVEL is
 
-    signal control_if            : WORK.CPU.t_CONTROL_IF;
+    signal control_if            : WORK.CPU.t_CONTROL_IF := WORK.CPU.NULL_CONTROL_IF;
     signal signals_if_id         : WORK.CPU.t_SIGNALS_IF_ID;
     signal signals_id_ex         : WORK.CPU.t_SIGNALS_ID_EX;
     signal signals_ex_mem        : WORK.CPU.t_SIGNALS_EX_MEM;
@@ -40,10 +40,13 @@ architecture RV32I of CPU_TOP_LEVEL is
 
     signal source_wb             : WORK.CPU.t_SIGNALS_MEM_WB;
 
+    signal branch                : std_logic;
+
 begin
 
     INSTRUCTION_FETCH : entity WORK.CPU_STAGE_IF(RV32I)
         port map (
+            branch          => branch,
             clock           => clock,
             clear           => clear,
             enable          => enable,
@@ -64,6 +67,7 @@ begin
             source              => signals_if_id,
             select_destination  => select_destination,
             data_destination    => data_destination,
+            branch              => branch,
             address_jump        => address_jump,
             control_if          => control_if,
             signals_ex          => signals_id_ex

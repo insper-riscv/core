@@ -13,6 +13,7 @@ class CPU_STAGE_IF(utils.DUT):
     control = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     address_jump = utils.DUT.Input_pin
+    branch = utils.DUT.Input_pin
     address_program = utils.DUT.Output_pin
 
     module_program_counter = MODULE_PROGRAM_COUNTER
