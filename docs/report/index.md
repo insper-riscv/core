@@ -10,7 +10,7 @@ prev: false
 ## Capa { style="position: absolute; visibility: hidden;"}
 
 **Desenvolvimento de RISC-V para Uso Aeroespacial**
-{style="text-align: center; padding-top: 5em; padding-bottom: 6em;"}
+{style="text-align: center; padding-top: 4em; padding-bottom: 6em;"}
 
 <br/>
 
@@ -42,7 +42,7 @@ prev: false
 **Giancarlo Vanoni Ruggiero**  
 **Luciano Felix Dias**  
 **Tiago Vitorino Seixas**
-{style="text-align: center; padding-top: 5em; padding-bottom: 5em;"}
+{style="text-align: center; padding-top: 4em; padding-bottom: 5em;"}
 
 <br/>
 
@@ -72,7 +72,7 @@ Coordenador TCC/PFE: Prof. Dr. Luciano Pereira Soares
 **Giancarlo Vanoni Ruggiero**  
 **Luciano Felix Dias**  
 **Tiago Vitorino Seixas**
-{style="text-align: center; padding-top: 5em; padding-bottom: 5em;"}
+{style="text-align: center; padding-top: 4em; padding-bottom: 5em;"}
 
 <br/>
 
@@ -96,6 +96,36 @@ General Coordinator TCC/PFE: Dr. Luciano Pereira Soares
 **São Paulo - SP**  
 **Março 2024**
 {style="text-align: center;"}
+
+--- {class="break-page"}
+
+**Giancarlo Vanoni Ruggiero**  
+**Luciano Felix Dias**  
+**Tiago Vitorino Seixas**
+{style="text-align: center; padding-top: 4em; padding-bottom: 1em;"}
+
+<br/>
+
+# Relatório Versão Intermediária do Projeto Final de Engenharia  {style="text-align: center;"}
+
+<br/>
+
+Projeto Final de Engenharia apresentado ao programa Graduação em Engenharia (Computação/Mecânica/Mecatrônica) como requisito parcial para a obtenção do título de Bacharel em Engenharia. <br/><br/>
+**Orientador:** Rafael Corsi Ferrão
+{style="margin-left: 50%; padding-bottom: 1em;"}
+
+<br/>
+
+**Banca Examinadora** {style="text-align: center;"}
+*** 
+Rafael Corsi Ferrão <br/><br/>
+Insper {style="text-align: center;"}
+*** 
+Paulo Carlos Ferreira dos Santos <br/><br/>
+Insper {style="text-align: center;"}
+*** 
+Rodrigo de Marca França <br/><br/>
+IMT {style="text-align: center;"}
 
 ## Sumário {style="text-align: center;"}
 
