@@ -24,7 +24,7 @@ class Program:
 
         return self._get_program_binaries(dump)
 
-    async def attach_device(self, trace: lib.Waveform, address: T.Type[lib.Device.Output_pin], data: T.Type[lib.Device.Input_pin]):
+    async def attach_device(self, trace: lib.Waveform, address: T.Type[lib.Entity.Output_pin], data: T.Type[lib.Entity.Input_pin]):
         mem_map = self.get_memory_map()
         index = 0
 

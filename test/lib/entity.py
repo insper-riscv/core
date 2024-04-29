@@ -14,12 +14,12 @@ from lib.waveform import Waveform
 
 
 _TESTCASE_TYPE = T.Union[
-    T.Callable[["Device", "Waveform"], None], T.Sequence[T.Callable[["Device", "Waveform"], None]]
+    T.Callable[["Entity", "Waveform"], None], T.Sequence[T.Callable[["Entity", "Waveform"], None]]
 ]
 
 runner = cocotb.runner.get_runner("ghdl")
 
-class Device(T.Type[cocotb.handle.HierarchyObject]):
+class Entity(T.Type[cocotb.handle.HierarchyObject]):
     _package: T.Union[T.Type[Package], None] = None
 
     class Input_pin(T.Type[cocotb.handle.ModifiableObject]):
@@ -41,7 +41,7 @@ class Device(T.Type[cocotb.handle.HierarchyObject]):
     @classmethod
     def testcase(cls, fn):
         @cocotb.test()
-        async def _testcase_wrapper(dut: "Device"):
+        async def _testcase_wrapper(dut: "Entity"):
             signals = [
                 getattr(dut, key)
                 for key in dir(dut)
@@ -58,7 +58,8 @@ class Device(T.Type[cocotb.handle.HierarchyObject]):
             with tracer as trace:
                 pased = all([result async for result in fn(dut, trace)])
 
-                trace.write(f"../sim_build/{fn.__name__.lower()}.svg")
+                if trace.enabled:
+                    trace.write(f"../sim_build/{fn.__name__.lower()}.svg")
 
                 if not pased:
                     message = "\n".join(check.check_log.get_failures())
@@ -79,7 +80,7 @@ class Device(T.Type[cocotb.handle.HierarchyObject]):
 
             value = getattr(cls, key)
 
-            if value == Device.Input_pin:
+            if value == Entity.Input_pin:
                 children.add(key)
 
         return children
@@ -94,14 +95,14 @@ class Device(T.Type[cocotb.handle.HierarchyObject]):
 
             value = getattr(cls, key)
 
-            if value == Device.Output_pin:
+            if value == Entity.Output_pin:
                 children.add(key)
 
         return children
 
     @classmethod
     def _get_children(cls):
-        children: T.Set[T.Type[Device]] = set()
+        children: T.Set[T.Type[Entity]] = set()
 
         for key in dir(cls):
             if key.startswith("_"):
@@ -112,7 +113,7 @@ class Device(T.Type[cocotb.handle.HierarchyObject]):
             if not isclass(value):
                 continue
 
-            if issubclass(value, Device):
+            if issubclass(value, Entity):
                 children.add(value)
 
         return children
@@ -212,7 +213,7 @@ class Device(T.Type[cocotb.handle.HierarchyObject]):
                 hdl_toplevel=cls.__name__.lower(),
                 test_args=["--std=08"],
                 test_module="test_" + cls.__name__,
-                testcase=Device._get_testcase_names(testcase),
+                testcase=Entity._get_testcase_names(testcase),
                 parameters=parameters,
                 hdl_toplevel_lang="vhdl",
             )

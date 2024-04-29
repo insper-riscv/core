@@ -1,19 +1,21 @@
-import typing as T
 import json
+import typing as T
 
+import wavedrom
 import cocotb.clock
 import cocotb.triggers
 import cocotb.wavedrom
-import wavedrom
 import pytest_check as check
 
 from lib.clockless_trace import Clockless_Trace
 
 
 class Waveform:
-    def __init__(self, *args: T.Any, clock: T.Any, model: T.Optional["Device"] = None):
+    def __init__(self, *args: T.Any, clock: T.Any, model: T.Optional["Entity"] = None):
         self.clock = clock
         self.model = model
+        self.scale = 1
+        self.enabled = True
 
         if clock is not None:
             self._trace = cocotb.wavedrom.trace(*args, clk=clock)
@@ -29,11 +31,18 @@ class Waveform:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         return self._trace.__exit__(exc_type, exc_val, exc_tb)
+    
+    def set_scale(self, scale: T.Union[int, float]):
+        self.scale = scale
 
-    def disble(self):
+    def disable(self):
+        self.enabled = False
+
         self._trace.disable()
 
     def enable(self):
+        self.enabled = True
+
         self._trace.enable()
 
     async def cycle(self, count: int = 1):
@@ -73,6 +82,7 @@ class Waveform:
     def write(self, filename: str):
         source = self._trace.dumpj()
 
+
         if self.model is not None:
             data = json.loads(source)
             inputs = self.model._get_input_pins()
@@ -83,6 +93,20 @@ class Waveform:
             data["signal"].insert(1, ["OUT"])
 
             for signal in data["signal"][2:]:
+                if signal["name"] == "clock":
+                    signal["wave"] = "P" + signal["wave"][1:]
+                    signal["phase"] = self.scale * -0.5
+
+                if "data" in signal:
+                    if type(signal["data"]) == str:
+                        try:
+                            signal["data"] = " ".join(
+                                "x" + hex(value)[2:].upper()
+                                for value in map(int, signal["data"].split(" "))
+                            )
+                        except Exception:
+                            pass
+
                 if signal["name"] in inputs:
                     data["signal"][0].append(data["signal"].pop(index))
                 elif signal["name"] in outputs:
@@ -92,6 +116,15 @@ class Waveform:
 
             if len(data["signal"]) > 2:
                 data["signal"].insert(2, {})
+
+            data.update({
+                "config": {
+                    "hscale": self.scale,
+                },
+                "head": {
+                    "tock": 1,
+                },
+            })
 
             source = json.dumps(data)
 
@@ -103,4 +136,4 @@ class Waveform:
         raise ValueError("Invalid Wavedrom source!")
 
 
-from lib.device import *
+from lib.entity import *
