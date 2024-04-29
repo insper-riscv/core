@@ -1,4 +1,4 @@
-name: VHD stress testing routine
+name: VHD Coverage tests
 'on':
   workflow_dispatch: {}
 
@@ -84,4 +84,4 @@ jobs:
       run: pytest -k ${{ matrix.component }} -m synthesis
     - name: Run Test Cases
       if: ${{ contains(matrix.enabled, true) }}
-      run: pytest -k ${{ matrix.component }} -m stress
+      run: pytest -k ${{ matrix.component }} -m coverage

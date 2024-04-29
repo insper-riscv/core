@@ -12,5 +12,8 @@
         "*S.vhd": "${capture}_*.vhd",
         "*_package.py": "${capture}_*.py",
         "*S_package.py": "${capture}_*.py"
-      }
+    },
+    "python.analysis.extraPaths": [
+        "./test/lib/"
+    ]
 }
