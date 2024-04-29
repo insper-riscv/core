@@ -25,7 +25,7 @@ outline: 2
 Largura dos vetores de entrada e saída de dados.
 
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `8`
 
 ### `DEFAULT_SOURCE_2` <Badge type="neutral" text="GENERIC" />
 

@@ -90,6 +90,9 @@ export default {
                                 text: 'Somador',
                                 link: '/reference/components/generic_adder',
                             }, {
+                                text: 'Comparador',
+                                link: '/reference/components/generic_comparator',
+                            }, {
                                 text: 'Multiplexador 2x1',
                                 link: '/reference/components/generic_mux_2x1',
                             }, {
@@ -99,11 +102,11 @@ export default {
                                 text: 'RAM',
                                 link: '/reference/components/generic_ram',
                             }, {
-                                text: 'ROM',
-                                link: '/reference/components/generic_rom',
-                            }, {
                                 text: 'Registrador',
                                 link: '/reference/components/generic_register',
+                            }, {
+                                text: 'ROM',
+                                link: '/reference/components/generic_rom',
                             }, //{
                             //    text: 'Extensor de sinal',
                             //    link: '/reference/components/generic_signal_extender',

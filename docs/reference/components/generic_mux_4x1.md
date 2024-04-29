@@ -25,7 +25,7 @@ outline: 2
 Largura dos vetores de entrada e saída de dados.
 
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `8`
 
 ## Interface de portas
 
