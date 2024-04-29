@@ -7,21 +7,21 @@ from test_GENERIC_MUX_4X1 import GENERIC_MUX_4X1
 from test_RV32I_ALU import RV32I_ALU
 
 
-class MODULE_EXECUTION_UNIT(lib.Device):
+class MODULE_EXECUTION_UNIT(lib.Entity):
     _package = MODULES
 
-    select_forward_1 = lib.Device.Input_pin
-    select_forward_2 = lib.Device.Input_pin
-    select_source_1 = lib.Device.Input_pin
-    select_source_2 = lib.Device.Input_pin
-    select_function = lib.Device.Input_pin
-    address_program = lib.Device.Input_pin
-    source_mem = lib.Device.Input_pin
-    source_wb  = lib.Device.Input_pin
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    immediate = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    select_forward_1 = lib.Entity.Input_pin
+    select_forward_2 = lib.Entity.Input_pin
+    select_source_1 = lib.Entity.Input_pin
+    select_source_2 = lib.Entity.Input_pin
+    select_function = lib.Entity.Input_pin
+    address_program = lib.Entity.Input_pin
+    source_mem = lib.Entity.Input_pin
+    source_wb  = lib.Entity.Input_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    immediate = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     mux_forward_source_1 = GENERIC_MUX_4X1
     mux_forward_source_2 = GENERIC_MUX_4X1
@@ -61,6 +61,7 @@ async def tb_MODULE_EXECUTION_UNIT_case_1(dut: "MODULE_EXECUTION_UNIT", trace: l
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000100")
+    await trace.cycle()
 
 
 @pytest.mark.synthesis

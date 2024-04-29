@@ -7,13 +7,13 @@ from test_RV32I_ALU_BIT import RV32I_ALU_BIT
 from test_RV32I_ALU_SHIFTER import RV32I_ALU_SHIFTER
 
 
-class RV32I_ALU(lib.Device):
+class RV32I_ALU(lib.Entity):
     _package = RV32I
 
-    select_function = lib.Device.Input_pin
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    select_function = lib.Entity.Input_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     bit_to_bit = RV32I_ALU_BIT
     generic_shifter = RV32I_ALU_SHIFTER
@@ -25,6 +25,7 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("11111111111111111111111111111111")
 
+    trace.set_scale(2)
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000000", "At 0")
 

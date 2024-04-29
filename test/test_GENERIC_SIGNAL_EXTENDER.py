@@ -4,12 +4,12 @@ import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_SIGNAL_EXTENDER(lib.Device):
+class GENERIC_SIGNAL_EXTENDER(lib.Entity):
     _package = GENERICS
 
-    source = lib.Device.Input_pin
-    enable_unsigned = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    source = lib.Entity.Input_pin
+    enable_unsigned = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @pytest.mark.synthesis

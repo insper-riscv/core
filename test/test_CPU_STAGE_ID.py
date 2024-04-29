@@ -8,17 +8,17 @@ from test_MODULE_BRANCH_COMPARE_UNIT import MODULE_BRANCH_COMPARE_UNIT
 from test_MODULE_BRANCH_UNIT import MODULE_BRANCH_UNIT
 
 
-class CPU_STAGE_ID(lib.Device):
+class CPU_STAGE_ID(lib.Entity):
     _package = CPU
 
-    control = lib.Device.Input_pin
-    source = lib.Device.Input_pin
-    select_destination = lib.Device.Input_pin
-    data_destination = lib.Device.Input_pin
-    address_jump = lib.Device.Output_pin
-    control_if = lib.Device.Output_pin
-    signals_ex = lib.Device.Output_pin
-    branch = lib.Device.Output_pin
+    control = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    select_destination = lib.Entity.Input_pin
+    data_destination = lib.Entity.Input_pin
+    address_jump = lib.Entity.Output_pin
+    control_if = lib.Entity.Output_pin
+    signals_ex = lib.Entity.Output_pin
+    branch = lib.Entity.Output_pin
 
     module_control_unit = MODULE_CONTROL_UNIT
     module_register_file = MODULE_REGISTER_FILE

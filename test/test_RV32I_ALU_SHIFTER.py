@@ -4,11 +4,11 @@ from cocotb.binary import BinaryValue
 import lib
 
 
-class RV32I_ALU_SHIFTER(lib.Device):
-    source = lib.Device.Input_pin
-    shamt = lib.Device.Input_pin
-    select_function = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+class RV32I_ALU_SHIFTER(lib.Entity):
+    source = lib.Entity.Input_pin
+    shamt = lib.Entity.Input_pin
+    select_function = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @RV32I_ALU_SHIFTER.testcase

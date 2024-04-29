@@ -7,13 +7,13 @@ from test_RV32I_BRANCH_CONTROLLER import RV32I_BRANCH_CONTROLLER
 from test_GENERIC_COMPARATOR import GENERIC_COMPARATOR
 
 
-class MODULE_BRANCH_COMPARE_UNIT(lib.Device):
+class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
     _package = MODULES
 
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    select_function = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    select_function = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     compare = RV32I_BRANCH_CONTROLLER
     comparator = GENERIC_COMPARATOR

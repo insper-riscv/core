@@ -6,14 +6,14 @@ from lib.utils import to_binstr as b
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_COMPARATOR(lib.Device):
+class GENERIC_COMPARATOR(lib.Entity):
     _package = GENERICS
 
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    flag_less = lib.Device.Output_pin
-    flag_greather = lib.Device.Output_pin
-    flag_equal = lib.Device.Output_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    flag_less = lib.Entity.Output_pin
+    flag_greather = lib.Entity.Output_pin
+    flag_equal = lib.Entity.Output_pin
 
 
 @GENERIC_COMPARATOR.testcase

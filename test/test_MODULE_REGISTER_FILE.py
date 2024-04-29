@@ -6,17 +6,17 @@ from test_MODULES_package import MODULES
 from test_RV32I_REGISTER_FILE import RV32I_REGISTER_FILE
 
 
-class MODULE_REGISTER_FILE(lib.Device):
+class MODULE_REGISTER_FILE(lib.Entity):
     _package = MODULES
 
-    clock = lib.Device.Input_pin
-    enable = lib.Device.Input_pin
-    select_destination = lib.Device.Input_pin
-    select_source_1 = lib.Device.Input_pin
-    select_source_2 = lib.Device.Input_pin
-    data_destination = lib.Device.Input_pin
-    data_source_1 = lib.Device.Output_pin
-    data_source_2 = lib.Device.Output_pin
+    clock = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    select_destination = lib.Entity.Input_pin
+    select_source_1 = lib.Entity.Input_pin
+    select_source_2 = lib.Entity.Input_pin
+    data_destination = lib.Entity.Input_pin
+    data_source_1 = lib.Entity.Output_pin
+    data_source_2 = lib.Entity.Output_pin
 
     register_file = RV32I_REGISTER_FILE
 

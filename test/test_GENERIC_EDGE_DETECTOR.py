@@ -6,12 +6,12 @@ import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_EDGE_DETECTOR(lib.Device):
+class GENERIC_EDGE_DETECTOR(lib.Entity):
     _package = GENERICS
 
-    clock = lib.Device.Input_pin
-    source = lib.Device.Input_pin
-    pulse = lib.Device.Output_pin
+    clock = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    pulse = lib.Entity.Output_pin
 
 
 @GENERIC_EDGE_DETECTOR.testcase

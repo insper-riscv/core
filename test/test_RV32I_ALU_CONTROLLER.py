@@ -5,13 +5,13 @@ import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_ALU_CONTROLLER(lib.Device):
+class RV32I_ALU_CONTROLLER(lib.Entity):
     _package = RV32I
 
-    opcode = lib.Device.Input_pin
-    funct3 = lib.Device.Input_pin
-    funct7 = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    opcode = lib.Entity.Input_pin
+    funct3 = lib.Entity.Input_pin
+    funct7 = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @RV32I_ALU_CONTROLLER.testcase

@@ -5,15 +5,15 @@ import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_ALU_BIT(lib.Device):
+class RV32I_ALU_BIT(lib.Entity):
     _package = RV32I
 
-    select_function = lib.Device.Input_pin
-    carry_in = lib.Device.Input_pin
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
-    carry_out = lib.Device.Output_pin
+    select_function = lib.Entity.Input_pin
+    carry_in = lib.Entity.Input_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
+    carry_out = lib.Entity.Output_pin
 
 
 @RV32I_ALU_BIT.testcase

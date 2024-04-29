@@ -6,13 +6,13 @@ from test_MODULES_package import MODULES
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
-class MODULE_WRITE_BACK(lib.Device):
+class MODULE_WRITE_BACK(lib.Entity):
     _package = MODULES
 
-    selector = lib.Device.Input_pin
-    source_memory = lib.Device.Input_pin
-    source_execution = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    selector = lib.Entity.Input_pin
+    source_memory = lib.Entity.Input_pin
+    source_execution = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     MUX_SOURCE = GENERIC_MUX_2X1
 

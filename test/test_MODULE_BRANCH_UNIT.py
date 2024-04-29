@@ -4,7 +4,7 @@ import lib
 from test_MODULES_package import MODULES
 
 
-class MODULE_BRANCH_UNIT(lib.Device):
+class MODULE_BRANCH_UNIT(lib.Entity):
     _package = MODULES
 
 

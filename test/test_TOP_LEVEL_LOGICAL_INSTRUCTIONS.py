@@ -12,10 +12,10 @@ from test_GENERIC_RAM import GENERIC_RAM
 from test_CPU_TOP_LEVEL import CPU_TOP_LEVEL
 
 
-class TOP_LEVEL(lib.Device):
-    clock = lib.Device.Input_pin
-    sw = lib.Device.Input_pin
-    led = lib.Device.Output_pin
+class TOP_LEVEL(lib.Entity):
+    clock = lib.Entity.Input_pin
+    sw = lib.Entity.Input_pin
+    led = lib.Entity.Output_pin
 
     rom = GENERIC_ROM
     ram = GENERIC_RAM

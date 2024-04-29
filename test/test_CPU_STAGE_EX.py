@@ -7,17 +7,17 @@ from test_MODULE_EXECUTION_UNIT_CONTROLLER import MODULE_EXECUTION_UNIT_CONTROLL
 from test_CPU_EXECUTION_FOWARDING_UNIT import CPU_EXECUTION_FOWARDING_UNIT
 
 
-class CPU_STAGE_EX(lib.Device):
+class CPU_STAGE_EX(lib.Entity):
     _package = CPU
 
-    source = lib.Device.Input_pin
-    selector_forwarding_mem = lib.Device.Input_pin
-    enable_mem = lib.Device.Input_pin
-    selector_forwarding_wb = lib.Device.Input_pin
-    enable_wb = lib.Device.Input_pin
-    forwarding_mem_source = lib.Device.Input_pin
-    forwarding_wb_source = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    source = lib.Entity.Input_pin
+    selector_forwarding_mem = lib.Entity.Input_pin
+    enable_mem = lib.Entity.Input_pin
+    selector_forwarding_wb = lib.Entity.Input_pin
+    enable_wb = lib.Entity.Input_pin
+    forwarding_mem_source = lib.Entity.Input_pin
+    forwarding_wb_source = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     module_execution_unit_controller = MODULE_EXECUTION_UNIT_CONTROLLER
     module_execution_unit = MODULE_EXECUTION_UNIT

@@ -6,16 +6,16 @@ import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_RAM(lib.Device):
+class GENERIC_RAM(lib.Entity):
     _package = GENERICS
 
-    clock = lib.Device.Input_pin
-    enable = lib.Device.Input_pin
-    enable_read = lib.Device.Input_pin
-    enable_write = lib.Device.Input_pin  
-    address = lib.Device.Input_pin
-    source = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    clock = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    enable_read = lib.Entity.Input_pin
+    enable_write = lib.Entity.Input_pin  
+    address = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @GENERIC_RAM.testcase

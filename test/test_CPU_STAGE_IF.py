@@ -5,14 +5,14 @@ from test_CPU_package import CPU
 from test_MODULE_PROGRAM_COUNTER import MODULE_PROGRAM_COUNTER
 
 
-class CPU_STAGE_IF(lib.Device):
+class CPU_STAGE_IF(lib.Entity):
     _package = CPU
 
-    control = lib.Device.Input_pin
-    source = lib.Device.Input_pin
-    address_jump = lib.Device.Input_pin
-    branch = lib.Device.Input_pin
-    address_program = lib.Device.Output_pin
+    control = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    address_jump = lib.Entity.Input_pin
+    branch = lib.Entity.Input_pin
+    address_program = lib.Entity.Output_pin
 
     module_program_counter = MODULE_PROGRAM_COUNTER
 

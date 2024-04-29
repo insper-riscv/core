@@ -8,12 +8,12 @@ from lib.utils import to_binstr as b
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_ADDER(lib.Device):
+class GENERIC_ADDER(lib.Entity):
     _package = GENERICS
 
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @GENERIC_ADDER.testcase

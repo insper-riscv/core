@@ -6,13 +6,13 @@ from test_MODULES_package import MODULES
 from test_RV32I_ALU_CONTROLLER import RV32I_ALU_CONTROLLER
 
 
-class MODULE_EXECUTION_UNIT_CONTROLLER(lib.Device):
+class MODULE_EXECUTION_UNIT_CONTROLLER(lib.Entity):
     _package = MODULES
 
-    opcode = lib.Device.Input_pin
-    funct_3 = lib.Device.Input_pin
-    funct_7 = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    opcode = lib.Entity.Input_pin
+    funct_3 = lib.Entity.Input_pin
+    funct_7 = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     alu_controller = RV32I_ALU_CONTROLLER
 
@@ -24,21 +24,21 @@ async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT
     dut.funct_7.value = BinaryValue("0000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000")
+    yield trace.check(dut.destination, "0111")
 
     dut.opcode.value = BinaryValue("01100")
     dut.funct_3.value = BinaryValue("000")
     dut.funct_7.value = BinaryValue("0000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00011")
+    yield trace.check(dut.destination, "0000")
 
     dut.opcode.value = BinaryValue("01100")
     dut.funct_3.value = BinaryValue("000")
     dut.funct_7.value = BinaryValue("0100000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "01011")
+    yield trace.check(dut.destination, "1000")
 
 
 @pytest.mark.synthesis

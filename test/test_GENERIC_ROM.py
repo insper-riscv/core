@@ -5,11 +5,11 @@ import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_ROM(lib.Device):
+class GENERIC_ROM(lib.Entity):
     _package = GENERICS
 
-    address = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    address = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @GENERIC_ROM.testcase

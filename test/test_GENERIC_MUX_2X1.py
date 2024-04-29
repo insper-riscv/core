@@ -5,13 +5,13 @@ import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_MUX_2X1(lib.Device):
+class GENERIC_MUX_2X1(lib.Entity):
     _package = GENERICS
 
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    selector = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    selector = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
 
 @GENERIC_MUX_2X1.testcase

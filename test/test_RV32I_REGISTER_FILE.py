@@ -6,17 +6,17 @@ import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_REGISTER_FILE(lib.Device):
+class RV32I_REGISTER_FILE(lib.Entity):
     _package = RV32I
 
-    clock = lib.Device.Input_pin
-    enable = lib.Device.Input_pin
-    address_destination = lib.Device.Input_pin
-    address_source_1 = lib.Device.Input_pin
-    address_source_2 = lib.Device.Input_pin
-    data_destination = lib.Device.Input_pin
-    data_source_1 = lib.Device.Output_pin
-    data_source_2 = lib.Device.Output_pin
+    clock = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    address_destination = lib.Entity.Input_pin
+    address_source_1 = lib.Entity.Input_pin
+    address_source_2 = lib.Entity.Input_pin
+    data_destination = lib.Entity.Input_pin
+    data_source_1 = lib.Entity.Output_pin
+    data_source_2 = lib.Entity.Output_pin
 
 @RV32I_REGISTER_FILE.testcase
 async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Waveform):

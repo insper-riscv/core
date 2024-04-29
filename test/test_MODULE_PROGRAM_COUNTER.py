@@ -8,14 +8,14 @@ from test_GENERIC_REGISTER import GENERIC_REGISTER
 from test_GENERIC_ADDER import GENERIC_ADDER
 
 
-class MODULE_PROGRAM_COUNTER(lib.Device):
+class MODULE_PROGRAM_COUNTER(lib.Entity):
     _package = MODULES
 
-    clock = lib.Device.Input_pin
-    selector = lib.Device.Input_pin
-    source = lib.Device.Input_pin
-    enable = lib.Device.Input_pin
-    destination = lib.Device.Output_pin
+    clock = lib.Entity.Input_pin
+    selector = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     mux_source = GENERIC_MUX_2X1
     count_register = GENERIC_REGISTER

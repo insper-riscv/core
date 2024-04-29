@@ -4,20 +4,20 @@ import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_BRANCH_CONTROLLER(lib.Device):
+class RV32I_BRANCH_CONTROLLER(lib.Entity):
     _package = RV32I
 
-    select_function = lib.Device.Input_pin
-    source_1 = lib.Device.Input_pin
-    source_2 = lib.Device.Input_pin
-    destination = lib.Device.Output_pin    
+    select_function = lib.Entity.Input_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin    
 
 
 
 @pytest.mark.synthesis
 def test_RV32I_BRANCH_CONTROLLER_synthesis():
     RV32I_BRANCH_CONTROLLER.build_vhd()
-    # RV32I_BRANCH_CONTROLLER.build_netlistsvg()
+    RV32I_BRANCH_CONTROLLER.build_netlistsvg()
 
 
 if __name__ == "__main__":

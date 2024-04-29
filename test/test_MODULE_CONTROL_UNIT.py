@@ -7,11 +7,11 @@ from test_GENERIC_ADDER import GENERIC_ADDER
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
-class MODULE_CONTROL_UNIT(lib.Device):
+class MODULE_CONTROL_UNIT(lib.Entity):
     _package = MODULES
 
-    instruction = lib.Device.Input_pin
-    immediate = lib.Device.Output_pin
+    instruction = lib.Entity.Input_pin
+    immediate = lib.Entity.Output_pin
 
 
 @MODULE_CONTROL_UNIT.testcase
