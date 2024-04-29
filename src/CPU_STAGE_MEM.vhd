@@ -54,18 +54,17 @@ begin
     destination.data_destination   <= source_0.address_pointer;
     destination.select_destination <= source_0.select_destination;
 
-    CPU_STORE_EXTENDER : entity WORK.CPU_STORE_EXTENDER
+    MEM_INTERFACE: entity WORK.MODULE_MEMORY_INTERFACE(RV32I)
+        generic map (
+            FUNCTION_WIDTH => WORK.RV32I.FUNCT3_WIDTH,
+            DATA_WIDTH     => WORK.RV32I.XLEN
+        )
         port map (
-            source      => source_0.data_source_2,
-            selector    => source_0.funct_3,
-            destination => data_memory_out
-        );
-
-    CPU_LOAD_EXTENDER : entity WORK.CPU_LOAD_EXTENDER
-        port map (
-            source      => data_memory_in,
-            selector    => source_0.funct_3,
-            destination => destination.data_memory
+            select_function      => source_0.funct_3,
+            source_data_in       => data_memory_in,
+            source_data_out      => source_0.data_source_2,
+            destination_data_in  => destination.data_memory,
+            destination_data_out => data_memory_out
         );
 
 end architecture;

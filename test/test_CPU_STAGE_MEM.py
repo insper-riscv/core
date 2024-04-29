@@ -2,22 +2,20 @@ import pytest
 
 import lib
 from test_CPU_package import CPU
-from test_CPU_STORE_EXTENDER import CPU_STORE_EXTENDER
-from test_CPU_LOAD_EXTENDER import CPU_LOAD_EXTENDER
+from test_MODULE_MEMORY_INTERFACE import MODULE_MEMORY_INTERFACE
 
 
-class CPU_STAGE_MEM(lib.Device):
+class CPU_STAGE_MEM(lib.Entity):
     _package = CPU
 
-    clock = lib.Device.Input_pin
-    source = lib.Device.Input_pin
-    control_memory = lib.Device.Output_pin
-    address_memory = lib.Device.Output_pin
-    data_memory = lib.Device.Output_pin
-    destination = lib.Device.Output_pin
+    clock = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    control_memory = lib.Entity.Output_pin
+    address_memory = lib.Entity.Output_pin
+    data_memory = lib.Entity.Output_pin
+    destination = lib.Entity.Output_pin
 
-    cpu_store_extender = CPU_STORE_EXTENDER
-    cpu_load_extender = CPU_LOAD_EXTENDER
+    MEM_INTERFACE = MODULE_MEMORY_INTERFACE
 
 
 @pytest.mark.synthesis
