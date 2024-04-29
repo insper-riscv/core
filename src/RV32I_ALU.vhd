@@ -61,7 +61,7 @@ begin
 
     EXTENDED_SIGN_BIT : entity WORK.RV32I_ALU_BIT
         port map (
-            select_function => "0000",
+            select_function => select_function,
             carry_in        => carry(DATA_WIDTH),
             source_1        => '0',
             source_2        => '0',
