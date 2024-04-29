@@ -1,13 +1,10 @@
-import os
-import subprocess
-
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 
 
-class MODULES(utils.VHD_Package):
+class MODULES(lib.Package):
     children = [
         CPU
     ]
@@ -19,4 +16,4 @@ def test_MODULES_package_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

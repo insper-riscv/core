@@ -1,8 +1,6 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_GENERIC_ROM import GENERIC_ROM
 from test_GENERIC_RAM import GENERIC_RAM
 from test_CPU_TOP_LEVEL import CPU_TOP_LEVEL
@@ -21,11 +19,10 @@ from test_TOP_LEVEL_SHIFT_INSTRUCTIONS import tb_TOP_LEVEL_SRL, tb_TOP_LEVEL_SRL
 from test_TOP_LEVEL_STORE_INSTRUCTIONS import tb_TOP_LEVEL_SB, tb_TOP_LEVEL_SH, tb_TOP_LEVEL_SW
 
 
-
-class TOP_LEVEL(utils.DUT):
-    clock = utils.DUT.Input_pin
-    sw = utils.DUT.Input_pin
-    led = utils.DUT.Output_pin
+class TOP_LEVEL(lib.Device):
+    clock = lib.Device.Input_pin
+    sw = lib.Device.Input_pin
+    led = lib.Device.Output_pin
 
     rom = GENERIC_ROM
     ram = GENERIC_RAM
@@ -39,4 +36,4 @@ def test_TOP_LEVEL_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

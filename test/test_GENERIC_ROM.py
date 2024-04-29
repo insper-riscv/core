@@ -1,21 +1,19 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_ROM(utils.DUT):
+class GENERIC_ROM(lib.Device):
     _package = GENERICS
 
-    address = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    address = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
 
 @GENERIC_ROM.testcase
-async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: utils.Trace):
+async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: lib.Waveform):
     dut.address.value = BinaryValue("00000000")
 
     await trace.cycle()
@@ -73,4 +71,4 @@ def test_GENERIC_ROM_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

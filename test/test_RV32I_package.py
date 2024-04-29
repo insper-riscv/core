@@ -1,13 +1,10 @@
-import os
-import subprocess
-
 import pytest
 
-import utils
+import lib
 from test_GENERICS_package import GENERICS
 
 
-class RV32I(utils.VHD_Package):
+class RV32I(lib.Package):
     children = [
         GENERICS
     ]
@@ -19,4 +16,4 @@ def test_RV32I_package_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

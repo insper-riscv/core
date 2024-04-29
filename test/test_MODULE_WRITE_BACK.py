@@ -1,26 +1,24 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
-class MODULE_WRITE_BACK(utils.DUT):
+class MODULE_WRITE_BACK(lib.Device):
     _package = MODULES
 
-    selector = utils.DUT.Input_pin
-    source_memory = utils.DUT.Input_pin
-    source_execution = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    selector = lib.Device.Input_pin
+    source_memory = lib.Device.Input_pin
+    source_execution = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
     MUX_SOURCE = GENERIC_MUX_2X1
 
 
 @MODULE_WRITE_BACK.testcase
-async def tb_MODULE_WRITE_BACK_case_1(dut: MODULE_WRITE_BACK, trace: utils.Trace):
+async def tb_MODULE_WRITE_BACK_case_1(dut: MODULE_WRITE_BACK, trace: lib.Waveform):
     dut.selector.value = BinaryValue("0")
     dut.source_memory.value = BinaryValue("00001111000011110000111100001111")
     dut.source_execution.value = BinaryValue("11110000111100001111000011110000")
@@ -62,4 +60,4 @@ def test_MODULE_WRITE_BACK_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

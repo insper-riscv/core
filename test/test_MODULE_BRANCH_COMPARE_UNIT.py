@@ -1,27 +1,26 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 from test_RV32I_BRANCH_CONTROLLER import RV32I_BRANCH_CONTROLLER
 from test_GENERIC_COMPARATOR import GENERIC_COMPARATOR
 
-class MODULE_BRANCH_COMPARE_UNIT(utils.DUT):
+
+class MODULE_BRANCH_COMPARE_UNIT(lib.Device):
     _package = MODULES
 
-    source_1 = utils.DUT.Input_pin
-    source_2 = utils.DUT.Input_pin
-    select_function = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    source_1 = lib.Device.Input_pin
+    source_2 = lib.Device.Input_pin
+    select_function = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
     compare = RV32I_BRANCH_CONTROLLER
     comparator = GENERIC_COMPARATOR
 
 
 @MODULE_BRANCH_COMPARE_UNIT.testcase
-async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, trace: utils.Trace):
+async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, trace: lib.Waveform):
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0000")
@@ -109,4 +108,4 @@ def test_MODULE_BRANCH_COMPARE_UNIT_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

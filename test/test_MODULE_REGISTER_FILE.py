@@ -1,31 +1,27 @@
-import os
-
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 from test_RV32I_REGISTER_FILE import RV32I_REGISTER_FILE
 
 
-class MODULE_REGISTER_FILE(utils.DUT):
+class MODULE_REGISTER_FILE(lib.Device):
     _package = MODULES
 
-    clock = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    select_destination = utils.DUT.Input_pin
-    select_source_1 = utils.DUT.Input_pin
-    select_source_2 = utils.DUT.Input_pin
-    data_destination = utils.DUT.Input_pin
-    data_source_1 = utils.DUT.Output_pin
-    data_source_2 = utils.DUT.Output_pin
+    clock = lib.Device.Input_pin
+    enable = lib.Device.Input_pin
+    select_destination = lib.Device.Input_pin
+    select_source_1 = lib.Device.Input_pin
+    select_source_2 = lib.Device.Input_pin
+    data_destination = lib.Device.Input_pin
+    data_source_1 = lib.Device.Output_pin
+    data_source_2 = lib.Device.Output_pin
 
     register_file = RV32I_REGISTER_FILE
 
 @MODULE_REGISTER_FILE.testcase
-async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils.Trace):
+async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: lib.Waveform):
     values_select_destination = [
         "00001",
         "00011",
@@ -80,9 +76,7 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
         values_data_destination[4],
         "00000000000000000000000000000000",
     ]
-    clock = Clock(dut.clock, 20000, units="ns")
 
-    cocotb.start_soon(clock.start(start_high=False))
     await trace.cycle()
 
     for index, (
@@ -128,4 +122,4 @@ def test_MODULE_REGISTER_FILE_testcases():
     )
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

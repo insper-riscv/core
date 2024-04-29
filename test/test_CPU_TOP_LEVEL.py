@@ -1,13 +1,9 @@
-import os
-
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
 from utils_interpreter import *
 
-import utils
+import lib
 from test_CPU_package import CPU
 from test_CPU_STAGE_IF import CPU_STAGE_IF
 from test_CPU_STAGE_ID import CPU_STAGE_ID
@@ -29,23 +25,46 @@ from test_CPU_STAGE_WB import CPU_STAGE_WB
 #from test_CPU_TOP_LEVEL_STORE_INSTRUCTIONS import tb_CPU_TOP_LEVEL_SB, tb_CPU_TOP_LEVEL_SH, tb_CPU_TOP_LEVEL_SW
 
 
-class CPU_TOP_LEVEL(utils.DUT):
+class CPU_TOP_LEVEL(lib.Device):
     _package = CPU
 
-    clock = utils.DUT.Input_pin
-    data_program = utils.DUT.Input_pin
-    data_memory_in = utils.DUT.Input_pin
-    data_memory_out = utils.DUT.Output_pin
-    address_program = utils.DUT.Output_pin
-    address_memory = utils.DUT.Output_pin
-    memory_read = utils.DUT.Output_pin
-    memory_write = utils.DUT.Output_pin
+    clock = lib.Device.Input_pin
+    clear = lib.Device.Input_pin
+    enable = lib.Device.Input_pin
+    data_program = lib.Device.Input_pin
+    data_memory_in = lib.Device.Input_pin
+    data_memory_out = lib.Device.Output_pin
+    address_program = lib.Device.Output_pin
+    address_memory = lib.Device.Output_pin
+    memory_read = lib.Device.Output_pin
+    memory_write = lib.Device.Output_pin
 
     instruction_fetch = CPU_STAGE_IF
     instruction_decode = CPU_STAGE_ID
     execute = CPU_STAGE_EX
     memory_access = CPU_STAGE_MEM
     write_back = CPU_STAGE_WB
+
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_case_1(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    address_values = [12, 24, 36]
+    program = lib.Program("../test/data/c/test.c")
+
+    dut.clear.value = BinaryValue("0")
+    dut.enable.value = BinaryValue("1")
+    dut.data_program.value = BinaryValue("00000000000000000000000000000000")
+    dut.data_memory_in.value = BinaryValue("00000000000000000000000000000000")
+    
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        yield True
+
+        assert address_values[index] == address, f"Invalid breakpoint address. At breakpoint {index}."
+        
+        if index > 2:
+            break
 
 @pytest.mark.synthesis
 def test_CPU_TOP_LEVEL_synthesis():
@@ -55,12 +74,11 @@ def test_CPU_TOP_LEVEL_synthesis():
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_testcases():
-    assembly = "./src/RV32I_INSTRUCTIONS/BUILD_INSTRUCTION_LUI.asm"
-    memory = "./src/GENERIC_ROM.vhd"
-    
-
-    assembly = "./src/RV32I_INSTRUCTIONS/BUILD_INSTRUCTION_LUI.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    CPU_TOP_LEVEL.test_with(
+        [
+            tb_CPU_TOP_LEVEL_case_1,
+        ]
+    )
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

@@ -1,25 +1,23 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 from test_MODULE_EXECUTION_UNIT import MODULE_EXECUTION_UNIT
 from test_MODULE_EXECUTION_UNIT_CONTROLLER import MODULE_EXECUTION_UNIT_CONTROLLER
 from test_CPU_EXECUTION_FOWARDING_UNIT import CPU_EXECUTION_FOWARDING_UNIT
 
 
-class CPU_STAGE_EX(utils.DUT):
+class CPU_STAGE_EX(lib.Device):
     _package = CPU
 
-    source = utils.DUT.Input_pin
-    selector_forwarding_mem = utils.DUT.Input_pin
-    enable_mem              = utils.DUT.Input_pin
-    selector_forwarding_wb  = utils.DUT.Input_pin
-    enable_wb               = utils.DUT.Input_pin
-    forwarding_mem_source   = utils.DUT.Input_pin
-    forwarding_wb_source    = utils.DUT.Input_pin
-    destination             = utils.DUT.Output_pin
+    source = lib.Device.Input_pin
+    selector_forwarding_mem = lib.Device.Input_pin
+    enable_mem = lib.Device.Input_pin
+    selector_forwarding_wb = lib.Device.Input_pin
+    enable_wb = lib.Device.Input_pin
+    forwarding_mem_source = lib.Device.Input_pin
+    forwarding_wb_source = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
     module_execution_unit_controller = MODULE_EXECUTION_UNIT_CONTROLLER
     module_execution_unit = MODULE_EXECUTION_UNIT
@@ -33,4 +31,4 @@ def test_CPU_STAGE_EX_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

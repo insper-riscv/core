@@ -1,23 +1,21 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_ALU_CONTROLLER(utils.DUT):
+class RV32I_ALU_CONTROLLER(lib.Device):
     _package = RV32I
 
-    opcode = utils.DUT.Input_pin
-    funct3 = utils.DUT.Input_pin
-    funct7 = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    opcode = lib.Device.Input_pin
+    funct3 = lib.Device.Input_pin
+    funct7 = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
 
 @RV32I_ALU_CONTROLLER.testcase
-async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER", trace: utils.Trace):
+async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER", trace: lib.Waveform):
     dut.opcode.value = BinaryValue("00100")
     dut.funct3.value = BinaryValue("000")
     dut.funct7.value = BinaryValue("0000000")
@@ -143,4 +141,4 @@ def test_RV32I_ALU_CONTROLLER_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

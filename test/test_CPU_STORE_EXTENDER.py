@@ -1,20 +1,18 @@
-import os
-
 import pytest
-from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_CPU_package import CPU
 
 
-class CPU_STORE_EXTENDER(utils.DUT):
+class CPU_STORE_EXTENDER(lib.Device):
     _package = CPU
 
-    source      = utils.DUT.Input_pin
-    selector    = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    source = lib.Device.Input_pin
+    selector = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
-    output_1 = utils.DUT.Output_pin
+    output_1 = lib.Device.Output_pin
+
 
 @pytest.mark.synthesis
 def test_CPU_STORE_EXTENDER_synthesis():
@@ -32,4 +30,4 @@ def test_CPU_STORE_EXTENDER_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

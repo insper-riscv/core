@@ -1,28 +1,25 @@
-import os
-
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_REGISTER_FILE(utils.DUT):
+class RV32I_REGISTER_FILE(lib.Device):
     _package = RV32I
 
-    clock = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    address_destination = utils.DUT.Input_pin
-    address_source_1 = utils.DUT.Input_pin
-    address_source_2 = utils.DUT.Input_pin
-    data_destination = utils.DUT.Input_pin
-    data_source_1 = utils.DUT.Output_pin
-    data_source_2 = utils.DUT.Output_pin
+    clock = lib.Device.Input_pin
+    enable = lib.Device.Input_pin
+    address_destination = lib.Device.Input_pin
+    address_source_1 = lib.Device.Input_pin
+    address_source_2 = lib.Device.Input_pin
+    data_destination = lib.Device.Input_pin
+    data_source_1 = lib.Device.Output_pin
+    data_source_2 = lib.Device.Output_pin
 
 @RV32I_REGISTER_FILE.testcase
-async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.Trace):
+async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Waveform):
     values_address_destination = [
         "00000",
         "00001",
@@ -77,9 +74,6 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.T
         values_data_destination[3],
         values_data_destination[4],
     ]
-    clock = Clock(dut.clock, 2_000_000_000, units="fs")
-
-    await cocotb.start(clock.start(start_high=False))
 
     for index, (
         address_destination,
@@ -125,4 +119,4 @@ def test_RV32I_REGISTER_FILE_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

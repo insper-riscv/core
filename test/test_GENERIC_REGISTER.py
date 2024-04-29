@@ -1,26 +1,22 @@
-import os
-
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_REGISTER(utils.DUT):
+class GENERIC_REGISTER(lib.Device):
     _package = GENERICS
 
-    clock = utils.DUT.Input_pin
-    clear = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    source = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    clock = lib.Device.Input_pin
+    clear = lib.Device.Input_pin
+    enable = lib.Device.Input_pin
+    source = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
 
 @GENERIC_REGISTER.testcase
-async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
+async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: lib.Waveform):
     values_clear = ["0", "0", "1", "0", "0"]
     values_enable = ["1", "0", "0", "1", "1"]
     values_source = [
@@ -37,9 +33,6 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
         "11111111",
         "00000000",
     ]
-    clock = Clock(dut.clock, 20000, units="ns")
-
-    cocotb.start_soon(clock.start(start_high=False))
 
     for index, (clear, enable, source, destination) in enumerate(
         zip(values_clear, values_enable, values_source, values_destination)
@@ -68,4 +61,4 @@ def test_GENERIC_REGISTER_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

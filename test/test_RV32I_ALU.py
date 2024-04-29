@@ -1,28 +1,26 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_RV32I_package import RV32I
 from test_RV32I_ALU_BIT import RV32I_ALU_BIT
 from test_RV32I_ALU_SHIFTER import RV32I_ALU_SHIFTER
 
 
-class RV32I_ALU(utils.DUT):
+class RV32I_ALU(lib.Device):
     _package = RV32I
 
-    select_function = utils.DUT.Input_pin
-    source_1 = utils.DUT.Input_pin
-    source_2 = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    select_function = lib.Device.Input_pin
+    source_1 = lib.Device.Input_pin
+    source_2 = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
     bit_to_bit = RV32I_ALU_BIT
     generic_shifter = RV32I_ALU_SHIFTER
 
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
+async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
     dut.select_function.value = BinaryValue("0111")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("11111111111111111111111111111111")
@@ -103,4 +101,4 @@ def test_RV32I_ALU_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

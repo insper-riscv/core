@@ -1,5 +1,3 @@
-import os
-
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
@@ -8,23 +6,23 @@ from cocotb.clock import Clock
 from utils_interpreter import *
 from utils_GENERIC_ROM import *
 
-import utils
+import lib
 from test_GENERIC_ROM import GENERIC_ROM
 from test_GENERIC_RAM import GENERIC_RAM
 from test_CPU_TOP_LEVEL import CPU_TOP_LEVEL
 
 
-class TOP_LEVEL(utils.DUT):
-    clock = utils.DUT.Input_pin
-    sw = utils.DUT.Input_pin
-    led = utils.DUT.Output_pin
+class TOP_LEVEL(lib.Device):
+    clock = lib.Device.Input_pin
+    sw = lib.Device.Input_pin
+    led = lib.Device.Output_pin
 
     rom = GENERIC_ROM
     ram = GENERIC_RAM
     cpu = CPU_TOP_LEVEL
 
 @TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_BEQ(dut: TOP_LEVEL, trace: utils.Trace):
+async def tb_TOP_LEVEL_BEQ(dut: TOP_LEVEL, trace: lib.Waveform):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -48,35 +46,7 @@ async def tb_TOP_LEVEL_BEQ(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_BNE(dut: TOP_LEVEL, trace: utils.Trace):
-    values_destination = [
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-        "00000000000000000000000000000010",
-        "00000000000000000000000000000001",
-        "00000000000000000000000000000111",
-        "00000000000000000000000000000111",
-        "00000000000000000000000000000111",
-        "00000000000000000000000000000011",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000100",
-        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-    ]
-
-    clock = Clock(dut.clock, 2_000_000_000, units="fs")
-
-    await cocotb.start(clock.start(start_high=False))
-
-    for index, (destination, ) in enumerate(
-        zip(values_destination)
-    ):
-
-        await trace.cycle()
-        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
-
-@TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_BLT(dut: TOP_LEVEL, trace: utils.Trace):
+async def tb_TOP_LEVEL_BNE(dut: TOP_LEVEL, trace: lib.Waveform):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -104,7 +74,7 @@ async def tb_TOP_LEVEL_BLT(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_BLTU(dut: TOP_LEVEL, trace: utils.Trace):
+async def tb_TOP_LEVEL_BLT(dut: TOP_LEVEL, trace: lib.Waveform):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -132,7 +102,7 @@ async def tb_TOP_LEVEL_BLTU(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_BGE(dut: TOP_LEVEL, trace: utils.Trace):
+async def tb_TOP_LEVEL_BLTU(dut: TOP_LEVEL, trace: lib.Waveform):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -160,7 +130,35 @@ async def tb_TOP_LEVEL_BGE(dut: TOP_LEVEL, trace: utils.Trace):
         yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
-async def tb_TOP_LEVEL_BGEU(dut: TOP_LEVEL, trace: utils.Trace):
+async def tb_TOP_LEVEL_BGE(dut: TOP_LEVEL, trace: lib.Waveform):
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000011",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    clock = Clock(dut.clock, 2_000_000_000, units="fs")
+
+    await cocotb.start(clock.start(start_high=False))
+
+    for index, (destination, ) in enumerate(
+        zip(values_destination)
+    ):
+
+        await trace.cycle()
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
+
+@TOP_LEVEL.testcase
+async def tb_TOP_LEVEL_BGEU(dut: TOP_LEVEL, trace: lib.Waveform):
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -248,4 +246,4 @@ def test_TOP_LEVEL_BRANCH_INSTRUCTIONS_testcases():
     create_GENERIC_ROM(memory)
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

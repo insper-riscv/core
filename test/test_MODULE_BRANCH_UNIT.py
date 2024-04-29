@@ -1,12 +1,10 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 
 
-class MODULE_BRANCH_UNIT(utils.DUT):
+class MODULE_BRANCH_UNIT(lib.Device):
     _package = MODULES
 
 
@@ -17,4 +15,4 @@ def test_MODULE_BRANCH_UNIT_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

@@ -1,28 +1,25 @@
-import os
-
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_RAM(utils.DUT):
+class GENERIC_RAM(lib.Device):
     _package = GENERICS
 
-    clock = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    enable_read = utils.DUT.Input_pin
-    enable_write = utils.DUT.Input_pin  
-    address = utils.DUT.Input_pin
-    source = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    clock = lib.Device.Input_pin
+    enable = lib.Device.Input_pin
+    enable_read = lib.Device.Input_pin
+    enable_write = lib.Device.Input_pin  
+    address = lib.Device.Input_pin
+    source = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
 
 @GENERIC_RAM.testcase
-async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
+async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: lib.Waveform):
     values_enable = ["0", "1", "1", "1", "1"]
     values_enable_read = ["1", "0", "1", "0", "1"]
     values_enable_write = ["0", "1", "0", "1", "0"]
@@ -47,9 +44,6 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
         "ZZZZZZZZ",
         "11110000",
     ]
-    clock = Clock(dut.clock, 20000, units="ns")
-
-    cocotb.start_soon(clock.start(start_high=False))
 
     for index, (
         enable,
@@ -94,4 +88,4 @@ def test_GENERIC_RAM_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

@@ -1,29 +1,27 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 from test_GENERIC_MUX_4X1 import GENERIC_MUX_4X1
 from test_RV32I_ALU import RV32I_ALU
 
 
-class MODULE_EXECUTION_UNIT(utils.DUT):
+class MODULE_EXECUTION_UNIT(lib.Device):
     _package = MODULES
 
-    select_forward_1 = utils.DUT.Input_pin
-    select_forward_2 = utils.DUT.Input_pin
-    select_source_1 = utils.DUT.Input_pin
-    select_source_2 = utils.DUT.Input_pin
-    select_function = utils.DUT.Input_pin
-    address_program = utils.DUT.Input_pin
-    source_mem = utils.DUT.Input_pin
-    source_wb  = utils.DUT.Input_pin
-    source_1 = utils.DUT.Input_pin
-    source_2 = utils.DUT.Input_pin
-    immediate = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    select_forward_1 = lib.Device.Input_pin
+    select_forward_2 = lib.Device.Input_pin
+    select_source_1 = lib.Device.Input_pin
+    select_source_2 = lib.Device.Input_pin
+    select_function = lib.Device.Input_pin
+    address_program = lib.Device.Input_pin
+    source_mem = lib.Device.Input_pin
+    source_wb  = lib.Device.Input_pin
+    source_1 = lib.Device.Input_pin
+    source_2 = lib.Device.Input_pin
+    immediate = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
     mux_forward_source_1 = GENERIC_MUX_4X1
     mux_forward_source_2 = GENERIC_MUX_4X1
@@ -33,7 +31,7 @@ class MODULE_EXECUTION_UNIT(utils.DUT):
 
 
 @MODULE_EXECUTION_UNIT.testcase
-async def tb_MODULE_EXECUTION_UNIT_case_1(dut: "MODULE_EXECUTION_UNIT", trace: utils.Trace):
+async def tb_MODULE_EXECUTION_UNIT_case_1(dut: "MODULE_EXECUTION_UNIT", trace: lib.Waveform):
     dut.select_forward_1.value = BinaryValue("00")
     dut.select_forward_2.value = BinaryValue("00")
     dut.select_source_1.value = BinaryValue("10")
@@ -81,4 +79,4 @@ def test_MODULE_EXECUTION_UNIT_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

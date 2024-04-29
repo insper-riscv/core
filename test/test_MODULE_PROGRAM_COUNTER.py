@@ -1,25 +1,21 @@
-import os
-
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 from test_GENERIC_REGISTER import GENERIC_REGISTER
 from test_GENERIC_ADDER import GENERIC_ADDER
 
 
-class MODULE_PROGRAM_COUNTER(utils.DUT):
+class MODULE_PROGRAM_COUNTER(lib.Device):
     _package = MODULES
 
-    clock = utils.DUT.Input_pin
-    selector = utils.DUT.Input_pin
-    source = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    clock = lib.Device.Input_pin
+    selector = lib.Device.Input_pin
+    source = lib.Device.Input_pin
+    enable = lib.Device.Input_pin
+    destination = lib.Device.Output_pin
 
     mux_source = GENERIC_MUX_2X1
     count_register = GENERIC_REGISTER
@@ -27,7 +23,7 @@ class MODULE_PROGRAM_COUNTER(utils.DUT):
 
 
 @MODULE_PROGRAM_COUNTER.testcase
-async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: utils.Trace):
+async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: lib.Waveform):
     values_source = [
         "11111111111111110000000000000000",
         "11111111111111110000000000000000",
@@ -47,9 +43,6 @@ async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: u
         "11111111111111110000000000000100",
         "11111111111111110000000000000100",
     ]
-
-    clock = Clock(dut.clock, 20000, units="ns")
-    cocotb.start_soon(clock.start(start_high=False))
 
     for index, (source, selector, enable, destination) in enumerate(
         zip(values_source, values_selector, values_enable, values_destination)
@@ -78,4 +71,4 @@ def test_MODULE_PROGRAM_COUNTER_testcases():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

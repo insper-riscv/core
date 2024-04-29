@@ -1,19 +1,16 @@
-import os
-
 import pytest
-from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_RV32I_package import RV32I
 
 
-class RV32I_BRANCH_CONTROLLER(utils.DUT):
+class RV32I_BRANCH_CONTROLLER(lib.Device):
     _package = RV32I
 
-    select_function : utils.DUT.Input_pin
-    source_1        : utils.DUT.Input_pin
-    source_2        : utils.DUT.Input_pin
-    destination     : utils.DUT.Output_pin    
+    select_function = lib.Device.Input_pin
+    source_1 = lib.Device.Input_pin
+    source_2 = lib.Device.Input_pin
+    destination = lib.Device.Output_pin    
 
 
 
@@ -24,4 +21,4 @@ def test_RV32I_BRANCH_CONTROLLER_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)
