@@ -32,18 +32,6 @@ architecture RV32I of MODULE_BRANCH_COMPARE_UNIT is
 
 begin
 
-    COMPARE: entity WORK.RV32I_BRANCH_CONTROLLER
-        port map (
-            enable          => enable,
-            select_function => select_function(2 downto 0),
-            flag_sign_1     => sign_1,
-            flag_sign_2     => sign_2,
-            flag_equal      => flag_equal,
-            flag_less       => flag_less,
-            flag_greather   => flag_greather,
-            destination     => destination
-        );
-
     COMPARATOR : entity WORK.GENERIC_COMPARATOR
         generic map (
             DATA_WIDTH => WORK.RV32I.XLEN
@@ -54,6 +42,18 @@ begin
             flag_equal    => flag_equal,
             flag_less     => flag_less,
             flag_greather => flag_greather
+        );
+
+    COMPARE: entity WORK.RV32I_BRANCH_CONTROLLER
+        port map (
+            enable          => enable,
+            select_function => select_function(2 downto 0),
+            flag_sign_1     => sign_1,
+            flag_sign_2     => sign_2,
+            flag_equal      => flag_equal,
+            flag_less       => flag_less,
+            flag_greather   => flag_greather,
+            destination     => destination
         );
 
 end architecture;

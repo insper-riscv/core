@@ -25,26 +25,13 @@ architecture RV32I of RV32I_BRANCH_CONTROLLER is
 
 begin
 
-    DECODE: process(select_function, flag_equal, flag_less, flag_greather, flag_sign_1, flag_sign_2, enable)
-        variable tmp_destination : std_logic;
-    begin
-        case select_function is
-            when WORK.RV32I.FUNCT3_BEQ =>
-                tmp_destination := flag_equal;
-            when WORK.RV32I.FUNCT3_BNE =>
-                tmp_destination := NOT flag_equal;
-            when WORK.RV32I.FUNCT3_BLT =>
-                tmp_destination := (flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2);
-            when WORK.RV32I.FUNCT3_BGE =>
-                tmp_destination := NOT ((flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2));
-            when WORK.RV32I.FUNCT3_BLTU =>
-                tmp_destination := flag_less;
-            when WORK.RV32I.FUNCT3_BGEU =>
-                tmp_destination := flag_greather;
-            when    others =>
-                tmp_destination := '0';
-        end case;
-        destination <= tmp_destination AND enable;
-    end process;
+    with select_function select
+        destination <=  flag_equal                                                                                  when WORK.RV32I.FUNCT3_BEQ,
+                        NOT flag_equal                                                                              when WORK.RV32I.FUNCT3_BNE,
+                        (flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2)          when WORK.RV32I.FUNCT3_BLT,
+                        NOT ((flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2))    when WORK.RV32I.FUNCT3_BGE,
+                        flag_less                                                                                   when WORK.RV32I.FUNCT3_BLTU,
+                        NOT flag_less                                                                               when WORK.RV32I.FUNCT3_BGEU,
+                        '0'                                                                                         when others;
 
 end architecture;
