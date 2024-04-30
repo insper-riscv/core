@@ -9,3 +9,4 @@ void main() {
     asm("xor  x3, x2,      x1");
     asm("xor  x3, x1,      x1");
     asm("xor  x3, x2,      x2");
+}
