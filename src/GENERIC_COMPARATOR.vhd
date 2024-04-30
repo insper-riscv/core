@@ -29,15 +29,6 @@ architecture RTL of GENERIC_COMPARATOR is
     signal a_less_than_b    : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal a_greater_than_b : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
-    function reduce_or (l : std_logic_vector) return std_logic is
-        variable result : std_logic := '0';
-    begin
-        for i in l'reverse_range loop
-            result := result OR l(i);
-        end loop;
-        return result;
-    end function;
-
 begin
 
     a_and_not_b <= source_1 AND NOT(source_2);
@@ -65,7 +56,7 @@ begin
     end generate;
 
     flag_equal    <= a_equal_b(DATA_WIDTH - 2);
-    flag_less     <= reduce_or(a_less_than_b);
-    flag_greather <= reduce_or(a_greater_than_b);
+    flag_less     <= WORK.GENERICS.reduce_or(a_less_than_b);
+    flag_greather <= WORK.GENERICS.reduce_or(a_greater_than_b);
 
 end architecture;
