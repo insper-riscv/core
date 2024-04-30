@@ -12,10 +12,17 @@ class Program:
     ENVIRONMENT_CALL = "00000000000000000000000001110011"
     ENVIRONMENT_BREAKPOINT = "00000000000100000000000001110011"
 
-    def __init__(self, filename: str, dependencies: T.List[str] = [], basedir: str = "sim_build"):
+    def __init__(self, filename: str, dependencies: T.List[str] = [], basedir: str = "sim_build", stepping: bool = False):
         self.entry = Path(filename)
         self.dependencies = dependencies
         self.basedir = basedir
+        self.stepping = stepping
+
+    def enable_stepping(self):
+        self.stepping = True
+
+    def disable_stepping(self):
+        self.stepping = False
 
     def get_memory_map(self):
         elf = self._build_program_executable()
@@ -38,7 +45,7 @@ class Program:
 
             data.value = BinaryValue(value)
 
-            if value == Program.ENVIRONMENT_BREAKPOINT:
+            if self.stepping or value == Program.ENVIRONMENT_BREAKPOINT:
                 yield index, key
 
                 index += 1
@@ -46,7 +53,7 @@ class Program:
             await trace.cycle()
 
     def _build_program_executable(self):
-        output = self.entry.with_suffix('.out')
+        output = Path(self.entry.with_suffix('.out').name)
         process = subprocess.Popen(
             [
                 "riscv32-unknown-elf-gcc",
