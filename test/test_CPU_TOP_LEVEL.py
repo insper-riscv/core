@@ -35,11 +35,11 @@ class CPU_TOP_LEVEL(lib.Entity):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_ADD.c", stepping=True)
+    program = lib.Program("../test/data/c/testcase_ADDI.c", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
         "00000000000000000000000000000001",
         "00000000000000000000000000000010",
         "00000000000000000000000000000100",
@@ -64,7 +64,7 @@ async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_ADDI.c", stepping=True)
+    program = lib.Program("../test/data/c/testcase_ADD.c", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -543,7 +543,16 @@ async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000010000010",
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-    ] 
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -1046,43 +1055,91 @@ def test_CPU_TOP_LEVEL_synthesis():
 
 
 @pytest.mark.testcases
-def test_CPU_TOP_LEVEL_testcases():
+def test_CPU_TOP_LEVEL_arithmetic_testcases():
     CPU_TOP_LEVEL.test_with(
         [
             tb_CPU_TOP_LEVEL_ADDI,
             tb_CPU_TOP_LEVEL_ADD,
             tb_CPU_TOP_LEVEL_SUB,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_banch_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_BEQ,
             tb_CPU_TOP_LEVEL_BNE,
             tb_CPU_TOP_LEVEL_BLT,
             tb_CPU_TOP_LEVEL_BLTU,
             tb_CPU_TOP_LEVEL_BGE,
             tb_CPU_TOP_LEVEL_BGEU,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_build_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_LUI,
             tb_CPU_TOP_LEVEL_AUIPC,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_compare_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_SLT,
             tb_CPU_TOP_LEVEL_SLTI,
             tb_CPU_TOP_LEVEL_SLTU,
             tb_CPU_TOP_LEVEL_SLTIU,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_jump_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_JAL,
             tb_CPU_TOP_LEVEL_JALR,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_load_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_LB,
             tb_CPU_TOP_LEVEL_LBU,
             tb_CPU_TOP_LEVEL_LH,
             tb_CPU_TOP_LEVEL_LHU,
             tb_CPU_TOP_LEVEL_LW,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_logical_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_XOR,
             tb_CPU_TOP_LEVEL_XORI,
             tb_CPU_TOP_LEVEL_AND,
             tb_CPU_TOP_LEVEL_ANDI,
             tb_CPU_TOP_LEVEL_OR,
             tb_CPU_TOP_LEVEL_ORI,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_shifting_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_SLL,
             tb_CPU_TOP_LEVEL_SLLI,
             tb_CPU_TOP_LEVEL_SRL,
             tb_CPU_TOP_LEVEL_SRLI,
             tb_CPU_TOP_LEVEL_SRA,
             tb_CPU_TOP_LEVEL_SRAI,
+        ]
+    )
+@pytest.mark.testcases
+def test_CPU_TOP_LEVEL_store_testcases():
+    CPU_TOP_LEVEL.test_with(
+        [
             tb_CPU_TOP_LEVEL_SB,
             tb_CPU_TOP_LEVEL_SH,
             tb_CPU_TOP_LEVEL_SW,
