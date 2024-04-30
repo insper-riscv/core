@@ -20,7 +20,7 @@ class RV32I_BRANCH_CONTROLLER(utils.DUT):
 @pytest.mark.synthesis
 def test_RV32I_BRANCH_CONTROLLER_synthesis():
     RV32I_BRANCH_CONTROLLER.build_vhd()
-    # RV32I_BRANCH_CONTROLLER.build_netlistsvg()
+    RV32I_BRANCH_CONTROLLER.build_netlistsvg()
 
 
 if __name__ == "__main__":

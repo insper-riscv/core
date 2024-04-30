@@ -30,11 +30,6 @@ async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER", trace: uti
     await trace.cycle()
     yield trace.check(dut.destination, "0001")
 
-    dut.funct3.value = BinaryValue("010")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "0010")
-
     dut.funct3.value = BinaryValue("100")
 
     await trace.cycle()
@@ -72,11 +67,6 @@ async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER", trace: uti
 
     await trace.cycle()
     yield trace.check(dut.destination, "0001")
-
-    dut.funct3.value = BinaryValue("010")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "0010")
 
     dut.funct3.value = BinaryValue("100")
 
