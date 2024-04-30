@@ -93,19 +93,19 @@ class Waveform:
             data["signal"].insert(1, ["OUT"])
 
             for signal in data["signal"][2:]:
-                if signal["name"] == "clock":
-                    signal["wave"] = "P" + signal["wave"][1:]
-                    signal["phase"] = self.scale * -0.5
+                # if signal["name"] == "clock":
+                #     signal["wave"] = "P" + signal["wave"][1:]
+                #     signal["phase"] = self.scale * -0.5
 
-                if "data" in signal:
-                    if type(signal["data"]) == str:
-                        try:
-                            signal["data"] = " ".join(
-                                "x" + hex(value)[2:].upper()
-                                for value in map(int, signal["data"].split(" "))
-                            )
-                        except Exception:
-                            pass
+                # if "data" in signal:
+                #     if type(signal["data"]) == str:
+                #         try:
+                #             signal["data"] = " ".join(
+                #                 "x" + hex(value)[2:].upper()
+                #                 for value in map(int, signal["data"].split(" "))
+                #             )
+                #         except Exception:
+                #             pass
 
                 if signal["name"] in inputs:
                     data["signal"][0].append(data["signal"].pop(index))
@@ -117,14 +117,14 @@ class Waveform:
             if len(data["signal"]) > 2:
                 data["signal"].insert(2, {})
 
-            data.update({
-                "config": {
-                    "hscale": self.scale,
-                },
-                "head": {
-                    "tock": 1,
-                },
-            })
+            # data.update({
+            #     "config": {
+            #         "hscale": self.scale,
+            #     },
+            #     "head": {
+            #         "tock": 1,
+            #     },
+            # })
 
             source = json.dumps(data)
 
