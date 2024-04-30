@@ -11,19 +11,6 @@ from test_CPU_STAGE_EX import CPU_STAGE_EX
 from test_CPU_STAGE_MEM import CPU_STAGE_MEM
 from test_CPU_STAGE_WB import CPU_STAGE_WB
 
-#from test_CPU_TOP_LEVEL_ARITHMETIC_INSTRUCTIONS import tb_CPU_TOP_LEVEL_ADD, tb_CPU_TOP_LEVEL_ADDI, tb_CPU_TOP_LEVEL_SUB
-#from test_CPU_TOP_LEVEL_BRANCH_INSTRUCTIONS import tb_CPU_TOP_LEVEL_BGE, tb_CPU_TOP_LEVEL_BGEU, tb_CPU_TOP_LEVEL_BLT, tb_CPU_TOP_LEVEL_BLTU
-#from test_CPU_TOP_LEVEL_BRANCH_INSTRUCTIONS import tb_CPU_TOP_LEVEL_BEQ, tb_CPU_TOP_LEVEL_BNE
-#from test_CPU_TOP_LEVEL_BUILD_INSTRUCTIONS import tb_CPU_TOP_LEVEL_LUI, tb_CPU_TOP_LEVEL_AUIPC
-#from test_CPU_TOP_LEVEL_COMPARE_INSTRUCTIONS import tb_CPU_TOP_LEVEL_SLT, tb_CPU_TOP_LEVEL_SLTI, tb_CPU_TOP_LEVEL_SLTIU, tb_CPU_TOP_LEVEL_SLTU
-#from test_CPU_TOP_LEVEL_LINK_INSTRUCTIONS import tb_CPU_TOP_LEVEL_JUMP_INSTRUCTIONS_JAL, tb_CPU_TOP_LEVEL_JUMP_INSTRUCTIONS_JALR
-#from test_CPU_TOP_LEVEL_LOAD_INSTRUCTIONS import tb_CPU_TOP_LEVEL_LB, tb_CPU_TOP_LEVEL_LBU, tb_CPU_TOP_LEVEL_LH, tb_CPU_TOP_LEVEL_LHU, tb_CPU_TOP_LEVEL_LW
-#from test_CPU_TOP_LEVEL_LOGICAL_INSTRUCTIONS import tb_CPU_TOP_LEVEL_AND, tb_CPU_TOP_LEVEL_ANDI, tb_CPU_TOP_LEVEL_OR, tb_CPU_TOP_LEVEL_ORI
-#from test_CPU_TOP_LEVEL_LOGICAL_INSTRUCTIONS import tb_CPU_TOP_LEVEL_XOR, tb_CPU_TOP_LEVEL_XORI
-#from test_CPU_TOP_LEVEL_SHIFT_INSTRUCTIONS import tb_CPU_TOP_LEVEL_SLL, tb_CPU_TOP_LEVEL_SLLI, tb_CPU_TOP_LEVEL_SRA, tb_CPU_TOP_LEVEL_SRAI
-#from test_CPU_TOP_LEVEL_SHIFT_INSTRUCTIONS import tb_CPU_TOP_LEVEL_SRL, tb_CPU_TOP_LEVEL_SRLI
-#from test_CPU_TOP_LEVEL_STORE_INSTRUCTIONS import tb_CPU_TOP_LEVEL_SB, tb_CPU_TOP_LEVEL_SH, tb_CPU_TOP_LEVEL_SW
-
 
 class CPU_TOP_LEVEL(lib.Entity):
     _package = CPU
@@ -47,25 +34,1010 @@ class CPU_TOP_LEVEL(lib.Entity):
 
 
 @CPU_TOP_LEVEL.testcase
-async def tb_CPU_TOP_LEVEL_case_1(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    address_values = [12, 24, 36]
-    program = lib.Program("../test/data/c/test.c")
-
-    dut.clear.value = BinaryValue("0")
-    dut.enable.value = BinaryValue("1")
-    dut.data_program.value = BinaryValue("00000000000000000000000000000000")
-    dut.data_memory_in.value = BinaryValue("00000000000000000000000000000000")
+async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_ADD.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000010000",
+        "00000000000000000000000000100000",
+        "00000000000000000000000001000000",
+        "00000000000000000000000010000000",
+        "00000000000000000000000100000000",
+        "00000000000000000000000100000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
 
     trace.set_scale(2)
     await trace.cycle()
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield True
-
-        assert address_values[index] == address, f"Invalid breakpoint address. At breakpoint {index}."
-
-        if index > 2:
+        if index == len(values_destination):
             break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_ADDI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000010000",
+        "00000000000000000000000000010000",
+        "00000000000000000000000000000000",#ainda sem hazard
+        "00000000000000000000000000010000",
+        "00000000000000000000000000010000",
+        "00000000000000000000000000010000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SUB.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_BEQ.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_BNE.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000011",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_BLT.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000011",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_BLTU.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000011",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_BGE.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000011",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_BGEU.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000010",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000011",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_LUI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000001000000000000",
+        "00000000000000000001000000000000",
+        "00000000000000000001000000000000",
+        "00000000000000000001000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_AUIPC.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000001000000000000",
+        "00000000000000000001000000000100",
+        "00000000000000000001000000001000",
+        "00000000000000000001000000001100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SLT.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000001",
+        "01000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000001001",
+        "10000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SLTI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "10000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "01000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SLTU.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000001",
+        "01000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000001001",
+        "10000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SLTIU.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "10000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "01000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000001",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_JAL.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000010001",
+        "00000000000000000000000000011100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001100",
+        "00000000000000000000000000010000",
+        "00000000000000000000000000010001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_JALR.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000010000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000011100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000011100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_LB.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000010000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "11111111111111111111111110000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "11111111111111111111111110000010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_LBU.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000010000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000010000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000010000010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ] 
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_LH.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000001000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "11111111111111111000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "11111111111111111000000000000010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_LHU.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000001000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000001000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000001000000000000010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_LW.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_XOR.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000111",
+        "11111111111000000000000000000000",
+        "11111111111000000000000000000111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "11111111111000000000000000000111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_XORI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "11111111111000000000000000000000",
+        "11111111111000000000000000000111",
+        "11111111111000000000000000000111",
+        "00000000000000000000000000000000",
+        "11111111111000000000000000000111",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_AND.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000101",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000101",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000101",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_ANDI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000101",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000111",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_OR.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000111",
+        "11111111111000000000000000000000",
+        "11111111111000000000000000000111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000111",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_ORI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "11111111111000000000000000000000",
+        "11111111111000000000000000000111",
+        "11111111111000000000000000000111",
+        "00000000000000000000000000000000",
+        "11111111111000000000000000000111",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SLL.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000100000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000100000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SLLI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000010000000",
+        "00000000000000000000000010000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000010000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SRL.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SRLI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SRA.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000110",
+        "00000000000000000000000000000100",
+        "00000000000000000001000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000001000000",
+        "10000000000000000000000000000000",
+        "11111110000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SRAI.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000100000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000000000100",
+        "00000000000000000001000000000000",
+        "00000000000000000000000001000000",
+        "00000000000000000000000001000000",
+        "10000000000000000000000000000000",
+        "11111110000000000000000000000000",
+        "11111110000000000000000000000000",
+        "00000000000000000000000000000100",
+        "00000000000000000000000001000000",
+        "11111110000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SB.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000001001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000010000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SH.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000011000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000011000001001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000001000001001111111",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000001000001010000001",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+
+@CPU_TOP_LEVEL.testcase
+async def tb_CPU_TOP_LEVEL_SW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
+    program = lib.Program("../test/data/c/testcase_SW.c", stepping=True)
+    values_destination = [
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
+        "00000000000000000000000000001010",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+    ]
+
+    trace.set_scale(2)
+    await trace.cycle()
+
+    async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
+        if index == len(values_destination):
+            break
+
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @pytest.mark.synthesis
 def test_CPU_TOP_LEVEL_synthesis():
@@ -77,7 +1049,43 @@ def test_CPU_TOP_LEVEL_synthesis():
 def test_CPU_TOP_LEVEL_testcases():
     CPU_TOP_LEVEL.test_with(
         [
-            tb_CPU_TOP_LEVEL_case_1,
+            tb_CPU_TOP_LEVEL_ADDI,
+            tb_CPU_TOP_LEVEL_ADD,
+            tb_CPU_TOP_LEVEL_SUB,
+            tb_CPU_TOP_LEVEL_BEQ,
+            tb_CPU_TOP_LEVEL_BNE,
+            tb_CPU_TOP_LEVEL_BLT,
+            tb_CPU_TOP_LEVEL_BLTU,
+            tb_CPU_TOP_LEVEL_BGE,
+            tb_CPU_TOP_LEVEL_BGEU,
+            tb_CPU_TOP_LEVEL_LUI,
+            tb_CPU_TOP_LEVEL_AUIPC,
+            tb_CPU_TOP_LEVEL_SLT,
+            tb_CPU_TOP_LEVEL_SLTI,
+            tb_CPU_TOP_LEVEL_SLTU,
+            tb_CPU_TOP_LEVEL_SLTIU,
+            tb_CPU_TOP_LEVEL_JAL,
+            tb_CPU_TOP_LEVEL_JALR,
+            tb_CPU_TOP_LEVEL_LB,
+            tb_CPU_TOP_LEVEL_LBU,
+            tb_CPU_TOP_LEVEL_LH,
+            tb_CPU_TOP_LEVEL_LHU,
+            tb_CPU_TOP_LEVEL_LW,
+            tb_CPU_TOP_LEVEL_XOR,
+            tb_CPU_TOP_LEVEL_XORI,
+            tb_CPU_TOP_LEVEL_AND,
+            tb_CPU_TOP_LEVEL_ANDI,
+            tb_CPU_TOP_LEVEL_OR,
+            tb_CPU_TOP_LEVEL_ORI,
+            tb_CPU_TOP_LEVEL_SLL,
+            tb_CPU_TOP_LEVEL_SLLI,
+            tb_CPU_TOP_LEVEL_SRL,
+            tb_CPU_TOP_LEVEL_SRLI,
+            tb_CPU_TOP_LEVEL_SRA,
+            tb_CPU_TOP_LEVEL_SRAI,
+            tb_CPU_TOP_LEVEL_SB,
+            tb_CPU_TOP_LEVEL_SH,
+            tb_CPU_TOP_LEVEL_SW,
         ]
     )
 
