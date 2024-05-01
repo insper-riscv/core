@@ -83,9 +83,7 @@ jobs:
             enabled: false
     steps:
     - name: Set up environment
-      run: |
-        apt-get update
-        apt-get install lsb_release
+      run: apt update && apt install lsb_release
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -102,5 +100,5 @@ jobs:
     - name: Run Synthesis
       run: pytest -k ${{ matrix.component }} -m synthesis
     - name: Run Testcases
-      if: ${{ contains(matrix.test_cases, true) }}
+      if: ${{ contains(matrix.enabled, true) }}
       run: pytest -k ${{ matrix.component }} -m sress
