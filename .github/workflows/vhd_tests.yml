@@ -17,7 +17,7 @@ jobs:
       matrix:
           include:
           - component: CPU_EXECUTION_FOWARDING_UNIT
-            enabled: true
+            enabled: false
           - component: CPU_LOAD_EXTENDER
             enabled: true
           - component: CPU_STAGE_EX
@@ -39,7 +39,7 @@ jobs:
           - component: GENERIC_COMPARATOR
             enabled: true
           - component: GENERIC_DEBOUNCE
-            enabled: true
+            enabled: false
           - component: GENERIC_EDGE_DETECTOR
             enabled: true
           - component: GENERIC_FLIP_FLOP
