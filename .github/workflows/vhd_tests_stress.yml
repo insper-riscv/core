@@ -83,7 +83,7 @@ jobs:
             enabled: false
     steps:
     - name: Set up environment
-      run: apt update && apt install lsb_release
+      run: apt-get update && apt-get install -y lsb-release
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
