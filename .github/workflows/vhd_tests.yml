@@ -55,7 +55,7 @@ jobs:
           - component: GENERIC_ROM
             enabled: true
           - component: GENERIC_SIGNAL_EXTENDER
-            enabled: true
+            enabled: false
           - component: MODULE_BRANCH_COMPARE_UNIT
             enabled: true
           - component: MODULE_BRANCH_UNIT
