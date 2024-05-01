@@ -35,6 +35,7 @@ class VHD_Package():
             child.build_vhd(timeout)
             _BUILT[child.__name__] = True # type: ignore
 
+        cwd = Path("sim_build").mkdir(exist_ok=True)
         process = subprocess.Popen(
             [
                 "ghdl",
