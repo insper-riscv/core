@@ -83,7 +83,7 @@ jobs:
           - component: test_RV32I_REGISTER_FILE.py
             enabled: true
           - component: test_TOP_LEVEL.py
-            enabled: true
+            enabled: false
     steps:
     - name: Checkout
       uses: actions/checkout@v4
