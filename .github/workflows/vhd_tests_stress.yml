@@ -11,75 +11,75 @@ jobs:
     strategy:
       matrix:
           include:
-          - component: CPU_EXECUTION_FOWARDING_UNIT
+          - component: test_CPU_EXECUTION_FOWARDING_UNIT.py
             enabled: true
-          - component: CPU_LOAD_EXTENDER
+          - component: test_CPU_LOAD_EXTENDER.py
             enabled: false
-          - component: CPU_STAGE_EX
+          - component: test_CPU_STAGE_EX.py
             enabled: false
-          - component: CPU_STAGE_ID
+          - component: test_CPU_STAGE_ID.py
             enabled: false
-          - component: CPU_STAGE_IF
+          - component: test_CPU_STAGE_IF.py
             enabled: false
-          - component: CPU_STAGE_MEM
+          - component: test_CPU_STAGE_MEM.py
             enabled: false
-          - component: CPU_STAGE_WB
+          - component: test_CPU_STAGE_WB.py
             enabled: false
-          - component: CPU_STORE_EXTENDER
+          - component: test_CPU_STORE_EXTENDER.py
             enabled: false
-          - component: CPU_TOP_LEVEL
+          - component: test_CPU_TOP_LEVEL.py
             enabled: false
-          - component: GENERIC_ADDER
+          - component: test_GENERIC_ADDER.py
             enabled: false
-          - component: GENERIC_COMPARATOR
+          - component: test_GENERIC_COMPARATOR.py
             enabled: false
-          - component: GENERIC_DEBOUNCE
+          - component: test_GENERIC_DEBOUNCE.py
             enabled: false
-          - component: GENERIC_EDGE_DETECTOR
+          - component: test_GENERIC_EDGE_DETECTOR.py
             enabled: false
-          - component: GENERIC_FLIP_FLOP
+          - component: test_GENERIC_FLIP_FLOP.py
             enabled: false
-          - component: GENERIC_MUX_2X1
+          - component: test_GENERIC_MUX_2X1.py
             enabled: false
-          - component: GENERIC_MUX_4X1
+          - component: test_GENERIC_MUX_4X1.py
             enabled: false
-          - component: GENERIC_RAM
+          - component: test_GENERIC_RAM.py
             enabled: false
-          - component: GENERIC_REGISTER
+          - component: test_GENERIC_REGISTER.py
             enabled: false
-          - component: GENERIC_ROM
+          - component: test_GENERIC_ROM.py
             enabled: false
-          - component: GENERIC_SIGNAL_EXTENDER
+          - component: test_GENERIC_SIGNAL_EXTENDER.py
             enabled: false
-          - component: MODULE_BRANCH_COMPARE_UNIT
+          - component: test_MODULE_BRANCH_COMPARE_UNIT.py
             enabled: false
-          - component: MODULE_BRANCH_UNIT
+          - component: test_MODULE_BRANCH_UNIT.py
             enabled: false
-          - component: MODULE_CONTROL_UNIT
+          - component: test_MODULE_CONTROL_UNIT.py
             enabled: false
-          - component: MODULE_EXECUTION_UNIT_CONTROLLER
+          - component: test_MODULE_EXECUTION_UNIT_CONTROLLER.py
             enabled: false
-          - component: MODULE_EXECUTION_UNIT
+          - component: test_MODULE_EXECUTION_UNIT.py
             enabled: false
-          - component: MODULE_PROGRAM_COUNTER
+          - component: test_MODULE_PROGRAM_COUNTER.py
             enabled: false
-          - component: MODULE_REGISTER_FILE
+          - component: test_MODULE_REGISTER_FILE.py
             enabled: false
-          - component: MODULE_WRITE_BACK
+          - component: test_MODULE_WRITE_BACK.py
             enabled: false
-          - component: RV32I_ALU_BIT
+          - component: test_RV32I_ALU_BIT.py
             enabled: false
-          - component: RV32I_ALU_CONTROLLER
+          - component: test_RV32I_ALU_CONTROLLER.py
             enabled: false
-          - component: RV32I_ALU_SHIFTER
+          - component: test_RV32I_ALU_SHIFTER.py
             enabled: false
-          - component: RV32I_ALU
+          - component: test_RV32I_ALU.py
             enabled: false
-          - component: RV32I_BRANCH_CONTROLLER
+          - component: test_RV32I_BRANCH_CONTROLLER.py
             enabled: false
-          - component: RV32I_REGISTER_FILE
+          - component: test_RV32I_REGISTER_FILE.py
             enabled: false
-          - component: TOP_LEVEL
+          - component: test_TOP_LEVEL.py
             enabled: false
     steps:
     - name: Checkout
