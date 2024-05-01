@@ -26,21 +26,21 @@ async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT
     dut.funct_7.value = BinaryValue("0000000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000")
+    yield trace.check(dut.destination, "0111")
 
     dut.opcode.value = BinaryValue("01100")
-    dut.funct_3.value = BinaryValue("000")
-    dut.funct_7.value = BinaryValue("0000000")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "00011")
-
-    dut.opcode.value = BinaryValue("01100")
-    dut.funct_3.value = BinaryValue("000")
+    dut.funct_3.value = BinaryValue("010")
     dut.funct_7.value = BinaryValue("0100000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "01011")
+    yield trace.check(dut.destination, "1010")
+
+    dut.opcode.value = BinaryValue("11100")
+    dut.funct_3.value = BinaryValue("111")
+    dut.funct_7.value = BinaryValue("1111111")
+
+    await trace.cycle()
+    yield trace.check(dut.destination, "0000")
 
 
 @pytest.mark.synthesis
