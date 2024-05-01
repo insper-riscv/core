@@ -11,93 +11,97 @@ jobs:
   test:
     name: Test ${{ matrix.component }}
     runs-on: ubuntu-latest
+    container:
+      image: hdlc/ghdl:yosys
     strategy:
       matrix:
           include:
-            - component: GENERIC_ADDER
-              test_cases: true
-            - component: GENERIC_EDGE_DETECTOR
-              test_cases: false
-            - component: GENERIC_FLIP_FLOP
-              test_cases: true
-            - component: GENERIC_MUX_2X1
-              test_cases: true
-            - component: GENERIC_MUX_4X1
-              test_cases: true
-            - component: GENERIC_RAM
-              test_cases: true
-            - component: GENERIC_REGISTER
-              test_cases: true
-            - component: GENERIC_ROM
-              test_cases: true
-            - component: GENERIC_COMPARATOR
-              test_cases: true
-            - component: GENERIC_SHIFTER
-              test_cases: true
-            - component: GENERIC_SIGNAL_EXTENDER
-              test_cases: false
-            - component: MODULE_BRANCH_COMPARE
-              test_cases: true
-            - component: MODULE_BRANCH_UNIT
-              test_cases: true
-            - component: MODULE_EXECUTION_UNIT
-              test_cases: true
-            - component: MODULE_EXECUTION_UNIT_CONTROLLER
-              test_cases: true
-            - component: MODULE_CONTROL_UNIT
-              test_cases: false
-            - component: MODULE_PROGRAM_COUNTER
-              test_cases: true
-            - component: MODULE_REGISTER_FILE
-              test_cases: true
-            - component: MODULE_WRITE_BACK
-              test_cases: true
-            - component: RV32I_ALU
-              test_cases: true
-            - component: RV32I_ALU_BIT
-              test_cases: true
-            - component: RV32I_ALU_SHIFTER
-              test_cases: true
-            - component: RV32I_ALU_CONTROLLER
-              test_cases: true
-            - component: RV32I_INSTRUCTION_DECODER
-              test_cases: true
-            - component: RV32I_REGISTER_FILE
-              test_cases: true
-            - component: CPU_STAGE_EX
-              test_cases: false
-            - component: CPU_STAGE_ID
-              test_cases: false
-            - component: CPU_STAGE_IF
-              test_cases: false
-            - component: CPU_STAGE_MEM
-              test_cases: false
-            - component: CPU_STAGE_WB
-              test_cases: false
-            - component: CPU_EXECUTION_FOWARDING_UNIT
-              test_cases: false
-            - component: CPU_LOAD_EXTENDER
-              test_cases: false
-            - component: CPU_STORE_EXTENDER
-              test_cases: false
-            - component: CPU_TOP_LEVEL
-              test_cases: true
+          - component: CPU_EXECUTION_FOWARDING_UNIT
+            enabled: true
+          - component: CPU_LOAD_EXTENDER
+            enabled: true
+          - component: CPU_STAGE_EX
+            enabled: false
+          - component: CPU_STAGE_ID
+            enabled: false
+          - component: CPU_STAGE_IF
+            enabled: false
+          - component: CPU_STAGE_MEM
+            enabled: false
+          - component: CPU_STAGE_WB
+            enabled: false
+          - component: CPU_STORE_EXTENDER
+            enabled: false
+          - component: CPU_TOP_LEVEL
+            enabled: true
+          - component: GENERIC_ADDER
+            enabled: true
+          - component: GENERIC_COMPARATOR
+            enabled: true
+          - component: GENERIC_DEBOUNCE
+            enabled: true
+          - component: GENERIC_EDGE_DETECTOR
+            enabled: true
+          - component: GENERIC_FLIP_FLOP
+            enabled: true
+          - component: GENERIC_MUX_2X1
+            enabled: true
+          - component: GENERIC_MUX_4X1
+            enabled: true
+          - component: GENERIC_RAM
+            enabled: true
+          - component: GENERIC_REGISTER
+            enabled: true
+          - component: GENERIC_ROM
+            enabled: true
+          - component: GENERIC_SIGNAL_EXTENDER
+            enabled: true
+          - component: MODULE_BRANCH_COMPARE_UNIT
+            enabled: true
+          - component: MODULE_BRANCH_UNIT
+            enabled: true
+          - component: MODULE_CONTROL_UNIT
+            enabled: true
+          - component: MODULE_EXECUTION_UNIT_CONTROLLER
+            enabled: true
+          - component: MODULE_EXECUTION_UNIT
+            enabled: true
+          - component: MODULE_PROGRAM_COUNTER
+            enabled: true
+          - component: MODULE_REGISTER_FILE
+            enabled: true
+          - component: MODULE_WRITE_BACK
+            enabled: true
+          - component: RV32I_ALU_BIT
+            enabled: true
+          - component: RV32I_ALU_CONTROLLER
+            enabled: true
+          - component: RV32I_ALU_SHIFTER
+            enabled: true
+          - component: RV32I_ALU
+            enabled: true
+          - component: RV32I_BRANCH_CONTROLLER
+            enabled: true
+          - component: RV32I_REGISTER_FILE
+            enabled: true
+          - component: TOP_LEVEL
+            enabled: true
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
         cache: pip
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        pip install -r requirements.txt
+        npm install -g netlistsvg
     - name: Run Synthesis
       run: pytest -k ${{ matrix.component }} -m synthesis
-    - name: Run Test Cases
+    - name: Run Testcases
       if: ${{ contains(matrix.test_cases, true) }}
       run: pytest -k ${{ matrix.component }} -m testcases
