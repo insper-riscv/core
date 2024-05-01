@@ -95,6 +95,7 @@ jobs:
         && apt-get upgrade -y           \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
             ca-certificates             \
+            libpython3-all-dev          \
             npm                         \
             python3                     \
             python3-pip                 \
