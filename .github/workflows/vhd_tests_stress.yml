@@ -82,6 +82,8 @@ jobs:
           - component: TOP_LEVEL
             enabled: false
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4
     - name: Set up environment
       run: apt-get update && apt-get install -y lsb-release
     - name: Set up Python
