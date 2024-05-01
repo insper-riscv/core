@@ -19,6 +19,7 @@ class CPU_EXECUTION_FOWARDING_UNIT(utils.DUT):
     stage_id_select_source_2     = utils.DUT.Output_pin
 
 
+@pytest.mark.synthesis
 def test_CPU_EXECUTION_FOWARDING_UNIT_synthesis():
     CPU_EXECUTION_FOWARDING_UNIT.build_vhd()
     # CPU_EXECUTION_FOWARDING_UNIT.build_netlistsvg()
