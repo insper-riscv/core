@@ -27,7 +27,7 @@ architecture RTL of RV32I_ALU is
     signal carry                : std_logic_vector((DATA_WIDTH) downto 0);
     signal carry_extended       : std_logic;
     signal overflow_auxiliar    : std_logic;
-    signal slt                  : std_logic_vector((DATA_WIDTH - 1) downto 0)   := (others => '0');
+    signal slt                  : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal shift                : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
@@ -44,6 +44,7 @@ begin
 
     overflow <= overflow_auxiliar;
 
+    slt(31 downto 1) <= (others => '0');
     slt(0) <=   overflow_auxiliar XOR result_extended when (select_function(1 downto 0) = "11") else
                 overflow_auxiliar XOR result(DATA_WIDTH - 1);
 
