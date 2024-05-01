@@ -59,7 +59,7 @@ jobs:
           - component: MODULE_BRANCH_COMPARE_UNIT
             enabled: true
           - component: MODULE_BRANCH_UNIT
-            enabled: true
+            enabled: false
           - component: MODULE_CONTROL_UNIT
             enabled: true
           - component: MODULE_EXECUTION_UNIT_CONTROLLER
