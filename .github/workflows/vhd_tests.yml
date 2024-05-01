@@ -79,7 +79,7 @@ jobs:
           - component: RV32I_ALU
             enabled: true
           - component: RV32I_BRANCH_CONTROLLER
-            enabled: true
+            enabled: false
           - component: RV32I_REGISTER_FILE
             enabled: true
           - component: TOP_LEVEL
