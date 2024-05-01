@@ -87,6 +87,8 @@ jobs:
           - component: TOP_LEVEL
             enabled: true
     steps:
+    - name: Set up environment
+      run: sudo apt-get update
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
