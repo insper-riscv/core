@@ -6,11 +6,13 @@ library WORK;
 
 entity TOP_LEVEL is
 
+    generic (
+        PROGRAM_FILE : string := "../data/mif/cpu_rom_dummy.mif"
+    );
+
     port (
         CLOCK           : in  std_logic                    := '0';
         SW              : in  std_logic_vector(3 downto 0) := (others => '0');
-        STORE_BYTE      : out std_logic;
-        STORE_HALFWORD  : out std_logic;
         LED             : out std_logic_vector(7 downto 0) := (others => '0')
     );
 
@@ -34,7 +36,8 @@ begin
     ROM : entity WORK.GENERIC_ROM
         generic map (
             DATA_WIDTH    => WORK.RV32I.XLEN,
-            ADDRESS_WIDTH => WORK.RV32I.XLEN
+            ADDRESS_WIDTH => WORK.RV32I.XLEN,
+            INIT_FILE     => PROGRAM_FILE
         )
         port map (
             address     => address_program,
