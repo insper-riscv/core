@@ -4,6 +4,7 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_RV32I_package import RV32I
 
 
 class RV32I_ALU_SHIFTER(utils.DUT):
