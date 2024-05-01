@@ -39,7 +39,7 @@ def test_GENERIC_COMPARATOR_synthesis():
 
 
 @pytest.mark.testcases
-def test_GENERIC_ADDER_testcases():
+def test_GENERIC_COMPARATOR_testcases():
     GENERIC_COMPARATOR.test_with(
         [
             tb_GENERIC_COMPARATOR_case_1,
