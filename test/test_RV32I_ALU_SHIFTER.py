@@ -7,6 +7,8 @@ import utils
 
 
 class RV32I_ALU_SHIFTER(utils.DUT):
+    _package = RV32I
+
     source = utils.DUT.Input_pin
     shamt = utils.DUT.Input_pin
     select_function = utils.DUT.Input_pin
