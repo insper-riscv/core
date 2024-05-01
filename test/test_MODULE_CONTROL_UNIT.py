@@ -27,7 +27,7 @@ async def tb_MODULE_CONTROL_UNIT_case_1(dut: "MODULE_CONTROL_UNIT", trace: utils
 @pytest.mark.synthesis
 def test_MODULE_CONTROL_UNIT_synthesis():
     MODULE_CONTROL_UNIT.build_vhd()
-    MODULE_CONTROL_UNIT.build_netlistsvg()
+    # MODULE_CONTROL_UNIT.build_netlistsvg()
 
 
 @pytest.mark.testcases
