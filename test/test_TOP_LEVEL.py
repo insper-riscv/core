@@ -35,7 +35,7 @@ class TOP_LEVEL(utils.DUT):
 @pytest.mark.synthesis
 def test_TOP_LEVEL_synthesis():
     TOP_LEVEL.build_vhd()
-    # TOP_LEVEL.build_netlistsvg()
+    TOP_LEVEL.build_netlistsvg()
 
 
 if __name__ == "__main__":

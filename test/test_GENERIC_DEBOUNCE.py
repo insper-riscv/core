@@ -18,7 +18,7 @@ class GENERIC_DEBOUNCE(utils.DUT):
 @pytest.mark.synthesis
 def test_GENERIC_DEBOUNCE_synthesis():
     GENERIC_DEBOUNCE.build_vhd()
-    # GENERIC_DEBOUNCE.build_netlistsvg()
+    GENERIC_DEBOUNCE.build_netlistsvg()
 
 
 if __name__ == "__main__":

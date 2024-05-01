@@ -17,7 +17,7 @@ class GENERIC_SIGNAL_EXTENDER(utils.DUT):
 @pytest.mark.synthesis
 def test_GENERIC_SIGNAL_EXTENDER_synthesis():
     GENERIC_SIGNAL_EXTENDER.build_vhd()
-    # GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
+    GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
 
 
 if __name__ == "__main__":

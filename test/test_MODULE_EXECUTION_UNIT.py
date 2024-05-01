@@ -53,7 +53,7 @@ async def tb_MODULE_EXECUTION_UNIT_case_1(dut: "MODULE_EXECUTION_UNIT", trace: u
 @pytest.mark.synthesis
 def test_MODULE_EXECUTION_UNIT_synthesis():
     MODULE_EXECUTION_UNIT.build_vhd()
-    # MODULE_EXECUTION_UNIT.build_netlistsvg()
+    MODULE_EXECUTION_UNIT.build_netlistsvg()
 
 
 @pytest.mark.testcases

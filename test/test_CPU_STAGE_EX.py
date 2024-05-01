@@ -29,7 +29,7 @@ class CPU_STAGE_EX(utils.DUT):
 @pytest.mark.synthesis
 def test_CPU_STAGE_EX_synthesis():
     CPU_STAGE_EX.build_vhd()
-    # CPU_STAGE_EX.build_netlistsvg()
+    CPU_STAGE_EX.build_netlistsvg()
 
 
 if __name__ == "__main__":

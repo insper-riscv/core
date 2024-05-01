@@ -19,7 +19,7 @@ class MODULE_BRANCH_UNIT(utils.DUT):
 @pytest.mark.synthesis
 def test_MODULE_BRANCH_UNIT_synthesis():
     MODULE_BRANCH_UNIT.build_vhd()
-    # MODULE_BRANCH_UNIT.build_netlistsvg()
+    MODULE_BRANCH_UNIT.build_netlistsvg()
 
 
 if __name__ == "__main__":

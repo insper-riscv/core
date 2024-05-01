@@ -53,7 +53,7 @@ async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: uti
 @pytest.mark.synthesis
 def test_GENERIC_EDGE_DETECTOR_synthesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
-    # GENERIC_EDGE_DETECTOR.build_netlistsvg()
+    GENERIC_EDGE_DETECTOR.build_netlistsvg()
 
 
 @pytest.mark.testcases

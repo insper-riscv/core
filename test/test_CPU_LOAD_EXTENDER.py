@@ -27,7 +27,7 @@ async def tb_CPU_LOAD_EXTENDER_case_1(dut: CPU_LOAD_EXTENDER, trace: utils.Trace
 @pytest.mark.synthesis
 def test_CPU_LOAD_EXTENDER_synthesis():
     CPU_LOAD_EXTENDER.build_vhd()
-    # CPU_LOAD_EXTENDER.build_netlistsvg()
+    CPU_LOAD_EXTENDER.build_netlistsvg()
 
 
 @pytest.mark.testcases

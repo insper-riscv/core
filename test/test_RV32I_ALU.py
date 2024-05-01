@@ -90,7 +90,7 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
 @pytest.mark.synthesis
 def test_RV32I_ALU_synthesis():
     RV32I_ALU.build_vhd()
-    # RV32I_ALU.build_netlistsvg()
+    RV32I_ALU.build_netlistsvg()
 
 
 @pytest.mark.testcases

@@ -74,7 +74,7 @@ async def tb_GENERIC_ADDER_stress(dut: GENERIC_ADDER, trace: utils.Trace):
 @pytest.mark.synthesis
 def test_GENERIC_ADDER_synthesis():
     GENERIC_ADDER.build_vhd()
-    # GENERIC_ADDER.build_netlistsvg()
+    GENERIC_ADDER.build_netlistsvg()
 
 
 @pytest.mark.testcases

@@ -21,7 +21,7 @@ class CPU_STAGE_WB(utils.DUT):
 @pytest.mark.synthesis
 def test_CPU_STAGE_WB_synthesis():
     CPU_STAGE_WB.build_vhd()
-    # CPU_STAGE_WB.build_netlistsvg()
+    CPU_STAGE_WB.build_netlistsvg()
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ class CPU_STAGE_MEM(utils.DUT):
 @pytest.mark.synthesis
 def test_CPU_STAGE_MEM_synthesis():
     CPU_STAGE_MEM.build_vhd()
-    # CPU_STAGE_MEM.build_netlistsvg()
+    CPU_STAGE_MEM.build_netlistsvg()
 
 
 if __name__ == "__main__":

@@ -103,7 +103,7 @@ async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: utils.Trace
 @pytest.mark.synthesis
 def test_RV32I_ALU_SHIFTER_synthesis():
     RV32I_ALU_SHIFTER.build_vhd()
-    # RV32I_ALU_SHIFTER.build_netlistsvg()
+    RV32I_ALU_SHIFTER.build_netlistsvg()
 
 
 @pytest.mark.testcases

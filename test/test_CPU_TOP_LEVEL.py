@@ -50,7 +50,7 @@ class CPU_TOP_LEVEL(utils.DUT):
 @pytest.mark.synthesis
 def test_CPU_TOP_LEVEL_synthesis():
     CPU_TOP_LEVEL.build_vhd()
-    # CPU_TOP_LEVEL.build_netlistsvg()
+    CPU_TOP_LEVEL.build_netlistsvg()
 
 
 @pytest.mark.testcases

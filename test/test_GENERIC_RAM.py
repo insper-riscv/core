@@ -81,7 +81,7 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: utils.Trace):
 @pytest.mark.synthesis
 def test_GENERIC_RAM_synthesis():
     GENERIC_RAM.build_vhd()
-    # GENERIC_RAM.build_netlistsvg()
+    GENERIC_RAM.build_netlistsvg()
 
 
 @pytest.mark.testcases

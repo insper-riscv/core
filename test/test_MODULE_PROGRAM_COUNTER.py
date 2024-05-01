@@ -57,7 +57,7 @@ async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: u
 @pytest.mark.synthesis
 def test_MODULE_PROGRAM_COUNTER_synthesis():
     MODULE_PROGRAM_COUNTER.build_vhd()
-    # MODULE_PROGRAM_COUNTER.build_netlistsvg()
+    MODULE_PROGRAM_COUNTER.build_netlistsvg()
 
 
 # @pytest.mark.testcases

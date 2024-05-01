@@ -120,7 +120,7 @@ async def tb_RV32I_ALU_CONTROLLER_case_1(dut: "RV32I_ALU_CONTROLLER", trace: uti
 @pytest.mark.synthesis
 def test_RV32I_ALU_CONTROLLER_synthesis():
     RV32I_ALU_CONTROLLER.build_vhd()
-    # RV32I_ALU_CONTROLLER.build_netlistsvg()
+    RV32I_ALU_CONTROLLER.build_netlistsvg()
 
 
 @pytest.mark.testcases

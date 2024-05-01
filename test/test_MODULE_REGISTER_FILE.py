@@ -116,7 +116,7 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
 @pytest.mark.synthesis
 def test_MODULE_REGISTER_FILE_synthesis():
     MODULE_REGISTER_FILE.build_vhd()
-    # MODULE_REGISTER_FILE.build_netlistsvg()
+    MODULE_REGISTER_FILE.build_netlistsvg()
 
 
 @pytest.mark.testcases

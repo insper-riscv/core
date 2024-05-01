@@ -55,7 +55,7 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
 @pytest.mark.synthesis
 def test_GENERIC_REGISTER_synthesis():
     GENERIC_REGISTER.build_vhd()
-    # GENERIC_REGISTER.build_netlistsvg()
+    GENERIC_REGISTER.build_netlistsvg()
 
 
 @pytest.mark.testcases

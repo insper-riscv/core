@@ -19,7 +19,7 @@ class CPU_STORE_EXTENDER(utils.DUT):
 @pytest.mark.synthesis
 def test_CPU_STORE_EXTENDER_synthesis():
     CPU_STORE_EXTENDER.build_vhd()
-    # CPU_STORE_EXTENDER.build_netlistsvg()
+    CPU_STORE_EXTENDER.build_netlistsvg()
 
 
 @pytest.mark.testcases

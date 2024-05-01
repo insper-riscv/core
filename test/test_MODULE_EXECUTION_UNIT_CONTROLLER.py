@@ -46,7 +46,7 @@ async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT
 @pytest.mark.synthesis
 def test_MODULE_EXECUTION_UNIT_CONTROLLER_synthesis():
     MODULE_EXECUTION_UNIT_CONTROLLER.build_vhd()
-    # MODULE_EXECUTION_UNIT_CONTROLLER.build_netlistsvg()
+    MODULE_EXECUTION_UNIT_CONTROLLER.build_netlistsvg()
 
 
 @pytest.mark.testcases
