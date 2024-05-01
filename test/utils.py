@@ -35,7 +35,7 @@ class VHD_Package():
             child.build_vhd(timeout)
             _BUILT[child.__name__] = True # type: ignore
 
-        cwd = Path("sim_build").mkdir(exist_ok=True)
+        cwd = Path("./sim_build/").mkdir(exist_ok=True)
         process = subprocess.Popen(
             [
                 "ghdl",
@@ -197,7 +197,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         if filename is not None:
             Path(filename).mkdir(exist_ok=True)
 
-        cwd = Path("sim_build").mkdir(exist_ok=True)
+        cwd = Path("./sim_build/").mkdir(exist_ok=True)
         entity = cls.__name__.lower()
 
         process = subprocess.Popen(
