@@ -1,73 +1,169 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity MODULE_CONTROL_UNIT is
 
     generic (
-        DATA_WIDTH    : natural := XLEN;
-        ADDRESS_WIDTH : natural := 5
+        DATA_WIDTH        : natural := WORK.RV32I.XLEN;
+        INSTRUCTION_WIDTH : natural := WORK.RV32I.INSTRUCTION_WIDTH
     );
 
     port (
-        instruction      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        address_program  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        --source_id        : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        jump_address     : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        immediate_source : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        control_if       : out t_CONTROL_IF;
-        control_ex       : out t_CONTROL_EX;
-        control_mem      : out t_CONTROL_MEM;
-        control_wb       : out t_CONTROL_WB
+        instruction : in  std_logic_vector((INSTRUCTION_WIDTH - 1) downto 0);
+        immediate   : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        control_if  : out WORK.CPU.t_CONTROL_IF;
+        control_id  : out WORK.CPU.t_CONTROL_ID;
+        control_ex  : out WORK.CPU.t_CONTROL_EX;
+        control_mem : out WORK.CPU.t_CONTROL_MEM;
+        control_wb  : out WORK.CPU.t_CONTROL_WB
     );
 
 end entity;
 
-architecture RTL of MODULE_CONTROL_UNIT is
+architecture RV32I of MODULE_CONTROL_UNIT is
 
-        signal immediate_tmp : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal adder_out_1   : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal adder_out_2   : std_logic_vector((DATA_WIDTH - 1) downto 0);
-        signal control_id    : t_CONTROL_ID;
+    -- No signals
 
 begin
 
-    CONTROL_UNIT : entity WORK.RV32I_INSTRUCTION_DECODER
-        port map (
-            instruction => instruction,
-            control_if  => control_if,
-            control_id  => control_id,
-            control_ex  => control_ex,
-            control_mem => control_mem,
-            control_wb  => control_wb,
-            immediate   => immediate_tmp
-        );
+    process(instruction) is
+        variable temp : WORK.RV32I.t_INSTRUCTION;
+    begin
+        temp := WORK.RV32I.to_instruction(instruction);
 
-    ADDER_1 : entity WORK.GENERIC_ADDER
-        port map (
-            source_1    => address_program,
-            source_2    => immediate_tmp,
-            destination => adder_out_1
-        );
+        case temp.encoding is
+            when WORK.RV32I.INSTRUCTION_I_TYPE =>
+                immediate <= temp.immediate_i;
+            when WORK.RV32I.INSTRUCTION_S_TYPE =>
+                immediate <= temp.immediate_s;
+            when WORK.RV32I.INSTRUCTION_B_TYPE =>
+                -- immediate <= temp.immediate_b;z
+            when WORK.RV32I.INSTRUCTION_U_TYPE =>
+                immediate <= temp.immediate_u;
+            when WORK.RV32I.INSTRUCTION_J_TYPE =>
+                immediate <= temp.immediate_j;
+            when others =>
+                immediate <= (others => '0');
+        end case;
 
-    ADDER_2 : entity WORK.GENERIC_ADDER
-        port map (
-            source_1    => immediate_tmp,
-            source_2    => data_source_1,
-            destination => adder_out_2
-        );
+        -- Instruction Fetch controls
+        control_if.enable_stall <= '0';
 
-    MUX : entity WORK.GENERIC_MUX_2X1
-        port map (
-            source_1    => adder_out_1,
-            source_2    => adder_out_2,
-            selector    => control_id.select_jump,
-            destination => jump_address
-        );   
+        control_if.enable_flush <= '0';
 
-    immediate_source <= immediate_tmp;
+        case temp.encoding is
+           when WORK.RV32I.INSTRUCTION_J_TYPE =>
+               control_if.enable_jump <= '1';
+           when others =>
+               case temp.opcode is
+                   when WORK.RV32I.OPCODE_JALR =>
+                       control_if.enable_jump <= '1';
+                   when others =>
+                       control_if.enable_jump <= '0';
+               end case;
+        end case;
 
+        control_if.select_source <= '1';
+
+        -- Instruction Decode controls
+
+        case temp.opcode is
+            when WORK.RV32I.OPCODE_JALR =>
+                control_id.select_jump <= '1';
+            when others =>
+                control_id.select_jump <= '0';
+        end case;
+
+        case temp.encoding is
+            when WORK.RV32I.INSTRUCTION_J_TYPE =>
+                control_id.enable_jump <= '1';
+            when others =>
+                case temp.opcode is
+                    when WORK.RV32I.OPCODE_JALR =>
+                        control_id.enable_jump <= '1';
+                    when others =>
+                        control_id.enable_jump <= '0';
+                end case;
+        end case;
+
+        case temp.encoding is
+            when WORK.RV32I.INSTRUCTION_B_TYPE =>
+                control_id.enable_branch <= '1';
+            when others =>
+                control_id.enable_branch <= '0';
+        end case;
+
+        control_id.enable_flush_id <= '0';
+
+        control_id.enable_flux_ex <= '0';
+
+        -- Execute controls
+
+        case temp.opcode is
+            when    WORK.RV32I.OPCODE_AUIPC |
+                    WORK.RV32I.OPCODE_JAL   |
+                    WORK.RV32I.OPCODE_JALR  =>
+                control_ex.select_source_1 <= "01";
+            when WORK.RV32I.OPCODE_LUI =>
+                control_ex.select_source_1 <= "10";
+            when others =>
+                control_ex.select_source_1 <= "00";
+        end case;
+
+        case temp.opcode is
+            when    WORK.RV32I.OPCODE_JAL   |
+                    WORK.RV32I.OPCODE_JALR  =>
+                control_ex.select_source_2 <= "10";
+            when others =>
+                case temp.encoding is
+                    when    WORK.RV32I.INSTRUCTION_I_TYPE   |
+                            WORK.RV32I.INSTRUCTION_U_TYPE   |
+                            WORK.RV32I.INSTRUCTION_S_TYPE   =>
+                        control_ex.select_source_2 <= "01";
+                    when others =>
+                        control_ex.select_source_2 <= "00";
+                end case;
+        end case;
+
+        control_ex.select_operation <= (others => '0');
+
+
+        -- Memory Access controls
+
+        case temp.opcode is
+            when WORK.RV32I.OPCODE_LOAD =>
+                control_mem.enable_read <= '1';
+            when others =>
+                control_mem.enable_read <= '0';
+        end case;
+
+        case temp.encoding is
+            when WORK.RV32I.INSTRUCTION_S_TYPE =>
+                control_mem.enable_write <= '1';
+            when others =>
+                control_mem.enable_write <= '0';
+        end case;
+
+        -- Write Back controls
+        case temp.encoding is
+            when    WORK.RV32I.INSTRUCTION_R_TYPE   | 
+                    WORK.RV32I.INSTRUCTION_I_TYPE   | 
+                    WORK.RV32I.INSTRUCTION_U_TYPE   | 
+                    WORK.RV32I.INSTRUCTION_J_TYPE   =>
+                control_wb.enable_destination <= '1';
+            when others =>
+                control_wb.enable_destination <= '0';
+        end case;
+
+        case temp.opcode is
+            when WORK.RV32I.OPCODE_LOAD =>
+                control_wb.select_destination <= '0';
+            when others =>
+                control_wb.select_destination <= '1';
+        end case;
+    end process;
+    
 end architecture;

@@ -4,9 +4,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_MUX_2X1(utils.DUT):
+    _package = GENERICS
+
     source_1 = utils.DUT.Input_pin
     source_2 = utils.DUT.Input_pin
     selector = utils.DUT.Input_pin
@@ -15,39 +18,39 @@ class GENERIC_MUX_2X1(utils.DUT):
 
 @GENERIC_MUX_2X1.testcase
 async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1, trace: utils.Trace):
-    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000010")
+    dut.source_1.value = BinaryValue("00000001")
+    dut.source_2.value = BinaryValue("00000010")
     dut.selector.value = BinaryValue("0")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000001")
+    yield trace.check(dut.destination, "00000001")
 
-    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000010")
+    dut.source_1.value = BinaryValue("00000001")
+    dut.source_2.value = BinaryValue("00000010")
     dut.selector.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000010")
+    yield trace.check(dut.destination, "00000010")
 
-    dut.source_1.value = BinaryValue("00000000000000000000000000000011")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000100")
+    dut.source_1.value = BinaryValue("00000011")
+    dut.source_2.value = BinaryValue("00000100")
     dut.selector.value = BinaryValue("0")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000011")
+    yield trace.check(dut.destination, "00000011")
 
-    dut.source_1.value = BinaryValue("00000000000000000000000000000011")
-    dut.source_2.value = BinaryValue("00000000000000000000000000000100")
+    dut.source_1.value = BinaryValue("00000011")
+    dut.source_2.value = BinaryValue("00000100")
     dut.selector.value = BinaryValue("1")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000100")
+    yield trace.check(dut.destination, "00000100")
 
 
 @pytest.mark.synthesis
 def test_GENERIC_MUX_2X1_synthesis():
     GENERIC_MUX_2X1.build_vhd()
-    # GENERIC_MUX_2X1.build_netlistsvg()
+    GENERIC_MUX_2X1.build_netlistsvg()
 
 
 @pytest.mark.testcases

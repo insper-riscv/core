@@ -7,9 +7,12 @@ from cocotb.triggers import RisingEdge, FallingEdge
 from cocotb.clock import Clock
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_EDGE_DETECTOR(utils.DUT):
+    _package = GENERICS
+
     clock = utils.DUT.Input_pin
     source = utils.DUT.Input_pin
     pulse = utils.DUT.Output_pin
@@ -50,7 +53,7 @@ async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: uti
 @pytest.mark.synthesis
 def test_GENERIC_EDGE_DETECTOR_synthesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
-    # GENERIC_EDGE_DETECTOR.build_netlistsvg()
+    GENERIC_EDGE_DETECTOR.build_netlistsvg()
 
 
 @pytest.mark.testcases

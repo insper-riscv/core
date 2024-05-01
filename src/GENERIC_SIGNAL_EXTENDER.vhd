@@ -2,13 +2,12 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_SIGNAL_EXTENDER is
 
     generic (
-        SOURCE_WIDTH      : natural := XLEN / 2;
-        DESTINATION_WIDTH : natural := XLEN
+        SOURCE_WIDTH      : natural := 4;
+        DESTINATION_WIDTH : natural := 8
     );
 
     port (

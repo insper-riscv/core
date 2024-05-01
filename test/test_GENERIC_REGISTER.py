@@ -6,9 +6,12 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_REGISTER(utils.DUT):
+    _package = GENERICS
+
     clock = utils.DUT.Input_pin
     clear = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
@@ -21,18 +24,18 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
     values_clear = ["0", "0", "1", "0", "0"]
     values_enable = ["1", "0", "0", "1", "1"]
     values_source = [
-        "11111111111111111111111111111111",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "11111111111111111111111111111111",
-        "00000000000000000000000000000000",
+        "11111111",
+        "00000000",
+        "00000000",
+        "11111111",
+        "00000000",
     ]
     values_destination = [
-        "11111111111111111111111111111111",
-        "11111111111111111111111111111111",
-        "00000000000000000000000000000000",
-        "11111111111111111111111111111111",
-        "00000000000000000000000000000000",
+        "11111111",
+        "11111111",
+        "00000000",
+        "11111111",
+        "00000000",
     ]
     clock = Clock(dut.clock, 20000, units="ns")
 
@@ -52,7 +55,7 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
 @pytest.mark.synthesis
 def test_GENERIC_REGISTER_synthesis():
     GENERIC_REGISTER.build_vhd()
-    # GENERIC_REGISTER.build_netlistsvg()
+    GENERIC_REGISTER.build_netlistsvg()
 
 
 @pytest.mark.testcases

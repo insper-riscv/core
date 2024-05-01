@@ -2,12 +2,11 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_MUX_2X1 is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        DATA_WIDTH : natural := 8
     );
 
     port (
@@ -25,7 +24,7 @@ architecture RTL of GENERIC_MUX_2X1 is
 
 begin
 
-    destination <= source_2 when (selector = '1') else
-                   source_1;
+    destination <=  source_2 when (selector = '1') else
+                    source_1;
 
 end architecture;

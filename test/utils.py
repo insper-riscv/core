@@ -1,9 +1,9 @@
-from inspect import isclass
+import os
 import json
-import typing as T
 import subprocess
+import typing as T
+from inspect import isclass
 from pathlib import Path
-import json
 
 import cocotb.binary
 import cocotb.handle
@@ -18,12 +18,44 @@ import pytest_check as check
 _TESTCASE_TYPE = T.Union[
     T.Callable[["DUT"], None], T.Sequence[T.Callable[["DUT"], None]]
 ]
-_BUILT: T.List[str] = []
+_BUILT: T.Dict[str, bool] = {}
 
 runner = cocotb.runner.get_runner("ghdl")
 
 
+class VHD_Package():
+    children: T.List[T.Type["VHD_Package"]] = []
+
+    @classmethod
+    def build_vhd(cls, timeout: int = 60):
+        for child in cls.children:
+            if child.__name__ in _BUILT: # type: ignore
+                continue
+
+            child.build_vhd(timeout)
+            _BUILT[child.__name__] = True # type: ignore
+
+        os.makedirs("sim_build", exist_ok=True)
+
+        process = subprocess.Popen(
+            [
+                "ghdl",
+                "-a",
+                "--std=08",
+                "--work=top",
+                f"../src/{cls.__name__}.vhd",
+            ],
+            cwd="sim_build",
+            stdout=subprocess.PIPE,
+        )
+
+        outs, errs = process.communicate(timeout=timeout)
+
+        assert process.returncode == 0, outs.decode()
+
+
 class DUT(T.Type[cocotb.handle.HierarchyObject]):
+    _package: T.Union[T.Type[VHD_Package], None] = None
     _log: T.Any
 
     class Input_pin(T.Type[cocotb.handle.ModifiableObject]):
@@ -37,7 +69,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         if isinstance(case, list):
             return [case.__name__ for case in case]
 
-        return case.__name__
+        return case.__name__ # type: ignore
 
     @classmethod
     def testcase(cls, fn):
@@ -142,19 +174,21 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
 
     @classmethod
     def build_vhd(cls):
+        if cls._package is not None:
+            cls._package.build_vhd()
+
         for child in cls._get_children():
             if child.__name__ in _BUILT:
                 continue
 
             child.build_vhd()
-            _BUILT.append(child.__name__)
+            _BUILT[child.__name__] = True
 
         runner.build(
             always=True,
             build_args=["--std=08"],
             vhdl_sources=[
-                "src/TOP_LEVEL_CONSTANTS.vhd",
-                f"src/{cls.__name__}.vhd",
+                f"src/{cls.__name__}.vhd"
             ],
             hdl_toplevel=cls.__name__.lower(),
         )
@@ -163,6 +197,8 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
     def build_netlistsvg(cls, filename: T.Optional[str] = None):
         if filename is not None:
             Path(filename).mkdir(exist_ok=True)
+
+        os.makedirs("sim_build", exist_ok=True)
 
         entity = cls.__name__.lower()
 
@@ -351,4 +387,4 @@ class Trace2(cocotb.wavedrom.trace):
 def convert_to_binstr(value: int, length: int) -> str:
     if len(bin(value)[2:]) < length:
         return bin(value)[2:].zfill(length)
-    return bin(value)[-32:]
+    return bin(value)[-length:]

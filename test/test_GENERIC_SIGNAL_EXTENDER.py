@@ -3,9 +3,12 @@ import os
 import pytest
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_SIGNAL_EXTENDER(utils.DUT):
+    _package = GENERICS
+
     source = utils.DUT.Input_pin
     enable_unsigned = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
@@ -14,7 +17,7 @@ class GENERIC_SIGNAL_EXTENDER(utils.DUT):
 @pytest.mark.synthesis
 def test_GENERIC_SIGNAL_EXTENDER_synthesis():
     GENERIC_SIGNAL_EXTENDER.build_vhd()
-    # GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
+    GENERIC_SIGNAL_EXTENDER.build_netlistsvg()
 
 
 if __name__ == "__main__":

@@ -6,39 +6,22 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 from utils_interpreter import *
+from utils_GENERIC_ROM import *
 
 import utils
 from test_GENERIC_ROM import GENERIC_ROM
 from test_GENERIC_RAM import GENERIC_RAM
-from test_STAGE_IF import STAGE_IF
-from test_STAGE_ID import STAGE_ID
-from test_STAGE_EX import STAGE_EX
-from test_STAGE_MEM import STAGE_MEM
-from test_STAGE_WB import STAGE_WB
-from test_CPU_LOAD_EXTENDER import CPU_LOAD_EXTENDER
+from test_CPU_TOP_LEVEL import CPU_TOP_LEVEL
+
 
 class TOP_LEVEL(utils.DUT):
     clock = utils.DUT.Input_pin
-    data_program = utils.DUT.Input_pin
-    data_memory_in = utils.DUT.Input_pin
     sw = utils.DUT.Input_pin
-    data_memory_out = utils.DUT.Output_pin
-    address_program = utils.DUT.Output_pin
-    address_memory = utils.DUT.Output_pin
-    memory_read = utils.DUT.Output_pin
-    memory_write = utils.DUT.Output_pin
-    store_byte     = utils.DUT.Output_pin
-    store_halfword = utils.DUT.Output_pin
     led = utils.DUT.Output_pin
 
     rom = GENERIC_ROM
     ram = GENERIC_RAM
-    stage_if = STAGE_IF
-    stage_id = STAGE_ID
-    stage_ex = STAGE_EX
-    stage_mem = STAGE_MEM
-    stage_wb = STAGE_WB
-    cpu_load_extender = CPU_LOAD_EXTENDER
+    cpu = CPU_TOP_LEVEL
 
 @TOP_LEVEL.testcase
 async def tb_TOP_LEVEL_SLL(dut: TOP_LEVEL, trace: utils.Trace):
@@ -64,7 +47,7 @@ async def tb_TOP_LEVEL_SLL(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
 async def tb_TOP_LEVEL_SLLI(dut: TOP_LEVEL, trace: utils.Trace):
@@ -89,7 +72,7 @@ async def tb_TOP_LEVEL_SLLI(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
 async def tb_TOP_LEVEL_SRL(dut: TOP_LEVEL, trace: utils.Trace):
@@ -117,7 +100,7 @@ async def tb_TOP_LEVEL_SRL(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
 async def tb_TOP_LEVEL_SRLI(dut: TOP_LEVEL, trace: utils.Trace):
@@ -143,7 +126,7 @@ async def tb_TOP_LEVEL_SRLI(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
 async def tb_TOP_LEVEL_SRA(dut: TOP_LEVEL, trace: utils.Trace):
@@ -171,7 +154,7 @@ async def tb_TOP_LEVEL_SRA(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @TOP_LEVEL.testcase
 async def tb_TOP_LEVEL_SRAI(dut: TOP_LEVEL, trace: utils.Trace):
@@ -203,7 +186,7 @@ async def tb_TOP_LEVEL_SRAI(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        yield trace.check(dut.stage_wb.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @pytest.mark.testcases
 def test_TOP_LEVEL_SHIFT_INSTRUCTIONS_testcases():
@@ -263,8 +246,7 @@ def test_TOP_LEVEL_SHIFT_INSTRUCTIONS_testcases():
         ],
     )
 
-    assembly = "./src/RV32I_INSTRUCTIONS/BUILD_INSTRUCTION_LUI.asm"
-    create_binary_instructions(assembly, memory, instruction_opcode, instruction_funct3, instruction_funct7, instruction_type)
+    create_GENERIC_ROM(memory)
 
 if __name__ == "__main__":
     pytest.main(["-k", os.path.basename(__file__)])

@@ -6,82 +6,100 @@ jobs:
   test:
     name: Test ${{ matrix.component }}
     runs-on: ubuntu-latest
+    container:
+      image: hdlc/ghdl:yosys
     strategy:
       matrix:
           include:
-            - component: GENERIC_ADDER
-              enabled: true
-            - component: GENERIC_COUNTER
-              enabled: false
-            - component: GENERIC_DEBOUNCE
-              enabled: false
-            - component: GENERIC_EDGE_DETECTOR
-              enabled: false
-            - component: GENERIC_FLIP_FLOP
-              enabled: false
-            - component: GENERIC_MUX_2X1
-              enabled: false
-            - component: GENERIC_MUX_4X1
-              enabled: false
-            - component: GENERIC_RAM
-              enabled: false
-            - component: GENERIC_REGISTER
-              enabled: false
-            - component: GENERIC_ROM
-              enabled: false
-            - component: GENERIC_SIGNAL_EXTENDER
-              enabled: false
-            - component: MODULE_ALU
-              enabled: false
-            - component: MODULE_ALU_CONTROLLER
-              enabled: false
-            - component: MODULE_CONTROL_UNIT
-              enabled: false
-            - component: MODULE_PC
-              enabled: false
-            - component: MODULE_REGISTER_FILE
-              enabled: false
-            - component: MODULE_WRITE_BACK
-              enabled: false
-            - component: RV32I_ALU
-              enabled: false
-            - component: RV32I_ALU_BIT
-              enabled: false
-            - component: RV32I_ALU_CONTROLLER
-              enabled: false
-            - component: RV32I_INSTRUCTION_DECODER
-              enabled: false
-            - component: RV32I_REGISTER_FILE
-              enabled: false
-            - component: STAGE_EX
-              enabled: false
-            - component: STAGE_ID
-              enabled: false
-            - component: STAGE_IF
-              enabled: false
-            - component: STAGE_MEM
-              enabled: false
-            - component: STAGE_WB
-              enabled: false
-            - component: TOP_LEVEL
-              enabled: false
+          - component: test_CPU_EXECUTION_FOWARDING_UNIT.py
+            enabled: true
+          - component: test_CPU_LOAD_EXTENDER.py
+            enabled: false
+          - component: test_CPU_STAGE_EX.py
+            enabled: false
+          - component: test_CPU_STAGE_ID.py
+            enabled: false
+          - component: test_CPU_STAGE_IF.py
+            enabled: false
+          - component: test_CPU_STAGE_MEM.py
+            enabled: false
+          - component: test_CPU_STAGE_WB.py
+            enabled: false
+          - component: test_CPU_STORE_EXTENDER.py
+            enabled: false
+          - component: test_CPU_TOP_LEVEL.py
+            enabled: false
+          - component: test_GENERIC_ADDER.py
+            enabled: false
+          - component: test_GENERIC_COMPARATOR.py
+            enabled: false
+          - component: test_GENERIC_DEBOUNCE.py
+            enabled: false
+          - component: test_GENERIC_EDGE_DETECTOR.py
+            enabled: false
+          - component: test_GENERIC_FLIP_FLOP.py
+            enabled: false
+          - component: test_GENERIC_MUX_2X1.py
+            enabled: false
+          - component: test_GENERIC_MUX_4X1.py
+            enabled: false
+          - component: test_GENERIC_RAM.py
+            enabled: false
+          - component: test_GENERIC_REGISTER.py
+            enabled: false
+          - component: test_GENERIC_ROM.py
+            enabled: false
+          - component: test_GENERIC_SIGNAL_EXTENDER.py
+            enabled: false
+          - component: test_MODULE_BRANCH_COMPARE_UNIT.py
+            enabled: false
+          - component: test_MODULE_BRANCH_UNIT.py
+            enabled: false
+          - component: test_MODULE_CONTROL_UNIT.py
+            enabled: false
+          - component: test_MODULE_EXECUTION_UNIT_CONTROLLER.py
+            enabled: false
+          - component: test_MODULE_EXECUTION_UNIT.py
+            enabled: false
+          - component: test_MODULE_PROGRAM_COUNTER.py
+            enabled: false
+          - component: test_MODULE_REGISTER_FILE.py
+            enabled: false
+          - component: test_MODULE_WRITE_BACK.py
+            enabled: false
+          - component: test_RV32I_ALU_BIT.py
+            enabled: false
+          - component: test_RV32I_ALU_CONTROLLER.py
+            enabled: false
+          - component: test_RV32I_ALU_SHIFTER.py
+            enabled: false
+          - component: test_RV32I_ALU.py
+            enabled: false
+          - component: test_RV32I_BRANCH_CONTROLLER.py
+            enabled: false
+          - component: test_RV32I_REGISTER_FILE.py
+            enabled: false
+          - component: test_TOP_LEVEL.py
+            enabled: false
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: llvm
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install packages
+      run: |
+        apt-get update -qq              \
+        && apt-get upgrade -y           \
+        && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
+            ca-certificates             \
+            libpython3-all-dev          \
+            npm                         \
+            python3                     \
+            python3-pip                 \
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        pip install -r requirements.txt
+        npm install -g netlistsvg
     - name: Run Synthesis
-      if: ${{ contains(matrix.enabled, true) }}
       run: pytest -k ${{ matrix.component }} -m synthesis
-    - name: Run Test Cases
+    - name: Run Testcases
       if: ${{ contains(matrix.enabled, true) }}
-      run: pytest -k ${{ matrix.component }} -m stress
+      run: pytest -k ${{ matrix.component }} -m sress

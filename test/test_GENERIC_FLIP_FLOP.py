@@ -6,9 +6,12 @@ from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 
 import utils
+from test_GENERICS_package import GENERICS
 
 
 class GENERIC_FLIP_FLOP(utils.DUT):
+    _package = GENERICS
+
     clock = utils.DUT.Input_pin
     clear = utils.DUT.Input_pin
     enable = utils.DUT.Input_pin
@@ -40,7 +43,7 @@ async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: utils.Trace
 @pytest.mark.synthesis
 def test_GENERIC_FLIP_FLOP_synthesis():
     GENERIC_FLIP_FLOP.build_vhd()
-    # GENERIC_FLIP_FLOP.build_netlistsvg()
+    GENERIC_FLIP_FLOP.build_netlistsvg()
 
 
 @pytest.mark.testcases
