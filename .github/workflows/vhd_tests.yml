@@ -74,8 +74,6 @@ jobs:
             enabled: true
           - component: RV32I_ALU_BIT
             enabled: true
-          - component: RV32I_ALU_CONTROLLER
-            enabled: true
           - component: RV32I_ALU_SHIFTER
             enabled: true
           - component: RV32I_ALU

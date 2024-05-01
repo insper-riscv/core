@@ -22,14 +22,27 @@ end entity;
 
 architecture RV32I of MODULE_EXECUTION_UNIT_CONTROLLER is
 
+    -- No signals
+
 begin
 
-    ALU_CONTROLLER : entity WORK.RV32I_ALU_CONTROLLER
-        port map (
-            opcode      => opcode,
-            funct3      => funct_3,
-            funct7      => funct_7,
-            destination => destination
-        );
+    destination <=  '1' & funct_3 when (
+                        (opcode = WORK.RV32I.OPCODE_OP or
+                        opcode = WORK.RV32I.OPCODE_OP_IMM) and
+                        (funct_3 = WORK.RV32I.FUNCT3_SLT or
+                        funct_3 = WORK.RV32I.FUNCT3_SLTU)
+                    ) else
+                    funct_7(5) & funct_3 when (
+                        opcode = WORK.RV32I.OPCODE_OP or
+                        opcode = WORK.RV32I.OPCODE_OP_IMM
+                    ) else
+                    '0' & WORK.RV32I.FUNCT3_ADDI when (
+                        opcode = WORK.RV32I.OPCODE_SYSTEM
+                    ) else
+                    '0' & WORK.RV32I.FUNCT3_ADD when (
+                        opcode = WORK.RV32I.OPCODE_LOAD or
+                        opcode = WORK.RV32I.OPCODE_STORE
+                    ) else
+                    '0' & WORK.RV32I.FUNCT3_OR;
 
 end architecture;
