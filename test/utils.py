@@ -43,7 +43,7 @@ class VHD_Package():
                 "--work=top",
                 f"../src/{cls.__name__}.vhd",
             ],
-            cwd="sim_build",
+            cwd=cwd,
             stdout=subprocess.PIPE,
         )
 
@@ -196,6 +196,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         if filename is not None:
             Path(filename).mkdir(exist_ok=True)
 
+        cwd = Path("sim_build").mkdir(exist_ok=True)
         entity = cls.__name__.lower()
 
         process = subprocess.Popen(
@@ -206,7 +207,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 "-p",
                 f"ghdl --std=08 --work=top {entity}; prep -top {cls.__name__}; write_json -compat-int {entity}.json",
             ],
-            cwd="sim_build",
+            cwd=cwd,
             stdout=subprocess.PIPE,
         )
 
@@ -223,7 +224,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 "-o",
                 filename or f"{entity}_netlist.svg",
             ],
-            cwd="sim_build",
+            cwd=cwd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
