@@ -1,9 +1,9 @@
-from inspect import isclass
+import os
 import json
-import typing as T
 import subprocess
+import typing as T
+from inspect import isclass
 from pathlib import Path
-import json
 
 import cocotb.binary
 import cocotb.handle
@@ -35,7 +35,8 @@ class VHD_Package():
             child.build_vhd(timeout)
             _BUILT[child.__name__] = True # type: ignore
 
-        cwd = Path("./sim_build/").mkdir(exist_ok=True)
+        os.makedirs("sim_build", exist_ok=True)
+
         process = subprocess.Popen(
             [
                 "ghdl",
@@ -44,7 +45,7 @@ class VHD_Package():
                 "--work=top",
                 f"../src/{cls.__name__}.vhd",
             ],
-            cwd=cwd,
+            cwd="sim_build",
             stdout=subprocess.PIPE,
         )
 
@@ -197,7 +198,8 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
         if filename is not None:
             Path(filename).mkdir(exist_ok=True)
 
-        cwd = Path("./sim_build/").mkdir(exist_ok=True)
+        os.makedirs("sim_build", exist_ok=True)
+
         entity = cls.__name__.lower()
 
         process = subprocess.Popen(
@@ -208,7 +210,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 "-p",
                 f"ghdl --std=08 --work=top {entity}; prep -top {cls.__name__}; write_json -compat-int {entity}.json",
             ],
-            cwd=cwd,
+            cwd="sim_build",
             stdout=subprocess.PIPE,
         )
 
@@ -225,7 +227,7 @@ class DUT(T.Type[cocotb.handle.HierarchyObject]):
                 "-o",
                 filename or f"{entity}_netlist.svg",
             ],
-            cwd=cwd,
+            cwd="sim_build",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
