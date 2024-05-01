@@ -67,7 +67,7 @@ jobs:
           - component: MODULE_EXECUTION_UNIT
             enabled: true
           - component: MODULE_PROGRAM_COUNTER
-            enabled: true
+            enabled: false
           - component: MODULE_REGISTER_FILE
             enabled: true
           - component: MODULE_WRITE_BACK
