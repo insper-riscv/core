@@ -102,6 +102,7 @@ jobs:
         && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
             ca-certificates     \
             wget                \
+            libmpc-dev          \
             libpython3-all-dev  \
             npm                 \
             python3             \
