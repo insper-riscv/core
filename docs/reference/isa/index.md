@@ -6,8 +6,8 @@ outline: [2, 3]
 
 ## Sintaxe
 
-As instruções são vetores binários de 32 bits. Cada tipo de instrução reserva
-sua sintaxe seguindo os segmentos:
+As instruções são vetores binários de 32 _bits_, podendo ser classificadas de duas formas: segundo sua sintaxe,
+ou de acordo com sua função. No que se refere à sintaxe, as instruções podem ser do tipo R, I, S, B, U ou J, como demonstrado:
 
 <table>
     <thead>
@@ -166,7 +166,19 @@ sua sintaxe seguindo os segmentos:
     </tbody>
 </table>
 
-Sendo, para cada segmento:
+Instruções do tipo R são usadas para realizar operações entre registradores.
+
+Instruções do tipo I são utilizadas para realizar operações em registradores com uso de valores imediatos.
+
+Instruções do tipo S armazenam valores na memória.
+
+Instruções do tipo B realizam desvios no programa dependendo do resultado da comparação de valores em dois registradores.
+
+Instruções do tipo U são empregadas em operações que usam os 20 _bits_ mais significativos da instrução como imediato, com os _bits_ remanescentes sendo 0.
+
+Apenas a instrução JAL (_Jump and Link_ - Salto e Conexão) é do tipo J.
+
+Sendo, para cada segmento da instrução:
 
 - `opcode`: Codifica o tipo de instrução ou uma instrução específica;
 - `funct3`: Codifica a operacionalização da instrução;
@@ -176,13 +188,13 @@ Sendo, para cada segmento:
 - `rd`: Endereça registrador de destinação;
 - `imm`: Vetor do imediato.
 
-Observação: Em alguns caso, é possível ver que um bit da instrução representa um 
-intervalo de bits, como imm[31:20] por exemplo. Esses são casos onde os bits 
-mais significativos do imediato são o bit mais significativo da instrução extendido.
+Observação: Em alguns caso, é possível ver que um_bit_ da instrução representa um 
+intervalo de _bits_, como imm[31:20] por exemplo. Esses são casos onde os _bits_ 
+mais significativos do imediato são o_bit_ mais significativo da instrução extendido.
 
 ### Opcode
 
-Opcodes são segmentos de 7 bits do vetor de instrução. Cada tipo de instrução
+Opcodes são segmentos de 7 _bits_ do vetor de instrução. Cada tipo de instrução
 possui um opcode ou uma instrução possui um opcode exclusivo. Para alguns tipos
 de instrução, são codificados com mais de um opcode, seguindo a seguinte
 generalização:
@@ -198,7 +210,7 @@ generalização:
 
 ### Imediato
 
-Os imediatos são vetores binários de 32 bits. Cada tipo de instrução com
+Os imediatos são vetores binários de 32 _bits_. Cada tipo de instrução com
 imediato possui uma sintaxe seguindo os segmentos:
 
 <table>
@@ -254,15 +266,28 @@ Sendo, para cada segmento, `inst` o vetor da instrução.
 
 ---
 
+Por sua vez, a classificação das instruções segundo sua funcionalidade divide-as em grupos independentemente de sua estrutura. Esses grupos incluem:
+
+- As instruções de construção, que criam valores em registradores;
+- As instruções de deslocamento, que realizam operações de deslocamento de _bits_ nos valores armazenados nos registradores;
+- As instruções aritméticas, que efetuam operações matemáticas;
+- As instruções lógicas, que são responsáveis por operações lógicas;
+- As instruções de desvio, que alteram o fluxo de execução do programa com base em condições; 
+- As instruções de salto, que permitem saltos para outras partes do programa; 
+- As instruções de carregar, que carregam valores da memória para os registradores; 
+- As instruções de armazenar, que guardam valores dos registradores na memória.
+
+Nas instruções que se seguem, RV32I Base significa que elas pertencem ao conjunto base de instruções para inteiros de 32 _bits_, e “M” _Standard Extension_ significa que elas pertencem à extensão de Multiplicação:
+
 ## Carrega Constante
 
 ### `LUI` <Badge type="info" text="RV32I Base" />
 
 Load Upper Immediate (Carregar Superior Imediato).
 
-Carrega registradores com valores constantes de 32 bits. `LUI` guarda o valor 
-imediato dos 20 bits mais significativos da instrução nos 20 bits mais 
-significativos do registrador de destino `rd`, preenchendo os 12 bits menos 
+Carrega registradores com valores constantes de 32 _bits_. `LUI` guarda o valor 
+imediato dos 20 _bits_ mais significativos da instrução nos 20 _bits_ mais 
+significativos do registrador de destino `rd`, preenchendo os 12 _bits_ menos 
 significativos com zero.
 
 #### Sintaxe
@@ -285,8 +310,8 @@ significativos com zero.
 
 Add Upper Immediate (Adiciona Superior Imediato).
 
-Desloca o valor do imediato da instrução, que consiste nos 20 bits mais significativos, 
-12 bits à esquerda, preenchendo os 12 bits menos significativos com zero, e o adiciona 
+Desloca o valor do imediato da instrução, que consiste nos 20 _bits_ mais significativos, 
+12 _bits_ à esquerda, preenchendo os 12 _bits_ menos significativos com zero, e o adiciona 
 ao PC. O resultado é então escrito no registrador de destino `rd`. 
 
 #### Sintaxe
@@ -583,7 +608,7 @@ números sem sinal, arredondando para zero, e armazena o resto no registrador de
 
 Exclusive OR (OU Exclusivo).
 
-Realiza a operação lógica XOR, bit a bit, entre os valores armazenados nos 
+Realiza a operação lógica XOR,_bit_ a_bit_, entre os valores armazenados nos 
 registradores `rs1` e `rs2` e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
@@ -606,7 +631,7 @@ registradores `rs1` e `rs2` e armazena o resultado no registrador de destino `rd
 
 Exclusive OR Immediate (OU Exclusivo Imediato).
 
-Realiza a operação lógica XOR, bit a bit, entre o valor armazenado no registrador `rs1` e o imediato
+Realiza a operação lógica XOR,_bit_ a_bit_, entre o valor armazenado no registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
@@ -629,7 +654,7 @@ com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 OR (OU).
 
-Realiza a operação lógica OR, bit a bit, entre os valores armazenados nos registradores `rs1` e `rs2` e
+Realiza a operação lógica OR,_bit_ a_bit_, entre os valores armazenados nos registradores `rs1` e `rs2` e
 armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
@@ -652,7 +677,7 @@ armazena o resultado no registrador de destino `rd`.
 
 OR Immediate (OU Imediato).
 
-Realiza a operação lógica OR, bit a bit, entre o valor armazenado no registrador `rs1` e o imediato
+Realiza a operação lógica OR,_bit_ a_bit_, entre o valor armazenado no registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
@@ -675,7 +700,7 @@ com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 AND (E).
 
-Realiza a operação lógica AND, bit a bit, entre os valores armazenados nos registradores `rs1` e `rs2` e
+Realiza a operação lógica AND,_bit_ a_bit_, entre os valores armazenados nos registradores `rs1` e `rs2` e
 armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
@@ -698,7 +723,7 @@ armazena o resultado no registrador de destino `rd`.
 
 AND Immediate (E Imediato).
 
-Realiza a operação lógica OR, bit a bit, entre o valor armazenado no registrador `rs1` e o imediato
+Realiza a operação lógica OR,_bit_ a_bit_, entre o valor armazenado no registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
@@ -724,8 +749,8 @@ com sinal estendido e armazena o resultado no registrador de destino `rd`.
 Shift Left Logical (Deslocamento à Esquerda Lógico).
 
 Desloca o valor armazenado no registrador `rs1` à esquerda pelo número de posições indicado
-pelos 5 bits menos significativos do valor armazenado no registrador `rs2`. Os bits
-remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
+pelos 5 _bits_ menos significativos do valor armazenado no registrador `rs2`. Os _bits_
+remanescentes de `rs2` são ignorados. Os _bits_ vazios de `rs1` são preenchidos
 com zeros. O resultado é escrito no registrador de destino `rd`.
 
 #### Sintaxe
@@ -749,7 +774,7 @@ com zeros. O resultado é escrito no registrador de destino `rd`.
 Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à esquerda pelo número de posições indicado
-pelo `shamt`. Os bits vazios de `rs1` são preenchidos com zeros. O resultado é
+pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com zeros. O resultado é
 escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
 
 #### Sintaxe
@@ -773,8 +798,8 @@ escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
 Shift Right Logical (Deslocamento à Direita Lógico).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
-pelos 5 bits menos significativos do valor armazenado no registrador `rs2`. Os bits
-remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
+pelos 5 _bits_ menos significativos do valor armazenado no registrador `rs2`. Os _bits_
+remanescentes de `rs2` são ignorados. Os _bits_ vazios de `rs1` são preenchidos
 com zeros. O resultado é escrito no registrador de destino `rd`.
 
 #### Sintaxe
@@ -798,7 +823,7 @@ com zeros. O resultado é escrito no registrador de destino `rd`.
 Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
-pelo `shamt`. Os bits vazios de `rs1` são preenchidos com zeros. O resultado é
+pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com zeros. O resultado é
 escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
 
 #### Sintaxe
@@ -822,9 +847,9 @@ escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
 Shift Right Arithmetic (Deslocamento à Direita Aritmético).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
-pelos 5 bits menos significativos do valor armazenado no registrador `rs2`. Os bits
-remanescentes de `rs2` são ignorados. Os bits vazios de `rs1` são preenchidos
-com cópias do bit mais significativo de `rs1`. O resultado é escrito no
+pelos 5 _bits_ menos significativos do valor armazenado no registrador `rs2`. Os _bits_
+remanescentes de `rs2` são ignorados. Os _bits_ vazios de `rs1` são preenchidos
+com cópias do_bit_ mais significativo de `rs1`. O resultado é escrito no
 registrador de destino `rd`.
 
 #### Sintaxe
@@ -848,7 +873,7 @@ registrador de destino `rd`.
 Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
-pelo `shamt`. Os bits vazios de `rs1` são preenchidos com cópias do bit mais
+pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com cópias do_bit_ mais
 significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. Só é
 permitido quando `shamt[5] = 0`.
 
@@ -996,7 +1021,7 @@ omitido, o valor de retorno é armazenado em `x1`.
 
 Jump and Link Register (Salto e Link por Registrador).
 
-Realiza um cópia do PC para `rs1 + sext(offset)`, mascara bit menos
+Realiza um cópia do PC para `rs1 + sext(offset)`, mascara_bit_ menos
 significativo do endereço resultante e armazena o endereço anterior de PC+4 no
 registrador de destino `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
 

@@ -25,21 +25,21 @@ outline: 2
 Largura dos vetores de dados `source` e `destination`.
 
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `8`
 
 ### `ADDRESS_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura do vetor da entrada `address`.
 
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `8`
 
 ### `ADDRESSABLE_WIDTH` <Badge type="neutral" text="GENERIC" />
 
 Largura do vetor de endereçamento com mapeamento na memória.
 
 - Tipo: `natural`
-- Padrão: `10`
+- Padrão: `7`
 
 ::: warning ATENÇÃO!
 

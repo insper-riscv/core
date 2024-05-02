@@ -25,7 +25,7 @@ outline: 2
 Largura dos vetores de dados `source` e `destination`.
 
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `8`
 
 ## Interface de portas
 
@@ -37,42 +37,26 @@ Entrada do sinal de clock.
 
 ### `clear` <Badge type="success" text="INPUT" />
 
-::: danger TO DO
-
-Descrição.
-
-:::
+Entrada do sinal que limpa o valor armazenado no registrador.
 
 - Tipo: `std_logic`
 
 ### `enable` <Badge type="success" text="INPUT" />
 
-::: danger TO DO
-
-Descrição.
-
-:::
+Entrada do sinal que ativa o registrador.
 
 - Tipo: `std_logic`
 
 ### `source` <Badge type="success" text="INPUT" />
 
-::: danger TO DO
-
-Descrição.
-
-:::
+Entrada do vetor de dados.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`
 
 ### `destination` <Badge type="danger" text="OUTPUT" />
 
-::: danger TO DO
-
-Descrição.
-
-:::
+Saída do vetor de dados armazenado no registrador.
 
 - Tipo: `std_logic_vector`
 - Largura: variável `(DATA_WIDTH - 1) downto 0`

@@ -22,34 +22,30 @@ outline: 2
 
 ### `SOURCE_WIDTH` <Badge type="neutral" text="GENERIC" />
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `4`
 
 ### `DESTINATION_WIDTH` <Badge type="neutral" text="GENERIC" />
 - Tipo: `natural`
-- Padrão: `XLEN` (constante externa)
+- Padrão: `8`
 
 ## Interface de portas
 
 ### `source` <Badge type="success" text="INPUT" />
 
-Vetor de entrada de dados.
+Entrada do vetor de dados.
 
 - Tipo: `std_logic_vector`
 - Largura: `(SOURCE_WIDTH - 1) downto 0`
 
 ### `enable_unsigned` <Badge type="success" text="INPUT" />
 
-::: danger TO DO
-
-Descrição.
-
-:::
+Entrada do sinal que indica se o vetor de dados tem ou não sinal.
 
 - Tipo: `std_logic`
 
 ### `destination` <Badge type="danger" text="OUTPUT" />
 
-Vetor de entrada de dados com sinal estendido.
+Saída do vetor de dados com sinal estendido.
 
 - Tipo: `std_logic_vector`
 - Largura: `(DESTINATION_WIDTH - 1) downto 0`
