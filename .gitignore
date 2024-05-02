@@ -366,4 +366,4 @@ docs/.vitepress/cache/
 docs/.vitepress/dist/
 
 **/sim_build/
-!test/lib
+!test/lib/
