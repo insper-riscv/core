@@ -27,15 +27,20 @@ architecture RTL of GENERIC_ROM is
     type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
 
     impure function memory_init return memory_block is
-        file     text_file  : text open read_mode is INIT_FILE;
-        variable text_line  : line;
-        variable content    : memory_block;
-        variable index      : integer := 0;
+        file     text_file : text open read_mode is INIT_FILE;
+        variable text_line : line;
+        variable content   : memory_block;
+        variable index     : integer := 0;
+        variable value     : bit_vector((DATA_WIDTH - 1) DOWNTO 0);
     begin
         while not endfile(text_file) loop
             readline(text_file, text_line);
             read(text_line, index);
-            read(text_line, content(index));
+            read(text_line, value);
+
+            if index >= 0 and index < (2**ADDRESSABLE_WIDTH) then
+                content(index) := To_StdLogicVector(value);
+            end if;
         end loop;
         
         return content;
