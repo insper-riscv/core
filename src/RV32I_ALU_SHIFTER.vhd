@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-use IEEE.MATH_REAL.ALL;
 
 library WORK;
 
@@ -9,7 +8,7 @@ entity RV32I_ALU_SHIFTER is
 
     generic (
         DATA_WIDTH  : natural := WORK.RV32I.XLEN;
-        SHAMT_WIDTH : natural := natural(ceil(log2(real(DATA_WIDTH))))
+        SHAMT_WIDTH : natural := 5
     );
 
     port (

@@ -7,7 +7,7 @@ library WORK;
 entity RV32I_ALU_ROW is
 
     generic (
-        DATA_WIDTH : natural := XLEN
+        DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
   
     port (
