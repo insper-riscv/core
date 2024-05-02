@@ -16,10 +16,10 @@ jobs:
     strategy:
       matrix:
           include:
+          - component: test_CPU_package.py
+            enabled: false
           - component: test_CPU_EXECUTION_FOWARDING_UNIT.py
             enabled: false
-          - component: test_CPU_LOAD_EXTENDER.py
-            enabled: true
           - component: test_CPU_STAGE_EX.py
             enabled: false
           - component: test_CPU_STAGE_ID.py
@@ -30,10 +30,10 @@ jobs:
             enabled: false
           - component: test_CPU_STAGE_WB.py
             enabled: false
-          - component: test_CPU_STORE_EXTENDER.py
-            enabled: false
           - component: test_CPU_TOP_LEVEL.py
             enabled: true
+          - component: test_GENERICS_package.py
+            enabled: false
           - component: test_GENERIC_ADDER.py
             enabled: true
           - component: test_GENERIC_COMPARATOR.py
@@ -56,6 +56,8 @@ jobs:
             enabled: true
           - component: test_GENERIC_SIGNAL_EXTENDER.py
             enabled: false
+          - component: test_MODULES_package.py
+            enabled: false
           - component: test_MODULE_BRANCH_COMPARE_UNIT.py
             enabled: true
           - component: test_MODULE_BRANCH_UNIT.py
@@ -72,6 +74,8 @@ jobs:
             enabled: true
           - component: test_MODULE_WRITE_BACK.py
             enabled: true
+          - component: test_RV32I_package.py
+            enabled: false
           - component: test_RV32I_ALU_BIT.py
             enabled: true
           - component: test_RV32I_ALU_SHIFTER.py
@@ -81,6 +85,8 @@ jobs:
           - component: test_RV32I_BRANCH_CONTROLLER.py
             enabled: false
           - component: test_RV32I_REGISTER_FILE.py
+            enabled: true
+          - component: test_RV32I_TYPE_CONVERTER.py
             enabled: true
           - component: test_TOP_LEVEL.py
             enabled: false
