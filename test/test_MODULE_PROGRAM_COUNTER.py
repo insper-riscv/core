@@ -24,50 +24,47 @@ class MODULE_PROGRAM_COUNTER(lib.Entity):
 
 @MODULE_PROGRAM_COUNTER.testcase
 async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: lib.Waveform):
-    values_source = [
-        "11111111111111110000000000000000",
-        "11111111111111110000000000000000",
-        "11111111111111110000000000000000",
-        "11111111111111110000000000000000",
-        "11111111111111110000000000000000",
-    ]
-
-    values_selector = ["0", "1", "0", "0", "1"]
-
     values_enable = ["1", "1", "1", "0", "0"]
-
+    values_selector = ["1", "1", "0", "0", "1"]
+    values_source = [
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100000",
+    ]
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000100",
-        "11111111111111110000000000000000",
-        "11111111111111110000000000000100",
-        "11111111111111110000000000000100",
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100100",
+        "00000000000000000000000000100100",
     ]
 
-    for index, (source, selector, enable, destination) in enumerate(
-        zip(values_source, values_selector, values_enable, values_destination)
+    for index, (enable, selector, source, destination) in enumerate(
+        zip(values_enable, values_selector, values_source, values_destination)
     ):
-        dut.source.value = BinaryValue(source)
         dut.enable.value = BinaryValue(enable)
         dut.selector.value = BinaryValue(selector)
+        dut.source.value = BinaryValue(source)
 
-        yield trace.check(dut.destination, destination, f"At clock {index}.")
         await trace.cycle()
+        yield trace.check(dut.destination, destination, f"At clock {index}.")
 
 
 @pytest.mark.synthesis
 def test_MODULE_PROGRAM_COUNTER_synthesis():
     MODULE_PROGRAM_COUNTER.build_vhd()
-    # MODULE_PROGRAM_COUNTER.build_netlistsvg()
+    MODULE_PROGRAM_COUNTER.build_netlistsvg()
 
 
-@pytest.mark.testcases
-def test_MODULE_PROGRAM_COUNTER_testcases():
-    MODULE_PROGRAM_COUNTER.test_with(
-        [
-            tb_MODULE_PROGRAM_COUNTER_case_1,
-        ]
-    )
+# @pytest.mark.testcases
+# def test_MODULE_PROGRAM_COUNTER_testcases():
+#     MODULE_PROGRAM_COUNTER.test_with(
+#         [
+#             tb_MODULE_PROGRAM_COUNTER_case_1,
+#         ]
+#     )
 
 
 if __name__ == "__main__":

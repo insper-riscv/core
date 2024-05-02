@@ -20,7 +20,7 @@ class CPU_STAGE_IF(lib.Entity):
 @pytest.mark.synthesis
 def test_CPU_STAGE_IF_synthesis():
     CPU_STAGE_IF.build_vhd()
-    # CPU_STAGE_IF.build_netlistsvg()
+    CPU_STAGE_IF.build_netlistsvg()
 
 
 if __name__ == "__main__":

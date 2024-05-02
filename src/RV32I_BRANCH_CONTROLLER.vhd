@@ -7,7 +7,6 @@ library WORK;
 entity RV32I_BRANCH_CONTROLLER is
 
     port (
-        enable          : in  std_logic;
         select_function : in  WORK.RV32I.t_FUNCT3;
         flag_sign_1     : in  std_logic;
         flag_sign_2     : in  std_logic;
@@ -21,17 +20,20 @@ end entity;
 
 architecture RV32I of RV32I_BRANCH_CONTROLLER is
 
-    --No signals
+    signal flag_less_signed : std_logic;
+    signal cases            : std_logic_vector(5 downto 0);
 
 begin
 
-    with select_function select
-        destination <=  flag_equal                                                                                  when WORK.RV32I.FUNCT3_BEQ,
-                        NOT flag_equal                                                                              when WORK.RV32I.FUNCT3_BNE,
-                        (flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2)          when WORK.RV32I.FUNCT3_BLT,
-                        NOT ((flag_less and not flag_sign_1) OR (flag_greather and flag_sign_1 and flag_sign_2))    when WORK.RV32I.FUNCT3_BGE,
-                        flag_less                                                                                   when WORK.RV32I.FUNCT3_BLTU,
-                        NOT flag_less                                                                               when WORK.RV32I.FUNCT3_BGEU,
-                        '0'                                                                                         when others;
+    flag_less_signed <= (flag_less AND NOT(flag_sign_1)) OR (flag_greather AND flag_sign_1 AND flag_sign_2);
+
+    cases(0) <= flag_equal           when (select_function = WORK.RV32I.FUNCT3_BEQ)  else '0';
+    cases(1) <= NOT flag_equal       when (select_function = WORK.RV32I.FUNCT3_BNE)  else '0';
+    cases(2) <= flag_less_signed     when (select_function = WORK.RV32I.FUNCT3_BLT)  else '0';
+    cases(3) <= NOT flag_less_signed when (select_function = WORK.RV32I.FUNCT3_BGE)  else '0';
+    cases(4) <= flag_less            when (select_function = WORK.RV32I.FUNCT3_BLTU) else '0';
+    cases(5) <= NOT flag_less        when (select_function = WORK.RV32I.FUNCT3_BGEU) else '0';
+
+    destination <= WORK.GENERICS.reduce_or(cases);
 
 end architecture;

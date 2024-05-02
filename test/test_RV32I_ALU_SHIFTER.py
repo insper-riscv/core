@@ -2,9 +2,12 @@ import pytest
 from cocotb.binary import BinaryValue
 
 import lib
+from test_RV32I_package import RV32I
 
 
 class RV32I_ALU_SHIFTER(lib.Entity):
+    _package = RV32I
+
     source = lib.Entity.Input_pin
     shamt = lib.Entity.Input_pin
     select_function = lib.Entity.Input_pin
@@ -101,7 +104,7 @@ async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: lib.Wavefor
 @pytest.mark.synthesis
 def test_RV32I_ALU_SHIFTER_synthesis():
     RV32I_ALU_SHIFTER.build_vhd()
-    # RV32I_ALU_SHIFTER.build_netlistsvg()
+    RV32I_ALU_SHIFTER.build_netlistsvg()
 
 
 @pytest.mark.testcases

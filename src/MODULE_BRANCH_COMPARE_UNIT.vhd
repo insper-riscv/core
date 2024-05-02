@@ -26,11 +26,25 @@ architecture RV32I of MODULE_BRANCH_COMPARE_UNIT is
     alias sign_1 : std_logic is source_1(WORK.RV32I.XLEN - 1);
     alias sign_2 : std_logic is source_2(WORK.RV32I.XLEN - 1);
 
+    signal flag_branch   : std_logic;
     signal flag_equal    : std_logic;
     signal flag_less     : std_logic;
     signal flag_greather : std_logic;
 
 begin
+
+    destination <= enable AND flag_branch;
+
+    COMPARE: entity WORK.RV32I_BRANCH_CONTROLLER
+        port map (
+            select_function => select_function(2 downto 0),
+            flag_sign_1     => sign_1,
+            flag_sign_2     => sign_2,
+            flag_equal      => flag_equal,
+            flag_less       => flag_less,
+            flag_greather   => flag_greather,
+            destination     => flag_branch
+        );
 
     COMPARATOR : entity WORK.GENERIC_COMPARATOR
         generic map (
@@ -42,18 +56,6 @@ begin
             flag_equal    => flag_equal,
             flag_less     => flag_less,
             flag_greather => flag_greather
-        );
-
-    COMPARE: entity WORK.RV32I_BRANCH_CONTROLLER
-        port map (
-            enable          => enable,
-            select_function => select_function(2 downto 0),
-            flag_sign_1     => sign_1,
-            flag_sign_2     => sign_2,
-            flag_equal      => flag_equal,
-            flag_less       => flag_less,
-            flag_greather   => flag_greather,
-            destination     => destination
         );
 
 end architecture;

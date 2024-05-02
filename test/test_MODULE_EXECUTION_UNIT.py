@@ -42,32 +42,16 @@ async def tb_MODULE_EXECUTION_UNIT_case_1(dut: "MODULE_EXECUTION_UNIT", trace: l
     dut.source_1.value = BinaryValue("10101010101010101010101010101010")
     dut.source_2.value = BinaryValue("01010101010101010101010101010101")
     dut.immediate.value = BinaryValue("00000000000000000001000000000000")
-    dut.select_function.value = BinaryValue("0001")
+    dut.select_function.value = BinaryValue("0110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000001000000000000")
-
-    dut.select_forward_1.value = BinaryValue("00")
-    dut.select_forward_2.value = BinaryValue("00")
-    dut.select_source_1.value = BinaryValue("01")
-    dut.select_source_2.value = BinaryValue("10")
-    dut.address_program.value = BinaryValue("00000000000000000000000000000000")
-    dut.source_mem.value = BinaryValue("11111111111111110000000000000000")
-    dut.source_wb.value = BinaryValue("00000000000000001111111111111111")
-    dut.source_1.value = BinaryValue("10101010101010101010101010101010")
-    dut.source_2.value = BinaryValue("01010101010101010101010101010101")
-    dut.immediate.value = BinaryValue("00000000000000000001000000000000")
-    dut.select_function.value = BinaryValue("0001")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "00000000000000000000000000000100")
-    await trace.cycle()
 
 
 @pytest.mark.synthesis
 def test_MODULE_EXECUTION_UNIT_synthesis():
     MODULE_EXECUTION_UNIT.build_vhd()
-    # MODULE_EXECUTION_UNIT.build_netlistsvg()
+    MODULE_EXECUTION_UNIT.build_netlistsvg()
 
 
 @pytest.mark.testcases

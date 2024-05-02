@@ -10,6 +10,7 @@ from test_GENERIC_COMPARATOR import GENERIC_COMPARATOR
 class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
     _package = MODULES
 
+    enable = lib.Entity.Input_pin
     source_1 = lib.Entity.Input_pin
     source_2 = lib.Entity.Input_pin
     select_function = lib.Entity.Input_pin
@@ -21,81 +22,82 @@ class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
 
 @MODULE_BRANCH_COMPARE_UNIT.testcase
 async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, trace: lib.Waveform):
+    dut.enable.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 1")
 
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0001")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 2")
 
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0100")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 3")
     
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("10000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0100")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "0")
+    yield trace.check(dut.destination, "1", "At 4")
     
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0101")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "0")
+    yield trace.check(dut.destination, "0", "At 5")
     
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("10000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0101")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "0", "At 6")
     
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0110")
-    
+
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 7")
     
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("10000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0110")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 8")
     
     dut.source_1.value = BinaryValue("00000000000000000000000000000001")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0111")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 9")
     
     dut.source_1.value = BinaryValue("10000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0111")
     
     await trace.cycle()
-    yield trace.check(dut.destination, "1")
+    yield trace.check(dut.destination, "1", "At 10")
 
 
 @pytest.mark.synthesis
 def test_MODULE_BRANCH_COMPARE_UNIT_synthesis():
     MODULE_BRANCH_COMPARE_UNIT.build_vhd()
-    # MODULE_BRANCH_COMPARE_UNIT.build_netlistsvg()
+    MODULE_BRANCH_COMPARE_UNIT.build_netlistsvg()
 
 
 @pytest.mark.testcases

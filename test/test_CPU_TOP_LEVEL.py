@@ -1051,7 +1051,7 @@ async def tb_CPU_TOP_LEVEL_SW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 @pytest.mark.synthesis
 def test_CPU_TOP_LEVEL_synthesis():
     CPU_TOP_LEVEL.build_vhd()
-    # CPU_TOP_LEVEL.build_netlistsvg()
+    CPU_TOP_LEVEL.build_netlistsvg()
 
 
 @pytest.mark.testcases

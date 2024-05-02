@@ -58,7 +58,7 @@ async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: lib.Waveform):
 @pytest.mark.synthesis
 def test_GENERIC_ROM_synthesis():
     GENERIC_ROM.build_vhd()
-    # GENERIC_ROM.build_netlistsvg()
+    GENERIC_ROM.build_netlistsvg()
 
 
 @pytest.mark.testcases

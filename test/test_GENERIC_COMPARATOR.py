@@ -34,11 +34,11 @@ async def tb_GENERIC_COMPARATOR_case_1(dut: GENERIC_COMPARATOR, trace: lib.Wavef
 @pytest.mark.synthesis
 def test_GENERIC_COMPARATOR_synthesis():
     GENERIC_COMPARATOR.build_vhd()
-    # GENERIC_COMPARATOR.build_netlistsvg()
+    GENERIC_COMPARATOR.build_netlistsvg()
 
 
 @pytest.mark.testcases
-def test_GENERIC_ADDER_testcases():
+def test_GENERIC_COMPARATOR_testcases():
     GENERIC_COMPARATOR.test_with(
         [
             tb_GENERIC_COMPARATOR_case_1,

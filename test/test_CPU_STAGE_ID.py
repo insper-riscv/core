@@ -29,7 +29,7 @@ class CPU_STAGE_ID(lib.Entity):
 @pytest.mark.synthesis
 def test_CPU_STAGE_ID_synthesis():
     CPU_STAGE_ID.build_vhd()
-    # CPU_STAGE_ID.build_netlistsvg()
+    CPU_STAGE_ID.build_netlistsvg()
 
 
 if __name__ == "__main__":

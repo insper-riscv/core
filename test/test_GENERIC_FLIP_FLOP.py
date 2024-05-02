@@ -36,7 +36,7 @@ async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: lib.Wavefor
 @pytest.mark.synthesis
 def test_GENERIC_FLIP_FLOP_synthesis():
     GENERIC_FLIP_FLOP.build_vhd()
-    # GENERIC_FLIP_FLOP.build_netlistsvg()
+    GENERIC_FLIP_FLOP.build_netlistsvg()
 
 
 @pytest.mark.testcases
