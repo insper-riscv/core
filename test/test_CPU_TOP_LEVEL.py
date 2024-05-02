@@ -1,7 +1,4 @@
 import pytest
-from cocotb.binary import BinaryValue
-
-from utils_interpreter import *
 
 import lib
 from test_CPU_package import CPU
@@ -41,7 +38,6 @@ async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        # "00000000000000000000000000000001",
         "00000000000000000000000000000010",
         "00000000000000000000000000000100",
         "00000000000000000000000000001000",
