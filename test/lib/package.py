@@ -1,3 +1,4 @@
+import os
 import typing as T
 import subprocess
 
@@ -9,6 +10,8 @@ class Package():
     def build_vhd(cls, timeout: int = 60):
         for child in cls.children:
             child.build_vhd(timeout)
+
+        os.makedirs("sim_build", exist_ok=True)
 
         process = subprocess.Popen(
             [

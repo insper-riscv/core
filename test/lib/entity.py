@@ -1,3 +1,4 @@
+import os
 import subprocess
 import json
 import typing as T
@@ -51,9 +52,9 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
             ]
 
             if hasattr(dut, "clock"):
-                tracer = Waveform(*signals, clock=dut.clock, model=cls)
+                tracer = Waveform(*signals, clock=dut.clock, model=cls) # type: ignore
             else:
-                tracer = Waveform(*signals, clock=None, model=cls)
+                tracer = Waveform(*signals, clock=None, model=cls) # type: ignore
 
             with tracer as trace:
                 pased = all([result async for result in fn(dut, trace)])
@@ -62,7 +63,7 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
                     trace.write(f"../sim_build/{fn.__name__.lower()}.svg")
 
                 if not pased:
-                    message = "\n".join(check.check_log.get_failures())
+                    message = "\n".join(check.check_log.get_failures()) # type: ignore
                     
                     raise AssertionError(message)
 
@@ -165,6 +166,8 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
 
         entity = cls.__name__.lower()
 
+        os.makedirs("sim_build", exist_ok=True)
+
         process = subprocess.Popen(
             [
                 "yosys",
@@ -194,7 +197,6 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
             ],
             cwd="sim_build",
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
         )
 
         outs, errs = process.communicate(timeout=30)
