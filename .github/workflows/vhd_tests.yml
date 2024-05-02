@@ -15,6 +15,7 @@ jobs:
       image: hdlc/ghdl:yosys
     env:
       RISCV_PATH: /opt/riscv
+      PATH: ${{ env.RISCV_PATH }}/bin:$PATH
     strategy:
       matrix:
           include:
