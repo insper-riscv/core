@@ -112,7 +112,7 @@ jobs:
         wget -q https://github.com/FelixLuciano/riscv-gnu-toolchain/releases/download/rv32i-240427/rv32i-unknown-elf-gnu-toolchain.tar.gz -P /tmp
         tar -xzf /tmp/rv32i-unknown-elf-gnu-toolchain.tar.gz -C ${{ env.RISCV_PATH }}
         rm /tmp/rv32i-unknown-elf-gnu-toolchain.tar.gz
-        echo "PATH=$PATH:${{ env.RISCV_PATH }}" >> $GITHUB_ENV
+        echo "PATH=$PATH:${{ env.RISCV_PATH }}/bin" >> $GITHUB_ENV
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
