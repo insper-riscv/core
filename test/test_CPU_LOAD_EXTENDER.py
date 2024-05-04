@@ -14,8 +14,6 @@ class CPU_LOAD_EXTENDER(utils.DUT):
     selector    = utils.DUT.Input_pin
     destination = utils.DUT.Output_pin
 
-    tmp = utils.DUT.Output_pin
-
 @CPU_LOAD_EXTENDER.testcase
 async def tb_CPU_LOAD_EXTENDER_case_1(dut: CPU_LOAD_EXTENDER, trace: utils.Trace):
     dut.source.value = BinaryValue("00000000000000000000000010000000")

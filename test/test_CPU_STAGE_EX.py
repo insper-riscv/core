@@ -19,6 +19,7 @@ class CPU_STAGE_EX(utils.DUT):
     enable_wb               = utils.DUT.Input_pin
     forwarding_mem_source   = utils.DUT.Input_pin
     forwarding_wb_source    = utils.DUT.Input_pin
+    enable_read             = utils.DUT.Output_pin
     destination             = utils.DUT.Output_pin
 
     module_execution_unit_controller = MODULE_EXECUTION_UNIT_CONTROLLER

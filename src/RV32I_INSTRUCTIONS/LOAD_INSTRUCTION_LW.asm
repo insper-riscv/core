@@ -5,7 +5,8 @@ addi x0, x0, 0
 addi x0, x0, 0
 sw x2, 0(x1)
 lw x3, 0(x1)
+addi x4, x3, 4
 addi x0, x0, 0
 addi x0, x0, 0
 addi x0, x0, 0
-addi x4, x3, 2
+addi x5, x4, 4

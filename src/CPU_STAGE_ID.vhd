@@ -18,6 +18,9 @@ entity CPU_STAGE_ID is
         source             : in  WORK.CPU.t_SIGNALS_IF_ID;
         select_destination : in  WORK.CPU.t_REGISTER;
         data_destination   : in  WORK.CPU.t_DATA;
+        enable_read        : in  std_logic;
+        hazzard_register   : in  WORK.CPU.t_REGISTER;
+        flag_stall         : out std_logic;
         branch             : out std_logic;
         address_jump       : out WORK.CPU.t_DATA;
         control_if         : out WORK.CPU.t_CONTROL_IF;
@@ -36,13 +39,24 @@ architecture RV32I of CPU_STAGE_ID is
     signal is_branch_condition : std_logic;
     signal enable_branch       : std_logic;
 
+    signal control_unit_ex     : WORK.CPU.t_CONTROL_EX    := WORK.CPU.NULL_CONTROL_EX;
+    signal control_unit_mem    : WORK.CPU.t_CONTROL_MEM   := WORK.CPU.NULL_CONTROL_MEM;
+    signal control_unit_wb     : WORK.CPU.t_CONTROL_WB    := WORK.CPU.NULL_CONTROL_WB;
+    signal control_ex          : WORK.CPU.t_CONTROL_EX    := WORK.CPU.NULL_CONTROL_EX;
+    signal control_mem         : WORK.CPU.t_CONTROL_MEM   := WORK.CPU.NULL_CONTROL_MEM;
+    signal control_wb          : WORK.CPU.t_CONTROL_WB    := WORK.CPU.NULL_CONTROL_WB;
+    signal flag_hazzard        : std_logic;
+    signal enable_pipeline     : std_logic;
+
 begin
 
+    enable_pipeline <= flag_hazzard XOR enable;
+
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
-        UPDATE : process(source, clear, clock, enable)
+        UPDATE : process(source, clear, clock, enable, enable_pipeline)
         begin
             if (rising_edge(clock)) then
-                SET_RESET : if (enable = '1') then
+                SET_RESET : if (enable_pipeline = '1') then
                     source_0 <= source;
                 elsif (clear = '1') then
                     source_0 <= WORK.CPU.NULL_SIGNALS_IF_ID;
@@ -80,10 +94,32 @@ begin
             immediate   => signals_ex.data_immediate,
             control_if  => control_if,
             control_id  => control_id,
-            control_ex  => signals_ex.control_ex,
-            control_mem => signals_ex.control_mem,
-            control_wb  => signals_ex.control_wb
+            control_ex  => control_unit_ex,
+            control_mem => control_unit_mem,
+            control_wb  => control_unit_wb
     );
+
+    HAZZARD_UNIT : entity WORK.CPU_HAZZARD_CONTROL_UNIT
+        port map (
+            stage_id_select_source_1    => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_1,
+            stage_id_select_source_2    => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_2,
+            stage_ex_enable_read        => enable_read,
+            stage_ex_select_destination => hazzard_register,
+            destination                 => flag_hazzard
+        );
+
+    flag_stall <= flag_hazzard;
+
+    STALL_MODULE : entity WORK.MODULE_STALL_MUX
+        port map (
+            control_ex_in   => control_unit_ex,
+            control_mem_in  => control_unit_mem,
+            control_wb_in   => control_unit_wb,
+            selector        => flag_hazzard,
+            control_ex_out  => signals_ex.control_ex,
+            control_mem_out => signals_ex.control_mem,
+            control_wb_out  => signals_ex.control_wb
+        );    
 
     MODULE_REGISTER_FILE : entity WORK.MODULE_REGISTER_FILE(RV32I)
         port map (

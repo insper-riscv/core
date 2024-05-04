@@ -8,6 +8,8 @@ from test_MODULE_REGISTER_FILE import MODULE_REGISTER_FILE
 from test_MODULE_CONTROL_UNIT import MODULE_CONTROL_UNIT
 from test_MODULE_BRANCH_COMPARE_UNIT import MODULE_BRANCH_COMPARE_UNIT
 from test_MODULE_BRANCH_UNIT import MODULE_BRANCH_UNIT
+from test_CPU_HAZZARD_CONTROL_UNIT import CPU_HAZZARD_CONTROL_UNIT
+from test_MODULE_STALL_MUX import MODULE_STALL_MUX
 
 
 class CPU_STAGE_ID(utils.DUT):
@@ -26,6 +28,8 @@ class CPU_STAGE_ID(utils.DUT):
     module_register_file = MODULE_REGISTER_FILE
     branch_compare_unit = MODULE_BRANCH_COMPARE_UNIT
     branch_unit = MODULE_BRANCH_UNIT
+    hazzard_unit = CPU_HAZZARD_CONTROL_UNIT
+    stall_module = MODULE_STALL_MUX
 
 @pytest.mark.synthesis
 def test_CPU_STAGE_ID_synthesis():

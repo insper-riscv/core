@@ -20,6 +20,7 @@ entity CPU_STAGE_EX is
         forwarding_mem_source   : in  WORK.CPU.t_DATA;
         forwarding_wb_source    : in  WORK.CPU.t_DATA;
         source                  : in  WORK.CPU.t_SIGNALS_ID_EX;
+        enable_read             : out std_logic;
         destination             : out WORK.CPU.t_SIGNALS_EX_MEM
     );
 
@@ -92,5 +93,6 @@ begin
     destination.data_source_2      <= source_0.data_source_2;
     destination.select_destination <= source_0.select_destination;
     destination.funct_3            <= source_0.funct_3;
+    enable_read                    <= source_0.control_mem.enable_read;
 
 end architecture;

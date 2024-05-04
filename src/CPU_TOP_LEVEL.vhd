@@ -41,6 +41,8 @@ architecture RV32I of CPU_TOP_LEVEL is
     signal source_wb             : WORK.CPU.t_SIGNALS_MEM_WB;
 
     signal branch                : std_logic;
+    signal enable_read           : std_logic;
+    signal flag_stall            : std_logic;
 
 begin
 
@@ -50,6 +52,7 @@ begin
             clock           => clock,
             clear           => clear,
             enable          => enable,
+            stall           => flag_stall,
             source          => control_if,
             address_jump    => address_jump,
             address_program => signals_if_id.address_program
@@ -67,6 +70,9 @@ begin
             source              => signals_if_id,
             select_destination  => select_destination,
             data_destination    => data_destination,
+            enable_read         => enable_read,
+            hazzard_register    => signals_ex_mem.select_destination,
+            flag_stall          => flag_stall,
             branch              => branch,
             address_jump        => address_jump,
             control_if          => control_if,
@@ -85,6 +91,7 @@ begin
             forwarding_mem_source     => signals_mem_wb.data_destination,
             forwarding_wb_source      => data_destination,
             source                    => signals_id_ex,
+            enable_read               => enable_read,
             destination               => signals_ex_mem
         );
 

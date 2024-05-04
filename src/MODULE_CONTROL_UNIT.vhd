@@ -40,7 +40,7 @@ begin
             when WORK.RV32I.INSTRUCTION_S_TYPE =>
                 immediate <= temp.immediate_s;
             when WORK.RV32I.INSTRUCTION_B_TYPE =>
-                -- immediate <= temp.immediate_b;z
+                immediate <= temp.immediate_b;
             when WORK.RV32I.INSTRUCTION_U_TYPE =>
                 immediate <= temp.immediate_u;
             when WORK.RV32I.INSTRUCTION_J_TYPE =>
