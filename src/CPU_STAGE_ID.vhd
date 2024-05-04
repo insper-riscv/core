@@ -11,22 +11,23 @@ entity CPU_STAGE_ID is
     );
 
     port (
-        clock                : in  std_logic;
-        clear                : in  std_logic;
-        enable               : in  std_logic;
-        enable_destination   : in  std_logic;
-        source               : in  WORK.CPU.t_SIGNALS_IF_ID;
-        select_destination   : in  WORK.CPU.t_REGISTER;
-        data_destination     : in  WORK.CPU.t_DATA;
-        enable_read_ex       : in  std_logic;
-        enable_read_mem      : in  std_logic;
-        hazzard_register_ex  : in  WORK.CPU.t_REGISTER;
-        hazzard_register_mem : in  WORK.CPU.t_REGISTER;
-        flag_stall           : out std_logic;
-        branch               : out std_logic;
-        address_jump         : out WORK.CPU.t_DATA;
-        control_if           : out WORK.CPU.t_CONTROL_IF;
-        signals_ex           : out WORK.CPU.t_SIGNALS_ID_EX
+        clock                 : in  std_logic;
+        clear                 : in  std_logic;
+        enable                : in  std_logic;
+        enable_destination    : in  std_logic;
+        source                : in  WORK.CPU.t_SIGNALS_IF_ID;
+        select_destination    : in  WORK.CPU.t_REGISTER;
+        data_destination      : in  WORK.CPU.t_DATA;
+        enable_read_ex        : in  std_logic;
+        enable_destination_ex : in  std_logic;
+        enable_read_mem       : in  std_logic;
+        hazzard_register_ex   : in  WORK.CPU.t_REGISTER;
+        hazzard_register_mem  : in  WORK.CPU.t_REGISTER;
+        flag_stall            : out std_logic;
+        branch                : out std_logic;
+        address_jump          : out WORK.CPU.t_DATA;
+        control_if            : out WORK.CPU.t_CONTROL_IF;
+        signals_ex            : out WORK.CPU.t_SIGNALS_ID_EX
     );
 
 end entity;
@@ -107,6 +108,7 @@ begin
             stage_id_select_source_1     => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_1,
             stage_id_select_source_2     => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_2,
             stage_ex_enable_read         => enable_read_ex,
+            stage_ex_enable_destination  => enable_destination_ex,
             stage_ex_select_destination  => hazzard_register_ex,
             stage_mem_enable_read        => enable_read_mem,
             stage_mem_select_destination => hazzard_register_mem,

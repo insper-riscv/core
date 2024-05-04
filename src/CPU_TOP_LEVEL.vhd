@@ -72,6 +72,7 @@ begin
             select_destination   => select_destination,
             data_destination     => data_destination,
             enable_read_ex       => enable_read_ex,
+            enable_destination_ex=> signals_ex_mem.control_wb.enable_destination,
             enable_read_mem      => control_memory.enable_read,
             hazzard_register_ex  => signals_ex_mem.select_destination,
             hazzard_register_mem => signals_mem_wb.select_destination,

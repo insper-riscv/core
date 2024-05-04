@@ -155,9 +155,6 @@ async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
         "00000000000000000000000000001000",
         "00000000000000000000000000001000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000001000",
         "00000000000000000000000000001000",
         "00000000000000000000000000001000",
@@ -170,7 +167,7 @@ async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
         "00000000000000000000000000001000",
         "00000000000000000000000000001000",
         "00000000000000000000000000001000",
-        "00000000000000000000000000010000",
+        "00000000000000000000000000001000",
         "00000000000000000000000000000000",
         "00000000000000000000000000001100",
         "00000000000000000000000000010000",
@@ -186,10 +183,7 @@ async def tb_TOP_LEVEL_LW(dut: TOP_LEVEL, trace: utils.Trace):
     ):
 
         await trace.cycle()
-        if index == 12:
-            #yield trace.check(dut.cpu.instruction_decode.hazzard_unit.stall_branch, destination, f"At clock {index}.")
-            yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
-        #yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
+        yield trace.check(dut.cpu.write_back.destination, destination, f"At clock {index}.")
 
 @pytest.mark.testcases
 def test_TOP_LEVEL_LOAD_INSTRUCTIONS_testcases():
