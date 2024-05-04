@@ -23,6 +23,9 @@ entity CPU_STAGE_ID is
         enable_read_mem       : in  std_logic;
         hazzard_register_ex   : in  WORK.CPU.t_REGISTER;
         hazzard_register_mem  : in  WORK.CPU.t_REGISTER;
+        forward_register_mem  : in  WORK.CPU.t_REGISTER;
+        forward_data_mem      : in  WORK.CPU.t_DATA;
+        forward_enable_mem    : in  std_logic;
         flag_stall            : out std_logic;
         branch                : out std_logic;
         address_jump          : out WORK.CPU.t_DATA;
@@ -51,6 +54,8 @@ architecture RV32I of CPU_STAGE_ID is
     signal flag_hazzard        : std_logic;
     signal flag_stall_branch   : std_logic;
     signal enable_pipeline     : std_logic;
+    signal forward_selector_1  : std_logic;
+    signal forward_selector_2  : std_logic;
 
 begin
 
@@ -141,6 +146,16 @@ begin
         data_source_2      => data_source_2  
     );
 
+    BRANCH_FORWARDING_UNIT : entity WORK.CPU_BRANCH_FORWARDING_UNIT
+        port map (
+        stage_id_select_source_1     => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_1,
+        stage_id_select_source_2     => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_2,
+        stage_mem_enable_destination => forward_enable_mem,
+        stage_mem_select_destination => forward_register_mem,
+        stage_id_select_1            => forward_selector_1,
+        stage_id_select_2            => forward_selector_2
+    );
+
     BRANCH_UNIT: entity WORK.MODULE_BRANCH_UNIT(RV32I)
         port map (
             selector         => control_id.select_jump,
@@ -152,11 +167,14 @@ begin
 
     BRANCH_COMPARE_UNIT: entity WORK.MODULE_BRANCH_COMPARE_UNIT(RV32I)
         port map (
-            enable          => enable_branch,
-            source_1        => data_source_1,
-            source_2        => data_source_2,
-            select_function => '0' & funct_3,
-            destination     => is_branch_condition
+            enable             => enable_branch,
+            source_1           => data_source_1,
+            source_2           => data_source_2,
+            select_function    => '0' & funct_3,
+            forward_selector_1 => forward_selector_1,
+            forward_selector_2 => forward_selector_2,
+            forward_source     => forward_data_mem,
+            destination        => is_branch_condition
         );
 
 end architecture;

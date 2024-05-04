@@ -10,6 +10,7 @@ from test_MODULE_BRANCH_COMPARE_UNIT import MODULE_BRANCH_COMPARE_UNIT
 from test_MODULE_BRANCH_UNIT import MODULE_BRANCH_UNIT
 from test_CPU_HAZZARD_CONTROL_UNIT import CPU_HAZZARD_CONTROL_UNIT
 from test_MODULE_STALL_MUX import MODULE_STALL_MUX
+from test_CPU_BRANCH_FORWARDING_UNIT import CPU_BRANCH_FORWARDING_UNIT
 
 
 class CPU_STAGE_ID(utils.DUT):
@@ -30,6 +31,7 @@ class CPU_STAGE_ID(utils.DUT):
     branch_unit = MODULE_BRANCH_UNIT
     hazzard_unit = CPU_HAZZARD_CONTROL_UNIT
     stall_module = MODULE_STALL_MUX
+    cpu_branch_forwarding_unit = CPU_BRANCH_FORWARDING_UNIT
 
 @pytest.mark.synthesis
 def test_CPU_STAGE_ID_synthesis():

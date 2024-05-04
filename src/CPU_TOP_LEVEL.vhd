@@ -65,7 +65,7 @@ begin
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
         port map (
             clock                => clock,
-            clear                => '0',
+            clear                => control_if.enable_flush,
             enable               => enable,
             enable_destination   => enable_destination,
             source               => signals_if_id,
@@ -76,6 +76,9 @@ begin
             enable_read_mem      => control_memory.enable_read,
             hazzard_register_ex  => signals_ex_mem.select_destination,
             hazzard_register_mem => signals_mem_wb.select_destination,
+            forward_register_mem => signals_mem_wb.select_destination,
+            forward_data_mem     => signals_mem_wb.data_destination,
+            forward_enable_mem   => signals_mem_wb.control_wb.enable_destination,
             flag_stall           => flag_stall,
             branch               => branch,
             address_jump         => address_jump,

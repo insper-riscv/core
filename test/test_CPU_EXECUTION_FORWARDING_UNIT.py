@@ -6,7 +6,7 @@ import utils
 from test_CPU_package import CPU
 
 
-class CPU_EXECUTION_FOWARDING_UNIT(utils.DUT):
+class CPU_EXECUTION_FORWARDING_UNIT(utils.DUT):
     _package = CPU
 
     stage_ex_select_source_1     = utils.DUT.Input_pin
@@ -20,9 +20,9 @@ class CPU_EXECUTION_FOWARDING_UNIT(utils.DUT):
 
 
 @pytest.mark.synthesis
-def test_CPU_EXECUTION_FOWARDING_UNIT_synthesis():
-    CPU_EXECUTION_FOWARDING_UNIT.build_vhd()
-    CPU_EXECUTION_FOWARDING_UNIT.build_netlistsvg()
+def test_CPU_EXECUTION_FORWARDING_UNIT_synthesis():
+    CPU_EXECUTION_FORWARDING_UNIT.build_vhd()
+    CPU_EXECUTION_FORWARDING_UNIT.build_netlistsvg()
 
 
 if __name__ == "__main__":

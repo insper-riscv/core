@@ -6,7 +6,7 @@ import utils
 from test_CPU_package import CPU
 from test_MODULE_EXECUTION_UNIT import MODULE_EXECUTION_UNIT
 from test_MODULE_EXECUTION_UNIT_CONTROLLER import MODULE_EXECUTION_UNIT_CONTROLLER
-from test_CPU_EXECUTION_FOWARDING_UNIT import CPU_EXECUTION_FOWARDING_UNIT
+from test_CPU_EXECUTION_FORWARDING_UNIT import CPU_EXECUTION_FORWARDING_UNIT
 
 
 class CPU_STAGE_EX(utils.DUT):
@@ -24,7 +24,7 @@ class CPU_STAGE_EX(utils.DUT):
 
     module_execution_unit_controller = MODULE_EXECUTION_UNIT_CONTROLLER
     module_execution_unit = MODULE_EXECUTION_UNIT
-    cpu_execution_fowarding_unit = CPU_EXECUTION_FOWARDING_UNIT
+    cpu_execution_forwarding_unit = CPU_EXECUTION_FORWARDING_UNIT
 
 
 @pytest.mark.synthesis

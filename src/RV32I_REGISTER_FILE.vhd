@@ -45,7 +45,7 @@ begin
     end process;
 
     data_source_1 <=    ZERO when address_source_1 = ADDRESS_ZERO else
-                        data_destination when address_source_1 = address_destination else
+                        data_destination when (address_source_1 = address_destination) else
                         registers(to_integer(unsigned(address_source_1)));
 
     data_source_2 <=    ZERO when address_source_2 = ADDRESS_ZERO else

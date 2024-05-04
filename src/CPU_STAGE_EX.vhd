@@ -61,7 +61,7 @@ begin
             destination => select_function
         );
 
-    CPU_EXECUTION_FOWARDING_UNIT : entity WORK.CPU_EXECUTION_FOWARDING_UNIT
+    CPU_EXECUTION_FORWARDING_UNIT : entity WORK.CPU_EXECUTION_FORWARDING_UNIT
         port map (
             stage_ex_select_source_1     => source_0.select_source_1,
             stage_ex_select_source_2     => source_0.select_source_2,
