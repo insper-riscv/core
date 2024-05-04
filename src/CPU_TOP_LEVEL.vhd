@@ -41,7 +41,8 @@ architecture RV32I of CPU_TOP_LEVEL is
     signal source_wb             : WORK.CPU.t_SIGNALS_MEM_WB;
 
     signal branch                : std_logic;
-    signal enable_read           : std_logic;
+    signal enable_read_ex        : std_logic;
+    signal enable_read_mem       : std_logic;
     signal flag_stall            : std_logic;
 
 begin
@@ -63,20 +64,22 @@ begin
 
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
         port map (
-            clock               => clock,
-            clear               => '0',
-            enable              => enable,
-            enable_destination  => enable_destination,
-            source              => signals_if_id,
-            select_destination  => select_destination,
-            data_destination    => data_destination,
-            enable_read         => enable_read,
-            hazzard_register    => signals_ex_mem.select_destination,
-            flag_stall          => flag_stall,
-            branch              => branch,
-            address_jump        => address_jump,
-            control_if          => control_if,
-            signals_ex          => signals_id_ex
+            clock                => clock,
+            clear                => '0',
+            enable               => enable,
+            enable_destination   => enable_destination,
+            source               => signals_if_id,
+            select_destination   => select_destination,
+            data_destination     => data_destination,
+            enable_read_ex       => enable_read_ex,
+            enable_read_mem      => control_memory.enable_read,
+            hazzard_register_ex  => signals_ex_mem.select_destination,
+            hazzard_register_mem => signals_mem_wb.select_destination,
+            flag_stall           => flag_stall,
+            branch               => branch,
+            address_jump         => address_jump,
+            control_if           => control_if,
+            signals_ex           => signals_id_ex
         );
 
     EXECUTE : entity WORK.CPU_STAGE_EX(RV32I)
@@ -91,7 +94,7 @@ begin
             forwarding_mem_source     => signals_mem_wb.data_destination,
             forwarding_wb_source      => data_destination,
             source                    => signals_id_ex,
-            enable_read               => enable_read,
+            enable_read               => enable_read_ex,
             destination               => signals_ex_mem
         );
 

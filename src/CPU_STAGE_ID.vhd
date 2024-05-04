@@ -11,20 +11,22 @@ entity CPU_STAGE_ID is
     );
 
     port (
-        clock              : in  std_logic;
-        clear              : in  std_logic;
-        enable             : in  std_logic;
-        enable_destination : in  std_logic;
-        source             : in  WORK.CPU.t_SIGNALS_IF_ID;
-        select_destination : in  WORK.CPU.t_REGISTER;
-        data_destination   : in  WORK.CPU.t_DATA;
-        enable_read        : in  std_logic;
-        hazzard_register   : in  WORK.CPU.t_REGISTER;
-        flag_stall         : out std_logic;
-        branch             : out std_logic;
-        address_jump       : out WORK.CPU.t_DATA;
-        control_if         : out WORK.CPU.t_CONTROL_IF;
-        signals_ex         : out WORK.CPU.t_SIGNALS_ID_EX
+        clock                : in  std_logic;
+        clear                : in  std_logic;
+        enable               : in  std_logic;
+        enable_destination   : in  std_logic;
+        source               : in  WORK.CPU.t_SIGNALS_IF_ID;
+        select_destination   : in  WORK.CPU.t_REGISTER;
+        data_destination     : in  WORK.CPU.t_DATA;
+        enable_read_ex       : in  std_logic;
+        enable_read_mem      : in  std_logic;
+        hazzard_register_ex  : in  WORK.CPU.t_REGISTER;
+        hazzard_register_mem : in  WORK.CPU.t_REGISTER;
+        flag_stall           : out std_logic;
+        branch               : out std_logic;
+        address_jump         : out WORK.CPU.t_DATA;
+        control_if           : out WORK.CPU.t_CONTROL_IF;
+        signals_ex           : out WORK.CPU.t_SIGNALS_ID_EX
     );
 
 end entity;
@@ -46,11 +48,12 @@ architecture RV32I of CPU_STAGE_ID is
     signal control_mem         : WORK.CPU.t_CONTROL_MEM   := WORK.CPU.NULL_CONTROL_MEM;
     signal control_wb          : WORK.CPU.t_CONTROL_WB    := WORK.CPU.NULL_CONTROL_WB;
     signal flag_hazzard        : std_logic;
+    signal flag_stall_branch   : std_logic;
     signal enable_pipeline     : std_logic;
 
 begin
 
-    enable_pipeline <= flag_hazzard XOR enable;
+    enable_pipeline <= (flag_hazzard OR (flag_stall_branch AND enable_branch)) XOR enable;
 
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
         UPDATE : process(source, clear, clock, enable, enable_pipeline)
@@ -85,7 +88,7 @@ begin
         signals_ex.select_source_2    <= instruction.select_source_2;
     end process;
 
-    branch <= control_id.enable_jump OR is_branch_condition;
+    branch <= (control_id.enable_jump OR is_branch_condition) AND NOT (flag_stall_branch);
     enable_branch <= control_id.enable_branch;
 
     MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT(RV32I)
@@ -101,14 +104,17 @@ begin
 
     HAZZARD_UNIT : entity WORK.CPU_HAZZARD_CONTROL_UNIT
         port map (
-            stage_id_select_source_1    => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_1,
-            stage_id_select_source_2    => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_2,
-            stage_ex_enable_read        => enable_read,
-            stage_ex_select_destination => hazzard_register,
-            destination                 => flag_hazzard
+            stage_id_select_source_1     => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_1,
+            stage_id_select_source_2     => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_2,
+            stage_ex_enable_read         => enable_read_ex,
+            stage_ex_select_destination  => hazzard_register_ex,
+            stage_mem_enable_read        => enable_read_mem,
+            stage_mem_select_destination => hazzard_register_mem,
+            stall_branch                 => flag_stall_branch,
+            destination                  => flag_hazzard
         );
 
-    flag_stall <= flag_hazzard;
+    flag_stall <= flag_hazzard OR (flag_stall_branch AND enable_branch);
 
     STALL_MODULE : entity WORK.MODULE_STALL_MUX
         port map (
