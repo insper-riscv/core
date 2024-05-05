@@ -40,7 +40,7 @@ architecture RV32I of CPU_TOP_LEVEL is
 
     signal source_wb             : WORK.CPU.t_SIGNALS_MEM_WB;
 
-    signal branch                : std_logic;
+    signal branch                : std_logic := '0';
     signal enable_read_ex        : std_logic;
     signal enable_read_mem       : std_logic;
     signal flag_stall            : std_logic;
@@ -65,8 +65,8 @@ begin
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
         port map (
             clock                => clock,
-            clear                => control_if.enable_flush,
-            enable               => enable,
+            clear                => branch,
+            enable               => NOT branch,
             enable_destination   => enable_destination,
             source               => signals_if_id,
             select_destination   => select_destination,

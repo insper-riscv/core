@@ -53,6 +53,14 @@ begin
         control_if.enable_stall <= '0';
 
         control_if.enable_flush <= '0';
+        --case temp.opcode is
+        --    when    WORK.RV32I.OPCODE_BRANCH |
+        --            WORK.RV32I.OPCODE_JAL    |
+        --            WORK.RV32I.OPCODE_JALR  =>
+        --        control_if.enable_flush <= '1';
+        --    when others =>
+        --        control_if.enable_flush <= '0';
+        --end case;
 
         case temp.encoding is
            when WORK.RV32I.INSTRUCTION_J_TYPE =>
