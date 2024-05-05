@@ -54,12 +54,14 @@ architecture RV32I of CPU_STAGE_ID is
     signal flag_hazzard        : std_logic;
     signal flag_stall_branch   : std_logic;
     signal enable_pipeline     : std_logic;
+    signal clear_pipeline      : std_logic;
     signal forward_selector_1  : std_logic;
     signal forward_selector_2  : std_logic;
 
 begin
 
-    enable_pipeline <= (flag_hazzard OR (flag_stall_branch AND enable_branch)) XOR enable;
+    clear_pipeline  <= clear AND ((control_id.enable_jump OR is_branch_condition) AND NOT (flag_stall_branch));
+    enable_pipeline <= (flag_hazzard OR (flag_stall_branch AND enable_branch)) XOR (enable AND NOT clear_pipeline);
 
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
         UPDATE : process(source, clear, clock, enable, enable_pipeline)
@@ -67,7 +69,7 @@ begin
             if (rising_edge(clock)) then
                 SET_RESET : if (enable_pipeline = '1') then
                     source_0 <= source;
-                elsif (clear = '1') then
+                elsif (clear_pipeline = '1') then
                     source_0 <= WORK.CPU.NULL_SIGNALS_IF_ID;
                 end if;
             end if;

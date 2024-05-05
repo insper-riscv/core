@@ -65,8 +65,8 @@ begin
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
         port map (
             clock                => clock,
-            clear                => branch,
-            enable               => NOT branch,
+            clear                => control_if.enable_flush,
+            enable               => enable,
             enable_destination   => enable_destination,
             source               => signals_if_id,
             select_destination   => select_destination,
