@@ -8,7 +8,7 @@ library WORK;
 entity RV32I_ALU_SHIFTER is
 
     generic (
-        DATA_WIDTH  : natural := 8;
+        DATA_WIDTH  : natural := WORK.RV32I.XLEN;
         SHAMT_WIDTH : natural := natural(ceil(log2(real(WORK.RV32I.XLEN))))
     );
 
