@@ -44,6 +44,7 @@ architecture RV32I of CPU_STAGE_ID is
     signal funct_3             : WORK.RV32I.t_FUNCT3;
     signal is_branch_condition : std_logic;
     signal enable_branch       : std_logic;
+    signal immediate           : WORK.CPU.t_DATA;
 
     signal control_unit_ex     : WORK.CPU.t_CONTROL_EX    := WORK.CPU.NULL_CONTROL_EX;
     signal control_unit_mem    : WORK.CPU.t_CONTROL_MEM   := WORK.CPU.NULL_CONTROL_MEM;
@@ -102,13 +103,15 @@ begin
     MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT(RV32I)
         port map (
             instruction => source_0.data_instruction,
-            immediate   => signals_ex.data_immediate,
+            immediate   => immediate,
             control_if  => control_if,
             control_id  => control_id,
             control_ex  => control_unit_ex,
             control_mem => control_unit_mem,
             control_wb  => control_unit_wb
     );
+
+    signals_ex.data_immediate <= immediate;
 
     HAZZARD_UNIT : entity WORK.CPU_HAZZARD_CONTROL_UNIT
         port map (
@@ -162,7 +165,7 @@ begin
         port map (
             selector         => control_id.select_jump,
             source_program   => source_0.address_program,
-            source_immediate => signals_ex.data_immediate,
+            source_immediate => immediate,
             source_register  => data_source_1,
             destination      => address_jump
         );

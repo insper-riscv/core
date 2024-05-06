@@ -31,7 +31,7 @@ begin
         jump <= source.select_source XOR branch;
     end process;
 
-    process(stall) is
+    process(stall, enable) is
     begin
         enable_0 <= enable AND NOT stall;
     end process;
