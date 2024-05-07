@@ -4,7 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
 
-entity CPU_EXECUTION_FOWARDING_UNIT is
+entity CPU_EXECUTION_FORWARDING_UNIT is
 
     port (
         stage_ex_select_source_1     : in  WORK.CPU.t_REGISTER;
@@ -19,7 +19,7 @@ entity CPU_EXECUTION_FOWARDING_UNIT is
 
 end entity;
 
-architecture RTL of CPU_EXECUTION_FOWARDING_UNIT is
+architecture RTL of CPU_EXECUTION_FORWARDING_UNIT is
 
     -- No signals
 

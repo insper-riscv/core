@@ -64,26 +64,25 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
     ]
     values_data_source_1 = [
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         values_data_destination[0],
         values_data_destination[1],
         values_data_destination[2],
         values_data_destination[3],
         values_data_destination[4],
+        "00000000000000000000000000000000",
     ]
     values_data_source_2 = [
-        "00000000000000000000000000000000",
         values_data_destination[0],
         values_data_destination[1],
         values_data_destination[2],
         values_data_destination[3],
         values_data_destination[4],
         "00000000000000000000000000000000",
+        values_data_destination[5],
     ]
     clock = Clock(dut.clock, 20000, units="ns")
 
     cocotb.start_soon(clock.start(start_high=False))
-    await trace.cycle()
 
     for index, (
         select_destination,
@@ -108,9 +107,9 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: utils
         dut.select_source_2.value = BinaryValue(select_source_2)
         dut.data_destination.value = BinaryValue(data_destination)
 
+        await trace.cycle()
         yield trace.check(dut.data_source_1, data_source_1, f"At clock {index}.")
         yield trace.check(dut.data_source_2, data_source_2, f"At clock {index}.")
-        await trace.cycle()
 
 
 @pytest.mark.synthesis

@@ -20,6 +20,7 @@ entity CPU_STAGE_EX is
         forwarding_mem_source   : in  WORK.CPU.t_DATA;
         forwarding_wb_source    : in  WORK.CPU.t_DATA;
         source                  : in  WORK.CPU.t_SIGNALS_ID_EX;
+        enable_read             : out std_logic;
         destination             : out WORK.CPU.t_SIGNALS_EX_MEM
     );
 
@@ -33,6 +34,7 @@ architecture RV32I of CPU_STAGE_EX is
     signal forward_register_2 : WORK.CPU.t_DATA;
     signal selector_forward_1 : std_logic_vector(1 downto 0);
     signal selector_forward_2 : std_logic_vector(1 downto 0);
+    signal forward_source_2   : WORK.CPU.t_DATA;
 
 begin
 
@@ -59,7 +61,7 @@ begin
             destination => select_function
         );
 
-    CPU_EXECUTION_FOWARDING_UNIT : entity WORK.CPU_EXECUTION_FOWARDING_UNIT
+    CPU_EXECUTION_FORWARDING_UNIT : entity WORK.CPU_EXECUTION_FORWARDING_UNIT
         port map (
             stage_ex_select_source_1     => source_0.select_source_1,
             stage_ex_select_source_2     => source_0.select_source_2,
@@ -84,13 +86,15 @@ begin
             source_2         => source_0.data_source_2,
             immediate        => source_0.data_immediate,
             select_function  => select_function,
+            forward_out      => forward_source_2,
             destination      => destination.address_pointer
         );
 
     destination.control_mem        <= source_0.control_mem;
     destination.control_wb         <= source_0.control_wb;
-    destination.data_source_2      <= source_0.data_source_2;
+    destination.data_source_2      <= forward_source_2;
     destination.select_destination <= source_0.select_destination;
     destination.funct_3            <= source_0.funct_3;
+    enable_read                    <= source_0.control_mem.enable_read;
 
 end architecture;

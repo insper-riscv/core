@@ -12,11 +12,14 @@ entity MODULE_BRANCH_COMPARE_UNIT is
     );
 
     port (
-        enable          : in  std_logic;
-        select_function : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
-        source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination     : out std_logic
+        enable             : in  std_logic;
+        select_function    : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
+        source_1           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_2           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        forward_selector_1 : in  std_logic;
+        forward_selector_2 : in  std_logic;
+        forward_source     : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination        : out std_logic
     );
 
 end entity;
@@ -30,6 +33,9 @@ architecture RV32I of MODULE_BRANCH_COMPARE_UNIT is
     signal flag_equal    : std_logic;
     signal flag_less     : std_logic;
     signal flag_greather : std_logic;
+
+    signal forward_source_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal forward_source_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 
@@ -46,13 +52,35 @@ begin
             destination     => flag_branch
         );
 
+    MUX_BRANCH_1 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
+        port map (
+            selector    => forward_selector_1,
+            source_1    => source_1,
+            source_2    => forward_source,
+            destination => forward_source_1
+        );
+
+    MUX_BRANCH_2 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
+        port map (
+            selector    => forward_selector_2,
+            source_1    => source_2,
+            source_2    => forward_source,
+            destination => forward_source_2
+        );
+
     COMPARATOR : entity WORK.GENERIC_COMPARATOR
         generic map (
             DATA_WIDTH => WORK.RV32I.XLEN
         )
         port map (
-            source_1      => source_1,
-            source_2      => source_2,
+            source_1      => forward_source_1,
+            source_2      => forward_source_2,
             flag_equal    => flag_equal,
             flag_less     => flag_less,
             flag_greather => flag_greather

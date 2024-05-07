@@ -10,7 +10,8 @@ entity CPU_STAGE_IF is
         clock           : in  std_logic;
         clear           : in  std_logic;
         enable          : in  std_logic;
-        branch          : in std_logic;
+        stall           : in  std_logic;
+        branch          : in  std_logic;
         source          : in  WORK.CPU.t_CONTROL_IF;
         address_jump    : in  WORK.CPU.t_DATA;
         address_program : out WORK.CPU.t_DATA
@@ -30,9 +31,9 @@ begin
         jump <= source.select_source XOR branch;
     end process;
 
-    process(source.enable_stall) is
+    process(stall, enable) is
     begin
-        enable_0 <= enable AND NOT source.enable_stall;
+        enable_0 <= enable AND NOT stall;
     end process;
 
     MODULE_PROGRAM_COUNTER : entity WORK.MODULE_PROGRAM_COUNTER(RV32I)

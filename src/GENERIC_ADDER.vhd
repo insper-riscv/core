@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-use IEEE.NUMERIC_STD_UNSIGNED.ALL;
 
 library WORK;
 
@@ -26,6 +25,6 @@ architecture RTL of GENERIC_ADDER is
 
 begin
 
-    destination <= source_1 + source_2;
+    destination <= std_logic_vector(signed(source_1) + signed(source_2));
 
 end architecture;
