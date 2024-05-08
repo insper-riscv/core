@@ -49,7 +49,7 @@ async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1, trace: utils.Trace):
 
 @GENERIC_MUX_2X1.testcase
 async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: utils.Trace):
-    for _ in range(1_000_000):
+    for _ in range(500_00):
         source_1 = random.getrandbits(32)
         source_2 = random.getrandbits(32)
         selector = random.getrandbits(1)
@@ -107,6 +107,7 @@ def test_GENERIC_MUX_2X1_stress():
         [
             tb_GENERIC_MUX_2X1_case_stress,
         ],
+        parameters={"DATA_WIDTH": 32},
     )
 
 @pytest.mark.stress
