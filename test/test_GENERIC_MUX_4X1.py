@@ -133,6 +133,7 @@ def test_GENERIC_MUX_4X1_stress():
         [
             tb_GENERIC_MUX_4X1_case_stress,
         ],
+        parameters={"DATA_WIDTH": 32},
     )
 
 @pytest.mark.stress
