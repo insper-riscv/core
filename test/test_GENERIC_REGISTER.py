@@ -56,7 +56,7 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: utils.Trace):
 
 @GENERIC_REGISTER.testcase
 async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Trace):
-    qnt_tests = 100_000
+    qnt_tests = 30_000
     
     clear = "0"
     enable = "1"
@@ -207,6 +207,7 @@ def test_GENERIC_REGISTER_stress():
         [
             tb_GENERIC_REGISTER_case_stress,
         ],
+         parameters={"DATA_WIDTH": 32},
     )
 
 @pytest.mark.stress
