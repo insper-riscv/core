@@ -861,15 +861,17 @@ Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à esquerda pelo número de posições indicado
 pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com zeros. O resultado é
-escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
+escrito no registrador de destino `rd`. Caso se decida atualizar o processador para uma
+arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
+a ter 6 bits cada).
 
 #### Sintaxe
 
 A instrução SLLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLLI.
 
-| Tipo | 31-26  | 25-20 | 19-15 |  14-12  | 11-7 |  6-0   |
-| :--: | :----: | :---: | :---: | :-----: | :--: | :----: |
-|  I   | 000000 | shamt |  rs1  |  `001`  |  rd  | OP-IMM |
+| Tipo |   31-26   | 24-20 | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
+|  I   | `0000000` | shamt |  rs1  |  `001`  |  rd  | OP-IMM |
 
 **Tabela SLLI** - Tabela com sintaxe da instrução SLLI.
 
@@ -918,15 +920,17 @@ Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
 pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com zeros. O resultado é
-escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
+escrito no registrador de destino `rd`. Caso se decida atualizar o processador para uma
+arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
+a ter 6 bits cada).
 
 #### Sintaxe
 
 A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRLI.
 
-| Tipo | 31-26  | 25-20 | 19-15 |  14-12  | 11-7 |  6-0   |
-| :--: | :----: | :---: | :---: | :-----: | :--: | :----: |
-|  I   | 000000 | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
+| Tipo |   31-26   | 24-20 | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
+|  I   | `0000000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
 
 **Tabela SRLI** - Tabela com sintaxe da instrução SRLI.
 
@@ -976,16 +980,17 @@ Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
 pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com cópias do_bit_ mais
-significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. Só é
-permitido quando `shamt[5] = 0`.
+significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. Caso se decida atualizar o 
+processador para uma arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
+a ter 6 bits cada).
 
 #### Sintaxe
 
 A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRLI.
 
-| Tipo |  31-26   | 25-20 | 19-15 |  14-12  | 11-7 |  6-0   |
-| :--: | :------: | :---: | :---: | :-----: | :--: | :----: |
-|  I   | `010000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
+| Tipo |   31-26   | 25-20 | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
+|  I   | `0100000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
 
 **Tabela SRAI** - Tabela com sintaxe da instrução SRAI.
 
