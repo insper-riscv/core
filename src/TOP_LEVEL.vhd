@@ -40,6 +40,7 @@ begin
             INIT_FILE     => PROGRAM_FILE
         )
         port map (
+            clock       => CLOCK,
             address     => address_program,
             destination => data_program
         );

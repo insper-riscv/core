@@ -6,7 +6,7 @@ use std.textio.all;
 
 library WORK;
 
-entity GENERIC_ROM IS
+entity GENERIC_ROM is
 
     generic (
         DATA_WIDTH        : natural := 8;
@@ -16,6 +16,7 @@ entity GENERIC_ROM IS
     );
 
     port (
+        clock       : in  std_logic := '1';
         address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) 
     );
@@ -26,27 +27,9 @@ architecture RTL of GENERIC_ROM is
 
     type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
 
-    impure function memory_init return memory_block is
-        file     text_file : text open read_mode is INIT_FILE;
-        variable text_line : line;
-        variable content   : memory_block;
-        variable index     : integer := 0;
-        variable value     : bit_vector((DATA_WIDTH - 1) DOWNTO 0);
-    begin
-        while not endfile(text_file) loop
-            readline(text_file, text_line);
-            read(text_line, index);
-            read(text_line, value);
-
-            if index >= 0 and index < (2**ADDRESSABLE_WIDTH) then
-                content(index) := To_StdLogicVector(value);
-            end if;
-        end loop;
-        
-        return content;
-    end function;
-
-    signal memory_ROM : memory_block := memory_init;
+    signal memory_ROM: memory_block;
+    attribute ram_init_file : string;
+    attribute ram_init_file of memory_ROM : signal is INIT_FILE;
 
 begin
 
