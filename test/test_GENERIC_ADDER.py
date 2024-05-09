@@ -61,15 +61,30 @@ async def tb_GENERIC_ADDER_stress(dut: GENERIC_ADDER, trace: utils.Trace):
         source_1 = random.getrandbits(8)
         source_2 = random.getrandbits(8)
     
-        dut.source_1.value = BinaryValue(utils.convert_to_binstr(source_1, 8))
-        dut.source_2.value = BinaryValue(utils.convert_to_binstr(source_2, 8))
+        dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 32))
+        dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 32))
     
         await trace.cycle()
 
-        message = f"source_1: {utils.convert_to_binstr(source_1, 8)}, source_2: {utils.convert_to_binstr(source_2, 8)}"
+        message = f"source_1: {'{0:0{1}b}'.format(source_1, 32)}, source_2: {'{0:0{1}b}'.format(source_2, 32)}"
 
-        yield trace.check(dut.destination, utils.convert_to_binstr(source_1 + source_2, 8), message)
+        yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1+source_2, 32)[-32:], message)
 
+@GENERIC_ADDER.testcase
+async def tb_GENERIC_ADDER_stress_5_bits(dut: "GENERIC_ADDER", trace: utils.Trace):
+    bits = 5
+    for i in range(2**bits):
+        for j in range(2**bits):
+                source_1 = '{0:0{1}b}'.format(i, bits)
+                source_2 = '{0:0{1}b}'.format(j, bits)
+
+                dut.source_1.value = BinaryValue(source_1)
+                dut.source_2.value = BinaryValue(source_2)
+
+                message = f"source_1: {source_1}, source_2: {source_2}"
+                
+                await trace.cycle()
+                yield trace.check(dut.destination, '{0:0{1}b}'.format(i+j, bits)[-bits:], message)
 
 @pytest.mark.synthesis
 def test_GENERIC_ADDER_synthesis():
@@ -92,6 +107,15 @@ def test_GENERIC_ADDER_stress():
         [
             tb_GENERIC_ADDER_stress
         ]
+    )
+
+@pytest.mark.stress
+def test_GENERIC_ADDER_stress_5_bits():
+    GENERIC_ADDER.test_with(
+        [
+            tb_GENERIC_ADDER_stress_5_bits,
+        ],
+        parameters={"DATA_WIDTH": 5},
     )
 
 if __name__ == "__main__":

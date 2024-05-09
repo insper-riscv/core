@@ -24,8 +24,8 @@ async def tb_GENERIC_COMPARATOR_case_1(dut: GENERIC_COMPARATOR, trace: utils.Tra
             is_less = "1" if source_1 < source_2 else "0"
             is_greather = "1" if source_1 > source_2 else "0"
             is_equal = "1" if source_1 == source_2 else "0"
-            dut.source_1.value = BinaryValue(utils.convert_to_binstr(source_1, 8), 8)
-            dut.source_2.value = BinaryValue(utils.convert_to_binstr(source_2, 8), 8)
+            dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 8))
+            dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 8))
 
             await trace.cycle()
             yield trace.check(dut.flag_less, is_less, f"for {source_1} < {source_2}")
