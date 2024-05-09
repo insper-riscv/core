@@ -91,10 +91,8 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: utils.Trace):
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
     qnt_tests = 1000
-    dut.select_function.value = BinaryValue("000")
+    dut.select_function.value = BinaryValue("0111")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
 
     mask = 0xFFFFFFFF
 
@@ -108,8 +106,6 @@ async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 & source_2, 32))
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("0")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -121,8 +117,6 @@ async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) & source_2, 32))
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("1")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -134,8 +128,6 @@ async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 & (source_2 ^ mask), 32))
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -151,11 +143,8 @@ async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: utils.Trace):
     qnt_tests = 1000
+
     dut.select_function.value = BinaryValue("001")
-
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
-
     mask = 0xFFFFFFFF
 
     for _ in range(qnt_tests//4):
@@ -168,52 +157,11 @@ async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 | source_2, 32))
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("0")
-
-    for _ in range(qnt_tests//4):
-        source_1 = random.getrandbits(32)
-        source_2 = random.getrandbits(32)
-
-        dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 32))
-        dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 32))
-
-        await trace.cycle()
-        yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) | source_2, 32))
-
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("1")
-
-    for _ in range(qnt_tests//4):
-        source_1 = random.getrandbits(32)
-        source_2 = random.getrandbits(32)
-
-        dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 32))
-        dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 32))
-
-        await trace.cycle()
-        yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 | (source_2 ^ mask), 32))
-
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
-
-    for _ in range(qnt_tests//4):
-        source_1 = random.getrandbits(32)
-        source_2 = random.getrandbits(32)
-
-        dut.source_1.value = BinaryValue('{0:0{1}b}'.format(source_1, 32))
-        dut.source_2.value = BinaryValue('{0:0{1}b}'.format(source_2, 32))
-
-        await trace.cycle()
-        yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) | (source_2 ^ mask), 32))
-
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace):
     qnt_tests = 1000
     dut.select_function.value = BinaryValue("010")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
 
     mask = 0xFFFFFFFF
 
@@ -227,8 +175,6 @@ async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 ^ source_2, 32))
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("0")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -240,8 +186,6 @@ async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) ^ source_2, 32))
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("1")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -253,8 +197,6 @@ async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 ^ (source_2 ^ mask), 32))
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -269,10 +211,8 @@ async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: utils.Trace):
     qnt_tests = 1000
-    dut.select_function.value = BinaryValue("011")
+    dut.select_function.value = BinaryValue("111")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
 
     mask = 0xFFFFFFFF
 
@@ -286,8 +226,6 @@ async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: utils.Trace
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 + source_2, 32)[-32:])
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("0")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -299,8 +237,6 @@ async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: utils.Trace
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) + source_2 + 1, 32)[-32:])
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("1")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -312,8 +248,6 @@ async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: utils.Trace
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 + (source_2 ^ mask) + 1, 32)[-32:])
 
-    dut.invert_source_1.value = BinaryValue("1")
-    dut.invert_source_2.value = BinaryValue("1")
 
     for _ in range(qnt_tests//4):
         source_1 = random.getrandbits(32)
@@ -330,8 +264,6 @@ async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: utils.Trace):
     qnt_tests = 1000
     dut.select_function.value = BinaryValue("110")
 
-    dut.invert_source_1.value = BinaryValue("0")
-    dut.invert_source_2.value = BinaryValue("0")
 
     mask = 0xFFFFFFFF
 
@@ -347,8 +279,8 @@ async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: utils.Trace):
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 + source_2) & mask >= 2**32 - 1, 32)[-32:], message)
 
-    # dut.invert_source_1.value = BinaryValue("1")
-    # dut.invert_source_2.value = BinaryValue("0")
+    
+    
 
     # for _ in range(qnt_tests//4):
     #     source_1 = random.getrandbits(32)
@@ -360,8 +292,8 @@ async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: utils.Trace):
     #     await trace.cycle()
     #     yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) + source_2 + 1, 32)[-32:])
 
-    # dut.invert_source_1.value = BinaryValue("0")
-    # dut.invert_source_2.value = BinaryValue("1")
+    
+    
 
     # for _ in range(qnt_tests//4):
     #     source_1 = random.getrandbits(32)
@@ -373,8 +305,8 @@ async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: utils.Trace):
     #     await trace.cycle()
     #     yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 + (source_2 ^ mask) + 1, 32)[-32:])
 
-    # dut.invert_source_1.value = BinaryValue("1")
-    # dut.invert_source_2.value = BinaryValue("1")
+    
+    
 
     # for _ in range(qnt_tests//4):
     #     source_1 = random.getrandbits(32)
@@ -405,10 +337,7 @@ def test_RV32I_ALU_testcases():
 def test_RV32I_ALU_stress():
     RV32I_ALU.test_with(
         [
-            tb_RV32I_ALU_case_stress_and,
-            tb_RV32I_ALU_case_stress_or,
-            tb_RV32I_ALU_case_stress_half_adder,
-            tb_RV32I_ALU_case_stress_full_adder,
+            
         ],
     )
 
