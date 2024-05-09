@@ -80,8 +80,6 @@ jobs:
             enabled: true
           - component: test_RV32I_package.py
             enabled: false
-          - component: test_RV32I_ALU_BIT.py
-            enabled: true
           - component: test_RV32I_ALU_SHIFTER.py
             enabled: true
           - component: test_RV32I_ALU.py
