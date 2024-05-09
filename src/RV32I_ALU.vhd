@@ -22,52 +22,57 @@ end entity;
 
 architecture RTL of RV32I_ALU is
 
-    signal result               : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal result_extended      : std_logic;
-    signal carry                : std_logic_vector((DATA_WIDTH) downto 0);
-    signal carry_extended       : std_logic;
-    signal overflow_auxiliar    : std_logic;
-    signal slt                  : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal shift                : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal flag_subtract     : std_logic;
+    signal source_2_auxiliar : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal carry_in          : std_logic;
+    signal source_and        : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal source_or         : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal half_add          : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal full_add          : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal carry_out         : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal slt               : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal sltu              : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal shift             : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal destination_1     : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal destination_2     : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal add_overflow      : std_logic;
 
 begin
 
-    carry(0) <= '1' when (
-                    select_function = "1000" or
-                    select_function = "0010" or
-                    select_function = "0011"
-                ) else
-                '0';
+    flag_subtract <=    WORK.GENERICS.is_equal(select_function(3 downto 2), "10") AND
+                        NOT(WORK.GENERICS.is_equal(select_function(1 downto 0), "01"));
 
-    overflow_auxiliar <=    carry_extended XOR carry(DATA_WIDTH) when (select_function(1 downto 0) = "11") else
-                            carry(DATA_WIDTH) XOR carry(DATA_WIDTH - 1);
+    source_and <= source_1 AND source_2_auxiliar;
+    source_or  <= source_1 OR  source_2;
+    half_add   <= source_1 XOR source_2_auxiliar;
+    full_add   <= half_add XOR (carry_out((DATA_WIDTH - 2) downto 0) & flag_subtract);
 
-    overflow <= overflow_auxiliar;
+    add_overflow <= carry_out(DATA_WIDTH - 1) XOR carry_out(DATA_WIDTH - 2);
+    overflow     <= add_overflow;
 
-    slt(31 downto 1) <= (others => '0');
-    slt(0) <=   overflow_auxiliar XOR result_extended when (select_function(1 downto 0) = "11") else
-                overflow_auxiliar XOR result(DATA_WIDTH - 1);
+    slt <=  (0 => add_overflow XOR full_add(DATA_WIDTH - 1), others => '0');
+    sltu <= (0 => NOT(carry_out(DATA_WIDTH - 1)),            others => '0');
 
-    BIT_TO_BIT : for i in 0 to (DATA_WIDTH - 1) generate
-        FOR_BIT : entity WORK.RV32I_ALU_BIT
-            port map (
-                select_function => select_function,
-                carry_in        => carry(i),
-                source_1        => source_1(i),
-                source_2        => source_2(i),
-                destination     => result(i),
-                carry_out       => carry(i + 1)
-            );
-    end generate;
-
-    EXTENDED_SIGN_BIT : entity WORK.RV32I_ALU_BIT
+    MUX_SOURCE_2 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => DATA_WIDTH
+        )
         port map (
-            select_function => select_function,
-            carry_in        => carry(DATA_WIDTH),
-            source_1        => '0',
-            source_2        => '0',
-            destination     => result_extended,
-            carry_out       => carry_extended
+            selector    => flag_subtract,
+            source_1    => source_2,
+            source_2    => NOT(source_2),
+            destination => source_2_auxiliar
+        );
+
+    CARRY_LOOKAHEAD : entity WORK.GENERIC_CARRY_LOOKAHEAD
+        generic map (
+            DATA_WIDTH => DATA_WIDTH
+        )
+        port map(
+            carry_in        => flag_subtract,
+            carry_generate  => source_and,
+            carry_propagate => half_add,
+            carry_out       => carry_out
         );
 
     SHIFTER : entity WORK.RV32I_ALU_SHIFTER
@@ -81,14 +86,41 @@ begin
             destination     => shift
         );
 
-    destination <=  shift when (
-                        select_function = "0001" or
-                        select_function(2 downto 0) = "101"
-                    ) else 
-                    slt when (
-                        select_function = "1010" or
-                        select_function = "1011"
-                    ) else
-                    result;
+    MUX_DESTINATION_1 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => DATA_WIDTH
+        )
+        port map (
+            selector    => select_function(1 downto 0),
+            source_1    => full_add,
+            source_2    => shift,
+            source_3    => slt,
+            source_4    => sltu,
+            destination => destination_1
+        );
+
+    MUX_DESTINATION_2 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => DATA_WIDTH
+        )
+        port map (
+            selector    => select_function(1 downto 0),
+            source_1    => half_add,
+            source_2    => shift,
+            source_3    => source_or,
+            source_4    => source_and,
+            destination => destination_2
+        );
+
+    MUX_DESTINATION_3 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => DATA_WIDTH
+        )
+        port map (
+            selector    => select_function(2),
+            source_1    => destination_1,
+            source_2    => destination_2,
+            destination => destination
+        );
 
 end architecture;

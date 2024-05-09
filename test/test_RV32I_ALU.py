@@ -3,7 +3,9 @@ from cocotb.binary import BinaryValue
 
 import lib
 from test_RV32I_package import RV32I
-from test_RV32I_ALU_BIT import RV32I_ALU_BIT
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
+from test_GENERIC_MUX_4X1 import GENERIC_MUX_4X1
+from test_GENERIC_CARRY_LOOKAHEAD import GENERIC_CARRY_LOOKAHEAD
 from test_RV32I_ALU_SHIFTER import RV32I_ALU_SHIFTER
 
 
@@ -13,10 +15,15 @@ class RV32I_ALU(lib.Entity):
     select_function = lib.Entity.Input_pin
     source_1 = lib.Entity.Input_pin
     source_2 = lib.Entity.Input_pin
+    overflow = lib.Entity.Output_pin
     destination = lib.Entity.Output_pin
 
-    bit_to_bit = RV32I_ALU_BIT
-    generic_shifter = RV32I_ALU_SHIFTER
+    MUX_SOURCE_2 = GENERIC_MUX_2X1
+    CARRY_LOOKAHEAD = GENERIC_CARRY_LOOKAHEAD
+    SHIFTER = RV32I_ALU_SHIFTER
+    MUX_DESTINATION_1 = GENERIC_MUX_4X1
+    MUX_DESTINATION_2 = GENERIC_MUX_4X1
+    MUX_DESTINATION_3 = GENERIC_MUX_2X1
 
 
 @RV32I_ALU.testcase
@@ -72,7 +79,7 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
     yield trace.check(dut.destination, "00000000000000000000000000000000", "At 6")
 
     dut.select_function.value = BinaryValue("1010") # 010111
-    dut.source_1.value = BinaryValue("00000000000000000000000000000010")
+    dut.source_1.value = BinaryValue("00000000000000000000000000000001")
     dut.source_2.value = BinaryValue("00000000000000000000000000000100")
 
     await trace.cycle()
