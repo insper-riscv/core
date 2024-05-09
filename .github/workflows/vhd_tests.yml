@@ -38,6 +38,8 @@ jobs:
             enabled: false
           - component: test_GENERIC_ADDER.py
             enabled: true
+          - component: test_GENERIC_CARRY_LOOKAHEAD.py
+            enabled: false
           - component: test_GENERIC_COMPARATOR.py
             enabled: true
           - component: test_GENERIC_DEBOUNCE.py
