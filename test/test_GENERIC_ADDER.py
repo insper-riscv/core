@@ -6,6 +6,7 @@ from cocotb.binary import BinaryValue
 import lib
 from lib.utils import to_binstr as b
 from test_GENERICS_package import GENERICS
+from test_GENERIC_CARRY_LOOKAHEAD import GENERIC_CARRY_LOOKAHEAD
 
 
 class GENERIC_ADDER(lib.Entity):
@@ -14,6 +15,8 @@ class GENERIC_ADDER(lib.Entity):
     source_1 = lib.Entity.Input_pin
     source_2 = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
+
+    carry_lookahead = GENERIC_CARRY_LOOKAHEAD
 
 
 @GENERIC_ADDER.testcase
