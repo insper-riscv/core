@@ -26,9 +26,12 @@ architecture RTL of GENERIC_MUX_4X1 is
 
 begin
 
-    destination <=  source_2 when (selector = "01") else
-                    source_3 when (selector = "10") else
-                    source_4 when (selector = "11") else
-                    source_1;
+    destination <=  (
+                        (source_1 AND (NOT(selector(0)) AND NOT(selector(1)))) OR
+                        (source_2 AND (selector(0) AND NOT(selector(1))))
+                    ) OR (
+                        (source_3 AND (NOT(selector(0)) AND selector(1))) OR
+                        (source_4 AND (selector(0) AND selector(1)))
+                    );
 
 end architecture;

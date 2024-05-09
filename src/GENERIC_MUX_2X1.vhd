@@ -24,7 +24,6 @@ architecture RTL of GENERIC_MUX_2X1 is
 
 begin
 
-    destination <=  source_2 when (selector = '1') else
-                    source_1;
+    destination <= (source_1 AND NOT(selector)) OR (source_2 AND selector);
 
 end architecture;
