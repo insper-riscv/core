@@ -97,7 +97,7 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
 
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
+async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: lib.Waveform):
     qnt_tests = 1000
     dut.select_function.value = BinaryValue("0111")
 
@@ -149,7 +149,7 @@ async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: utils.Trace):
 
     
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: utils.Trace):
+async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: lib.Waveform):
     qnt_tests = 1000
 
     dut.select_function.value = BinaryValue("001")
@@ -166,7 +166,7 @@ async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: utils.Trace):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 | source_2, 32))
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace):
+async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: lib.Waveform):
     qnt_tests = 1000
     dut.select_function.value = BinaryValue("010")
 
@@ -217,7 +217,7 @@ async def tb_RV32I_ALU_case_stress_half_adder(dut: RV32I_ALU, trace: utils.Trace
         yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) ^ (source_2 ^ mask), 32))
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: utils.Trace):
+async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: lib.Waveform):
     qnt_tests = 1000
     dut.select_function.value = BinaryValue("111")
 
@@ -268,7 +268,7 @@ async def tb_RV32I_ALU_case_stress_full_adder(dut: RV32I_ALU, trace: utils.Trace
         yield trace.check(dut.destination, '{0:0{1}b}'.format((source_1 ^ mask) + (source_2 ^ mask), 32)[-32:])
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: utils.Trace):
+async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: lib.Waveform):
     qnt_tests = 1000
     dut.select_function.value = BinaryValue("110")
 

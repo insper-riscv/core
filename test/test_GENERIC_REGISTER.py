@@ -50,14 +50,11 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: lib.Waveform)
 
 
 @GENERIC_REGISTER.testcase
-async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Trace):
+async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: lib.Waveform):
     qnt_tests = 30_000
     
     clear = "0"
     enable = "1"
-    
-    clock = Clock(dut.clock, 20000, units="ns")
-    cocotb.start_soon(clock.start(start_high=False))
     
     for _ in range(qnt_tests):
         source = random.getrandbits(32)
@@ -119,14 +116,11 @@ async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: utils.Tr
         yield trace.check(dut.destination, destination, message)
 
 @GENERIC_REGISTER.testcase
-async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: utils.Trace):
+async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: lib.Waveform):
     bits = 15
     
     clear = "0"
     enable = "1"
-
-    clock = Clock(dut.clock, 20000, units="ns")
-    cocotb.start_soon(clock.start(start_high=False))
 
     for source in range(2**bits):
         source_bits = '{0:0{1}b}'.format(source, bits)

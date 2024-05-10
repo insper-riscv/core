@@ -48,7 +48,7 @@ async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
     yield trace.check(dut.destination, "00000100")
 
 @GENERIC_MUX_2X1.testcase
-async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: utils.Trace):
+async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
     for _ in range(500_00):
         source_1 = random.getrandbits(32)
         source_2 = random.getrandbits(32)
@@ -69,7 +69,7 @@ async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: utils.Trac
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 if selector == 0 else source_2, 32), message)
 
 @GENERIC_MUX_2X1.testcase
-async def tb_GENERIC_MUX_2X1_case_stress_5_bits(dut: GENERIC_MUX_2X1, trace: utils.Trace):
+async def tb_GENERIC_MUX_2X1_case_stress_5_bits(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
     bits = 5
     for i in range(2**bits):
         for j in range(2**bits):

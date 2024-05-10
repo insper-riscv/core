@@ -3,20 +3,20 @@ import os
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_CPU_package import CPU
 
 
-class MODULE_STALL_MUX(utils.DUT):
+class MODULE_STALL_MUX(lib.Entity):
     _package = CPU
 
-    control_ex_in = utils.DUT.Input_pin
-    control_mem_in = utils.DUT.Input_pin
-    control_wb_in = utils.DUT.Input_pin
-    selector = utils.DUT.Input_pin
-    control_ex_out = utils.DUT.Output_pin
-    control_mem_out = utils.DUT.Output_pin
-    control_wb_out = utils.DUT.Output_pin
+    control_ex_in = lib.Entity.Input_pin
+    control_mem_in = lib.Entity.Input_pin
+    control_wb_in = lib.Entity.Input_pin
+    selector = lib.Entity.Input_pin
+    control_ex_out = lib.Entity.Output_pin
+    control_mem_out = lib.Entity.Output_pin
+    control_wb_out = lib.Entity.Output_pin
     
 
 @pytest.mark.synthesis
