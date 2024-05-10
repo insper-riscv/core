@@ -1,6 +1,8 @@
 name: VHD Coverage tests
 'on':
   workflow_dispatch: {}
+  push:
+  - .github/workflows/vhd_tests_stress.yml
 
 jobs:
   test:
@@ -106,6 +108,6 @@ jobs:
         npm install -g netlistsvg
     - name: Run Synthesis
       run: pytest -k ${{ matrix.component }} -m synthesis
-    - name: Run Testcases
+    - name: Run Stress Tests
       if: ${{ contains(matrix.enabled, true) }}
       run: pytest -k ${{ matrix.component }} -m coverage

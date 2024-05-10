@@ -93,8 +93,17 @@ def test_GENERIC_ADDER_testcases():
 def test_GENERIC_ADDER_coverage():
     GENERIC_ADDER.test_with(
         [
-            tb_GENERIC_ADDER_coverage_case
+            tb_GENERIC_ADDER_stress
         ]
+    )
+
+@pytest.mark.stress
+def test_GENERIC_ADDER_stress_5_bits():
+    GENERIC_ADDER.test_with(
+        [
+            tb_GENERIC_ADDER_stress_5_bits,
+        ],
+        parameters={"DATA_WIDTH": 5},
     )
 
 if __name__ == "__main__":

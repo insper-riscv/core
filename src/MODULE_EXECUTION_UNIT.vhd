@@ -23,6 +23,7 @@ entity MODULE_EXECUTION_UNIT is
         source_1         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         immediate        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        forward_out      : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -96,5 +97,7 @@ begin
             source_2        => alu_source_2,
             destination     => destination
         );
+
+    forward_out <= forward_source_2;
 
 end architecture;

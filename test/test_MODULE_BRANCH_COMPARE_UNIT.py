@@ -5,6 +5,7 @@ import lib
 from test_MODULES_package import MODULES
 from test_RV32I_BRANCH_CONTROLLER import RV32I_BRANCH_CONTROLLER
 from test_GENERIC_COMPARATOR import GENERIC_COMPARATOR
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
@@ -18,6 +19,8 @@ class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
 
     compare = RV32I_BRANCH_CONTROLLER
     comparator = GENERIC_COMPARATOR
+    mux_branch_1 = GENERIC_MUX_2X1
+    mux_branch_2 = GENERIC_MUX_2X1
 
 
 @MODULE_BRANCH_COMPARE_UNIT.testcase

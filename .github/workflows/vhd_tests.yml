@@ -20,7 +20,7 @@ jobs:
           include:
           - component: test_CPU_package.py
             enabled: false
-          - component: test_CPU_EXECUTION_FOWARDING_UNIT.py
+          - component: test_CPU_EXECUTION_FORWARDING_UNIT.py
             enabled: false
           - component: test_CPU_STAGE_EX.py
             enabled: false
