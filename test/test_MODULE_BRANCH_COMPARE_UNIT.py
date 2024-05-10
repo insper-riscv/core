@@ -15,6 +15,8 @@ class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
     source_1 = lib.Entity.Input_pin
     source_2 = lib.Entity.Input_pin
     select_function = lib.Entity.Input_pin
+    forward_selector_1 = lib.Entity.Input_pin
+    forward_selector_2 = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
 
     compare = RV32I_BRANCH_CONTROLLER
@@ -28,6 +30,8 @@ async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, 
     dut.enable.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
+    dut.forward_selector_1.value = BinaryValue("0")
+    dut.forward_selector_2.value = BinaryValue("0")
     dut.select_function.value = BinaryValue("0000")
 
     await trace.cycle()
