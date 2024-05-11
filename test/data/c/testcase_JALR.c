@@ -12,4 +12,7 @@ void main() {
     asm("addi x0, x0,  0    ");
     asm("addi x2, x0,  8    ");
     asm("addi x2, x1, 12    ");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

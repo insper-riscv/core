@@ -11,4 +11,7 @@ void main() {
     asm("and  x5, x3, x1");
     asm("and  x5, x3, x2");
     asm("and  x5, x3, x3");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

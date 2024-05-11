@@ -12,4 +12,7 @@ void main() {
     asm("sltu x20, x2,     x3");
     asm("sltu x20, x4,     x9");
     asm("sltu x20, x4,    x10");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

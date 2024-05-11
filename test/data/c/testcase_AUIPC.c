@@ -5,4 +5,7 @@ void main() {
     asm("auipc x8, 1");
     asm("auipc x8, 1");
     asm("auipc x8, 1");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

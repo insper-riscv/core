@@ -6,4 +6,7 @@ void main() {
     asm("slli x2, x1, 4");
     asm("addi x0, x0, 0");
     asm("slli x2, x1, 4");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

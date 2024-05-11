@@ -17,6 +17,13 @@ class Program:
         self.dependencies = dependencies
         self.basedir = basedir
         self.stepping = stepping
+        self.memory_enable_pin = None
+        self.memory_enable_read_pin = None
+        self.memory_enable_write_pin = None
+        self.memory_address_pin = None
+        self.memory_source_pin = None
+        self.memory_destination_pin = None
+        self.memory = None
 
     def enable_stepping(self):
         self.stepping = True
@@ -50,7 +57,31 @@ class Program:
 
                 index += 1
 
+            if self.memory is not None:
+                memory_address = self.memory_address_pin.value.integer
+
+                if self.memory_enable_read_pin.value.binstr == "1":
+                    if memory_address in self.memory:
+                        self.memory_destination_pin.value = BinaryValue(self.memory[memory_address])
+                    else:
+                        self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr))
+                else:
+                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr))
+
+                if self.memory_enable_write_pin.value.binstr == "1":
+                    self.memory[memory_address] = self.memory_source_pin.value.binstr
+
             await trace.cycle()
+
+    def attach_memory(self, enable_read: T.Type[lib.Entity.Output_pin], 
+                            enable_write: T.Type[lib.Entity.Output_pin], address: T.Type[lib.Entity.Output_pin],
+                            source: T.Type[lib.Entity.Output_pin], destination: T.Type[lib.Entity.Input_pin]):
+        self.memory_enable_read_pin = enable_read
+        self.memory_enable_write_pin = enable_write
+        self.memory_address_pin = address
+        self.memory_source_pin = source
+        self.memory_destination_pin = destination
+        self.memory = {}
 
     def _build_program_executable(self):
         output = Path(self.entry.with_suffix('.out').name)

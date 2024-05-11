@@ -10,4 +10,7 @@ void main() {
     asm("sub x3, x3, x2");
     asm("sub x3, x3, x2");
     asm("sub x3, x3, x2");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

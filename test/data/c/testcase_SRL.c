@@ -9,4 +9,7 @@ void main() {
     asm("srl  x3, x1,  x2");
     asm("srl  x3, x1,  x2");
     asm("srl  x3, x1,  x2");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

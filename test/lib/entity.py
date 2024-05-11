@@ -15,7 +15,8 @@ from lib.waveform import Waveform
 
 
 _TESTCASE_TYPE = T.Union[
-    T.Callable[["Entity", "Waveform"], None], T.Sequence[T.Callable[["Entity", "Waveform"], None]]
+    T.Callable[["Entity", Waveform], T.AsyncGenerator[bool, T.Any]],
+    list[T.Callable[["Entity", Waveform], T.AsyncGenerator[bool, T.Any]]],
 ]
 
 runner = cocotb.runner.get_runner("ghdl")
@@ -206,7 +207,7 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
     @classmethod
     def test_with(
         cls,
-        testcase: _TESTCASE_TYPE,
+        testcase: T.Any,
         parameters: T.Mapping[str, object] = {},
     ):
         with check.check() as context:

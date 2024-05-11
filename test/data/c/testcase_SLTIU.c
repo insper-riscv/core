@@ -11,4 +11,7 @@ void main() {
     asm("sltiu  x2,  x1,     40");
     asm("sltiu  x2,  x9,      1");
     asm("sltiu  x2, x10,      1");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

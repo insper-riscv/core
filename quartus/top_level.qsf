@@ -224,6 +224,7 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VHDL_FILE ../src/TOP_LEVEL.vhd
 set_global_assignment -name VHDL_FILE ../src/RV32M_ADDER_BIT.vhd
 set_global_assignment -name VHDL_FILE ../src/RV32M_ADDER.vhd
@@ -235,8 +236,6 @@ set_global_assignment -name VHDL_FILE ../src/RV32I_ALU_SHIFTER.vhd
 set_global_assignment -name VHDL_FILE ../src/RV32I_ALU.vhd
 set_global_assignment -name VHDL_FILE ../src/RV32I.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULES.vhd
-set_global_assignment -name VHDL_FILE ../src/RV32I.vhd
-set_global_assignment -name VHDL_FILE ../src/MODULES.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_WRITE_BACK.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_STALL_MUX.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_REGISTER_FILE.vhd
@@ -245,9 +244,6 @@ set_global_assignment -name VHDL_FILE ../src/MODULE_MEMORY_INTERFACE.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_EXECUTION_UNIT_CONTROLLER.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_EXECUTION_UNIT.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_CONTROL_UNIT.vhd
-set_global_assignment -name VHDL_FILE ../src/MODULE_BRANCH_UNIT.vhd
-set_global_assignment -name VHDL_FILE ../src/MODULE_BRANCH_COMPARE_UNIT.vhd
-set_global_assignment -name VHDL_FILE ../src/GENERICS.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_BRANCH_UNIT.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_BRANCH_COMPARE_UNIT.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERICS.vhd
@@ -269,6 +265,7 @@ set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_MEM.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_IF.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_ID.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_EX.vhd
-set_global_assignment -name VHDL_FILE ../src/CPU_EXECUTION_FOWARDING_UNIT.vhd
+set_global_assignment -name VHDL_FILE ../src/CPU_BRANCH_FORWARDING_UNIT.vhd
+set_global_assignment -name VHDL_FILE ../src/CPU_EXECUTION_FORWARDING_UNIT.vhd
+set_global_assignment -name VHDL_FILE ../src/CPU_HAZZARD_CONTROL_UNIT.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU.vhd
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

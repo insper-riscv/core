@@ -13,4 +13,7 @@ void main() {
     asm("srai x2, x1,      6");
     asm("srai x2, x8,      6");
     asm("srai x3, x9,      6");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

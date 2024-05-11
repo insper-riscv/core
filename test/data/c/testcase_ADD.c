@@ -1,6 +1,7 @@
 void main() __attribute__((noreturn));
 
 void main() {
+    asm("addi x1, x0, 0");
     asm("addi x1, x0, 8");
     asm("add x3, x1, x1");
     asm("add x3, x1, x1");
@@ -8,4 +9,7 @@ void main() {
     asm("add x3, x1, x1");
     asm("add x3, x1, x1");
     asm("add x3, x1, x1");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }

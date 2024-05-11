@@ -9,4 +9,7 @@ void main() {
     asm("sra  x3, x8,     x2");
     asm("lui  x9,     524288");
     asm("sra  x3, x9,     x2");
+    asm("nop");
+    asm("nop");
+    asm("nop");
 }
