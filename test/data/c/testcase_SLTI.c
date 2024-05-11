@@ -1,6 +1,7 @@
 void main() __attribute__((noreturn));
 
 void main() {
+    asm("addi x1, x0, 0");
     asm("lui  x10,      524288");
     asm("addi  x1,  x0,      8");
     asm("slti  x2,  x1,      7");
