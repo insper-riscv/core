@@ -1,3 +1,4 @@
+import math
 import re
 import subprocess
 import typing as T
@@ -12,10 +13,17 @@ class Program:
     ENVIRONMENT_CALL = "00000000000000000000000001110011"
     ENVIRONMENT_BREAKPOINT = "00000000000100000000000001110011"
 
-    def __init__(self, filename: str, dependencies: T.List[str] = [], basedir: str = "sim_build", stepping: bool = False):
+    memory_enable_pin: T.Union[T.Type[lib.Entity.Output_pin], None]
+    memory_enable_read_pin: T.Union[T.Type[lib.Entity.Output_pin], None]
+    memory_enable_write_pin: T.Union[T.Type[lib.Entity.Output_pin], None]
+    memory_address_pin: T.Union[T.Type[lib.Entity.Output_pin], None]
+    memory_source_pin: T.Union[T.Type[lib.Entity.Output_pin], None]
+    memory_destination_pin: T.Union[T.Type[lib.Entity.Input_pin], None]
+    memory: T.Union[T.Dict[int, str], None]
+
+    def __init__(self, filename: str, dependencies: T.List[str] = [], stepping: bool = False):
         self.entry = Path(filename)
         self.dependencies = dependencies
-        self.basedir = basedir
         self.stepping = stepping
         self.memory_enable_pin = None
         self.memory_enable_read_pin = None
@@ -36,6 +44,9 @@ class Program:
         bins = self._build_program_dump(elf)
         dump = self._get_program_dump(bins)
 
+        elf.unlink()
+        bins.unlink()
+
         return self._get_program_binaries(dump)
 
     async def attach_device(self, trace: lib.Waveform, address: T.Type[lib.Entity.Output_pin], data: T.Type[lib.Entity.Input_pin]):
@@ -52,30 +63,38 @@ class Program:
 
             data.value = BinaryValue(value)
 
+            if self.memory is not None:
+                memory_address = self.memory_address_pin.value.integer # type: ignore
+
+                if self.memory_enable_read_pin.value.binstr == "1": # type: ignore
+                    if memory_address in self.memory:
+                        self.memory_destination_pin.value = BinaryValue(self.memory[memory_address]) # type: ignore
+                    else:
+                        self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr)) # type: ignore
+                else:
+                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr)) # type: ignore
+
+                if self.memory_enable_write_pin.value.binstr == "1": # type: ignore
+                    self.memory[memory_address] = self.memory_source_pin.value.binstr # type: ignore
+
             if self.stepping or value == Program.ENVIRONMENT_BREAKPOINT:
                 yield index, key
 
                 index += 1
-
-            if self.memory is not None:
-                memory_address = self.memory_address_pin.value.integer
-
-                if self.memory_enable_read_pin.value.binstr == "1":
-                    if memory_address in self.memory:
-                        self.memory_destination_pin.value = BinaryValue(self.memory[memory_address])
-                    else:
-                        self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr))
-                else:
-                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr))
-
-                if self.memory_enable_write_pin.value.binstr == "1":
-                    self.memory[memory_address] = self.memory_source_pin.value.binstr
+            elif value == Program.ENVIRONMENT_CALL:    
+                await trace.cycle()
+                break
 
             await trace.cycle()
 
-    def attach_memory(self, enable_read: T.Type[lib.Entity.Output_pin], 
-                            enable_write: T.Type[lib.Entity.Output_pin], address: T.Type[lib.Entity.Output_pin],
-                            source: T.Type[lib.Entity.Output_pin], destination: T.Type[lib.Entity.Input_pin]):
+    def attach_memory(
+            self,
+            enable_read: T.Type[lib.Entity.Output_pin],
+            enable_write: T.Type[lib.Entity.Output_pin],
+            address: T.Type[lib.Entity.Output_pin],
+            source: T.Type[lib.Entity.Output_pin],
+            destination: T.Type[lib.Entity.Input_pin]
+    ):
         self.memory_enable_read_pin = enable_read
         self.memory_enable_write_pin = enable_write
         self.memory_address_pin = address
@@ -83,15 +102,43 @@ class Program:
         self.memory_destination_pin = destination
         self.memory = {}
 
+    def to_memory_initialization_file(self, width: int, depth: int):
+        mem = {
+            key: value
+            for key, value in self.get_memory_map().items()
+        }
+        argmax = max(mem.keys())
+        pad_size = math.floor(math.log10(argmax) + 1)
+        bins = [
+            f"    {key:0{pad_size}}: {value};"
+            for key, value in mem.items()
+        ]
+
+        if width is None:
+            width = len(mem.get(0)) # type: ignore
+
+        if depth is None:
+            depth = len(bins)
+
+        return "\n".join([
+            f"WIDTH={width};",
+            f"DEPTH={depth};",
+            "ADDRESS_RADIX=DEC;",
+            "DATA_RADIX=BIN;\n",
+            "CONTENT BEGIN",
+            *bins,
+            "END;\n",
+        ])
+
     def _build_program_executable(self):
         output = Path(self.entry.with_suffix('.out').name)
         process = subprocess.Popen(
             [
                 "riscv32-unknown-elf-gcc",
                 "-T",
-                "../test/data/gcc/linker.ld",
+                f"{lib.WORKSPACE_FOLDER}/data/gcc/linker.ld",
                 "-nostartfiles",
-                "../test/data/gcc/start.S",
+                f"{lib.WORKSPACE_FOLDER}/data/gcc/start.S",
                 "-fno-exceptions",
                 "-nolibc",
                 "-nostdlib",

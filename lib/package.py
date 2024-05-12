@@ -2,6 +2,8 @@ import os
 import typing as T
 import subprocess
 
+import lib
+
 
 class Package():
     children: T.List[T.Type["Package"]] = []
@@ -19,7 +21,7 @@ class Package():
                 "-a",
                 "--std=08",
                 "--work=top",
-                f"../src/{cls.__name__}.vhd",
+                f"{lib.WORKSPACE_FOLDER}/src/{cls.__name__}.vhd",
             ],
             cwd="sim_build",
             stdout=subprocess.PIPE,

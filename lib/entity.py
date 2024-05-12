@@ -10,6 +10,7 @@ import cocotb.binary
 import cocotb.handle
 import cocotb.runner
 
+import lib
 from lib.package import Package
 from lib.waveform import Waveform
 
@@ -42,7 +43,7 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
 
     @classmethod
     def testcase(cls, fn):
-        @cocotb.test()
+        @cocotb.test() # type: ignore
         async def _testcase_wrapper(dut: "Entity"):
             signals = [
                 getattr(dut, key)
@@ -194,7 +195,7 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
                 "-o",
                 filename or f"{entity}_netlist.svg",
                 "--skin",
-                "../test/data/netlistsvg/digital.svg",
+                f"{lib.WORKSPACE_FOLDER}/data/netlistsvg/digital.svg",
             ],
             cwd="sim_build",
             stdout=subprocess.PIPE,

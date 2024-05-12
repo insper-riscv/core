@@ -63,7 +63,7 @@ class Waveform:
         await self.cycle(count)
         self._trace.enable()
 
-    def check(self, pin: T.Type["Device.Output_pin"], value: str, message: str = ""):
+    def check(self, pin: T.Type["Entity.Output_pin"], value: str, message: str = ""):
         result = check.equal(pin.value.binstr, value, f"At pin \"{pin._name}\". {message}")
 
         for signal in self._trace._signals:
