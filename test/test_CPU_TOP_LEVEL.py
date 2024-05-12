@@ -32,7 +32,7 @@ class CPU_TOP_LEVEL(lib.Entity):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_ADDI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_ADDI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -51,7 +51,6 @@ async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -63,7 +62,7 @@ async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_ADD.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_ADD.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -79,7 +78,6 @@ async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -91,7 +89,7 @@ async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SUB.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SUB.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -109,7 +107,6 @@ async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -121,7 +118,7 @@ async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_BEQ.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_BEQ.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -134,7 +131,6 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -146,7 +142,7 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_BNE.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_BNE.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -163,7 +159,6 @@ async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -175,7 +170,7 @@ async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_BLT.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_BLT.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -192,7 +187,6 @@ async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -204,7 +198,7 @@ async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_BLTU.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_BLTU.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -221,7 +215,6 @@ async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -233,7 +226,7 @@ async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_BGE.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_BGE.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -250,7 +243,6 @@ async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -262,7 +254,7 @@ async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_BGEU.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_BGEU.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -279,7 +271,6 @@ async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -291,7 +282,7 @@ async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_LUI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_LUI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -304,7 +295,6 @@ async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -316,7 +306,7 @@ async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_AUIPC.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_AUIPC.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -329,7 +319,6 @@ async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -341,7 +330,7 @@ async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SLT.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SLT.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -361,7 +350,6 @@ async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -373,7 +361,7 @@ async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SLTI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SLTI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -392,7 +380,6 @@ async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -404,7 +391,7 @@ async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SLTU.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SLTU.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -424,7 +411,6 @@ async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -436,7 +422,7 @@ async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SLTIU.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SLTIU.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -455,7 +441,6 @@ async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -467,7 +452,7 @@ async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_JAL.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_JAL.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -484,7 +469,6 @@ async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -496,7 +480,7 @@ async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_JALR.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_JALR.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -515,7 +499,6 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -527,7 +510,7 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_LB.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_LB.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -559,7 +542,7 @@ async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_LBU.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_LBU.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -591,7 +574,7 @@ async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_LH.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_LH.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -623,7 +606,7 @@ async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_LHU.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_LHU.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -655,7 +638,7 @@ async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_LW.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_LW.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -700,7 +683,7 @@ async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_XOR.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_XOR.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -717,7 +700,6 @@ async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -729,7 +711,7 @@ async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_XORI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_XORI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -743,7 +725,6 @@ async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -755,7 +736,7 @@ async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_AND.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_AND.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -774,7 +755,6 @@ async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -786,7 +766,7 @@ async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_ANDI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_ANDI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -800,7 +780,6 @@ async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -812,7 +791,7 @@ async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_OR.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_OR.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -826,7 +805,6 @@ async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -838,7 +816,7 @@ async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_ORI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_ORI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -852,7 +830,6 @@ async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -864,7 +841,7 @@ async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SLL.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SLL.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -879,7 +856,6 @@ async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -891,7 +867,7 @@ async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SLLI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SLLI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -905,7 +881,6 @@ async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -917,7 +892,7 @@ async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SRL.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SRL.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -934,7 +909,6 @@ async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -946,7 +920,7 @@ async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SRLI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SRLI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -961,7 +935,6 @@ async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -973,7 +946,7 @@ async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SRA.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SRA.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -990,7 +963,6 @@ async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -1002,7 +974,7 @@ async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SRAI.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SRAI.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -1023,7 +995,6 @@ async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
     ]
 
-    program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
     await trace.cycle()
 
@@ -1035,7 +1006,7 @@ async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SB.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SB.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -1068,7 +1039,7 @@ async def tb_CPU_TOP_LEVEL_SB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SH.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SH.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -1102,7 +1073,7 @@ async def tb_CPU_TOP_LEVEL_SH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
-    program = lib.Program("../test/data/c/testcase_SW.c", stepping=True)
+    program = lib.Program("../data/assembly/testcase_SW.S", stepping=True)
     values_destination = [
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
