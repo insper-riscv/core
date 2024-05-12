@@ -1112,214 +1112,140 @@ def test_CPU_TOP_LEVEL_synthesis():
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_arithmetic_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_ADDI,
-        ]
+        tb_CPU_TOP_LEVEL_ADDI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_ADD,
-        ]
+        tb_CPU_TOP_LEVEL_ADD,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SUB,
-        ]
+        tb_CPU_TOP_LEVEL_SUB,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_branch_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_BEQ,
-        ]
+        tb_CPU_TOP_LEVEL_BEQ,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_BNE,
-        ]
+        tb_CPU_TOP_LEVEL_BNE,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_BLT,
-        ]
+        tb_CPU_TOP_LEVEL_BLT,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_BLTU,
-        ]
+        tb_CPU_TOP_LEVEL_BLTU,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_BGE,
-        ]
+        tb_CPU_TOP_LEVEL_BGE,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_BGEU,
-        ]
+        tb_CPU_TOP_LEVEL_BGEU,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_build_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_LUI,
-        ]
+        tb_CPU_TOP_LEVEL_LUI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_AUIPC,
-        ]
+        tb_CPU_TOP_LEVEL_AUIPC,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_compare_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SLT,
-        ]
+        tb_CPU_TOP_LEVEL_SLT,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SLTI,
-        ]
+        tb_CPU_TOP_LEVEL_SLTI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SLTU,
-        ]
+        tb_CPU_TOP_LEVEL_SLTU,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SLTIU,
-        ]
+        tb_CPU_TOP_LEVEL_SLTIU,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_jump_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_JAL,
-        ]
+        tb_CPU_TOP_LEVEL_JAL,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_JALR,
-        ]
+        tb_CPU_TOP_LEVEL_JALR,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_load_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_LB,
-        ]
+        tb_CPU_TOP_LEVEL_LB,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_LBU,
-        ]
+        tb_CPU_TOP_LEVEL_LBU,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_LH,
-        ]
+        tb_CPU_TOP_LEVEL_LH,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_LHU,
-        ]
+        tb_CPU_TOP_LEVEL_LHU,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_LW,
-        ]
+        tb_CPU_TOP_LEVEL_LW,
     )
 
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_logical_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_XOR,
-        ]
+        tb_CPU_TOP_LEVEL_XOR,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_XORI,
-        ]
+        tb_CPU_TOP_LEVEL_XORI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_AND,
-        ]
+        tb_CPU_TOP_LEVEL_AND,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_ANDI,
-        ]
+        tb_CPU_TOP_LEVEL_ANDI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_OR,
-        ]
+        tb_CPU_TOP_LEVEL_OR,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_ORI,
-        ]
+        tb_CPU_TOP_LEVEL_ORI,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_shifting_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SLL,
-        ]
+        tb_CPU_TOP_LEVEL_SLL,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SLLI,
-        ]
+        tb_CPU_TOP_LEVEL_SLLI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SRL,
-        ]
+        tb_CPU_TOP_LEVEL_SRL,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SRLI,
-        ]
+        tb_CPU_TOP_LEVEL_SRLI,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SRA,
-        ]
+        tb_CPU_TOP_LEVEL_SRA,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SRAI,
-        ]
+        tb_CPU_TOP_LEVEL_SRAI,
     )
 
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_store_testcases():
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SB,
-        ]
+        tb_CPU_TOP_LEVEL_SB,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SH,
-        ]
+        tb_CPU_TOP_LEVEL_SH,
     )
     CPU_TOP_LEVEL.test_with(
-        [
-            tb_CPU_TOP_LEVEL_SW,
-        ]
+        tb_CPU_TOP_LEVEL_SW,
     )
 
 if __name__ == "__main__":
