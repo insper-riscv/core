@@ -97,7 +97,7 @@ def test_GENERIC_ADDER_coverage():
         ]
     )
 
-@pytest.mark.stress
+@pytest.mark.coverage
 def test_GENERIC_ADDER_stress_5_bits():
     GENERIC_ADDER.test_with(
         [

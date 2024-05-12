@@ -127,7 +127,7 @@ def test_GENERIC_MUX_4X1_testcases():
         ]
     )
 
-@pytest.mark.stress
+@pytest.mark.coverage
 def test_GENERIC_MUX_4X1_stress():
     GENERIC_MUX_4X1.test_with(
         [
@@ -136,7 +136,7 @@ def test_GENERIC_MUX_4X1_stress():
         parameters={"DATA_WIDTH": 32},
     )
 
-@pytest.mark.stress
+@pytest.mark.coverage
 def test_GENERIC_MUX_4X1_stress_3_bits():
     GENERIC_MUX_4X1.test_with(
         [

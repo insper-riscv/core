@@ -288,7 +288,7 @@ def test_RV32I_ALU_testcases():
         ]
     )
 
-@pytest.mark.stress
+@pytest.mark.coverage
 def test_RV32I_ALU_stress():
     RV32I_ALU.test_with(
         [
