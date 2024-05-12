@@ -190,7 +190,7 @@ def test_GENERIC_REGISTER_testcases():
         ]
     )
 
-@pytest.mark.stress
+@pytest.mark.coverage
 def test_GENERIC_REGISTER_stress():
     GENERIC_REGISTER.test_with(
         [
@@ -199,7 +199,7 @@ def test_GENERIC_REGISTER_stress():
          parameters={"DATA_WIDTH": 32},
     )
 
-@pytest.mark.stress
+@pytest.mark.coverage
 def test_GENERIC_REGISTER_stress_15_bits():
     GENERIC_REGISTER.test_with(
         [

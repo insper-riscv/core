@@ -1,27 +1,18 @@
-FROM hdlc/ghdl:yosys
+FROM debian:stretch-slim
 
 RUN apt-get update -qq              \
     && apt-get upgrade -y           \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends    \
         ca-certificates             \
-        git                         \
-        libglib2.0-0                \
-        libpython3-all-dev          \
         libtcmalloc-minimal4        \
         locales                     \
-        make                        \
-        npm                         \
-        python3                     \
-        python3-pip                 \
-        sudo                        \
         tar                         \
         xauth                       \
         xvfb                        \
     && apt-get autoclean            \
     && apt-get clean                \
     && apt-get autoremove -y        \
-    && rm -r /var/lib/apt/lists/*   \
-    && npm install -g netlistsvg
+    && rm -r /var/lib/apt/lists/*
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8
@@ -53,5 +44,3 @@ RUN chmod a+x QuartusLiteSetup-23.1std.0.991-linux.run                          
     ./QuartusLiteSetup-23.1std.0.991-linux.run --mode unattended --accept_eula 1 --installdir /opt/intelFPGA  && \
     rm -rf /opt/intelFPGA/uninstall/                                                                          && \
     rm -rf /tmp/*
-
-RUN echo 'export PS1="\n\e[92m\e[1m\u@\h\e[0m \e[94m\w\n \e[92m\e[1m$\e[0m\e[0m\e[39m\e[49m "' >> ~/.bashrc
