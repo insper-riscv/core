@@ -4,8 +4,10 @@ on:
   workflow_dispatch: {}
   push:
     paths:
-      - src/**
       - .github/workflows/quartus_tests.yml
+      - Dockerfile
+      - quartus/**
+      - src/**
 
 jobs:
   quartus:
