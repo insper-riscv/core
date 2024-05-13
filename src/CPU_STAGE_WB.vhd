@@ -31,10 +31,12 @@ begin
         UPDATE : process(source, clear, clock, enable)
         begin
             if (rising_edge(clock)) then
-                SET_RESET : if (enable = '1') then
-                    source_0 <= source;
-                elsif (clear = '1') then
-                    source_0 <= WORK.CPU.NULL_SIGNALS_MEM_WB;
+                if (enable = '1') then
+                    if (clear = '1') then
+                        source_0 <= WORK.CPU.NULL_SIGNALS_MEM_WB;
+                    else
+                        source_0 <= source;
+                    end if;
                 end if;
             end if;
         end process;
@@ -44,13 +46,13 @@ begin
 
     MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK(RV32I)
         port map (
-            source_memory    => source_0.data_memory,
-            source_execution => source_0.data_destination,
             selector         => source_0.control_wb.select_destination,
+            source_execution => source_0.data_destination,
+            source_memory    => source_0.data_memory,
             destination      => destination
         );
 
-    select_destination <= source_0.select_destination;
     enable_destination <= source_0.control_wb.enable_destination;
+    select_destination <= source_0.select_destination;
 
 end architecture;
