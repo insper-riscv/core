@@ -35,7 +35,7 @@ begin
 
     DATA_OUT : entity WORK.RV32I_TYPE_CONVERTER
         port map (
-            select_type => select_function,
+            select_type => "1" & select_function(1 downto 0), -- Aways zero-extended
             source      => source_data_out,
             destination => destination_data_out
         );
