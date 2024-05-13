@@ -28,10 +28,12 @@ begin
     UPDATE : process(clear, clock, enable)
     begin
         if (rising_edge(clock)) then
-            SET_RESET : if (enable = '1') then
-                destination <= source;
-            elsif (clear = '1') then
-                destination <= (others => '0');
+            if (enable = '1') then
+                if (clear = '1') then
+                    destination <= (others => '0');
+                else
+                    destination <= source;
+                end if;
             end if;
         end if;
     end process;
