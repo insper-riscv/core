@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library WORK;
+use WORK.GENERICS.ALL;
 
 entity MODULE_CONTROL_UNIT is
 
@@ -12,9 +13,9 @@ entity MODULE_CONTROL_UNIT is
     );
 
     port (
+        clear       : in std_logic;
         instruction : in  std_logic_vector((INSTRUCTION_WIDTH - 1) downto 0);
         immediate   : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        control_if  : out WORK.CPU.t_CONTROL_IF;
         control_id  : out WORK.CPU.t_CONTROL_ID;
         control_ex  : out WORK.CPU.t_CONTROL_EX;
         control_mem : out WORK.CPU.t_CONTROL_MEM;
@@ -25,153 +26,132 @@ end entity;
 
 architecture RV32I of MODULE_CONTROL_UNIT is
 
-    -- No signals
+    alias opcode   is instruction(WORK.RV32I.OPCODE_RANGE);
+
+    signal is_lui    : std_logic;
+    signal is_auipc  : std_logic;
+    signal is_jalr   : std_logic;
+    signal is_load   : std_logic;
+    signal r_type    : std_logic;
+    signal i_type    : std_logic;
+    signal s_type    : std_logic;
+    signal b_type    : std_logic;
+    signal u_type    : std_logic;
+    signal j_type    : std_logic;
+    signal not_flush : std_logic;
 
 begin
 
-    process(instruction) is
-        variable temp : WORK.RV32I.t_INSTRUCTION;
-    begin
-        temp := WORK.RV32I.to_instruction(instruction);
+    is_lui   <= is_equal(opcode, WORK.RV32I.OPCODE_LUI);
+    is_auipc <= is_equal(opcode, WORK.RV32I.OPCODE_AUIPC);
+    is_jalr  <= is_equal(opcode, WORK.RV32I.OPCODE_JALR);
+    is_load  <= is_equal(opcode, WORK.RV32I.OPCODE_LOAD);
+    r_type   <= is_equal(opcode, WORK.RV32I.OPCODE_OP);
+    i_type   <= is_equal(opcode, WORK.RV32I.OPCODE_OP_IMM) OR is_equal(opcode, WORK.RV32I.OPCODE_LOAD) OR is_equal(opcode, WORK.RV32I.OPCODE_SYSTEM) OR is_jalr;
+    s_type   <= is_equal(opcode, WORK.RV32I.OPCODE_STORE);
+    b_type   <= is_equal(opcode, WORK.RV32I.OPCODE_BRANCH);
+    u_type   <= is_lui OR is_auipc;
+    j_type   <= is_equal(opcode, WORK.RV32I.OPCODE_JAL);
 
-        case temp.encoding is
-            when WORK.RV32I.INSTRUCTION_I_TYPE =>
-                immediate <= temp.immediate_i;
-            when WORK.RV32I.INSTRUCTION_S_TYPE =>
-                immediate <= temp.immediate_s;
-            when WORK.RV32I.INSTRUCTION_B_TYPE =>
-                immediate <= temp.immediate_b;
-            when WORK.RV32I.INSTRUCTION_U_TYPE =>
-                immediate <= temp.immediate_u;
-            when WORK.RV32I.INSTRUCTION_J_TYPE =>
-                immediate <= temp.immediate_j;
-            when others =>
-                immediate <= (others => '0');
-        end case;
+    not_flush <= NOT(clear OR j_type OR is_jalr);
 
-        -- Instruction Fetch controls
-        control_if.enable_stall <= '0';
+    -- Stage Instruction Decode controls
+    control_id.enable_branch <= not_flush AND (b_type);
 
-        --control_if.enable_flush <= '0';
-        case temp.opcode is
-            when    WORK.RV32I.OPCODE_BRANCH |
-                    WORK.RV32I.OPCODE_JAL    |
-                    WORK.RV32I.OPCODE_JALR  =>
-                control_if.enable_flush <= '1';
-            when others =>
-                control_if.enable_flush <= '0';
-        end case;
+    control_id.enable_jump <= not_flush AND (j_type OR is_jalr);
 
-        case temp.encoding is
-           when WORK.RV32I.INSTRUCTION_J_TYPE =>
-               control_if.enable_jump <= '1';
-           when others =>
-               case temp.opcode is
-                   when WORK.RV32I.OPCODE_JALR =>
-                       control_if.enable_jump <= '1';
-                   when others =>
-                       control_if.enable_jump <= '0';
-               end case;
-        end case;
+    control_id.select_jump <= not_flush AND (is_jalr);
 
-        control_if.select_source <= '1';
+    -- Stage Execute controls
+    control_ex.select_source_1(0) <= not_flush AND (is_auipc OR is_jalr OR j_type);
+    control_ex.select_source_1(1) <= not_flush AND (is_lui);
 
-        -- Instruction Decode controls
+    control_ex.select_source_2(0) <= not_flush AND (i_type OR u_type OR s_type);
+    control_ex.select_source_2(1) <= not_flush AND (is_jalr);
 
-        case temp.opcode is
-            when WORK.RV32I.OPCODE_JALR =>
-                control_id.select_jump <= '1';
-            when others =>
-                control_id.select_jump <= '0';
-        end case;
+    -- Stage Memory Access controls
+    control_mem.enable_read <= not_flush AND (is_load);
 
-        case temp.encoding is
-            when WORK.RV32I.INSTRUCTION_J_TYPE =>
-                control_id.enable_jump <= '1';
-            when others =>
-                case temp.opcode is
-                    when WORK.RV32I.OPCODE_JALR =>
-                        control_id.enable_jump <= '1';
-                    when others =>
-                        control_id.enable_jump <= '0';
-                end case;
-        end case;
+    control_mem.enable_write <= not_flush AND (s_type);
 
-        case temp.encoding is
-            when WORK.RV32I.INSTRUCTION_B_TYPE =>
-                control_id.enable_branch <= '1';
-            when others =>
-                control_id.enable_branch <= '0';
-        end case;
+    -- Write Back controls
+    control_wb.enable_destination <= not_flush AND (r_type OR i_type OR u_type OR j_type);
 
-        control_id.enable_flush_id <= '0';
+    control_wb.select_destination <= not_flush AND (is_load);
 
-        control_id.enable_flux_ex <= '0';
+    -- Immediate generating
+    immediate(31) <= instruction(31);
 
-        -- Execute controls
+    MUX_IMMEDIATE19_20 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => 11
+        )
+        port map (
+            selector    => u_type,
+            source_1    => (others => instruction(31)),
+            source_2    => instruction(30 downto 20),
+            destination => immediate(30 downto 20)
+        );
 
-        case temp.opcode is
-            when    WORK.RV32I.OPCODE_AUIPC |
-                    WORK.RV32I.OPCODE_JAL   |
-                    WORK.RV32I.OPCODE_JALR  =>
-                control_ex.select_source_1 <= "01";
-            when WORK.RV32I.OPCODE_LUI =>
-                control_ex.select_source_1 <= "10";
-            when others =>
-                control_ex.select_source_1 <= "00";
-        end case;
+    MUX_IMMEDIATE_19_12 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => 8
+        )
+        port map (
+            selector    => u_type OR j_type,
+            source_1    => (others => instruction(31)),
+            source_2    => instruction(19 downto 12),
+            destination => immediate(19 downto 12)
+        );
 
-        case temp.opcode is
-            when    WORK.RV32I.OPCODE_JAL   |
-                    WORK.RV32I.OPCODE_JALR  =>
-                control_ex.select_source_2 <= "10";
-            when others =>
-                case temp.encoding is
-                    when    WORK.RV32I.INSTRUCTION_I_TYPE   |
-                            WORK.RV32I.INSTRUCTION_U_TYPE   |
-                            WORK.RV32I.INSTRUCTION_S_TYPE   =>
-                        control_ex.select_source_2 <= "01";
-                    when others =>
-                        control_ex.select_source_2 <= "00";
-                end case;
-        end case;
+    MUX_IMMEDIATE_11 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => 1
+        )
+        port map (
+            selector    => (u_type OR j_type) & (u_type OR b_type),
+            source_1    => (others => instruction(31)),
+            source_2    => instruction(7 downto 7),
+            source_4    => instruction(20 downto 20),
+            source_3    => (others => '0'),
+            destination => immediate(11 downto 11)
+        );
 
-        control_ex.select_operation <= (others => '0');
+    MUX_IMMEDIATE_10_5 : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => 6
+        )
+        port map (
+            selector    => u_type,
+            source_1    => instruction(30 downto 25),
+            source_2    => (others => '0'),
+            destination => immediate(10 downto 5)
+        );
 
+    MUX_IMMEDIATE_4_1 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => 4
+        )
+        port map (
+            selector    => u_type & (s_type OR b_type),
+            source_1    => instruction(24 downto 21),
+            source_2    => instruction(11 downto 8),
+            source_3    => (others => '0'),
+            source_4    => (others => '0'),
+            destination => immediate(4 downto 1)
+        );
 
-        -- Memory Access controls
+    MUX_IMMEDIATE_0 : entity WORK.GENERIC_MUX_4X1
+        generic map (
+            DATA_WIDTH => 1
+        )
+        port map (
+            selector    => s_type & i_type,
+            source_1    => (others => '0'),
+            source_2    => instruction(20 downto 20),
+            source_3    => instruction(7 downto 7),
+            source_4    => (others => '0'),
+            destination => immediate(0 downto 0)
+        );
 
-        case temp.opcode is
-            when WORK.RV32I.OPCODE_LOAD =>
-                control_mem.enable_read <= '1';
-            when others =>
-                control_mem.enable_read <= '0';
-        end case;
-
-        case temp.encoding is
-            when WORK.RV32I.INSTRUCTION_S_TYPE =>
-                control_mem.enable_write <= '1';
-            when others =>
-                control_mem.enable_write <= '0';
-        end case;
-
-        -- Write Back controls
-        case temp.encoding is
-            when    WORK.RV32I.INSTRUCTION_R_TYPE   | 
-                    WORK.RV32I.INSTRUCTION_I_TYPE   | 
-                    WORK.RV32I.INSTRUCTION_U_TYPE   | 
-                    WORK.RV32I.INSTRUCTION_J_TYPE   =>
-                control_wb.enable_destination <= '1';
-            when others =>
-                control_wb.enable_destination <= '0';
-        end case;
-
-        case temp.opcode is
-            when WORK.RV32I.OPCODE_LOAD =>
-                control_wb.select_destination <= '0';
-            when others =>
-                control_wb.select_destination <= '1';
-        end case;
-    end process;
-    
 end architecture;
