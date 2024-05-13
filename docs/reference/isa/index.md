@@ -7,7 +7,7 @@ outline: [2, 3]
 ## Sintaxe
 
 As instruções são vetores binários de 32 _bits_, podendo ser classificadas de duas formas: segundo sua sintaxe,
-ou de acordo com sua função. No que se refere à sintaxe, as instruções podem ser do tipo R, I, S, B, U ou J, como demonstrado:
+ou de acordo com sua função. No que se refere à sintaxe, as instruções podem ser do tipo R, I, S, B, U ou J, como demonstrado na Tabela Sintaxe.
 
 <table>
     <thead>
@@ -166,6 +166,8 @@ ou de acordo com sua função. No que se refere à sintaxe, as instruções pode
     </tbody>
 </table>
 
+**Tabela Sintaxe** - Tabela de Sintaxe dos tipos de instrução.
+
 Instruções do tipo R são usadas para realizar operações entre registradores.
 
 Instruções do tipo I são utilizadas para realizar operações em registradores com uso de valores imediatos.
@@ -196,8 +198,8 @@ mais significativos do imediato são o_bit_ mais significativo da instrução ex
 
 Opcodes são segmentos de 7 _bits_ do vetor de instrução. Cada tipo de instrução
 possui um opcode ou uma instrução possui um opcode exclusivo. Para alguns tipos
-de instrução, são codificados com mais de um opcode, seguindo a seguinte
-generalização:
+de instrução, são codificados com mais de um opcode, estando estes exemplificados
+na Tabela Opcode.
 
 |    None    |   valor   |
 | :--------: | :-------: |
@@ -208,10 +210,12 @@ generalização:
 |   BRANCH   | `1100011` |
 | **Outros** | `XXXXX11` |
 
+**Tabela Opcode** - Tabela com exemplos de opcodes comuns.
+
 ### Imediato
 
 Os imediatos são vetores binários de 32 _bits_. Cada tipo de instrução com
-imediato possui uma sintaxe seguindo os segmentos:
+imediato possui uma sintaxe de imediato demonstrada na Tabela Imediato.
 
 <table>
     <thead>
@@ -262,6 +266,8 @@ imediato possui uma sintaxe seguindo os segmentos:
     </tbody>
 </table>
 
+**Tabela Imediato** - Tabela com a sintaxe dos imediatos de acordo com seu tipo de instrução.
+
 Sendo, para cada segmento, `inst` o vetor da instrução.
 
 ---
@@ -283,7 +289,7 @@ Nas instruções que se seguem, RV32I Base significa que elas pertencem ao conju
 
 ### `LUI` <Badge type="info" text="RV32I Base" />
 
-Load Upper Immediate (Carregar Superior Imediato).
+_Load Upper Immediate_ (Carregar Superior Imediato).
 
 Carrega registradores com valores constantes de 32 _bits_. `LUI` guarda o valor 
 imediato dos 20 _bits_ mais significativos da instrução nos 20 _bits_ mais 
@@ -292,9 +298,13 @@ significativos com zero.
 
 #### Sintaxe
 
+A instrução LUI é do tipo U, tendo um opcode próprio, como ilustrado na Tabela LUI.
+
 | Tipo |   31-12    | 11-7 |    6-0    |
 | :--: | :--------: | :--: | :-------: |
 |  U   | imm[31:12] |  rd  | `0110111` |
+
+**Tabela LUI** - Tabela com sintaxe da instrução LUI.
 
 #### Formato
 
@@ -316,9 +326,13 @@ ao PC. O resultado é então escrito no registrador de destino `rd`.
 
 #### Sintaxe
 
+A instrução AUIPC é do tipo U, tendo um opcode próprio, como ilustrado na Tabela AUIPC.
+
 | Tipo |   31-12    | 11-7 |    6-0    |
 | :--: | :--------: | :--: | :-------: |
 |  U   | imm[31:12] |  rd  | `0010111` |
+
+**Tabela AUIPC** - Tabela com sintaxe da instrução AUIPC.
 
 #### Formato
 
@@ -342,9 +356,13 @@ no registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  000  |  rd  | OP  |
+A instrução ADD é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela ADD.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
+
+**Tabela ADD** - Tabela com sintaxe da instrução ADD.
 
 #### Formato
 
@@ -366,9 +384,13 @@ Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :-------: | :---: | :---: | :--: | :----: |
-|  I   | imm[11:0] |  rs1  |  000  |  rd  | OP-IMM |
+A instrução ADDI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela ADDI.
+
+| Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :-----: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  `000`  |  rd  | OP-IMM |
+
+**Tabela ADDI** - Tabela com sintaxe da instrução ADDI.
 
 #### Formato
 
@@ -390,9 +412,13 @@ registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0100000 |  rs2  |  rs1  |  000  |  rd  | OP  |
+A instrução SUB é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SUB.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0100000` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
+
+**Tabela SUB** - Tabela com sintaxe da instrução SUB.
 
 #### Formato
 
@@ -414,9 +440,13 @@ registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  000  |  rd  | OP  |
+A instrução MUL é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MUL.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
+
+**Tabela MUL** - Tabela com sintaxe da instrução MUL.
 
 #### Formato
 
@@ -438,9 +468,13 @@ de complemento de dois e armazena a metade superior do produto no registrador de
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  001  |  rd  | OP  |
+A instrução MULH é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MULH.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `001`  |  rd  | OP  |
+
+**Tabela MULH** - Tabela com sintaxe da instrução MULH.
 
 #### Formato
 
@@ -464,9 +498,13 @@ produto no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  010  |  rd  | OP  |
+A instrução MULHSU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MULHSU.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `010`  |  rd  | OP  |
+
+**Tabela MULHSU** - Tabela com sintaxe da instrução MULHSU.
 
 #### Formato
 
@@ -488,9 +526,13 @@ são números sem sinal, e armazena a metade superior do produto no registrador 
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  011  |  rd  | OP  |
+A instrução MULHU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MULHU.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `011`  |  rd  | OP  |
+
+**Tabela MULHU** - Tabela com sintaxe da instrução MULHU.
 
 #### Formato
 
@@ -514,9 +556,13 @@ armazena o quociente no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  100  |  rd  | OP  |
+A instrução DIV é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela DIV.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `100`  |  rd  | OP  |
+
+**Tabela DIV** - Tabela com sintaxe da instrução DIV.
 
 #### Formato
 
@@ -539,9 +585,13 @@ armazena o quociente no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  101  |  rd  | OP  |
+A instrução DIVU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela DIVU.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
+
+**Tabela DIVU** - Tabela com sintaxe da instrução DIVU.
 
 #### Formato
 
@@ -564,9 +614,13 @@ e armazena o resto no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  110  |  rd  | OP  |
+A instrução REM é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela REM.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `110`  |  rd  | OP  |
+
+**Tabela REM** - Tabela com sintaxe da instrução REM.
 
 #### Formato
 
@@ -588,9 +642,13 @@ números sem sinal, arredondando para zero, e armazena o resto no registrador de
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000001 |  rs2  |  rs1  |  111  |  rd  | OP  |
+A instrução REMU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela REMU.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000001` |  rs2  |  rs1  |  `111`  |  rd  | OP  |
+
+**Tabela REMU** - Tabela com sintaxe da instrução REMU.
 
 #### Formato
 
@@ -613,9 +671,13 @@ registradores `rs1` e `rs2` e armazena o resultado no registrador de destino `rd
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  100  |  rd  | OP  |
+A instrução XOR é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela XOR.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `100`  |  rd  | OP  |
+
+**Tabela XOR** - Tabela com sintaxe da instrução XOR.
 
 #### Formato
 
@@ -636,9 +698,13 @@ com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :-------: | :---: | :---: | :--: | :----: |
-|  I   | imm[11:0] |  rs1  |  100  |  rd  | OP-IMM |
+A instrução XORI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela XORI.
+
+| Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :-----: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  `100`  |  rd  | OP-IMM |
+
+**Tabela XORI** - Tabela com sintaxe da instrução XORI.
 
 #### Formato
 
@@ -659,9 +725,13 @@ armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  110  |  rd  | OP  |
+A instrução OR é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela OR.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `110`  |  rd  | OP  |
+
+**Tabela OR** - Tabela com sintaxe da instrução OR.
 
 #### Formato
 
@@ -682,9 +752,13 @@ com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :-------: | :---: | :---: | :--: | :----: |
-|  I   | imm[11:0] |  rs1  |  110  |  rd  | OP-IMM |
+A instrução ORI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela ORI.
+
+| Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :-----: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  `110`  |  rd  | OP-IMM |
+
+**Tabela ORI** - Tabela com sintaxe da instrução ORI.
 
 #### Formato
 
@@ -705,9 +779,13 @@ armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  111  |  rd  | OP  |
+A instrução AND é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela AND.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `111`  |  rd  | OP  |
+
+**Tabela AND** - Tabela com sintaxe da instrução AND.
 
 #### Formato
 
@@ -728,9 +806,13 @@ com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :-------: | :---: | :---: | :--: | :----: |
-|  I   | imm[11:0] |  rs1  |  111  |  rd  | OP-IMM |
+A instrução ANDI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela ANDI.
+
+| Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :-----: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  `111`  |  rd  | OP-IMM |
+
+**Tabela ANDI** - Tabela com sintaxe da instrução ANDI.
 
 #### Formato
 
@@ -755,9 +837,13 @@ com zeros. O resultado é escrito no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  001  |  rd  | OP  |
+A instrução SLL é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLL.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `001`  |  rd  | OP  |
+
+**Tabela SLL** - Tabela com sintaxe da instrução SLL.
 
 #### Formato
 
@@ -775,13 +861,19 @@ Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à esquerda pelo número de posições indicado
 pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com zeros. O resultado é
-escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
+escrito no registrador de destino `rd`. Caso se decida atualizar o processador para uma
+arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
+a ter 6 bits cada).
 
 #### Sintaxe
 
-| Tipo | 31-26  | 25-20 | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :----: | :---: | :---: | :---: | :--: | :----: |
-|  I   | 000000 | shamt |  rs1  |  001  |  rd  | OP-IMM |
+A instrução SLLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLLI.
+
+| Tipo |   31-26   | 24-20 | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
+|  I   | `0000000` | shamt |  rs1  |  `001`  |  rd  | OP-IMM |
+
+**Tabela SLLI** - Tabela com sintaxe da instrução SLLI.
 
 #### Formato
 
@@ -804,9 +896,13 @@ com zeros. O resultado é escrito no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  101  |  rd  | OP  |
+A instrução SRL é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRL.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
+
+**Tabela SRL** - Tabela com sintaxe da instrução SRL.
 
 #### Formato
 
@@ -824,13 +920,19 @@ Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
 pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com zeros. O resultado é
-escrito no registrador de destino `rd`. Só é permitido quando `shamt[5] = 0`.
+escrito no registrador de destino `rd`. Caso se decida atualizar o processador para uma
+arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
+a ter 6 bits cada).
 
 #### Sintaxe
 
-| Tipo | 31-26  | 25-20 | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :----: | :---: | :---: | :---: | :--: | :----: |
-|  I   | 000000 | shamt |  rs1  |  101  |  rd  | OP-IMM |
+A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRLI.
+
+| Tipo |   31-26   | 24-20 | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
+|  I   | `0000000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
+
+**Tabela SRLI** - Tabela com sintaxe da instrução SRLI.
 
 #### Formato
 
@@ -854,9 +956,13 @@ registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0100000 |  rs2  |  rs1  |  101  |  rd  | OP  |
+A instrução SRA é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRA.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0100000` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
+
+**Tabela SRA** - Tabela com sintaxe da instrução SRA.
 
 #### Formato
 
@@ -874,14 +980,19 @@ Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
 
 Desloca o valor armazenado no registrador `rs1` à direita pelo número de posições indicado
 pelo `shamt`. Os _bits_ vazios de `rs1` são preenchidos com cópias do_bit_ mais
-significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. Só é
-permitido quando `shamt[5] = 0`.
+significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. Caso se decida atualizar o 
+processador para uma arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
+a ter 6 bits cada).
 
 #### Sintaxe
 
-| Tipo | 31-26  | 25-20 | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :----: | :---: | :---: | :---: | :--: | :----: |
-|  I   | 010000 | shamt |  rs1  |  101  |  rd  | OP-IMM |
+A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRLI.
+
+| Tipo |   31-26   | 25-20 | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
+|  I   | `0100000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
+
+**Tabela SRAI** - Tabela com sintaxe da instrução SRAI.
 
 #### Formato
 
@@ -905,9 +1016,13 @@ registrador `rs2`, considerandoque são complemento de dois, em caso positivo, a
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  010  |  rd  | OP  |
+A instrução SLT é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLT.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `010`  |  rd  | OP  |
+
+**Tabela SLT** - Tabela com sintaxe da instrução SLT.
 
 #### Formato
 
@@ -929,9 +1044,13 @@ registrador de destino `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
 
-| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :-------: | :---: | :---: | :--: | :----: |
-|  I   | imm[11:0] |  rs1  |  010  |  rd  | OP-IMM |
+A instrução SLTI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela SLTI.
+
+| Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :-----: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  `010`  |  rd  | OP-IMM |
+
+**Tabela SLTI** - Tabela com sintaxe da instrução SLTI.
 
 #### Formato
 
@@ -953,9 +1072,13 @@ considerando que são sem sinal, em caso positivo, armazena 1 no registrador de 
 
 #### Sintaxe
 
-| Tipo |   31-20   | 19-15 | 14-12 | 11-7 |  6-0   |
-| :--: | :-------: | :---: | :---: | :--: | :----: |
-|  I   | imm[11:0] |  rs1  |  011  |  rd  | OP-IMM |
+A instrução SLTIU é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela SLTIU.
+
+| Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
+| :--: | :-------: | :---: | :-----: | :--: | :----: |
+|  I   | imm[11:0] |  rs1  |  `011`  |  rd  | OP-IMM |
+
+**Tabela SLTIU** - Tabela com sintaxe da instrução SLTIU.
 
 #### Formato
 
@@ -977,9 +1100,13 @@ registrador de destino `rd`, caso contrário, armazena 0.
 
 #### Sintaxe
 
-| Tipo |  31-25  | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |
-| :--: | :-----: | :---: | :---: | :---: | :--: | :-: |
-|  R   | 0000000 |  rs2  |  rs1  |  011  |  rd  | OP  |
+A instrução SLTU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLTU.
+
+| Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
+| :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
+|  R   | `0000000` |  rs2  |  rs1  |  `011`  |  rd  | OP  |
+
+**Tabela SLTU** - Tabela com sintaxe da instrução SLTU.
 
 #### Formato
 
@@ -1003,9 +1130,36 @@ omitido, o valor de retorno é armazenado em `x1`.
 
 #### Sintaxe
 
-| Tipo |   31-12   | 11-7 | 6-0 |
-| :--: | :-------: | :--: | :-: |
-|  J   | offset[20 | 10:1 | 11  |
+A instrução JAL é do tipo J, tendo um opcode próprio, como ilustrado na Tabela JAL.
+
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; white-space: nowrap;">Tipo</th>
+            <th style="text-align: center; white-space: nowrap;">31 - 12</th>
+            <th style="text-align: center; white-space: nowrap;">11 - 7</th>
+            <th style="text-align: center; white-space: nowrap;">6 - 0</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">
+                J
+            </td>
+            <td style="text-align: center;">
+                offset[20|10:1|11|19:12]
+            </td>
+            <td style="text-align: center;">
+                rd
+            </td>
+            <td style="text-align: center;">
+                <code>1101111</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+**Tabela JAL** - Tabela com sintaxe da instrução JAL.
 
 #### Formato
 
@@ -1027,9 +1181,13 @@ registrador de destino `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
 
 #### Sintaxe
 
-| Tipo |    31-20     | 19-15 | 14-12 | 11-7 |    6-0    |
-| :--: | :----------: | :---: | :---: | :--: | :-------: |
-|  I   | offset[11:0] |  rs1  |  000  |  rd  | `1100111` |
+A instrução JALR é do tipo I, tendo uma funct3 e um opcode próprios, como ilustrado na Tabela JALR.
+
+| Tipo |    31-20     | 19-15 |  14-12  | 11-7 |    6-0    |
+| :--: | :----------: | :---: | :-----: | :--: | :-------: |
+|  I   | offset[11:0] |  rs1  |  `000`  |  rd  | `1100111` |
+
+**Tabela JALR** - Tabela com sintaxe da instrução JALR.
 
 #### Formato
 
@@ -1052,6 +1210,8 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
 
 #### Sintaxe
 
+A instrução BEQ é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BEQ.
+
 <table>
     <thead>
         <tr>
@@ -1079,7 +1239,7 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
                 rs1
             </td>
             <td style="text-align: center;">
-                000
+                <code>000</code>
             </td>
             <td style="text-align: center;">
                 offset[4:1|11]
@@ -1090,6 +1250,8 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
         </tr>
     </tbody>
 </table> 
+
+**Tabela BEQ** - Tabela com sintaxe da instrução BEQ.
 
 #### Formato
 
@@ -1110,6 +1272,8 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
 
 #### Sintaxe
 
+A instrução BNE é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BNE.
+
 <table>
     <thead>
         <tr>
@@ -1137,7 +1301,7 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
                 rs1
             </td>
             <td style="text-align: center;">
-                001
+                <code>001</code>
             </td>
             <td style="text-align: center;">
                 offset[4:1|11]
@@ -1148,6 +1312,8 @@ em caso positivo, modifica o PC para o valor atual somado ao offset com extensã
         </tr>
     </tbody>
 </table>
+
+**Tabela BNE** - Tabela com sintaxe da instrução BNE.
 
 #### Formato
 
@@ -1169,6 +1335,8 @@ modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
+A instrução BLT é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BLT.
+
 <table>
     <thead>
         <tr>
@@ -1196,7 +1364,7 @@ modifica o PC para o valor atual somado ao offset com extensão de sinal.
                 rs1
             </td>
             <td style="text-align: center;">
-                100
+                <code>100</code>
             </td>
             <td style="text-align: center;">
                 offset[4:1|11]
@@ -1207,6 +1375,8 @@ modifica o PC para o valor atual somado ao offset com extensão de sinal.
         </tr>
     </tbody>
 </table>
+
+**Tabela BLT** - Tabela com sintaxe da instrução BLT.
 
 #### Formato
 
@@ -1228,6 +1398,8 @@ o PC para o valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
+A instrução BGE é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BGE.
+
 <table>
     <thead>
         <tr>
@@ -1255,7 +1427,7 @@ o PC para o valor atual somado ao offset com extensão de sinal.
                 rs1
             </td>
             <td style="text-align: center;">
-                101
+                <code>101</code>
             </td>
             <td style="text-align: center;">
                 offset[4:1|11]
@@ -1266,6 +1438,8 @@ o PC para o valor atual somado ao offset com extensão de sinal.
         </tr>
     </tbody>
 </table>
+
+**Tabela BGE** - Tabela com sintaxe da instrução BGE.
 
 #### Formato
 
@@ -1287,6 +1461,8 @@ somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
+A instrução BLTU é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BLTU.
+
 <table>
     <thead>
         <tr>
@@ -1314,7 +1490,7 @@ somado ao offset com extensão de sinal.
                 rs1
             </td>
             <td style="text-align: center;">
-                110
+                <code>110</code>
             </td>
             <td style="text-align: center;">
                 offset[4:1|11]
@@ -1325,6 +1501,8 @@ somado ao offset com extensão de sinal.
         </tr>
     </tbody>
 </table>
+
+**Tabela BLTU** - Tabela com sintaxe da instrução BLTU.
 
 #### Formato
 
@@ -1346,6 +1524,8 @@ valor atual somado ao offset com extensão de sinal.
 
 #### Sintaxe
 
+A instrução BGEU é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BGEU.
+
 <table>
     <thead>
         <tr>
@@ -1373,7 +1553,7 @@ valor atual somado ao offset com extensão de sinal.
                 rs1
             </td>
             <td style="text-align: center;">
-                111
+                <code>111</code>
             </td>
             <td style="text-align: center;">
                 offset[4:1|11]
@@ -1384,6 +1564,8 @@ valor atual somado ao offset com extensão de sinal.
         </tr>
     </tbody>
 </table>
+
+**Tabela BGEU** - Tabela com sintaxe da instrução BGEU.
 
 #### Formato
 
@@ -1406,9 +1588,13 @@ no registrador de destino `rd`, com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
-| :--: | :----------: | :---: | :---: | :--: | :--: |
-|  I   | offset[11:0] |  rs1  |  000  |  rd  | LOAD |
+A instrução LB é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LB.
+
+| Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :-----: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  `000`  |  rd  | LOAD |
+
+**Tabela LB** - Tabela com sintaxe da instrução LB.
 
 #### Formato
 
@@ -1429,9 +1615,13 @@ valor no registrador de destino `rd`, com extensão de sinal.
 
 #### Sintaxe
 
-| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
-| :--: | :----------: | :---: | :---: | :--: | :--: |
-|  I   | offset[11:0] |  rs1  |  001  |  rd  | LOAD |
+A instrução LH é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LH.
+
+| Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :-----: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  `001`  |  rd  | LOAD |
+
+**Tabela LH** - Tabela com sintaxe da instrução LH.
 
 #### Formato
 
@@ -1452,9 +1642,13 @@ no registrador de destino `rd`, com extensão de zero.
 
 #### Sintaxe
 
-| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
-| :--: | :----------: | :---: | :---: | :--: | :--: |
-|  I   | offset[11:0] |  rs1  |  100  |  rd  | LOAD |
+A instrução LBU é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LBU.
+
+| Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :-----: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  `100`  |  rd  | LOAD |
+
+**Tabela LBU** - Tabela com sintaxe da instrução LBU.
 
 #### Formato
 
@@ -1475,9 +1669,13 @@ valor no registrador de destino `rd`, com extensão de zero.
 
 #### Sintaxe
 
-| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
-| :--: | :----------: | :---: | :---: | :--: | :--: |
-|  I   | offset[11:0] |  rs1  |  101  |  rd  | LOAD |
+A instrução LHU é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LHU.
+
+| Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :-----: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  `101`  |  rd  | LOAD |
+
+**Tabela LHU** - Tabela com sintaxe da instrução LHU.
 
 #### Formato
 
@@ -1498,9 +1696,13 @@ valor no registrador de destino `rd`.
 
 #### Sintaxe
 
-| Tipo |    31-20     | 19-15 | 14-12 | 11-7 | 6-0  |
-| :--: | :----------: | :---: | :---: | :--: | :--: |
-|  I   | offset[11:0] |  rs1  |  010  |  rd  | LOAD |
+A instrução LW é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LW.
+
+| Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
+| :--: | :----------: | :---: | :-----: | :--: | :--: |
+|  I   | offset[11:0] |  rs1  |  `010`  |  rd  | LOAD |
+
+**Tabela LW** - Tabela com sintaxe da instrução LW.
 
 #### Formato
 
@@ -1523,9 +1725,13 @@ Armazena o byte menos significativo do valor armazenado no registrador `rs2` na 
 
 #### Sintaxe
 
-| Tipo |    31-25     | 24-20 | 19-15 | 14-12 |    11-7     |  6-0  |
-| :--: | :----------: | :---: | :---: | :---: | :---------: | :---: |
-|  S   | offset[11:5] |  rs2  |  rs1  |  000  | offset[4:0] | STORE |
+A instrução SB é do tipo S, tendo uma funct3 própria, como ilustrado na Tabela SB.
+
+| Tipo |    31-25     | 24-20 | 19-15 |  14-12  |    11-7     |  6-0  |
+| :--: | :----------: | :---: | :---: | :-----: | :---------: | :---: |
+|  S   | offset[11:5] |  rs2  |  rs1  |  `000`  | offset[4:0] | STORE |
+
+**Tabela SB** - Tabela com sintaxe da instrução SB.
 
 #### Formato
 
@@ -1546,9 +1752,13 @@ endereço `rs1 + sext(offset)`.
 
 #### Sintaxe
 
-| Tipo |    31-25     | 24-20 | 19-15 | 14-12 |    11-7     |  6-0  |
-| :--: | :----------: | :---: | :---: | :---: | :---------: | :---: |
-|  S   | offset[11:5] |  rs2  |  rs1  |  001  | offset[4:0] | STORE |
+A instrução SH é do tipo S, tendo uma funct3 própria, como ilustrado na Tabela SH.
+
+| Tipo |    31-25     | 24-20 | 19-15 |  14-12  |    11-7     |  6-0  |
+| :--: | :----------: | :---: | :---: | :-----: | :---------: | :---: |
+|  S   | offset[11:5] |  rs2  |  rs1  |  `001`  | offset[4:0] | STORE |
+
+**Tabela SH** - Tabela com sintaxe da instrução SH.
 
 #### Formato
 
@@ -1569,9 +1779,13 @@ endereço `rs1 + sext(offset)`.
 
 #### Sintaxe
 
-| Tipo |    31-25     | 24-20 | 19-15 | 14-12 |    11-7     |  6-0  |
-| :--: | :----------: | :---: | :---: | :---: | :---------: | :---: |
-|  S   | offset[11:5] |  rs2  |  rs1  |  010  | offset[4:0] | STORE |
+A instrução SW é do tipo S, tendo uma funct3 própria, como ilustrado na Tabela SW.
+
+| Tipo |    31-25     | 24-20 | 19-15 |  14-12  |    11-7     |  6-0  |
+| :--: | :----------: | :---: | :---: | :-----: | :---------: | :---: |
+|  S   | offset[11:5] |  rs2  |  rs1  |  `010`  | offset[4:0] | STORE |
+
+**Tabela SW** - Tabela com sintaxe da instrução SW.
 
 #### Formato
 
