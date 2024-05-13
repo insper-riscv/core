@@ -34,23 +34,18 @@ package CPU is
 
     type t_CONTROL_IF is record
         enable_stall  : std_logic;
-        enable_flush  : std_logic;
-        enable_jump   : std_logic;
         select_source : std_logic;
     end record;
 
     type t_CONTROL_ID is record
-        select_jump     : std_logic;
-        enable_jump     : std_logic;
-        enable_branch   : std_logic;
-        enable_flush_id : std_logic;
-        enable_flux_ex  : std_logic;
+        enable_branch : std_logic;
+        enable_jump   : std_logic;
+        select_jump   : std_logic;
     end record;
 
     type t_CONTROL_EX is record
         select_source_1  : std_logic_vector(1 downto 0);
         select_source_2  : std_logic_vector(1 downto 0);
-        select_operation : std_logic_vector(1 downto 0);
     end record;
 
     type t_CONTROL_MEM is record
@@ -84,13 +79,6 @@ package CPU is
         select_source_2    : t_REGISTER;
     end record;
 
-    type t_SIGNALS_MEM_WB is record
-        control_wb         : t_CONTROL_WB;
-        data_memory        : t_DATA;
-        data_destination   : t_DATA;
-        select_destination : t_REGISTER;
-    end record;
-
     type t_SIGNALS_EX_MEM is record
         control_mem        : t_CONTROL_MEM;
         control_wb         : t_CONTROL_WB;
@@ -100,25 +88,42 @@ package CPU is
         funct_3            : WORK.RV32I.t_FUNCT3;
     end record;
 
+    type t_SIGNALS_MEM_WB is record
+        control_wb         : t_CONTROL_WB;
+        data_memory        : t_DATA;
+        data_destination   : t_DATA;
+        select_destination : t_REGISTER;
+    end record;
+
+    type t_FORWARD_BRANCH is record
+        select_source_1 : std_logic_vector(1 downto 0);
+        select_source_2 : std_logic_vector(1 downto 0);
+        source_ex       : WORK.RV32I.t_DATA;
+        source_mem      : WORK.RV32I.t_DATA;
+        source_wb       : WORK.RV32I.t_DATA;
+    end record;
+
+    type t_FORWARD_EXECUTION is record
+        select_source_1 : std_logic_vector(1 downto 0);
+        select_source_2 : std_logic_vector(1 downto 0);
+        source_mem      : WORK.RV32I.t_DATA;
+        source_wb       : WORK.RV32I.t_DATA;
+    end record;
+
     constant NULL_CONTROL_IF : t_CONTROL_IF := (
         enable_stall  => '0',
-        enable_flush  => '0',
-        enable_jump   => '0',
         select_source => '0'
     );
 
     constant NULL_CONTROL_ID : t_CONTROL_ID := (
-        select_jump     => '0',
-        enable_jump     => '0',
         enable_branch   => '0',
-        enable_flush_id => '0',
-        enable_flux_ex  => '0'
+        enable_jump     => '0',
+        select_jump     => '0'
     );
 
     constant NULL_CONTROL_EX : t_CONTROL_EX := (
         select_source_1  => (others => '0'),
-        select_source_2  => (others => '0'),
-        select_operation => (others => '0')
+        select_source_2  => (others => '0')
     );
 
     constant NULL_CONTROL_MEM : t_CONTROL_MEM := (
