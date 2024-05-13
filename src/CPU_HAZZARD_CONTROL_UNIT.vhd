@@ -27,25 +27,30 @@ architecture RTL of CPU_HAZZARD_CONTROL_UNIT is
 begin
 
     destination <= '1' when (
-                        (stage_id_select_source_1 = stage_ex_select_destination or
-                        stage_id_select_source_2 = stage_ex_select_destination) and
+                        (
+                            stage_id_select_source_1 = stage_ex_select_destination or
+                            stage_id_select_source_2 = stage_ex_select_destination
+                        ) and
                         stage_ex_enable_read = '1' and
-                        stage_ex_select_destination /= "00000"
-                        ) else
-                        '0';
+                        (stage_ex_select_destination /= "00000")
+                    ) else
+                    '0';
 
     stall_branch <= '1' when (
                         (
-                        (stage_id_select_source_1 = stage_ex_select_destination or
-                        stage_id_select_source_2 = stage_ex_select_destination) and
-                        stage_ex_enable_destination = '1' and
-                        stage_ex_select_destination /= "00000"
-                        ) or 
-                        ((stage_id_select_source_1 = stage_mem_select_destination or
-                        stage_id_select_source_2 = stage_mem_select_destination) and
+                            stage_id_select_source_1 = stage_ex_select_destination or
+                            stage_id_select_source_2 = stage_ex_select_destination
+                        ) and
+                            stage_ex_enable_destination = '1' and
+                            (stage_ex_select_destination /= "00000")
+                        ) or  (
+                            (
+                                stage_id_select_source_1 = stage_mem_select_destination or
+                            stage_id_select_source_2 = stage_mem_select_destination
+                        ) and
                         stage_mem_enable_read = '1' and
-                        stage_mem_select_destination /= "00000")                     
-                        ) else
-                        '0';
+                        (stage_mem_select_destination /= "00000")
+                    ) else
+                    '0';
 
 end architecture;
