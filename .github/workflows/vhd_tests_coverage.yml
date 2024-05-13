@@ -1,8 +1,10 @@
 name: VHD Coverage tests
-'on':
+
+on:
   workflow_dispatch: {}
   push:
-  - .github/workflows/vhd_tests_stress.yml
+    paths:
+    - .github/workflows/vhd_tests_coverage.yml
 
 jobs:
   test:
