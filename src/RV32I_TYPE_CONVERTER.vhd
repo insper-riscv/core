@@ -22,12 +22,9 @@ architecture RV32I of RV32I_TYPE_CONVERTER is
     signal enable_unsigned      : std_logic;
     signal destination_byte     : WORK.RV32I.t_DATA;
     signal destination_halfword : WORK.RV32I.t_DATA;
+    signal destination_auxiliar : WORK.RV32I.t_DATA;
 
 begin
-
-    destination <=  destination_halfword when (select_type(0) = '1') else
-                    destination_byte when (select_type(1) = '0') else
-                    source;
 
     EXTEND_BYTE: entity WORK.GENERIC_SIGNAL_EXTENDER
         generic map (
@@ -49,6 +46,28 @@ begin
             enable_unsigned => select_type(2),
             source          => source(15 downto 0),
             destination     => destination_halfword
+        );
+
+    MUX_TYPE: entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
+        port map (
+            selector    => select_type(0),
+            source_1    => destination_byte,
+            source_2    => destination_halfword,
+            destination => destination_auxiliar
+        );
+
+    MUX_DESTINATION: entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => WORK.RV32I.XLEN
+        )
+        port map (
+            selector    => select_type(1),
+            source_1    => source,
+            source_2    => destination_auxiliar,
+            destination => destination
         );
 
 end architecture;
