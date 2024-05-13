@@ -51,9 +51,9 @@ begin
             DATA_WIDTH => WORK.RV32I.XLEN
         )
         port map (
+            selector    => selector,
             source_1    => program_plus_immediate,
             source_2    => register_plus_immediate,
-            selector    => selector,
             destination => destination
         );
 
