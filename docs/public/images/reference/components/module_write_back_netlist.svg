@@ -43,16 +43,16 @@
     <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_selector fill-4"/>
     <g s:x="30" s:y="10" s:pid="Y"/>
   </g>
-  <g s:type="inputExt" transform="translate(12,87)" s:width="30" s:height="20" id="cell_source_memory">
-    <text x="15" y="-4" class="nodelabel text-1 cell_source_memory" s:attribute="ref">source_memory</text>
-    <s:alias val="$_inputExt_"/>
-    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_source_memory fill-4"/>
-    <g s:x="30" s:y="10" s:pid="Y"/>
-  </g>
-  <g s:type="inputExt" transform="translate(12,152)" s:width="30" s:height="20" id="cell_source_execution">
+  <g s:type="inputExt" transform="translate(12,87)" s:width="30" s:height="20" id="cell_source_execution">
     <text x="15" y="-4" class="nodelabel text-1 cell_source_execution" s:attribute="ref">source_execution</text>
     <s:alias val="$_inputExt_"/>
     <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_source_execution fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,152)" s:width="30" s:height="20" id="cell_source_memory">
+    <text x="15" y="-4" class="nodelabel text-1 cell_source_memory" s:attribute="ref">source_memory</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_source_memory fill-4"/>
     <g s:x="30" s:y="10" s:pid="Y"/>
   </g>
   <g s:type="outputExt" transform="translate(325,67)" s:width="30" s:height="20" id="cell_destination">
