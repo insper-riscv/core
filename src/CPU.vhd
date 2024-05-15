@@ -82,7 +82,7 @@ package CPU is
     type t_SIGNALS_EX_MEM is record
         control_mem        : t_CONTROL_MEM;
         control_wb         : t_CONTROL_WB;
-        address_pointer    : t_DATA;
+        data_destination   : t_DATA;
         data_source_2      : t_DATA;
         select_destination : t_REGISTER;
         funct_3            : WORK.RV32I.t_FUNCT3;
@@ -133,12 +133,12 @@ package CPU is
 
     constant NULL_CONTROL_WB : t_CONTROL_WB := (
         enable_destination => '0',
-        select_destination => '1'
+        select_destination => '0'
     );
 
     constant NULL_SIGNALS_IF_ID : t_SIGNALS_IF_ID := (
         address_program  => (others => '0'),
-        data_instruction => (others => '0')
+        data_instruction => WORK.RV32I.NULL_INSTRUCTION
     );
 
     constant NULL_SIGNALS_ID_EX : t_SIGNALS_ID_EX := (
@@ -149,21 +149,21 @@ package CPU is
         data_source_1      => (others => '0'),
         data_source_2      => (others => '0'),
         data_immediate     => (others => '0'),
-        funct_7            => (others => '0'),
-        funct_3            => (others => '0'),
-        opcode             => (others => '0'),
-        select_destination => (others => '0'),
+        funct_7            => WORK.RV32I.FUNCT7_ADD,
+        funct_3            => WORK.RV32I.FUNCT3_ADDI,
+        opcode             => WORK.RV32I.OPCODE_OP_IMM,
         select_source_1    => (others => '0'),
-        select_source_2    => (others => '0')
+        select_source_2    => (others => '0'),
+        select_destination => (others => '0')
     );
 
     constant NULL_SIGNALS_EX_MEM : t_SIGNALS_EX_MEM := (
         control_mem        => NULL_CONTROL_MEM,
         control_wb         => NULL_CONTROL_WB,
-        address_pointer    => (others => '0'),
+        data_destination   => (others => '0'),
         data_source_2      => (others => '0'),
         select_destination => (others => '0'),
-        funct_3            => (others => '0')
+        funct_3            => WORK.RV32I.FUNCT3_ADDI
     );
 
     constant NULL_SIGNALS_MEM_WB : t_SIGNALS_MEM_WB := (
