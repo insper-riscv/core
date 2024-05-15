@@ -49,7 +49,7 @@ begin
     memory_read  <= stage_mem_control_memory.enable_read;
     memory_write <= stage_mem_control_memory.enable_write;
 
-    stage_id_forward_branch.source_ex  <= signals_ex_mem.address_pointer;
+    stage_id_forward_branch.source_ex  <= signals_ex_mem.data_destination;
     stage_id_forward_branch.source_mem <= signals_mem_wb.data_destination;
     stage_id_forward_branch.source_wb  <= stage_wb_data_destination;
 
@@ -60,7 +60,7 @@ begin
         port map (
             clock           => clock,
             clear           => clear,
-            enable          => enable AND control_if.enable_stall,
+            enable          => enable,
             source          => control_if,
             address_jump    => stage_id_address_jump,
             address_program => signals_if_id.address_program
