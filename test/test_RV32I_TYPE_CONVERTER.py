@@ -49,7 +49,7 @@ async def tb_RV32I_TYPE_CONVERTER_case_1(dut: RV32I_TYPE_CONVERTER, trace: lib.W
 @pytest.mark.synthesis
 def test_RV32I_TYPE_CONVERTER_synthesis():
     RV32I_TYPE_CONVERTER.build_vhd()
-    # RV32I_TYPE_CONVERTER.build_netlistsvg()
+    RV32I_TYPE_CONVERTER.build_netlistsvg()
 
 
 @pytest.mark.testcases
