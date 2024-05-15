@@ -165,8 +165,7 @@ ou de acordo com sua função. No que se refere à sintaxe, as instruções pode
         </tr>
     </tbody>
 </table>
-
-**Tabela Sintaxe** - Tabela de Sintaxe dos tipos de instrução.
+<p class="table_subtitle"><b>Tabela Sintaxe</b> - Tabela de Sintaxe dos tipos de instrução.</p>
 
 Instruções do tipo R são usadas para realizar operações entre registradores.
 
@@ -209,8 +208,7 @@ na Tabela Opcode.
 |    LOAD    | `0000011` |
 |   BRANCH   | `1100011` |
 | **Outros** | `XXXXX11` |
-
-**Tabela Opcode** - Tabela com exemplos de opcodes comuns.
+<p class="table_subtitle"><b>Tabela Opcode</b> - Tabela com exemplos de opcodes comuns.</p>
 
 ### Imediato
 
@@ -265,8 +263,7 @@ imediato possui uma sintaxe de imediato demonstrada na Tabela Imediato.
         </tr>
     </tbody>
 </table>
-
-**Tabela Imediato** - Tabela com a sintaxe dos imediatos de acordo com seu tipo de instrução.
+<p class="table_subtitle"><b>Tabela Imediato</b> - Tabela com a sintaxe dos imediatos de acordo com seu tipo de instrução.</p>
 
 Sendo, para cada segmento, `inst` o vetor da instrução.
 
@@ -303,8 +300,7 @@ A instrução LUI é do tipo U, tendo um opcode próprio, como ilustrado na Tabe
 | Tipo |   31-12    | 11-7 |    6-0    |
 | :--: | :--------: | :--: | :-------: |
 |  U   | imm[31:12] |  rd  | `0110111` |
-
-**Tabela LUI** - Tabela com sintaxe da instrução LUI.
+<p class="table_subtitle"><b>Tabela LUI</b> - Tabela com sintaxe da instrução LUI.</p>
 
 #### Formato
 
@@ -331,8 +327,7 @@ A instrução AUIPC é do tipo U, tendo um opcode próprio, como ilustrado na Ta
 | Tipo |   31-12    | 11-7 |    6-0    |
 | :--: | :--------: | :--: | :-------: |
 |  U   | imm[31:12] |  rd  | `0010111` |
-
-**Tabela AUIPC** - Tabela com sintaxe da instrução AUIPC.
+<p class="table_subtitle"><b>Tabela AUIPC</b> - Tabela com sintaxe da instrução AUIPC.</p>
 
 #### Formato
 
@@ -361,8 +356,7 @@ A instrução ADD é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
-
-**Tabela ADD** - Tabela com sintaxe da instrução ADD.
+<p class="table_subtitle"><b>Tabela ADD</b> - Tabela com sintaxe da instrução ADD.</p>
 
 #### Formato
 
@@ -389,8 +383,7 @@ A instrução ADDI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :-----: | :--: | :----: |
 |  I   | imm[11:0] |  rs1  |  `000`  |  rd  | OP-IMM |
-
-**Tabela ADDI** - Tabela com sintaxe da instrução ADDI.
+<p class="table_subtitle"><b>Tabela ADDI</b> - Tabela com sintaxe da instrução ADDI.</p>
 
 #### Formato
 
@@ -417,8 +410,7 @@ A instrução SUB é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0100000` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
-
-**Tabela SUB** - Tabela com sintaxe da instrução SUB.
+<p class="table_subtitle"><b>Tabela SUB</b> - Tabela com sintaxe da instrução SUB.</p>
 
 #### Formato
 
@@ -445,8 +437,7 @@ A instrução MUL é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
-
-**Tabela MUL** - Tabela com sintaxe da instrução MUL.
+<p class="table_subtitle"><b>Tabela MUL</b> - Tabela com sintaxe da instrução MUL.</p>
 
 #### Formato
 
@@ -473,8 +464,7 @@ A instrução MULH é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `001`  |  rd  | OP  |
-
-**Tabela MULH** - Tabela com sintaxe da instrução MULH.
+<p class="table_subtitle"><b>Tabela MULH</b> - Tabela com sintaxe da instrução MULH.</p>
 
 #### Formato
 
@@ -503,8 +493,7 @@ A instrução MULHSU é do tipo R, tendo uma funct3 e uma funct7 próprias, como
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `010`  |  rd  | OP  |
-
-**Tabela MULHSU** - Tabela com sintaxe da instrução MULHSU.
+<p class="table_subtitle"><b>Tabela MULHSU</b> - Tabela com sintaxe da instrução MULHSU.</p>
 
 #### Formato
 
@@ -531,8 +520,7 @@ A instrução MULHU é do tipo R, tendo uma funct3 e uma funct7 próprias, como 
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `011`  |  rd  | OP  |
-
-**Tabela MULHU** - Tabela com sintaxe da instrução MULHU.
+<p class="table_subtitle"><b>Tabela MULHU</b> - Tabela com sintaxe da instrução MULHU.</p>
 
 #### Formato
 
@@ -561,8 +549,7 @@ A instrução DIV é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `100`  |  rd  | OP  |
-
-**Tabela DIV** - Tabela com sintaxe da instrução DIV.
+<p class="table_subtitle"><b>Tabela DIV</b> - Tabela com sintaxe da instrução DIV.</p>
 
 #### Formato
 
@@ -590,8 +577,7 @@ A instrução DIVU é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
-
-**Tabela DIVU** - Tabela com sintaxe da instrução DIVU.
+<p class="table_subtitle"><b>Tabela DIVU</b> - Tabela com sintaxe da instrução DIVU.</p>
 
 #### Formato
 
@@ -619,8 +605,7 @@ A instrução REM é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `110`  |  rd  | OP  |
-
-**Tabela REM** - Tabela com sintaxe da instrução REM.
+<p class="table_subtitle"><b>Tabela REM</b> - Tabela com sintaxe da instrução REM.</p>
 
 #### Formato
 
@@ -647,8 +632,7 @@ A instrução REMU é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000001` |  rs2  |  rs1  |  `111`  |  rd  | OP  |
-
-**Tabela REMU** - Tabela com sintaxe da instrução REMU.
+<p class="table_subtitle"><b>Tabela REMU</b> - Tabela com sintaxe da instrução REMU.</p>
 
 #### Formato
 
@@ -676,8 +660,7 @@ A instrução XOR é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `100`  |  rd  | OP  |
-
-**Tabela XOR** - Tabela com sintaxe da instrução XOR.
+<p class="table_subtitle"><b>Tabela XOR</b> - Tabela com sintaxe da instrução XOR.</p>
 
 #### Formato
 
@@ -703,8 +686,7 @@ A instrução XORI é do tipo I, tendo uma funct3 própria, como ilustrado na Ta
 | Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :-----: | :--: | :----: |
 |  I   | imm[11:0] |  rs1  |  `100`  |  rd  | OP-IMM |
-
-**Tabela XORI** - Tabela com sintaxe da instrução XORI.
+<p class="table_subtitle"><b>Tabela XORI</b> - Tabela com sintaxe da instrução XORI.</p>
 
 #### Formato
 
@@ -730,8 +712,7 @@ A instrução OR é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilu
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `110`  |  rd  | OP  |
-
-**Tabela OR** - Tabela com sintaxe da instrução OR.
+<p class="table_subtitle"><b>Tabela OR</b> - Tabela com sintaxe da instrução OR.</p>
 
 #### Formato
 
@@ -757,8 +738,7 @@ A instrução ORI é do tipo I, tendo uma funct3 própria, como ilustrado na Tab
 | Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :-----: | :--: | :----: |
 |  I   | imm[11:0] |  rs1  |  `110`  |  rd  | OP-IMM |
-
-**Tabela ORI** - Tabela com sintaxe da instrução ORI.
+<p class="table_subtitle"><b>Tabela ORI</b> - Tabela com sintaxe da instrução ORI.</p>
 
 #### Formato
 
@@ -784,8 +764,7 @@ A instrução AND é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `111`  |  rd  | OP  |
-
-**Tabela AND** - Tabela com sintaxe da instrução AND.
+<p class="table_subtitle"><b>Tabela AND</b> - Tabela com sintaxe da instrução AND.</p>
 
 #### Formato
 
@@ -811,8 +790,7 @@ A instrução ANDI é do tipo I, tendo uma funct3 própria, como ilustrado na Ta
 | Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :-----: | :--: | :----: |
 |  I   | imm[11:0] |  rs1  |  `111`  |  rd  | OP-IMM |
-
-**Tabela ANDI** - Tabela com sintaxe da instrução ANDI.
+<p class="table_subtitle"><b>Tabela ANDI</b> - Tabela com sintaxe da instrução ANDI.</p>
 
 #### Formato
 
@@ -842,8 +820,7 @@ A instrução SLL é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `001`  |  rd  | OP  |
-
-**Tabela SLL** - Tabela com sintaxe da instrução SLL.
+<p class="table_subtitle"><b>Tabela SLL</b> - Tabela com sintaxe da instrução SLL.</p>
 
 #### Formato
 
@@ -872,8 +849,7 @@ A instrução SLLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-26   | 24-20 | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
 |  I   | `0000000` | shamt |  rs1  |  `001`  |  rd  | OP-IMM |
-
-**Tabela SLLI** - Tabela com sintaxe da instrução SLLI.
+<p class="table_subtitle"><b>Tabela SLLI</b> - Tabela com sintaxe da instrução SLLI.</p>
 
 #### Formato
 
@@ -901,8 +877,7 @@ A instrução SRL é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
-
-**Tabela SRL** - Tabela com sintaxe da instrução SRL.
+<p class="table_subtitle"><b>Tabela SRL</b> - Tabela com sintaxe da instrução SRL.</p>
 
 #### Formato
 
@@ -931,8 +906,7 @@ A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-26   | 24-20 | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
 |  I   | `0000000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
-
-**Tabela SRLI** - Tabela com sintaxe da instrução SRLI.
+<p class="table_subtitle"><b>Tabela SRLI</b> - Tabela com sintaxe da instrução SRLI.</p>
 
 #### Formato
 
@@ -961,8 +935,7 @@ A instrução SRA é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0100000` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
-
-**Tabela SRA** - Tabela com sintaxe da instrução SRA.
+<p class="table_subtitle"><b>Tabela SRA</b> - Tabela com sintaxe da instrução SRA.</p>
 
 #### Formato
 
@@ -991,8 +964,7 @@ A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-26   | 25-20 | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :----: |
 |  I   | `0100000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
-
-**Tabela SRAI** - Tabela com sintaxe da instrução SRAI.
+<p class="table_subtitle"><b>Tabela SRAI</b> - Tabela com sintaxe da instrução SRAI.</p>
 
 #### Formato
 
@@ -1021,8 +993,7 @@ A instrução SLT é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `010`  |  rd  | OP  |
-
-**Tabela SLT** - Tabela com sintaxe da instrução SLT.
+<p class="table_subtitle"><b>Tabela SLT</b> - Tabela com sintaxe da instrução SLT.</p>
 
 #### Formato
 
@@ -1049,8 +1020,7 @@ A instrução SLTI é do tipo I, tendo uma funct3 própria, como ilustrado na Ta
 | Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :-----: | :--: | :----: |
 |  I   | imm[11:0] |  rs1  |  `010`  |  rd  | OP-IMM |
-
-**Tabela SLTI** - Tabela com sintaxe da instrução SLTI.
+<p class="table_subtitle"><b>Tabela SLTI</b> - Tabela com sintaxe da instrução SLTI.</p>
 
 #### Formato
 
@@ -1077,8 +1047,7 @@ A instrução SLTIU é do tipo I, tendo uma funct3 própria, como ilustrado na T
 | Tipo |   31-20   | 19-15 |  14-12  | 11-7 |  6-0   |
 | :--: | :-------: | :---: | :-----: | :--: | :----: |
 |  I   | imm[11:0] |  rs1  |  `011`  |  rd  | OP-IMM |
-
-**Tabela SLTIU** - Tabela com sintaxe da instrução SLTIU.
+<p class="table_subtitle"><b>Tabela SLTIU</b> - Tabela com sintaxe da instrução SLTIU.</p>
 
 #### Formato
 
@@ -1105,8 +1074,7 @@ A instrução SLTU é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 | Tipo |   31-25   | 24-20 | 19-15 |  14-12  | 11-7 | 6-0 |
 | :--: | :-------: | :---: | :---: | :-----: | :--: | :-: |
 |  R   | `0000000` |  rs2  |  rs1  |  `011`  |  rd  | OP  |
-
-**Tabela SLTU** - Tabela com sintaxe da instrução SLTU.
+<p class="table_subtitle"><b>Tabela SLTU</b> - Tabela com sintaxe da instrução SLTU.</p>
 
 #### Formato
 
@@ -1158,8 +1126,7 @@ A instrução JAL é do tipo J, tendo um opcode próprio, como ilustrado na Tabe
         </tr>
     </tbody>
 </table>
-
-**Tabela JAL** - Tabela com sintaxe da instrução JAL.
+<p class="table_subtitle"><b>Tabela JAL</b> - Tabela com sintaxe da instrução JAL.</p>
 
 #### Formato
 
@@ -1186,8 +1153,7 @@ A instrução JALR é do tipo I, tendo uma funct3 e um opcode próprios, como il
 | Tipo |    31-20     | 19-15 |  14-12  | 11-7 |    6-0    |
 | :--: | :----------: | :---: | :-----: | :--: | :-------: |
 |  I   | offset[11:0] |  rs1  |  `000`  |  rd  | `1100111` |
-
-**Tabela JALR** - Tabela com sintaxe da instrução JALR.
+<p class="table_subtitle"><b>Tabela JALR</b> - Tabela com sintaxe da instrução JALR.</p>
 
 #### Formato
 
@@ -1250,8 +1216,7 @@ A instrução BEQ é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
         </tr>
     </tbody>
 </table> 
-
-**Tabela BEQ** - Tabela com sintaxe da instrução BEQ.
+<p class="table_subtitle"><b>Tabela BEQ</b> - Tabela com sintaxe da instrução BEQ.</p>
 
 #### Formato
 
@@ -1312,8 +1277,7 @@ A instrução BNE é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
         </tr>
     </tbody>
 </table>
-
-**Tabela BNE** - Tabela com sintaxe da instrução BNE.
+<p class="table_subtitle"><b>Tabela BNE</b> - Tabela com sintaxe da instrução BNE.</p>
 
 #### Formato
 
@@ -1375,8 +1339,7 @@ A instrução BLT é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
         </tr>
     </tbody>
 </table>
-
-**Tabela BLT** - Tabela com sintaxe da instrução BLT.
+<p class="table_subtitle"><b>Tabela BLT</b> - Tabela com sintaxe da instrução BLT.</p>
 
 #### Formato
 
@@ -1438,8 +1401,7 @@ A instrução BGE é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
         </tr>
     </tbody>
 </table>
-
-**Tabela BGE** - Tabela com sintaxe da instrução BGE.
+<p class="table_subtitle"><b>Tabela BGE</b> - Tabela com sintaxe da instrução BGE.</p>
 
 #### Formato
 
@@ -1501,8 +1463,7 @@ A instrução BLTU é do tipo B, tendo uma funct3 própria, como ilustrado na Ta
         </tr>
     </tbody>
 </table>
-
-**Tabela BLTU** - Tabela com sintaxe da instrução BLTU.
+<p class="table_subtitle"><b>Tabela BLTU</b> - Tabela com sintaxe da instrução BLTU.</p>
 
 #### Formato
 
@@ -1564,8 +1525,7 @@ A instrução BGEU é do tipo B, tendo uma funct3 própria, como ilustrado na Ta
         </tr>
     </tbody>
 </table>
-
-**Tabela BGEU** - Tabela com sintaxe da instrução BGEU.
+<p class="table_subtitle"><b>Tabela BGEU</b> - Tabela com sintaxe da instrução BGEU.</p>
 
 #### Formato
 
@@ -1593,8 +1553,7 @@ A instrução LB é do tipo I, tendo uma funct3 própria, como ilustrado na Tabe
 | Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
 | :--: | :----------: | :---: | :-----: | :--: | :--: |
 |  I   | offset[11:0] |  rs1  |  `000`  |  rd  | LOAD |
-
-**Tabela LB** - Tabela com sintaxe da instrução LB.
+<p class="table_subtitle"><b>Tabela LB</b> - Tabela com sintaxe da instrução LB.</p>
 
 #### Formato
 
@@ -1620,8 +1579,7 @@ A instrução LH é do tipo I, tendo uma funct3 própria, como ilustrado na Tabe
 | Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
 | :--: | :----------: | :---: | :-----: | :--: | :--: |
 |  I   | offset[11:0] |  rs1  |  `001`  |  rd  | LOAD |
-
-**Tabela LH** - Tabela com sintaxe da instrução LH.
+<p class="table_subtitle"><b>Tabela LH</b> - Tabela com sintaxe da instrução LH.</p>
 
 #### Formato
 
@@ -1647,8 +1605,7 @@ A instrução LBU é do tipo I, tendo uma funct3 própria, como ilustrado na Tab
 | Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
 | :--: | :----------: | :---: | :-----: | :--: | :--: |
 |  I   | offset[11:0] |  rs1  |  `100`  |  rd  | LOAD |
-
-**Tabela LBU** - Tabela com sintaxe da instrução LBU.
+<p class="table_subtitle"><b>Tabela LBU</b> - Tabela com sintaxe da instrução LBU.</p>
 
 #### Formato
 
@@ -1674,8 +1631,7 @@ A instrução LHU é do tipo I, tendo uma funct3 própria, como ilustrado na Tab
 | Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
 | :--: | :----------: | :---: | :-----: | :--: | :--: |
 |  I   | offset[11:0] |  rs1  |  `101`  |  rd  | LOAD |
-
-**Tabela LHU** - Tabela com sintaxe da instrução LHU.
+<p class="table_subtitle"><b>Tabela LHU</b> - Tabela com sintaxe da instrução LHU.</p>
 
 #### Formato
 
@@ -1701,8 +1657,7 @@ A instrução LW é do tipo I, tendo uma funct3 própria, como ilustrado na Tabe
 | Tipo |    31-20     | 19-15 |  14-12  | 11-7 | 6-0  |
 | :--: | :----------: | :---: | :-----: | :--: | :--: |
 |  I   | offset[11:0] |  rs1  |  `010`  |  rd  | LOAD |
-
-**Tabela LW** - Tabela com sintaxe da instrução LW.
+<p class="table_subtitle"><b>Tabela LW</b> - Tabela com sintaxe da instrução LW.</p>
 
 #### Formato
 
@@ -1730,8 +1685,7 @@ A instrução SB é do tipo S, tendo uma funct3 própria, como ilustrado na Tabe
 | Tipo |    31-25     | 24-20 | 19-15 |  14-12  |    11-7     |  6-0  |
 | :--: | :----------: | :---: | :---: | :-----: | :---------: | :---: |
 |  S   | offset[11:5] |  rs2  |  rs1  |  `000`  | offset[4:0] | STORE |
-
-**Tabela SB** - Tabela com sintaxe da instrução SB.
+<p class="table_subtitle"><b>Tabela SB</b> - Tabela com sintaxe da instrução SB.</p>
 
 #### Formato
 
@@ -1757,8 +1711,7 @@ A instrução SH é do tipo S, tendo uma funct3 própria, como ilustrado na Tabe
 | Tipo |    31-25     | 24-20 | 19-15 |  14-12  |    11-7     |  6-0  |
 | :--: | :----------: | :---: | :---: | :-----: | :---------: | :---: |
 |  S   | offset[11:5] |  rs2  |  rs1  |  `001`  | offset[4:0] | STORE |
-
-**Tabela SH** - Tabela com sintaxe da instrução SH.
+<p class="table_subtitle"><b>Tabela SH</b> - Tabela com sintaxe da instrução SH.</p>
 
 #### Formato
 
@@ -1784,8 +1737,7 @@ A instrução SW é do tipo S, tendo uma funct3 própria, como ilustrado na Tabe
 | Tipo |    31-25     | 24-20 | 19-15 |  14-12  |    11-7     |  6-0  |
 | :--: | :----------: | :---: | :---: | :-----: | :---------: | :---: |
 |  S   | offset[11:5] |  rs2  |  rs1  |  `010`  | offset[4:0] | STORE |
-
-**Tabela SW** - Tabela com sintaxe da instrução SW.
+<p class="table_subtitle"><b>Tabela SW</b> - Tabela com sintaxe da instrução SW.</p>
 
 #### Formato
 
