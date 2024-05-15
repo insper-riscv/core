@@ -2,6 +2,7 @@ import os
 import subprocess
 import json
 import typing as T
+from fractions import Fraction
 from pathlib import Path
 from inspect import isclass
 
@@ -9,6 +10,7 @@ import pytest_check as check
 import cocotb.binary
 import cocotb.handle
 import cocotb.runner
+import cocotb.triggers
 
 import lib
 from lib.package import Package
@@ -57,6 +59,10 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
                 tracer = Waveform(*signals, clock=dut.clock, model=cls) # type: ignore
             else:
                 tracer = Waveform(*signals, clock=None, model=cls) # type: ignore
+
+            print(type(tracer.clock_pin), True)
+
+            await tracer.start()
 
             with tracer as trace:
                 pased = all([result async for result in fn(dut, trace)])
