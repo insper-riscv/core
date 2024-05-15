@@ -25,10 +25,10 @@ architecture RV32I of CPU_EXECUTION_FORWARDING_UNIT is
 
     signal mem_source_1 : std_logic;
     signal mem_source_2 : std_logic;
-    signal mem_zero     : std_logic;
+    signal mem_not_zero : std_logic;
     signal wb_source_1  : std_logic;
     signal wb_source_2  : std_logic;
-    signal wb_zero      : std_logic;
+    signal wb_not_zero  : std_logic;
 
 begin
 
@@ -36,12 +36,12 @@ begin
     mem_source_2 <= reduce_and(stage_ex_select_source_2 XNOR stage_mem_select_destination);
     wb_source_1  <= reduce_and(stage_ex_select_source_1 XNOR stage_wb_select_destination);
     wb_source_2  <= reduce_and(stage_ex_select_source_2 XNOR stage_wb_select_destination);
-    mem_zero     <= is_equal(stage_mem_select_destination, ZERO);
-    wb_zero      <= is_equal(stage_wb_select_destination,  ZERO);
+    mem_not_zero <= reduce_or(stage_mem_select_destination);
+    wb_not_zero  <= reduce_or(stage_wb_select_destination);
 
-    select_source_1(0) <= stage_mem_enable_destination AND mem_source_1 AND NOT(mem_zero);
-    select_source_1(1) <= stage_wb_enable_destination  AND wb_source_1  AND NOT(wb_zero);
-    select_source_2(0) <= stage_mem_enable_destination AND mem_source_2 AND NOT(mem_zero);
-    select_source_2(1) <= stage_wb_enable_destination  AND wb_source_2  AND NOT(wb_zero);
+    select_source_1(0) <= stage_mem_enable_destination AND mem_source_1 AND mem_not_zero;
+    select_source_1(1) <= stage_wb_enable_destination  AND wb_source_1  AND wb_not_zero;
+    select_source_2(0) <= stage_mem_enable_destination AND mem_source_2 AND mem_not_zero;
+    select_source_2(1) <= stage_wb_enable_destination  AND wb_source_2  AND wb_not_zero;
 
 end architecture;
