@@ -21,8 +21,8 @@ class GENERIC_REGISTER(lib.Entity):
 
 @GENERIC_REGISTER.testcase
 async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: lib.Waveform):
+    values_enable = ["1", "0", "1", "1", "1"]
     values_clear = ["0", "0", "1", "0", "0"]
-    values_enable = ["1", "0", "0", "1", "1"]
     values_source = [
         "11111111",
         "00000000",
@@ -38,8 +38,11 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: lib.Waveform)
         "00000000",
     ]
 
+    yield trace.check(dut.destination, "00000000", "At clock 0.")
+
     for index, (clear, enable, source, destination) in enumerate(
-        zip(values_clear, values_enable, values_source, values_destination)
+        zip(values_clear, values_enable, values_source, values_destination),
+        1,
     ):
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)
