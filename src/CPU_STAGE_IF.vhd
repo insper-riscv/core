@@ -27,7 +27,7 @@ begin
         port map (
             clock        => clock,
             clear        => clear,
-            enable       => enable AND NOT(source.enable_stall),
+            enable       => enable, -- AND NOT(source.enable_stall),
             selector     => source.select_source,
             source       => address_jump,
             destination  => address_program
