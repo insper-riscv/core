@@ -31,7 +31,7 @@ $ docker push gianvr/pfe:latest
 ## Validação dos Componentes
 
 Utilizou-se neste projeto pytest, uma ferramenta de estruturação de testes em
-python. Através da biblioteca é possível executar todos os testes de uma vez, bem como por categoria,
+Python. Através da biblioteca é possível executar todos os testes de uma vez, bem como por categoria,
 sendo três categorias: tests cases, stress e synthesis. 
 
 Além disso, como o processador foi desenvolvido em VHDL, 

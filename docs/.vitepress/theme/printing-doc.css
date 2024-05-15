@@ -1,4 +1,8 @@
 .printing-doc {
+    code {
+        white-space : pre-wrap !important;
+        word-break: break-word;
+      }
     p,
     li {
         text-align: justify;
@@ -26,7 +30,7 @@
         break-inside: avoid-column;
     }
 
-    p, table {
+    p, table, code {
         break-inside: avoid-page;
     }
 
