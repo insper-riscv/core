@@ -12,16 +12,16 @@ from lib.clockless_trace import Clockless_Trace
 
 class Waveform:
     def __init__(self, *args: T.Any, clock: T.Any, model: T.Optional["Entity"] = None):
-        self.clock = clock
+        self.clock_pin = clock
         self.model = model
         self.scale = 1
         self.enabled = True
 
         if clock is not None:
             self._trace = cocotb.wavedrom.trace(*args, clk=clock)
-            clock_ = cocotb.clock.Clock(clock, 20_000, units="ns")
+            self.clock = cocotb.clock.Clock(clock, 20_000, units="ns")
 
-            cocotb.start_soon(clock_.start(start_high=False))
+            cocotb.start_soon(self.clock.start(start_high=False))
         else:
             self._trace = Clockless_Trace(*args)
 
@@ -31,6 +31,10 @@ class Waveform:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         return self._trace.__exit__(exc_type, exc_val, exc_tb)
+    
+    async def start(self):
+        # await cocotb.triggers.FallingEdge(self.clock_pin)
+        pass
     
     def set_scale(self, scale: T.Union[int, float]):
         self.scale = scale
@@ -46,10 +50,10 @@ class Waveform:
         self._trace.enable()
 
     async def cycle(self, count: int = 1):
-        if self.clock is not None:
+        if self.clock_pin is not None:
             for _ in range(count):
-                await cocotb.triggers.RisingEdge(self.clock)
-                await cocotb.triggers.FallingEdge(self.clock)
+                await cocotb.triggers.FallingEdge(self.clock_pin)
+                # await cocotb.triggers.RisingEdge(self.clock_pin)
         else:
             await cocotb.triggers.Timer(cocotb.triggers.Decimal(1), units="step")
 
@@ -64,16 +68,16 @@ class Waveform:
         self._trace.enable()
 
     def check(self, pin: T.Type["Entity.Output_pin"], value: str, message: str = ""):
-        result = check.equal(pin.value.binstr, value, f"At pin \"{pin._name}\". {message}")
+        result = check.equal(pin.value.binstr, value, f"At pin \"{pin._name}\". {message}") # type: ignore
 
         for signal in self._trace._signals:
-            if pin._name not in signal._samples:
+            if pin._name not in signal._samples: # type: ignore
                 continue
 
-            signal._samples[pin._name][-1] = "7" if result else "9"
+            signal._samples[pin._name][-1] = "7" if result else "9" # type: ignore
 
             if len(value) < 2:
-                signal._data[pin._name].append(pin.value)
+                signal._data[pin._name].append(pin.value) # type: ignore
 
             break
 
