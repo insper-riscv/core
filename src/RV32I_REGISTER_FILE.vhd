@@ -28,7 +28,7 @@ end entity;
 
 architecture RTL of RV32I_REGISTER_FILE is
 
-    signal registers       : t_std_logic_array(0 to (2**ADDRESS_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
+    signal registers       : t_std_logic_array(1 to (2**ADDRESS_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
     signal decode_source_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal decode_source_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal passthrough_1   : std_logic;
@@ -38,11 +38,11 @@ begin
 
     process(address_source_1, address_source_2, address_destination)
     begin
-        passthrough_1 <= reduce_and(address_source_1 XNOR address_destination);
-        passthrough_2 <= reduce_and(address_source_2 XNOR address_destination);
+        passthrough_1 <= reduce_and(address_source_1 XNOR address_destination) AND reduce_or(address_destination);
+        passthrough_2 <= reduce_and(address_source_2 XNOR address_destination) AND reduce_or(address_destination);
     end process;
 
-    GEN_REGISTERS : for i in 1 to 31 generate
+    GEN_REGISTERS : for i in registers'range generate
         REGISTER_I : entity WORK.GENERIC_REGISTER
             generic map (
                 DATA_WIDTH => DATA_WIDTH
@@ -62,7 +62,7 @@ begin
         )
         port map (
             selector    => address_source_1,
-            source_1    => (others => '1'),
+            source_1    => (others => '0'),
             source_2    => registers(1),
             source_3    => registers(2),
             source_4    => registers(3),
@@ -103,7 +103,7 @@ begin
         )
         port map (
             selector    => address_source_2,
-            source_1    => (others => '1'),
+            source_1    => (others => '0'),
             source_2    => registers(1),
             source_3    => registers(2),
             source_4    => registers(3),
