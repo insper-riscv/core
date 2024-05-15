@@ -38,7 +38,6 @@ architecture RV32I of MODULE_CONTROL_UNIT is
     signal b_type    : std_logic;
     signal u_type    : std_logic;
     signal j_type    : std_logic;
-    signal not_flush : std_logic;
 
 begin
 
@@ -53,31 +52,29 @@ begin
     u_type   <= is_lui OR is_auipc;
     j_type   <= is_equal(opcode, WORK.RV32I.OPCODE_JAL);
 
-    not_flush <= NOT(clear OR j_type OR is_jalr);
-
     -- Stage Instruction Decode controls
-    control_id.enable_branch <= not_flush AND (b_type);
+    control_id.enable_branch <= b_type;
 
-    control_id.enable_jump <= not_flush AND (j_type OR is_jalr);
+    control_id.enable_jump <= j_type OR is_jalr;
 
-    control_id.select_jump <= not_flush AND (is_jalr);
+    control_id.select_jump <= is_jalr;
 
     -- Stage Execute controls
-    control_ex.select_source_1(0) <= not_flush AND (is_auipc OR is_jalr OR j_type);
-    control_ex.select_source_1(1) <= not_flush AND (is_lui);
+    control_ex.select_source_1(0) <= j_type OR is_jalr OR is_auipc;
+    control_ex.select_source_1(1) <= is_lui;
 
-    control_ex.select_source_2(0) <= not_flush AND (i_type OR u_type OR s_type);
-    control_ex.select_source_2(1) <= not_flush AND (is_jalr);
+    control_ex.select_source_2(0) <= i_type OR u_type OR s_type;
+    control_ex.select_source_2(1) <= is_jalr;
 
     -- Stage Memory Access controls
-    control_mem.enable_read <= not_flush AND (is_load);
+    control_mem.enable_read <= is_load;
 
-    control_mem.enable_write <= not_flush AND (s_type);
+    control_mem.enable_write <= s_type;
 
     -- Write Back controls
-    control_wb.enable_destination <= not_flush AND (r_type OR i_type OR u_type OR j_type);
+    control_wb.enable_destination <= r_type OR i_type OR u_type OR j_type;
 
-    control_wb.select_destination <= not_flush AND (is_load);
+    control_wb.select_destination <= is_load;
 
     -- Immediate generating
     immediate(31) <= instruction(31);
