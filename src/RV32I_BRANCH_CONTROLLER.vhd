@@ -37,7 +37,7 @@ begin
         port map (
             selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BEQ),
             source_1    => "0",
-            source_2    => "" & flag_equal,
+            source_2    => (0 => flag_equal),
             destination => cases(0 downto 0)
         );
 
@@ -48,7 +48,7 @@ begin
         port map (
             selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BNE),
             source_1    => "0",
-            source_2    => "" & NOT(flag_equal),
+            source_2    => (0 => NOT(flag_equal)),
             destination => cases(1 downto 1)
         );
 
@@ -59,7 +59,7 @@ begin
         port map (
             selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BLT),
             source_1    => "0",
-            source_2    => "" & flag_less_signed,
+            source_2    => (0 => flag_less_signed),
             destination => cases(2 downto 2)
         );
 
@@ -70,7 +70,7 @@ begin
         port map (
             selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BGE),
             source_1    => "0",
-            source_2    => "" & NOT(flag_less_signed),
+            source_2    => (0 => NOT(flag_less_signed)),
             destination => cases(3 downto 3)
         );
 
@@ -81,7 +81,7 @@ begin
         port map (
             selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BLTU),
             source_1    => "0",
-            source_2    => "" & flag_less,
+            source_2    => (0 => flag_less),
             destination => cases(4 downto 4)
         );
 
@@ -92,7 +92,7 @@ begin
         port map (
             selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BGEU),
             source_1    => "0",
-            source_2    => "" & NOT(flag_less),
+            source_2    => (0 => NOT(flag_less)),
             destination => cases(5 downto 5)
         );
 
