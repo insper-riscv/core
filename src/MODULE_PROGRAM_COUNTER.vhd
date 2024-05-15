@@ -37,8 +37,8 @@ begin
         )
         port map (
             selector    => selector,
-            source_1    => source,
-            source_2    => count_increment,
+            source_1    => count_increment,
+            source_2    => source,
             destination => count_source
         );
 
