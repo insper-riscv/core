@@ -51,9 +51,9 @@ begin
     control_memory.enable_read     <= source_0.control_mem.enable_read;
     control_memory.enable_write    <= source_0.control_mem.enable_write;
 
-    address_memory                 <= source_0.address_pointer;
+    address_memory                 <= source_0.data_destination;
 
-    destination.data_destination   <= source_0.address_pointer;
+    destination.data_destination   <= source_0.data_destination;
     destination.select_destination <= source_0.select_destination;
 
     MEM_INTERFACE: entity WORK.MODULE_MEMORY_INTERFACE(RV32I)
