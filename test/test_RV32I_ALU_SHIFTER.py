@@ -3,6 +3,8 @@ from cocotb.binary import BinaryValue
 
 import lib
 from test_RV32I_package import RV32I
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
+from test_GENERIC_MUX_32X1 import GENERIC_MUX_32X1
 
 
 class RV32I_ALU_SHIFTER(lib.Entity):
@@ -12,6 +14,11 @@ class RV32I_ALU_SHIFTER(lib.Entity):
     shamt = lib.Entity.Input_pin
     select_function = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
+
+    MUX_MSB_VECTOR = GENERIC_MUX_2X1
+    MUX_source_auxiliar = GENERIC_MUX_2X1
+    MUX_DESTINATION = GENERIC_MUX_2X1
+    MUX_DATA = GENERIC_MUX_32X1
 
 
 @RV32I_ALU_SHIFTER.testcase
