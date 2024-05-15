@@ -101,7 +101,7 @@ begin
             source_1         => data_source_1,
             source_2         => data_source_2,
             immediate        => source_0.data_immediate,
-            destination      => destination.address_pointer
+            destination      => destination.data_destination
         );
 
 end architecture;
