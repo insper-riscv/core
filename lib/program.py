@@ -53,8 +53,13 @@ class Program:
         mem_map = self.get_memory_map()
         index = 0
 
+        print(mem_map)
+
         while True:
-            key = address.value.integer
+            try:
+                key = address.value.integer
+            except ValueError:
+                key = 0
 
             try:
                 value = mem_map[key]
@@ -66,26 +71,24 @@ class Program:
             if self.memory is not None:
                 memory_address = self.memory_address_pin.value.integer # type: ignore
 
-                if self.memory_enable_read_pin.value.binstr == "1": # type: ignore
-                    if memory_address in self.memory:
-                        self.memory_destination_pin.value = BinaryValue(self.memory[memory_address]) # type: ignore
-                    else:
-                        self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr)) # type: ignore
-                else:
-                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr)) # type: ignore
-
                 if self.memory_enable_write_pin.value.binstr == "1": # type: ignore
                     self.memory[memory_address] = self.memory_source_pin.value.binstr # type: ignore
+                elif self.memory_enable_read_pin.value.binstr == "0": # type: ignore
+                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr)) # type: ignore
+                elif memory_address in self.memory:
+                    self.memory_destination_pin.value = BinaryValue(self.memory[memory_address]) # type: ignore
+                else:
+                    self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr)) # type: ignore
+                    
+            await trace.cycle()
 
             if self.stepping or value == Program.ENVIRONMENT_BREAKPOINT:
+                print(index, key)
                 yield index, key
 
                 index += 1
             elif value == Program.ENVIRONMENT_CALL:    
-                await trace.cycle()
                 break
-
-            await trace.cycle()
 
     def attach_memory(
             self,
