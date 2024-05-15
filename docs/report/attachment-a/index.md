@@ -6,10 +6,6 @@ pageClass: printing-doc
 editLink: false
 ---
 
-# Anexo A
+## Anexo A
 
 <!--@include: @/reference/isa/index.md-->
-
---- {class="break-page"}
-
-<!--@include: @/reference/isa/pseudo.md-->
