@@ -2,6 +2,9 @@
     p,
     li {
         text-align: justify;
+        font-size: 12pt;
+        font-family: "Times New Roman";
+        line-height: 20pt;
     }
 
     .break-page,
@@ -11,6 +14,9 @@
 
     hr {
         margin: 32px 0;
+        font-size: 12pt;
+        font-family: "Times New Roman";
+        line-height: 20pt;
     }
 
     h1,
@@ -20,18 +26,37 @@
     h5,
     h6 {
         font-size: 12pt;
+        font-family: "Times New Roman";
+        line-height: 20pt;
     }
 
     li {
         break-inside: avoid-column;
     }
 
-    p, table {
+    p, table, .table_subtitle {
         break-inside: avoid-page;
     }
 
     table {
         column-span: all;
+        margin-bottom: 0;
+    }
+
+    .table_subtitle {
+        margin-top: 0.3em;
+    }
+
+    th, tr, td {
+        font-size: 12pt;
+        font-family: "Times New Roman";
+        line-height: 20pt;
+    }
+
+    pre {
+        font-size: 12pt;
+        font-family: "Times New Roman";
+        line-height: 20pt;
     }
 
     h1, h2, h3, h4, h5, h6, img, svg, figure {
