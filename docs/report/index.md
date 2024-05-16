@@ -135,26 +135,27 @@ IMT {style="text-align: center;"}
 
 ## Sumário {style="text-align: center;"}
 
-- RESUMO	5
-- ABSTRACT	6
-- 1. Introdução	7
-- 1.1 Escopo do projeto	7
-- 1.2 Recursos	9
-- 1.5 Mapeamento dos stakeholders	9
-- 1.6 Questões Éticas e Profissionais	10
-- 1.7 Normas Técnicas	10
-- 1.8 Revisão do Estado da Arte	10
-- 2. Metodologia	16
-- 2.1 Coleta de dados sobre o projeto	19
-- 2.2 Análise dos Dados Coletados	19
-- 3. Resultados	21
-- 3.1 Nível dos Componentes Genéricos
-- 3.2 Nível dos Componentes RV32I
-- 3.3 Nível dos Módulos
-- 3.4 Nível dos Componentes da CPU
-- 4. Conclusão	35
-- Referências	36
-- Anexo A - Instruções da Arquitetura	40
+- RESUMO <span style="float: right;">5</span>
+
+- ABSTRACT <span style="float: right;">6</span>
+- 1. Introdução <span style="float: right;">7</span>
+    - 1.1 Escopo do projeto <span style="float: right;">7</span>
+    - 1.2 Recursos <span style="float: right;">9</span>
+    - 1.5 Mapeamento dos stakeholders <span style="float: right;">9</span>
+    - 1.6 Questões Éticas e Profissionais <span style="float: right;">10</span>
+    - 1.7 Normas Técnicas <span style="float: right;">10</span>
+    - 1.8 Revisão do Estado da Arte <span style="float: right;">10</span>
+- 2. Metodologia <span style="float: right;">16</span>
+    - 2.1 Coleta de dados sobre o projeto <span style="float: right;">19</span>
+    - 2.2 Análise dos Dados Coletados <span style="float: right;">19</span>
+- 3. Resultados <span style="float: right;">21</span>
+    - 3.1 Nível dos Componentes Genéricos
+    - 3.2 Nível dos Componentes RV32I
+    - 3.3 Nível dos Módulos
+    - 3.4 Nível dos Componentes da CPU
+- 4. Conclusão <span style="float: right;">35</span>
+- Referências <span style="float: right;">36</span>
+- Anexo A - Instruções da Arquitetura <span style="float: right;">40</span>
 
 <!--@include: @/report/.resumo.md-->
 <!--@include: @/report/.abstract.md-->
