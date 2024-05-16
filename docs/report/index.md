@@ -134,10 +134,10 @@ IMT {style="text-align: center;"}
 - 1. Introdução	7
 - 1.1 Escopo do projeto	7
 - 1.2 Recursos	9
-- 1.5 Mapeamento dos stakeholders	12
-- 1.6 Questões Éticas e Profissionais	12
-- 1.7 Normas Técnicas	13
-- 1.8 Revisão do Estado da Arte	13
+- 1.5 Mapeamento dos stakeholders	9
+- 1.6 Questões Éticas e Profissionais	10
+- 1.7 Normas Técnicas	10
+- 1.8 Revisão do Estado da Arte	10
 - 2. Metodologia	16
 - 2.1 Coleta de dados sobre o projeto	19
 - 2.2 Análise dos Dados Coletados	19
