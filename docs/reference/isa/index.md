@@ -9,7 +9,7 @@ outline: [2, 3]
 As instruções são vetores binários de 32 _bits_, podendo ser classificadas de duas formas: segundo sua sintaxe,
 ou de acordo com sua função. No que se refere à sintaxe, as instruções podem ser do tipo R, I, S, B, U ou J, como demonstrado na Tabela Sintaxe.
 
-![alt text](../../public/images/reference/report_components/tabela_sintaxe.drawio.svg)
+![alt text](/images/reference/report_components/tabela_sintaxe.drawio.svg)
 <p class="table_subtitle"><b>Tabela Sintaxe</b> - Tabela de Sintaxe dos tipos de instrução.</p>
 
 Instruções do tipo R são usadas para realizar operações entre registradores.
