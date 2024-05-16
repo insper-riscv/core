@@ -2,9 +2,9 @@
 outline: [2, 3]
 ---
 
-# Conjunto de Instruções
+## Conjunto de Instruções
 
-## Sintaxe
+### Sintaxe
 
 As instruções são vetores binários de 32 _bits_, podendo ser classificadas de duas formas: segundo sua sintaxe,
 ou de acordo com sua função. No que se refere à sintaxe, as instruções podem ser do tipo R, I, S, B, U ou J, como demonstrado na Tabela Sintaxe.
@@ -193,7 +193,7 @@ Observação: Em alguns caso, é possível ver que um_bit_ da instrução repres
 intervalo de _bits_, como imm[31:20] por exemplo. Esses são casos onde os _bits_ 
 mais significativos do imediato são o_bit_ mais significativo da instrução extendido.
 
-### Opcode
+#### Opcode
 
 Opcodes são segmentos de 7 _bits_ do vetor de instrução. Cada tipo de instrução
 possui um opcode ou uma instrução possui um opcode exclusivo. Para alguns tipos
@@ -210,7 +210,7 @@ na Tabela Opcode.
 | **Outros** | `XXXXX11` |
 <p class="table_subtitle"><b>Tabela Opcode</b> - Tabela com exemplos de opcodes comuns.</p>
 
-### Imediato
+#### Imediato
 
 Os imediatos são vetores binários de 32 _bits_. Cada tipo de instrução com
 imediato possui uma sintaxe de imediato demonstrada na Tabela Imediato.
@@ -282,9 +282,9 @@ Por sua vez, a classificação das instruções segundo sua funcionalidade divid
 
 Nas instruções que se seguem, RV32I Base significa que elas pertencem ao conjunto base de instruções para inteiros de 32 _bits_, e “M” _Standard Extension_ significa que elas pertencem à extensão de Multiplicação:
 
-## Carrega Constante
+### Carrega Constante
 
-### `LUI` <Badge type="info" text="RV32I Base" />
+#### `LUI` <Badge type="info" text="RV32I Base" />
 
 _Load Upper Immediate_ (Carregar Superior Imediato).
 
@@ -293,7 +293,7 @@ imediato dos 20 _bits_ mais significativos da instrução nos 20 _bits_ mais
 significativos do registrador de destino `rd`, preenchendo os 12 _bits_ menos 
 significativos com zero.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução LUI é do tipo U, tendo um opcode próprio, como ilustrado na Tabela LUI.
 
@@ -302,17 +302,17 @@ A instrução LUI é do tipo U, tendo um opcode próprio, como ilustrado na Tabe
 |  U   | imm[31:12] |  rd  | `0110111` |
 <p class="table_subtitle"><b>Tabela LUI</b> - Tabela com sintaxe da instrução LUI.</p>
 
-#### Formato
+##### Formato
 
 `lui rd, imm`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = imm[31:12] << 12`
 
 ---
 
-### `AUIPC` <Badge type="info" text="RV32I Base" />
+#### `AUIPC` <Badge type="info" text="RV32I Base" />
 
 Add Upper Immediate (Adiciona Superior Imediato).
 
@@ -320,7 +320,7 @@ Desloca o valor do imediato da instrução, que consiste nos 20 _bits_ mais sign
 12 _bits_ à esquerda, preenchendo os 12 _bits_ menos significativos com zero, e o adiciona 
 ao PC. O resultado é então escrito no registrador de destino `rd`. 
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução AUIPC é do tipo U, tendo um opcode próprio, como ilustrado na Tabela AUIPC.
 
@@ -329,19 +329,19 @@ A instrução AUIPC é do tipo U, tendo um opcode próprio, como ilustrado na Ta
 |  U   | imm[31:12] |  rd  | `0010111` |
 <p class="table_subtitle"><b>Tabela AUIPC</b> - Tabela com sintaxe da instrução AUIPC.</p>
 
-#### Formato
+##### Formato
 
 `auipc rd, imm`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = pc + sext(imm[31:12] << 12)`
 
 ---
 
-## Lógica Aritmética
+### Lógica Aritmética
 
-### `ADD` <Badge type="info" text="RV32I Base" />
+#### `ADD` <Badge type="info" text="RV32I Base" />
 
 Add (Adição).
 
@@ -349,7 +349,7 @@ Soma o valor armazenado no registrador `rs1` com o valor
 armazenado no registrador `rs2` e armazena o resultado 
 no registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução ADD é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela ADD.
 
@@ -358,17 +358,17 @@ A instrução ADD é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000000` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela ADD</b> - Tabela com sintaxe da instrução ADD.</p>
 
-#### Formato
+##### Formato
 
 `add rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] + x[rs2]`
 
 ---
 
-### `ADDI` <Badge type="info" text="RV32I Base" />
+#### `ADDI` <Badge type="info" text="RV32I Base" />
 
 Add Immediate (Adição Imediata).
 
@@ -376,7 +376,7 @@ Soma o valor armazenado no registrador `rs1` com o sinal estendido
 do imediato e armazena o resultado no registrador de destino `rd`. 
 Em caso de overflow, ele é ignorado.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução ADDI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela ADDI.
 
@@ -385,17 +385,17 @@ A instrução ADDI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 |  I   | imm[11:0] |  rs1  |  `000`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela ADDI</b> - Tabela com sintaxe da instrução ADDI.</p>
 
-#### Formato
+##### Formato
 
 `addi rd, rs1, immediate`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] + sext(immediate)`
 
 ---
 
-### `SUB` <Badge type="info" text="RV32I Base" />
+#### `SUB` <Badge type="info" text="RV32I Base" />
 
 Subtract (Subtração).
 
@@ -403,7 +403,7 @@ Subtrai o valor armazenado no registrador `rs2` do valor
 armazenado no registrador `rs1` e armazena o resultado no 
 registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SUB é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SUB.
 
@@ -412,17 +412,17 @@ A instrução SUB é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0100000` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela SUB</b> - Tabela com sintaxe da instrução SUB.</p>
 
-#### Formato
+##### Formato
 
 `sub rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] - x[rs2]`
 
 ---
 
-### `MUL` <Badge type="tip" text="“M” Standard Extension" />
+#### `MUL` <Badge type="tip" text="“M” Standard Extension" />
 
 Multiply (Multiplicação).
 
@@ -430,7 +430,7 @@ Multiplica o valor armazenado no registrador `rs1` pelo valor
 armazenado no registrador `rs2` e armazena o resultado no 
 registrador de destino `rd`. Em caso de overflow, ele é ignorado.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução MUL é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MUL.
 
@@ -439,17 +439,17 @@ A instrução MUL é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000001` |  rs2  |  rs1  |  `000`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela MUL</b> - Tabela com sintaxe da instrução MUL.</p>
 
-#### Formato
+##### Formato
 
 `mul rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] × x[rs2]`
 
 ---
 
-### `MULH` <Badge type="tip" text="“M” Standard Extension" />
+#### `MULH` <Badge type="tip" text="“M” Standard Extension" />
 
 Multiply High (Multiplicação Superior).
 
@@ -457,7 +457,7 @@ Multiplica o valor armazenado no registrador `rs1` pelo valor
 armazenado no registrador `rs2` considerando que são números 
 de complemento de dois e armazena a metade superior do produto no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução MULH é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MULH.
 
@@ -466,17 +466,17 @@ A instrução MULH é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 |  R   | `0000001` |  rs2  |  rs1  |  `001`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela MULH</b> - Tabela com sintaxe da instrução MULH.</p>
 
-#### Formato
+##### Formato
 
 `mulh rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = (x[rs1] × x[rs2]) >> XLEN`
 
 ---
 
-### `MULHSU` <Badge type="tip" text="“M” Standard Extension" />
+#### `MULHSU` <Badge type="tip" text="“M” Standard Extension" />
 
 Multiply High Signed and Unsigned (Multiplicação Superior com Sinal e Sem
 Sinal).
@@ -486,7 +486,7 @@ armazenado no registrador `rs2`, considerando que o valor em rs1 é
 de complemento de dois e que o valor em rs2 é um número sem sinal, armazenando a metade superior do 
 produto no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução MULHSU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MULHSU.
 
@@ -495,17 +495,17 @@ A instrução MULHSU é do tipo R, tendo uma funct3 e uma funct7 próprias, como
 |  R   | `0000001` |  rs2  |  rs1  |  `010`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela MULHSU</b> - Tabela com sintaxe da instrução MULHSU.</p>
 
-#### Formato
+##### Formato
 
 `mulhsu rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = (x[rs1] * x[rs2]) >> XLEN`
 
 ---
 
-### `MULHU` <Badge type="tip" text="“M” Standard Extension" />
+#### `MULHU` <Badge type="tip" text="“M” Standard Extension" />
 
 Multiply High Unsigned (Multiplicação Superior Sem Sinal).
 
@@ -513,7 +513,7 @@ Multiplica o valor armazenado no registrador `rs1` pelo valor
 armazenado no registrador `rs2`, considerando que ambos 
 são números sem sinal, e armazena a metade superior do produto no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução MULHU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela MULHU.
 
@@ -522,17 +522,17 @@ A instrução MULHU é do tipo R, tendo uma funct3 e uma funct7 próprias, como 
 |  R   | `0000001` |  rs2  |  rs1  |  `011`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela MULHU</b> - Tabela com sintaxe da instrução MULHU.</p>
 
-#### Formato
+##### Formato
 
 `mulhu rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = (x[rs1] × x[rs2]) >> XLEN`
 
 ---
 
-### `DIV` <Badge type="tip" text="“M” Standard Extension" />
+#### `DIV` <Badge type="tip" text="“M” Standard Extension" />
 
 Divide (Divisão).
 
@@ -542,7 +542,7 @@ que ambos são números de complemento de dois, arredondando para zero, e
 armazena o quociente no registrador de destino `rd`.
 
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução DIV é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela DIV.
 
@@ -551,17 +551,17 @@ A instrução DIV é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000001` |  rs2  |  rs1  |  `100`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela DIV</b> - Tabela com sintaxe da instrução DIV.</p>
 
-#### Formato
+##### Formato
 
 `div rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] ÷ x[rs2]`
 
 ---
 
-### `DIVU` <Badge type="tip" text="“M” Standard Extension" />
+#### `DIVU` <Badge type="tip" text="“M” Standard Extension" />
 
 Divide Unsigned (Divisão Sem Sinal).
 
@@ -570,7 +570,7 @@ pelo valor armazenado no registrador `rs2`,
 considerando que são números sem sinal, arredondando para zero, e 
 armazena o quociente no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução DIVU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela DIVU.
 
@@ -579,17 +579,17 @@ A instrução DIVU é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 |  R   | `0000001` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela DIVU</b> - Tabela com sintaxe da instrução DIVU.</p>
 
-#### Formato
+##### Formato
 
 `div rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] ÷ x[rs2]`
 
 ---
 
-### `REM` <Badge type="tip" text="“M” Standard Extension" />
+#### `REM` <Badge type="tip" text="“M” Standard Extension" />
 
 Remainder (Resto).
 
@@ -598,7 +598,7 @@ pelo valor armazenado no registrador `rs2`,
 considerando que são números de complemento de dois, arredondando para zero, 
 e armazena o resto no registrador de destino `rd`. 
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução REM é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela REM.
 
@@ -607,17 +607,17 @@ A instrução REM é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000001` |  rs2  |  rs1  |  `110`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela REM</b> - Tabela com sintaxe da instrução REM.</p>
 
-#### Formato
+##### Formato
 
 `rem rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] % x[rs2]`
 
 ---
 
-### `REMU` <Badge type="tip" text="“M” Standard Extension" />
+#### `REMU` <Badge type="tip" text="“M” Standard Extension" />
 
 Remainder Unsigned (Resto Sem Sinal).
 
@@ -625,7 +625,7 @@ Divide o valor armazenado no registrador `rs1` pelo valor
 armazenado no registrador `rs2`, considerando que são 
 números sem sinal, arredondando para zero, e armazena o resto no registrador de destino `rd`. 
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução REMU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela REMU.
 
@@ -634,26 +634,26 @@ A instrução REMU é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 |  R   | `0000001` |  rs2  |  rs1  |  `111`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela REMU</b> - Tabela com sintaxe da instrução REMU.</p>
 
-#### Formato
+##### Formato
 
 `rem rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] % x[rs2]`
 
 ---
 
-## Lógicas Booleana
+### Lógicas Booleana
 
-### `XOR` <Badge type="info" text="RV32I Base" />
+#### `XOR` <Badge type="info" text="RV32I Base" />
 
 Exclusive OR (OU Exclusivo).
 
 Realiza a operação lógica XOR,_bit_ a_bit_, entre os valores armazenados nos 
 registradores `rs1` e `rs2` e armazena o resultado no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução XOR é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela XOR.
 
@@ -662,24 +662,24 @@ A instrução XOR é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000000` |  rs2  |  rs1  |  `100`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela XOR</b> - Tabela com sintaxe da instrução XOR.</p>
 
-#### Formato
+##### Formato
 
 `xor rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] ˆ x[rs2]`
 
 ---
 
-### `XORI` <Badge type="info" text="RV32I Base" />
+#### `XORI` <Badge type="info" text="RV32I Base" />
 
 Exclusive OR Immediate (OU Exclusivo Imediato).
 
 Realiza a operação lógica XOR,_bit_ a_bit_, entre o valor armazenado no registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução XORI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela XORI.
 
@@ -688,24 +688,24 @@ A instrução XORI é do tipo I, tendo uma funct3 própria, como ilustrado na Ta
 |  I   | imm[11:0] |  rs1  |  `100`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela XORI</b> - Tabela com sintaxe da instrução XORI.</p>
 
-#### Formato
+##### Formato
 
 `xori rd, rs1, immediate`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] ˆ sext(immediate)`
 
 ---
 
-### `OR` <Badge type="info" text="RV32I Base" />
+#### `OR` <Badge type="info" text="RV32I Base" />
 
 OR (OU).
 
 Realiza a operação lógica OR,_bit_ a_bit_, entre os valores armazenados nos registradores `rs1` e `rs2` e
 armazena o resultado no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução OR é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela OR.
 
@@ -714,24 +714,24 @@ A instrução OR é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilu
 |  R   | `0000000` |  rs2  |  rs1  |  `110`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela OR</b> - Tabela com sintaxe da instrução OR.</p>
 
-#### Formato
+##### Formato
 
 `or rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] | x[rs2]`
 
 ---
 
-### `ORI` <Badge type="info" text="RV32I Base" />
+#### `ORI` <Badge type="info" text="RV32I Base" />
 
 OR Immediate (OU Imediato).
 
 Realiza a operação lógica OR,_bit_ a_bit_, entre o valor armazenado no registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução ORI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela ORI.
 
@@ -740,24 +740,24 @@ A instrução ORI é do tipo I, tendo uma funct3 própria, como ilustrado na Tab
 |  I   | imm[11:0] |  rs1  |  `110`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela ORI</b> - Tabela com sintaxe da instrução ORI.</p>
 
-#### Formato
+##### Formato
 
 `ori rd, rs1, immediate`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] | sext(immediate)`
 
 ---
 
-### `AND` <Badge type="info" text="RV32I Base" />
+#### `AND` <Badge type="info" text="RV32I Base" />
 
 AND (E).
 
 Realiza a operação lógica AND,_bit_ a_bit_, entre os valores armazenados nos registradores `rs1` e `rs2` e
 armazena o resultado no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução AND é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela AND.
 
@@ -766,24 +766,24 @@ A instrução AND é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000000` |  rs2  |  rs1  |  `111`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela AND</b> - Tabela com sintaxe da instrução AND.</p>
 
-#### Formato
+##### Formato
 
 `and rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] & x[rs2]`
 
 ---
 
-### `ANDI` <Badge type="info" text="RV32I Base" />
+#### `ANDI` <Badge type="info" text="RV32I Base" />
 
 AND Immediate (E Imediato).
 
 Realiza a operação lógica OR,_bit_ a_bit_, entre o valor armazenado no registrador `rs1` e o imediato
 com sinal estendido e armazena o resultado no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução ANDI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela ANDI.
 
@@ -792,19 +792,19 @@ A instrução ANDI é do tipo I, tendo uma funct3 própria, como ilustrado na Ta
 |  I   | imm[11:0] |  rs1  |  `111`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela ANDI</b> - Tabela com sintaxe da instrução ANDI.</p>
 
-#### Formato
+##### Formato
 
 `andi rd, rs1, immediate`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] & sext(immediate)`
 
 ---
 
-## Operação de Deslocamento
+### Operação de Deslocamento
 
-### `SLL` <Badge type="info" text="RV32I Base" />
+#### `SLL` <Badge type="info" text="RV32I Base" />
 
 Shift Left Logical (Deslocamento à Esquerda Lógico).
 
@@ -813,7 +813,7 @@ pelos 5 _bits_ menos significativos do valor armazenado no registrador `rs2`. Os
 remanescentes de `rs2` são ignorados. Os _bits_ vazios de `rs1` são preenchidos
 com zeros. O resultado é escrito no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SLL é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLL.
 
@@ -822,17 +822,17 @@ A instrução SLL é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000000` |  rs2  |  rs1  |  `001`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela SLL</b> - Tabela com sintaxe da instrução SLL.</p>
 
-#### Formato
+##### Formato
 
 `sll rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] << x[rs2]`
 
 ---
 
-### `SLLI` <Badge type="info" text="RV32I Base" />
+#### `SLLI` <Badge type="info" text="RV32I Base" />
 
 Shift Left Logical Immediate (Deslocamento à Esquerda Lógico Imediato).
 
@@ -842,7 +842,7 @@ escrito no registrador de destino `rd`. Caso se decida atualizar o processador p
 arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
 a ter 6 bits cada).
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SLLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLLI.
 
@@ -851,17 +851,17 @@ A instrução SLLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 |  I   | `0000000` | shamt |  rs1  |  `001`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela SLLI</b> - Tabela com sintaxe da instrução SLLI.</p>
 
-#### Formato
+##### Formato
 
 `slli rd, rs1, shamt`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] << shamt`
 
 ---
 
-### `SRL` <Badge type="info" text="RV32I Base" />
+#### `SRL` <Badge type="info" text="RV32I Base" />
 
 Shift Right Logical (Deslocamento à Direita Lógico).
 
@@ -870,7 +870,7 @@ pelos 5 _bits_ menos significativos do valor armazenado no registrador `rs2`. Os
 remanescentes de `rs2` são ignorados. Os _bits_ vazios de `rs1` são preenchidos
 com zeros. O resultado é escrito no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SRL é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRL.
 
@@ -879,17 +879,17 @@ A instrução SRL é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000000` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela SRL</b> - Tabela com sintaxe da instrução SRL.</p>
 
-#### Formato
+##### Formato
 
 `srl rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] >> x[rs2]`
 
 ---
 
-### `SRLI` <Badge type="info" text="RV32I Base" />
+#### `SRLI` <Badge type="info" text="RV32I Base" />
 
 Shift Right Logical Immediate (Deslocamento à Direita Lógico Imediato).
 
@@ -899,7 +899,7 @@ escrito no registrador de destino `rd`. Caso se decida atualizar o processador p
 arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
 a ter 6 bits cada).
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRLI.
 
@@ -908,17 +908,17 @@ A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 |  I   | `0000000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela SRLI</b> - Tabela com sintaxe da instrução SRLI.</p>
 
-#### Formato
+##### Formato
 
 `srli rd, rs1, shamt`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] >>shamt`
 
 ---
 
-### `SRA` <Badge type="info" text="RV32I Base" />
+#### `SRA` <Badge type="info" text="RV32I Base" />
 
 Shift Right Arithmetic (Deslocamento à Direita Aritmético).
 
@@ -928,7 +928,7 @@ remanescentes de `rs2` são ignorados. Os _bits_ vazios de `rs1` são preenchido
 com cópias do_bit_ mais significativo de `rs1`. O resultado é escrito no
 registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SRA é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRA.
 
@@ -937,17 +937,17 @@ A instrução SRA é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0100000` |  rs2  |  rs1  |  `101`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela SRA</b> - Tabela com sintaxe da instrução SRA.</p>
 
-#### Formato
+##### Formato
 
 `sra rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] >> x[rs2]`
 
 ---
 
-### `SRAI` <Badge type="info" text="RV32I Base" />
+#### `SRAI` <Badge type="info" text="RV32I Base" />
 
 Shift Right Arithmetic Immediate (Deslocamento à Direita Aritmético Imediato).
 
@@ -957,7 +957,7 @@ significativo de `rs1`. O resultado é escrito no registrador de destino `rd`. C
 processador para uma arquitetura de 64 bits, esta instrução terá sua sintaxe alterada (o shamt e o funct7 passam
 a ter 6 bits cada).
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SRLI.
 
@@ -966,19 +966,19 @@ A instrução SRLI é do tipo I, tendo uma funct3 e uma funct7 próprias, como i
 |  I   | `0100000` | shamt |  rs1  |  `101`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela SRAI</b> - Tabela com sintaxe da instrução SRAI.</p>
 
-#### Formato
+##### Formato
 
 `srai rd, rs1, shamt`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] >> shamt`
 
 ---
 
-## Comparação
+### Comparação
 
-### `SLT` <Badge type="info" text="RV32I Base" />
+#### `SLT` <Badge type="info" text="RV32I Base" />
 
 Set if Less Than (Definir se Menor que).
 
@@ -986,7 +986,7 @@ Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazen
 registrador `rs2`, considerandoque são complemento de dois, em caso positivo, armazena 
 1 no registrador de destino `rd`, caso contrário, armazena 0.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SLT é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLT.
 
@@ -995,17 +995,17 @@ A instrução SLT é do tipo R, tendo uma funct3 e uma funct7 próprias, como il
 |  R   | `0000000` |  rs2  |  rs1  |  `010`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela SLT</b> - Tabela com sintaxe da instrução SLT.</p>
 
-#### Formato
+##### Formato
 
 `slt rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] < x[rs2]`
 
 ---
 
-### `SLTI` <Badge type="info" text="RV32I Base" />
+#### `SLTI` <Badge type="info" text="RV32I Base" />
 
 Set if Less Than Immediate (Definir se Menor que Imediato).
 
@@ -1013,7 +1013,7 @@ Verifica se o valor armazenado no registrador `rs1` é menor que o imediato com 
 considerando que são complemento de dois, em caso positivo, armazena 1 no
 registrador de destino `rd`, caso contrário, armazena 0.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SLTI é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela SLTI.
 
@@ -1022,17 +1022,17 @@ A instrução SLTI é do tipo I, tendo uma funct3 própria, como ilustrado na Ta
 |  I   | imm[11:0] |  rs1  |  `010`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela SLTI</b> - Tabela com sintaxe da instrução SLTI.</p>
 
-#### Formato
+##### Formato
 
 `slti rd, rs1, immediate`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] < sext(immediate)`
 
 ---
 
-### `SLTIU` <Badge type="info" text="RV32I Base" />
+#### `SLTIU` <Badge type="info" text="RV32I Base" />
 
 Set if Less Than Immediate Unisgned(Definir se Menor que Imediato Sem Sinal).
 
@@ -1040,7 +1040,7 @@ Verifica se o valor armazenado no registrador `rs1` é menor que o imediato com 
 considerando que são sem sinal, em caso positivo, armazena 1 no registrador de destino
 `rd`, caso contrário, armazena 0.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SLTIU é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela SLTIU.
 
@@ -1049,17 +1049,17 @@ A instrução SLTIU é do tipo I, tendo uma funct3 própria, como ilustrado na T
 |  I   | imm[11:0] |  rs1  |  `011`  |  rd  | OP-IMM |
 <p class="table_subtitle"><b>Tabela SLTIU</b> - Tabela com sintaxe da instrução SLTIU.</p>
 
-#### Formato
+##### Formato
 
 `slti rd, rs1, immediate`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] < sext(immediate)`
 
 ---
 
-### `SLTU` <Badge type="info" text="RV32I Base" />
+#### `SLTU` <Badge type="info" text="RV32I Base" />
 
 Set if Less Than Unsigned(Definir se Menor que Sem Sinal).
 
@@ -1067,7 +1067,7 @@ Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazen
 registrador `rs2`, considerando que são valores sem sinal, em caso positivo, armazena 1 no 
 registrador de destino `rd`, caso contrário, armazena 0.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SLTU é do tipo R, tendo uma funct3 e uma funct7 próprias, como ilustrado na Tabela SLTU.
 
@@ -1076,19 +1076,19 @@ A instrução SLTU é do tipo R, tendo uma funct3 e uma funct7 próprias, como i
 |  R   | `0000000` |  rs2  |  rs1  |  `011`  |  rd  | OP  |
 <p class="table_subtitle"><b>Tabela SLTU</b> - Tabela com sintaxe da instrução SLTU.</p>
 
-#### Formato
+##### Formato
 
 `sltu rd, rs1, rs2`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = x[rs1] < x[rs2]`
 
 ---
 
-## Desvio Incondicional
+### Desvio Incondicional
 
-### `JAL` <Badge type="info" text="RV32I Base" />
+#### `JAL` <Badge type="info" text="RV32I Base" />
 
 Jump and Link (Salto e Link).
 
@@ -1096,7 +1096,7 @@ Escreve o endereço da próxima instrução (PC+4) no registrador de destino `rd
 PC para o valor atual somado ao offset com extensão de sinal. Se `rd` for
 omitido, o valor de retorno é armazenado em `x1`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução JAL é do tipo J, tendo um opcode próprio, como ilustrado na Tabela JAL.
 
@@ -1128,17 +1128,17 @@ A instrução JAL é do tipo J, tendo um opcode próprio, como ilustrado na Tabe
 </table>
 <p class="table_subtitle"><b>Tabela JAL</b> - Tabela com sintaxe da instrução JAL.</p>
 
-#### Formato
+##### Formato
 
 `jal rd, offset`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = pc+4; pc += sext(offset)`
 
 ---
 
-### `JALR` <Badge type="info" text="RV32I Base" />
+#### `JALR` <Badge type="info" text="RV32I Base" />
 
 Jump and Link Register (Salto e Link por Registrador).
 
@@ -1146,7 +1146,7 @@ Realiza um cópia do PC para `rs1 + sext(offset)`, mascara_bit_ menos
 significativo do endereço resultante e armazena o endereço anterior de PC+4 no
 registrador de destino `rd`. Se `rd` for omitido, o valor é armazenado em `x1`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução JALR é do tipo I, tendo uma funct3 e um opcode próprios, como ilustrado na Tabela JALR.
 
@@ -1155,26 +1155,26 @@ A instrução JALR é do tipo I, tendo uma funct3 e um opcode próprios, como il
 |  I   | offset[11:0] |  rs1  |  `000`  |  rd  | `1100111` |
 <p class="table_subtitle"><b>Tabela JALR</b> - Tabela com sintaxe da instrução JALR.</p>
 
-#### Formato
+##### Formato
 
 `jalr rd, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `t =pc+4; pc=(x[rs1]+sext(offset))&∼1; x[rd]=t`
 
 ---
 
-## Desvio Condicional
+### Desvio Condicional
 
-### `BEQ` <Badge type="info" text="RV32I Base" />
+#### `BEQ` <Badge type="info" text="RV32I Base" />
 
 Branch if Equal (Desvio se Igual)
 
 Verifica se o valor armazenado no registrador `rs1` é igual ao valor armazenado no registrador `rs2`, 
 em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução BEQ é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BEQ.
 
@@ -1218,24 +1218,24 @@ A instrução BEQ é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
 </table> 
 <p class="table_subtitle"><b>Tabela BEQ</b> - Tabela com sintaxe da instrução BEQ.</p>
 
-#### Formato
+##### Formato
 
 `beq rs1, rs2, offset`
 
-#### Implementação
+##### Implementação
 
 `if (rs1 == rs2) pc += sext(offset)`
 
 ---
 
-### `BNE` <Badge type="info" text="RV32I Base" />
+#### `BNE` <Badge type="info" text="RV32I Base" />
 
 Branch if Not Equal (Desvio se Não Igual)
 
 Verifica se o valor armazenado no registrador `rs1` é diferente do valor armazenado no registrador `rs2`, 
 em caso positivo, modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução BNE é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BNE.
 
@@ -1279,17 +1279,17 @@ A instrução BNE é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
 </table>
 <p class="table_subtitle"><b>Tabela BNE</b> - Tabela com sintaxe da instrução BNE.</p>
 
-#### Formato
+##### Formato
 
 `bnq rs1, rs2, offset`
 
-#### Implementação
+##### Implementação
 
 `if (rs1 != rs2) pc += sext(offset)`
 
 ---
 
-### `BLT` <Badge type="info" text="RV32I Base" />
+#### `BLT` <Badge type="info" text="RV32I Base" />
 
 Branch if Less Than (Desvio se Menor que)
 
@@ -1297,7 +1297,7 @@ Verifica se o valor armazenado no registrador `rs1` é menor que o valor armazen
 registrador `rs2`, considerando que são números em complemento de dois, em caso positivo, 
 modifica o PC para o valor atual somado ao offset com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução BLT é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BLT.
 
@@ -1341,17 +1341,17 @@ A instrução BLT é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
 </table>
 <p class="table_subtitle"><b>Tabela BLT</b> - Tabela com sintaxe da instrução BLT.</p>
 
-#### Formato
+##### Formato
 
 `blt rs1, rs2, offset`
 
-#### Implementação
+##### Implementação
 
 `if (rs1 < rs2) pc += sext(offset)`
 
 ---
 
-### `BGE` <Badge type="info" text="RV32I Base" />
+#### `BGE` <Badge type="info" text="RV32I Base" />
 
 Branch if Greater Than or Equal(Desvio se Maior ou Igual que)
 
@@ -1359,7 +1359,7 @@ Verifica se o valor armazenado no registrador `rs1` é maior ou igual ao valor a
 registrador `rs2`, considerando que são números em complemento de dois, em caso positivo, modifica
 o PC para o valor atual somado ao offset com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução BGE é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BGE.
 
@@ -1403,17 +1403,17 @@ A instrução BGE é do tipo B, tendo uma funct3 própria, como ilustrado na Tab
 </table>
 <p class="table_subtitle"><b>Tabela BGE</b> - Tabela com sintaxe da instrução BGE.</p>
 
-#### Formato
+##### Formato
 
 `bge rs1, rs2, offset`
 
-#### Implementação
+##### Implementação
 
 `if (rs1 >= rs2) pc += sext(offset)`
 
 ---
 
-### `BLTU` <Badge type="info" text="RV32I Base" />
+#### `BLTU` <Badge type="info" text="RV32I Base" />
 
 Branch if Less Than Unsigned(Desvio se Menor que Sem Sinal)
 
@@ -1421,7 +1421,7 @@ Verifica se o valor armazenado no registrador `rs1` é menor ao valor armazenado
 considerando que são números sem sinal, em caso positivo, modifica o PC para o valor atual
 somado ao offset com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução BLTU é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BLTU.
 
@@ -1465,17 +1465,17 @@ A instrução BLTU é do tipo B, tendo uma funct3 própria, como ilustrado na Ta
 </table>
 <p class="table_subtitle"><b>Tabela BLTU</b> - Tabela com sintaxe da instrução BLTU.</p>
 
-#### Formato
+##### Formato
 
 `bltu rs1, rs2, offset`
 
-#### Implementação
+##### Implementação
 
 `if (rs1 < rs2) pc += sext(offset)`
 
 ---
 
-### `BGEU` <Badge type="info" text="RV32I Base" />
+#### `BGEU` <Badge type="info" text="RV32I Base" />
 
 Branch if Greater or Equal Than Unsigned(Desvio se Maior ou Igual que Sem Sinal)
 
@@ -1483,7 +1483,7 @@ Verifica se o valor armazenado no registrador `rs1` é maior ou igual ao valor a
 considerando que são números sem sinal, em caso positivo, modifica o PC para o
 valor atual somado ao offset com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução BGEU é do tipo B, tendo uma funct3 própria, como ilustrado na Tabela BGEU.
 
@@ -1527,26 +1527,26 @@ A instrução BGEU é do tipo B, tendo uma funct3 própria, como ilustrado na Ta
 </table>
 <p class="table_subtitle"><b>Tabela BGEU</b> - Tabela com sintaxe da instrução BGEU.</p>
 
-#### Formato
+##### Formato
 
 `bgeu rs1, rs2, offset`
 
-#### Implementação
+##### Implementação
 
 `if (rs1 >= rs2) pc += sext(offset)`
 
 ---
 
-## Busca na Memória
+### Busca na Memória
 
-### `LB` <Badge type="info" text="RV32I Base" />
+#### `LB` <Badge type="info" text="RV32I Base" />
 
 Load Byte (Carrega Byte).
 
 Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor
 no registrador de destino `rd`, com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução LB é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LB.
 
@@ -1555,24 +1555,24 @@ A instrução LB é do tipo I, tendo uma funct3 própria, como ilustrado na Tabe
 |  I   | offset[11:0] |  rs1  |  `000`  |  rd  | LOAD |
 <p class="table_subtitle"><b>Tabela LB</b> - Tabela com sintaxe da instrução LB.</p>
 
-#### Formato
+##### Formato
 
 `lb rd, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = sext(M[x[rs1] + sext(offset)][7:0])`
 
 ---
 
-### `LH` <Badge type="info" text="RV32I Base" />
+#### `LH` <Badge type="info" text="RV32I Base" />
 
 Load Halfword (Carrega Halfword).
 
 Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o
 valor no registrador de destino `rd`, com extensão de sinal.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução LH é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LH.
 
@@ -1581,24 +1581,24 @@ A instrução LH é do tipo I, tendo uma funct3 própria, como ilustrado na Tabe
 |  I   | offset[11:0] |  rs1  |  `001`  |  rd  | LOAD |
 <p class="table_subtitle"><b>Tabela LH</b> - Tabela com sintaxe da instrução LH.</p>
 
-#### Formato
+##### Formato
 
 `lh rd, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = sext(M[x[rs1] + sext(offset)][15:0])`
 
 ---
 
-### `LBU` <Badge type="info" text="RV32I Base" />
+#### `LBU` <Badge type="info" text="RV32I Base" />
 
 Load Byte Unsigned(Carrega Byte Sem Sinal).
 
 Carrega um byte da memória no endereço `rs1 + sext(offset)` e armazena o valor
 no registrador de destino `rd`, com extensão de zero.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução LBU é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LBU.
 
@@ -1607,24 +1607,24 @@ A instrução LBU é do tipo I, tendo uma funct3 própria, como ilustrado na Tab
 |  I   | offset[11:0] |  rs1  |  `100`  |  rd  | LOAD |
 <p class="table_subtitle"><b>Tabela LBU</b> - Tabela com sintaxe da instrução LBU.</p>
 
-#### Formato
+##### Formato
 
 `lbu rd, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = M[x[rs1] + sext(offset)][7:0]`
 
 ---
 
-### `LHU` <Badge type="info" text="RV32I Base" />
+#### `LHU` <Badge type="info" text="RV32I Base" />
 
 Load Halfword Unsigned(Carrega Halfword Sem Sinal).
 
 Carrega dois bytes da memória no endereço `rs1 + sext(offset)` e armazena o
 valor no registrador de destino `rd`, com extensão de zero.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução LHU é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LHU.
 
@@ -1633,24 +1633,24 @@ A instrução LHU é do tipo I, tendo uma funct3 própria, como ilustrado na Tab
 |  I   | offset[11:0] |  rs1  |  `101`  |  rd  | LOAD |
 <p class="table_subtitle"><b>Tabela LHU</b> - Tabela com sintaxe da instrução LHU.</p>
 
-#### Formato
+##### Formato
 
 `lhu rd, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = M[x[rs1] + sext(offset)][15:0]`
 
 ---
 
-### `LW` <Badge type="info" text="RV32I Base" />
+#### `LW` <Badge type="info" text="RV32I Base" />
 
 Load Word (Carrega Word).
 
 Carrega quatro bytes da memória no endereço `rs1 + sext(offset)` e armazena o
 valor no registrador de destino `rd`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução LW é do tipo I, tendo uma funct3 própria, como ilustrado na Tabela LW.
 
@@ -1659,26 +1659,26 @@ A instrução LW é do tipo I, tendo uma funct3 própria, como ilustrado na Tabe
 |  I   | offset[11:0] |  rs1  |  `010`  |  rd  | LOAD |
 <p class="table_subtitle"><b>Tabela LW</b> - Tabela com sintaxe da instrução LW.</p>
 
-#### Formato
+##### Formato
 
 `lw rd, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `x[rd] = sext(M[x[rs1] + sext(offset)][31:0])`
 
 ---
 
-## Escrita na Memória
+### Escrita na Memória
 
-### `SB` <Badge type="info" text="RV32I Base" />
+#### `SB` <Badge type="info" text="RV32I Base" />
 
 Store Byte (Armazena Byte).
 
 Armazena o byte menos significativo do valor armazenado no registrador `rs2` na memória no endereço
 `rs1 + sext(offset)`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SB é do tipo S, tendo uma funct3 própria, como ilustrado na Tabela SB.
 
@@ -1687,24 +1687,24 @@ A instrução SB é do tipo S, tendo uma funct3 própria, como ilustrado na Tabe
 |  S   | offset[11:5] |  rs2  |  rs1  |  `000`  | offset[4:0] | STORE |
 <p class="table_subtitle"><b>Tabela SB</b> - Tabela com sintaxe da instrução SB.</p>
 
-#### Formato
+##### Formato
 
 `sb rs2, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `M[x[rs1] + sext(offset)] = x[rs2][7:0]`
 
 ---
 
-### `SH` <Badge type="info" text="RV32I Base" />
+#### `SH` <Badge type="info" text="RV32I Base" />
 
 Store Halfword (Armazena Halfword).
 
 Armazena os dois bytes menos significativo do valor armazenado no registrador `rs2` na memória no
 endereço `rs1 + sext(offset)`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SH é do tipo S, tendo uma funct3 própria, como ilustrado na Tabela SH.
 
@@ -1713,24 +1713,24 @@ A instrução SH é do tipo S, tendo uma funct3 própria, como ilustrado na Tabe
 |  S   | offset[11:5] |  rs2  |  rs1  |  `001`  | offset[4:0] | STORE |
 <p class="table_subtitle"><b>Tabela SH</b> - Tabela com sintaxe da instrução SH.</p>
 
-#### Formato
+##### Formato
 
 `sh rs2, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `M[x[rs1] + sext(offset)] = x[rs2][15:0]`
 
 ---
 
-### `SW` <Badge type="info" text="RV32I Base" />
+#### `SW` <Badge type="info" text="RV32I Base" />
 
 Store Word (Armazena Word).
 
 Armazena os quatro bytes menos significativo do valor armazenado no registrador `rs2` na memória no
 endereço `rs1 + sext(offset)`.
 
-#### Sintaxe
+##### Sintaxe
 
 A instrução SW é do tipo S, tendo uma funct3 própria, como ilustrado na Tabela SW.
 
@@ -1739,10 +1739,10 @@ A instrução SW é do tipo S, tendo uma funct3 própria, como ilustrado na Tabe
 |  S   | offset[11:5] |  rs2  |  rs1  |  `010`  | offset[4:0] | STORE |
 <p class="table_subtitle"><b>Tabela SW</b> - Tabela com sintaxe da instrução SW.</p>
 
-#### Formato
+##### Formato
 
 `sw rs2, offset(rs1)`
 
-#### Implementação
+##### Implementação
 
 `M[x[rs1] + sext(offset)] = x[rs2][31:0]`

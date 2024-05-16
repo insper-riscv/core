@@ -129,27 +129,26 @@ IMT {style="text-align: center;"}
 
 ## Sumário {style="text-align: center;"}
 
-RESUMO	5
-ABSTRACT	6
-1. Introdução	7
-1.1 Escopo do projeto	7
-1.2 Recursos	10
-1.3 Cronograma	11
-1.4 Mapeamento dos stakeholders	12
-1.5 Questões Éticas e Profissionais	12
-1.6 Normas Técnicas	13
-1.7 Revisão do Estado da Arte	13
-2. Metodologia	16
-2.1 Coleta de dados sobre o projeto	19
-2.2 Análise dos Dados Coletados	19
-3. Resultados	21
-3.1 Nível dos Componentes Genéricos
-3.2 Nível dos Componentes RV32I
-3.3 Nível dos Módulos
-3.4 Nível dos Componentes da CPU
-4. Conclusão	35
-Referências	36
-Anexo A - Instruções da Arquitetura	40
+- RESUMO	5
+- ABSTRACT	6
+- 1. Introdução	7
+- 1.1 Escopo do projeto	7
+- 1.2 Recursos	9
+- 1.5 Mapeamento dos stakeholders	12
+- 1.6 Questões Éticas e Profissionais	12
+- 1.7 Normas Técnicas	13
+- 1.8 Revisão do Estado da Arte	13
+- 2. Metodologia	16
+- 2.1 Coleta de dados sobre o projeto	19
+- 2.2 Análise dos Dados Coletados	19
+- 3. Resultados	21
+- 3.1 Nível dos Componentes Genéricos
+- 3.2 Nível dos Componentes RV32I
+- 3.3 Nível dos Módulos
+- 3.4 Nível dos Componentes da CPU
+- 4. Conclusão	35
+- Referências	36
+- Anexo A - Instruções da Arquitetura	40
 
 <!--@include: @/report/.resumo.md-->
 <!--@include: @/report/.abstract.md-->
@@ -161,7 +160,6 @@ Anexo A - Instruções da Arquitetura	40
 <!--@include: @/report/.resultados.md-->
 <!--@include: @/report/.conclusao.md-->
 <!--@include: @/report/.referencias.md-->
+<!--@include: @/report/attachment-a/index.md-->
 
 </section>
-
-<!--@include: @/report/attachment-a/index.md-->
