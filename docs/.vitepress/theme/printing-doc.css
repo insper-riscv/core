@@ -68,7 +68,13 @@
     figure {
         counter-increment: figures;
         margin: 16px 0;
+        text-align: center;
         break-inside: avoid-page;
+
+        > img {
+            min-width: 50%;
+            margin: 0 auto;
+        }
 
         > figcaption:before {
             content: "Figura " counter(figures) " - ";
