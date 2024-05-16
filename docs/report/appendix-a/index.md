@@ -6,7 +6,7 @@ pageClass: printing-doc
 editLink: false
 ---
 
-# Apêndice A<br>Pacote WORK.CPU {style="font-size: 2em;"}
+## Apêndice A<br>Pacote WORK.CPU {style="font-size: 2em;"}
 
 ---
 
@@ -17,7 +17,7 @@ todos os pontos de controle e de dados de todo o fluxo de execução da
 arquitetura. Além disso, também são especificados valores que caracterizem o
 comportamento ocioso da arquitetura.
 
-## Controles do estágio Busca Instrução <Badge text="WORK.CPU.t_CONTROL_IF"/>
+### Controles do estágio Busca Instrução <Badge text="WORK.CPU.t_CONTROL_IF"/>
 
 Este é o registro dos pontos de controle do estágio Busca Instrução. A partir do
 qual é possível controlar os seguintes aspectos, respecitvamente:
@@ -38,7 +38,7 @@ constant NULL_CONTROL_IF : t_CONTROL_IF := (
 );
 ```
 
-## Controles do estágio Decodifica Instrução <Badge text="WORK.CPU.t_CONTROL_ID"/>
+### Controles do estágio Decodifica Instrução <Badge text="WORK.CPU.t_CONTROL_ID"/>
 
 Este é o registro dos pontos de controle do estágio Decodifica Instrução. A
 partir do qual é possível controlar os seguintes aspectos, respecitvamente:
@@ -63,7 +63,7 @@ constant NULL_CONTROL_ID : t_CONTROL_ID := (
 );
 ```
 
-## Controles do estágio Executa <Badge text="WORK.CPU.t_CONTROL_EX"/>
+### Controles do estágio Executa <Badge text="WORK.CPU.t_CONTROL_EX"/>
 
 Este é o registro dos pontos de controle do estágio Executa. A partir do qual é
 possível controlar os seguintes aspectos, respecitvamente:
@@ -87,7 +87,7 @@ constant NULL_CONTROL_EX : t_CONTROL_EX := (
 );
 ```
 
-## Controles do estágio Acessa a Memória <Badge text="WORK.CPU.t_CONTROL_MEM"/>
+### Controles do estágio Acessa a Memória <Badge text="WORK.CPU.t_CONTROL_MEM"/>
 
 Este é o registro dos pontos de controle do estágio Acessa a Memória. A partir
 do qual é possível controlar os seguintes aspectos, respecitvamente:
@@ -109,7 +109,7 @@ constant NULL_CONTROL_MEM : t_CONTROL_MEM := (
 );
 ```
 
-## Controles do estágio Escrite de Retorno <Badge text="WORK.CPU.t_CONTROL_WB"/>
+### Controles do estágio Escrite de Retorno <Badge text="WORK.CPU.t_CONTROL_WB"/>
 
 Este é o registro dos pontos de controle do estágio Escrite de Retorno. A partir
 do qual é possível controlar os seguintes aspectos, respecitvamente:
@@ -131,7 +131,7 @@ constant NULL_CONTROL_WB : t_CONTROL_WB := (
 );
 ```
 
-## Sinais do registrador de pipeline IF/ID <Badge text="WORK.CPU.t_SIGNALS_IF_ID"/>
+### Sinais do registrador de pipeline IF/ID <Badge text="WORK.CPU.t_SIGNALS_IF_ID"/>
 
 Este é o registro dos sinais do estágio Decodifica instrução, que recebe os
 sinais do Busca Instrução e os registra no pipeline. A partir do seguinte
@@ -152,7 +152,7 @@ constant NULL_SIGNALS_IF_ID : t_SIGNALS_IF_ID := (
 );
 ```
 
-## Sinais do registrador de pipeline ID/EX <Badge text="WORK.CPU.t_SIGNALS_ID_EX"/>
+### Sinais do registrador de pipeline ID/EX <Badge text="WORK.CPU.t_SIGNALS_ID_EX"/>
 
 Este é o registro dos sinais do estágio Executa, que recebe os sinais do
 Decodifica instrução e os registra no pipeline. A partir do seguinte registro é
@@ -206,7 +206,7 @@ constant NULL_SIGNALS_ID_EX : t_SIGNALS_ID_EX := (
 );
 ```
 
-## Sinais do registrador de pipeline EX/MEM <Badge text="WORK.CPU.t_SIGNALS_EX_MEM"/>
+### Sinais do registrador de pipeline EX/MEM <Badge text="WORK.CPU.t_SIGNALS_EX_MEM"/>
 
 Este é o registro dos sinais do estágio Acesso a Memória, que recebe os sinais
 do Executa e os registra no pipeline. A partir do seguinte registro é possível
@@ -239,7 +239,7 @@ constant NULL_SIGNALS_EX_MEM : t_SIGNALS_EX_MEM := (
 );
 ```
 
-## Sinais do registrador de pipeline MEM/WB <Badge text="WORK.CPU.t_SIGNALS_MEM_WB"/>
+### Sinais do registrador de pipeline MEM/WB <Badge text="WORK.CPU.t_SIGNALS_MEM_WB"/>
 
 Este é o registro dos sinais do estágio Escrita de Retorno, que recebe os sinais
 do Acesso a Memória e os registra no pipeline. A partir do seguinte registro é
@@ -266,7 +266,7 @@ constant NULL_SIGNALS_MEM_WB : t_SIGNALS_MEM_WB := (
 );
 ```
 
-## Sinais de forward de desvio <Badge text="WORK.CPU.t_SIGNALS_MEM_WB"/>
+### Sinais de forward de desvio <Badge text="WORK.CPU.t_SIGNALS_MEM_WB"/>
 
 Este é o registro dos controles e sinais de forwarding do comparador de desvio
 no estágio Decodifica Instrução. A partir do seguinte registro é possível
@@ -288,7 +288,7 @@ type t_FORWARD_BRANCH is record
 end record;
 ```
 
-## Sinais do forward de execução <Badge text="WORK.CPU.t_SIGNALS_MEM_WB"/>
+### Sinais do forward de execução <Badge text="WORK.CPU.t_SIGNALS_MEM_WB"/>
 
 Este é o registro dos controles e sinais de forwarding da unidade lógica e aritmética
 no estágio Executa. A partir do seguinte registro é possível
