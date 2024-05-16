@@ -14,8 +14,8 @@ class CPU_EXECUTION_FORWARDING_UNIT(lib.Entity):
     stage_mem_select_destination = lib.Entity.Input_pin
     stage_wb_enable_destination  = lib.Entity.Input_pin
     stage_wb_select_destination  = lib.Entity.Input_pin
-    stage_id_select_source_1     = lib.Entity.Output_pin
-    stage_id_select_source_2     = lib.Entity.Output_pin
+    select_source_1              = lib.Entity.Output_pin
+    select_source_2              = lib.Entity.Output_pin
 
 
 @pytest.mark.synthesis

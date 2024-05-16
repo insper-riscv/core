@@ -5,6 +5,7 @@ from cocotb.binary import BinaryValue
 import lib
 from test_RV32I_package import RV32I
 from test_GENERIC_MUX_32X1 import GENERIC_MUX_32X1
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class RV32I_REGISTER_FILE(lib.Entity):
@@ -21,6 +22,8 @@ class RV32I_REGISTER_FILE(lib.Entity):
 
     mux_decode_source_1 = GENERIC_MUX_32X1
     mux_decode_source_2 = GENERIC_MUX_32X1
+    mux_source_1 = GENERIC_MUX_2X1
+    mux_source_2 = GENERIC_MUX_2X1
 
 @RV32I_REGISTER_FILE.testcase
 async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Waveform):

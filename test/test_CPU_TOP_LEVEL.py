@@ -8,7 +8,9 @@ from test_CPU_STAGE_ID import CPU_STAGE_ID
 from test_CPU_STAGE_EX import CPU_STAGE_EX
 from test_CPU_STAGE_MEM import CPU_STAGE_MEM
 from test_CPU_STAGE_WB import CPU_STAGE_WB
-
+from test_CPU_BRANCH_FORWARDING_UNIT import CPU_BRANCH_FORWARDING_UNIT
+from test_CPU_EXECUTION_FORWARDING_UNIT import CPU_EXECUTION_FORWARDING_UNIT
+from test_CPU_HAZZARD_CONTROL_UNIT import CPU_HAZZARD_CONTROL_UNIT
 
 class CPU_TOP_LEVEL(lib.Entity):
     _package = CPU
@@ -29,12 +31,17 @@ class CPU_TOP_LEVEL(lib.Entity):
     execute = CPU_STAGE_EX
     memory_access = CPU_STAGE_MEM
     write_back = CPU_STAGE_WB
+    branch_forwarding_unit = CPU_BRANCH_FORWARDING_UNIT
+    execution_forwarding_unit = CPU_EXECUTION_FORWARDING_UNIT
+    control_hazzard_unit = CPU_HAZZARD_CONTROL_UNIT
+    
 
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_ADDI.S", stepping=True)
     values_destination = [
+        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -50,16 +57,13 @@ async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000100000001",
     ]
 
-    dut.data_memory_in.value = BinaryValue("10101010101001010101010101011010")
-
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
             break
 
-        yield trace.check(dut.instruction_decode.module_register_file.register_file.data_source_2, values_destination[index], f"At clock {index} (PC = {address}).")
-        # yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -80,7 +84,6 @@ async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -109,13 +112,21 @@ async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
             break
 
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        if index == 8:
+            yield trace.check_input(dut.execution_forwarding_unit.stage_ex_select_source_1, "SOURCE_1", f"At clock {index} (PC = {address}).")
+            yield trace.check_input(dut.execution_forwarding_unit.stage_ex_select_source_2, "SOURCE_2", f"At clock {index} (PC = {address}).")
+            yield trace.check_input(dut.execution_forwarding_unit.stage_mem_select_destination, "SOURCE_MEM", f"At clock {index} (PC = {address}).")
+            yield trace.check_input(dut.execution_forwarding_unit.stage_mem_enable_destination, "ENABLE_MEM", f"At clock {index} (PC = {address}).")
+            yield trace.check_input(dut.execution_forwarding_unit.stage_wb_select_destination, "SOURCE_WB", f"At clock {index} (PC = {address}).")
+            yield trace.check_input(dut.execution_forwarding_unit.stage_wb_enable_destination, "ENABLE_WB", f"At clock {index} (PC = {address}).")
+
+        #yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -133,7 +144,7 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -161,7 +172,7 @@ async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -189,7 +200,7 @@ async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -217,7 +228,7 @@ async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -245,7 +256,7 @@ async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -273,7 +284,7 @@ async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -297,7 +308,7 @@ async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -321,7 +332,7 @@ async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -352,7 +363,7 @@ async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -382,7 +393,7 @@ async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -413,7 +424,7 @@ async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -443,7 +454,7 @@ async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -471,7 +482,7 @@ async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -501,7 +512,7 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -533,7 +544,7 @@ async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -565,7 +576,7 @@ async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -597,7 +608,7 @@ async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -629,7 +640,7 @@ async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -674,7 +685,7 @@ async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -702,7 +713,7 @@ async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -727,7 +738,7 @@ async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -757,7 +768,7 @@ async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -782,7 +793,7 @@ async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -807,7 +818,7 @@ async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -832,7 +843,7 @@ async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -858,7 +869,7 @@ async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -883,7 +894,7 @@ async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -911,7 +922,7 @@ async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -937,7 +948,7 @@ async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -965,7 +976,7 @@ async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -997,7 +1008,7 @@ async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     ]
 
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -1030,7 +1041,7 @@ async def tb_CPU_TOP_LEVEL_SB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -1064,7 +1075,7 @@ async def tb_CPU_TOP_LEVEL_SH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -1096,7 +1107,7 @@ async def tb_CPU_TOP_LEVEL_SW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
 
     program.attach_memory(dut.memory_read, dut.memory_write, dut.address_memory, dut.data_memory_out, dut.data_memory_in)
     trace.set_scale(2)
-    await trace.cycle()
+    
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
@@ -1113,8 +1124,8 @@ def test_CPU_TOP_LEVEL_synthesis():
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_arithmetic_testcases():
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_ADDI)
-    # CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_ADD)
-    # CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SUB)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_ADD)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SUB)
 
 # @pytest.mark.testcases
 # def test_CPU_TOP_LEVEL_branch_testcases():

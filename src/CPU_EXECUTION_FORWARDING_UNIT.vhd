@@ -39,9 +39,9 @@ begin
     mem_not_zero <= reduce_or(stage_mem_select_destination);
     wb_not_zero  <= reduce_or(stage_wb_select_destination);
 
-    select_source_1(0) <= stage_mem_enable_destination AND mem_source_1 AND mem_not_zero;
-    select_source_1(1) <= stage_wb_enable_destination  AND wb_source_1  AND wb_not_zero;
-    select_source_2(0) <= stage_mem_enable_destination AND mem_source_2 AND mem_not_zero;
-    select_source_2(1) <= stage_wb_enable_destination  AND wb_source_2  AND wb_not_zero;
+    select_source_1(1) <= (stage_mem_enable_destination AND mem_source_1 AND mem_not_zero);
+    select_source_1(0) <= (stage_wb_enable_destination  AND wb_source_1  AND wb_not_zero) AND NOT select_source_1(1);
+    select_source_2(1) <= (stage_mem_enable_destination AND mem_source_2 AND mem_not_zero);
+    select_source_2(0) <= (stage_wb_enable_destination  AND wb_source_2  AND wb_not_zero) AND NOT select_source_2(1);
 
 end architecture;

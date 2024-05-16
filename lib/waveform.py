@@ -82,6 +82,22 @@ class Waveform:
             break
 
         return result
+    
+    def check_input(self, pin: T.Type["Entity.Input_pin"], value: str, message: str = ""):
+        result = check.equal(pin.value.binstr, value, f"At pin \"{pin._name}\". {message}") # type: ignore
+
+        for signal in self._trace._signals:
+            if pin._name not in signal._samples: # type: ignore
+                continue
+
+            signal._samples[pin._name][-1] = "7" if result else "9" # type: ignore
+
+            if len(value) < 2:
+                signal._data[pin._name].append(pin.value) # type: ignore
+
+            break
+
+        return result
 
     def write(self, filename: str):
         source = self._trace.dumpj()
