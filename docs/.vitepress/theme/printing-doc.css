@@ -1,4 +1,9 @@
-.printing-doc {
+.printing-doc main {
+    counter-reset: figures;
+
+    * {
+        font-size: 12pt;
+    }
 
     code {
         white-space : pre-wrap !important;
@@ -8,8 +13,6 @@
     p,
     li {
         text-align: justify;
-        font-size: 12pt;
-        font-family: "Times New Roman";
         line-height: 20pt;
     }
 
@@ -20,8 +23,6 @@
 
     hr {
         margin: 32px 0;
-        font-size: 12pt;
-        font-family: "Times New Roman";
         line-height: 20pt;
     }
 
@@ -31,8 +32,6 @@
     h4,
     h5,
     h6 {
-        font-size: 12pt;
-        font-family: "Times New Roman";
         line-height: 20pt;
     }
 
@@ -54,14 +53,10 @@
     }
 
     th, tr, td {
-        font-size: 12pt;
-        font-family: "Times New Roman";
         line-height: 20pt;
     }
 
     pre {
-        font-size: 12pt;
-        font-family: "Times New Roman";
         line-height: 20pt;
     }
 
@@ -71,9 +66,48 @@
     }
 
     figure {
+        counter-increment: figures;
         margin: 16px 0;
+        break-inside: avoid-page;
+
+        > figcaption:before {
+            content: "Figura " counter(figures) " - ";
+            font-weight: bold;
+        }
     }
 
+    @media print {
+        * {
+            font-size: 12pt;
+            font-family: "Times New Roman";
+        }
+
+        a {
+            color: currentcolor;
+            font: inherit;
+            text-decoration: none;
+        }
+
+        h2 {
+            padding-top: 0;
+            border-top: none;
+        }
+
+        p {
+            line-height: 20pt;
+        }
+
+        hr.break-page {
+            opacity: 0;
+        }
+
+        .printing-doc--columns-section {
+            columns: 1;
+        }
+    }
+}
+
+.printing-doc {
     .table-of-contents {
         ul {
             list-style: none;
@@ -91,32 +125,6 @@
     }
 
     @media print {
-        font-size: 12pt;
-        font-family: "Times New Roman";
-
-        a {
-            color: currentcolor;
-            font: inherit;
-            text-decoration: none;
-        }
-
-        h2 {
-            /* padding-top: 0; */
-            border-top: none;
-        }
-
-        p {
-            line-height: 20pt;
-        }
-
-        hr.break-page {
-            opacity: 0;
-        }
-
-        .printing-doc--columns-section {
-            columns: 1;
-        }
-
         .VPNav,
         .VPLocalNav,
         .VPFooter,

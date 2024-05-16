@@ -117,14 +117,20 @@ Projeto Final de Engenharia apresentado ao programa Graduação em Engenharia (C
 <br/>
 
 **Banca Examinadora** {style="text-align: center;"}
-*** 
-Rafael Corsi Ferrão <br/><br/>
+
+--- {style="width: 65%; margin: 4em auto 0 auto;"}
+
+**Rafael Corsi Ferrão**  
 Insper {style="text-align: center;"}
-*** 
-Paulo Carlos Ferreira dos Santos <br/><br/>
+
+--- {style="width: 65%; margin: 4em auto 0 auto;"}
+
+**Paulo Carlos Ferreira dos Santos**  
 Insper {style="text-align: center;"}
-*** 
-Rodrigo de Marca França <br/><br/>
+
+--- {style="width: 65%; margin: 4em auto 0 auto;"}
+
+**Rodrigo de Marca França**  
 IMT {style="text-align: center;"}
 
 ## Sumário {style="text-align: center;"}
