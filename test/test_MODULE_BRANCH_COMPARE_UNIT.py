@@ -19,7 +19,7 @@ class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
     forward_selector_2 = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
 
-    compare = RV32I_BRANCH_CONTROLLER
+    controller = RV32I_BRANCH_CONTROLLER
     comparator = GENERIC_COMPARATOR
     mux_branch_1 = GENERIC_MUX_2X1
     mux_branch_2 = GENERIC_MUX_2X1

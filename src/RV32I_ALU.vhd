@@ -39,8 +39,10 @@ architecture RTL of RV32I_ALU is
 
 begin
 
-    flag_subtract <=    WORK.GENERICS.is_equal(select_function(3 downto 2), "10") AND
-                        NOT(WORK.GENERICS.is_equal(select_function(1 downto 0), "01"));
+    flag_subtract <=    WORK.GENERICS.reduce_and(select_function(3 downto 2) XNOR "10") AND
+                        NOT(WORK.GENERICS.reduce_and(select_function(1 downto 0) XNOR "01"));
+                        --WORK.GENERICS.is_equal(select_function(3 downto 2), "10") AND
+                        --NOT(WORK.GENERICS.is_equal(select_function(1 downto 0), "01"));
 
     source_and <= source_1 AND source_2_auxiliar;
     source_or  <= source_1 OR  source_2;

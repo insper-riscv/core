@@ -39,29 +39,25 @@ begin
 
     destination <= enable AND flag_branch;
 
-    MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_2X1
         generic map (
             DATA_WIDTH => WORK.RV32I.XLEN
         )
         port map (
             selector    => forward.select_source_1,
             source_1    => source_1,
-            source_2    => forward.source_ex,
-            source_3    => forward.source_mem,
-            source_4    => forward.source_wb,
+            source_2    => forward.source_mem,
             destination => forward_source_1
         );
 
-    MUX_FORWARD_SOURCE_2 : entity WORK.GENERIC_MUX_4X1
+    MUX_FORWARD_SOURCE_2 : entity WORK.GENERIC_MUX_2X1
         generic map (
             DATA_WIDTH => WORK.RV32I.XLEN
         )
         port map (
             selector    => forward.select_source_2,
             source_1    => source_2,
-            source_2    => forward.source_ex,
-            source_3    => forward.source_mem,
-            source_4    => forward.source_wb,
+            source_2    => forward.source_mem,
             destination => forward_source_2
         );
 

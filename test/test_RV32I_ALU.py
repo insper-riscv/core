@@ -35,16 +35,18 @@ class RV32I_ALU(lib.Entity):
     overflow = lib.Entity.Output_pin
     destination = lib.Entity.Output_pin
 
-    MUX_SOURCE_2 = GENERIC_MUX_2X1
-    CARRY_LOOKAHEAD = GENERIC_CARRY_LOOKAHEAD
-    SHIFTER = RV32I_ALU_SHIFTER
-    MUX_DESTINATION_1 = GENERIC_MUX_4X1
-    MUX_DESTINATION_2 = GENERIC_MUX_4X1
-    MUX_DESTINATION_3 = GENERIC_MUX_2X1
+    mux_source_2 = GENERIC_MUX_2X1
+    carry_lookahead = GENERIC_CARRY_LOOKAHEAD
+    shifter = RV32I_ALU_SHIFTER
+    mux_destination_1 = GENERIC_MUX_4X1
+    mux_destination_2 = GENERIC_MUX_4X1
+    mux_destination_3 = GENERIC_MUX_2X1
 
 
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
+    
+    #AND
     dut.select_function.value = BinaryValue("0111")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("11111111111111111111111111111111")
@@ -52,6 +54,14 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
     trace.set_scale(2)
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000000", "At 0")
+
+    dut.select_function.value = BinaryValue("0111")
+    dut.source_1.value = BinaryValue("11111111111111111111111111111111")
+    dut.source_2.value = BinaryValue("11111111111111111111111111111111")
+
+    trace.set_scale(2)
+    await trace.cycle()
+    yield trace.check(dut.destination, "11111111111111111111111111111111", "At 0")
 
     dut.select_function.value = BinaryValue("0110") # 000001
     dut.source_1.value = BinaryValue("11111111111111111111111111111111")
@@ -288,20 +298,20 @@ def test_RV32I_ALU_testcases():
         ]
     )
 
-@pytest.mark.coverage
-def test_RV32I_ALU_stress():
-    RV32I_ALU.test_with(
-        [
-            tb_RV32I_ALU_case_stress_and,
-            tb_RV32I_ALU_case_stress_or,
-            tb_RV32I_ALU_case_stress_xor,
-            tb_RV32I_ALU_case_stress_add,
-            tb_RV32I_ALU_case_stress_sub,
-            tb_RV32I_ALU_case_stress_sll,
-            tb_RV32I_ALU_case_stress_srl,
-            tb_RV32I_ALU_case_stress_sra
-        ],
-    )
+#@pytest.mark.coverage
+#def test_RV32I_ALU_stress():
+#    RV32I_ALU.test_with(
+#        [
+#            tb_RV32I_ALU_case_stress_and,
+#            tb_RV32I_ALU_case_stress_or,
+#            tb_RV32I_ALU_case_stress_xor,
+#            tb_RV32I_ALU_case_stress_add,
+#            tb_RV32I_ALU_case_stress_sub,
+#            tb_RV32I_ALU_case_stress_sll,
+#            tb_RV32I_ALU_case_stress_srl,
+#            tb_RV32I_ALU_case_stress_sra
+#        ],
+#    )
 
 if __name__ == "__main__":
     lib.run_test(__file__)

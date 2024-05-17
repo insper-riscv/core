@@ -49,9 +49,7 @@ begin
     memory_read  <= stage_mem_control_memory.enable_read;
     memory_write <= stage_mem_control_memory.enable_write;
 
-    stage_id_forward_branch.source_ex  <= signals_ex_mem.data_destination;
     stage_id_forward_branch.source_mem <= signals_mem_wb.data_destination;
-    stage_id_forward_branch.source_wb  <= stage_wb_data_destination;
 
     stage_ex_forward_execution.source_mem <= signals_mem_wb.data_destination;
     stage_ex_forward_execution.source_wb  <= stage_wb_data_destination;
@@ -119,14 +117,10 @@ begin
 
     BRANCH_FORWARDING_UNIT : entity WORK.CPU_BRANCH_FORWARDING_UNIT
         port map (
-            stage_id_select_source_1     => stage_ex_select_source_1,
-            stage_id_select_source_2     => stage_ex_select_source_2,
-            stage_ex_enable_destination  => signals_ex_mem.control_wb.enable_destination,
-            stage_ex_select_destination  => signals_ex_mem.select_destination,
+            stage_id_select_source_1     => signals_id_ex.select_source_1,
+            stage_id_select_source_2     => signals_id_ex.select_source_2,
             stage_mem_enable_destination => signals_mem_wb.control_wb.enable_destination,
             stage_mem_select_destination => signals_mem_wb.select_destination,
-            stage_wb_enable_destination  => stage_wb_enable_destination,
-            stage_wb_select_destination  => stage_wb_select_destination,
             select_source_1              => stage_id_forward_branch.select_source_1,
             select_source_2              => stage_id_forward_branch.select_source_2
         );

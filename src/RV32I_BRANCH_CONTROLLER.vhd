@@ -35,7 +35,7 @@ begin
             DATA_WIDTH => 1
         )
         port map (
-            selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BEQ),
+            selector    => reduce_and(select_function XNOR WORK.RV32I.FUNCT3_BEQ),
             source_1    => "0",
             source_2    => (0 => flag_equal),
             destination => cases(0 downto 0)
@@ -46,7 +46,7 @@ begin
             DATA_WIDTH => 1
         )
         port map (
-            selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BNE),
+            selector    => reduce_and(select_function XNOR WORK.RV32I.FUNCT3_BNE),
             source_1    => "0",
             source_2    => (0 => NOT(flag_equal)),
             destination => cases(1 downto 1)
@@ -57,7 +57,7 @@ begin
             DATA_WIDTH => 1
         )
         port map (
-            selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BLT),
+            selector    => reduce_and(select_function XNOR WORK.RV32I.FUNCT3_BLT),
             source_1    => "0",
             source_2    => (0 => flag_less_signed),
             destination => cases(2 downto 2)
@@ -68,7 +68,7 @@ begin
             DATA_WIDTH => 1
         )
         port map (
-            selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BGE),
+            selector    => reduce_and(select_function XNOR WORK.RV32I.FUNCT3_BGE),
             source_1    => "0",
             source_2    => (0 => NOT(flag_less_signed)),
             destination => cases(3 downto 3)
@@ -79,7 +79,7 @@ begin
             DATA_WIDTH => 1
         )
         port map (
-            selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BLTU),
+            selector    => reduce_and(select_function XNOR WORK.RV32I.FUNCT3_BLTU),
             source_1    => "0",
             source_2    => (0 => flag_less),
             destination => cases(4 downto 4)
@@ -90,7 +90,7 @@ begin
             DATA_WIDTH => 1
         )
         port map (
-            selector    => is_equal(select_function, WORK.RV32I.FUNCT3_BGEU),
+            selector    => reduce_and(select_function XNOR WORK.RV32I.FUNCT3_BGEU),
             source_1    => "0",
             source_2    => (0 => NOT(flag_less)),
             destination => cases(5 downto 5)

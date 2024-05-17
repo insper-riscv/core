@@ -96,11 +96,9 @@ package CPU is
     end record;
 
     type t_FORWARD_BRANCH is record
-        select_source_1 : std_logic_vector(1 downto 0);
-        select_source_2 : std_logic_vector(1 downto 0);
-        source_ex       : WORK.RV32I.t_DATA;
+        select_source_1 : std_logic;
+        select_source_2 : std_logic;
         source_mem      : WORK.RV32I.t_DATA;
-        source_wb       : WORK.RV32I.t_DATA;
     end record;
 
     type t_FORWARD_EXECUTION is record
