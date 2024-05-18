@@ -130,6 +130,7 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
+        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000000",
@@ -489,14 +490,13 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000100",
         "00000000000000000000000000000000",
         "00000000000000000000000000010000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000011100",
+        "00000000000000000000000000100000",
         "00000000000000000000000000000000",
         "00000000000000000000000000001000",
         "00000000000000000000000000011100",
@@ -509,7 +509,7 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
         if index == len(values_destination):
             break
-
+        
         yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
@@ -1143,7 +1143,7 @@ def test_CPU_TOP_LEVEL_compare_testcases():
 @pytest.mark.testcases
 def test_CPU_TOP_LEVEL_jump_testcases():
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_JAL)
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_JALR)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_JALR)
 
 #@pytest.mark.testcases
 #def test_CPU_TOP_LEVEL_load_testcases():

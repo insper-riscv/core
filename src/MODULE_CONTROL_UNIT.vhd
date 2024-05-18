@@ -63,7 +63,7 @@ begin
     control_ex.select_source_1(0) <= j_type OR is_jalr OR is_auipc;
     control_ex.select_source_1(1) <= is_lui;
 
-    control_ex.select_source_2(0) <= i_type OR u_type OR s_type;
+    control_ex.select_source_2(0) <= (i_type OR u_type OR s_type) AND NOT is_jalr;
     control_ex.select_source_2(1) <= is_jalr;
 
     -- Stage Memory Access controls

@@ -47,7 +47,7 @@ begin
         begin
             if (rising_edge(clock)) then
                 if (enable = '1') then
-                    if ((clear OR enable_flush) = '1') then
+                    if ((clear AND enable_flush) = '1') then
                         source_0 <= WORK.CPU.NULL_SIGNALS_IF_ID;
                     else
                         source_0 <= source;
@@ -61,7 +61,7 @@ begin
 
     enable_flush <= control_id.enable_jump OR enable_branch;
 
-    control_if.enable_stall  <= '0';
+    control_if.enable_stall  <= control_id.enable_branch;
     control_if.select_source <= control_id.enable_jump OR enable_branch;
 
     signals_ex.address_program <= source_0.address_program;

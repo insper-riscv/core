@@ -137,7 +137,7 @@ package RV32I is
 
     constant NULL_INSTRUCTION : t_PROGRAM := (
         FUNCT7_RANGE      => FUNCT7_ADD,
-        FUNCT3_RANGE      => FUNCT3_ADDI,
+        FUNCT3_RANGE      => FUNCT3_ADD,
         OPCODE_FULL_RANGE => OPCODE_FULL_OP_IMM,
         others            => '0'
     );

@@ -10,6 +10,7 @@ class CPU_STAGE_IF(lib.Entity):
 
     control = lib.Entity.Input_pin
     source = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
     address_jump = lib.Entity.Input_pin
     branch = lib.Entity.Input_pin
     address_program = lib.Entity.Output_pin

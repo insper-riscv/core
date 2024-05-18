@@ -58,7 +58,7 @@ begin
         port map (
             clock           => clock,
             clear           => clear,
-            enable          => enable,
+            enable          => NOT (flag_hazzard OR (flag_stall AND control_if.enable_stall)),
             source          => control_if,
             address_jump    => stage_id_address_jump,
             address_program => signals_if_id.address_program
@@ -67,8 +67,8 @@ begin
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
         port map (
             clock                => clock,
-            clear                => clear,
-            enable               => enable,
+            clear                => NOT flag_stall,
+            enable               => NOT (flag_hazzard OR (flag_stall AND control_if.enable_stall)),
             enable_destination   => stage_wb_enable_destination,
             select_destination   => stage_wb_select_destination,
             data_destination     => stage_wb_data_destination,
@@ -82,7 +82,7 @@ begin
     EXECUTE : entity WORK.CPU_STAGE_EX(RV32I)
         port map (
             clock           => clock,
-            clear           => clear,
+            clear           => clear OR (flag_hazzard OR (flag_stall AND control_if.enable_stall)),
             enable          => enable,
             forward         => stage_ex_forward_execution,
             source          => signals_id_ex,
