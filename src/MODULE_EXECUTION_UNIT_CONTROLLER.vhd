@@ -32,12 +32,15 @@ begin
                         (funct_3 = WORK.RV32I.FUNCT3_SLT or
                         funct_3 = WORK.RV32I.FUNCT3_SLTU)
                     ) else
+                    funct_7(5) & funct_3 when (
+                        opcode = WORK.RV32I.OPCODE_OP or
+                        (opcode = WORK.RV32I.OPCODE_OP_IMM and
+                        (funct_3 = WORK.RV32I.FUNCT3_SLL or
+                        funct_3 = WORK.RV32I.FUNCT3_SRL))
+                    ) else
                     '0' & funct_3 when (
                         opcode = WORK.RV32I.OPCODE_OP_IMM or
                         opcode = WORK.RV32I.OPCODE_JALR
-                    ) else
-                    funct_7(5) & funct_3 when (
-                        opcode = WORK.RV32I.OPCODE_OP
                     ) else
                     '0' & WORK.RV32I.FUNCT3_ADD when (
                         opcode = WORK.RV32I.OPCODE_SYSTEM or

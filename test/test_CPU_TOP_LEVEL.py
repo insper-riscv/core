@@ -1163,14 +1163,14 @@ def test_CPU_TOP_LEVEL_logical_testcases():
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_OR)
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_ORI)
 
-#pytest.mark.testcases
-#def test_CPU_TOP_LEVEL_shifting_testcases():
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SLL)
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SLLI)
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRL)
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRLI)
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRA)
-#    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRAI)
+pytest.mark.testcases
+def test_CPU_TOP_LEVEL_shifting_testcases():
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SLL)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SLLI)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRL)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRLI)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRA)
+    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_SRAI)
 
 #@pytest.mark.testcases
 #def test_CPU_TOP_LEVEL_store_testcases():
