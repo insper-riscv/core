@@ -298,20 +298,20 @@ def test_RV32I_ALU_testcases():
         ]
     )
 
-#@pytest.mark.coverage
-#def test_RV32I_ALU_stress():
-#    RV32I_ALU.test_with(
-#        [
-#            tb_RV32I_ALU_case_stress_and,
-#            tb_RV32I_ALU_case_stress_or,
-#            tb_RV32I_ALU_case_stress_xor,
-#            tb_RV32I_ALU_case_stress_add,
-#            tb_RV32I_ALU_case_stress_sub,
-#            tb_RV32I_ALU_case_stress_sll,
-#            tb_RV32I_ALU_case_stress_srl,
-#            tb_RV32I_ALU_case_stress_sra
-#        ],
-#    )
+@pytest.mark.coverage
+def test_RV32I_ALU_stress():
+    RV32I_ALU.test_with(
+        [
+            tb_RV32I_ALU_case_stress_and,
+            tb_RV32I_ALU_case_stress_or,
+            tb_RV32I_ALU_case_stress_xor,
+            tb_RV32I_ALU_case_stress_add,
+            tb_RV32I_ALU_case_stress_sub,
+            tb_RV32I_ALU_case_stress_sll,
+            tb_RV32I_ALU_case_stress_srl,
+            tb_RV32I_ALU_case_stress_sra
+        ],
+    )
 
 if __name__ == "__main__":
     lib.run_test(__file__)
