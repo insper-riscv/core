@@ -12,7 +12,38 @@ class GENERIC_MUX_32X1(lib.Entity):
     _package = GENERICS
 
     selector = lib.Entity.Input_pin
-    source = lib.Entity.Input_pin
+    source_1 = lib.Entity.Input_pin
+    source_2 = lib.Entity.Input_pin
+    source_3 = lib.Entity.Input_pin
+    source_4 = lib.Entity.Input_pin
+    source_5 = lib.Entity.Input_pin
+    source_6 = lib.Entity.Input_pin
+    source_7 = lib.Entity.Input_pin
+    source_8 = lib.Entity.Input_pin
+    source_9 = lib.Entity.Input_pin
+    source_10 = lib.Entity.Input_pin
+    source_11 = lib.Entity.Input_pin
+    source_12 = lib.Entity.Input_pin
+    source_13 = lib.Entity.Input_pin
+    source_14 = lib.Entity.Input_pin
+    source_15 = lib.Entity.Input_pin
+    source_16 = lib.Entity.Input_pin
+    source_17 = lib.Entity.Input_pin
+    source_18 = lib.Entity.Input_pin
+    source_19 = lib.Entity.Input_pin
+    source_20 = lib.Entity.Input_pin
+    source_21 = lib.Entity.Input_pin
+    source_22 = lib.Entity.Input_pin
+    source_23 = lib.Entity.Input_pin
+    source_24 = lib.Entity.Input_pin
+    source_25 = lib.Entity.Input_pin
+    source_26 = lib.Entity.Input_pin
+    source_27 = lib.Entity.Input_pin
+    source_28 = lib.Entity.Input_pin
+    source_29 = lib.Entity.Input_pin
+    source_30 = lib.Entity.Input_pin
+    source_31 = lib.Entity.Input_pin
+    source_32 = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
 
 

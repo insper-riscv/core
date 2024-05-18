@@ -50,7 +50,7 @@ begin
             port map (
                 clock       => clock,
                 clear       => clear,
-                enable      => enable AND is_equal(address_destination, std_logic_vector(to_unsigned(i, 5))),
+                enable      => enable AND reduce_and(address_destination XNOR std_logic_vector(to_unsigned(i, 5))),
                 source      => data_destination,
                 destination => registers(i)
             );
