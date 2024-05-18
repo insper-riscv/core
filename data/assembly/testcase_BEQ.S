@@ -13,4 +13,3 @@ j_eq:
     nop                                         ;
     nop                                         ;
     nop                                         ;
-    nop                                         ;
