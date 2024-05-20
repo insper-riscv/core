@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
+use WORK.GENERICS.ALL;
 
 entity CPU_HAZZARD_CONTROL_UNIT is
 
@@ -26,31 +27,27 @@ architecture RTL of CPU_HAZZARD_CONTROL_UNIT is
 
 begin
 
-    destination <= '1' when (
+    stall_branch <= (
                         (
-                            stage_id_select_source_1 = stage_ex_select_destination or
-                            stage_id_select_source_2 = stage_ex_select_destination
-                        ) and
-                        stage_ex_enable_read = '1' and
-                        (stage_ex_select_destination /= "00000")
-                    ) else
-                    '0';
+                            is_equal_dynamic(stage_id_select_source_1, stage_ex_select_destination) OR
+                            is_equal_dynamic(stage_id_select_source_2, stage_ex_select_destination)
+                        ) AND
+                        NOT(is_equal(tage_ex_select_destination, 5X"0")) AND
+                        stage_ex_enable_destination
+                    ) OR  (
+                        (
+                            is_equal_dynamic(stage_id_select_source_1, stage_mem_select_destination) OR
+                            is_equal_dynamic(stage_id_select_source_2, stage_mem_select_destination)
+                        ) AND
+                        NOT(is_equal(stage_mem_select_destination, 5X"0")) AND
+                        stage_mem_enable_read
+                    );
 
-    stall_branch <= '1' when (
-                        (
-                            stage_id_select_source_1 = stage_ex_select_destination or
-                            stage_id_select_source_2 = stage_ex_select_destination
-                        ) and
-                            stage_ex_enable_destination = '1' and
-                            (stage_ex_select_destination /= "00000")
-                        ) or  (
-                            (
-                                stage_id_select_source_1 = stage_mem_select_destination or
-                            stage_id_select_source_2 = stage_mem_select_destination
-                        ) and
-                        stage_mem_enable_read = '1' and
-                        (stage_mem_select_destination /= "00000")
-                    ) else
-                    '0';
+    destination <=  (
+                        is_equal_dynamic(stage_id_select_source_1, stage_ex_select_destination) OR
+                        is_equal_dynamic(stage_id_select_source_2, stage_ex_select_destination)
+                    ) AND
+                    NOT(is_equal(stage_ex_select_destination), 5X"0")) AND
+                    stage_ex_enable_read;
 
 end architecture;
