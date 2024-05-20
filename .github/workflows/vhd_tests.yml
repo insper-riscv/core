@@ -119,6 +119,8 @@ jobs:
       run: |
         pip install -r requirements.txt
         npm install -g netlistsvg
+    - name: Add checkout directory to PYTHONPATH
+      run: echo "PYTHONPATH=$(pwd):$PYTHONPATH" >> $GITHUB_ENV
     - name: Run Synthesis
       run: pytest -k ${{ matrix.component }} -m synthesis
     - name: Run Testcases
