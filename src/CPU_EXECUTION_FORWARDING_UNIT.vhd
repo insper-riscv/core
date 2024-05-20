@@ -32,10 +32,10 @@ architecture RV32I of CPU_EXECUTION_FORWARDING_UNIT is
 
 begin
 
-    mem_source_1 <= reduce_and(stage_ex_select_source_1 XNOR stage_mem_select_destination);
-    mem_source_2 <= reduce_and(stage_ex_select_source_2 XNOR stage_mem_select_destination);
-    wb_source_1  <= reduce_and(stage_ex_select_source_1 XNOR stage_wb_select_destination);
-    wb_source_2  <= reduce_and(stage_ex_select_source_2 XNOR stage_wb_select_destination);
+    mem_source_1 <= is_equal_dynamic(stage_ex_select_source_1, stage_mem_select_destination);
+    mem_source_2 <= is_equal_dynamic(stage_ex_select_source_2, stage_mem_select_destination);
+    wb_source_1  <= is_equal_dynamic(stage_ex_select_source_1, stage_wb_select_destination);
+    wb_source_2  <= is_equal_dynamic(stage_ex_select_source_2, stage_wb_select_destination);
     mem_not_zero <= reduce_or(stage_mem_select_destination);
     wb_not_zero  <= reduce_or(stage_wb_select_destination);
 

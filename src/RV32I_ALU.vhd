@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
+use WORK.GENERICS.ALL;
 
 entity RV32I_ALU is
 
@@ -39,8 +40,8 @@ architecture RTL of RV32I_ALU is
 
 begin
 
-    flag_subtract <=    WORK.GENERICS.reduce_and(select_function(3 downto 2) XNOR "10") AND
-                        NOT(WORK.GENERICS.reduce_and(select_function(1 downto 0) XNOR "01"));
+    flag_subtract <=    is_equal_dynamic(select_function(3 downto 2), "10") AND
+                        NOT(is_equal_dynamic(select_function(1 downto 0), "01"));
                         --WORK.GENERICS.is_equal(select_function(3 downto 2), "10") AND
                         --NOT(WORK.GENERICS.is_equal(select_function(1 downto 0), "01"));
 

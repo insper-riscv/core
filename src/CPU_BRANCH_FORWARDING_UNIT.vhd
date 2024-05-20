@@ -27,11 +27,11 @@ architecture RV32I of CPU_BRANCH_FORWARDING_UNIT is
 
 begin
 
-    mem_source_1 <= reduce_and(stage_id_select_source_1 XNOR stage_mem_select_destination);
-    mem_source_2 <= reduce_and(stage_id_select_source_2 XNOR stage_mem_select_destination);
-    mem_zero     <= reduce_and(stage_mem_select_destination XNOR ZERO);
+    mem_source_1 <= is_equal_dynamic(stage_id_select_source_1, stage_mem_select_destination);
+    mem_source_2 <= is_equal_dynamic(stage_id_select_source_2, stage_mem_select_destination);
+    mem_zero     <= is_equal_dynamic(stage_mem_select_destination, ZERO);
 
-    select_source_1 <=  (stage_mem_enable_destination AND mem_source_1 AND NOT(mem_zero));
-    select_source_2 <=  (stage_mem_enable_destination AND mem_source_2 AND NOT(mem_zero));
+    select_source_1 <= (stage_mem_enable_destination AND mem_source_1 AND NOT(mem_zero));
+    select_source_2 <= (stage_mem_enable_destination AND mem_source_2 AND NOT(mem_zero));
 
 end architecture;

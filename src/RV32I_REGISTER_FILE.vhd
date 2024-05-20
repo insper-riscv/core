@@ -38,8 +38,8 @@ begin
 
     process(address_source_1, address_source_2, address_destination)
     begin
-        passthrough_1 <= reduce_and(address_source_1 XNOR address_destination) AND reduce_or(address_destination);
-        passthrough_2 <= reduce_and(address_source_2 XNOR address_destination) AND reduce_or(address_destination);
+        passthrough_1 <= is_equal_dynamic(address_source_1, address_destination) AND reduce_or(address_destination);
+        passthrough_2 <= is_equal_dynamic(address_source_2, address_destination) AND reduce_or(address_destination);
     end process;
 
     GEN_REGISTERS : for i in registers'range generate
@@ -50,7 +50,7 @@ begin
             port map (
                 clock       => clock,
                 clear       => clear,
-                enable      => enable AND reduce_and(address_destination XNOR std_logic_vector(to_unsigned(i, 5))),
+                enable      => enable AND is_equal(address_destination, std_logic_vector(to_unsigned(i, 5))),
                 source      => data_destination,
                 destination => registers(i)
             );

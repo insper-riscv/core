@@ -41,16 +41,16 @@ architecture RV32I of MODULE_CONTROL_UNIT is
 
 begin
 
-    is_lui   <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_LUI);
-    is_auipc <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_AUIPC);
-    is_jalr  <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_JALR);
-    is_load  <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_LOAD);
-    r_type   <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_OP);
-    i_type   <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_OP_IMM) OR reduce_and(opcode XNOR WORK.RV32I.OPCODE_LOAD) OR reduce_and(opcode XNOR WORK.RV32I.OPCODE_SYSTEM) OR is_jalr;
-    s_type   <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_STORE);
-    b_type   <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_BRANCH);
+    is_lui   <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_LUI);
+    is_auipc <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_AUIPC);
+    is_jalr  <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_JALR);
+    is_load  <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_LOAD);
+    r_type   <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP);
+    i_type   <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP_IMM) OR is_equal_dynamic(opcode, WORK.RV32I.OPCODE_LOAD) OR is_equal_dynamic(opcode, WORK.RV32I.OPCODE_SYSTEM) OR is_jalr;
+    s_type   <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_STORE);
+    b_type   <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_BRANCH);
     u_type   <= is_lui OR is_auipc;
-    j_type   <= reduce_and(opcode XNOR WORK.RV32I.OPCODE_JAL);
+    j_type   <= is_equal_dynamic(opcode, WORK.RV32I.OPCODE_JAL);
 
     -- Stage Instruction Decode controls
     control_id.enable_branch <= b_type;

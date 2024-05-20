@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
+use WORK.GENERICS.ALL;
 
 entity RV32I_ALU_SHIFTER is
 
@@ -22,7 +23,7 @@ end entity;
 
 architecture RTL of RV32I_ALU_SHIFTER is
 
-    signal data                 : WORK.GENERICS.t_std_logic_array(0 to (DATA_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
+    signal data                 : t_std_logic_array(0 to (DATA_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
     signal msb                  : std_logic := '0';
     signal msb_vector           : std_logic_vector((DATA_WIDTH - 1) downto 0);
     signal source_auxiliar      : std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -32,9 +33,9 @@ architecture RTL of RV32I_ALU_SHIFTER is
 
 begin
 
-    reversed_source <= WORK.GENERICS.reverse_vector(source);
+    reversed_source <= reverse_vector(source);
     
-    reversed_destination <= WORK.GENERICS.reverse_vector(destination_auxiliar);
+    reversed_destination <= reverse_vector(destination_auxiliar);
 
     BUILD : for i in 0 to (DATA_WIDTH - 1) generate
         BUILD_ROW : if (i = 0) generate

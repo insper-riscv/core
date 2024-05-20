@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
+use WORK.GENERICS.all;
 
 entity GENERIC_COMPARATOR is
 
@@ -56,7 +57,7 @@ begin
     end generate;
 
     flag_equal    <= a_equal_b(DATA_WIDTH - 2);
-    flag_less     <= WORK.GENERICS.reduce_or(a_less_than_b);
-    flag_greather <= WORK.GENERICS.reduce_or(a_greater_than_b);
+    flag_less     <= reduce_or(a_less_than_b);
+    flag_greather <= reduce_or(a_greater_than_b);
 
 end architecture;

@@ -23,7 +23,7 @@ architecture RV32I of CPU_STAGE_IF is
 
 begin
 
-    MODULE_PROGRAM_COUNTER : entity WORK.MODULE_PROGRAM_COUNTER(RV32I)
+    PROGRAM_COUNTER : entity WORK.MODULE_PROGRAM_COUNTER(RV32I)
         port map (
             clock        => clock,
             clear        => clear,

@@ -44,7 +44,7 @@ begin
         source_0 <= source;
     end generate;
 
-    MODULE_WRITE_BACK : entity WORK.MODULE_WRITE_BACK(RV32I)
+    WRITE_BACK : entity WORK.MODULE_WRITE_BACK(RV32I)
         port map (
             selector         => source_0.control_wb.select_destination,
             source_execution => source_0.data_destination,
