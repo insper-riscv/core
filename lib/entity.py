@@ -60,8 +60,6 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
             else:
                 tracer = Waveform(*signals, clock=None, model=cls) # type: ignore
 
-            print(type(tracer.clock_pin), True)
-
             await tracer.start()
 
             with tracer as trace:
