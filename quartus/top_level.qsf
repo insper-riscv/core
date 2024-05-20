@@ -237,7 +237,6 @@ set_global_assignment -name VHDL_FILE ../src/RV32I_ALU.vhd
 set_global_assignment -name VHDL_FILE ../src/RV32I.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULES.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_WRITE_BACK.vhd
-set_global_assignment -name VHDL_FILE ../src/MODULE_STALL_MUX.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_REGISTER_FILE.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_PROGRAM_COUNTER.vhd
 set_global_assignment -name VHDL_FILE ../src/MODULE_MEMORY_INTERFACE.vhd
@@ -252,6 +251,7 @@ set_global_assignment -name VHDL_FILE ../src/GENERIC_ROM_QUARTUS.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERIC_REGISTER.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERIC_RAM.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERIC_MUX_4X1.vhd
+set_global_assignment -name VHDL_FILE ../src/GENERIC_MUX_32X1.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERIC_MUX_2X1.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERIC_FLIP_FLOP.vhd
 set_global_assignment -name VHDL_FILE ../src/GENERIC_EDGE_DETECTOR.vhd
@@ -265,7 +265,7 @@ set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_MEM.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_IF.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_ID.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_STAGE_EX.vhd
-set_global_assignment -name VHDL_FILE ../src/CPU_BRANCH_FORWARDING_UNIT.vhd
-set_global_assignment -name VHDL_FILE ../src/CPU_EXECUTION_FORWARDING_UNIT.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU_HAZZARD_CONTROL_UNIT.vhd
+set_global_assignment -name VHDL_FILE ../src/CPU_EXECUTION_FORWARDING_UNIT.vhd
+set_global_assignment -name VHDL_FILE ../src/CPU_BRANCH_FORWARDING_UNIT.vhd
 set_global_assignment -name VHDL_FILE ../src/CPU.vhd
