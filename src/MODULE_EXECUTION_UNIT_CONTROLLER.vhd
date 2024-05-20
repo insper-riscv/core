@@ -32,8 +32,8 @@ begin
                             is_equal(opcode, WORK.RV32I.OPCODE_OP) OR
                             is_equal(opcode, WORK.RV32I.OPCODE_OP_IMM)
                         ) AND (
-                            funct_3 = WORK.RV32I.FUNCT3_SLT OR
-                            funct_3 = WORK.RV32I.FUNCT3_SLTU
+                            is_equal(funct_3, WORK.RV32I.FUNCT3_SLT) OR
+                            is_equal(funct_3, WORK.RV32I.FUNCT3_SLTU)
                         )
                     ) else
                     funct_7(5) & funct_3 when (
@@ -41,8 +41,8 @@ begin
                         (
                             is_equal(opcode, WORK.RV32I.OPCODE_OP_IMM) AND
                             (
-                                funct_3 = WORK.RV32I.FUNCT3_SLL OR
-                                funct_3 = WORK.RV32I.FUNCT3_SRL
+                                is_equal(funct_3, WORK.RV32I.FUNCT3_SLL) OR
+                                is_equal(funct_3, WORK.RV32I.FUNCT3_SRL)
                             )
                         )
                     ) else
