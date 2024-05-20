@@ -32,7 +32,7 @@ begin
                             is_equal_dynamic(stage_id_select_source_1, stage_ex_select_destination) OR
                             is_equal_dynamic(stage_id_select_source_2, stage_ex_select_destination)
                         ) AND
-                        NOT(is_equal(tage_ex_select_destination, 5X"0")) AND
+                        NOT(is_equal(stage_ex_select_destination, 5X"0")) AND
                         stage_ex_enable_destination
                     ) OR  (
                         (
