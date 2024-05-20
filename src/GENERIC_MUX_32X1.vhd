@@ -52,9 +52,9 @@ end entity;
 
 architecture RTL of GENERIC_MUX_32X1 is
 
-    signal source    : WORK.GENERICS.t_std_logic_array(31 downto 0)((DATA_WIDTH - 1) downto 0) := (others => (others => '0'));
-    signal selectors : WORK.GENERICS.t_std_logic_array(31 downto 0)((DATA_WIDTH - 1) downto 0) := (others => (others => '0'));
-    signal auxiliar  : WORK.GENERICS.t_std_logic_array(31 downto 0)((DATA_WIDTH - 1) downto 0) := (others => (others => '0'));
+    signal source    : t_std_logic_array(31 downto 0)((DATA_WIDTH - 1) downto 0) := (others => (others => '0'));
+    signal selectors : t_std_logic_array(31 downto 0)((DATA_WIDTH - 1) downto 0) := (others => (others => '0'));
+    signal auxiliar  : t_std_logic_array(31 downto 0)((DATA_WIDTH - 1) downto 0) := (others => (others => '0'));
 
 begin
 
@@ -91,79 +91,13 @@ begin
     source(30) <= source_31;
     source(31) <= source_32;
 
-    -- ENCODE : for i in 31 downto 0 generate
-    --     selectors(i) <= (others => reduce_and(selector XNOR std_logic_vector(to_unsigned(i, 5))));
-    -- end generate;
+    ENCODE : for i in 31 downto 0 generate
+        selectors(i) <= (others => is_equal_dynamic(selector, std_logic_vector(to_unsigned(i, 5))));
+    end generate;
 
-    selectors( 0) <= (others => reduce_and(selector XNOR 5X"00"));
-    selectors( 1) <= (others => reduce_and(selector XNOR 5X"01"));
-    selectors( 2) <= (others => reduce_and(selector XNOR 5X"02"));
-    selectors( 3) <= (others => reduce_and(selector XNOR 5X"03"));
-    selectors( 4) <= (others => reduce_and(selector XNOR 5X"04"));
-    selectors( 5) <= (others => reduce_and(selector XNOR 5X"05"));
-    selectors( 6) <= (others => reduce_and(selector XNOR 5X"06"));
-    selectors( 7) <= (others => reduce_and(selector XNOR 5X"07"));
-    selectors( 8) <= (others => reduce_and(selector XNOR 5X"08"));
-    selectors( 9) <= (others => reduce_and(selector XNOR 5X"09"));
-    selectors(10) <= (others => reduce_and(selector XNOR 5X"0a"));
-    selectors(11) <= (others => reduce_and(selector XNOR 5X"0b"));
-    selectors(12) <= (others => reduce_and(selector XNOR 5X"0c"));
-    selectors(13) <= (others => reduce_and(selector XNOR 5X"0d"));
-    selectors(14) <= (others => reduce_and(selector XNOR 5X"0e"));
-    selectors(15) <= (others => reduce_and(selector XNOR 5X"0f"));
-    selectors(16) <= (others => reduce_and(selector XNOR 5X"10"));
-    selectors(17) <= (others => reduce_and(selector XNOR 5X"11"));
-    selectors(18) <= (others => reduce_and(selector XNOR 5X"12"));
-    selectors(19) <= (others => reduce_and(selector XNOR 5X"13"));
-    selectors(20) <= (others => reduce_and(selector XNOR 5X"14"));
-    selectors(21) <= (others => reduce_and(selector XNOR 5X"15"));
-    selectors(22) <= (others => reduce_and(selector XNOR 5X"16"));
-    selectors(23) <= (others => reduce_and(selector XNOR 5X"17"));
-    selectors(24) <= (others => reduce_and(selector XNOR 5X"18"));
-    selectors(25) <= (others => reduce_and(selector XNOR 5X"19"));
-    selectors(26) <= (others => reduce_and(selector XNOR 5X"1a"));
-    selectors(27) <= (others => reduce_and(selector XNOR 5X"1b"));
-    selectors(28) <= (others => reduce_and(selector XNOR 5X"1c"));
-    selectors(29) <= (others => reduce_and(selector XNOR 5X"1d"));
-    selectors(30) <= (others => reduce_and(selector XNOR 5X"1e"));
-    selectors(31) <= (others => reduce_and(selector XNOR 5X"1f"));
-
-    -- DECODE : for i in 31 downto 0 generate
-    --     auxiliar(i) <= source(i) AND selectors(i);
-    -- end generate;
-
-    auxiliar( 0) <= source( 0) AND selectors( 0);
-    auxiliar( 1) <= source( 1) AND selectors( 1);
-    auxiliar( 2) <= source( 2) AND selectors( 2);
-    auxiliar( 3) <= source( 3) AND selectors( 3);
-    auxiliar( 4) <= source( 4) AND selectors( 4);
-    auxiliar( 5) <= source( 5) AND selectors( 5);
-    auxiliar( 6) <= source( 6) AND selectors( 6);
-    auxiliar( 7) <= source( 7) AND selectors( 7);
-    auxiliar( 8) <= source( 8) AND selectors( 8);
-    auxiliar( 9) <= source( 9) AND selectors( 9);
-    auxiliar(10) <= source(10) AND selectors(10);
-    auxiliar(11) <= source(11) AND selectors(11);
-    auxiliar(12) <= source(12) AND selectors(12);
-    auxiliar(13) <= source(13) AND selectors(13);
-    auxiliar(14) <= source(14) AND selectors(14);
-    auxiliar(15) <= source(15) AND selectors(15);
-    auxiliar(16) <= source(16) AND selectors(16);
-    auxiliar(17) <= source(17) AND selectors(17);
-    auxiliar(18) <= source(18) AND selectors(18);
-    auxiliar(19) <= source(19) AND selectors(19);
-    auxiliar(20) <= source(20) AND selectors(20);
-    auxiliar(21) <= source(21) AND selectors(21);
-    auxiliar(22) <= source(22) AND selectors(22);
-    auxiliar(23) <= source(23) AND selectors(23);
-    auxiliar(24) <= source(24) AND selectors(24);
-    auxiliar(25) <= source(25) AND selectors(25);
-    auxiliar(26) <= source(26) AND selectors(26);
-    auxiliar(27) <= source(27) AND selectors(27);
-    auxiliar(28) <= source(28) AND selectors(28);
-    auxiliar(29) <= source(29) AND selectors(29);
-    auxiliar(30) <= source(30) AND selectors(30);
-    auxiliar(31) <= source(31) AND selectors(31);
+    DECODE : for i in 31 downto 0 generate
+        auxiliar(i) <= source(i) AND selectors(i);
+    end generate;
 
     destination <=  ((((auxiliar( 0) OR auxiliar( 1)) OR
                        (auxiliar( 2) OR auxiliar( 3)))    OR
@@ -181,15 +115,5 @@ begin
                        (auxiliar(26) OR auxiliar(27)))    OR
                       ((auxiliar(28) OR auxiliar(29)) OR
                        (auxiliar(30) OR auxiliar(31)))));
-
-    -- REDUCE : process(selector, source_1, source_2, source_3, source_4, source_5, source_6, source_7, source_8, source_9, source_10, source_11, source_12, source_13, source_14, source_15, source_16, source_17, source_18, source_19, source_20, source_21, source_22, source_23, source_24, source_25, source_26, source_27, source_28, source_29, source_30, source_31, source_32, source, selectors, auxiliar)
-    --     variable result : std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-    -- begin
-    --     for i in 31 downto 0 loop
-    --         result := result OR auxiliar(i);
-    --     end loop;
-
-    --     destination <= result;
-    -- end process;
 
 end architecture;
