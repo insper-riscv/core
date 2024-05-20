@@ -57,9 +57,10 @@ async def tb_GENERIC_ADDER_case_1(dut: GENERIC_ADDER, trace: lib.Waveform):
     await trace.cycle()
     yield trace.check(dut.destination, "11111111")
 
-
 @GENERIC_ADDER.testcase
 async def tb_GENERIC_ADDER_coverage_case(dut: GENERIC_ADDER, trace: lib.Waveform):
+    trace.disable()
+
     for _ in range(1_000_000):
         source_1 = random.getrandbits(8)
         source_2 = random.getrandbits(8)
@@ -79,32 +80,14 @@ def test_GENERIC_ADDER_synthesis():
     GENERIC_ADDER.build_vhd()
     GENERIC_ADDER.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_ADDER_testcases():
-    GENERIC_ADDER.test_with(
-        [
-            tb_GENERIC_ADDER_case_1,
-        ]
-    )
-
+    GENERIC_ADDER.test_with(tb_GENERIC_ADDER_case_1)
 
 @pytest.mark.coverage
 def test_GENERIC_ADDER_coverage():
-    GENERIC_ADDER.test_with(
-        [
-            tb_GENERIC_ADDER_coverage_case
-        ]
-    )
+    GENERIC_ADDER.test_with(tb_GENERIC_ADDER_coverage_case)
 
-#@pytest.mark.coverage
-#def test_GENERIC_ADDER_stress_5_bits():
-#    GENERIC_ADDER.test_with(
-#        [
-#            tb_GENERIC_ADDER_stress_5_bits,
-#        ],
-#        parameters={"DATA_WIDTH": 5},
-#    )
 
 if __name__ == "__main__":
     lib.run_test(__file__)

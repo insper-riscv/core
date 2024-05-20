@@ -10,6 +10,7 @@ class MODULE_REGISTER_FILE(lib.Entity):
     _package = MODULES
 
     clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
     enable = lib.Entity.Input_pin
     select_destination = lib.Entity.Input_pin
     select_source_1 = lib.Entity.Input_pin
@@ -19,6 +20,7 @@ class MODULE_REGISTER_FILE(lib.Entity):
     data_source_2 = lib.Entity.Output_pin
 
     register_file = RV32I_REGISTER_FILE
+
 
 @MODULE_REGISTER_FILE.testcase
 async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: lib.Waveform):
@@ -77,7 +79,6 @@ async def tb_MODULE_REGISTER_FILE_case_1(dut: MODULE_REGISTER_FILE, trace: lib.W
         values_data_destination[5],
     ]
 
-
     for index, (
         select_destination,
         select_source_1,
@@ -111,14 +112,10 @@ def test_MODULE_REGISTER_FILE_synthesis():
     MODULE_REGISTER_FILE.build_vhd()
     MODULE_REGISTER_FILE.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_MODULE_REGISTER_FILE_testcases():
-    MODULE_REGISTER_FILE.test_with(
-        [
-            tb_MODULE_REGISTER_FILE_case_1,
-        ]
-    )
+    MODULE_REGISTER_FILE.test_with(tb_MODULE_REGISTER_FILE_case_1)
+
 
 if __name__ == "__main__":
     lib.run_test(__file__)

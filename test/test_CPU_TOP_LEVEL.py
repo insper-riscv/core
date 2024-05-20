@@ -18,13 +18,13 @@ class CPU_TOP_LEVEL(lib.Entity):
     clock = lib.Entity.Input_pin
     clear = lib.Entity.Input_pin
     enable = lib.Entity.Input_pin
+    memory_read = lib.Entity.Output_pin
+    memory_write = lib.Entity.Output_pin
     data_program = lib.Entity.Input_pin
     data_memory_in = lib.Entity.Input_pin
     data_memory_out = lib.Entity.Output_pin
     address_program = lib.Entity.Output_pin
     address_memory = lib.Entity.Output_pin
-    memory_read = lib.Entity.Output_pin
-    memory_write = lib.Entity.Output_pin
 
     instruction_fetch = CPU_STAGE_IF
     instruction_decode = CPU_STAGE_ID

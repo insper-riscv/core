@@ -51,11 +51,11 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: lib.Waveform)
         await trace.cycle()
         yield trace.check(dut.destination, destination, f"At clock {index}.")
 
-
 @GENERIC_REGISTER.testcase
-async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: lib.Waveform):
-    qnt_tests = 30_000
-    
+async def tb_GENERIC_REGISTER_case_coverage(dut: GENERIC_REGISTER, trace: lib.Waveform):
+    trace.disable()
+
+    qnt_tests = 30_000    
     clear = "0"
     enable = "1"
     
@@ -119,9 +119,10 @@ async def tb_GENERIC_REGISTER_case_stress(dut: GENERIC_REGISTER, trace: lib.Wave
         yield trace.check(dut.destination, destination, message)
 
 @GENERIC_REGISTER.testcase
-async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: lib.Waveform):
-    bits = 15
-    
+async def tb_GENERIC_REGISTER_case_coverage_15_bits(dut: GENERIC_REGISTER, trace: lib.Waveform):
+    trace.disable()
+
+    bits = 15    
     clear = "0"
     enable = "1"
 
@@ -179,37 +180,27 @@ async def tb_GENERIC_REGISTER_case_stress_15_bits(dut: GENERIC_REGISTER, trace: 
         await trace.cycle()
         yield trace.check(dut.destination, destination, message)
 
+
 @pytest.mark.synthesis
 def test_GENERIC_REGISTER_synthesis():
     GENERIC_REGISTER.build_vhd()
     GENERIC_REGISTER.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_REGISTER_testcases():
-    GENERIC_REGISTER.test_with(
-        [
-            tb_GENERIC_REGISTER_case_1,
-        ]
-    )
+    GENERIC_REGISTER.test_with(tb_GENERIC_REGISTER_case_1)
 
 @pytest.mark.coverage
 def test_GENERIC_REGISTER_stress():
-    GENERIC_REGISTER.test_with(
-        [
-            tb_GENERIC_REGISTER_case_stress,
-        ],
-         parameters={"DATA_WIDTH": 32},
-    )
+    GENERIC_REGISTER.test_with(tb_GENERIC_REGISTER_case_coverage, {
+        "DATA_WIDTH": 32,
+    })
 
 @pytest.mark.coverage
 def test_GENERIC_REGISTER_stress_15_bits():
-    GENERIC_REGISTER.test_with(
-        [
-            tb_GENERIC_REGISTER_case_stress_15_bits,
-        ],
-        parameters = {'DATA_WIDTH': 15}
-    )
+    GENERIC_REGISTER.test_with(tb_GENERIC_REGISTER_case_coverage_15_bits, {
+        "DATA_WIDTH": 15,
+    })
 
 
 if __name__ == "__main__":

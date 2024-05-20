@@ -19,10 +19,10 @@ class MODULE_BRANCH_COMPARE_UNIT(lib.Entity):
     forward_selector_2 = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
 
-    controller = RV32I_BRANCH_CONTROLLER
-    comparator = GENERIC_COMPARATOR
-    mux_branch_1 = GENERIC_MUX_2X1
-    mux_branch_2 = GENERIC_MUX_2X1
+    MUX_FORWARD_SOURCE_1 = GENERIC_MUX_2X1
+    MUX_FORWARD_SOURCE_2 = GENERIC_MUX_2X1
+    COMPARATOR = GENERIC_COMPARATOR
+    CONTROLLER = RV32I_BRANCH_CONTROLLER
 
 
 @MODULE_BRANCH_COMPARE_UNIT.testcase
@@ -106,14 +106,9 @@ def test_MODULE_BRANCH_COMPARE_UNIT_synthesis():
     MODULE_BRANCH_COMPARE_UNIT.build_vhd()
     MODULE_BRANCH_COMPARE_UNIT.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_MODULE_BRANCH_COMPARE_UNIT_testcases():
-    MODULE_BRANCH_COMPARE_UNIT.test_with(
-        [
-            tb_MODULE_BRANCH_COMPARE_UNIT_case_1,
-        ]
-    )
+    MODULE_BRANCH_COMPARE_UNIT.test_with(tb_MODULE_BRANCH_COMPARE_UNIT_case_1)
 
 
 if __name__ == "__main__":

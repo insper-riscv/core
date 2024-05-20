@@ -8,14 +8,14 @@ from test_CPU_package import CPU
 class CPU_EXECUTION_FORWARDING_UNIT(lib.Entity):
     _package = CPU
 
-    stage_ex_select_source_1     = lib.Entity.Input_pin
-    stage_ex_select_source_2     = lib.Entity.Input_pin
+    stage_ex_select_source_1 = lib.Entity.Input_pin
+    stage_ex_select_source_2 = lib.Entity.Input_pin
     stage_mem_enable_destination = lib.Entity.Input_pin
     stage_mem_select_destination = lib.Entity.Input_pin
-    stage_wb_enable_destination  = lib.Entity.Input_pin
-    stage_wb_select_destination  = lib.Entity.Input_pin
-    select_source_1              = lib.Entity.Output_pin
-    select_source_2              = lib.Entity.Output_pin
+    stage_wb_enable_destination = lib.Entity.Input_pin
+    stage_wb_select_destination = lib.Entity.Input_pin
+    select_source_1 = lib.Entity.Output_pin
+    select_source_2 = lib.Entity.Output_pin
 
 
 @pytest.mark.synthesis

@@ -31,19 +31,15 @@ async def tb_GENERIC_COMPARATOR_case_1(dut: GENERIC_COMPARATOR, trace: lib.Wavef
             yield trace.check(dut.flag_greather, is_greather, f"for {source_1} > {source_2}")
             yield trace.check(dut.flag_equal, is_equal, f"for {source_1} = {source_2}")
 
+
 @pytest.mark.synthesis
 def test_GENERIC_COMPARATOR_synthesis():
     GENERIC_COMPARATOR.build_vhd()
     GENERIC_COMPARATOR.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_COMPARATOR_testcases():
-    GENERIC_COMPARATOR.test_with(
-        [
-            tb_GENERIC_COMPARATOR_case_1,
-        ]
-    )
+    GENERIC_COMPARATOR.test_with(tb_GENERIC_COMPARATOR_case_1)
 
 
 if __name__ == "__main__":

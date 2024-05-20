@@ -9,10 +9,13 @@ class CPU_STAGE_MEM(lib.Entity):
     _package = CPU
 
     clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
     source = lib.Entity.Input_pin
+    data_memory_in = lib.Entity.Input_pin
     control_memory = lib.Entity.Output_pin
     address_memory = lib.Entity.Output_pin
-    data_memory = lib.Entity.Output_pin
+    data_memory_out = lib.Entity.Output_pin
     destination = lib.Entity.Output_pin
 
     MEM_INTERFACE = MODULE_MEMORY_INTERFACE

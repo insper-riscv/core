@@ -4,6 +4,7 @@ from cocotb.binary import BinaryValue
 import lib
 from test_RV32I_package import RV32I
 from test_GENERIC_SIGNAL_EXTENDER import GENERIC_SIGNAL_EXTENDER
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
 class RV32I_TYPE_CONVERTER(lib.Entity):
@@ -16,6 +17,10 @@ class RV32I_TYPE_CONVERTER(lib.Entity):
     EXTEND_BYTE = GENERIC_SIGNAL_EXTENDER
     EXTEND_HALFWORD = GENERIC_SIGNAL_EXTENDER
 
+    EXTEND_BYTE = GENERIC_SIGNAL_EXTENDER
+    EXTEND_HALFWORD = GENERIC_SIGNAL_EXTENDER
+    MUX_TYPE = GENERIC_MUX_2X1
+    MUX_DESTINATION = GENERIC_MUX_2X1
 
 
 @RV32I_TYPE_CONVERTER.testcase
@@ -46,19 +51,15 @@ async def tb_RV32I_TYPE_CONVERTER_case_1(dut: RV32I_TYPE_CONVERTER, trace: lib.W
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000001000000010000000")
 
+
 @pytest.mark.synthesis
 def test_RV32I_TYPE_CONVERTER_synthesis():
     RV32I_TYPE_CONVERTER.build_vhd()
     RV32I_TYPE_CONVERTER.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_RV32I_TYPE_CONVERTER_testcases():
-    RV32I_TYPE_CONVERTER.test_with(
-        [
-            tb_RV32I_TYPE_CONVERTER_case_1,
-        ]
-    )
+    RV32I_TYPE_CONVERTER.test_with(tb_RV32I_TYPE_CONVERTER_case_1)
 
 
 if __name__ == "__main__":

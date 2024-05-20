@@ -24,7 +24,6 @@ class RV32I_BRANCH_CONTROLLER(lib.Entity):
     mux_case_bgeu = GENERIC_MUX_2X1
 
 
-
 @pytest.mark.synthesis
 def test_RV32I_BRANCH_CONTROLLER_synthesis():
     RV32I_BRANCH_CONTROLLER.build_vhd()

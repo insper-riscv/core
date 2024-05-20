@@ -120,7 +120,9 @@ async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
     yield trace.check(dut.destination, "00000000000000000000100000000000", "At 8")
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_and(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 100_000
     dut.select_function.value = BinaryValue(operations["AND"])
 
@@ -135,7 +137,9 @@ async def tb_RV32I_ALU_case_stress_and(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 & source_2, 32))
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_or(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50_000
     dut.select_function.value = BinaryValue(operations["OR"])
 
@@ -150,7 +154,9 @@ async def tb_RV32I_ALU_case_stress_or(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 | source_2, 32))
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_xor(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_xor(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50_000
     dut.select_function.value = BinaryValue(operations["XOR"])
 
@@ -164,9 +170,10 @@ async def tb_RV32I_ALU_case_stress_xor(dut: RV32I_ALU, trace: lib.Waveform):
         await trace.cycle()
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 ^ source_2, 32))
 
-
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_add(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_add(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50_000
     dut.select_function.value = BinaryValue(operations["ADD"])
 
@@ -181,7 +188,9 @@ async def tb_RV32I_ALU_case_stress_add(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 + source_2, 32)[-32:])
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_sub(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_sub(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50_000
     dut.select_function.value = BinaryValue(operations["SUB"])
 
@@ -198,7 +207,9 @@ async def tb_RV32I_ALU_case_stress_sub(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, expected)
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_sll(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_sll(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50_000
     dut.select_function.value = BinaryValue(operations["SLL"])
 
@@ -214,7 +225,9 @@ async def tb_RV32I_ALU_case_stress_sll(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 << source_2, 32)[-32:])
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_slt(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50
     dut.select_function.value = BinaryValue(operations["SLT"])
 
@@ -232,7 +245,9 @@ async def tb_RV32I_ALU_case_stress_slt(dut: RV32I_ALU, trace: lib.Waveform):
 
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_sltu(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_sltu(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50
     dut.select_function.value = BinaryValue(operations["SLTU"])
 
@@ -249,7 +264,9 @@ async def tb_RV32I_ALU_case_stress_sltu(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(1 if source_1 < source_2 else 0, 32), message)
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_srl(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_srl(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50
     dut.select_function.value = BinaryValue(operations["SRL"])
 
@@ -265,7 +282,9 @@ async def tb_RV32I_ALU_case_stress_srl(dut: RV32I_ALU, trace: lib.Waveform):
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 >> source_2, 32))
 
 @RV32I_ALU.testcase
-async def tb_RV32I_ALU_case_stress_sra(dut: RV32I_ALU, trace: lib.Waveform):
+async def tb_RV32I_ALU_case_coverage_sra(dut: RV32I_ALU, trace: lib.Waveform):
+    trace.disable()
+
     qnt_tests = 50
     dut.select_function.value = BinaryValue(operations["SRA"])
 
@@ -284,6 +303,7 @@ async def tb_RV32I_ALU_case_stress_sra(dut: RV32I_ALU, trace: lib.Waveform):
         await trace.cycle()
         yield trace.check(dut.destination, expected, message)
 
+
 @pytest.mark.synthesis
 def test_RV32I_ALU_synthesis():
     RV32I_ALU.build_vhd()
@@ -292,26 +312,23 @@ def test_RV32I_ALU_synthesis():
 
 @pytest.mark.testcases
 def test_RV32I_ALU_testcases():
-    RV32I_ALU.test_with(
-        [
-            tb_RV32I_ALU_case_1,
-        ]
-    )
+    RV32I_ALU.test_with(tb_RV32I_ALU_case_1)
 
 @pytest.mark.coverage
 def test_RV32I_ALU_stress():
     RV32I_ALU.test_with(
         [
-            tb_RV32I_ALU_case_stress_and,
-            tb_RV32I_ALU_case_stress_or,
-            tb_RV32I_ALU_case_stress_xor,
-            tb_RV32I_ALU_case_stress_add,
-            tb_RV32I_ALU_case_stress_sub,
-            tb_RV32I_ALU_case_stress_sll,
-            tb_RV32I_ALU_case_stress_srl,
-            tb_RV32I_ALU_case_stress_sra
+            tb_RV32I_ALU_case_coverage_and,
+            tb_RV32I_ALU_case_coverage_or,
+            tb_RV32I_ALU_case_coverage_xor,
+            tb_RV32I_ALU_case_coverage_add,
+            tb_RV32I_ALU_case_coverage_sub,
+            tb_RV32I_ALU_case_coverage_sll,
+            tb_RV32I_ALU_case_coverage_srl,
+            tb_RV32I_ALU_case_coverage_sra,
         ],
     )
+
 
 if __name__ == "__main__":
     lib.run_test(__file__)

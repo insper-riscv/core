@@ -13,8 +13,8 @@ class CPU_BRANCH_FORWARDING_UNIT(lib.Entity):
     stage_id_select_source_2 = lib.Entity.Input_pin
     stage_mem_enable_destination = lib.Entity.Input_pin
     stage_mem_select_destination = lib.Entity.Input_pin
-    stage_id_source_1 = lib.Entity.Output_pin
-    stage_id_source_2 = lib.Entity.Output_pin
+    select_source_1 = lib.Entity.Output_pin
+    select_source_2 = lib.Entity.Output_pin
 
 
 @pytest.mark.synthesis

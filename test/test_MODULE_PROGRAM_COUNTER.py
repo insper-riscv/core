@@ -12,9 +12,10 @@ class MODULE_PROGRAM_COUNTER(lib.Entity):
     _package = MODULES
 
     clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
     selector = lib.Entity.Input_pin
     source = lib.Entity.Input_pin
-    enable = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
 
     mux_source = GENERIC_MUX_2X1
@@ -57,14 +58,9 @@ def test_MODULE_PROGRAM_COUNTER_synthesis():
     MODULE_PROGRAM_COUNTER.build_vhd()
     MODULE_PROGRAM_COUNTER.build_netlistsvg()
 
-
-# @pytest.mark.testcases
-# def test_MODULE_PROGRAM_COUNTER_testcases():
-#     MODULE_PROGRAM_COUNTER.test_with(
-#         [
-#             tb_MODULE_PROGRAM_COUNTER_case_1,
-#         ]
-#     )
+@pytest.mark.testcases
+def test_MODULE_PROGRAM_COUNTER_testcases():
+    MODULE_PROGRAM_COUNTER.test_with(tb_MODULE_PROGRAM_COUNTER_case_1)
 
 
 if __name__ == "__main__":

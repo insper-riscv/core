@@ -48,7 +48,9 @@ async def tb_GENERIC_MUX_2X1_case_1(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
     yield trace.check(dut.destination, "00000100")
 
 @GENERIC_MUX_2X1.testcase
-async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
+async def tb_GENERIC_MUX_2X1_case_coverage(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
+    trace.disable()
+
     for _ in range(500_00):
         source_1 = random.getrandbits(32)
         source_2 = random.getrandbits(32)
@@ -69,7 +71,9 @@ async def tb_GENERIC_MUX_2X1_case_stress(dut: GENERIC_MUX_2X1, trace: lib.Wavefo
         yield trace.check(dut.destination, '{0:0{1}b}'.format(source_1 if selector == 0 else source_2, 32), message)
 
 @GENERIC_MUX_2X1.testcase
-async def tb_GENERIC_MUX_2X1_case_stress_5_bits(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
+async def tb_GENERIC_MUX_2X1_case_coverage_5_bits(dut: GENERIC_MUX_2X1, trace: lib.Waveform):
+    trace.disable()
+
     bits = 5
     for i in range(2**bits):
         for j in range(2**bits):
@@ -87,38 +91,27 @@ async def tb_GENERIC_MUX_2X1_case_stress_5_bits(dut: GENERIC_MUX_2X1, trace: lib
                 await trace.cycle()
                 yield trace.check(dut.destination, '{0:0{1}b}'.format(i if k == 0 else j, bits), message)
 
+
 @pytest.mark.synthesis
 def test_GENERIC_MUX_2X1_synthesis():
     GENERIC_MUX_2X1.build_vhd()
     GENERIC_MUX_2X1.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_MUX_2X1_testcases():
-    GENERIC_MUX_2X1.test_with(
-        [
-            tb_GENERIC_MUX_2X1_case_1,
-        ]
-    )
+    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_1)
 
 @pytest.mark.coverage
 def test_GENERIC_MUX_2X1_stress():
-    GENERIC_MUX_2X1.test_with(
-        [
-            tb_GENERIC_MUX_2X1_case_stress,
-        ],
-        parameters={"DATA_WIDTH": 32},
-    )
+    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_coverage, {
+        "DATA_WIDTH": 32,
+    })
 
 @pytest.mark.coverage
 def test_GENERIC_MUX_2X1_stress_5_bits():
-    GENERIC_MUX_2X1.test_with(
-        [
-            tb_GENERIC_MUX_2X1_case_stress_5_bits,
-        ],
-        parameters={"DATA_WIDTH": 5},
-    )
-
+    GENERIC_MUX_2X1.test_with(tb_GENERIC_MUX_2X1_case_coverage_5_bits, {
+        "DATA_WIDTH": 5,
+    })
 
 
 if __name__ == "__main__":

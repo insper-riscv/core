@@ -60,14 +60,9 @@ def test_GENERIC_ROM_synthesis():
     GENERIC_ROM.build_vhd()
     GENERIC_ROM.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_ROM_testcases():
-    GENERIC_ROM.test_with(
-        [
-            tb_GENERIC_ROM_case_1,
-        ]
-    )
+    GENERIC_ROM.test_with(tb_GENERIC_ROM_case_1)
 
 
 if __name__ == "__main__":

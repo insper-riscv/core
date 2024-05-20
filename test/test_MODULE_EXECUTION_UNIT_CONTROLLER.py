@@ -120,14 +120,9 @@ def test_MODULE_EXECUTION_UNIT_CONTROLLER_synthesis():
     MODULE_EXECUTION_UNIT_CONTROLLER.build_vhd()
     MODULE_EXECUTION_UNIT_CONTROLLER.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_MODULE_EXECUTION_UNIT_CONTROLLER_testcases():
-    MODULE_EXECUTION_UNIT_CONTROLLER.test_with(
-        [
-            tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1,
-        ]
-    )
+    MODULE_EXECUTION_UNIT_CONTROLLER.test_with(tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1)
 
 
 if __name__ == "__main__":

@@ -10,8 +10,8 @@ class MODULE_WRITE_BACK(lib.Entity):
     _package = MODULES
 
     selector = lib.Entity.Input_pin
-    source_memory = lib.Entity.Input_pin
     source_execution = lib.Entity.Input_pin
+    source_memory = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin
 
     MUX_SOURCE = GENERIC_MUX_2X1
@@ -49,14 +49,9 @@ def test_MODULE_WRITE_BACK_synthesis():
     MODULE_WRITE_BACK.build_vhd()
     MODULE_WRITE_BACK.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_MODULE_WRITE_BACK_testcases():
-    MODULE_WRITE_BACK.test_with(
-        [
-            tb_MODULE_WRITE_BACK_case_1,
-        ]
-    )
+    MODULE_WRITE_BACK.test_with(tb_MODULE_WRITE_BACK_case_1)
 
 
 if __name__ == "__main__":

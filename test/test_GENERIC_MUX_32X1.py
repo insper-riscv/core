@@ -49,7 +49,9 @@ class GENERIC_MUX_32X1(lib.Entity):
 
 @GENERIC_MUX_32X1.testcase
 async def tb_GENERIC_MUX_32X1_coverage(dut: GENERIC_MUX_32X1, trace: lib.Waveform):
-    for _ in range(5):
+    trace.disable()
+
+    for _ in range(1_000):
         pins = [f"source_{i}" for i in range(1, 33)]
         sources = [lib.to_binstr(random.getrandbits(8), 8) for _ in range(1, 33)]
         choice = random.randint(0, 31)
@@ -73,7 +75,6 @@ async def tb_GENERIC_MUX_32X1_coverage(dut: GENERIC_MUX_32X1, trace: lib.Wavefor
 def test_GENERIC_MUX_32X1_synthesis():
     GENERIC_MUX_32X1.build_vhd()
     GENERIC_MUX_32X1.build_netlistsvg()
-
 
 @pytest.mark.coverage
 def test_GENERIC_MUX_32X1_coverage():

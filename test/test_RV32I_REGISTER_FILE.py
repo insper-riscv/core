@@ -4,6 +4,7 @@ from cocotb.binary import BinaryValue
 
 import lib
 from test_RV32I_package import RV32I
+from test_GENERIC_REGISTER import GENERIC_REGISTER
 from test_GENERIC_MUX_32X1 import GENERIC_MUX_32X1
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
@@ -20,6 +21,7 @@ class RV32I_REGISTER_FILE(lib.Entity):
     data_source_1 = lib.Entity.Output_pin
     data_source_2 = lib.Entity.Output_pin
 
+    REGISTER_I = GENERIC_REGISTER
     mux_decode_source_1 = GENERIC_MUX_32X1
     mux_decode_source_2 = GENERIC_MUX_32X1
     mux_source_1 = GENERIC_MUX_2X1
@@ -64,7 +66,7 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Wav
         "00000000000000001111111111111111",
     ]
     values_data_source_1 = [
-        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
         "00000000000000000000000000000000",
         values_data_destination[1],
         values_data_destination[2],
@@ -73,7 +75,7 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Wav
         values_data_destination[5],
     ]
     values_data_source_2 = [
-        "00000000000000000000000000000000",
+        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         values_data_destination[1],
@@ -115,14 +117,9 @@ def test_RV32I_REGISTER_FILE_synthesis():
     RV32I_REGISTER_FILE.build_vhd()
     RV32I_REGISTER_FILE.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_RV32I_REGISTER_FILE_testcases():
-    RV32I_REGISTER_FILE.test_with(
-        [
-            tb_RV32I_REGISTER_FILE_case_1,
-        ]
-    )
+    RV32I_REGISTER_FILE.test_with(tb_RV32I_REGISTER_FILE_case_1)
 
 
 if __name__ == "__main__":

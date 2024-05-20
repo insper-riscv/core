@@ -26,7 +26,6 @@ async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: lib
         yield trace.check(dut.pulse, pulse, f"At clock {index}.")
         await FallingEdge(dut.clock)
 
-
 @GENERIC_EDGE_DETECTOR.testcase
 async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: lib.Waveform):
     values_source = ["0", "1", "0", "0"]
@@ -45,15 +44,12 @@ def test_GENERIC_EDGE_DETECTOR_synthesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
     GENERIC_EDGE_DETECTOR.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_EDGE_DETECTOR_testcases():
-    GENERIC_EDGE_DETECTOR.test_with(
-        [
-            tb_GENERIC_EDGE_DETECTOR_case_1,
-            tb_GENERIC_EDGE_DETECTOR_case_2,
-        ]
-    )
+    GENERIC_EDGE_DETECTOR.test_with([
+        tb_GENERIC_EDGE_DETECTOR_case_1,
+        tb_GENERIC_EDGE_DETECTOR_case_2,
+    ])
 
 
 if __name__ == "__main__":

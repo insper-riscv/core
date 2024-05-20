@@ -21,7 +21,7 @@ class MODULE_MEMORY_INTERFACE(lib.Entity):
 @pytest.mark.synthesis
 def test_MODULE_MEMORY_INTERFACE_synthesis():
     MODULE_MEMORY_INTERFACE.build_vhd()
-    # MODULE_MEMORY_INTERFACE.build_netlistsvg()
+    MODULE_MEMORY_INTERFACE.build_netlistsvg()
 
 
 if __name__ == "__main__":

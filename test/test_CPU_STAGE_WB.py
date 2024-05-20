@@ -8,12 +8,15 @@ from test_MODULE_WRITE_BACK import MODULE_WRITE_BACK
 class CPU_STAGE_WB(lib.Entity):
     _package = CPU
 
+    clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
     source = lib.Entity.Input_pin
     enable_destination = lib.Entity.Output_pin
     select_destination = lib.Entity.Output_pin
     destination = lib.Entity.Output_pin
 
-    module_write_back = MODULE_WRITE_BACK
+    write_back = MODULE_WRITE_BACK
 
 
 @pytest.mark.synthesis
