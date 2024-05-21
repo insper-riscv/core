@@ -9,7 +9,7 @@ entity TOP_LEVEL is
     generic (
         PROGRAM_FILE : string := "../data/mif/blink.mif";
 		  DEMONSTRATION  : boolean := TRUE;
-		  QUARTUS_MEMORY : boolean := FALSE
+		  QUARTUS_MEMORY : boolean := TRUE
     );
 
     port (
