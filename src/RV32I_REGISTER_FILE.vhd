@@ -42,7 +42,7 @@ begin
         passthrough_2 <= is_equal_dynamic(address_source_2, address_destination) AND reduce_or(address_destination);
     end process;
 
-    GEN_REGISTERS : for i in registers'range generate
+    GEN_REGISTERS : for i in 1 to (ADDRESS_WIDTH - 1) generate
         REGISTER_I : entity WORK.GENERIC_REGISTER
             generic map (
                 DATA_WIDTH => DATA_WIDTH
@@ -50,7 +50,7 @@ begin
             port map (
                 clock       => clock,
                 clear       => clear,
-                enable      => enable AND is_equal(address_destination, std_logic_vector(to_unsigned(i, 5))),
+                enable      => enable AND is_equal_dynamic(address_destination, std_logic_vector(to_unsigned(i, 5))),
                 source      => data_destination,
                 destination => registers(i)
             );

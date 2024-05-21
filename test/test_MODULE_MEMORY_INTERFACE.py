@@ -14,8 +14,8 @@ class MODULE_MEMORY_INTERFACE(lib.Entity):
     destination_data_in = lib.Entity.Output_pin
     destination_data_out = lib.Entity.Output_pin
 
-    DATA_IN = RV32I_TYPE_CONVERTER
-    DATA_OUT = RV32I_TYPE_CONVERTER
+    data_in = RV32I_TYPE_CONVERTER
+    data_out = RV32I_TYPE_CONVERTER
 
 
 @pytest.mark.synthesis

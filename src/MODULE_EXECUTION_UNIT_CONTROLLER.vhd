@@ -29,31 +29,31 @@ begin
 
     destination <=  '1' & funct_3 when (
                         (
-                            is_equal(opcode, WORK.RV32I.OPCODE_OP) OR
-                            is_equal(opcode, WORK.RV32I.OPCODE_OP_IMM)
+                            is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP) OR
+                            is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP_IMM)
                         ) AND (
-                            is_equal(funct_3, WORK.RV32I.FUNCT3_SLT) OR
-                            is_equal(funct_3, WORK.RV32I.FUNCT3_SLTU)
+                            is_equal_dynamic(funct_3, WORK.RV32I.FUNCT3_SLT) OR
+                            is_equal_dynamic(funct_3, WORK.RV32I.FUNCT3_SLTU)
                         )
                     ) else
                     funct_7(5) & funct_3 when (
-                        is_equal(opcode, WORK.RV32I.OPCODE_OP) OR
+                        is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP) OR
                         (
-                            is_equal(opcode, WORK.RV32I.OPCODE_OP_IMM) AND
+                            is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP_IMM) AND
                             (
-                                is_equal(funct_3, WORK.RV32I.FUNCT3_SLL) OR
-                                is_equal(funct_3, WORK.RV32I.FUNCT3_SRL)
+                                is_equal_dynamic(funct_3, WORK.RV32I.FUNCT3_SLL) OR
+                                is_equal_dynamic(funct_3, WORK.RV32I.FUNCT3_SRL)
                             )
                         )
                     ) else
                     '0' & funct_3 when (
-                        is_equal(opcode, WORK.RV32I.OPCODE_OP_IMM) OR
-                        is_equal(opcode, WORK.RV32I.OPCODE_JALR)
+                        is_equal_dynamic(opcode, WORK.RV32I.OPCODE_OP_IMM) OR
+                        is_equal_dynamic(opcode, WORK.RV32I.OPCODE_JALR)
                     ) else
                     '0' & WORK.RV32I.FUNCT3_ADD when (
-                        is_equal(opcode, WORK.RV32I.OPCODE_SYSTEM) OR
-                        is_equal(opcode, WORK.RV32I.OPCODE_LOAD) OR
-                        is_equal(opcode, WORK.RV32I.OPCODE_STORE)
+                        is_equal_dynamic(opcode, WORK.RV32I.OPCODE_SYSTEM) OR
+                        is_equal_dynamic(opcode, WORK.RV32I.OPCODE_LOAD) OR
+                        is_equal_dynamic(opcode, WORK.RV32I.OPCODE_STORE)
                     ) else
                     '0' & WORK.RV32I.FUNCT3_OR;
 

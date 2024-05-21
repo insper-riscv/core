@@ -65,8 +65,8 @@ begin
         )
         port map (
             selector    => select_type(1),
-            source_1    => source,
-            source_2    => destination_auxiliar,
+            source_1    => destination_auxiliar,
+            source_2    => source,
             destination => destination
         );
 

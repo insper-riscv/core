@@ -69,15 +69,32 @@ class Program:
             data.value = BinaryValue(value)
 
             if self.memory is not None:
-                memory_address = self.memory_address_pin.value.integer # type: ignore
+                try:
+                    memory_address = self.memory_address_pin.value.integer # type: ignore
+                except ValueError:
+                    memory_address = 0 # type: ignore
 
-                if self.memory_enable_write_pin.value.binstr == "1": # type: ignore
+                try:
+                    enable_write = self.memory_enable_write_pin.value.binstr == "1" # type: ignore
+                except ValueError:
+                    enable_write = False # type: ignore
+
+                try:
+                    enable_read = self.memory_enable_read_pin.value.binstr == "1" # type: ignore
+                except ValueError:
+                    enable_read = False # type: ignore
+
+
+                if enable_write:
                     self.memory[memory_address] = self.memory_source_pin.value.binstr # type: ignore
-                elif self.memory_enable_read_pin.value.binstr == "0": # type: ignore
-                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr)) # type: ignore
-                elif memory_address in self.memory:
+
+
+
+                if memory_address in self.memory and enable_read:
                     self.memory_destination_pin.value = BinaryValue(self.memory[memory_address]) # type: ignore
-                else:
+                elif enable_read == False:
+                    self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr)) # type: ignore
+                elif enable_read == True and memory_address not in self.memory:
                     self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr)) # type: ignore
                     
             await trace.cycle()

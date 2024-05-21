@@ -18,7 +18,7 @@ class CPU_STAGE_MEM(lib.Entity):
     data_memory_out = lib.Entity.Output_pin
     destination = lib.Entity.Output_pin
 
-    MEM_INTERFACE = MODULE_MEMORY_INTERFACE
+    mem_interface = MODULE_MEMORY_INTERFACE
 
 
 @pytest.mark.synthesis

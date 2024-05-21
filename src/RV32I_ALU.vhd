@@ -42,8 +42,8 @@ begin
 
     flag_subtract <=    is_equal_dynamic(select_function(3 downto 2), "10") AND
                         NOT(is_equal_dynamic(select_function(1 downto 0), "01"));
-                        --WORK.GENERICS.is_equal(select_function(3 downto 2), "10") AND
-                        --NOT(WORK.GENERICS.is_equal(select_function(1 downto 0), "01"));
+                        --WORK.GENERICS.is_equal_dynamic(select_function(3 downto 2), "10") AND
+                        --NOT(WORK.GENERICS.is_equal_dynamic(select_function(1 downto 0), "01"));
 
     source_and <= source_1 AND source_2_auxiliar;
     source_or  <= source_1 OR  source_2;
