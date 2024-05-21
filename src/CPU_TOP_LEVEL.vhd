@@ -6,6 +6,10 @@ library WORK;
 
 entity CPU_TOP_LEVEL is
 
+	 generic (
+	     QUARTUS_MEMORY : boolean := FALSE
+	 );
+
     port (
         clock           : in  std_logic := '0';
         clear           : in  std_logic := '0';
@@ -65,6 +69,10 @@ begin
         );
 
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
+	 
+			generic map (
+            QUARTUS_MEMORY => FALSE
+         )
         port map (
             clock                => clock,
             clear                => NOT flag_stall,

@@ -7,7 +7,8 @@ library WORK;
 entity CPU_STAGE_ID is
 
     generic (
-        GENERATE_REGISTERS : boolean := TRUE
+        GENERATE_REGISTERS : boolean := TRUE;
+		  QUARTUS_MEMORY     : boolean := FALSE
     );
 
     port (
@@ -34,6 +35,7 @@ architecture RV32I of CPU_STAGE_ID is
     signal data_source_2       : WORK.CPU.t_DATA;
     signal data_immediate      : WORK.CPU.t_DATA;
     signal immediate           : WORK.CPU.t_DATA;
+	 signal address_out         : WORK.CPU.t_DATA;
     signal enable_flush        : std_logic;
     signal enable_branch       : std_logic;
 
@@ -105,11 +107,24 @@ begin
         data_source_1      => data_source_1,      
         data_source_2      => data_source_2  
     );
+	 
+	  QUARTUS_DELAY : if (QUARTUS_MEMORY = TRUE) generate
+        UPDATE : process(source_0.address_program, clock, enable)
+        begin
+            if (rising_edge(clock)) then
+                if (enable = '1') then
+						address_out <= source_0.address_program;
+                end if;
+            end if;
+        end process;
+    else generate
+         address_out <= source_0.address_program;
+    end generate;
 
     BRANCH_UNIT: entity WORK.MODULE_BRANCH_UNIT(RV32I)
         port map (
             selector         => control_id.select_jump,
-            source_program   => source_0.address_program,
+            source_program   => address_out,
             source_immediate => data_immediate,
             source_register  => data_source_1,
             destination      => address_jump

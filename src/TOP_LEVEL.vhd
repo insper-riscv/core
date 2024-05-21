@@ -7,13 +7,15 @@ library WORK;
 entity TOP_LEVEL is
 
     generic (
-        PROGRAM_FILE : string := "../data/mif/cpu_rom_dummy.mif"
+        PROGRAM_FILE : string := "../data/mif/blink.mif";
+		  DEMONSTRATION  : boolean := TRUE;
+		  QUARTUS_MEMORY : boolean := FALSE
     );
 
     port (
         CLOCK           : in  std_logic                    := '0';
         SW              : in  std_logic_vector(3 downto 0) := (others => '0');
-        LED             : out std_logic_vector(7 downto 0) := (others => '0')
+        LEDR             : out std_logic_vector(9 downto 0) := (others => '0')
     );
 
 end entity;
@@ -27,11 +29,11 @@ architecture RTL of TOP_LEVEL is
     signal enable_memory_write : std_logic;
     signal address_program     : WORK.RV32I.t_DATA;
     signal address_memory      : WORK.RV32I.t_DATA;
+    signal clock_processor      : std_logic := '0';
 
 begin
 
-    LED(0) <= SW(1);
-    LED(7 downto 1) <= (others => '0');
+	LEDR(0) <= SW(0);
 
     ROM : entity WORK.GENERIC_ROM
         generic map (
@@ -40,7 +42,7 @@ begin
             INIT_FILE     => PROGRAM_FILE
         )
         port map (
-            clock       => CLOCK,
+            clock       => clock_processor,
             address     => address_program,
             destination => data_program
         );
@@ -51,7 +53,7 @@ begin
             ADDRESS_WIDTH => WORK.RV32I.XLEN
         )
         port map (
-            clock        => CLOCK,
+            clock        => clock_processor,
             enable       => '1',      
             enable_read  => enable_memory_read,
             enable_write => enable_memory_write,
@@ -61,8 +63,11 @@ begin
         );
 
     CPU : entity WORK.CPU_TOP_LEVEL(RV32I)
+	     generic map (
+            QUARTUS_MEMORY => QUARTUS_MEMORY
+        )
         port map (
-            clock           => CLOCK,
+            clock           => clock_processor,
             clear           => '0',
             enable          => '1',
             memory_read     => enable_memory_read,
@@ -73,5 +78,29 @@ begin
             address_program => address_program,
             address_memory  => address_memory
         );
+    
+    UPDATE_LED : entity WORK.GENERIC_REGISTER
+        generic map (
+            DATA_WIDTH    => 2
+        )
+        port map (
+            clock        => clock_processor,
+            clear        => '0',
+            enable       => enable_memory_write AND WORK.GENERICS.is_equal_dynamic(address_memory,"00000000000000000000000010000000"),
+            source       => data_memory_out(1 downto  0),
+            destination  => LEDR(8 downto 7)
+        );
+    
+    CLOCK_DEMONSTRATION : if DEMONSTRATION = TRUE generate
+        low_freq : entity WORK.GENERIC_LOW_FREQ
+            generic map (n => 100000000) 
+            port map (
+                clock => CLOCK, 
+                clock_out => clock_processor
+            );
+            LEDR(9) <= clock_processor;
+            else generate
+               clock_processor <= CLOCK;
+           end generate;
 
 end architecture;
