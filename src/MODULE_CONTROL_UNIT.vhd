@@ -109,8 +109,8 @@ begin
             selector    => (u_type OR j_type) & (u_type OR b_type),
             source_1    => (others => instruction(31)),
             source_2    => instruction(7 downto 7),
-            source_4    => instruction(20 downto 20),
-            source_3    => (others => '0'),
+            source_3    => instruction(20 downto 20),
+            source_4    => (others => '0'),
             destination => immediate(11 downto 11)
         );
 
