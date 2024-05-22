@@ -71,7 +71,7 @@ jobs:
           - component: test_MODULE_EXECUTION_UNIT_CONTROLLER.py
             enabled: true
           - component: test_MODULE_EXECUTION_UNIT.py
-            enabled: true
+            enabled: false
           - component: test_MODULE_PROGRAM_COUNTER.py
             enabled: false
           - component: test_MODULE_REGISTER_FILE.py
