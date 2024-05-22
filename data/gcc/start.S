@@ -1,6 +1,6 @@
-    .section .main
-    .global main
-_init:
-test:
-    addi ra, zero, 0
+_end:
+    nop
+    nop
+    nop
+    nop
     ecall

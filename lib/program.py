@@ -40,10 +40,12 @@ class Program:
         self.stepping = False
 
     def get_memory_map(self):
-        elf = self._build_program_executable()
+        obj = self._build_program_object()
+        elf = self._link_program_executable(obj)
         bins = self._build_program_dump(elf)
         dump = self._get_program_dump(bins)
 
+        obj.unlink()
         elf.unlink()
         bins.unlink()
 
@@ -52,8 +54,6 @@ class Program:
     async def attach_device(self, trace: lib.Waveform, address: T.Type[lib.Entity.Output_pin], data: T.Type[lib.Entity.Input_pin]):
         mem_map = self.get_memory_map()
         index = 0
-
-        print(mem_map)
 
         while True:
             try:
@@ -68,7 +68,9 @@ class Program:
 
             data.value = BinaryValue(value)
 
-            if self.memory is not None:
+            if value == Program.ENVIRONMENT_CALL:
+                break
+            elif self.memory is not None:
                 try:
                     memory_address = self.memory_address_pin.value.integer # type: ignore
                 except ValueError:
@@ -84,11 +86,8 @@ class Program:
                 except ValueError:
                     enable_read = False # type: ignore
 
-
                 if enable_write:
                     self.memory[memory_address] = self.memory_source_pin.value.binstr # type: ignore
-
-
 
                 if memory_address in self.memory and enable_read:
                     self.memory_destination_pin.value = BinaryValue(self.memory[memory_address]) # type: ignore
@@ -96,16 +95,13 @@ class Program:
                     self.memory_destination_pin.value = BinaryValue("Z" * len(self.memory_destination_pin.value.binstr)) # type: ignore
                 elif enable_read == True and memory_address not in self.memory:
                     self.memory_destination_pin.value = BinaryValue("0" * len(self.memory_destination_pin.value.binstr)) # type: ignore
-                    
+
             await trace.cycle()
 
             if self.stepping or value == Program.ENVIRONMENT_BREAKPOINT:
-                print(index, key)
                 yield index, key
 
                 index += 1
-            elif value == Program.ENVIRONMENT_CALL:    
-                break
 
     def attach_memory(
             self,
@@ -150,21 +146,37 @@ class Program:
             "END;\n",
         ])
 
-    def _build_program_executable(self):
-        output = Path(self.entry.with_suffix('.out').name)
+    def _build_program_object(self):
+        output = Path(self.entry.with_suffix('.o').name)
         process = subprocess.Popen(
             [
                 "riscv32-unknown-elf-gcc",
                 "-T",
                 f"{lib.WORKSPACE_FOLDER}/data/gcc/linker.ld",
-                "-nostartfiles",
-                f"{lib.WORKSPACE_FOLDER}/data/gcc/start.S",
+                "-c",
                 "-fno-exceptions",
                 "-nolibc",
                 "-nostdlib",
                 "-O3",
                 str(self.entry),
                 *self.dependencies,
+                "-o",
+                output,
+            ],
+            stdout=subprocess.PIPE,
+        )
+        outs, errs = process.communicate(timeout=60)
+
+        assert process.returncode == 0, outs.decode()
+        return output
+
+    def _link_program_executable(self, obj_file: Path):
+        output = Path(self.entry.with_suffix('.out').name)
+        process = subprocess.Popen(
+            [
+                "riscv32-unknown-elf-ld",
+                str(obj_file),
+                f"{lib.WORKSPACE_FOLDER}/data/gcc/start.o",
                 "-o",
                 output,
             ],
