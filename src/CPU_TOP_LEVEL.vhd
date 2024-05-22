@@ -69,10 +69,9 @@ begin
         );
 
     INSTRUCTION_DECODE : entity WORK.CPU_STAGE_ID(RV32I)
-
-			generic map (
+		generic map (
             QUARTUS_MEMORY => QUARTUS_MEMORY
-         )
+        )
         port map (
             clock                => clock,
             clear                => NOT flag_stall,

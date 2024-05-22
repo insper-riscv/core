@@ -8,14 +8,14 @@ entity TOP_LEVEL is
 
     generic (
         PROGRAM_FILE   : string := "../data/mif/blink.mif";
-		DEMONSTRATION  : boolean := TRUE;
-		QUARTUS_MEMORY : boolean := TRUE
+		DEMONSTRATION  : boolean := FALSE;
+		QUARTUS_MEMORY : boolean := FALSE
     );
 
     port (
         CLOCK           : in  std_logic                    := '0';
         SW              : in  std_logic_vector(3 downto 0) := (others => '0');
-        LEDR            : out std_logic_vector(9 downto 0) := (others => '0')
+        LEDR            : out std_logic_vector(9 downto 0) := (others => '1')
     );
 
 end entity;
@@ -33,7 +33,9 @@ architecture RTL of TOP_LEVEL is
 
 begin
 
-	LEDR(0) <= SW(0);
+	LEDR(0)          <= SW(0);
+	LEDR(6 downto 1) <= (others => '1');
+	LEDR(9)          <= '1';
 
     ROM : entity WORK.GENERIC_ROM
         generic map (
