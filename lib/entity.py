@@ -60,9 +60,11 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
             else:
                 tracer = Waveform(*signals, clock=None, model=cls) # type: ignore
 
-            await tracer.start()
+            tracer.set_title(fn.__name__)
 
             with tracer as trace:
+                await tracer.start()
+
                 pased = all([result async for result in fn(dut, trace)])
 
                 if trace.enabled:

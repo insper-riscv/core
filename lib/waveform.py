@@ -16,12 +16,13 @@ class Waveform:
         self.model = model
         self.scale = 1
         self.enabled = True
+        self.title = None
 
         if clock is not None:
             self._trace = cocotb.wavedrom.trace(*args, clk=clock)
             self.clock = cocotb.clock.Clock(clock, 20_000, units="ns")
 
-            cocotb.start_soon(self.clock.start(start_high=False))
+            cocotb.start_soon(self.clock.start(start_high=True))
         else:
             self._trace = Clockless_Trace(*args)
 
@@ -33,11 +34,13 @@ class Waveform:
         return self._trace.__exit__(exc_type, exc_val, exc_tb)
 
     async def start(self):
-        # await cocotb.triggers.FallingEdge(self.clock_pin)
-        pass
+        await self.cycle()
 
     def set_scale(self, scale: T.Union[int, float]):
         self.scale = scale
+
+    def set_title(self, text: str):
+        self.title = text
 
     def disable(self):
         self.enabled = False
@@ -52,8 +55,8 @@ class Waveform:
     async def cycle(self, count: int = 1):
         if self.clock_pin is not None:
             for _ in range(count):
+                await cocotb.triggers.RisingEdge(self.clock_pin)
                 await cocotb.triggers.FallingEdge(self.clock_pin)
-                # await cocotb.triggers.RisingEdge(self.clock_pin)
         else:
             await cocotb.triggers.Timer(cocotb.triggers.Decimal(1), units="step")
 
@@ -93,7 +96,7 @@ class Waveform:
             signal._samples[pin._name][-1] = "7" if result else "9" # type: ignore
 
             if len(value) < 2:
-                signal._data[pin._name].append(pin.value) # type: ignore
+                signal._data[pin._name].append(str(pin.value)) # type: ignore
 
             break
 
@@ -113,19 +116,18 @@ class Waveform:
             data["signal"].insert(1, ["OUT"])
 
             for signal in data["signal"][2:]:
-                # if signal["name"] == "clock":
-                #     signal["wave"] = "P" + signal["wave"][1:]
-                #     signal["phase"] = self.scale * -0.5
+                if signal["name"] == "clock":
+                    signal["wave"] = "P" + signal["wave"][1:]
 
-                # if "data" in signal:
-                #     if type(signal["data"]) == str:
-                #         try:
-                #             signal["data"] = " ".join(
-                #                 "x" + hex(value)[2:].upper()
-                #                 for value in map(int, signal["data"].split(" "))
-                #             )
-                #         except Exception:
-                #             pass
+                if "data" in signal:
+                    if type(signal["data"]) == str:
+                        try:
+                            signal["data"] = " ".join(
+                                "0x" + hex(value)[2:].upper()
+                                for value in map(int, signal["data"].split(" "))
+                            )
+                        except Exception:
+                            pass
 
                 if signal["name"] in inputs:
                     data["signal"][0].append(data["signal"].pop(index))
@@ -137,14 +139,26 @@ class Waveform:
             if len(data["signal"]) > 2:
                 data["signal"].insert(2, {})
 
-            # data.update({
-            #     "config": {
-            #         "hscale": self.scale,
-            #     },
-            #     "head": {
-            #         "tock": 1,
-            #     },
-            # })
+            data.update({
+                "config": {
+                    "hscale": self.scale,
+                },
+            })
+
+            if True:
+                data.update({
+                    "head": {
+                        "tock": 0,
+                    },
+                })
+
+            if self.title is not None:
+                data.update({
+                    "head": {
+                        **data["head"],
+                        "text": self.title,
+                    },
+                })
 
             source = json.dumps(data)
 
