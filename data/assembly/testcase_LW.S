@@ -1,6 +1,5 @@
     .section    .text
     .globl      main
-
 main:
     addi        x0,         x0,         0       ;
     addi        x1,         x0,         8       ;
@@ -27,6 +26,3 @@ j_eq1:
 j_eq2:
     addi        x9,         x0,         12      ;
     addi        x9,         x0,         16      ;
-    nop                                         ;
-    nop                                         ;
-    nop                                         ;

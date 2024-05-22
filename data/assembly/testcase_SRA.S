@@ -1,6 +1,5 @@
     .section    .text
     .globl      main
-
 main:
     addi        x1,         x0,         0       ;
     addi        x1,         x0,         256     ;
@@ -11,6 +10,3 @@ main:
     sra         x3,         x8,         x2      ;
     lui         x9,         524288              ;
     sra         x3,         x9,         x2      ;
-    nop                                         ;
-    nop                                         ;
-    nop                                         ;

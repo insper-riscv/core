@@ -1,6 +1,5 @@
     .section    .text
     .globl      main
-
 main:
     jalr        x1,         12(x0)              ;
     addi        x0,         x0,         7       ;
@@ -13,6 +12,3 @@ main:
     addi        x0,         x0,         0       ;
     addi        x2,         x0,         8       ;
     addi        x2,         x1,         12      ;
-    nop                                         ;
-    nop                                         ;
-    nop                                         ;

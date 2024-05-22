@@ -1,6 +1,5 @@
     .section    .text
     .globl      main
-
 main:
     addi        x1,         x0,         0       ;
     lui         x10,        524288              ;
@@ -13,6 +12,3 @@ main:
     slti        x2,         x1,         40      ;
     slti        x2,         x9,         1       ;
     slti        x2,         x10,        1       ;
-    nop                                         ;
-    nop                                         ;
-    nop                                         ;

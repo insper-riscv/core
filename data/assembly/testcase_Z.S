@@ -1,6 +1,5 @@
     .section    .text
     .globl      main
-
 main:
     add         x3,         x1,         x1      ;
     addi        x1,         x0,         0       ;
