@@ -10,9 +10,9 @@ entity GENERIC_CARRY_LOOKAHEAD is
     );
 
     port (
-        carry_in        : in  std_logic;
-        carry_generate  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        carry_propagate : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        carry_in        : in  std_logic                                   := '0';
+        carry_generate  : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        carry_propagate : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
         carry_out       : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 

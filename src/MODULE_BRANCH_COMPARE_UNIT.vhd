@@ -16,7 +16,7 @@ entity MODULE_BRANCH_COMPARE_UNIT is
         select_function    : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
         source_1           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        forward            : in  WORK.CPU.t_FORWARD_BRANCH;
+        forward            : in  WORK.CPU.t_FORWARD_BRANCH := WORK.CPU.NULL_FORWARD_BRANCH;
         destination        : out std_logic
     );
 

@@ -19,6 +19,7 @@ entity MODULE_EXECUTION_UNIT is
         source_1         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         immediate        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        overflow         : out std_logic;
         destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -62,6 +63,7 @@ begin
             select_function => select_function,
             source_1        => alu_source_1,
             source_2        => alu_source_2,
+            overflow        => overflow,
             destination     => destination
         );
 

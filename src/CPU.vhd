@@ -171,4 +171,17 @@ package CPU is
         select_destination => (others => '0')
     );
 
+    constant NULL_FORWARD_BRANCH : t_FORWARD_BRANCH := (
+        select_source_1 => '0',
+        select_source_2 => '0',
+        source_mem      => (others => '0')
+    );
+
+    constant NULL_FORWARD_EXECUTION : t_FORWARD_EXECUTION := (
+        select_source_1 => (others => '0'),
+        select_source_2 => (others => '0'),
+        source_mem      => (others => '0'),
+        source_wb       => (others => '0')
+    );
+
 end package;

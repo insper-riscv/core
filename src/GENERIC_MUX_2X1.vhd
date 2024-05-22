@@ -10,9 +10,9 @@ entity GENERIC_MUX_2X1 is
     );
 
     port (
-        selector    : in  std_logic;
-        source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        selector    : in  std_logic                                   := '0';
+        source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        source_2    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 

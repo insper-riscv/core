@@ -7,8 +7,8 @@ entity GENERIC_DEBOUNCE is
 
     Port (
         clock  : in  std_logic;
-        clear  : in  std_logic := '0';
-        source : in  std_logic;
+        clear  : in  std_logic := '1';
+        source : in  std_logic := 'X';
         state  : out std_logic
     );
 

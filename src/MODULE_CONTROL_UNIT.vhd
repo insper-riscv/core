@@ -16,10 +16,10 @@ entity MODULE_CONTROL_UNIT is
         clear       : in  std_logic;
         instruction : in  std_logic_vector((INSTRUCTION_WIDTH - 1) downto 0);
         immediate   : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        control_id  : out WORK.CPU.t_CONTROL_ID;
-        control_ex  : out WORK.CPU.t_CONTROL_EX;
-        control_mem : out WORK.CPU.t_CONTROL_MEM;
-        control_wb  : out WORK.CPU.t_CONTROL_WB
+        control_id  : out WORK.CPU.t_CONTROL_ID := WORK.CPU.NULL_CONTROL_ID;
+        control_ex  : out WORK.CPU.t_CONTROL_EX := WORK.CPU.NULL_CONTROL_EX;
+        control_mem : out WORK.CPU.t_CONTROL_MEM := WORK.CPU.NULL_CONTROL_MEM;
+        control_wb  : out WORK.CPU.t_CONTROL_WB := WORK.CPU.NULL_CONTROL_WB
     );
 
 end entity;

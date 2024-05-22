@@ -11,9 +11,9 @@ entity GENERIC_REGISTER is
 
     port (
         clock       : in  std_logic;
-        clear       : in  std_logic;
-        enable      : in  std_logic;
-        source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        clear       : in  std_logic := '1';
+        enable      : in  std_logic := 'X';
+        source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => 'X');
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0')
     );
 

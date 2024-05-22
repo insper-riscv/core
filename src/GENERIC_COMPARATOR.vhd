@@ -12,8 +12,8 @@ entity GENERIC_COMPARATOR is
     );
 
     port (
-        source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
         flag_equal    : out std_logic;
         flag_less     : out std_logic;
         flag_greather : out std_logic
