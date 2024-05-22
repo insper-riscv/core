@@ -66,7 +66,7 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Wav
         "00000000000000001111111111111111",
     ]
     values_data_source_1 = [
-        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         values_data_destination[1],
         values_data_destination[2],
@@ -75,7 +75,7 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Wav
         values_data_destination[5],
     ]
     values_data_source_2 = [
-        "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         values_data_destination[1],

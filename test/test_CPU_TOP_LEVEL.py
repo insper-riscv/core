@@ -26,13 +26,14 @@ class CPU_TOP_LEVEL(lib.Entity):
     address_program = lib.Entity.Output_pin
     address_memory = lib.Entity.Output_pin
 
+    stage_wb_data_destination = lib.Entity.Output_pin # Check internal signal
+
     instruction_fetch = CPU_STAGE_IF
     instruction_decode = CPU_STAGE_ID
     execute = CPU_STAGE_EX
     memory_access = CPU_STAGE_MEM
     write_back = CPU_STAGE_WB
     branch_forwarding_unit = CPU_BRANCH_FORWARDING_UNIT
-    execution_forwarding_unit = CPU_EXECUTION_FORWARDING_UNIT
     control_hazzard_unit = CPU_HAZZARD_CONTROL_UNIT
 
 
@@ -40,7 +41,6 @@ class CPU_TOP_LEVEL(lib.Entity):
 async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_ADDI.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -60,13 +60,12 @@ async def tb_CPU_TOP_LEVEL_ADDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_ADD.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -83,13 +82,12 @@ async def tb_CPU_TOP_LEVEL_ADD(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SUB.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -108,7 +106,7 @@ async def tb_CPU_TOP_LEVEL_SUB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -119,8 +117,6 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000000",
@@ -129,7 +125,7 @@ async def tb_CPU_TOP_LEVEL_BEQ(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -138,7 +134,6 @@ async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000111",
@@ -153,7 +148,7 @@ async def tb_CPU_TOP_LEVEL_BNE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -162,7 +157,6 @@ async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000111",
@@ -177,7 +171,7 @@ async def tb_CPU_TOP_LEVEL_BLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -186,7 +180,6 @@ async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000111",
@@ -201,7 +194,7 @@ async def tb_CPU_TOP_LEVEL_BLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -210,7 +203,6 @@ async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000111",
@@ -225,7 +217,7 @@ async def tb_CPU_TOP_LEVEL_BGE(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -234,7 +226,6 @@ async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000010",
         "00000000000000000000000000000001",
         "00000000000000000000000000000111",
@@ -249,13 +240,12 @@ async def tb_CPU_TOP_LEVEL_BGEU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_LUI.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -269,13 +259,12 @@ async def tb_CPU_TOP_LEVEL_LUI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_AUIPC.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -289,7 +278,7 @@ async def tb_CPU_TOP_LEVEL_AUIPC(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -298,7 +287,6 @@ async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000001",
         "01000000000000000000000000000000",
         "00000000000000000000000000001000",
@@ -316,7 +304,7 @@ async def tb_CPU_TOP_LEVEL_SLT(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -325,7 +313,6 @@ async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "10000000000000000000000000000000",
         "00000000000000000000000000001000",
         "00000000000000000000000000000000",
@@ -342,13 +329,12 @@ async def tb_CPU_TOP_LEVEL_SLTI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SLTU.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -369,13 +355,12 @@ async def tb_CPU_TOP_LEVEL_SLTU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SLTIU.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -395,13 +380,12 @@ async def tb_CPU_TOP_LEVEL_SLTIU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_JAL.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -419,7 +403,7 @@ async def tb_CPU_TOP_LEVEL_JAL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -428,17 +412,17 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000100",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000010000",
+        "00000000000000000000000000000111",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001100",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000100000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000001000",
-        "00000000000000000000000000011100",
         "00000000000000000000000000000000",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000011000",
     ]
 
     trace.set_scale(2)
@@ -447,13 +431,12 @@ async def tb_CPU_TOP_LEVEL_JALR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         if index == len(values_destination):
             break
 
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_LB.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -478,13 +461,12 @@ async def tb_CPU_TOP_LEVEL_LB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         if index == len(values_destination):
             break
 
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_LBU.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -506,13 +488,12 @@ async def tb_CPU_TOP_LEVEL_LBU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_LH.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -534,13 +515,12 @@ async def tb_CPU_TOP_LEVEL_LH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_LHU.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -562,13 +542,12 @@ async def tb_CPU_TOP_LEVEL_LHU(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_LW.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -603,7 +582,7 @@ async def tb_CPU_TOP_LEVEL_LW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -612,7 +591,6 @@ async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000111",
         "11111111111000000000000000000000",
         "11111111111000000000000000000111",
@@ -627,7 +605,7 @@ async def tb_CPU_TOP_LEVEL_XOR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -636,7 +614,6 @@ async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "11111111111000000000000000000000",
         "11111111111000000000000000000111",
         "11111111111000000000000000000111",
@@ -648,7 +625,7 @@ async def tb_CPU_TOP_LEVEL_XORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -657,7 +634,6 @@ async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000111",
         "00000000000000000000000000000110",
         "00000000000000000000000000000101",
@@ -674,7 +650,7 @@ async def tb_CPU_TOP_LEVEL_AND(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -683,7 +659,6 @@ async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000111",
         "00000000000000000000000000000110",
         "00000000000000000000000000000101",
@@ -695,7 +670,7 @@ async def tb_CPU_TOP_LEVEL_ANDI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -704,7 +679,6 @@ async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000000111",
         "11111111111000000000000000000000",
         "11111111111000000000000000000111",
@@ -716,7 +690,7 @@ async def tb_CPU_TOP_LEVEL_OR(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -725,7 +699,6 @@ async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "11111111111000000000000000000000",
         "11111111111000000000000000000111",
         "11111111111000000000000000000111",
@@ -737,7 +710,7 @@ async def tb_CPU_TOP_LEVEL_ORI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -746,7 +719,6 @@ async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000001000",
         "00000000000000000000000000001000",
         "00000000000000000000100000000000",
@@ -759,7 +731,7 @@ async def tb_CPU_TOP_LEVEL_SLL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -768,7 +740,6 @@ async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000000001000",
         "00000000000000000000000010000000",
         "00000000000000000000000010000000",
@@ -780,7 +751,7 @@ async def tb_CPU_TOP_LEVEL_SLLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -789,7 +760,6 @@ async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000100000000",
         "00000000000000000000000000000110",
         "00000000000000000000000000000100",
@@ -804,7 +774,7 @@ async def tb_CPU_TOP_LEVEL_SRL(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
@@ -813,7 +783,6 @@ async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
-        "00000000000000000000000000000000",
         "00000000000000000000000100000000",
         "00000000000000000000000000000100",
         "00000000000000000000000000000100",
@@ -826,13 +795,12 @@ async def tb_CPU_TOP_LEVEL_SRLI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SRA.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -850,13 +818,12 @@ async def tb_CPU_TOP_LEVEL_SRA(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SRAI.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -878,13 +845,12 @@ async def tb_CPU_TOP_LEVEL_SRAI(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SB.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -907,13 +873,12 @@ async def tb_CPU_TOP_LEVEL_SB(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SH.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -937,13 +902,12 @@ async def tb_CPU_TOP_LEVEL_SH(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @CPU_TOP_LEVEL.testcase
 async def tb_CPU_TOP_LEVEL_SW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     program = lib.Program("../data/assembly/testcase_SW.S", stepping=True)
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
         "00000000000000000000000000000000",
@@ -965,7 +929,7 @@ async def tb_CPU_TOP_LEVEL_SW(dut: CPU_TOP_LEVEL, trace: lib.Waveform):
     trace.set_scale(2)
 
     async for index, address in program.attach_device(trace, dut.address_program, dut.data_program):
-        yield trace.check(dut.write_back.destination, values_destination[index], f"At clock {index} (PC = {address}).")
+        yield trace.check(dut.stage_wb_data_destination, values_destination[index], f"At clock {index} (PC = {address}).")
 
 @pytest.mark.synthesis
 def test_CPU_TOP_LEVEL_synthesis():

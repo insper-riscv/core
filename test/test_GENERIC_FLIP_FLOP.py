@@ -17,13 +17,16 @@ class GENERIC_FLIP_FLOP(lib.Entity):
 
 @GENERIC_FLIP_FLOP.testcase
 async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: lib.Waveform):
-    values_clear = ["0", "0", "1"]
-    values_enable = ["1", "1", "0"]
-    values_source = ["1", "0", "1"]
-    values_state = ["1", "0", "0"]
+    values_clear = ["0", "0", "0", "0", "1"]
+    values_enable = ["1", "0", "1", "1", "1"]
+    values_source = ["1", "0", "0", "1", "1"]
+    values_state = ["1", "1", "0", "1", "0"]
+
+    yield trace.check(dut.state, "0", f"At clock 0.")
 
     for index, (clear, enable, source, state) in enumerate(
-        zip(values_clear, values_enable, values_source, values_state)
+        zip(values_clear, values_enable, values_source, values_state),
+        1,
     ):
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)

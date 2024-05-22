@@ -19,26 +19,26 @@ class MODULE_WRITE_BACK(lib.Entity):
 
 @MODULE_WRITE_BACK.testcase
 async def tb_MODULE_WRITE_BACK_case_1(dut: MODULE_WRITE_BACK, trace: lib.Waveform):
-    dut.selector.value = BinaryValue("0")
+    dut.selector.value = BinaryValue("1")
     dut.source_memory.value = BinaryValue("00001111000011110000111100001111")
     dut.source_execution.value = BinaryValue("11110000111100001111000011110000")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00001111000011110000111100001111")
 
-    dut.selector.value = BinaryValue("1")
+    dut.selector.value = BinaryValue("0")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11110000111100001111000011110000")
 
-    dut.selector.value = BinaryValue("0")
+    dut.selector.value = BinaryValue("1")
     dut.source_memory.value = BinaryValue("00000000000000000000000000000000")
     dut.source_execution.value = BinaryValue("11111111111111111111111111111111")
 
     await trace.cycle()
     yield trace.check(dut.destination, "00000000000000000000000000000000")
 
-    dut.selector.value = BinaryValue("1")
+    dut.selector.value = BinaryValue("0")
 
     await trace.cycle()
     yield trace.check(dut.destination, "11111111111111111111111111111111")

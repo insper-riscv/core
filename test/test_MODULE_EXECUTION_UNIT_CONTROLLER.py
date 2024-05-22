@@ -37,7 +37,7 @@ async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT
     dut.funct_7.value = BinaryValue("0100000")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1000")
+    yield trace.check(dut.destination, "0000")
 
     dut.funct_3.value = BinaryValue("001")
 
@@ -52,7 +52,7 @@ async def tb_MODULE_EXECUTION_UNIT_CONTROLLER_case_1(dut: "MODULE_EXECUTION_UNIT
     dut.funct_3.value = BinaryValue("100")
 
     await trace.cycle()
-    yield trace.check(dut.destination, "1100")
+    yield trace.check(dut.destination, "0100")
 
     dut.opcode.value = BinaryValue("01100")
     dut.funct_3.value = BinaryValue("000")

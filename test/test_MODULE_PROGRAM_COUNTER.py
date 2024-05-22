@@ -25,9 +25,12 @@ class MODULE_PROGRAM_COUNTER(lib.Entity):
 
 @MODULE_PROGRAM_COUNTER.testcase
 async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: lib.Waveform):
-    values_enable = ["1", "1", "1", "0", "0"]
-    values_selector = ["1", "1", "0", "0", "1"]
+    values_enable = ["1", "1", "1", "1", "1", "1", "1", "0"]
+    values_selector = ["0", "0", "0", "1", "0", "0", "0", "1"]
     values_source = [
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100000",
+        "00000000000000000000000000100000",
         "00000000000000000000000000100000",
         "00000000000000000000000000100000",
         "00000000000000000000000000100000",
@@ -35,15 +38,21 @@ async def tb_MODULE_PROGRAM_COUNTER_case_1(dut: MODULE_PROGRAM_COUNTER, trace: l
         "00000000000000000000000000100000",
     ]
     values_destination = [
-        "00000000000000000000000000000000",
         "00000000000000000000000000000100",
+        "00000000000000000000000000001000",
+        "00000000000000000000000000001100",
         "00000000000000000000000000100000",
         "00000000000000000000000000100100",
-        "00000000000000000000000000100100",
+        "00000000000000000000000000101000",
+        "00000000000000000000000000101100",
+        "00000000000000000000000000101100",
     ]
+    
+    yield trace.check(dut.destination, "00000000000000000000000000000000", f"At clock 0.")
 
     for index, (enable, selector, source, destination) in enumerate(
-        zip(values_enable, values_selector, values_source, values_destination)
+        zip(values_enable, values_selector, values_source, values_destination),
+        1,
     ):
         dut.enable.value = BinaryValue(enable)
         dut.selector.value = BinaryValue(selector)

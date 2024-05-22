@@ -30,8 +30,6 @@ async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, 
     dut.enable.value = BinaryValue("1")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
-    dut.forward_selector_1.value = BinaryValue("0")
-    dut.forward_selector_2.value = BinaryValue("0")
     dut.select_function.value = BinaryValue("0000")
 
     await trace.cycle()

@@ -23,10 +23,17 @@ class MODULE_CONTROL_UNIT(lib.Entity):
 
 @MODULE_CONTROL_UNIT.testcase
 async def tb_MODULE_CONTROL_UNIT_case_1(dut: "MODULE_CONTROL_UNIT", trace: lib.Waveform):
-    dut.instruction.value = BinaryValue("00000000000000000001010000110111")
+    trace.set_scale(2)
+
+    dut.instruction.value = BinaryValue("00000000000000000001000000110111")
 
     await trace.cycle()
     yield trace.check(dut.immediate, "00000000000000000001000000000000")
+
+    dut.instruction.value = BinaryValue("00000000000100000000000000010011")
+
+    await trace.cycle()
+    yield trace.check(dut.immediate, "00000000000000000000000000000001")
 
 
 @pytest.mark.synthesis
