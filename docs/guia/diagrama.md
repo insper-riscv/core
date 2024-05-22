@@ -99,7 +99,7 @@ barramento, cache ou controlador de memória.
 
 ## Referências:
 
-- Hennessy, J. L.; Patterson, D. A. (2020) 
+- Hennessy, J. L.; Patterson, D. A. (2020)
 **Computer Organization and Design: The Hardware/Software Interface (RISC-V Edition)**. p. 314.
 
 - Patterson, David A.; Waterman, Andrew. **The RISC-V reader: An open architecture atlas**.

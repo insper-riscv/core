@@ -135,6 +135,8 @@ package RV32I is
     constant FUNCT7_OR   : t_FUNCT7 := 7X"00";
     constant FUNCT7_AND  : t_FUNCT7 := 7X"00";
 
+    constant NULL_INSTRUCTION : t_PROGRAM := 17X"0" & FUNCT3_ADDI & 5X"0" & OPCODE_FULL_OP_IMM;
+
     function to_immediate_i(
         in_vec : std_logic_vector(INSTRUCTION_RANGE)
     ) return t_DATA;
@@ -241,7 +243,7 @@ package body RV32I is
             when
                 OPCODE_STORE =>
                 return INSTRUCTION_S_TYPE;
-            when 
+            when
                 OPCODE_BRANCH =>
                 return INSTRUCTION_B_TYPE;
             when

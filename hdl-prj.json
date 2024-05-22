@@ -1,0 +1,58 @@
+{
+    "options": {
+        "ghdl_analysis": [
+            "--std=08"
+        ]
+    },
+    "files": [
+        { "file": "src/GENERICS.vhd" },
+        { "file": "src/GENERIC_MUX_2X1.vhd" },
+        { "file": "src/GENERIC_MUX_4X1.vhd" },
+        { "file": "src/GENERIC_MUX_32X1.vhd" },
+        { "file": "src/GENERIC_CARRY_LOOKAHEAD.vhd" },
+        { "file": "src/GENERIC_FLIP_FLOP.vhd" },
+        { "file": "src/GENERIC_REGISTER.vhd" },
+        { "file": "src/GENERIC_ADDER.vhd" },
+        { "file": "src/GENERIC_COMPARATOR.vhd" },
+        { "file": "src/GENERIC_SIGNAL_EXTENDER.vhd" },
+        { "file": "src/GENERIC_EDGE_DETECTOR.vhd" },
+        { "file": "src/GENERIC_DEBOUNCE.vhd" },
+        { "file": "src/GENERIC_RAM.vhd" },
+        { "file": "src/GENERIC_ROM.vhd" },
+
+        { "file": "src/RV32I.vhd" },
+        { "file": "src/RV32I_REGISTER_FILE.vhd" },
+        { "file": "src/RV32I_ALU_SHIFTER.vhd" },
+        { "file": "src/RV32I_ALU.vhd" },
+        { "file": "src/RV32I_BRANCH_CONTROLLER.vhd" },
+        { "file": "src/RV32I_TYPE_CONVERTER.vhd" },
+
+        { "file": "src/RV32M.vhd" },
+        { "file": "src/RV32M_ADDER_BIT.vhd" },
+        { "file": "src/RV32M_ADDER.vhd" },
+
+        { "file": "src/MODULES.vhd" },
+        { "file": "src/MODULE_BRANCH_COMPARE_UNIT.vhd" },
+        { "file": "src/MODULE_BRANCH_UNIT.vhd" },
+        { "file": "src/MODULE_CONTROL_UNIT.vhd" },
+        { "file": "src/MODULE_EXECUTION_UNIT_CONTROLLER.vhd" },
+        { "file": "src/MODULE_EXECUTION_UNIT.vhd" },
+        { "file": "src/MODULE_MEMORY_INTERFACE.vhd" },
+        { "file": "src/MODULE_PROGRAM_COUNTER.vhd" },
+        { "file": "src/MODULE_REGISTER_FILE.vhd" },
+        { "file": "src/MODULE_WRITE_BACK.vhd" },
+
+        { "file": "src/CPU.vhd" },
+        { "file": "src/CPU_BRANCH_FORWARDING_UNIT.vhd" },
+        { "file": "src/CPU_EXECUTION_FORWARDING_UNIT.vhd" },
+        { "file": "src/CPU_HAZZARD_CONTROL_UNIT.vhd" },
+        { "file": "src/CPU_STAGE_EX.vhd" },
+        { "file": "src/CPU_STAGE_ID.vhd" },
+        { "file": "src/CPU_STAGE_IF.vhd" },
+        { "file": "src/CPU_STAGE_MEM.vhd" },
+        { "file": "src/CPU_STAGE_WB.vhd" },
+        { "file": "src/CPU_TOP_LEVEL.vhd" },
+
+        { "file": "src/TOP_LEVEL.vhd" }
+    ]
+}

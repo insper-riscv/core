@@ -11,8 +11,8 @@ entity MODULE_WRITE_BACK is
 
     port (
         selector         : in  std_logic;
-        source_memory    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_execution : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_memory    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
@@ -30,8 +30,8 @@ begin
         )
         port map (
             selector    => selector,
-            source_1    => source_memory,
-            source_2    => source_execution,
+            source_1    => source_execution,
+            source_2    => source_memory,
             destination => destination
         );
 

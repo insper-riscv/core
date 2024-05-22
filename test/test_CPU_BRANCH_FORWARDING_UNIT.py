@@ -2,19 +2,19 @@ import os
 
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 
 
-class CPU_BRANCH_FORWARDING_UNIT(utils.DUT):
+class CPU_BRANCH_FORWARDING_UNIT(lib.Entity):
     _package = CPU
 
-    stage_id_select_source_1 = utils.DUT.Input_pin
-    stage_id_select_source_2 = utils.DUT.Input_pin
-    stage_mem_enable_destination = utils.DUT.Input_pin
-    stage_mem_select_destination = utils.DUT.Input_pin
-    stage_id_source_1 = utils.DUT.Output_pin
-    stage_id_source_2 = utils.DUT.Output_pin
+    stage_id_select_source_1 = lib.Entity.Input_pin
+    stage_id_select_source_2 = lib.Entity.Input_pin
+    stage_mem_enable_destination = lib.Entity.Input_pin
+    stage_mem_select_destination = lib.Entity.Input_pin
+    select_source_1 = lib.Entity.Output_pin
+    select_source_2 = lib.Entity.Output_pin
 
 
 @pytest.mark.synthesis

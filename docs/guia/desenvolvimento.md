@@ -26,5 +26,5 @@ Este projeto foi documentado usando o vitepress, que é uma ferramenta que permi
 
 ## Referências
 
-- Laoyan, S. **What is Agile methodology? (A beginner’s guide)**. Asana, 15 oct. 2022. 
+- Laoyan, S. **What is Agile methodology? (A beginner’s guide)**. Asana, 15 oct. 2022.
 Available at: https://asana.com/pt/resources/agile-methodology

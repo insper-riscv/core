@@ -1,22 +1,21 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 
 
-class CPU_EXECUTION_FORWARDING_UNIT(utils.DUT):
+@pytest.mark.synthesis
+class CPU_EXECUTION_FORWARDING_UNIT(lib.Entity):
     _package = CPU
 
-    stage_ex_select_source_1     = utils.DUT.Input_pin
-    stage_ex_select_source_2     = utils.DUT.Input_pin
-    stage_mem_enable_destination = utils.DUT.Input_pin
-    stage_mem_select_destination = utils.DUT.Input_pin
-    stage_wb_enable_destination  = utils.DUT.Input_pin
-    stage_wb_select_destination  = utils.DUT.Input_pin
-    stage_id_select_source_1     = utils.DUT.Output_pin
-    stage_id_select_source_2     = utils.DUT.Output_pin
+    stage_ex_select_source_1 = lib.Entity.Input_pin
+    stage_ex_select_source_2 = lib.Entity.Input_pin
+    stage_mem_enable_destination = lib.Entity.Input_pin
+    stage_mem_select_destination = lib.Entity.Input_pin
+    stage_wb_enable_destination = lib.Entity.Input_pin
+    stage_wb_select_destination = lib.Entity.Input_pin
+    select_source_1 = lib.Entity.Output_pin
+    select_source_2 = lib.Entity.Output_pin
 
 
 @pytest.mark.synthesis
@@ -26,4 +25,4 @@ def test_CPU_EXECUTION_FORWARDING_UNIT_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

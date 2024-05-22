@@ -1,30 +1,23 @@
-import os
-
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
 from cocotb.triggers import RisingEdge, FallingEdge
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_EDGE_DETECTOR(utils.DUT):
+class GENERIC_EDGE_DETECTOR(lib.Entity):
     _package = GENERICS
 
-    clock = utils.DUT.Input_pin
-    source = utils.DUT.Input_pin
-    pulse = utils.DUT.Output_pin
+    clock = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    pulse = lib.Entity.Output_pin
 
 
 @GENERIC_EDGE_DETECTOR.testcase
-async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: utils.Trace):
+async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: lib.Waveform):
     values_source = ["0", "1", "0", "0"]
     values_pulse = ["0", "0", "0", "1"]
-    clock = Clock(dut.clock, 20000, units="ns")
-
-    cocotb.start_soon(clock.start(start_high=False))
 
     for index, (source_rise, pulse) in enumerate(zip(values_source, values_pulse)):
         dut.source.value = BinaryValue(source_rise)
@@ -33,14 +26,10 @@ async def tb_GENERIC_EDGE_DETECTOR_case_1(dut: GENERIC_EDGE_DETECTOR, trace: uti
         yield trace.check(dut.pulse, pulse, f"At clock {index}.")
         await FallingEdge(dut.clock)
 
-
 @GENERIC_EDGE_DETECTOR.testcase
-async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: utils.Trace):
+async def tb_GENERIC_EDGE_DETECTOR_case_2(dut: GENERIC_EDGE_DETECTOR, trace: lib.Waveform):
     values_source = ["0", "1", "0", "0"]
     values_pulse = ["0", "0", "0", "1"]
-    clock = Clock(dut.clock, 20000, units="ns")
-
-    cocotb.start_soon(clock.start(start_high=True))
 
     for index, (source_fall, pulse) in enumerate(zip(values_source, values_pulse)):
         dut.source.value = BinaryValue(source_fall)
@@ -55,16 +44,13 @@ def test_GENERIC_EDGE_DETECTOR_synthesis():
     GENERIC_EDGE_DETECTOR.build_vhd()
     GENERIC_EDGE_DETECTOR.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_EDGE_DETECTOR_testcases():
-    GENERIC_EDGE_DETECTOR.test_with(
-        [
-            tb_GENERIC_EDGE_DETECTOR_case_1,
-            tb_GENERIC_EDGE_DETECTOR_case_2,
-        ]
-    )
+    GENERIC_EDGE_DETECTOR.test_with([
+        tb_GENERIC_EDGE_DETECTOR_case_1,
+        tb_GENERIC_EDGE_DETECTOR_case_2,
+    ])
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

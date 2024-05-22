@@ -11,9 +11,9 @@ entity GENERIC_REGISTER is
 
     port (
         clock       : in  std_logic;
-        clear       : in  std_logic;
-        enable      : in  std_logic;
-        source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        clear       : in  std_logic := '1';
+        enable      : in  std_logic := 'X';
+        source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => 'X');
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0')
     );
 
@@ -25,13 +25,15 @@ architecture RTL of GENERIC_REGISTER is
 
 begin
 
-    UPDATE : process(clear, clock, enable)
+    UPDATE : process(clock)
     begin
         if (rising_edge(clock)) then
-            SET_RESET : if (enable = '1') then
-                destination <= source;
-            elsif (clear = '1') then
-                destination <= (others => '0');
+            if (enable = '1') then
+                if (clear = '1') then
+                    destination <= (others => '0');
+                else
+                    destination <= source;
+                end if;
             end if;
         end if;
     end process;

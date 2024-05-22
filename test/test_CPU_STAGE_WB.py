@@ -1,21 +1,22 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 from test_MODULE_WRITE_BACK import MODULE_WRITE_BACK
 
 
-class CPU_STAGE_WB(utils.DUT):
+class CPU_STAGE_WB(lib.Entity):
     _package = CPU
 
-    source = utils.DUT.Input_pin
-    enable_destination = utils.DUT.Output_pin
-    select_destination = utils.DUT.Output_pin
-    destination = utils.DUT.Output_pin
+    clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    enable_destination = lib.Entity.Output_pin
+    select_destination = lib.Entity.Output_pin
+    destination = lib.Entity.Output_pin
 
-    module_write_back = MODULE_WRITE_BACK
+    write_back = MODULE_WRITE_BACK
 
 
 @pytest.mark.synthesis
@@ -25,4 +26,4 @@ def test_CPU_STAGE_WB_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

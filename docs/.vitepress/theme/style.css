@@ -34,11 +34,11 @@
     background-color: rgba(0 50 98 / 0.75);
     color: #000000
 }
-  
+
 /**
  * Component: Button
  * -------------------------------------------------------------------------- */
-  
+
 :root {
     --vp-button-brand-border: var(--vp-c-brand-light);
     --vp-button-brand-text: var(--vp-c-white);
@@ -50,11 +50,11 @@
     --vp-button-brand-active-text: var(--vp-c-white);
     --vp-button-brand-active-bg: var(--vp-button-brand-bg);
 }
-  
+
 /**
  * Component: Home
  * -------------------------------------------------------------------------- */
-  
+
 :root {
     --vp-home-hero-name-color: #003262;
 }
@@ -62,35 +62,35 @@
 .dark {
     --vp-home-hero-name-color: #FDB616;
 }
-  
+
 /**
  * Component: Custom Block
  * -------------------------------------------------------------------------- */
-  
+
 :root {
     --vp-custom-block-tip-border: var(--vp-c-brand-light);
     --vp-custom-block-tip-text: var(--vp-c-brand-darker);
     --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
 }
-  
+
 .dark {
     --vp-custom-block-tip-border: var(--vp-c-brand);
     --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
     --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
 }
-  
+
 /**
  * Component: Algolia
  * -------------------------------------------------------------------------- */
-  
+
 .DocSearch {
     --docsearch-primary-color: var(--vp-c-brand) !important;
 }
-  
+
 /**
   * Others
   * -------------------------------------------------------------------------- */
-  
+
 .aside-curtain {
     display: none;
 }

@@ -1,22 +1,21 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 from test_MODULE_PROGRAM_COUNTER import MODULE_PROGRAM_COUNTER
 
 
-class CPU_STAGE_IF(utils.DUT):
+class CPU_STAGE_IF(lib.Entity):
     _package = CPU
 
-    control = utils.DUT.Input_pin
-    source = utils.DUT.Input_pin
-    address_jump = utils.DUT.Input_pin
-    branch = utils.DUT.Input_pin
-    address_program = utils.DUT.Output_pin
+    clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    address_jump = lib.Entity.Input_pin
+    address_program = lib.Entity.Output_pin
 
-    module_program_counter = MODULE_PROGRAM_COUNTER
+    program_counter = MODULE_PROGRAM_COUNTER
 
 
 @pytest.mark.synthesis
@@ -26,4 +25,4 @@ def test_CPU_STAGE_IF_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

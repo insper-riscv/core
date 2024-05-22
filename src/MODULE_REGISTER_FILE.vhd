@@ -12,6 +12,7 @@ entity MODULE_REGISTER_FILE is
 
     port (
         clock              : in  std_logic;
+        clear              : in  std_logic;
         enable             : in  std_logic;
         select_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
         select_source_1    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
@@ -32,6 +33,7 @@ begin
     REGISTER_FILE : entity WORK.RV32I_REGISTER_FILE
         port map (
             clock               => clock,
+            clear               => clear,
             enable              => enable,
             address_destination => select_destination,
             address_source_1    => select_source_1,

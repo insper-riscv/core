@@ -16,9 +16,7 @@ entity MODULE_BRANCH_COMPARE_UNIT is
         select_function    : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
         source_1           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        forward_selector_1 : in  std_logic;
-        forward_selector_2 : in  std_logic;
-        forward_source     : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        forward            : in  WORK.CPU.t_FORWARD_BRANCH := WORK.CPU.NULL_FORWARD_BRANCH;
         destination        : out std_logic
     );
 
@@ -41,36 +39,25 @@ begin
 
     destination <= enable AND flag_branch;
 
-    COMPARE: entity WORK.RV32I_BRANCH_CONTROLLER
-        port map (
-            select_function => select_function(2 downto 0),
-            flag_sign_1     => sign_1,
-            flag_sign_2     => sign_2,
-            flag_equal      => flag_equal,
-            flag_less       => flag_less,
-            flag_greather   => flag_greather,
-            destination     => flag_branch
-        );
-
-    MUX_BRANCH_1 : entity WORK.GENERIC_MUX_2X1
+    MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_2X1
         generic map (
             DATA_WIDTH => WORK.RV32I.XLEN
         )
         port map (
-            selector    => forward_selector_1,
+            selector    => forward.select_source_1,
             source_1    => source_1,
-            source_2    => forward_source,
+            source_2    => forward.source_mem,
             destination => forward_source_1
         );
 
-    MUX_BRANCH_2 : entity WORK.GENERIC_MUX_2X1
+    MUX_FORWARD_SOURCE_2 : entity WORK.GENERIC_MUX_2X1
         generic map (
             DATA_WIDTH => WORK.RV32I.XLEN
         )
         port map (
-            selector    => forward_selector_2,
+            selector    => forward.select_source_2,
             source_1    => source_2,
-            source_2    => forward_source,
+            source_2    => forward.source_mem,
             destination => forward_source_2
         );
 
@@ -84,6 +71,17 @@ begin
             flag_equal    => flag_equal,
             flag_less     => flag_less,
             flag_greather => flag_greather
+        );
+
+    CONTROLLER: entity WORK.RV32I_BRANCH_CONTROLLER
+        port map (
+            select_function => select_function(2 downto 0),
+            flag_sign_1     => sign_1,
+            flag_sign_2     => sign_2,
+            flag_equal      => flag_equal,
+            flag_less       => flag_less,
+            flag_greather   => flag_greather,
+            destination     => flag_branch
         );
 
 end architecture;

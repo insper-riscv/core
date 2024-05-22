@@ -1,36 +1,32 @@
-import os
-
 import pytest
-import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
 from test_GENERICS_package import GENERICS
 
 
-class GENERIC_FLIP_FLOP(utils.DUT):
+class GENERIC_FLIP_FLOP(lib.Entity):
     _package = GENERICS
 
-    clock = utils.DUT.Input_pin
-    clear = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    source = utils.DUT.Input_pin
-    state = utils.DUT.Output_pin
+    clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    state = lib.Entity.Output_pin
 
 
 @GENERIC_FLIP_FLOP.testcase
-async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: utils.Trace):
-    values_clear = ["0", "0", "1"]
-    values_enable = ["1", "1", "0"]
-    values_source = ["1", "0", "1"]
-    values_state = ["1", "0", "0"]
-    clock = Clock(dut.clock, 20000, units="ns")
+async def tb_GENERIC_FLIP_FLOP_case_1(dut: GENERIC_FLIP_FLOP, trace: lib.Waveform):
+    values_clear = ["0", "0", "0", "0", "1"]
+    values_enable = ["1", "0", "1", "1", "1"]
+    values_source = ["1", "0", "0", "1", "1"]
+    values_state = ["1", "1", "0", "1", "0"]
 
-    cocotb.start_soon(clock.start(start_high=False))
+    yield trace.check(dut.state, "0", f"At clock 0.")
 
     for index, (clear, enable, source, state) in enumerate(
-        zip(values_clear, values_enable, values_source, values_state)
+        zip(values_clear, values_enable, values_source, values_state),
+        1,
     ):
         dut.clear.value = BinaryValue(clear)
         dut.enable.value = BinaryValue(enable)
@@ -45,15 +41,10 @@ def test_GENERIC_FLIP_FLOP_synthesis():
     GENERIC_FLIP_FLOP.build_vhd()
     GENERIC_FLIP_FLOP.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_GENERIC_FLIP_FLOP_testcases():
-    GENERIC_FLIP_FLOP.test_with(
-        [
-            tb_GENERIC_FLIP_FLOP_case_1,
-        ]
-    )
+    GENERIC_FLIP_FLOP.test_with(tb_GENERIC_FLIP_FLOP_case_1)
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)
