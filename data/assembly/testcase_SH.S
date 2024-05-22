@@ -1,5 +1,7 @@
     .section    .text
+    .globl      _start
     .globl      main
+_start:
 main:
     addi        x1,         x0,         0       ;
     lui         x2,         24                  ;

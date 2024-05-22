@@ -1,5 +1,7 @@
     .section    .text
+    .globl      _start
     .globl      main
+_start:
 main:
     jalr        x1,         12(x0)              ;
     addi        x0,         x0,         7       ;
