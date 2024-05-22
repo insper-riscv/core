@@ -15,7 +15,8 @@
                 "actboy168.tasks",
                 "ms-python.python",
                 "ms-python.black-formatter",
-                "mshr-h.VerilogHDL"
+                "mshr-h.VerilogHDL",
+                "/tmp/vhdl-lsp-0.1.0-dev.vsix"
             ]
         }
     }

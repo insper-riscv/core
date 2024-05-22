@@ -15,5 +15,8 @@
     },
     "python.analysis.extraPaths": [
         "./test/lib/"
-    ]
+    ],
+    "[vhdl]": {
+        "editor.defaultFormatter": "tgingold.vhdl-lsp"
+    }
 }

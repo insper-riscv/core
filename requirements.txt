@@ -1,3 +1,4 @@
+https://github.com/ghdl/ghdl/releases/download/nightly/pyGHDL-5.0.0.dev0-py3-none-any.whl
 cocotb
 find-libpython
 pytest
