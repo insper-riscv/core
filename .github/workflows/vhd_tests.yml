@@ -48,6 +48,8 @@ jobs:
             enabled: true
           - component: test_GENERIC_FLIP_FLOP.py
             enabled: true
+          - component: test_GENERIC_LOW_FREQ.py
+            enabled: false
           - component: test_GENERIC_MUX_2X1.py
             enabled: true
           - component: test_GENERIC_MUX_4X1.py

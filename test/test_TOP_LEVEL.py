@@ -3,6 +3,8 @@ import pytest
 import lib
 from test_GENERIC_ROM import GENERIC_ROM
 from test_GENERIC_RAM import GENERIC_RAM
+from test_GENERIC_REGISTER import GENERIC_REGISTER
+from test_GENERIC_LOW_FREQ import GENERIC_LOW_FREQ
 from test_CPU_TOP_LEVEL import CPU_TOP_LEVEL
 
 
@@ -11,10 +13,11 @@ class TOP_LEVEL(lib.Entity):
     sw = lib.Entity.Input_pin
     led = lib.Entity.Output_pin
 
-    ROM = GENERIC_ROM
-    RAM = GENERIC_RAM
-    CPU = CPU_TOP_LEVEL
-
+    rom = GENERIC_ROM
+    ram = GENERIC_RAM
+    cpu = CPU_TOP_LEVEL
+    update_led = GENERIC_REGISTER
+    low_freq = GENERIC_LOW_FREQ
 
 @pytest.mark.synthesis
 def test_TOP_LEVEL_synthesis():
