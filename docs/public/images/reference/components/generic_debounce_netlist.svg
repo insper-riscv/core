@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:s="https://github.com/nturley/netlistsvg" width="497" height="207">
+  <style>  svg {
+      stroke: #011e41;
+      fill: none;
+    }
+    text {
+      fill:#ffffff;
+      stroke:none;
+      font-size:10px;
+      font-weight: bold;
+      font-family: "Courier New", monospace;
+    }
+    .fill-1 { fill: #003262; }
+    .fill-2 { fill: #011e41; stroke: #003262; }
+    .fill-3 { fill: #ffffff; }
+    .fill-4 { fill: #003262; }
+    .fill-5 { fill: #011e41; stroke: #fdda64; }
+    .text-1 { fill: #fdb515; }
+    .text-2 { fill: #003262; }
+    .text-3 { stroke: #fdda64; }
+    .nodelabel { text-anchor: middle; }
+    .inputPortLabel { text-anchor: end; }
+    .splitjoinBody { fill: #3c3c43; }</style>
+  <g s:type="not" transform="translate(84,142.5)" s:width="30" s:height="20" id="cell_\5">
+    <s:alias val="$_NOT_"/>
+    <s:alias val="$not"/>
+    <s:alias val="$logic_not"/>
+    <path d="M0,0 L0,20 L20,10 Z" class="cell_\5 fill-1"/>
+    <circle cx="24" cy="10" r="3" class="cell_\5 fill-3"/>
+    <g s:x="-1" s:y="10" s:pid="A"/>
+    <g s:x="27" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="generic" transform="translate(186,87)" s:width="30" s:height="40" id="cell_edge_detector">
+    <text x="15" y="-4" class="nodelabel text-1 cell_edge_detector" s:attribute="ref">generic_edge_detector</text>
+    <rect width="30" height="40" s:generic="body" class="cell_edge_detector fill-1"/>
+    <g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="port_edge_detector~clock">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_edge_detector">clock</text>
+    </g>
+    <g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="port_edge_detector~source">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_edge_detector">source</text>
+    </g>
+    <g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="port_edge_detector~pulse">
+      <text x="5" y="-4" class="cell_edge_detector text-2">pulse</text>
+    </g>
+  </g>
+  <g s:type="generic" transform="translate(336,67)" s:width="30" s:height="40" id="cell_state_register">
+    <text x="15" y="-4" class="nodelabel text-1 cell_state_register" s:attribute="ref">generic_flip_flop</text>
+    <rect width="30" height="80" s:generic="body" class="cell_state_register fill-1"/>
+    <g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="port_state_register~clear">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_state_register">clear</text>
+    </g>
+    <g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="port_state_register~clock">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_state_register">clock</text>
+    </g>
+    <g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="port_state_register~enable">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_state_register">enable</text>
+    </g>
+    <g transform="translate(0,70)" s:x="0" s:y="10" s:pid="in0" id="port_state_register~source">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_state_register">source</text>
+    </g>
+    <g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="port_state_register~state">
+      <text x="5" y="-4" class="cell_state_register text-2">state</text>
+    </g>
+  </g>
+  <g s:type="inputExt" transform="translate(84,87.5)" s:width="30" s:height="20" id="cell_clock">
+    <text x="15" y="-4" class="nodelabel text-1 cell_clock" s:attribute="ref">clock</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_clock fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(186,22)" s:width="30" s:height="20" id="cell_clear">
+    <text x="15" y="-4" class="nodelabel text-1 cell_clear" s:attribute="ref">clear</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_clear fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,142.5)" s:width="30" s:height="20" id="cell_source">
+    <text x="15" y="-4" class="nodelabel text-1 cell_source" s:attribute="ref">source</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_source fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="outputExt" transform="translate(455,67.5)" s:width="30" s:height="20" id="cell_state">
+    <text x="15" y="-4" class="nodelabel text-1 cell_state" s:attribute="ref">state</text>
+    <s:alias val="$_outputExt_"/>
+    <path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_state fill-4"/>
+    <g s:x="0" s:y="10" s:pid="A"/>
+  </g>
+  <g s:type="constant" transform="translate(186,175)" s:width="30" s:height="20" id="cell_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_1" s:attribute="ref">1</text>
+    <s:alias val="$_constant_"/>
+    <rect width="30" height="20" class="cell_1 fill-4"/>
+    <g s:x="31" s:y="10" s:pid="Y"/>
+  </g>
+  <line x1="42" x2="83" y1="152.5" y2="152.5" class="net_4"/>
+  <line x1="114" x2="186" y1="97.5" y2="97.5" class="net_2"/>
+  <line x1="111" x2="124" y1="152.5" y2="152.5" class="net_6"/>
+  <line x1="124" x2="124" y1="152.5" y2="117.5" class="net_6"/>
+  <line x1="124" x2="186" y1="117.5" y2="117.5" class="net_6"/>
+  <line x1="216" x2="274" y1="32" y2="32" class="net_3"/>
+  <line x1="274" x2="274" y1="32" y2="77.5" class="net_3"/>
+  <line x1="274" x2="336" y1="77.5" y2="77.5" class="net_3"/>
+  <line x1="217" x2="336" y1="97.5" y2="97.5" class="net_7"/>
+  <line x1="217" x2="274" y1="185" y2="185" class="net_8"/>
+  <line x1="274" x2="274" y1="185" y2="117.5" class="net_8"/>
+  <line x1="274" x2="336" y1="117.5" y2="117.5" class="net_8"/>
+  <line x1="217" x2="274" y1="185" y2="185" class="net_8"/>
+  <line x1="274" x2="274" y1="185" y2="137.5" class="net_8"/>
+  <circle cx="274" cy="137.5" r="2" style="fill:#000" class="net_8"/>
+  <line x1="274" x2="336" y1="137.5" y2="137.5" class="net_8"/>
+  <line x1="367" x2="455" y1="77.5" y2="77.5" class="net_5"/>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:s="https://github.com/nturley/netlistsvg" width="379" height="184">
+  <style>  svg {
+      stroke: #011e41;
+      fill: none;
+    }
+    text {
+      fill:#ffffff;
+      stroke:none;
+      font-size:10px;
+      font-weight: bold;
+      font-family: "Courier New", monospace;
+    }
+    .fill-1 { fill: #003262; }
+    .fill-2 { fill: #011e41; stroke: #003262; }
+    .fill-3 { fill: #ffffff; }
+    .fill-4 { fill: #003262; }
+    .fill-5 { fill: #011e41; stroke: #fdda64; }
+    .text-1 { fill: #fdb515; }
+    .text-2 { fill: #003262; }
+    .text-3 { stroke: #fdda64; }
+    .nodelabel { text-anchor: middle; }
+    .inputPortLabel { text-anchor: end; }
+    .splitjoinBody { fill: #3c3c43; }</style>
+  <g s:type="generic" transform="translate(168,66.5)" s:width="30" s:height="40" id="cell_alu_controller">
+    <text x="15" y="-4" class="nodelabel text-1 cell_alu_controller" s:attribute="ref">rv32i_alu_controller</text>
+    <rect width="30" height="60" s:generic="body" class="cell_alu_controller fill-1"/>
+    <g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="port_alu_controller~function_3">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_alu_controller">function_3</text>
+    </g>
+    <g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="port_alu_controller~function_7">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_alu_controller">function_7</text>
+    </g>
+    <g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="port_alu_controller~opcode">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_alu_controller">opcode</text>
+    </g>
+    <g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="port_alu_controller~destination">
+      <text x="5" y="-4" class="cell_alu_controller text-2">destination</text>
+    </g>
+  </g>
+  <g s:type="inputExt" transform="translate(12,152)" s:width="30" s:height="20" id="cell_opcode">
+    <text x="15" y="-4" class="nodelabel text-1 cell_opcode" s:attribute="ref">opcode</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_opcode fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,22)" s:width="30" s:height="20" id="cell_function_3">
+    <text x="15" y="-4" class="nodelabel text-1 cell_function_3" s:attribute="ref">function_3</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_function_3 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,87)" s:width="30" s:height="20" id="cell_function_7">
+    <text x="15" y="-4" class="nodelabel text-1 cell_function_7" s:attribute="ref">function_7</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_function_7 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="outputExt" transform="translate(301,67)" s:width="30" s:height="20" id="cell_destination">
+    <text x="15" y="-4" class="nodelabel text-1 cell_destination" s:attribute="ref">destination</text>
+    <s:alias val="$_outputExt_"/>
+    <path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_destination fill-4"/>
+    <g s:x="0" s:y="10" s:pid="A"/>
+  </g>
+  <line x1="42" x2="82" y1="32" y2="32" class="net_7,8,9"/>
+  <line x1="82" x2="82" y1="32" y2="77" class="net_7,8,9"/>
+  <line x1="82" x2="168" y1="77" y2="77" class="net_7,8,9"/>
+  <line x1="42" x2="168" y1="97" y2="97" class="net_10,11,12,13,14,15,16"/>
+  <line x1="42" x2="82" y1="162" y2="162" class="net_2,3,4,5,6"/>
+  <line x1="82" x2="82" y1="162" y2="117" class="net_2,3,4,5,6"/>
+  <line x1="82" x2="168" y1="117" y2="117" class="net_2,3,4,5,6"/>
+  <line x1="199" x2="301" y1="77" y2="77" class="net_17,18,19,20,21"/>
+</svg>

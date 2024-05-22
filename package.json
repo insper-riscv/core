@@ -2,13 +2,19 @@
   "name": "24a-cti-riscv",
   "version": "1.0.0",
   "scripts": {
-    "docs:dev": "vitepress dev docs -o",
+    "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress previe docsw"
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "@types/node": "^20.11.24",
-    "markdown-it-deflist": "^3.0.0",
-    "vitepress": "^1.0.0-rc.42"
+    "@types/node": "^20.11.30",
+    "markdown-it-image-figures": "^2.1.1",
+    "mermaid": "^10.9.0",
+    "panzoom": "^9.4.3",
+    "vitepress": "^1.1.3",
+    "vitepress-plugin-mermaid": "^2.0.16"
+  },
+  "dependencies": {
+    "markdown-it-footnote": "^4.0.0"
   }
 }

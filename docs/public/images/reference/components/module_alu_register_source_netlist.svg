@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:s="https://github.com/nturley/netlistsvg" width="480" height="482">
+  <style>  svg {
+      stroke: #011e41;
+      fill: none;
+    }
+    text {
+      fill:#ffffff;
+      stroke:none;
+      font-size:10px;
+      font-weight: bold;
+      font-family: "Courier New", monospace;
+    }
+    .fill-1 { fill: #003262; }
+    .fill-2 { fill: #011e41; stroke: #003262; }
+    .fill-3 { fill: #ffffff; }
+    .fill-4 { fill: #003262; }
+    .fill-5 { fill: #011e41; stroke: #fdda64; }
+    .text-1 { fill: #fdb515; }
+    .text-2 { fill: #003262; }
+    .text-3 { stroke: #fdda64; }
+    .nodelabel { text-anchor: middle; }
+    .inputPortLabel { text-anchor: end; }
+    .splitjoinBody { fill: #3c3c43; }</style>
+  <g s:type="generic" transform="translate(247,111.5)" s:width="30" s:height="40" id="cell_mux_register_alu_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_mux_register_alu_1" s:attribute="ref">generic_mux_4x1_32</text>
+    <rect width="30" height="100" s:generic="body" class="cell_mux_register_alu_1 fill-1"/>
+    <g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_1~selector">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_1">selector</text>
+    </g>
+    <g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_1~source_1">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_1">source_1</text>
+    </g>
+    <g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_1~source_2">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_1">source_2</text>
+    </g>
+    <g transform="translate(0,70)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_1~source_3">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_1">source_3</text>
+    </g>
+    <g transform="translate(0,90)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_1~source_4">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_1">source_4</text>
+    </g>
+    <g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="port_mux_register_alu_1~destination">
+      <text x="5" y="-4" class="cell_mux_register_alu_1 text-2">destination</text>
+    </g>
+  </g>
+  <g s:type="generic" transform="translate(247,259.5)" s:width="30" s:height="40" id="cell_mux_register_alu_2">
+    <text x="15" y="-4" class="nodelabel text-1 cell_mux_register_alu_2" s:attribute="ref">generic_mux_4x1_32</text>
+    <rect width="30" height="100" s:generic="body" class="cell_mux_register_alu_2 fill-1"/>
+    <g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_2~selector">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_2">selector</text>
+    </g>
+    <g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_2~source_1">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_2">source_1</text>
+    </g>
+    <g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_2~source_2">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_2">source_2</text>
+    </g>
+    <g transform="translate(0,70)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_2~source_3">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_2">source_3</text>
+    </g>
+    <g transform="translate(0,90)" s:x="0" s:y="10" s:pid="in0" id="port_mux_register_alu_2~source_4">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_mux_register_alu_2">source_4</text>
+    </g>
+    <g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="port_mux_register_alu_2~destination">
+      <text x="5" y="-4" class="cell_mux_register_alu_2 text-2">destination</text>
+    </g>
+  </g>
+  <g s:type="inputExt" transform="translate(12,87)" s:width="30" s:height="20" id="cell_register_source_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_register_source_1" s:attribute="ref">register_source_1</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_register_source_1 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,385)" s:width="30" s:height="20" id="cell_register_source_2">
+    <text x="15" y="-4" class="nodelabel text-1 cell_register_source_2" s:attribute="ref">register_source_2</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_register_source_2 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,320)" s:width="30" s:height="20" id="cell_forwarding_mem_source">
+    <text x="15" y="-4" class="nodelabel text-1 cell_forwarding_mem_source" s:attribute="ref">forwarding_mem_source</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_forwarding_mem_source fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,152)" s:width="30" s:height="20" id="cell_forwarding_wb_source">
+    <text x="15" y="-4" class="nodelabel text-1 cell_forwarding_wb_source" s:attribute="ref">forwarding_wb_source</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_forwarding_wb_source fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,22)" s:width="30" s:height="20" id="cell_select_source_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_select_source_1" s:attribute="ref">select_source_1</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_select_source_1 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,255)" s:width="30" s:height="20" id="cell_select_source_2">
+    <text x="15" y="-4" class="nodelabel text-1 cell_select_source_2" s:attribute="ref">select_source_2</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_select_source_2 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="outputExt" transform="translate(390,112)" s:width="30" s:height="20" id="cell_data_source_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_data_source_1" s:attribute="ref">data_source_1</text>
+    <s:alias val="$_outputExt_"/>
+    <path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_data_source_1 fill-4"/>
+    <g s:x="0" s:y="10" s:pid="A"/>
+  </g>
+  <g s:type="outputExt" transform="translate(390,260)" s:width="30" s:height="20" id="cell_data_source_2">
+    <text x="15" y="-4" class="nodelabel text-1 cell_data_source_2" s:attribute="ref">data_source_2</text>
+    <s:alias val="$_outputExt_"/>
+    <path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_data_source_2 fill-4"/>
+    <g s:x="0" s:y="10" s:pid="A"/>
+  </g>
+  <g s:type="constant" transform="translate(12,450)" s:width="30" s:height="20" id="cell_00000000000000000000000000000000">
+    <text x="15" y="-4" class="nodelabel text-1 cell_00000000000000000000000000000000" s:attribute="ref">0x0</text>
+    <s:alias val="$_constant_"/>
+    <rect width="30" height="20" class="cell_00000000000000000000000000000000 fill-4"/>
+    <g s:x="31" s:y="10" s:pid="Y"/>
+  </g>
+  <line x1="42" x2="158" y1="32" y2="32" class="net_130,131"/>
+  <line x1="158" x2="158" y1="32" y2="122" class="net_130,131"/>
+  <line x1="158" x2="247" y1="122" y2="122" class="net_130,131"/>
+  <line x1="42" x2="148" y1="97" y2="97" class="net_2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33"/>
+  <line x1="148" x2="148" y1="97" y2="142" class="net_2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33"/>
+  <line x1="148" x2="247" y1="142" y2="142" class="net_2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33"/>
+  <line x1="42" x2="247" y1="162" y2="162" class="net_98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129"/>
+  <line x1="42" x2="188" y1="162" y2="162" class="net_98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129"/>
+  <line x1="188" x2="188" y1="162" y2="310" class="net_98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129"/>
+  <circle cx="188" cy="162" r="2" style="fill:#000" class="net_98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129"/>
+  <line x1="188" x2="247" y1="310" y2="310" class="net_98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129"/>
+  <line x1="42" x2="148" y1="330" y2="330" class="net_66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97"/>
+  <line x1="148" x2="148" y1="330" y2="182" class="net_66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97"/>
+  <circle cx="148" cy="330" r="2" style="fill:#000" class="net_66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97"/>
+  <line x1="148" x2="247" y1="182" y2="182" class="net_66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97"/>
+  <line x1="42" x2="247" y1="330" y2="330" class="net_66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97"/>
+  <line x1="43" x2="168" y1="460" y2="460" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <line x1="168" x2="168" y1="460" y2="202" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <line x1="168" x2="247" y1="202" y2="202" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <line x1="43" x2="168" y1="460" y2="460" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <line x1="168" x2="168" y1="460" y2="350" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <circle cx="168" cy="350" r="2" style="fill:#000" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <line x1="168" x2="247" y1="350" y2="350" class="net_198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229"/>
+  <line x1="42" x2="178" y1="265" y2="265" class="net_132,133"/>
+  <line x1="178" x2="178" y1="265" y2="270" class="net_132,133"/>
+  <line x1="178" x2="247" y1="270" y2="270" class="net_132,133"/>
+  <line x1="42" x2="158" y1="395" y2="395" class="net_34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65"/>
+  <line x1="158" x2="158" y1="395" y2="290" class="net_34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65"/>
+  <line x1="158" x2="247" y1="290" y2="290" class="net_34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65"/>
+  <line x1="278" x2="390" y1="122" y2="122" class="net_134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165"/>
+  <line x1="278" x2="390" y1="270" y2="270" class="net_166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197"/>
+</svg>

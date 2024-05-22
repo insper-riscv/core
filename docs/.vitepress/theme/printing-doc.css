@@ -1,0 +1,143 @@
+.printing-doc main {
+    counter-reset: figures;
+
+    * {
+        font-size: 12pt;
+        font-family: "Times New Roman";
+    }
+
+    code {
+        white-space : pre-wrap !important;
+        word-break: break-word;
+      }
+    
+    p,
+    li {
+        text-align: justify;
+        line-height: 20pt;
+    }
+
+    .break-page,
+    h2 {
+        page-break-before : always;
+    }
+
+    hr {
+        margin: 32px 0;
+        line-height: 20pt;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 20pt;
+    }
+
+    li {
+        break-inside: avoid-column;
+    }
+
+    p, table, code, .table_subtitle {
+        break-inside: avoid-page;
+    }
+
+    table {
+        column-span: all;
+        margin-bottom: 0;
+    }
+
+    .table_subtitle {
+        margin-top: 0.3em;
+    }
+
+    th, tr, td {
+        line-height: 20pt;
+    }
+
+    pre {
+        line-height: 20pt;
+    }
+
+    h1, h2, h3, h4, h5, h6, img, svg, figure {
+        column-span: all;
+        break-inside: avoid-column;
+    }
+
+    figure {
+        counter-increment: figures;
+        margin: 16px 0;
+        text-align: center;
+        break-inside: avoid-page;
+
+        > img {
+            min-width: 50%;
+            margin: 0 auto;
+        }
+
+        > figcaption:before {
+            content: "Figura " counter(figures) " - ";
+            font-weight: bold;
+        }
+    }
+
+    @media print {
+        * {
+            font-size: 12pt;
+            font-family: "Times New Roman";
+        }
+
+        a {
+            color: currentcolor;
+            font: inherit;
+            text-decoration: none;
+        }
+
+        h2 {
+            padding-top: 0;
+            border-top: none;
+        }
+
+        p {
+            line-height: 20pt;
+        }
+
+        hr.break-page {
+            opacity: 0;
+        }
+
+        .printing-doc--columns-section {
+            columns: 1;
+        }
+    }
+}
+
+.printing-doc {
+    .table-of-contents {
+        ul {
+            list-style: none;
+        }
+
+        li:nth-child(1),
+        li:nth-child(2) {
+            display: none;
+        }
+    }
+
+    .footnotes-sep,
+    .footnote-backref {
+        display: none;
+    }
+
+    @media print {
+        .VPNav,
+        .VPLocalNav,
+        .VPFooter,
+        .VPDocFooter,
+        .header-anchor {
+            display: none;
+        }
+    }
+}

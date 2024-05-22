@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:s="https://github.com/nturley/netlistsvg" width="510" height="444">
+  <style>  svg {
+      stroke: #011e41;
+      fill: none;
+    }
+    text {
+      fill:#ffffff;
+      stroke:none;
+      font-size:10px;
+      font-weight: bold;
+      font-family: "Courier New", monospace;
+    }
+    .fill-1 { fill: #003262; }
+    .fill-2 { fill: #011e41; stroke: #003262; }
+    .fill-3 { fill: #ffffff; }
+    .fill-4 { fill: #003262; }
+    .fill-5 { fill: #011e41; stroke: #fdda64; }
+    .text-1 { fill: #fdb515; }
+    .text-2 { fill: #003262; }
+    .text-3 { stroke: #fdda64; }
+    .nodelabel { text-anchor: middle; }
+    .inputPortLabel { text-anchor: end; }
+    .splitjoinBody { fill: #3c3c43; }</style>
+  <g s:type="generic" transform="translate(275,156.5)" s:width="30" s:height="40" id="cell_register_file">
+    <text x="15" y="-4" class="nodelabel text-1 cell_register_file" s:attribute="ref">rv32i_register_file_32_5</text>
+    <rect width="30" height="140" s:generic="body" class="cell_register_file fill-1"/>
+    <g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~address_destination">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">address_destination</text>
+    </g>
+    <g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~address_source_1">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">address_source_1</text>
+    </g>
+    <g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~address_source_2">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">address_source_2</text>
+    </g>
+    <g transform="translate(0,70)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~clear">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">clear</text>
+    </g>
+    <g transform="translate(0,90)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~clock">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">clock</text>
+    </g>
+    <g transform="translate(0,110)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~data_destination">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">data_destination</text>
+    </g>
+    <g transform="translate(0,130)" s:x="0" s:y="10" s:pid="in0" id="port_register_file~enable">
+      <text x="-3" y="-4" class="inputPortLabel text-2 cell_register_file">enable</text>
+    </g>
+    <g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="port_register_file~data_source_1">
+      <text x="5" y="-4" class="cell_register_file text-2">data_source_1</text>
+    </g>
+    <g transform="translate(30,30)" s:x="30" s:y="10" s:pid="out0" id="port_register_file~data_source_2">
+      <text x="5" y="-4" class="cell_register_file text-2">data_source_2</text>
+    </g>
+  </g>
+  <g s:type="inputExt" transform="translate(12,282)" s:width="30" s:height="20" id="cell_clock">
+    <text x="15" y="-4" class="nodelabel text-1 cell_clock" s:attribute="ref">clock</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_clock fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,217)" s:width="30" s:height="20" id="cell_clear">
+    <text x="15" y="-4" class="nodelabel text-1 cell_clear" s:attribute="ref">clear</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_clear fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,412)" s:width="30" s:height="20" id="cell_enable">
+    <text x="15" y="-4" class="nodelabel text-1 cell_enable" s:attribute="ref">enable</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_enable fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,22)" s:width="30" s:height="20" id="cell_select_destination">
+    <text x="15" y="-4" class="nodelabel text-1 cell_select_destination" s:attribute="ref">select_destination</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_select_destination fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,87)" s:width="30" s:height="20" id="cell_select_source_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_select_source_1" s:attribute="ref">select_source_1</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_select_source_1 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,152)" s:width="30" s:height="20" id="cell_select_source_2">
+    <text x="15" y="-4" class="nodelabel text-1 cell_select_source_2" s:attribute="ref">select_source_2</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_select_source_2 fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="inputExt" transform="translate(12,347)" s:width="30" s:height="20" id="cell_data_destination">
+    <text x="15" y="-4" class="nodelabel text-1 cell_data_destination" s:attribute="ref">data_destination</text>
+    <s:alias val="$_inputExt_"/>
+    <path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_data_destination fill-4"/>
+    <g s:x="30" s:y="10" s:pid="Y"/>
+  </g>
+  <g s:type="outputExt" transform="translate(420,157)" s:width="30" s:height="20" id="cell_data_source_1">
+    <text x="15" y="-4" class="nodelabel text-1 cell_data_source_1" s:attribute="ref">data_source_1</text>
+    <s:alias val="$_outputExt_"/>
+    <path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_data_source_1 fill-4"/>
+    <g s:x="0" s:y="10" s:pid="A"/>
+  </g>
+  <g s:type="outputExt" transform="translate(420,222)" s:width="30" s:height="20" id="cell_data_source_2">
+    <text x="15" y="-4" class="nodelabel text-1 cell_data_source_2" s:attribute="ref">data_source_2</text>
+    <s:alias val="$_outputExt_"/>
+    <path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_data_source_2 fill-4"/>
+    <g s:x="0" s:y="10" s:pid="A"/>
+  </g>
+  <line x1="42" x2="150" y1="32" y2="32" class="net_5,6,7,8,9"/>
+  <line x1="150" x2="150" y1="32" y2="167" class="net_5,6,7,8,9"/>
+  <line x1="150" x2="275" y1="167" y2="167" class="net_5,6,7,8,9"/>
+  <line x1="42" x2="140" y1="97" y2="97" class="net_10,11,12,13,14"/>
+  <line x1="140" x2="140" y1="97" y2="187" class="net_10,11,12,13,14"/>
+  <line x1="140" x2="275" y1="187" y2="187" class="net_10,11,12,13,14"/>
+  <line x1="42" x2="130" y1="162" y2="162" class="net_15,16,17,18,19"/>
+  <line x1="130" x2="130" y1="162" y2="207" class="net_15,16,17,18,19"/>
+  <line x1="130" x2="275" y1="207" y2="207" class="net_15,16,17,18,19"/>
+  <line x1="42" x2="275" y1="227" y2="227" class="net_3"/>
+  <line x1="42" x2="130" y1="292" y2="292" class="net_2"/>
+  <line x1="130" x2="130" y1="292" y2="247" class="net_2"/>
+  <line x1="130" x2="275" y1="247" y2="247" class="net_2"/>
+  <line x1="42" x2="140" y1="357" y2="357" class="net_20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51"/>
+  <line x1="140" x2="140" y1="357" y2="267" class="net_20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51"/>
+  <line x1="140" x2="275" y1="267" y2="267" class="net_20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51"/>
+  <line x1="42" x2="150" y1="422" y2="422" class="net_4"/>
+  <line x1="150" x2="150" y1="422" y2="287" class="net_4"/>
+  <line x1="150" x2="275" y1="287" y2="287" class="net_4"/>
+  <line x1="306" x2="420" y1="167" y2="167" class="net_52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83"/>
+  <line x1="306" x2="395" y1="187" y2="187" class="net_84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115"/>
+  <line x1="395" x2="395" y1="187" y2="232" class="net_84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115"/>
+  <line x1="395" x2="420" y1="232" y2="232" class="net_84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115"/>
+</svg>
