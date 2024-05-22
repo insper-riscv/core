@@ -50,7 +50,7 @@
 *.sopc_builder
 *.summary
 *.tcl
-*.sld 
+*.sld
 *.txt # Explicitly add any text files used
 c5_pin_model_dump.txt
 *~
@@ -365,7 +365,5 @@ dist
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 
-
-#sim_build
 **/sim_build/
-
+!/lib/

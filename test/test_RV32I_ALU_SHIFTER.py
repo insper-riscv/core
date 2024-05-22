@@ -1,23 +1,28 @@
-import os
-
 import pytest
 from cocotb.binary import BinaryValue
 
-import utils
+import lib
 from test_RV32I_package import RV32I
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
+from test_GENERIC_MUX_32X1 import GENERIC_MUX_32X1
 
 
-class RV32I_ALU_SHIFTER(utils.DUT):
+class RV32I_ALU_SHIFTER(lib.Entity):
     _package = RV32I
 
-    source = utils.DUT.Input_pin
-    shamt = utils.DUT.Input_pin
-    select_function = utils.DUT.Input_pin
-    destination = utils.DUT.Output_pin
+    source = lib.Entity.Input_pin
+    shamt = lib.Entity.Input_pin
+    select_function = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
+
+    mux_msb_vector = GENERIC_MUX_2X1
+    mux_source_auxiliar = GENERIC_MUX_2X1
+    mux_destination = GENERIC_MUX_2X1
+    mux_data = GENERIC_MUX_32X1
 
 
 @RV32I_ALU_SHIFTER.testcase
-async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: utils.Trace):
+async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: lib.Waveform):
     dut.source.value = BinaryValue("11111111111111111111111111111111")
     dut.shamt.value = BinaryValue("00000")
     dut.select_function.value = BinaryValue("0001")
@@ -103,20 +108,16 @@ async def tb_RV32I_ALU_SHIFTER_case_1(dut: RV32I_ALU_SHIFTER, trace: utils.Trace
     await trace.cycle()
     yield trace.check(dut.destination, "00001111111111111111111111111111")
 
+
 @pytest.mark.synthesis
 def test_RV32I_ALU_SHIFTER_synthesis():
     RV32I_ALU_SHIFTER.build_vhd()
     RV32I_ALU_SHIFTER.build_netlistsvg()
 
-
 @pytest.mark.testcases
 def test_RV32I_ALU_SHIFTER_testcases():
-    RV32I_ALU_SHIFTER.test_with(
-        [
-            tb_RV32I_ALU_SHIFTER_case_1,
-        ]
-    )
+    RV32I_ALU_SHIFTER.test_with(tb_RV32I_ALU_SHIFTER_case_1)
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

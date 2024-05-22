@@ -30,13 +30,15 @@ architecture RV32I of CPU_STAGE_MEM is
 begin
 
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
-        UPDATE : process(source, clear, clock, enable)
+        UPDATE : process(clock)
         begin
             if (rising_edge(clock)) then
-                SET_RESET : if (enable = '1') then
-                    source_0 <= source;
-                elsif (clear = '1') then
-                    source_0 <= WORK.CPU.NULL_SIGNALS_EX_MEM;
+                if (enable = '1') then
+                    if (clear = '1') then
+                        source_0 <= WORK.CPU.NULL_SIGNALS_EX_MEM;
+                    else
+                        source_0 <= source;
+                    end if;
                 end if;
             end if;
         end process;
@@ -49,23 +51,22 @@ begin
     control_memory.enable_read     <= source_0.control_mem.enable_read;
     control_memory.enable_write    <= source_0.control_mem.enable_write;
 
-    address_memory                 <= source_0.address_pointer;
+    address_memory                 <= source_0.data_destination;
 
-    destination.data_destination   <= source_0.address_pointer;
+    destination.data_destination   <= source_0.data_destination;
     destination.select_destination <= source_0.select_destination;
 
-    CPU_STORE_EXTENDER : entity WORK.CPU_STORE_EXTENDER
+    MEM_INTERFACE: entity WORK.MODULE_MEMORY_INTERFACE(RV32I)
+        generic map (
+            FUNCTION_WIDTH => WORK.RV32I.FUNCT3_WIDTH,
+            DATA_WIDTH     => WORK.RV32I.XLEN
+        )
         port map (
-            source      => source_0.data_source_2,
-            selector    => source_0.funct_3,
-            destination => data_memory_out
-        );
-
-    CPU_LOAD_EXTENDER : entity WORK.CPU_LOAD_EXTENDER
-        port map (
-            source      => data_memory_in,
-            selector    => source_0.funct_3,
-            destination => destination.data_memory
+            select_function      => source_0.funct_3,
+            source_data_in       => data_memory_in,
+            source_data_out      => source_0.data_source_2,
+            destination_data_in  => destination.data_memory,
+            destination_data_out => data_memory_out
         );
 
 end architecture;

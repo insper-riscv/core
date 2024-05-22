@@ -7,7 +7,7 @@ entity GENERIC_EDGE_DETECTOR is
 
     Port (
         clock  : in  std_logic;
-        source : in  std_logic;
+        source : in  std_logic := 'X';
         pulse  : out std_logic
     );
 

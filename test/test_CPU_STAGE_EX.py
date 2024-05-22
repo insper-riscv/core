@@ -1,29 +1,28 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_CPU_package import CPU
 from test_MODULE_EXECUTION_UNIT import MODULE_EXECUTION_UNIT
 from test_MODULE_EXECUTION_UNIT_CONTROLLER import MODULE_EXECUTION_UNIT_CONTROLLER
-from test_CPU_EXECUTION_FOWARDING_UNIT import CPU_EXECUTION_FOWARDING_UNIT
+from test_GENERIC_MUX_4X1 import GENERIC_MUX_4X1
 
 
-class CPU_STAGE_EX(utils.DUT):
+class CPU_STAGE_EX(lib.Entity):
     _package = CPU
 
-    source = utils.DUT.Input_pin
-    selector_forwarding_mem = utils.DUT.Input_pin
-    enable_mem              = utils.DUT.Input_pin
-    selector_forwarding_wb  = utils.DUT.Input_pin
-    enable_wb               = utils.DUT.Input_pin
-    forwarding_mem_source   = utils.DUT.Input_pin
-    forwarding_wb_source    = utils.DUT.Input_pin
-    destination             = utils.DUT.Output_pin
+    clock = lib.Entity.Input_pin
+    clear = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    source = lib.Entity.Input_pin
+    forward = lib.Entity.Input_pin
+    select_source_1n = lib.Entity.Output_pin
+    select_source_2n = lib.Entity.Output_pin
+    destinationn = lib.Entity.Output_pin
 
+    mux_forward_source_1 = GENERIC_MUX_4X1
+    mux_forward_source_2 = GENERIC_MUX_4X1
     module_execution_unit_controller = MODULE_EXECUTION_UNIT_CONTROLLER
     module_execution_unit = MODULE_EXECUTION_UNIT
-    cpu_execution_fowarding_unit = CPU_EXECUTION_FOWARDING_UNIT
 
 
 @pytest.mark.synthesis
@@ -33,4 +32,4 @@ def test_CPU_STAGE_EX_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

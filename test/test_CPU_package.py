@@ -1,18 +1,16 @@
-import os
-import subprocess
-
 import pytest
 
-import utils
+import lib
 from test_RV32I_package import RV32I
 from test_GENERICS_package import GENERICS
 
 
-class CPU(utils.VHD_Package):
+class CPU(lib.Package):
     children = [
         RV32I,
         GENERICS,
     ]
+
 
 @pytest.mark.synthesis
 def test_CPU_package_synthesis():
@@ -20,4 +18,4 @@ def test_CPU_package_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

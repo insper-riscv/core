@@ -1,0 +1,118 @@
+name: VHD Coverage tests
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+    - .github/workflows/vhd_tests_coverage.yml
+
+jobs:
+  test:
+    name: Test ${{ matrix.component }}
+    runs-on: ubuntu-latest
+    container:
+      image: hdlc/ghdl:yosys
+    strategy:
+      matrix:
+          include:
+          - component: test_CPU_package.py
+            enabled: false
+          - component: test_CPU_EXECUTION_FORWARDING_UNIT.py
+            enabled: false
+          - component: test_CPU_STAGE_EX.py
+            enabled: false
+          - component: test_CPU_STAGE_ID.py
+            enabled: false
+          - component: test_CPU_STAGE_IF.py
+            enabled: false
+          - component: test_CPU_STAGE_MEM.py
+            enabled: false
+          - component: test_CPU_STAGE_WB.py
+            enabled: false
+          - component: test_CPU_TOP_LEVEL.py
+            enabled: false
+          - component: test_GENERICS_package.py
+            enabled: false
+          - component: test_GENERIC_ADDER.py
+            enabled: true
+          - component: test_GENERIC_CARRY_LOOKAHEAD.py
+            enabled: false
+          - component: test_GENERIC_COMPARATOR.py
+            enabled: false
+          - component: test_GENERIC_DEBOUNCE.py
+            enabled: false
+          - component: test_GENERIC_EDGE_DETECTOR.py
+            enabled: false
+          - component: test_GENERIC_FLIP_FLOP.py
+            enabled: false
+          - component: test_GENERIC_LOW_FREQ.py
+            enabled: false
+          - component: test_GENERIC_MUX_2X1.py
+            enabled: false
+          - component: test_GENERIC_MUX_4X1.py
+            enabled: false
+          - component: test_GENERIC_RAM.py
+            enabled: false
+          - component: test_GENERIC_REGISTER.py
+            enabled: false
+          - component: test_GENERIC_ROM.py
+            enabled: false
+          - component: test_GENERIC_SIGNAL_EXTENDER.py
+            enabled: false
+          - component: test_MODULES_package.py
+            enabled: false
+          - component: test_MODULE_BRANCH_COMPARE_UNIT.py
+            enabled: false
+          - component: test_MODULE_BRANCH_UNIT.py
+            enabled: false
+          - component: test_MODULE_CONTROL_UNIT.py
+            enabled: false
+          - component: test_MODULE_EXECUTION_UNIT_CONTROLLER.py
+            enabled: false
+          - component: test_MODULE_EXECUTION_UNIT.py
+            enabled: false
+          - component: test_MODULE_PROGRAM_COUNTER.py
+            enabled: false
+          - component: test_MODULE_REGISTER_FILE.py
+            enabled: false
+          - component: test_MODULE_WRITE_BACK.py
+            enabled: false
+          - component: test_RV32I_package.py
+            enabled: false
+
+          - component: test_RV32I_ALU_SHIFTER.py
+            enabled: false
+          - component: test_RV32I_ALU.py
+            enabled: false
+          - component: test_RV32I_BRANCH_CONTROLLER.py
+            enabled: false
+          - component: test_RV32I_REGISTER_FILE.py
+            enabled: false
+          - component: test_RV32I_TYPE_CONVERTER.py
+            enabled: false
+          - component: test_TOP_LEVEL.py
+            enabled: false
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install packages
+      run: |
+        apt-get update -qq              \
+        && apt-get upgrade -y           \
+        && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
+            ca-certificates             \
+            libpython3-all-dev          \
+            npm                         \
+            python3                     \
+            python3-pip                 \
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        npm install -g netlistsvg
+    - name: Add checkout directory to PYTHONPATH
+      run: echo "PYTHONPATH=$(pwd):$PYTHONPATH" >> $GITHUB_ENV
+    - name: Run Synthesis
+      run: pytest -k ${{ matrix.component }} -m synthesis
+    - name: Run Stress Tests
+      if: ${{ contains(matrix.enabled, true) }}
+      run: pytest -k ${{ matrix.component }} -m coverage

@@ -1,15 +1,19 @@
-import os
-
 import pytest
 
-import utils
+import lib
 from test_MODULES_package import MODULES
 from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 from test_GENERIC_ADDER import GENERIC_ADDER
 
 
-class MODULE_BRANCH_UNIT(utils.DUT):
+class MODULE_BRANCH_UNIT(lib.Entity):
     _package = MODULES
+
+    selector = lib.Entity.Input_pin
+    source_program = lib.Entity.Input_pin
+    source_immediate = lib.Entity.Input_pin
+    source_register = lib.Entity.Input_pin
+    destination = lib.Entity.Output_pin
 
     ADDER_1 = GENERIC_ADDER
     ADDER_2 = GENERIC_ADDER
@@ -23,4 +27,4 @@ def test_MODULE_BRANCH_UNIT_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

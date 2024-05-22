@@ -1,12 +1,9 @@
-import os
-import subprocess
-
 import pytest
 
-import utils
+import lib
 
 
-class GENERICS(utils.VHD_Package):
+class GENERICS(lib.Package):
     pass
 
 
@@ -16,4 +13,4 @@ def test_GENERICS_package_synthesis():
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

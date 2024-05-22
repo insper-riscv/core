@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 library WORK;
+use WORK.GENERICS.all;
 
 entity GENERIC_COMPARATOR is
 
@@ -11,8 +12,8 @@ entity GENERIC_COMPARATOR is
     );
 
     port (
-        source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
         flag_equal    : out std_logic;
         flag_less     : out std_logic;
         flag_greather : out std_logic
@@ -56,7 +57,7 @@ begin
     end generate;
 
     flag_equal    <= a_equal_b(DATA_WIDTH - 2);
-    flag_less     <= WORK.GENERICS.reduce_or(a_less_than_b);
-    flag_greather <= WORK.GENERICS.reduce_or(a_greater_than_b);
+    flag_less     <= reduce_or(a_less_than_b);
+    flag_greather <= reduce_or(a_greater_than_b);
 
 end architecture;
