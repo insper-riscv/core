@@ -10,9 +10,9 @@ entity RV32I_TYPE_CONVERTER is
     );
   
     port (
-        select_type : in  std_ulogic_vector(2 downto 0);
-        source      : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        destination : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
+        select_type : in  std_logic_vector(2 downto 0);
+        source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;

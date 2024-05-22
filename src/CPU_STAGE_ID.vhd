@@ -12,10 +12,10 @@ entity CPU_STAGE_ID is
     );
 
     port (
-        clock                 : in  std_ulogic;
-        clear                 : in  std_ulogic;
-        enable                : in  std_ulogic;
-        enable_destination    : in  std_ulogic;
+        clock                 : in  std_logic;
+        clear                 : in  std_logic;
+        enable                : in  std_logic;
+        enable_destination    : in  std_logic;
         select_destination    : in  WORK.CPU.t_REGISTER;
         data_destination      : in  WORK.CPU.t_DATA;
         forward               : in  WORK.CPU.t_FORWARD_BRANCH;
@@ -35,8 +35,8 @@ architecture RV32I of CPU_STAGE_ID is
     signal data_source_2       : WORK.CPU.t_DATA;
     signal data_immediate      : WORK.CPU.t_DATA;
 	signal address_out         : WORK.CPU.t_DATA;
-    signal enable_flush        : std_ulogic;
-    signal enable_branch       : std_ulogic;
+    signal enable_flush        : std_logic;
+    signal enable_branch       : std_logic;
 
 begin
 

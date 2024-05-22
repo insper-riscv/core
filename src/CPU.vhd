@@ -26,36 +26,36 @@ package CPU is
     subtype REGISTER_ADDRESS_RANGE  is natural range (REGISTER_ADDRESS_WIDTH  - 1) downto 0;
     subtype FUNCTION_RANGE          is natural range (EXECUTION_CONTROL_WIDTH - 1) downto 0;
 
-    subtype t_DATA        is std_ulogic_vector(DATA_RANGE);
-    subtype t_PROGRAM     is std_ulogic_vector(INSTRUCTION_RANGE);
-    subtype t_OPCODE      is std_ulogic_vector(OPCODE_RANGE);
-    subtype t_REGISTER    is std_ulogic_vector(REGISTER_ADDRESS_RANGE);
-    subtype t_FUNCTION    is std_ulogic_vector(FUNCTION_RANGE);
+    subtype t_DATA        is std_logic_vector(DATA_RANGE);
+    subtype t_PROGRAM     is std_logic_vector(INSTRUCTION_RANGE);
+    subtype t_OPCODE      is std_logic_vector(OPCODE_RANGE);
+    subtype t_REGISTER    is std_logic_vector(REGISTER_ADDRESS_RANGE);
+    subtype t_FUNCTION    is std_logic_vector(FUNCTION_RANGE);
 
     type t_CONTROL_IF is record
-        enable_stall  : std_ulogic;
-        select_source : std_ulogic;
+        enable_stall  : std_logic;
+        select_source : std_logic;
     end record;
 
     type t_CONTROL_ID is record
-        enable_branch : std_ulogic;
-        enable_jump   : std_ulogic;
-        select_jump   : std_ulogic;
+        enable_branch : std_logic;
+        enable_jump   : std_logic;
+        select_jump   : std_logic;
     end record;
 
     type t_CONTROL_EX is record
-        select_source_1  : std_ulogic_vector(1 downto 0);
-        select_source_2  : std_ulogic_vector(1 downto 0);
+        select_source_1  : std_logic_vector(1 downto 0);
+        select_source_2  : std_logic_vector(1 downto 0);
     end record;
 
     type t_CONTROL_MEM is record
-        enable_read  : std_ulogic;
-        enable_write : std_ulogic;
+        enable_read  : std_logic;
+        enable_write : std_logic;
     end record;
 
     type t_CONTROL_WB is record
-        enable_destination : std_ulogic;
-        select_destination : std_ulogic;
+        enable_destination : std_logic;
+        select_destination : std_logic;
     end record;
 
     type t_SIGNALS_IF_ID is record
@@ -96,14 +96,14 @@ package CPU is
     end record;
 
     type t_FORWARD_BRANCH is record
-        select_source_1 : std_ulogic;
-        select_source_2 : std_ulogic;
+        select_source_1 : std_logic;
+        select_source_2 : std_logic;
         source_mem      : WORK.RV32I.t_DATA;
     end record;
 
     type t_FORWARD_EXECUTION is record
-        select_source_1 : std_ulogic_vector(1 downto 0);
-        select_source_2 : std_ulogic_vector(1 downto 0);
+        select_source_1 : std_logic_vector(1 downto 0);
+        select_source_2 : std_logic_vector(1 downto 0);
         source_mem      : WORK.RV32I.t_DATA;
         source_wb       : WORK.RV32I.t_DATA;
     end record;

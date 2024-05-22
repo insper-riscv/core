@@ -6,11 +6,11 @@ library WORK;
 entity GENERIC_FLIP_FLOP is
 
     port (
-        clock  : in  std_ulogic;
-        clear  : in  std_ulogic;
-        enable : in  std_ulogic;
-        source : in  std_ulogic;
-        state  : out std_ulogic := '0'
+        clock  : in  std_logic;
+        clear  : in  std_logic;
+        enable : in  std_logic;
+        source : in  std_logic;
+        state  : out std_logic := '0'
     );
 
 end entity;

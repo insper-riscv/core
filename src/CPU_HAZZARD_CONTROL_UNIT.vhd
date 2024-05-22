@@ -10,13 +10,13 @@ entity CPU_HAZZARD_CONTROL_UNIT is
     port (
         stage_id_select_source_1     : in  WORK.CPU.t_REGISTER;
         stage_id_select_source_2     : in  WORK.CPU.t_REGISTER;
-        stage_ex_enable_read         : in  std_ulogic;
-        stage_ex_enable_destination  : in  std_ulogic;
+        stage_ex_enable_read         : in  std_logic;
+        stage_ex_enable_destination  : in  std_logic;
         stage_ex_select_destination  : in  WORK.CPU.t_REGISTER;
-        stage_mem_enable_read        : in  std_ulogic;
+        stage_mem_enable_read        : in  std_logic;
         stage_mem_select_destination : in  WORK.CPU.t_REGISTER; 
-        stall_branch                 : out std_ulogic;       
-        destination                  : out std_ulogic
+        stall_branch                 : out std_logic;       
+        destination                  : out std_logic
     );
 
 end entity;

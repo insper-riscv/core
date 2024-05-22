@@ -12,28 +12,28 @@ entity MODULE_BRANCH_COMPARE_UNIT is
     );
 
     port (
-        enable             : in  std_ulogic;
-        select_function    : in  std_ulogic_vector((FUNCTION_WIDTH - 1) downto 0);
-        source_1           : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        source_2           : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        enable             : in  std_logic;
+        select_function    : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
+        source_1           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_2           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         forward            : in  WORK.CPU.t_FORWARD_BRANCH;
-        destination        : out std_ulogic
+        destination        : out std_logic
     );
 
 end entity;
 
 architecture RV32I of MODULE_BRANCH_COMPARE_UNIT is
 
-    alias sign_1 : std_ulogic is source_1(WORK.RV32I.XLEN - 1);
-    alias sign_2 : std_ulogic is source_2(WORK.RV32I.XLEN - 1);
+    alias sign_1 : std_logic is source_1(WORK.RV32I.XLEN - 1);
+    alias sign_2 : std_logic is source_2(WORK.RV32I.XLEN - 1);
 
-    signal flag_branch   : std_ulogic;
-    signal flag_equal    : std_ulogic;
-    signal flag_less     : std_ulogic;
-    signal flag_greather : std_ulogic;
+    signal flag_branch   : std_logic;
+    signal flag_equal    : std_logic;
+    signal flag_less     : std_logic;
+    signal flag_greather : std_logic;
 
-    signal forward_source_1 : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-    signal forward_source_2 : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal forward_source_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal forward_source_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 

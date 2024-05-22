@@ -10,9 +10,9 @@ entity CPU_STAGE_EX is
     );
 
     port (
-        clock           : in  std_ulogic;
-        clear           : in  std_ulogic;
-        enable          : in  std_ulogic;
+        clock           : in  std_logic;
+        clear           : in  std_logic;
+        enable          : in  std_logic;
         source          : in  WORK.CPU.t_SIGNALS_ID_EX;
         forward         : in  WORK.CPU.t_FORWARD_EXECUTION;
         select_source_1 : out WORK.CPU.t_REGISTER;

@@ -5,21 +5,21 @@ library WORK;
 
 package GENERICS is
 
-    type t_std_ulogic_array is array(natural range <>) of std_ulogic_vector;
+    type t_std_logic_array is array(natural range <>) of std_logic_vector;
 
-    function reverse_vector (l: in std_ulogic_vector) return std_ulogic_vector;
-    function reduce_or  (l : std_ulogic_vector) return std_ulogic;
-    function reduce_and (l : std_ulogic_vector) return std_ulogic;
-    function is_equal (l : std_ulogic_vector; r : std_ulogic_vector) return std_ulogic;
-    function is_equal_dynamic (l : std_ulogic_vector; r : std_ulogic_vector) return std_ulogic;
+    function reverse_vector (l: in std_logic_vector) return std_logic_vector;
+    function reduce_or  (l : std_logic_vector) return std_logic;
+    function reduce_and (l : std_logic_vector) return std_logic;
+    function is_equal (l : std_logic_vector; r : std_logic_vector) return std_logic;
+    function is_equal_dynamic (l : std_logic_vector; r : std_logic_vector) return std_logic;
 
 end package;
 
 package body GENERICS is
 
-    function reverse_vector (l: in std_ulogic_vector) return std_ulogic_vector is
-        variable result : std_ulogic_vector(l'range);
-        alias auxiliar  : std_ulogic_vector(l'reverse_range) is l;
+    function reverse_vector (l: in std_logic_vector) return std_logic_vector is
+        variable result : std_logic_vector(l'range);
+        alias auxiliar  : std_logic_vector(l'reverse_range) is l;
     begin
         for i in auxiliar'range loop
             result(i) := auxiliar(i);
@@ -27,7 +27,7 @@ package body GENERICS is
         return result;
     end function;
 
-    function reduce_or (l : std_ulogic_vector) return std_ulogic is
+    function reduce_or (l : std_logic_vector) return std_logic is
         constant mid : integer := (l'high + l'low) / 2;
     begin
         if l'length = 1 then
@@ -41,7 +41,7 @@ package body GENERICS is
         end if;
     end function;
 
-    function reduce_and (l : std_ulogic_vector) return std_ulogic is
+    function reduce_and (l : std_logic_vector) return std_logic is
         constant mid : integer := (l'high + l'low) / 2;
     begin
         if l'length = 1 then
@@ -55,9 +55,9 @@ package body GENERICS is
         end if;
     end function;
 
-    function is_equal (l : std_ulogic_vector; r : std_ulogic_vector) return std_ulogic is
-        variable base : std_ulogic_vector(r'range) := r;
-        variable result : std_ulogic_vector(r'range);
+    function is_equal (l : std_logic_vector; r : std_logic_vector) return std_logic is
+        variable base : std_logic_vector(r'range) := r;
+        variable result : std_logic_vector(r'range);
     begin
         if r'ascending then
             base := reverse_vector(r);
@@ -74,7 +74,7 @@ package body GENERICS is
         return reduce_and(result);
     end function;
 
-    function is_equal_dynamic (l : std_ulogic_vector; r : std_ulogic_vector) return std_ulogic is
+    function is_equal_dynamic (l : std_logic_vector; r : std_logic_vector) return std_logic is
     begin
         return reduce_and(l XNOR r);
     end function;

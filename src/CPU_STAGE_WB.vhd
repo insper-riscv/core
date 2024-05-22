@@ -10,11 +10,11 @@ entity CPU_STAGE_WB is
     );
 
     port (
-        clock              : in  std_ulogic;
-        clear              : in  std_ulogic;
-        enable             : in  std_ulogic;
+        clock              : in  std_logic;
+        clear              : in  std_logic;
+        enable             : in  std_logic;
         source             : in  WORK.CPU.t_SIGNALS_MEM_WB;
-        enable_destination : out std_ulogic;
+        enable_destination : out std_logic;
         select_destination : out WORK.CPU.t_REGISTER;
         destination        : out WORK.CPU.t_DATA
     );

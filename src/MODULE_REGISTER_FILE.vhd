@@ -11,15 +11,15 @@ entity MODULE_REGISTER_FILE is
     );
 
     port (
-        clock              : in  std_ulogic;
-        clear              : in  std_ulogic;
-        enable             : in  std_ulogic;
-        select_destination : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
-        select_source_1    : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
-        select_source_2    : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
-        data_destination   : in  std_ulogic_vector((DATA_WIDTH    - 1) downto 0);
-        data_source_1      : out std_ulogic_vector((DATA_WIDTH    - 1) downto 0);
-        data_source_2      : out std_ulogic_vector((DATA_WIDTH    - 1) downto 0)
+        clock              : in  std_logic;
+        clear              : in  std_logic;
+        enable             : in  std_logic;
+        select_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        select_source_1    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        select_source_2    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        data_destination   : in  std_logic_vector((DATA_WIDTH    - 1) downto 0);
+        data_source_1      : out std_logic_vector((DATA_WIDTH    - 1) downto 0);
+        data_source_2      : out std_logic_vector((DATA_WIDTH    - 1) downto 0)
     );
 
 end entity;

@@ -10,17 +10,17 @@ entity GENERIC_CARRY_LOOKAHEAD is
     );
 
     port (
-        carry_in        : in  std_ulogic;
-        carry_generate  : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        carry_propagate : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        carry_out       : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
+        carry_in        : in  std_logic;
+        carry_generate  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        carry_propagate : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        carry_out       : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of GENERIC_CARRY_LOOKAHEAD is
 
-    signal carry : std_ulogic_vector(DATA_WIDTH downto 0);
+    signal carry : std_logic_vector(DATA_WIDTH downto 0);
 
 begin
 

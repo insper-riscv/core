@@ -9,24 +9,24 @@ entity CPU_EXECUTION_FORWARDING_UNIT is
     port (
         stage_ex_select_source_1     : in  WORK.CPU.t_REGISTER;
         stage_ex_select_source_2     : in  WORK.CPU.t_REGISTER;
-        stage_mem_enable_destination : in  std_ulogic;
+        stage_mem_enable_destination : in  std_logic;
         stage_mem_select_destination : in  WORK.CPU.t_REGISTER;
-        stage_wb_enable_destination  : in  std_ulogic;
+        stage_wb_enable_destination  : in  std_logic;
         stage_wb_select_destination  : in  WORK.CPU.t_REGISTER;
-        select_source_1              : out std_ulogic_vector(1 downto 0);
-        select_source_2              : out std_ulogic_vector(1 downto 0)
+        select_source_1              : out std_logic_vector(1 downto 0);
+        select_source_2              : out std_logic_vector(1 downto 0)
     );
 
 end entity;
 
 architecture RV32I of CPU_EXECUTION_FORWARDING_UNIT is
 
-    signal mem_source_1 : std_ulogic;
-    signal mem_source_2 : std_ulogic;
-    signal mem_not_zero : std_ulogic;
-    signal wb_source_1  : std_ulogic;
-    signal wb_source_2  : std_ulogic;
-    signal wb_not_zero  : std_ulogic;
+    signal mem_source_1 : std_logic;
+    signal mem_source_2 : std_logic;
+    signal mem_not_zero : std_logic;
+    signal wb_source_1  : std_logic;
+    signal wb_source_2  : std_logic;
+    signal wb_not_zero  : std_logic;
 
 begin
 

@@ -13,8 +13,8 @@ entity GENERIC_LOW_FREQ is
     );
 
     port(
-        clock     : in  std_ulogic;
-        clock_out : out std_ulogic
+        clock     : in  std_logic;
+        clock_out : out std_logic
     );
 
 end entity;
@@ -22,7 +22,7 @@ end entity;
 architecture RTL of GENERIC_LOW_FREQ is
 
     signal counter : integer range 0 to (n + 1) := 0;
-    signal tick    : std_ulogic := '0';
+    signal tick    : std_logic := '0';
 
 begin
 

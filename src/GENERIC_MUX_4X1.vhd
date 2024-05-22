@@ -10,20 +10,20 @@ entity GENERIC_MUX_4X1 is
     );
 
     port (
-        selector     : in  std_ulogic_vector(1 downto 0);
-        source_1     : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-        source_2     : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-        source_3     : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-        source_4     : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
-        destination  : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
+        selector     : in  std_logic_vector(1 downto 0);
+        source_1     : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        source_2     : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        source_3     : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        source_4     : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of GENERIC_MUX_4X1 is
 
-    signal selector_0 : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-    signal selector_1 : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal selector_0 : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal selector_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 

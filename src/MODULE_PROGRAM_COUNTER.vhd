@@ -11,12 +11,12 @@ entity MODULE_PROGRAM_COUNTER is
     );
 
     port (
-        clock        : in  std_ulogic;
-        clear        : in  std_ulogic;
-        enable       : in  std_ulogic;
-        selector     : in  std_ulogic;
-        source       : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        destination  : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
+        clock        : in  std_logic;
+        clear        : in  std_logic;
+        enable       : in  std_logic;
+        selector     : in  std_logic;
+        source       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;

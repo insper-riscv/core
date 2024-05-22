@@ -13,26 +13,26 @@ entity RV32I_REGISTER_FILE is
     );
 
     port (
-        clock               : in  std_ulogic;
-        clear               : in  std_ulogic;
-        enable              : in  std_ulogic := '0';
-        address_destination : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
-        address_source_1    : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
-        address_source_2    : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
-        data_destination    : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_1       : out std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        data_source_2       : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
+        clock               : in  std_logic;
+        clear               : in  std_logic;
+        enable              : in  std_logic := '0';
+        address_destination : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        address_source_1    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        address_source_2    : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        data_destination    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        data_source_1       : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        data_source_2       : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of RV32I_REGISTER_FILE is
 
-    signal registers       : t_std_ulogic_array(1 to (2**ADDRESS_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
-    signal decode_source_1 : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-    signal decode_source_2 : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-    signal passthrough_1   : std_ulogic;
-    signal passthrough_2   : std_ulogic;
+    signal registers       : t_std_logic_array(1 to (2**ADDRESS_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
+    signal decode_source_1 : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal decode_source_2 : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal passthrough_1   : std_logic;
+    signal passthrough_2   : std_logic;
 
 begin
 
@@ -50,7 +50,7 @@ begin
             port map (
                 clock       => clock,
                 clear       => clear,
-                enable      => enable AND is_equal_dynamic(address_destination, std_ulogic_vector(to_unsigned(i, 5))),
+                enable      => enable AND is_equal_dynamic(address_destination, std_logic_vector(to_unsigned(i, 5))),
                 source      => data_destination,
                 destination => registers(i)
             );

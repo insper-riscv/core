@@ -13,9 +13,9 @@ entity TOP_LEVEL is
     );
 
     port (
-        CLOCK           : in  std_ulogic                    := '0';
-        SW              : in  std_ulogic_vector(3 downto 0) := (others => '0');
-        LEDR            : out std_ulogic_vector(9 downto 0) := (others => '0')
+        CLOCK           : in  std_logic                    := '0';
+        SW              : in  std_logic_vector(3 downto 0) := (others => '0');
+        LEDR            : out std_logic_vector(9 downto 0) := (others => '0')
     );
 
 end entity;
@@ -25,11 +25,11 @@ architecture RTL of TOP_LEVEL is
     signal data_program        : WORK.RV32I.t_PROGRAM;
     signal data_memory_in      : WORK.RV32I.t_DATA;
     signal data_memory_out     : WORK.RV32I.t_DATA;
-    signal enable_memory_read  : std_ulogic;
-    signal enable_memory_write : std_ulogic;
+    signal enable_memory_read  : std_logic;
+    signal enable_memory_write : std_logic;
     signal address_program     : WORK.RV32I.t_DATA;
     signal address_memory      : WORK.RV32I.t_DATA;
-    signal clock_processor     : std_ulogic := '0';
+    signal clock_processor     : std_logic := '0';
 
 begin
 
@@ -43,7 +43,7 @@ begin
         )
         port map (
             clock       => clock_processor,
-            address     => address_program,
+            address     => std_logic_vector(address_program),
             destination => data_program
         );
 

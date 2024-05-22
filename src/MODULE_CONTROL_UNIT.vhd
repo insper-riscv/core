@@ -13,9 +13,9 @@ entity MODULE_CONTROL_UNIT is
     );
 
     port (
-        clear       : in  std_ulogic;
-        instruction : in  std_ulogic_vector((INSTRUCTION_WIDTH - 1) downto 0);
-        immediate   : out std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        clear       : in  std_logic;
+        instruction : in  std_logic_vector((INSTRUCTION_WIDTH - 1) downto 0);
+        immediate   : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         control_id  : out WORK.CPU.t_CONTROL_ID;
         control_ex  : out WORK.CPU.t_CONTROL_EX;
         control_mem : out WORK.CPU.t_CONTROL_MEM;
@@ -28,16 +28,16 @@ architecture RV32I of MODULE_CONTROL_UNIT is
 
     alias opcode   is instruction(WORK.RV32I.OPCODE_RANGE);
 
-    signal is_lui   : std_ulogic;
-    signal is_auipc : std_ulogic;
-    signal is_jalr  : std_ulogic;
-    signal is_load  : std_ulogic;
-    signal r_type   : std_ulogic;
-    signal i_type   : std_ulogic;
-    signal s_type   : std_ulogic;
-    signal b_type   : std_ulogic;
-    signal u_type   : std_ulogic;
-    signal j_type   : std_ulogic;
+    signal is_lui   : std_logic;
+    signal is_auipc : std_logic;
+    signal is_jalr  : std_logic;
+    signal is_load  : std_logic;
+    signal r_type   : std_logic;
+    signal i_type   : std_logic;
+    signal s_type   : std_logic;
+    signal b_type   : std_logic;
+    signal u_type   : std_logic;
+    signal j_type   : std_logic;
 
 begin
 

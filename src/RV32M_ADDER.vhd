@@ -11,22 +11,22 @@ entity RV32I_ALU_ROW is
     );
   
     port (
-        invert_source_2 : in  std_ulogic;
-        source_1        : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        source_2        : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        destination     : out std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-        overflow        : out std_ulogic
+        invert_source_2 : in  std_logic;
+        source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
+        destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0);
+        overflow        : out std_logic
     );
 
 end entity;
 
 architecture CPU of RV32I_ALU_ROW is
 
-    signal source_2_auxiliar : std_ulogic;
-    signal half_add          : std_ulogic;
-    signal carry_auxiliar    : std_ulogic;
-    signal result            : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
-    signal carry             : std_ulogic_vector( DATA_WIDTH      downto 0);
+    signal source_2_auxiliar : std_logic;
+    signal half_add          : std_logic;
+    signal carry_auxiliar    : std_logic;
+    signal result            : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal carry             : std_logic_vector( DATA_WIDTH      downto 0);
 
 begin
 

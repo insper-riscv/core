@@ -13,10 +13,10 @@ entity MODULE_EXECUTION_UNIT_CONTROLLER is
     );
 
     port (
-        opcode      : in  std_ulogic_vector((OPCODE_WIDTH - 1) downto 0);
-        funct_3     : in  std_ulogic_vector(2 downto 0);
-        funct_7     : in  std_ulogic_vector(6 downto 0);
-        destination : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
+        opcode      : in  std_logic_vector((OPCODE_WIDTH - 1) downto 0);
+        funct_3     : in  std_logic_vector(2 downto 0);
+        funct_7     : in  std_logic_vector(6 downto 0);
+        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
