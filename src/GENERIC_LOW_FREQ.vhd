@@ -7,9 +7,9 @@ LIBRARY WORK;
 entity GENERIC_LOW_FREQ is
 
     generic (
-        n : natural := 8    -- O valor "n" do n, define a divisão por "2n". 
+        n : natural := 8    -- O valor "n" do n, define a divisão por "2n".
                             -- Ou seja, não metade do perí­odo da frequência de saÃída.
-        
+
     );
 
     port(

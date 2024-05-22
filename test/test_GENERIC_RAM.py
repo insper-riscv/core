@@ -12,7 +12,7 @@ class GENERIC_RAM(lib.Entity):
     clock = lib.Entity.Input_pin
     enable = lib.Entity.Input_pin
     enable_read = lib.Entity.Input_pin
-    enable_write = lib.Entity.Input_pin  
+    enable_write = lib.Entity.Input_pin
     address = lib.Entity.Input_pin
     source = lib.Entity.Input_pin
     destination = lib.Entity.Output_pin

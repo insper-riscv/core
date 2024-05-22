@@ -54,12 +54,12 @@ begin
         )
         port map (
             clock        => clock_processor,
-            enable       => '1',      
+            enable       => '1',
             enable_read  => enable_memory_read,
             enable_write => enable_memory_write,
             address      => address_memory,
             source       => data_memory_out,
-            destination  => data_memory_in 
+            destination  => data_memory_in
         );
 
     CPU : entity WORK.CPU_TOP_LEVEL(RV32I)
@@ -93,9 +93,9 @@ begin
 
     CLOCK_DEMONSTRATION : if DEMONSTRATION = TRUE generate
         low_freq : entity WORK.GENERIC_LOW_FREQ
-            generic map (n => 100000000) 
+            generic map (n => 100000000)
             port map (
-                clock => CLOCK, 
+                clock => CLOCK,
                 clock_out => clock_processor
             );
             LEDR(9) <= clock_processor;

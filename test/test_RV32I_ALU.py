@@ -18,7 +18,7 @@ operations = {
     "XOR":  "0100",
     "OR":   "0110",
     "AND":  "0111",
-    "SUB":  "1000", 
+    "SUB":  "1000",
     "SLL":  "0001",
     "SLT":  "0010",
     "SLTU": "0011",
@@ -45,7 +45,7 @@ class RV32I_ALU(lib.Entity):
 
 @RV32I_ALU.testcase
 async def tb_RV32I_ALU_case_1(dut: RV32I_ALU, trace: lib.Waveform):
-    
+
     #AND
     dut.select_function.value = BinaryValue("0111")
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
@@ -298,7 +298,7 @@ async def tb_RV32I_ALU_case_coverage_sra(dut: RV32I_ALU, trace: lib.Waveform):
         expected = '{0:0{1}b}'.format(source_1 >> source_2, 32-source_2)
         expected = expected[0]*source_2 + expected
 
-        message = f"Shift: {'{0:0{1}b}'.format(source_1 >> source_2, 32-source_2)} Source_1: {'{0:0{1}b}'.format(source_1, 32)} Source_2: {source_2} Expected: {expected}" 
+        message = f"Shift: {'{0:0{1}b}'.format(source_1 >> source_2, 32-source_2)} Source_1: {'{0:0{1}b}'.format(source_1, 32)} Source_2: {source_2} Expected: {expected}"
 
         await trace.cycle()
         yield trace.check(dut.destination, expected, message)

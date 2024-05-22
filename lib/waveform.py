@@ -31,11 +31,11 @@ class Waveform:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         return self._trace.__exit__(exc_type, exc_val, exc_tb)
-    
+
     async def start(self):
         # await cocotb.triggers.FallingEdge(self.clock_pin)
         pass
-    
+
     def set_scale(self, scale: T.Union[int, float]):
         self.scale = scale
 
@@ -82,7 +82,7 @@ class Waveform:
             break
 
         return result
-    
+
     def check_input(self, pin: T.Type["Entity.Input_pin"], value: str, message: str = ""):
         result = check.equal(pin.value.binstr, value, f"At pin \"{pin._name}\". {message}") # type: ignore
 

@@ -9,7 +9,7 @@ entity RV32I_ALU_ROW is
     generic (
         DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
-  
+
     port (
         invert_source_2 : in  std_logic;
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
@@ -43,7 +43,7 @@ begin
                 carry_out       => carry(i + 1)
             );
     end generate;
-    
+
     source_2_auxiliar <= source_2(DATA_WIDTH - 1) XOR invert_source_2;
     half_add          <= source_1(DATA_WIDTH - 1) XOR source_2_auxiliar;
     carry_auxiliar    <= (source_1(DATA_WIDTH - 1) AND source_2_auxiliar) OR (half_add AND carry(DATA_WIDTH - 1));

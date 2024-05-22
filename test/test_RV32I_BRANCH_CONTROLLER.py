@@ -14,7 +14,7 @@ class RV32I_BRANCH_CONTROLLER(lib.Entity):
     flag_equal = lib.Entity.Input_pin
     flag_less = lib.Entity.Input_pin
     flag_greather = lib.Entity.Input_pin
-    destination = lib.Entity.Output_pin   
+    destination = lib.Entity.Output_pin
 
     mux_case_beq = GENERIC_MUX_2X1
     mux_case_bne = GENERIC_MUX_2X1

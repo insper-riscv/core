@@ -243,7 +243,7 @@ package body RV32I is
             when
                 OPCODE_STORE =>
                 return INSTRUCTION_S_TYPE;
-            when 
+            when
                 OPCODE_BRANCH =>
                 return INSTRUCTION_B_TYPE;
             when

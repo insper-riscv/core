@@ -33,7 +33,7 @@ architecture RTL of RV32I_ALU_SHIFTER is
 begin
 
     reversed_source <= reverse_vector(source);
-    
+
     reversed_destination <= reverse_vector(destination_auxiliar);
 
     BUILD : for i in 0 to (DATA_WIDTH - 1) generate

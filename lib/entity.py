@@ -70,7 +70,7 @@ class Entity(T.Type[cocotb.handle.HierarchyObject]):
 
                 if not pased:
                     message = "\n".join(check.check_log.get_failures()) # type: ignore
-                    
+
                     raise AssertionError(message)
 
         _testcase_wrapper.__name__ = fn.__name__

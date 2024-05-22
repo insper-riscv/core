@@ -47,56 +47,56 @@ async def tb_MODULE_BRANCH_COMPARE_UNIT_case_1(dut: MODULE_BRANCH_COMPARE_UNIT, 
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0100")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "1", "At 3")
-    
+
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("10000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0100")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "1", "At 4")
-    
+
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0101")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "0", "At 5")
-    
+
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("10000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0101")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "0", "At 6")
-    
+
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000001")
     dut.select_function.value = BinaryValue("0110")
 
     await trace.cycle()
     yield trace.check(dut.destination, "1", "At 7")
-    
+
     dut.source_1.value = BinaryValue("00000000000000000000000000000000")
     dut.source_2.value = BinaryValue("10000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0110")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "1", "At 8")
-    
+
     dut.source_1.value = BinaryValue("00000000000000000000000000000001")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0111")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "1", "At 9")
-    
+
     dut.source_1.value = BinaryValue("10000000000000000000000000000000")
     dut.source_2.value = BinaryValue("00000000000000000000000000000000")
     dut.select_function.value = BinaryValue("0111")
-    
+
     await trace.cycle()
     yield trace.check(dut.destination, "1", "At 10")
 

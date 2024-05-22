@@ -262,7 +262,7 @@ export default {
                         collapsed: true,
                         items: [
                         ],
-                    }, 
+                    },
                 ],
             },
         ],

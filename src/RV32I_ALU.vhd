@@ -10,7 +10,7 @@ entity RV32I_ALU is
     generic (
         DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
-  
+
     port (
         select_function : in  std_logic_vector(3 downto 0);
         source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);

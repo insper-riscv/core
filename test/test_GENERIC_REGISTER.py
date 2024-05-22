@@ -55,10 +55,10 @@ async def tb_GENERIC_REGISTER_case_1(dut: GENERIC_REGISTER, trace: lib.Waveform)
 async def tb_GENERIC_REGISTER_case_coverage(dut: GENERIC_REGISTER, trace: lib.Waveform):
     trace.disable()
 
-    qnt_tests = 30_000    
+    qnt_tests = 30_000
     clear = "0"
     enable = "1"
-    
+
     for _ in range(qnt_tests):
         source = random.getrandbits(32)
 
@@ -73,7 +73,7 @@ async def tb_GENERIC_REGISTER_case_coverage(dut: GENERIC_REGISTER, trace: lib.Wa
 
         await trace.cycle()
         yield trace.check(dut.destination, destination, message)
-    
+
     source = random.getrandbits(32)
     source_bits = '{0:0{1}b}'.format(source, 32)
     destination = source_bits
@@ -122,7 +122,7 @@ async def tb_GENERIC_REGISTER_case_coverage(dut: GENERIC_REGISTER, trace: lib.Wa
 async def tb_GENERIC_REGISTER_case_coverage_15_bits(dut: GENERIC_REGISTER, trace: lib.Waveform):
     trace.disable()
 
-    bits = 15    
+    bits = 15
     clear = "0"
     enable = "1"
 
@@ -138,7 +138,7 @@ async def tb_GENERIC_REGISTER_case_coverage_15_bits(dut: GENERIC_REGISTER, trace
 
         await trace.cycle()
         yield trace.check(dut.destination, destination, message)
-    
+
 
     source = random.getrandbits(bits)
     source_bits = '{0:0{1}b}'.format(source, bits)

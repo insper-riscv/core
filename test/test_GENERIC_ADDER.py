@@ -64,10 +64,10 @@ async def tb_GENERIC_ADDER_coverage_case(dut: GENERIC_ADDER, trace: lib.Waveform
     for _ in range(1_000_000):
         source_1 = random.getrandbits(8)
         source_2 = random.getrandbits(8)
-    
+
         dut.source_1.value = BinaryValue(b(source_1, 8))
         dut.source_2.value = BinaryValue(b(source_2, 8))
-    
+
         await trace.cycle()
 
         message = f"source_1: {b(source_1, 8)}, source_2: {b(source_2, 8)}"

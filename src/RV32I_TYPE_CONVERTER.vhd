@@ -8,7 +8,7 @@ entity RV32I_TYPE_CONVERTER is
     generic (
         DATA_WIDTH : natural := WORK.RV32I.XLEN
     );
-  
+
     port (
         select_type : in  std_logic_vector(2 downto 0);
         source      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);

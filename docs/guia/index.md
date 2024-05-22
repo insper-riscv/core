@@ -1,6 +1,6 @@
 # Desenvolvimento de RISC-V para Aplicações Aeroespaciais
 
-![](/public/images/capa_ilustrativa.jpg)  
+![](/public/images/capa_ilustrativa.jpg)
 
 ## Introdução
 

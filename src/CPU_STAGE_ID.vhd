@@ -90,20 +90,20 @@ begin
             control_mem => signals_ex.control_mem,
             control_wb  => signals_ex.control_wb
     );
-   
+
     MODULE_REGISTER_FILE : entity WORK.MODULE_REGISTER_FILE(RV32I)
         port map (
         clock              => clock,
         clear              => '0',
         enable             => enable_destination,
         select_destination => select_destination,
-        data_destination   => data_destination,   
+        data_destination   => data_destination,
         select_source_1    => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_1,
         select_source_2    => WORK.RV32I.to_INSTRUCTION(source_0.data_instruction).select_source_2,
-        data_source_1      => data_source_1,      
-        data_source_2      => data_source_2  
+        data_source_1      => data_source_1,
+        data_source_2      => data_source_2
     );
-	 
+
 	QUARTUS_DELAY : if (QUARTUS_MEMORY = TRUE) generate
         UPDATE : process(clock)
         begin

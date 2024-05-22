@@ -14,8 +14,8 @@ entity CPU_HAZZARD_CONTROL_UNIT is
         stage_ex_enable_destination  : in  std_logic;
         stage_ex_select_destination  : in  WORK.CPU.t_REGISTER;
         stage_mem_enable_read        : in  std_logic;
-        stage_mem_select_destination : in  WORK.CPU.t_REGISTER; 
-        stall_branch                 : out std_logic;       
+        stage_mem_select_destination : in  WORK.CPU.t_REGISTER;
+        stall_branch                 : out std_logic;
         destination                  : out std_logic
     );
 

@@ -114,7 +114,7 @@
     <s:alias val="$reduce_bool"/>
 
     <path d="M0,0 A30 25 0 0 1 0,25 A30 25 0 0 0 30,12.5 A30 25 0 0 0 0,0" class="$cell_id fill-1"/>
- 
+
     <g s:x="2" s:y="5" s:pid="A"/>
     <g s:x="2" s:y="20" s:pid="B"/>
     <g s:x="30" s:y="12.5" s:pid="Y"/>
@@ -137,7 +137,7 @@
 
     <path d="M0,0 A30 25 0 0 1 0,25 A30 25 0 0 0 30,12.5 A30 25 0 0 0 0,0" class="$cell_id fill-1"/>
     <circle cx="-1" cy="20" r="3" class="fill-3"/>
- 
+
     <g s:x="2" s:y="5" s:pid="A"/>
     <g s:x="-4" s:y="20" s:pid="B"/>
     <!-- <path d="M -8,20 L -4,20"/> -->

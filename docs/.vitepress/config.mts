@@ -6,7 +6,7 @@ export default defineConfig({
   title: 'RISC-V para uso Aeroespacial',
   description: 'Documentação do Projeto',
   base: '/24a-CTI-RISCV/',
-  
+
   locales: {
     root: {
       label: 'Português',
@@ -93,7 +93,7 @@ export default defineConfig({
     darkModeSwitchLabel: 'Aparência',
     returnToTopLabel: 'Voltar para o topo',
     langMenuLabel: 'Mudar idioma',
-  
+
     footer: {
       message: 'Publicado sob a Licença MIT.<br/>Icones por <a href="https://github.com/microsoft/fluentui-emoji">microsoft/fluentui-emoji</a>.',
       copyright: 'Copyright © 2024'

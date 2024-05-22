@@ -61,24 +61,24 @@ async def tb_GENERIC_MUX_4X1_case_coverage(dut: GENERIC_MUX_4X1, trace: lib.Wave
         source_2_bits = '{0:0{1}b}'.format(source_2, 32)
         source_3_bits = '{0:0{1}b}'.format(source_3, 32)
         source_4_bits = '{0:0{1}b}'.format(source_4, 32)
-    
+
         dut.selector.value = BinaryValue(selector_bits)
         dut.source_1.value = BinaryValue(source_1_bits)
         dut.source_2.value = BinaryValue(source_2_bits)
         dut.source_3.value = BinaryValue(source_3_bits)
         dut.source_4.value = BinaryValue(source_4_bits)
-    
+
         await trace.cycle()
 
         message = f"source_1: {source_1_bits}, source_2: {source_2_bits}, source_3: {source_3_bits}, source_4: {source_4_bits}, selector: {selector_bits}"
 
-        if selector == 0:  
+        if selector == 0:
             yield trace.check(dut.destination, source_1_bits, message)
-        if selector == 1:  
+        if selector == 1:
             yield trace.check(dut.destination, source_2_bits, message)
-        if selector == 2:  
+        if selector == 2:
             yield trace.check(dut.destination, source_3_bits, message)
-        if selector == 3:  
+        if selector == 3:
             yield trace.check(dut.destination, source_4_bits, message)
 
 @GENERIC_MUX_4X1.testcase
@@ -96,7 +96,7 @@ async def tb_GENERIC_MUX_4X1_case_coverage_3_bits(dut: GENERIC_MUX_4X1, trace: l
                         source_2 = '{0:0{1}b}'.format(value_2, bits)
                         source_3 = '{0:0{1}b}'.format(value_3, bits)
                         source_4 = '{0:0{1}b}'.format(value_4, bits)
-                
+
                         dut.selector.value = BinaryValue(selector)
                         dut.source_1.value = BinaryValue(source_1)
                         dut.source_2.value = BinaryValue(source_2)
@@ -107,13 +107,13 @@ async def tb_GENERIC_MUX_4X1_case_coverage_3_bits(dut: GENERIC_MUX_4X1, trace: l
 
                         await trace.cycle()
 
-                        if selector == 0:  
+                        if selector == 0:
                             yield trace.check(dut.destination, '{0:0{1}b}'.format(value_1, bits), message)
-                        if selector == 1:  
+                        if selector == 1:
                             yield trace.check(dut.destination, '{0:0{1}b}'.format(value_2, bits), message)
-                        if selector == 2:  
+                        if selector == 2:
                             yield trace.check(dut.destination, '{0:0{1}b}'.format(value_3, bits), message)
-                        if selector == 3:  
+                        if selector == 3:
                             yield trace.check(dut.destination, '{0:0{1}b}'.format(value_4, bits), message)
 
 
