@@ -42,7 +42,7 @@ begin
         passthrough_2 <= is_equal_dynamic(address_source_2, address_destination) AND reduce_or(address_destination);
     end process;
 
-    GEN_REGISTERS : for i in 1 to (ADDRESS_WIDTH - 1) generate
+    GEN_REGISTERS : for i in 1 to (DATA_WIDTH - 1) generate
         REGISTER_I : entity WORK.GENERIC_REGISTER
             generic map (
                 DATA_WIDTH => DATA_WIDTH
