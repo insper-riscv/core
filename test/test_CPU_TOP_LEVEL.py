@@ -34,6 +34,7 @@ class CPU_TOP_LEVEL(lib.Entity):
     memory_access = CPU_STAGE_MEM
     write_back = CPU_STAGE_WB
     branch_forwarding_unit = CPU_BRANCH_FORWARDING_UNIT
+    execution_forwarding_unit = CPU_EXECUTION_FORWARDING_UNIT
     control_hazzard_unit = CPU_HAZZARD_CONTROL_UNIT
 
 
