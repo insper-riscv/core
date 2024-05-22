@@ -1,25 +1,34 @@
-import os
-
 import pytest
 import cocotb
 from cocotb.binary import BinaryValue
-from cocotb.clock import Clock
 
-import utils
+import lib
+from test_RV32I_package import RV32I
+from test_GENERIC_REGISTER import GENERIC_REGISTER
+from test_GENERIC_MUX_32X1 import GENERIC_MUX_32X1
+from test_GENERIC_MUX_2X1 import GENERIC_MUX_2X1
 
 
-class RV32I_REGISTER_FILE(utils.DUT):
-    clock = utils.DUT.Input_pin
-    enable = utils.DUT.Input_pin
-    address_destination = utils.DUT.Input_pin
-    address_source_1 = utils.DUT.Input_pin
-    address_source_2 = utils.DUT.Input_pin
-    data_destination = utils.DUT.Input_pin
-    data_source_1 = utils.DUT.Output_pin
-    data_source_2 = utils.DUT.Output_pin
+class RV32I_REGISTER_FILE(lib.Entity):
+    _package = RV32I
+
+    clock = lib.Entity.Input_pin
+    enable = lib.Entity.Input_pin
+    address_destination = lib.Entity.Input_pin
+    address_source_1 = lib.Entity.Input_pin
+    address_source_2 = lib.Entity.Input_pin
+    data_destination = lib.Entity.Input_pin
+    data_source_1 = lib.Entity.Output_pin
+    data_source_2 = lib.Entity.Output_pin
+
+    REGISTER_I = GENERIC_REGISTER
+    mux_decode_source_1 = GENERIC_MUX_32X1
+    mux_decode_source_2 = GENERIC_MUX_32X1
+    mux_source_1 = GENERIC_MUX_2X1
+    mux_source_2 = GENERIC_MUX_2X1
 
 @RV32I_REGISTER_FILE.testcase
-async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.Trace):
+async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: lib.Waveform):
     values_address_destination = [
         "00000",
         "00001",
@@ -74,9 +83,6 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.T
         values_data_destination[3],
         values_data_destination[4],
     ]
-    clock = Clock(dut.clock, 2_000_000_000, units="fs")
-
-    await cocotb.start(clock.start(start_high=False))
 
     for index, (
         address_destination,
@@ -109,17 +115,12 @@ async def tb_RV32I_REGISTER_FILE_case_1(dut: RV32I_REGISTER_FILE, trace: utils.T
 @pytest.mark.synthesis
 def test_RV32I_REGISTER_FILE_synthesis():
     RV32I_REGISTER_FILE.build_vhd()
-    # RV32I_REGISTER_FILE.build_netlistsvg()
-
+    RV32I_REGISTER_FILE.build_netlistsvg()
 
 @pytest.mark.testcases
 def test_RV32I_REGISTER_FILE_testcases():
-    RV32I_REGISTER_FILE.test_with(
-        [
-            tb_RV32I_REGISTER_FILE_case_1,
-        ]
-    )
+    RV32I_REGISTER_FILE.test_with(tb_RV32I_REGISTER_FILE_case_1)
 
 
 if __name__ == "__main__":
-    pytest.main(["-k", os.path.basename(__file__)])
+    lib.run_test(__file__)

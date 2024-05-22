@@ -1,9 +1,12 @@
 {
     "name": "cti-risc-v",
     "build": {
-        "dockerfile": "Dockerfile",        
+        "dockerfile": "Dockerfile"
     },
     "postCreateCommand": "pip install -r requirements.txt",
+    "containerEnv": {
+        "PYTHONPATH": "/root/workspace/"
+    },
     "workspaceMount": "source=${localWorkspaceFolder},target=/root/workspace,type=bind,consistency=cached",
     "workspaceFolder": "/root/workspace",
     "customizations": {
@@ -12,7 +15,8 @@
                 "actboy168.tasks",
                 "ms-python.python",
                 "ms-python.black-formatter",
-                "mshr-h.VerilogHDL"
+                "mshr-h.VerilogHDL",
+                "/tmp/vhdl-lsp-0.1.0-dev.vsix"
             ]
         }
     }

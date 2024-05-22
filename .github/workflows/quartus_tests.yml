@@ -1,0 +1,33 @@
+name: Quartus Tests
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/quartus_tests.yml
+      - Dockerfile
+      - quartus/**
+      - src/**
+
+jobs:
+  quartus:
+    name: Quartus Tests
+    runs-on: ubuntu-latest
+    container:
+      image: gianvr/pfe:latest
+      options: -v ${{ github.workspace }}:/var/www
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+
+    - name: Run Synthesis
+      run: quartus_map /var/www/quartus/top_level
+
+    - name: Run Elaboration
+      run: quartus_map /var/www/quartus/top_level --analysis_and_elaboration --enable_register_retiming=on --enable_wysiwyg_resynthesis=on
+
+    - name: Run Fitter
+      run: quartus_fit /var/www/quartus/top_level
+
+    - name: Run Timing Analysis
+      run: quartus_sta /var/www/quartus/top_level --do_report_timing --multicorner

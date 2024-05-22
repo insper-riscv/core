@@ -2,13 +2,12 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 library WORK;
-use WORK.TOP_LEVEL_CONSTANTS.ALL;
 
 entity GENERIC_SIGNAL_EXTENDER is
 
     generic (
-        SOURCE_WIDTH      : natural := XLEN / 2;
-        DESTINATION_WIDTH : natural := XLEN
+        SOURCE_WIDTH      : natural := 4;
+        DESTINATION_WIDTH : natural := 8
     );
 
     port (
@@ -36,8 +35,16 @@ architecture LOWER_EXTEND of GENERIC_SIGNAL_EXTENDER is
 
 begin
 
-    upper <= (others => '0') when (enable_unsigned = '1') else
-             (others => source(SOURCE_WIDTH - 1));
+    MUX_UPPER : entity WORK.GENERIC_MUX_2X1
+        generic map (
+            DATA_WIDTH => upper'length
+        )
+        port map (
+            selector    => enable_unsigned,
+            source_1    => (others => source(SOURCE_WIDTH - 1)),
+            source_2    => (others => '0'),
+            destination => upper
+        );
 
     destination((DESTINATION_WIDTH - 1) downto SOURCE_WIDTH) <= upper;
     destination((SOURCE_WIDTH - 1) downto 0) <= source;

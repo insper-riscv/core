@@ -23,6 +23,19 @@
                 "close": true
             }
         }, {
+            "label": "GUI Timing Analysis",
+            "detail": "Open GUI Timing Analysis",
+            "icon": {
+                "id": "window"
+            },
+            "command": "quartus_staw",
+            "args": [
+                "top_level",
+            ],
+            "options": {
+                "cwd": "${cwd}/quartus"
+            }
+        }, {
             "label": "Syntesis",
             "detail": "Start Analisys & Syntesis",
             "icon": {
@@ -51,6 +64,34 @@
             "options": {
                 "cwd": "${cwd}/quartus"
             }
-        }
+        }, {
+            "label": "Fitter",
+            "detail": "Start Fitter",
+            "icon": {
+                "id": "run-all"
+            },
+            "command": "quartus_fit",
+            "args": [
+                "top_level",
+            ],
+            "options": {
+                "cwd": "${cwd}/quartus"
+            }
+        }, {
+            "label": "Timing Analysis",
+            "detail": "Start Timing Analysis",
+            "icon": {
+                "id": "run-all"
+            },
+            "command": "quartus_sta",
+            "args": [
+                "top_level",
+                "--do_report_timing",
+                "--multicorner"
+            ],
+            "options": {
+                "cwd": "${cwd}/quartus"
+            }
+        },
     ]
 }
