@@ -6,14 +6,13 @@ library WORK;
 entity CPU_STAGE_EX is
 
     generic (
-        GENERATE_REGISTERS : boolean := TRUE;
-        REGISTER_WIDTH     : natural := WORK.RV32I.REGISTER_WIDTH
+        GENERATE_REGISTERS : boolean := TRUE
     );
 
     port (
-        clock           : in  std_logic;
-        clear           : in  std_logic;
-        enable          : in  std_logic;
+        clock           : in  std_ulogic;
+        clear           : in  std_ulogic;
+        enable          : in  std_ulogic;
         source          : in  WORK.CPU.t_SIGNALS_ID_EX;
         forward         : in  WORK.CPU.t_FORWARD_EXECUTION;
         select_source_1 : out WORK.CPU.t_REGISTER;
@@ -33,7 +32,7 @@ architecture RV32I of CPU_STAGE_EX is
 begin
 
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
-        UPDATE : process(source, clear, clock, enable)
+        UPDATE : process(clock)
         begin
             if (rising_edge(clock)) then
                 if (enable = '1') then

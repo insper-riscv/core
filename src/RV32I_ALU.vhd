@@ -12,31 +12,30 @@ entity RV32I_ALU is
     );
   
     port (
-        select_function : in  std_logic_vector(3 downto 0);
-        source_1        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        overflow        : out std_logic;
-        destination     : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        select_function : in  std_ulogic_vector(3 downto 0);
+        source_1        : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_2        : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        overflow        : out std_ulogic;
+        destination     : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of RV32I_ALU is
 
-    signal flag_subtract     : std_logic;
-    signal source_2_auxiliar : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal carry_in          : std_logic;
-    signal source_and        : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal source_or         : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal half_add          : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal full_add          : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal carry_out         : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal slt               : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal sltu              : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal shift             : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal destination_1     : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal destination_2     : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal add_overflow      : std_logic;
+    signal flag_subtract     : std_ulogic;
+    signal source_2_auxiliar : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal source_and        : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal source_or         : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal half_add          : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal full_add          : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal carry_out         : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal slt               : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal sltu              : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal shift             : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal destination_1     : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal destination_2     : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal add_overflow      : std_ulogic;
 
 begin
 

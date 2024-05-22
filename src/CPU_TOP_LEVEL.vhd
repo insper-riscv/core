@@ -11,11 +11,11 @@ entity CPU_TOP_LEVEL is
 	 );
 
     port (
-        clock           : in  std_logic := '0';
-        clear           : in  std_logic := '0';
-        enable          : in  std_logic := '1';
-        memory_read     : out std_logic;
-        memory_write    : out std_logic;
+        clock           : in  std_ulogic := '0';
+        clear           : in  std_ulogic := '0';
+        enable          : in  std_ulogic := '1';
+        memory_read     : out std_ulogic;
+        memory_write    : out std_ulogic;
         data_program    : in  WORK.CPU.t_PROGRAM := (others => '0');
         data_memory_in  : in  WORK.CPU.t_DATA := (others => '0');
         data_memory_out : out WORK.CPU.t_DATA;
@@ -38,11 +38,11 @@ architecture RV32I of CPU_TOP_LEVEL is
     signal stage_ex_select_source_1    : WORK.RV32I.t_REGISTER;
     signal stage_ex_select_source_2    : WORK.RV32I.t_REGISTER;
     signal stage_mem_control_memory    : WORK.CPU.t_CONTROL_MEM;
-    signal stage_wb_enable_destination : std_logic;
+    signal stage_wb_enable_destination : std_ulogic;
     signal stage_wb_select_destination : WORK.RV32I.t_REGISTER;
     signal stage_wb_data_destination   : WORK.RV32I.t_DATA;
-    signal flag_stall                  : std_logic;
-    signal flag_hazzard                : std_logic;
+    signal flag_stall                  : std_ulogic;
+    signal flag_hazzard                : std_ulogic;
 
 begin
 

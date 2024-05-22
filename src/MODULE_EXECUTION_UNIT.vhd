@@ -12,14 +12,14 @@ entity MODULE_EXECUTION_UNIT is
     );
 
     port (
-        select_source_1  : in  std_logic_vector(1 downto 0);
-        select_source_2  : in  std_logic_vector(1 downto 0);
-        select_function  : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
-        address_program  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_1         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2         : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        immediate        : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        select_source_1  : in  std_ulogic_vector(1 downto 0);
+        select_source_2  : in  std_ulogic_vector(1 downto 0);
+        select_function  : in  std_ulogic_vector((FUNCTION_WIDTH - 1) downto 0);
+        address_program  : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_1         : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_2         : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        immediate        : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination      : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
@@ -39,7 +39,7 @@ begin
             selector    => select_source_1,
             source_1    => source_1,
             source_2    => address_program,
-            source_3    => std_logic_vector(to_unsigned(0, DATA_WIDTH)),
+            source_3    => std_ulogic_vector(to_unsigned(0, DATA_WIDTH)),
             source_4    => (others => '0'),
             destination => alu_source_1
         );
@@ -52,7 +52,7 @@ begin
             selector    => select_source_2,
             source_1    => source_2,
             source_2    => immediate,
-            source_3    => std_logic_vector(to_unsigned(4, DATA_WIDTH)),
+            source_3    => std_ulogic_vector(to_unsigned(4, DATA_WIDTH)),
             source_4    => (others => '0'),
             destination => alu_source_2
         );

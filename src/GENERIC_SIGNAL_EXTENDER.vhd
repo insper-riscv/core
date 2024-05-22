@@ -11,9 +11,9 @@ entity GENERIC_SIGNAL_EXTENDER is
     );
 
     port (
-        source          : in  std_logic_vector((SOURCE_WIDTH - 1) downto 0);
-        enable_unsigned : in  std_logic := '0';
-        destination     : out std_logic_vector((DESTINATION_WIDTH - 1) downto 0)
+        source          : in  std_ulogic_vector((SOURCE_WIDTH - 1) downto 0);
+        enable_unsigned : in  std_ulogic := '0';
+        destination     : out std_ulogic_vector((DESTINATION_WIDTH - 1) downto 0)
     );
 
 end entity;
@@ -31,7 +31,7 @@ end architecture;
 
 architecture LOWER_EXTEND of GENERIC_SIGNAL_EXTENDER is
 
-    signal upper : std_logic_vector((DESTINATION_WIDTH - 1) downto SOURCE_WIDTH);
+    signal upper : std_ulogic_vector((DESTINATION_WIDTH - 1) downto SOURCE_WIDTH);
 
 begin
 

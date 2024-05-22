@@ -6,17 +6,17 @@ library WORK;
 entity GENERIC_EDGE_DETECTOR is
 
     Port (
-        clock  : in  std_logic;
-        source : in  std_logic;
-        pulse  : out std_logic
+        clock  : in  std_ulogic;
+        source : in  std_ulogic;
+        pulse  : out std_ulogic
     );
 
 end entity;
 
 architecture RISING_DETECTOR of GENERIC_EDGE_DETECTOR is
 
-    signal state_1 : std_logic := '0';
-    signal state_2 : std_logic := '0';
+    signal state_1 : std_ulogic := '0';
+    signal state_2 : std_ulogic := '0';
 
 begin
 
@@ -34,8 +34,8 @@ end architecture;
 
 architecture FALLING_DETECTOR of GENERIC_EDGE_DETECTOR is
 
-    signal state_1 : std_logic := '0';
-    signal state_2 : std_logic := '0';
+    signal state_1 : std_ulogic := '0';
+    signal state_2 : std_ulogic := '0';
 
 begin
 

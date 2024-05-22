@@ -13,20 +13,20 @@ entity GENERIC_RAM is
     );
 
     port (
-        clock        : in  std_logic;
-        enable       : in  std_logic;
-        enable_read  : in  std_logic;
-        enable_write : in  std_logic;
-        address      : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        source       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination  : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        clock        : in  std_ulogic;
+        enable       : in  std_ulogic;
+        enable_read  : in  std_ulogic;
+        enable_write : in  std_ulogic;
+        address      : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
+        source       : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination  : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL OF GENERIC_RAM IS
 
-    subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
+    subtype word_t is std_ulogic_vector((DATA_WIDTH - 1) downto 0);
     type memory_t is array(0 to (2**ADDRESSABLE_WIDTH - 1)) of word_t;
 
     signal ram: memory_t;

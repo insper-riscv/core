@@ -52,9 +52,9 @@ entity GENERIC_ROM is
     );
 
     port (
-        clock       : in  std_logic := '1';
-        address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        clock       : in  std_ulogic := '1';
+        address     : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
+        destination : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;

@@ -16,16 +16,16 @@ entity GENERIC_ROM is
     );
 
     port (
-        clock       : in  std_logic := '1';
-        address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
-        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) 
+        clock       : in  std_ulogic := '1';
+        address     : in  std_ulogic_vector((ADDRESS_WIDTH - 1) downto 0);
+        destination : out std_ulogic_vector((DATA_WIDTH - 1) downto 0) 
     );
 
 end entity;
 
 architecture RTL of GENERIC_ROM is
 
-    type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
+    type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_ulogic_vector((DATA_WIDTH - 1) DOWNTO 0);
 
     impure function read_mif_file return memory_block is
         file     file_text    : text open READ_MODE is INIT_FILE;

@@ -8,14 +8,14 @@ entity CPU_STAGE_ID is
 
     generic (
         GENERATE_REGISTERS : boolean := TRUE;
-		  QUARTUS_MEMORY     : boolean := FALSE
+		QUARTUS_MEMORY     : boolean := FALSE
     );
 
     port (
-        clock                 : in  std_logic;
-        clear                 : in  std_logic;
-        enable                : in  std_logic;
-        enable_destination    : in  std_logic;
+        clock                 : in  std_ulogic;
+        clear                 : in  std_ulogic;
+        enable                : in  std_ulogic;
+        enable_destination    : in  std_ulogic;
         select_destination    : in  WORK.CPU.t_REGISTER;
         data_destination      : in  WORK.CPU.t_DATA;
         forward               : in  WORK.CPU.t_FORWARD_BRANCH;
@@ -34,18 +34,14 @@ architecture RV32I of CPU_STAGE_ID is
     signal data_source_1       : WORK.CPU.t_DATA;
     signal data_source_2       : WORK.CPU.t_DATA;
     signal data_immediate      : WORK.CPU.t_DATA;
-    signal immediate           : WORK.CPU.t_DATA;
-	 signal address_out         : WORK.CPU.t_DATA;
-    signal enable_flush        : std_logic;
-    signal enable_branch       : std_logic;
-
-    signal forward_selector_1  : std_logic;
-    signal forward_selector_2  : std_logic;
+	signal address_out         : WORK.CPU.t_DATA;
+    signal enable_flush        : std_ulogic;
+    signal enable_branch       : std_ulogic;
 
 begin
 
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
-        UPDATE : process(source, clear, clock, enable)
+        UPDATE : process(clock)
         begin
             if (rising_edge(clock)) then
                 if (enable = '1') then
@@ -108,8 +104,8 @@ begin
         data_source_2      => data_source_2  
     );
 	 
-	  QUARTUS_DELAY : if (QUARTUS_MEMORY = TRUE) generate
-        UPDATE : process(source_0.address_program, clock, enable)
+	QUARTUS_DELAY : if (QUARTUS_MEMORY = TRUE) generate
+        UPDATE : process(clock)
         begin
             if (rising_edge(clock)) then
                 if (enable = '1') then

@@ -10,10 +10,10 @@ entity MODULE_WRITE_BACK is
     );
 
     port (
-        selector         : in  std_logic;
-        source_execution : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_memory    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        selector         : in  std_ulogic;
+        source_execution : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_memory    : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination      : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;

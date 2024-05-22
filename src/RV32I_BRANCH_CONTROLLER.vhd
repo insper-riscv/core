@@ -9,20 +9,20 @@ entity RV32I_BRANCH_CONTROLLER is
 
     port (
         select_function : in  WORK.RV32I.t_FUNCT3;
-        flag_sign_1     : in  std_logic;
-        flag_sign_2     : in  std_logic;
-        flag_equal      : in  std_logic;
-        flag_less       : in  std_logic;
-        flag_greather   : in  std_logic;
-        destination     : out std_logic
+        flag_sign_1     : in  std_ulogic;
+        flag_sign_2     : in  std_ulogic;
+        flag_equal      : in  std_ulogic;
+        flag_less       : in  std_ulogic;
+        flag_greather   : in  std_ulogic;
+        destination     : out std_ulogic
     );
 
 end entity;
 
 architecture RV32I of RV32I_BRANCH_CONTROLLER is
 
-    signal flag_less_signed : std_logic;
-    signal cases            : std_logic_vector(5 downto 0);
+    signal flag_less_signed : std_ulogic;
+    signal cases            : std_ulogic_vector(5 downto 0);
 
 begin
 

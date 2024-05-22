@@ -12,23 +12,23 @@ entity GENERIC_COMPARATOR is
     );
 
     port (
-        source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        flag_equal    : out std_logic;
-        flag_less     : out std_logic;
-        flag_greather : out std_logic
+        source_1      : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_2      : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        flag_equal    : out std_ulogic;
+        flag_less     : out std_ulogic;
+        flag_greather : out std_ulogic
     );
 
 end entity;
 
 architecture RTL of GENERIC_COMPARATOR is
 
-    signal a_and_not_b      : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal not_a_and_b      : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal a_xnor_b         : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal a_equal_b        : std_logic_vector((DATA_WIDTH - 2) downto 0);
-    signal a_less_than_b    : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal a_greater_than_b : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal a_and_not_b      : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal not_a_and_b      : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal a_xnor_b         : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal a_equal_b        : std_ulogic_vector((DATA_WIDTH - 2) downto 0);
+    signal a_less_than_b    : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal a_greater_than_b : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 

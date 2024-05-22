@@ -13,23 +13,22 @@ entity RV32I_ALU_SHIFTER is
     );
 
     port (
-        select_function : in  std_logic_vector(3 downto 0);
-        shamt           : in  std_logic_vector((SHAMT_WIDTH - 1) downto 0);
-        source          : in  std_logic_vector((DATA_WIDTH  - 1) downto 0);
-        destination     : out std_logic_vector((DATA_WIDTH  - 1) downto 0)
+        select_function : in  std_ulogic_vector(3 downto 0);
+        shamt           : in  std_ulogic_vector((SHAMT_WIDTH - 1) downto 0);
+        source          : in  std_ulogic_vector((DATA_WIDTH  - 1) downto 0);
+        destination     : out std_ulogic_vector((DATA_WIDTH  - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of RV32I_ALU_SHIFTER is
 
-    signal data                 : t_std_logic_array(0 to (DATA_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
-    signal msb                  : std_logic := '0';
-    signal msb_vector           : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal source_auxiliar      : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal reversed_source      : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal destination_auxiliar : std_logic_vector((DATA_WIDTH - 1) downto 0);
-    signal reversed_destination : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal data                 : t_std_ulogic_array(0 to (DATA_WIDTH - 1))((DATA_WIDTH - 1) downto 0);
+    signal msb_vector           : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal source_auxiliar      : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal reversed_source      : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal destination_auxiliar : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+    signal reversed_destination : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 

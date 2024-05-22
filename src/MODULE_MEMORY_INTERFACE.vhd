@@ -11,11 +11,11 @@ entity MODULE_MEMORY_INTERFACE is
     );
 
     port (
-        select_function      : in  std_logic_vector((FUNCTION_WIDTH - 1) downto 0);
-        source_data_in       : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_data_out      : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination_data_in  : out std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination_data_out : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        select_function      : in  std_ulogic_vector((FUNCTION_WIDTH - 1) downto 0);
+        source_data_in       : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_data_out      : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination_data_in  : out std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination_data_out : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;

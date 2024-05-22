@@ -6,18 +6,18 @@ library WORK;
 entity GENERIC_DEBOUNCE is
 
     Port (
-        clock  : in  std_logic;
-        clear  : in  std_logic := '0';
-        source : in  std_logic;
-        state  : out std_logic
+        clock  : in  std_ulogic;
+        clear  : in  std_ulogic := '0';
+        source : in  std_ulogic;
+        state  : out std_ulogic
     );
 
 end entity;
 
 architecture RTL of GENERIC_DEBOUNCE is
 
-    signal edge_detector_pulse_state_register_clock : std_logic;
-    signal not_source                               : std_logic;
+    signal edge_detector_pulse_state_register_clock : std_ulogic;
+    signal not_source                               : std_ulogic;
 
 begin
 

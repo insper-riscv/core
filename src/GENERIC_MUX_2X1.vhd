@@ -10,17 +10,17 @@ entity GENERIC_MUX_2X1 is
     );
 
     port (
-        selector    : in  std_logic;
-        source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_2    : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        selector    : in  std_ulogic;
+        source_1    : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_2    : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;
 
 architecture RTL of GENERIC_MUX_2X1 is
 
-    signal selector_vec : std_logic_vector((DATA_WIDTH - 1) downto 0);
+    signal selector_vec : std_ulogic_vector((DATA_WIDTH - 1) downto 0);
 
 begin
 

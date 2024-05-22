@@ -10,11 +10,11 @@ entity MODULE_BRANCH_UNIT is
     );
 
     port (
-        selector         : in  std_logic;
-        source_program   : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_immediate : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        source_register  : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
-        destination      : out std_logic_vector((DATA_WIDTH - 1) downto 0)
+        selector         : in  std_ulogic;
+        source_program   : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_immediate : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        source_register  : in  std_ulogic_vector((DATA_WIDTH - 1) downto 0);
+        destination      : out std_ulogic_vector((DATA_WIDTH - 1) downto 0)
     );
 
 end entity;

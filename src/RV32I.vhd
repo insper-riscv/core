@@ -15,13 +15,13 @@ package RV32I is
     subtype OPCODE_RANGE      is natural range  6 downto  2;
     subtype REGISTER_RANGE    is natural range  4 downto  0;
 
-    subtype t_DATA        is std_logic_vector(XLEN_RANGE);
-    subtype t_PROGRAM     is std_logic_vector(INSTRUCTION_RANGE);
-    subtype t_FUNCT3      is std_logic_vector(FUNCT3_RANGE);
-    subtype t_FUNCT7      is std_logic_vector(FUNCT7_RANGE);
-    subtype t_OPCODE_FULL is std_logic_vector(OPCODE_FULL_RANGE);
-    subtype t_OPCODE      is std_logic_vector(OPCODE_RANGE);
-    subtype t_REGISTER    is std_logic_vector(REGISTER_RANGE);
+    subtype t_DATA        is std_ulogic_vector(XLEN_RANGE);
+    subtype t_PROGRAM     is std_ulogic_vector(INSTRUCTION_RANGE);
+    subtype t_FUNCT3      is std_ulogic_vector(FUNCT3_RANGE);
+    subtype t_FUNCT7      is std_ulogic_vector(FUNCT7_RANGE);
+    subtype t_OPCODE_FULL is std_ulogic_vector(OPCODE_FULL_RANGE);
+    subtype t_OPCODE      is std_ulogic_vector(OPCODE_RANGE);
+    subtype t_REGISTER    is std_ulogic_vector(REGISTER_RANGE);
 
     type t_INSTRUCTION_TYPE is (
         INSTRUCTION_R_TYPE,
@@ -43,7 +43,7 @@ package RV32I is
         immediate_b        : t_DATA;
         immediate_u        : t_DATA;
         immediate_j        : t_DATA;
-        shamt              : std_logic_vector(4 downto 0);
+        shamt              : std_ulogic_vector(4 downto 0);
         opcode             : t_OPCODE;
         encoding           : t_INSTRUCTION_TYPE;
     end record;
@@ -138,23 +138,23 @@ package RV32I is
     constant NULL_INSTRUCTION : t_PROGRAM := 17X"0" & FUNCT3_ADDI & 5X"0" & OPCODE_FULL_OP_IMM;
 
     function to_immediate_i(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA;
 
     function to_immediate_s(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA;
 
     function to_immediate_b(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA;
 
     function to_immediate_u(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA;
 
     function to_immediate_j(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA;
 
     function to_instruction_type(
@@ -162,7 +162,7 @@ package RV32I is
     ) return t_INSTRUCTION_TYPE;
 
     function to_instruction(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_INSTRUCTION;
 
 end package;
@@ -170,7 +170,7 @@ end package;
 package body RV32I is
 
     function to_immediate_i(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA is
         variable out_vec : t_DATA;
     begin
@@ -181,7 +181,7 @@ package body RV32I is
     end function;
 
     function to_immediate_s(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA is
         variable out_vec : t_DATA;
     begin
@@ -192,7 +192,7 @@ package body RV32I is
     end function;
 
     function to_immediate_b(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA is
         variable out_vec : t_DATA;
     begin
@@ -203,7 +203,7 @@ package body RV32I is
     end function;
 
     function to_immediate_u(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA is
         variable out_vec : t_DATA;
     begin
@@ -214,7 +214,7 @@ package body RV32I is
     end function;
 
     function to_immediate_j(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_DATA is
         variable out_vec : t_DATA;
     begin
@@ -260,7 +260,7 @@ package body RV32I is
     end function;
 
     function to_instruction(
-        in_vec : std_logic_vector(INSTRUCTION_RANGE)
+        in_vec : std_ulogic_vector(INSTRUCTION_RANGE)
     ) return t_INSTRUCTION is
         variable out_vec : t_INSTRUCTION;
     begin

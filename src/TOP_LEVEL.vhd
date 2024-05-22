@@ -7,15 +7,15 @@ library WORK;
 entity TOP_LEVEL is
 
     generic (
-        PROGRAM_FILE : string := "../data/mif/blink.mif";
-		  DEMONSTRATION  : boolean := TRUE;
-		  QUARTUS_MEMORY : boolean := TRUE
+        PROGRAM_FILE   : string := "../data/mif/blink.mif";
+		DEMONSTRATION  : boolean := TRUE;
+		QUARTUS_MEMORY : boolean := TRUE
     );
 
     port (
-        CLOCK           : in  std_logic                    := '0';
-        SW              : in  std_logic_vector(3 downto 0) := (others => '0');
-        LEDR             : out std_logic_vector(9 downto 0) := (others => '0')
+        CLOCK           : in  std_ulogic                    := '0';
+        SW              : in  std_ulogic_vector(3 downto 0) := (others => '0');
+        LEDR            : out std_ulogic_vector(9 downto 0) := (others => '0')
     );
 
 end entity;
@@ -25,11 +25,11 @@ architecture RTL of TOP_LEVEL is
     signal data_program        : WORK.RV32I.t_PROGRAM;
     signal data_memory_in      : WORK.RV32I.t_DATA;
     signal data_memory_out     : WORK.RV32I.t_DATA;
-    signal enable_memory_read  : std_logic;
-    signal enable_memory_write : std_logic;
+    signal enable_memory_read  : std_ulogic;
+    signal enable_memory_write : std_ulogic;
     signal address_program     : WORK.RV32I.t_DATA;
     signal address_memory      : WORK.RV32I.t_DATA;
-    signal clock_processor      : std_logic := '0';
+    signal clock_processor     : std_ulogic := '0';
 
 begin
 
@@ -78,7 +78,7 @@ begin
             address_program => address_program,
             address_memory  => address_memory
         );
-    
+
     UPDATE_LED : entity WORK.GENERIC_REGISTER
         generic map (
             DATA_WIDTH    => 2
@@ -86,11 +86,11 @@ begin
         port map (
             clock        => clock_processor,
             clear        => '0',
-            enable       => enable_memory_write AND WORK.GENERICS.is_equal_dynamic(address_memory,"00000000000000000000000010000000"),
+            enable       => enable_memory_write AND WORK.GENERICS.is_equal_dynamic(address_memory, 32X"0080"),
             source       => data_memory_out(1 downto  0),
             destination  => LEDR(8 downto 7)
         );
-    
+
     CLOCK_DEMONSTRATION : if DEMONSTRATION = TRUE generate
         low_freq : entity WORK.GENERIC_LOW_FREQ
             generic map (n => 100000000) 

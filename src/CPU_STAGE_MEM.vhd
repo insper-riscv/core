@@ -10,9 +10,9 @@ entity CPU_STAGE_MEM is
     );
 
     port (
-        clock           : in  std_logic;
-        clear           : in  std_logic;
-        enable          : in  std_logic;
+        clock           : in  std_ulogic;
+        clear           : in  std_ulogic;
+        enable          : in  std_ulogic;
         source          : in  WORK.CPU.t_SIGNALS_EX_MEM;
         data_memory_in  : in  WORK.CPU.t_DATA;
         control_memory  : out WORK.CPU.t_CONTROL_MEM;
@@ -30,7 +30,7 @@ architecture RV32I of CPU_STAGE_MEM is
 begin
 
     PIPELINE : if (GENERATE_REGISTERS = TRUE) generate
-        UPDATE : process(source, clear, clock, enable)
+        UPDATE : process(clock)
         begin
             if (rising_edge(clock)) then
                 if (enable = '1') then
