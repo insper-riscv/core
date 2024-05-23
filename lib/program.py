@@ -142,6 +142,7 @@ class Program:
             "ADDRESS_RADIX=DEC;",
             "DATA_RADIX=BIN;\n",
             "CONTENT BEGIN",
+            f"DEFAULT: {'0' * width};",
             *bins,
             "END;\n",
         ])
