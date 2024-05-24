@@ -135,7 +135,7 @@ class Program:
             width = len(mem.get(0)) # type: ignore
 
         if depth is None:
-            depth = len(bins)
+            depth = len(bins) - 1
 
         return "\n".join([
             f"WIDTH={width};",
