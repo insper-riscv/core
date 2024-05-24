@@ -129,6 +129,7 @@ class Program:
             f"    {key:0{pad_size}}: {value};"
             for key, value in mem.items()
         ]
+        delta = width // 8
 
         if width is None:
             width = len(mem.get(0)) # type: ignore
@@ -142,7 +143,7 @@ class Program:
             "ADDRESS_RADIX=DEC;",
             "DATA_RADIX=BIN;\n",
             "CONTENT BEGIN",
-            f"DEFAULT: {'0' * width};",
+            f"[{argmax + delta}..{depth}]: {'0' * width};",
             *bins,
             "END;\n",
         ])
