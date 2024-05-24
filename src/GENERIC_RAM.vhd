@@ -38,7 +38,7 @@ begin
 
     destination <=  ram(local_address) when (
                         enable = '1' AND enable_read = '1'
-                    ) else (others => 'Z');
+                    ) else (others => '0');
 
     WRITE : process(clock)
     begin
