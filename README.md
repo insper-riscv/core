@@ -2,7 +2,10 @@
 
 # CTI RISCV
 
-[![Pytest](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/pytest.yml)
+[![Deploy Docs](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/deploy-docs.yml)
+[![VHD tests](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/vhd_tests.yml/badge.svg)](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/vhd_tests.yml)
+[![VHD Coverage tests](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/vhd_tests_coverage.yml/badge.svg)](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/vhd_tests_coverage.yml)
+[![Quartus Tests](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/quartus_tests.yml/badge.svg)](https://github.com/pfeinsper/24a-CTI-RISCV/actions/workflows/quartus_tests.yml)
 
 O objetivo central deste projeto é o desenvolvimento de uma Propriedade
 Intelectual (IP) de um processador baseado na arquitetura RISC-V,
