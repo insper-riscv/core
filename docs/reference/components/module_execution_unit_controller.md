@@ -46,7 +46,7 @@ Work in progress.
 
 <pan-container>
 
-![Diagrama de RTL da Unidade de Controle da ULA](/images/reference/components/MODULE_EXECUTION_UNIT_CONTROLLER_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL da Unidade de Controle da ULA](/images/reference/components/module_execution_unit_controller_netlist.svg){.w-full .dark-invert}
 
 </pan-container>
 

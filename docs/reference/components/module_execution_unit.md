@@ -46,7 +46,7 @@ Work in progress.
 
 <pan-container>
 
-![Diagrama de RTL da Unidade de Execução](/images/reference/components/MODULE_EXECUTION_UNIT_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL da Unidade de Execução](/images/reference/components/module_execution_unit_netlist.svg){.w-full .dark-invert}
 
 </pan-container>
 
