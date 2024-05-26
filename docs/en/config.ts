@@ -1,37 +1,16 @@
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export const en = defineConfig({
   description: 'Project Documentation',
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       {
-        text: 'Guide',
-        link: '/en/guide/',
-      }, {
-        text: 'Reference',
-        link: '/en/reference/components/',
-      }, {
         text: 'More',
         items: [
           {
-            text: 'About',
-            link: '/en/guide/',
-          }, {
-            text: 'Getting Started',
-            link: '/en/guide/',
-          }, {
-            text: 'Architecture',
-            link: '/en/reference/components/',
-          }, {
-            text: 'Specification',
-            link: '/en/reference/components/',
-          }, {
-            text: 'Bibliography',
-            link: '/en/guide/bibliography'
-          }, {
             text: 'CTI Renato Archer',
             link: 'https://www.gov.br/cti/pt-br'
           }, {
@@ -43,8 +22,6 @@ export default defineConfig({
     ],
 
     sidebar: {
-      ...require('../en/guide/config.ts').default.sidebar,
-      ...require('../en/reference/config.ts').default.sidebar,
     },
 
     outline: 'deep',
