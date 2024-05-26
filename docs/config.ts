@@ -1,8 +1,12 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress'
+
+import { sidebar as guideSidebar } from './guide/config'
+import { sidebar as referenceSidebar } from './reference/config'
+import { sidebar as reportSidebar } from './report/config'
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
-  description: 'Project Documentation',
+export const pt = defineConfig({
+  description: 'Documentação do Projeto',
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -42,66 +46,87 @@ export default defineConfig({
       },
     ],
 
-    //search: {
-    //  options: {
-    //    locales: {
-    //      root: {
-    //        translations: {
-    //          button: {
-    //            buttonText: "Pesquisar",
-    //            buttonAriaLabel: "Pesquisar"
-    //          },
-    //          modal: {
-    //            displayDetails: "Exibição detalhada",
-    //            resetButtonTitle: "Limpar pesquisa",
-    //            noResultsText: "Não há resultados para",
-    //            backButtonTitle: "Voltar",
-    //            footer: {
-    //              closeText: "Fechar",
-    //              navigateText: "Navegação",
-    //              selectText: "Selecionar",
-    //            }
-    //          }
-    //        }
-    //      }
-    //    }
-    //  }
-    //},
-
     sidebar: {
-      ...require('./guide/config.ts').default.sidebar,
-      ...require('./reference/config.ts').default.sidebar,
-      ...require('./report/config.ts').default.sidebar,
+      ...guideSidebar,
+      ...referenceSidebar,
+      ...reportSidebar,
+    },
+
+    editLink: {
+      pattern: 'https://github.com/pfeinsper/24a-CTI-RISCV/edit/docs/docs/:path',
+      text: 'Edite esta página no GitHub'
+    },
+
+    docFooter: {
+      prev: 'Anterior',
+      next: 'Próximo'
     },
 
     outline: 'deep',
     outlineTitle: 'Tópicos',
 
-    editLink: {
-      pattern: 'https://github.com/pfeinsper/24a-CTI-RISCV/edit/docs/docs/:path',
-      text: 'Editar esta página'
-    },
-
     lastUpdated: {
-      text: 'Última modificação em',
+      text: 'Atualizado em',
       formatOptions: {
-        dateStyle: 'long',
-        timeStyle: 'short'
+        dateStyle: 'short',
+        timeStyle: 'medium'
       }
     },
 
-    docFooter: {
-      prev: 'Página anterior',
-      next: 'Próxima página'
-    },
-
-    darkModeSwitchLabel: 'Aparência',
-    returnToTopLabel: 'Voltar para o topo',
-    langMenuLabel: 'Mudar idioma',
+    langMenuLabel: 'Alterar Idioma',
+    returnToTopLabel: 'Voltar ao Topo',
+    sidebarMenuLabel: 'Menu Lateral',
+    darkModeSwitchLabel: 'Tema Escuro',
+    lightModeSwitchTitle: 'Mudar para Modo Claro',
+    darkModeSwitchTitle: 'Mudar para Modo Escuro',
   
     footer: {
       message: 'Publicado sob a Licença MIT.',
-      copyright: 'Copyright © 2024'
+      copyright: 'Copyright © 2024',
     },
   },
 })
+
+export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
+  pt: {
+    placeholder: 'Pesquisar documentos',
+    translations: {
+      button: {
+        buttonText: 'Pesquisar',
+        buttonAriaLabel: 'Pesquisar'
+      },
+      modal: {
+        searchBox: {
+          resetButtonTitle: 'Limpar pesquisa',
+          resetButtonAriaLabel: 'Limpar pesquisa',
+          cancelButtonText: 'Cancelar',
+          cancelButtonAriaLabel: 'Cancelar',
+        },
+        startScreen: {
+          recentSearchesTitle: 'Histórico de Pesquisa',
+          noRecentSearchesText: 'Nenhuma pesquisa recente',
+          saveRecentSearchButtonTitle: 'Salvar no histórico de pesquisas',
+          removeRecentSearchButtonTitle: 'Remover do histórico de pesquisas',
+          favoriteSearchesTitle: 'Favoritos',
+          removeFavoriteSearchButtonTitle: 'Remover dos favoritos',
+        },
+        errorScreen: {
+          titleText: 'Não foi possível obter resultados',
+          helpText: 'Verifique a sua conexão de rede',
+        },
+        footer: {
+          selectText: 'Selecionar',
+          navigateText: 'Navegar',
+          closeText: 'Fechar',
+          searchByText: 'Pesquisa por',
+        },
+        noResultsScreen: {
+          noResultsText: 'Não foi possível encontrar resultados',
+          suggestedQueryText: 'Você pode tentar uma nova consulta',
+          reportMissingResultsText: 'Deveriam haver resultados para essa consulta?',
+          reportMissingResultsLinkText: 'Clique para enviar feedback',
+        },
+      },
+    },
+  },
+}

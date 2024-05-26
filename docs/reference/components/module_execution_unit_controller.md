@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_EXECUTION_UNIT_CONTROLLER.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_EXECUTION_UNIT_CONTROLLER.vhd &boxbox;" /></a>
 
-<<< @/../src/MODULE_ALU_CONTROLLER.vhd{vhdl:line-numbers}
+<<< @/../src/MODULE_EXECUTION_UNIT_CONTROLLER.vhd{vhdl:line-numbers}
 
 :::
 
@@ -46,7 +46,7 @@ Work in progress.
 
 <pan-container>
 
-![Diagrama de RTL da Unidade de Controle da ULA](/images/reference/components/module_alu_controller_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL da Unidade de Controle da ULA](/images/reference/components/MODULE_EXECUTION_UNIT_CONTROLLER_netlist.svg){.w-full .dark-invert}
 
 </pan-container>
 

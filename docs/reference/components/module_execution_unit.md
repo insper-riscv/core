@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_EXECUTION_UNIT.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_EXECUTION_UNIT.vhd &boxbox;" /></a>
 
-<<< @/../src/MODULE_ALU.vhd{vhdl:line-numbers}
+<<< @/../src/MODULE_EXECUTION_UNIT.vhd{vhdl:line-numbers}
 
 :::
 
@@ -46,7 +46,7 @@ Work in progress.
 
 <pan-container>
 
-![Diagrama de RTL da Unidade de Execução](/images/reference/components/module_alu_netlist.svg){.w-full .dark-invert}
+![Diagrama de RTL da Unidade de Execução](/images/reference/components/MODULE_EXECUTION_UNIT_netlist.svg){.w-full .dark-invert}
 
 </pan-container>
 
