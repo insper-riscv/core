@@ -39,6 +39,7 @@ package CPU is
 
     type t_CONTROL_ID is record
         enable_branch : std_logic;
+        enable_jalr   : std_logic;
         enable_jump   : std_logic;
         select_jump   : std_logic;
     end record;
@@ -115,6 +116,7 @@ package CPU is
 
     constant NULL_CONTROL_ID : t_CONTROL_ID := (
         enable_branch   => '0',
+        enable_jalr     => '0',
         enable_jump     => '0',
         select_jump     => '0'
     );

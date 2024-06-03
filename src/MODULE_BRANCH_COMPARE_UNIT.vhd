@@ -17,6 +17,7 @@ entity MODULE_BRANCH_COMPARE_UNIT is
         source_1           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         source_2           : in  std_logic_vector((DATA_WIDTH - 1) downto 0);
         forward            : in  WORK.CPU.t_FORWARD_BRANCH := WORK.CPU.NULL_FORWARD_BRANCH;
+        data_source_1      : out std_logic_vector((DATA_WIDTH - 1) downto 0);
         destination        : out std_logic
     );
 
@@ -38,6 +39,7 @@ architecture RV32I of MODULE_BRANCH_COMPARE_UNIT is
 begin
 
     destination <= enable AND flag_branch;
+    data_source_1 <= forward_source_1;
 
     MUX_FORWARD_SOURCE_1 : entity WORK.GENERIC_MUX_2X1
         generic map (
