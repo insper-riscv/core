@@ -14,8 +14,8 @@ entity TOP_LEVEL is
 
     port (
         CLOCK           : in  std_logic                    := '0';
-        SW              : in  std_logic_vector(3 downto 0) := (others => '0');
-        LEDR            : out std_logic_vector(9 downto 0) := (others => '1')
+        --SW            : in  std_logic_vector(3 downto 0) := (others => '0');
+        LEDR            : out std_logic_vector(0 downto 0) := (others => '0')
     );
 
 end entity;
@@ -32,10 +32,6 @@ architecture RTL of TOP_LEVEL is
     signal clock_processor     : std_logic := '0';
 
 begin
-
-	LEDR(0)          <= SW(0);
-	LEDR(6 downto 1) <= (others => '1');
-	LEDR(9)          <= '1';
 
     ROM : entity WORK.GENERIC_ROM
         generic map (
@@ -83,14 +79,14 @@ begin
 
     UPDATE_LED : entity WORK.GENERIC_REGISTER
         generic map (
-            DATA_WIDTH    => 2
+            DATA_WIDTH    => 1
         )
         port map (
             clock        => clock_processor,
             clear        => '0',
             enable       => enable_memory_write AND WORK.GENERICS.is_equal_dynamic(address_memory, 32X"0080"),
-            source       => data_memory_out(1 downto  0),
-            destination  => LEDR(8 downto 7)
+            source       => data_memory_out(0 downto  0),
+            destination  => LEDR(0 downto 0)
         );
 
     CLOCK_DEMONSTRATION : if DEMONSTRATION = TRUE generate
@@ -100,7 +96,7 @@ begin
                 clock => CLOCK,
                 clock_out => clock_processor
             );
-            LEDR(9) <= clock_processor;
+            --LEDR(9) <= clock_processor;
             else generate
                clock_processor <= CLOCK;
            end generate;

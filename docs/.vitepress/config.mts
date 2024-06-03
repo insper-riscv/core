@@ -3,22 +3,25 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import markdownItFootnote from 'markdown-it-footnote'
 import implicitFigures from 'markdown-it-image-figures'
 
+import { pt, search as ptSearch } from '../config'
+import { en } from '../en/config'
+
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig(withMermaid({
   title: 'CTI RISC-V',
-  description: 'Documentação do Projeto',
   base: '/24a-CTI-RISCV/',
 
   locales: {
     root: {
       label: 'Português',
       lang: 'pt',
-      ...require('../config.ts').default
+      ...pt,
     },
     en: {
       label: 'English',
       lang: 'en',
-      ...require('../en/config.ts').default
+      ...en,
     },
   },
 
@@ -36,6 +39,12 @@ export default defineConfig(withMermaid({
 
     search: {
       provider: 'local',
+      options: {
+        placeholder: 'Pesquisar documentos',
+        translations: {
+          ...(ptSearch.pt.translations),
+        },
+      }
     },
 
     socialLinks: [

@@ -6,7 +6,7 @@ outline: 2
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/MODULE_PROGRAM_COUNTER.vhd" target="blank" style="float:right"><Badge type="tip" text="MODULE_PROGRAM_COUNTER.vhd &boxbox;" /></a>
 
-<<< @/../src/MODULE_PC.vhd{vhdl:line-numbers}
+<<< @/../src/MODULE_PROGRAM_COUNTER.vhd{vhdl:line-numbers}
 
 :::
 
@@ -60,7 +60,7 @@ Work in progress.
 
 ::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_MODULE_PROGRAM_COUNTER.py" target="blank" style="float:right"><Badge type="tip" text="test_MODULE_PROGRAM_COUNTER.py &boxbox;" /></a>
 
-<<< @/../test/test_GENERIC_ADDER.py{py:line-numbers}
+<<< @/../test/test_MODULE_PROGRAM_COUNTER.py{py:line-numbers}
 
 :::
 

@@ -74,7 +74,7 @@ begin
             intended_device_family => "Cyclone V",
             lpm_hint               => "ENABLE_RUNTIME_MOD=YES,INSTANCE_NAME=PROG",
             lpm_type               => "altsyncram",
-            numwords_a             => (2**ADDRESSABLE_WIDTH) - 1,
+            numwords_a             => (2**ADDRESSABLE_WIDTH),
             operation_mode         => "ROM",
             outdata_aclr_a         => "NONE",
             outdata_reg_a          => "UNREGISTERED",

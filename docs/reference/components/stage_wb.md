@@ -4,9 +4,9 @@ outline: 2
 
 # WB - Escreve o Retorno
 
-::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_WB.vhd" target="blank" style="float:right"><Badge type="tip" text="STAGE_WB.vhd &boxbox;" /></a>
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/src/STAGE_WB.vhd" target="blank" style="float:right"><Badge type="tip" text="CPU_STAGE_WB.vhd &boxbox;" /></a>
 
-<<< @/../src/STAGE_WB.vhd{vhdl:line-numbers}
+<<< @/../src/CPU_STAGE_WB.vhd{vhdl:line-numbers}
 
 :::
 
@@ -59,9 +59,9 @@ Work in progress.
 
 ## Casos de teste
 
-::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_STAGE_WB.py" target="blank" style="float:right"><Badge type="tip" text="test_STAGE_WB.py &boxbox;" /></a>
+::: details Código fonte <a href="https://github.com/pfeinsper/24a-CTI-RISCV/blob/main/test/test_STAGE_WB.py" target="blank" style="float:right"><Badge type="tip" text="test_CPU_STAGE_WB.py &boxbox;" /></a>
 
-<<< @/../test/test_STAGE_WB.py{py:line-numbers}
+<<< @/../test/test_CPU_STAGE_WB.py{py:line-numbers}
 
 :::
 
