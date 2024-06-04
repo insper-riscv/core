@@ -970,10 +970,6 @@ def test_CPU_TOP_LEVEL_jump_testcases():
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_JALR)
 
 @pytest.mark.testcases
-def test_CPU_TOP_LEVEL_jalr_testcases():
-    CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_JALR)
-
-@pytest.mark.testcases
 def test_CPU_TOP_LEVEL_load_testcases():
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_LB)
     CPU_TOP_LEVEL.test_with(tb_CPU_TOP_LEVEL_LBU)
