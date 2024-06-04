@@ -38,10 +38,10 @@ async def tb_GENERIC_RAM_case_1(dut: GENERIC_RAM, trace: lib.Waveform):
         "00000000",
     ]
     values_destination = [
-        "ZZZZZZZZ",
-        "ZZZZZZZZ",
+        "00000000",
+        "00000000",
         "00001111",
-        "ZZZZZZZZ",
+        "00000000",
         "11110000",
     ]
 

@@ -55,6 +55,8 @@ begin
     -- Stage Instruction Decode controls
     control_id.enable_branch <= b_type;
 
+    control_id.enable_jalr <= is_jalr;
+
     control_id.enable_jump <= j_type OR is_jalr;
 
     control_id.select_jump <= is_jalr;

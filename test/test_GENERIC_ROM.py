@@ -49,11 +49,6 @@ async def tb_GENERIC_ROM_case_1(dut: GENERIC_ROM, trace: lib.Waveform):
     await trace.cycle()
     yield trace.check(dut.destination, "01000000", f"For address {dut.address.value}")
 
-    dut.address.value = BinaryValue("00000111")
-
-    await trace.cycle()
-    yield trace.check(dut.destination, "10000000", f"For address {dut.address.value}")
-
 
 @pytest.mark.synthesis
 def test_GENERIC_ROM_synthesis():

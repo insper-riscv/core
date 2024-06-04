@@ -32,6 +32,7 @@ architecture RV32I of CPU_STAGE_ID is
     signal source_0            : WORK.CPU.t_SIGNALS_IF_ID := WORK.CPU.NULL_SIGNALS_IF_ID;
     signal control_id          : WORK.CPU.t_CONTROL_ID;
     signal data_source_1       : WORK.CPU.t_DATA;
+    signal forward_source_1    : WORK.CPU.t_DATA;
     signal data_source_2       : WORK.CPU.t_DATA;
     signal data_immediate      : WORK.CPU.t_DATA;
 	signal address_out         : WORK.CPU.t_DATA;
@@ -59,7 +60,7 @@ begin
 
     enable_flush <= control_id.enable_jump OR enable_branch;
 
-    control_if.enable_stall  <= control_id.enable_branch;
+    control_if.enable_stall  <= control_id.enable_branch or control_id.enable_jalr;
     control_if.select_source <= control_id.enable_jump OR enable_branch;
 
     signals_ex.address_program <= source_0.address_program;
@@ -82,7 +83,7 @@ begin
 
     MODULE_CONTROL_UNIT : entity WORK.MODULE_CONTROL_UNIT(RV32I)
         port map (
-            clear       => enable_branch,
+            clear       => '0',
             instruction => source_0.data_instruction,
             immediate   => data_immediate,
             control_id  => control_id,
@@ -122,7 +123,7 @@ begin
             selector         => control_id.select_jump,
             source_program   => address_out,
             source_immediate => data_immediate,
-            source_register  => data_source_1,
+            source_register  => forward_source_1,
             destination      => address_jump
         );
 
@@ -133,6 +134,7 @@ begin
             source_1           => data_source_1,
             source_2           => data_source_2,
             forward            => forward,
+            data_source_1      => forward_source_1,
             destination        => enable_branch
         );
 
