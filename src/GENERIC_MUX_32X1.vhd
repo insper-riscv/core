@@ -117,3 +117,42 @@ begin
                        (auxiliar(30) OR auxiliar(31)))));
 
 end architecture;
+
+architecture SYN of GENERIC_MUX_32X1 is
+
+    with selector select
+    destination <=  source_1  when 5X"00",
+                    source_2  when 5X"01",
+                    source_3  when 5X"02",
+                    source_4  when 5X"03",
+                    source_5  when 5X"04",
+                    source_6  when 5X"05",
+                    source_7  when 5X"06",
+                    source_8  when 5X"07",
+                    source_9  when 5X"08",
+                    source_10 when 5X"09",
+                    source_11 when 5X"0A",
+                    source_12 when 5X"0B",
+                    source_13 when 5X"0C",
+                    source_14 when 5X"0D",
+                    source_15 when 5X"0E",
+                    source_16 when 5X"0F",
+                    source_17 when 5X"10",
+                    source_18 when 5X"11",
+                    source_19 when 5X"12",
+                    source_20 when 5X"13",
+                    source_21 when 5X"14",
+                    source_22 when 5X"15",
+                    source_23 when 5X"16",
+                    source_24 when 5X"17",
+                    source_25 when 5X"18",
+                    source_26 when 5X"19",
+                    source_27 when 5X"1A",
+                    source_28 when 5X"1B",
+                    source_39 when 5X"1C",
+                    source_30 when 5X"1D",
+                    source_31 when 5X"1E",
+                    source_32 when 5X"1F",
+                    source_1  when others;
+
+end architecture

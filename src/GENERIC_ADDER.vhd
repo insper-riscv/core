@@ -43,3 +43,12 @@ begin
         );
 
 end architecture;
+
+architecture SYN of GENERIC_ADDER is
+
+    process(source_1, source_2)
+    begin
+        destination <= std_logic_vector(to_integer(unsigned(source_1)) + to_integer(unsigned(source_2)));
+    end process;
+
+end architecture;

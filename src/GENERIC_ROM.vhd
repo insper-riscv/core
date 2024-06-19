@@ -23,7 +23,7 @@ entity GENERIC_ROM is
 
 end entity;
 
-architecture RTL of GENERIC_ROM is
+architecture SYN of GENERIC_ROM is
 
     type memory_block is array(0 TO (2**ADDRESSABLE_WIDTH - 1)) of std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
 

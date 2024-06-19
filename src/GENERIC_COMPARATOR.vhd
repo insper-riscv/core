@@ -61,3 +61,14 @@ begin
     flag_greather <= reduce_or(a_greater_than_b);
 
 end architecture;
+
+architecture SYN of GENERIC_COMPARATOR is
+
+    process(source_1, source_2)
+    begin
+        flag_equal    <= std_logic(source_1 = source_2);
+        flag_less     <= std_logic(to_integer(unsigned(source_1)) < to_integer(unsigned(source_2)));
+        flag_greather <= std_logic(to_integer(unsigned(source_1)) > to_integer(unsigned(source_2)));
+    end process;
+
+end architecture;

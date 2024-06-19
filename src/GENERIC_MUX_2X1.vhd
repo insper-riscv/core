@@ -29,3 +29,12 @@ begin
     destination <= (source_1 AND NOT(selector_vec)) OR (source_2 AND selector_vec);
 
 end architecture;
+
+architecture SYN of GENERIC_MUX_2X1 is
+
+    with selector select
+    destination <=  source_1 when '0',
+                    source_2 when '1',
+                    source_1 when others;
+
+end architecture

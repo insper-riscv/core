@@ -39,3 +39,14 @@ begin
                     );
 
 end architecture;
+
+architecture SYN of GENERIC_MUX_4X1 is
+
+    with selector select
+    destination <=  source_1 when "00",
+                    source_2 when "01",
+                    source_3 when "10",
+                    source_4 when "11",
+                    source_1 when others;
+
+end architecture

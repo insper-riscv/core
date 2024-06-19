@@ -19,7 +19,7 @@ entity GENERIC_REGISTER is
 
 end entity;
 
-architecture RTL of GENERIC_REGISTER is
+architecture SYN of GENERIC_REGISTER is
 
     -- No signals
 

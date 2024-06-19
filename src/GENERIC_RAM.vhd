@@ -24,7 +24,7 @@ entity GENERIC_RAM is
 
 end entity;
 
-architecture RTL OF GENERIC_RAM IS
+architecture SYN OF GENERIC_RAM IS
 
     subtype word_t is std_logic_vector((DATA_WIDTH - 1) downto 0);
     type memory_t is array(0 to (2**ADDRESSABLE_WIDTH - 1)) of word_t;
