@@ -119,7 +119,7 @@ jobs:
         echo "PATH=$PATH:${{ env.RISCV_PATH }}/bin" >> $GITHUB_ENV
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install cocotb[bus] pytest wavedrom
         npm install -g netlistsvg
     - name: Add checkout directory to PYTHONPATH
       run: echo "PYTHONPATH=$(pwd):$PYTHONPATH" >> $GITHUB_ENV
