@@ -107,7 +107,7 @@ jobs:
             python3-pip                 \
     - name: Install dependencies
       run: |
-        pip install cocotb[bus] pytest wavedrom
+        pip install cocotb[bus] pytest pytest-check wavedrom
         npm install -g netlistsvg
     - name: Add checkout directory to PYTHONPATH
       run: echo "PYTHONPATH=$(pwd):$PYTHONPATH" >> $GITHUB_ENV
