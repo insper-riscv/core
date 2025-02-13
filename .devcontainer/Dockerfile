@@ -2,8 +2,6 @@ FROM ubuntu:22.04 AS intel
 
 ARG INTEL_CDN="https://downloads.intel.com/akdlm/software/acdsinst/23.1std/991/ib_installers"
 
-VOLUME /opt/intel
-
 WORKDIR /tmp
 
 # - Intel® Quartus® Prime Lite installer
@@ -28,14 +26,14 @@ RUN chmod a+x QuartusLiteSetup-23.1std.0.991-linux.run  \
         --installdir /opt/intel                         \
     && rm -rf /tmp/*
 
+VOLUME /opt/intel
+
 
 FROM ubuntu:22.04 AS runtime
 
 ARG OSS_CAD_SUITE_URL="https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2025-02-03/oss-cad-suite-linux-x64-20250203.tgz"
 ARG DENO_URL="https://dl.deno.land/release/v2.1.9/deno-x86_64-unknown-linux-gnu.zip"
 ARG PS1_FORMAT="\\n\\e[0m\\e[1m\\w\\n\\e[92m\\$\\e[0m\\e[39m\\e[49m "
-
-VOLUME /root/.vscode /opt/intel /opt/oss-design-suite
 
 ENV INTEL_PATH=/opt/intel
 ENV QUARTUS_ROOTDIR=${INTEL_PATH}/quartus
@@ -54,11 +52,13 @@ RUN apt-get update -qq                                  \
     && apt-get upgrade -y                               \
     && DEBIAN_FRONTEND=noninteractive apt-get install   \
         -y --no-install-recommends                      \
+        build-essential                                 \
         git                                             \
         libdbus-1-3                                     \
         libfontconfig1                                  \
         libglib2.0-0                                    \
         locales                                         \
+        qtbase5-dev                                     \
         unzip                                           \
         zlib1g-dev                                      \
     && apt-get autoclean                                \
@@ -83,3 +83,7 @@ RUN tar -xzf /tmp/oss-cad-suite.tgz  -C /opt/        \
     && ${DENO_PATH}/bin/deno install                \
         -q -g --allow-all --no-prompt               \
         npm:netlistsvg
+
+COPY --from=intel /opt/intel    $INTEL_PATH
+
+VOLUME /root/.vscode $INTEL_PATH $OSS_CAD_SUITE_PATH

@@ -10,10 +10,10 @@ services:
       - ..:/root/workspace
       - vscode:/root/.vscode
       - intel:/opt/intel
-      - oss-design-suite:/opt/oss-design-suite
+      - oss-cad-suite:/opt/oss-cad-suite
     entrypoint: ["tail", "-f", "/dev/null"]
 
 volumes:
   vscode:
   intel:
-  oss-design-suite:
+  oss-cad-suite:
