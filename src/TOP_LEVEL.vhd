@@ -7,7 +7,7 @@ library WORK;
 entity TOP_LEVEL is
 
     generic (
-        PROGRAM_FILE   : string := "../data/mif/blink.mif";
+        PROGRAM_FILE   : string := "/root/workspace/data/mif/blink.mif";
 		DEMONSTRATION  : boolean := FALSE;
 		QUARTUS_MEMORY : boolean := FALSE
     );

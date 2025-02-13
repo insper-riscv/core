@@ -12,7 +12,7 @@ entity GENERIC_ROM is
         DATA_WIDTH        : natural := 8;
         ADDRESS_WIDTH     : natural := 8;
         ADDRESSABLE_WIDTH : natural := 7;
-        INIT_FILE         : string  := "../data/mif/generic_rom_dummy.mif"
+        INIT_FILE         : string  := "/root/workspace/data/mif/generic_rom_dummy.mif"
     );
 
     port (
