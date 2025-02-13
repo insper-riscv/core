@@ -1,22 +1,44 @@
 {
-    "name": "cti-risc-v",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "postCreateCommand": "pip install -r requirements.txt",
-    "containerEnv": {
-        "PYTHONPATH": "/root/workspace/"
-    },
-    "workspaceMount": "source=${localWorkspaceFolder},target=/root/workspace,type=bind,consistency=cached",
-    "workspaceFolder": "/root/workspace",
+	"name": "hdl-stack",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "hdl-stack",
+	"workspaceFolder": "/root/workspace",
     "customizations": {
         "vscode": {
+            "settings": {
+                "[vhdl]": {
+                    "editor.defaultFormatter": "teros-technology.teroshdl"
+                },
+                "explorer.fileNesting.enabled": true,
+                "explorer.fileNesting.patterns": {
+                    "*.vhd": "${capture}_*.vhd",
+                    "*S.vhd": "${capture}_*.vhd",
+                    "*_package.py": "${capture}_*.py",
+                    "*S_package.py": "${capture}_*.py"
+                },
+                "material-icon-theme.folders.associations": {
+                    "quartus": "tools",
+                    "sim_build": "temp",
+                    "src": "core"
+                },
+                "material-icon-theme.files.associations": {
+                    "*.py": "test-jsx",
+                    "config.yml": "settings",
+                    "top_level.qsf": "3d"
+                },
+                "python.analysis.autoImportCompletions": true,
+                "python.analysis.typeCheckingMode": "standard",
+                "python.testing.pytestArgs": [
+                    "test"
+                ],
+                "python.testing.pytestEnabled": true,
+                "python.testing.unittestEnabled": false
+            },
             "extensions": [
-                "actboy168.tasks",
+                "teros-technology.teroshdl",
                 "ms-python.python",
-                "ms-python.black-formatter",
-                "mshr-h.VerilogHDL",
-                "/tmp/vhdl-lsp-0.1.0-dev.vsix"
+                "ms-python.black-formatter" //,
+                // "mshr-h.VerilogHDL"
             ]
         }
     }

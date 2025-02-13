@@ -1,0 +1,19 @@
+services:
+  hdl-stack:
+    container_name: hdl-stack
+    image: hdl-stack:latest
+    build:
+      dockerfile: Dockerfile
+    devices: []
+      # - /dev/ttyUSB0:/dev/ttyUSB0
+    volumes:
+      - ..:/root/workspace
+      - vscode:/root/.vscode
+      - intel:/opt/intel
+      - oss-design-suite:/opt/oss-design-suite
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+volumes:
+  vscode:
+  intel:
+  oss-design-suite:

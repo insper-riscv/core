@@ -1,0 +1,672 @@
+name: Core
+project_disk_path: /root/workspace/quartus/top_level.qsf
+project_type: quartusProject
+toplevel: src/TOP_LEVEL.vhd
+files:
+  - name: src/GENERICS.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_MUX_2X1.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_MUX_4X1.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_MUX_32X1.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_CARRY_LOOKAHEAD.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_FLIP_FLOP.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_REGISTER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_ADDER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_COMPARATOR.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_SIGNAL_EXTENDER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_EDGE_DETECTOR.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_DEBOUNCE.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_RAM.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_ROM.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32I.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32I_REGISTER_FILE.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32I_ALU_SHIFTER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32I_ALU.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32I_BRANCH_CONTROLLER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32I_TYPE_CONVERTER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32M.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32M_ADDER_BIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/RV32M_ADDER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULES.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_BRANCH_COMPARE_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_BRANCH_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_CONTROL_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_EXECUTION_UNIT_CONTROLLER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_EXECUTION_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_MEMORY_INTERFACE.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_PROGRAM_COUNTER.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_REGISTER_FILE.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/MODULE_WRITE_BACK.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_BRANCH_FORWARDING_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_EXECUTION_FORWARDING_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_HAZZARD_CONTROL_UNIT.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_STAGE_EX.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_STAGE_ID.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_STAGE_IF.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_STAGE_MEM.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_STAGE_WB.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/CPU_TOP_LEVEL.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/TOP_LEVEL.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+  - name: src/GENERIC_LOW_FREQ.vhd
+    file_type: vhdlSource
+    file_version: '2008'
+    is_include_file: false
+    include_path: ''
+    logical_name: WORK
+    is_manual: true
+    source_type: none
+hooks:
+  pre_build: []
+  post_build: []
+  pre_run: []
+  post_run: []
+watchers: []
+configuration:
+  general:
+    general:
+      pypath: ''
+      makepath: ''
+      go_to_definition_vhdl: true
+      go_to_definition_verilog: true
+      developer_mode: false
+  documentation:
+    general:
+      language: english
+      symbol_vhdl: '!'
+      symbol_verilog: '!'
+      dependency_graph: true
+      self_contained: true
+      fsm: true
+      ports: all
+      generics: all
+      instantiations: all
+      signals: all
+      constants: all
+      types: all
+      process: all
+      functions: all
+      tasks: all
+      magic_config_path: ''
+  editor:
+    general:
+      stutter_comment_shortcuts: false
+      stutter_block_width: 80
+      stutter_max_width: 0
+      stutter_delimiters: false
+      stutter_bracket_shortcuts: false
+  formatter:
+    general:
+      formatter_verilog: istyle
+      formatter_vhdl: standalone
+    istyle:
+      style: ansi
+      indentation_size: 2
+    s3sv:
+      one_bind_per_line: false
+      one_declaration_per_line: false
+      use_tabs: false
+      indentation_size: 2
+    verible:
+      format_args: ''
+    standalone:
+      keyword_case: lowercase
+      name_case: lowercase
+      indentation: '  '
+      align_port_generic: true
+      align_comment: true
+      remove_comments: false
+      remove_reports: false
+      check_alias: false
+      new_line_after_then: new_line
+      new_line_after_semicolon: new_line
+      new_line_after_else: new_line
+      new_line_after_port: new_line
+      new_line_after_generic: new_line
+    svg:
+      configuration: ''
+      core_number: 2
+      aditional_arguments: ''
+  linter:
+    general:
+      linter_vhdl: ghdl
+      linter_verilog: modelsim
+      lstyle_verilog: disabled
+      lstyle_vhdl: disabled
+    ghdl:
+      arguments: '--std=08'
+    icarus:
+      arguments: ''
+    modelsim:
+      vhdl_arguments: ''
+      verilog_arguments: ''
+    verible:
+      arguments: ''
+    verilator:
+      arguments: ''
+    vivado:
+      vhdl_arguments: ''
+      verilog_arguments: ''
+    vsg:
+      arguments: ''
+  schematic:
+    general:
+      backend: yosys_ghdl
+      extra: ''
+      args: ''
+      args_ghdl: ''
+  templates:
+    general:
+      header_file_path: ''
+      indent: '  '
+      clock_generation_style: inline
+      instance_style: inline
+  tools:
+    general:
+      select_tool: ghdl
+      manual_compilation_order: ''
+      execution_mode: cmd
+      waveform_viewer: tool
+      gtkwave_installation_path: ''
+      gtkwave_extra_arguments: ''
+    quartus:
+      installation_path: /opt/intel/quartus
+      family: Cyclone V
+      device: 5CEBA4F23C7
+      optimization_mode: BALANCED
+      allow_register_retiming: true
+      wave_file_questa: ''
+    osvvm:
+      installation_path: ''
+      tclsh_binary: ''
+      simulator_name: ghdl
+    ascenlint:
+      installation_path: ''
+      ascentlint_options: []
+    cocotb:
+      installation_path: ''
+      simulator_name: ghdl
+      compile_args: ''
+      run_args: ''
+      plusargs: ''
+    diamond:
+      installation_path: ''
+      part: ''
+    ghdl:
+      installation_path: ''
+      waveform: vcd
+      analyze_options:
+        - '--workdir=/root/.teroshdl/build/WORK'
+        - '--work=WORK'
+      run_options: []
+    icarus:
+      installation_path: ''
+      timescale: ''
+      iverilog_options: []
+    icestorm:
+      installation_path: ''
+      pnr: none
+      arch: xilinx
+      output_format: json
+      yosys_as_subtool: false
+      makefile_name: ''
+      arachne_pnr_options: []
+      nextpnr_options: []
+      yosys_synth_options: []
+    ise:
+      installation_path: ''
+      family: ''
+      device: ''
+      package: ''
+      speed: ''
+    isem:
+      installation_path: ''
+      fuse_options: []
+      isim_options: []
+    modelsim:
+      installation_path: ''
+      vcom_options: []
+      vlog_options: []
+      vsim_options: []
+    morty:
+      installation_path: ''
+      morty_options: []
+    radiant:
+      installation_path: ''
+      part: ''
+    rivierapro:
+      installation_path: ''
+      compilation_mode: ''
+      vlog_options: []
+      vsim_options: []
+    spyglass:
+      installation_path: ''
+      methodology: ''
+      goals: []
+      spyglass_options: []
+      rule_parameters: []
+    symbiyosys:
+      installation_path: ''
+      tasknames: []
+    symbiflow:
+      installation_path: ''
+      package: ''
+      part: ''
+      vendor: ''
+      pnr: vpr
+      vpr_options: ''
+      environment_script: ''
+    trellis:
+      installation_path: ''
+      arch: xilinx
+      output_format: json
+      yosys_as_subtool: false
+      makefile_name: ''
+      script_name: ''
+      nextpnr_options: []
+      yosys_synth_options: []
+    vcs:
+      installation_path: ''
+      vcs_options: []
+      run_options: []
+    verible:
+      installation_path: ''
+    verilator:
+      installation_path: ''
+      mode: lint-only
+      libs: []
+      verilator_options: []
+      make_options: []
+      run_options: []
+    vivado:
+      installation_path: ''
+      part: ''
+      synth: ''
+      pnr: vivado
+      jtag_freq: 10000
+      hw_target: ''
+    vunit:
+      installation_path: ''
+      simulator_name: ghdl
+      runpy_mode: standalone
+      extra_options: ''
+      enable_array_util_lib: false
+      enable_com_lib: false
+      enable_json4vhdl_lib: false
+      enable_osvvm_lib: false
+      enable_random_lib: false
+      enable_verification_components_lib: false
+    xcelium:
+      installation_path: ''
+      xmvhdl_options: []
+      xmvlog_options: []
+      xmsim_options: []
+      xrun_options: []
+    xsim:
+      installation_path: ''
+      xelab_options: []
+      xsim_options: []
+    yosys:
+      installation_path: ''
+      arch: xilinx
+      output_format: json
+      yosys_as_subtool: false
+      makefile_name: ''
+      script_name: ''
+      yosys_synth_options: []
+    openfpga:
+      installation_path: ''
+      arch: ''
+      task_options: []
+    activehdl:
+      installation_path: ''
+    questa:
+      installation_path: ''
+    raptor:
+      installation_path: ''
+      target_device: 1GE100
+      vhdl_version: VHDL_1993
+      verilog_version: V_2001
+      sv_version: SV_2012
+      div_0: SV_2012
+      optimization: none
+      effort: high
+      fsm_encoding: onehot
+      carry: auto
+      pnr_netlist_language: verilog
+      dsp_limit: 154
+      block_ram_limit: 154
+      fast_synthesis: false
+      div_1: false
+      top_level: ''
+      sim_source_list: []
+      simulate_rtl: false
+      waveform_rtl: syn_tb_rtl.fst
+      simulator_rtl: ghdl
+      simulation_options_rtl: '--stop-time=1000ns'
+      simulate_gate: false
+      waveform_gate: syn_tb_gate.fst
+      simulator_gate: ghdl
+      simulation_options_gate: '--stop-time=1000ns'
+      simulate_pnr: false
+      waveform_pnr: sim_pnr.fst
+      simulator_pnr: ghdl
+      simulation_options_pnr: '--stop-time=1000ns'
+tool_options:
+  ghdl:
+    name: ghdl
+    installation_path: ''
+    config:
+      installation_path: ''
+      waveform: vcd
+      analyze_options:
+        - '--workdir=/root/.teroshdl/build/WORK'
+        - '--work=WORK'
+      run_options: []
