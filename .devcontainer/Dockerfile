@@ -64,6 +64,7 @@ RUN apt-get update -qq                                  \
         locales                                         \
         qtbase5-dev                                     \
         unzip                                           \
+        xxd                                             \
         zlib1g-dev                                      \
     && apt-get autoclean                                \
     && apt-get clean                                    \
