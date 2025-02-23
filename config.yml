@@ -388,7 +388,7 @@ configuration:
       ports: all
       generics: all
       instantiations: all
-      signals: all
+      signals: none
       constants: all
       types: all
       process: all

@@ -5,17 +5,24 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.GENERICS.all;
 
+--! Realiza operações aritmética de comparação entre dois inteiros positivos codificados em vetores booleanos
 entity GENERIC_COMPARATOR is
 
     generic (
+        --! Largura dos vetores de dados
         DATA_WIDTH : natural := 8
     );
 
     port (
+        --! Vetor de dados primário
         source_1      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados secundário
         source_2      : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Resultado da comparação `source_1 = source_2`
         flag_equal    : out std_logic;
+        --! Resultado da comparação `source_1 < source_2`
         flag_less     : out std_logic;
+        --! Resultado da comparação `source_1 > source_2`
         flag_greather : out std_logic
     );
 

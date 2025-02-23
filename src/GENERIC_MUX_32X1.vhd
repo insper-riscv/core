@@ -5,46 +5,82 @@ use IEEE.NUMERIC_STD.ALL;
 library WORK;
 use WORK.GENERICS.ALL;
 
+--! Atribui saída conforme entrada selecionada dentre trinda e duas
 entity GENERIC_MUX_32X1 is
-
+    
     generic (
+        --! Largura dos vetores de dados
         DATA_WIDTH : natural := 8
     );
-
+        
     port (
+        --! Seletor dos vetores de dados
         selector    : in  std_logic_vector(4 downto 0)                := (others => '0');
+        --! Vetor de dados 1
         source_1    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 2
         source_2    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 3
         source_3    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 4
         source_4    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 5
         source_5    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 6
         source_6    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 7
         source_7    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 8
         source_8    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 9
         source_9    : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 10
         source_10   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 11
         source_11   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 12
         source_12   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 13
         source_13   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 14
         source_14   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 15
         source_15   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 16
         source_16   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 17
         source_17   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 18
         source_18   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 19
         source_19   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 20
         source_20   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 21
         source_21   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 22
         source_22   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 23
         source_23   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 24
         source_24   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 25
         source_25   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 26
         source_26   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 27
         source_27   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 28
         source_28   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 29
         source_29   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 30
         source_30   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 31
         source_31   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados 32
         source_32   : in  std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de dados selecionado
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0) := (others => '0')
     );
 

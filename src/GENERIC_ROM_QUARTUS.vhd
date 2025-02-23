@@ -42,18 +42,26 @@ use ALTERA_MF.ALTERA_MF_COMPONENTS.ALL;
 
 library WORK;
 
+--! Memória de apenas leitura
 entity GENERIC_ROM is
 
     generic (
+        --! Largura dos vetores de dados
         DATA_WIDTH        : natural := 8;
+        --! Largura do vetore de endereço
         ADDRESS_WIDTH     : natural := 8;
+        --! Largura do vetor de endereço mapeado na memória
         ADDRESSABLE_WIDTH : natural := 7;
+        --! Arquivo .mif de inicialização da memória
         INIT_FILE         : string  := "/root/workspace/data/mif/generic_rom_dummy.mif"
     );
 
     port (
+        --! Sinal de clock
         clock       : in  std_logic := '1';
-        address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0) := (others => '0');
+        --! Vetor de endereço
+        address     : in  std_logic_vector((ADDRESS_WIDTH - 1) downto 0);
+        --! Vetor de dados endereçado
         destination : out std_logic_vector((DATA_WIDTH - 1) downto 0)
     );
 
